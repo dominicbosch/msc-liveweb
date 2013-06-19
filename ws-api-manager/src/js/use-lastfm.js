@@ -15,8 +15,8 @@
   
   
   var api_key = '89b550d2dbd83432671324df515d3829',
-    cb = 'http://localhost/lastfm.html',
-    // cb = 'http://dominicbosch.github.io/msc-liveweb/lastfm.html',
+    // cb = 'http://localhost/lastfm.html',
+    cb = 'http://dominicbosch.github.io/msc-liveweb/lastfm.html',
     ws = "http://ws.audioscrobbler.com/2.0/",
     session_key = '';
   /**
