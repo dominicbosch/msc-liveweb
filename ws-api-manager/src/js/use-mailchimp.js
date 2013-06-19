@@ -50,7 +50,7 @@
       }
     }
     
-    console.log('received mailchimp code: ' + urlparam.code);
+    console.log('received mailchimp code: ' + urlparams.code);
     $.ajax({
       dataType: "json",
       url: access_token_uri,
@@ -58,7 +58,7 @@
         grant_type: 'authorization_code',
         client_id: client_id,
         client_secret: secret,
-        code: urlparam.code,
+        code: urlparams.code,
         redirect_uri: redirect_uri
       },
       method: 'post',
