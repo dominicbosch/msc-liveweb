@@ -20,7 +20,15 @@
     }
     return sel;
   }
-  
+  var ul = nel('ul');
+  $('#apimgr').append(ul);
+  ul.append(nel('li', {text: 'Unit Tests'}).attr('class', 'link').click(function(){ window.location = 'test'; }));
+  ul.append(nel('li', {text: 'JSONP'}).attr('class', 'link').click(function(){ window.location = 'jsonp'; }));
+  ul.append(nel('li', {text: 'Google'}).attr('class', 'link').click(function(){ window.location = 'google'; }));
+  ul.append(nel('li', {text: 'Last.fm'}).attr('class', 'link').click(function(){ window.location = 'lastfm'; }));
+  ul.append(nel('li', {text: 'Mailchimp'}).attr('class', 'link').click(function(){ window.location = 'mailchimp'; }));
+  ul.append(nel('li', {text: 'Evernote'}).attr('class', 'link').click(function(){ window.location = 'evernote'; }));
+  $('#apimgr').append(nel('div', {text: 'ProBinder API Interface'}).attr('class', 'header'));
   $('#apimgr').append(nel('div', {text: 'Select Webservice API:'}))
     .append(nel('select', {id: 'wsselect'})).append('<br/>')
     .append(nel('select', {id: 'pkgselect'})).append('<br/>')
