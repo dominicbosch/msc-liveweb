@@ -85,7 +85,13 @@
       },
       crossDomain: 'true',
       method: 'post',
-      success: checkValidation
+      success: checkValidation,
+      error: function(j, t, e) {
+        div.append($('<div>').text('Error during request: ' + t));
+        console.log(j);
+        console.log(t);
+        console.log(e);
+      }
     });
   }
 })();
