@@ -1,0 +1,12 @@
+{
+  "name": "Evernote API",
+  "apiid": "evernote",
+  "host": "sandbox.evernote.com",
+  "authentication": {
+    "api-key": "",
+    "user": "dominicbosch"
+  },
+  "packages": {
+  
+  }
+}

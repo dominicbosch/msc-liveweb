@@ -1,0 +1,12 @@
+{
+  "name": "Google Drive API",
+  "apiid": "google",
+  "host": "",
+  "authentication": {
+    "api-key": "",
+    "user": ""
+  },
+  "packages": {
+  
+  }
+}

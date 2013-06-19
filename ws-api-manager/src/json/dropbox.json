@@ -1,0 +1,12 @@
+{
+  "name": "Dropbox API",
+  "apiid": "dropbox",
+  "host": "",
+  "authentication": {
+    "api-key": "",
+    "user": "dominicbosch"
+  },
+  "packages": {
+  
+  }
+}

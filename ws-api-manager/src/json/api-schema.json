@@ -1,0 +1,120 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "WebService Plugin Description Schema",
+  "type": "object",
+  "required": [ "name",  "apiid", "host", "authentication", "packages" ],
+  
+  "properties": {
+    "name": { "type": "string" },
+    "apiid": { "type": "string" },
+    "host": { "type": "string" },
+    "method": { "type": "string" },
+    "authentication": {
+      "type": "object",
+      "oneOf": [
+        { "$ref": "#/definitions/int-oauth" },
+        { "$ref": "#/definitions/int-api-key" },
+        { "$ref": "#/definitions/int-credentials" },
+        { "type": "null" }
+      ]
+    },
+    "urlparameters": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "packages": { "$ref": "#/definitions/int-packages" }
+  },
+  "additionalProperties": false,
+
+  "definitions": {
+    "int-oauth" : {
+      "type": "object",
+      "required": [ "oauth" ],
+      "properties": {
+        "oauth": {
+          "type": "object",
+          "required": [ "key", "secret" ],
+          "properties": {
+            "key": { "type": "string" },
+            "secret": { "type": "string" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    
+    "int-api-key" : {
+      "type": "object",
+      "required": [ "api-key" ],
+      "properties": {
+        "api-key": {
+          "type": "object",
+          "required": [ "key" ],
+          "properties": {
+            "key": { "type": "string" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    
+    "int-credentials" : {
+      "type": "object",
+      "required": [ "credentials" ],
+      "properties": {
+        "credentials": {
+          "type": "object",
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    
+    "int-packages" : { 
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": [ "name", "methods" ],
+        "properties": {
+          "name":  { "type": "string" },
+          "description":  { "type": "string" },
+          "methods": { "$ref": "#/definitions/int-methods" }
+        },
+        "additionalProperties": false
+      }
+    },
+    
+    "int-methods" : { 
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": [ "name" ],
+        "properties": {
+          "name":  { "type": "string" },
+          "description":  { "type": "string" },
+          "parameters":  { "$ref": "#/definitions/int-parameters" }
+        },
+        "additionalProperties": false
+      }
+    },
+    
+    "int-parameters" : {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [ "key" ],
+        "properties": {
+          "key":  { "type": "string" },
+          "datatype":  { "type": "string" },
+          "optional":  { "type": "boolean" },
+          "description":  { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

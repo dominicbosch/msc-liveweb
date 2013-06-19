@@ -1,0 +1,45 @@
+{
+  "name": "ProBinder API",
+  "apiid": "probinder",
+  "host": "https://probinder.com/service/",
+  "method": "post",
+  "authentication": { "credentials": {}},
+  "packages": {
+    "2": {
+      "name": "Content",
+      "methods": {
+        "addcomment": {
+          "name": "add comment",
+          "parameters": [ { "key": "" } ]
+        },
+        "get": {
+          "name": "get",
+          "parameters": [ { "key": "" } ]
+        },
+        "setread": {
+          "name": "set read",
+          "parameters": [ { "key": "" } ]
+        }
+      }
+    },
+    "26": {
+      "name": "Authentication",
+      "methods": {
+        "userinfo": { "name": "User Info" },
+        "login": {
+          "name": "Login",
+          "parameters": [ { "key": "" } ]
+        }
+      }
+    },
+    "36": {
+      "name": "User",
+      "methods": {
+        "current": {
+          "name": "User Info",
+          "description": "Retrieves the data of the currently logged in user."
+        }
+      }
+    }
+  }
+}

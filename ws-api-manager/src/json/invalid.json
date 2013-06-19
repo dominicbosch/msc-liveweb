@@ -1,0 +1,5 @@
+{
+  "name": "Invalid API",
+  "apiid": "invalid",
+  "host": "http://example.com"
+}
