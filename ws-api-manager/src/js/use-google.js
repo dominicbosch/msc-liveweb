@@ -18,8 +18,8 @@
       .appendTo(div)
       .click(function(){
         var authurl = 'https://accounts.google.com/o/oauth2/auth',
-          // redirect_uri = 'http://localhost/google.html',
-          redirect_uri = 'http://dominicbosch.github.io/msc-liveweb/google.html',
+          redirect_uri = 'http://localhost/google.html',
+          // redirect_uri = 'http://dominicbosch.github.io/msc-liveweb/google.html',
           scope = 'https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email'
             +'+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcalendar';
         window.location = authurl
@@ -43,7 +43,7 @@
             div.append($('<div>').text('You are : ' + d.email + ' and your email verification status is: ' + d.verified_email));
           }
         );
-        var calID =  'pm55ibb4kg98vv58juiq5shu48@group.calendar.google.com';//msc.theliveweb@gmail.com
+        var calID = 'pm55ibb4kg98vv58juiq5shu48@group.calendar.google.com';
         $.getJSON(
         'https://www.googleapis.com/calendar/v3/calendars/'+calID+'/events?access_token=' + access_token,
           function(d){
@@ -55,19 +55,23 @@
             }
           }
         );
-        $.ajax(
-          'https://www.googleapis.com/calendar/calendar/v3/calendars/'+calID+'/events',
-          {
-            access_token: access_token,
-            start: { dateTime: '2013-06-23T00:39:57Z' },
-            end: { dateTime: '2013-06-23T02:39:57Z' },
-            description: 'test insertion'
-          },
-          function(d){
-            console.log('new entry added');
-            console.log(d);
-          }
-        );
+        //TODO POST requests seem to be a challenge
+        // $.ajax(
+          // {
+            // url: 'https://www.googleapis.com/calendar/v3/calendars/'+calID+'/events?key=AIzaSyA5z1fyYRkR4brOthvmzN5iUYHdnFV6cqg',
+            // method: 'POST',
+            // data: {
+              // access_token: access_token,
+              // start: { dateTime: '2013-06-23T00:39:57Z' },
+              // end: { dateTime: '2013-06-23T02:39:57Z' },
+              // summary: 'testinsertion'
+            // },
+            // done: function(d){
+              // console.log('new entry added');
+              // console.log(d);
+            // }
+          // }
+        // );
       }
     }
     
