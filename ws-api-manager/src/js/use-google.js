@@ -1,5 +1,5 @@
 (function(){
-  var div = $('#jshook'), urlparams = {};
+  var div = $('<div>').appendTo($('body')), urlparams = {};
   var wl = window.location.hash.substring(1);
   if(wl){
     wl = wl.split('&');
@@ -8,6 +8,9 @@
       urlparams[kv[0]] = kv[1];
     }
   }
+  var title = 'Google API Interface';
+  document.title = title;
+  div.append($('<div>').attr('class', 'header').text(title));
   
   var client_id = '833085220207.apps.googleusercontent.com';
   var access_token = '';
