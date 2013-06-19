@@ -49,35 +49,37 @@
                 function(d){
                   console.log(d);
                   div.append($('<div>').text('You are : ' + d.email + ' and your email verification status is: ' + d.verified_email));
-                });
-             $.getJSON(
-              'https://www.googleapis.com/calendar/calendar/v3/calendars/msc.theliveweb@gmail.com/events?access_token=' + access_token,
-              function(d){
-                console.log(d);
-                div.append($('<div>').text('You have following calendar entries: '));
-                var ul = $('<ul>').appendTo(div);
-                for(var i = 0; i < d.items.length; i++){
-                  ul.append($('<li>').text(d.items[i].description));
                 }
-              }
-            );
-             $.ajax(
-              'https://www.googleapis.com/calendar/calendar/v3/calendars/msc.theliveweb@gmail.com/events',
-              {
-                access_token: access_token,
-                start: {
-                  dateTime: '2013-06-23T00:39:57Z'
+              );
+              $.getJSON(
+              'https://www.googleapis.com/calendar/calendar/v3/calendars/msc.theliveweb@gmail.com/events?access_token=' + access_token,
+                function(d){
+                  console.log(d);
+                  div.append($('<div>').text('You have following calendar entries: '));
+                  var ul = $('<ul>').appendTo(div);
+                  for(var i = 0; i < d.items.length; i++){
+                    ul.append($('<li>').text(d.items[i].description));
+                  }
+                }
+              );
+              $.ajax(
+                'https://www.googleapis.com/calendar/calendar/v3/calendars/msc.theliveweb@gmail.com/events',
+                {
+                  access_token: access_token,
+                  start: {
+                    dateTime: '2013-06-23T00:39:57Z'
+                  },
+                  end: {
+                    dateTime: '2013-06-23T02:39:57Z'
+                  },
+                  description: 'test insertion'
                 },
-                end: {
-                  dateTime: '2013-06-23T02:39:57Z'
-                },
-                description: 'test insertion'
-              },
-              function(d){
-                console.log('new entry added');
-                console.log(d);
-              }
-            );
+                function(d){
+                  console.log('new entry added');
+                  console.log(d);
+                }
+              );
+            }
           });
         })
       );
