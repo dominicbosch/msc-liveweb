@@ -1,6 +1,6 @@
 (function(){
   var div = $('<div>').appendTo($('body')), urlparams = {};
-  var wl = window.location.hash.substring(1);
+  var wl = window.location.search.substring(1);
   if(wl){
     wl = wl.split('&');
     for(var i = 0; i < wl.length; i++){
