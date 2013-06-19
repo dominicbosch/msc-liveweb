@@ -18,8 +18,8 @@
       .appendTo(div)
       .click(function(){
         var authurl = 'https://accounts.google.com/o/oauth2/auth',
-          redirect_uri = 'http://localhost/google.html',
-          // redirect_uri = 'http://dominicbosch.github.io/msc-liveweb/google.html',
+          // redirect_uri = 'http://localhost/google.html',
+          redirect_uri = 'http://dominicbosch.github.io/msc-liveweb/google.html',
           scope = 'https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email'
             +'+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcalendar';
         window.location = authurl
