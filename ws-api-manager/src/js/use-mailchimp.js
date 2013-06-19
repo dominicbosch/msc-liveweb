@@ -14,12 +14,12 @@
   
   var client_id = '877100874064',
     secret = '69caa7cd76debdf2183a8723a5540947', // TODO keep this secret in productive
-    redirect_uri = 'http://dominicbosch.github.io/msc-liveweb/mailchimp.html',
+    redirect_uri = 'http://dominicbosch.github.io/msc-liveweb/mailchimp',
     authorize_uri =  'https://login.mailchimp.com/oauth2/authorize',
     access_token_uri = 'https://login.mailchimp.com/oauth2/token',
     base_uri = 'https://login.mailchimp.com/oauth2/',
     metadata_uri = 'https://login.mailchimp.com/oauth2/metadata',
-    request_uri= 'http://us7.api.mailchimp.com/1.3/';
+    request_uri= 'http://us7.api.mailchimp.com/2.0/';
     
   var access_token = '';
   if(!urlparams.code) {
@@ -36,6 +36,7 @@
   } else {
     function requestWebservice(){
       
+      $('<div>').text('calling webservice').appendTo(div);
       $.ajax({
         dataType: "json",
         url: request_uri + 'folders/add',
@@ -45,6 +46,7 @@
         },
         headers: { 'Authorization': 'OAuth ' + access_token },
         success: function (d) {
+          $('<div>').text('webservice called').appendTo(div);
           console.log('webservice call:');
           console.log(d);
         }
@@ -70,7 +72,7 @@
       }
     }
     
-    console.log('received mailchimp code: ' + urlparams.code);
+    $('<div>').text('received mailchimp code: ' + urlparams.code).appendTo(div);
     $.ajax({
       dataType: "json",
       url: access_token_uri,
