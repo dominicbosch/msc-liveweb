@@ -18,7 +18,8 @@
     authorize_uri =  'https://login.mailchimp.com/oauth2/authorize',
     access_token_uri = 'https://login.mailchimp.com/oauth2/token',
     base_uri = 'https://login.mailchimp.com/oauth2/',
-    metadata_uri = 'https://login.mailchimp.com/oauth2/metadata';
+    metadata_uri = 'https://login.mailchimp.com/oauth2/metadata',
+    request_uri= 'http://us7.api.mailchimp.com/1.3/';
     
   var access_token = '';
   if(!urlparams.code) {
@@ -33,18 +34,37 @@
           + '&response_type=code';
     });
   } else {
+    function requestWebservice(){
+      
+      $.ajax({
+        dataType: "json",
+        url: request_uri + 'folders/add',
+        data: {
+          name: 'test folder',
+          type: 'campaign'
+        },
+        headers: { 'Authorization': 'OAuth ' + access_token },
+        success: function (d) {
+          console.log('webservice call:');
+          console.log(d);
+        }
+      });
+    }
+    
     function checkValidation(d) {
       console.log(d);
       if(d.access_token){
+        access_token = d.access_token;
         $('#validateButton').remove();
-        div.append($('<div>').text('Got access token: ' + d.access_token));
+        div.append($('<div>').text('Got access token: ' + access_token));
         $.ajax({
           dataType: "json",
           url: metadata_uri,
-          headers: { 'Authorization': 'OAuth ' + d.access_token },
+          headers: { 'Authorization': 'OAuth ' + access_token },
           success: function (d) {
             console.log('access after OAuth:');
-            console.log();
+            console.log(d);
+            requestWebservice();
           }
         });
       }
