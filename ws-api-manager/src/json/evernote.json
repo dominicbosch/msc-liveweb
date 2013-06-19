@@ -7,6 +7,35 @@
     "user": "dominicbosch"
   },
   "packages": {
-  
+      "NoteStore": {
+      "name": "Note store",
+      "methods": {
+        "createNote": {
+          "name": "create note",
+          "parameters": [ { "key": "" } ]
+        },
+        "deleteNode": {
+          "name": "delete note",
+          "parameters": [ { "key": "" } ]
+        },
+        "getNote": {
+          "name": "get note",
+          "parameters": [ { "key": "" } ]
+        }
+      }
+    },
+    "UserStore": {
+      "name": "User store",
+      "methods": {
+        "getPublicUserInfo": {
+          "name": "get pulic user info",
+          "parameters": [ { "key": "" } ]
+        },
+        "getUser": {
+          "name": "get",
+          "parameters": [  ]
+        }
+      }
+    }
   }
 }

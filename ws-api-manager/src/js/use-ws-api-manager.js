@@ -50,7 +50,7 @@
   }
   
   function reloadPackageSelector(idname){
-    selPkg = createOptions(wsAPI.getAllApiPackages(idname), '#pkgselect');
+    selPkg = createOptions(wsAPI.getAllPackages(idname), '#pkgselect');
     try { reloadMethodSelector(idname, selPkg); } catch(e) {}
   }
   

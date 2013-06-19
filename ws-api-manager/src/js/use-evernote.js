@@ -8,83 +8,103 @@
       urlparams[kv[0]] = kv[1];
     }
   }
-  var title = 'Mailchimp API Interface';
+  var title = 'Evernote API Interface';
   document.title = title;
   div.append($('<div>').attr('class', 'header').text(title));
-  
-  var client_id = '877100874064',
-    secret = '69caa7cd76debdf2183a8723a5540947', // TODO keep this secret in productive
-    redirect_uri = 'http://dominicbosch.github.io/msc-liveweb/mailchimp',
-    authorize_uri =  'https://login.mailchimp.com/oauth2/authorize',
-    access_token_uri = 'https://login.mailchimp.com/oauth2/token',
-    base_uri = 'https://login.mailchimp.com/oauth2/',
-    metadata_uri = 'https://login.mailchimp.com/oauth2/metadata',
-    request_uri= 'http://us7.api.mailchimp.com/2.0/';
-    
-  var access_token = '';
-  if(!urlparams.code) {
-    var button = $('<button>')
-      .attr('id', 'authButton')
-      .text('authorize')
-      .appendTo(div)
-      .click(function(){
-        window.location = authorize_uri
-          + '?client_id=' + client_id
-          + '&redirect_uri=' + encodeURIComponent(redirect_uri)
-          + '&response_type=code';
+  $('<button>')
+    .attr('id', 'authButton')
+    .text('authorize')
+    .appendTo(div)
+    .click(function(){
+      app.loginWithEvernote();
     });
-  } else {
-    function requestWebservice(){
-      
-      $('<div>').text('calling webservice').appendTo(div);
-      $.ajax({
-        dataType: "json",
-        url: request_uri + 'folders/add',
-        data: {
-          name: 'test folder',
-          type: 'campaign'
-        },
-        headers: { 'Authorization': 'OAuth ' + access_token },
-        success: function (d) {
-          $('<div>').text('webservice called').appendTo(div);
-          console.log('webservice call:');
-          console.log(d);
+  app = {
+    consumerKey : 'theliveweb-7120',
+    consumerSecret : 'd9a33b924edf0a95',
+    evernoteHostName : 'https://sandbox.evernote.com',
+    loginWithEvernote: function() {
+      options = {
+          consumerKey: app.consumerKey,
+          consumerSecret: app.consumerSecret,
+          callbackUrl : "http://dominicbosch.github.io/msc-liveweb/evernote", // this filename doesn't matter in this example
+          signatureMethod : "HMAC-SHA1",
+      };
+      oauth = OAuth(options);
+      // OAuth Step 1: Get request token
+      oauth.request({'method': 'GET', 'url': app.evernoteHostName + '/oauth', 'success': app.success, 'failure': app.failure});
+    },
+    success: function(data) {
+        var isCallBackConfirmed = false;
+        var token = '';
+        var vars = data.text.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var y = vars[i].split('=');
+            if(y[0] === 'oauth_token')  {
+                token = y[1];
+            }
+            else if(y[0] === 'oauth_token_secret') {
+                this.oauth_token_secret = y[1];
+                localStorage.setItem("oauth_token_secret", y[1]);
+            }
+            else if(y[0] === 'oauth_callback_confirmed') {
+                isCallBackConfirmed = true;
+            }
         }
-      });
+        var ref;
+        if(isCallBackConfirmed) {
+            // step 2
+            ref = window.open(app.evernoteHostName + '/OAuth.action?oauth_token=' + token, '_blank');
+            ref.addEventListener('loadstart',
+                function(event) {
+                    var loc = event.url;
+                    if (loc.indexOf(app.evernoteHostName + '/Home.action?gotOAuth.html?') >= 0) {
+                        var index, verifier = '';
+                        var got_oauth = '';
+                        var params = loc.substr(loc.indexOf('?') + 1);
+                        params = params.split('&');
+                        for (var i = 0; i < params.length; i++) {
+                            var y = params[i].split('=');
+                            if(y[0] === 'oauth_verifier') {
+                                verifier = y[1];
+                            }
+                        }
+                    } else if(y[0] === 'gotOAuth.html?oauth_token') {
+                        got_oauth = y[1];
+                    }
+                    // step 3
+                    oauth.setVerifier(verifier);
+                    oauth.setAccessToken([got_oauth, localStorage.getItem("oauth_token_secret")]);
+ 
+                    var getData = {'oauth_verifier':verifier};
+                    ref.close();
+                    oauth.request({'method': 'GET', 'url': app.evernoteHostName + '/oauth',
+                        'success': app.success, 'failure': app.failure});
+ 
+                }
+            );
+        } else {
+            // Step 4 : Get the final token
+            var querystring = app.getQueryParams(data.text);
+            var authTokenEvernote = querystring.oauth_token;
+            // authTokenEvernote can now be used to send request to the Evernote Cloud API
+            
+            // Here, we connect to the Evernote Cloud API and get a list of all of the
+            // notebooks in the authenticated user's account:
+            var noteStoreURL = querystring.edam_noteStoreUrl;
+            var noteStoreTransport = new Thrift.BinaryHttpTransport(noteStoreURL);
+            var noteStoreProtocol = new Thrift.BinaryProtocol(noteStoreTransport);
+            var noteStore = new NoteStoreClient(noteStoreProtocol);
+            noteStore.listNotebooks(authTokenEvernote, function (notebooks) {
+                console.log(notebooks);
+            },
+            function onerror(error) {
+                console.log(error);
+            });
+        }
+ 
+    },
+    failure: function(error) {
+        console.log('error ' + error.text);
     }
-    
-    function checkValidation(d) {
-      console.log(d);
-      if(d.access_token){
-        access_token = d.access_token;
-        $('#validateButton').remove();
-        div.append($('<div>').text('Got access token: ' + access_token));
-        $.ajax({
-          dataType: "json",
-          url: metadata_uri,
-          headers: { 'Authorization': 'OAuth ' + access_token },
-          success: function (d) {
-            console.log('access after OAuth:');
-            console.log(d);
-            requestWebservice();
-          }
-        });
-      }
-    }
-    
-    $('<div>').text('received mailchimp code: ' + urlparams.code).appendTo(div);
-    $.ajax({
-      dataType: "json",
-      url: access_token_uri,
-      data: {
-        grant_type: 'authorization_code',
-        client_id: client_id,
-        client_secret: secret,
-        code: urlparams.code,
-        redirect_uri: redirect_uri
-      },
-      method: 'post',
-      success: checkValidation
-    });
   }
 })();

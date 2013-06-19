@@ -3,6 +3,7 @@
  */
 (function(){
   var libHost = 'http://dominicbosch.github.io/msc-liveweb/';
+  
   var arrParams = window.location.search.substr(1).split('&'), arrKeyVal;
   var objParams = {};
   for(var i = 0; i < arrParams.length; i++){

@@ -83,7 +83,6 @@
         code: urlparams.code,
         redirect_uri: redirect_uri
       },
-      crossDomain: 'true',
       method: 'post',
       success: checkValidation,
       error: function(j, t, e) {

@@ -7,6 +7,7 @@
   var wsApiManager = (function(){
     var version = 0.1;
     var libHost = 'http://dominicbosch.github.io/msc-liveweb/';
+    
     var pubFunc = {}, listApis = {}, objSchema = null, errSchema = null;
     var readyTv4 = false;
     var arrDefaultAPIs = [ 'json/probinder.json', 'json/evernote.json' ];
