@@ -1,0 +1,3432 @@
+%!PS-Adobe-3.0
+%%Creator: graphviz version 2.26.3 (20100126.1600)
+%%Title: G
+%%Pages: (atend)
+%%BoundingBox: (atend)
+%%EndComments
+save
+%%BeginProlog
+/DotDict 200 dict def
+DotDict begin
+
+/setupLatin1 {
+mark
+/EncodingVector 256 array def
+ EncodingVector 0
+
+ISOLatin1Encoding 0 255 getinterval putinterval
+EncodingVector 45 /hyphen put
+
+% Set up ISO Latin 1 character encoding
+/starnetISO {
+        dup dup findfont dup length dict begin
+        { 1 index /FID ne { def }{ pop pop } ifelse
+        } forall
+        /Encoding EncodingVector def
+        currentdict end definefont
+} def
+/Times-Roman starnetISO def
+/Times-Italic starnetISO def
+/Times-Bold starnetISO def
+/Times-BoldItalic starnetISO def
+/Helvetica starnetISO def
+/Helvetica-Oblique starnetISO def
+/Helvetica-Bold starnetISO def
+/Helvetica-BoldOblique starnetISO def
+/Courier starnetISO def
+/Courier-Oblique starnetISO def
+/Courier-Bold starnetISO def
+/Courier-BoldOblique starnetISO def
+cleartomark
+} bind def
+
+%%BeginResource: procset graphviz 0 0
+/coord-font-family /Times-Roman def
+/default-font-family /Times-Roman def
+/coordfont coord-font-family findfont 8 scalefont def
+
+/InvScaleFactor 1.0 def
+/set_scale {
+       dup 1 exch div /InvScaleFactor exch def
+       scale
+} bind def
+
+% styles
+/solid { [] 0 setdash } bind def
+/dashed { [9 InvScaleFactor mul dup ] 0 setdash } bind def
+/dotted { [1 InvScaleFactor mul 6 InvScaleFactor mul] 0 setdash } bind def
+/invis {/fill {newpath} def /stroke {newpath} def /show {pop newpath} def} bind def
+/bold { 2 setlinewidth } bind def
+/filled { } bind def
+/unfilled { } bind def
+/rounded { } bind def
+/diagonals { } bind def
+
+% hooks for setting color 
+/nodecolor { sethsbcolor } bind def
+/edgecolor { sethsbcolor } bind def
+/graphcolor { sethsbcolor } bind def
+/nopcolor {pop pop pop} bind def
+
+/beginpage {	% i j npages
+	/npages exch def
+	/j exch def
+	/i exch def
+	/str 10 string def
+	npages 1 gt {
+		gsave
+			coordfont setfont
+			0 0 moveto
+			(\() show i str cvs show (,) show j str cvs show (\)) show
+		grestore
+	} if
+} bind def
+
+/set_font {
+	findfont exch
+	scalefont setfont
+} def
+
+% draw text fitted to its expected width
+/alignedtext {			% width text
+	/text exch def
+	/width exch def
+	gsave
+		width 0 gt {
+			[] 0 setdash
+			text stringwidth pop width exch sub text length div 0 text ashow
+		} if
+	grestore
+} def
+
+/boxprim {				% xcorner ycorner xsize ysize
+		4 2 roll
+		moveto
+		2 copy
+		exch 0 rlineto
+		0 exch rlineto
+		pop neg 0 rlineto
+		closepath
+} bind def
+
+/ellipse_path {
+	/ry exch def
+	/rx exch def
+	/y exch def
+	/x exch def
+	matrix currentmatrix
+	newpath
+	x y translate
+	rx ry scale
+	0 0 1 0 360 arc
+	setmatrix
+} bind def
+
+/endpage { showpage } bind def
+/showpage { } def
+
+/layercolorseq
+	[	% layer color sequence - darkest to lightest
+		[0 0 0]
+		[.2 .8 .8]
+		[.4 .8 .8]
+		[.6 .8 .8]
+		[.8 .8 .8]
+	]
+def
+
+/layerlen layercolorseq length def
+
+/setlayer {/maxlayer exch def /curlayer exch def
+	layercolorseq curlayer 1 sub layerlen mod get
+	aload pop sethsbcolor
+	/nodecolor {nopcolor} def
+	/edgecolor {nopcolor} def
+	/graphcolor {nopcolor} def
+} bind def
+
+/onlayer { curlayer ne {invis} if } def
+
+/onlayers {
+	/myupper exch def
+	/mylower exch def
+	curlayer mylower lt
+	curlayer myupper gt
+	or
+	{invis} if
+} def
+
+/curlayer 0 def
+
+%%EndResource
+%%EndProlog
+%%BeginSetup
+14 default-font-family set_font
+1 setmiterlimit
+% /arrowlength 10 def
+% /arrowwidth 5 def
+
+% make sure pdfmark is harmless for PS-interpreters other than Distiller
+/pdfmark where {pop} {userdict /pdfmark /cleartomark load put} ifelse
+% make '<<' and '>>' safe on PS Level 1 devices
+/languagelevel where {pop languagelevel}{1} ifelse
+2 lt {
+    userdict (<<) cvn ([) cvn load put
+    userdict (>>) cvn ([) cvn load put
+} if
+
+%%EndSetup
+setupLatin1
+%%Page: 1 1
+%%PageBoundingBox: 36 36 9326 1208
+%%PageOrientation: Portrait
+0 0 1 beginpage
+gsave
+36 36 9290 1172 boxprim clip newpath
+1 1 set_scale 0 rotate 40 41 translate
+% 2003-Papamarkos-ECARLSW.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+3607.96 1120 314.16 43.84 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3589.46 1134.4 moveto 37 (2003) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3393.46 1116.4 moveto 429 (Event-Condition-Action Rule Languages for the Semantic Web) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3490.46 1098.4 moveto 235 (- Papamarkos, Poulovassilis, Wood) alignedtext
+grestore
+% 2004-Papamarkos_etal-RDFTL.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+3088.96 833 272.24 43.84 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3070.46 847.4 moveto 37 (2004) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+2904.46 829.4 moveto 369 (RDFTL: An Event-Condition-Action Language for RDF) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+2971.46 811.4 moveto 235 (- Papamarkos, Poulovassilis, Wood) alignedtext
+grestore
+% 2003-Papamarkos-ECARLSW.pdf->2004-Papamarkos_etal-RDFTL.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 3470.54 1080.36 moveto
+3438.41 1069.05 3404.86 1055.51 3374.96 1040 curveto
+3290.05 995.94 3202.37 928.66 3146.86 882.86 curveto
+stroke
+0 0 0 edgecolor
+newpath 3148.84 879.95 moveto
+3138.9 876.26 lineto
+3144.37 885.34 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 3148.84 879.95 moveto
+3138.9 876.26 lineto
+3144.37 885.34 lineto
+closepath stroke
+grestore
+% 2005-Alferes_etal-GLER.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+2602.96 833 181.23 56.57 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+2584.46 856.4 moveto 37 (2005) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+2489.96 838.4 moveto 226 (A general language for evolution) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+2482.46 820.4 moveto 241 (and reactivity in the semantic web) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+2524.46 802.4 moveto 157 (- Alferes, Amador, May) alignedtext
+grestore
+% 2003-Papamarkos-ECARLSW.pdf->2005-Alferes_etal-GLER.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 3407.66 1086.07 moveto
+3341.99 1073.46 3268.96 1057.81 3202.96 1040 curveto
+3034.9 994.64 2845.78 926.44 2725.59 880.86 curveto
+stroke
+0 0 0 edgecolor
+newpath 2726.57 877.49 moveto
+2715.98 877.21 lineto
+2724.08 884.03 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 2726.57 877.49 moveto
+2715.98 877.21 lineto
+2724.08 884.03 lineto
+closepath stroke
+grestore
+% 2005-Bailey_etal-FlavorsOfXChange.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+4496.96 683 220.12 56.57 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4478.46 706.4 moveto 37 (2005) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4376.46 688.4 moveto 241 (Flavours of XChange, a Rule-Based) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4348.96 670.4 moveto 296 (Reactive Language for the \(Semantic\) Web) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4389.96 652.4 moveto 214 (- Bailey, Bry, Eckert, Patranjan) alignedtext
+grestore
+% 2003-Papamarkos-ECARLSW.pdf->2005-Bailey_etal-FlavorsOfXChange.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 3908.93 1107.36 moveto
+4214.68 1093.01 4647.03 1067.95 4672.96 1040 curveto
+4753.91 952.74 4697.36 872.7 4627.96 776 curveto
+4618.74 763.15 4607.17 751.42 4594.75 740.96 curveto
+stroke
+0 0 0 edgecolor
+newpath 4596.89 738.19 moveto
+4586.92 734.61 lineto
+4592.48 743.62 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 4596.89 738.19 moveto
+4586.92 734.61 lineto
+4592.48 743.62 lineto
+closepath stroke
+grestore
+% 2005-Berndtsson_Serioe-ECA_ruleCore.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+3586.96 533 207.89 43.84 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3568.46 547.4 moveto 37 (2005) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3447.96 529.4 moveto 278 (Supporting ECA rule markup in ruleCore) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3514.46 511.4 moveto 145 (- Berndtsson, Seirioe) alignedtext
+grestore
+% 2003-Papamarkos-ECARLSW.pdf->2005-Berndtsson_Serioe-ECA_ruleCore.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 3588.45 1075.8 moveto
+3558.85 1006.09 3503.93 865.59 3483.96 740 curveto
+3476 689.96 3463.39 672.3 3483.96 626 curveto
+3491.31 609.47 3503.21 594.63 3516.36 581.92 curveto
+stroke
+0 0 0 edgecolor
+newpath 3518.79 584.43 moveto
+3523.77 575.08 lineto
+3514.05 579.29 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 3518.79 584.43 moveto
+3523.77 575.08 lineto
+3514.05 579.29 lineto
+closepath stroke
+grestore
+% 2005-Bry_etal-XChange.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+3827.96 983 220.82 56.57 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3809.46 1006.4 moveto 37 (2005) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3711.46 988.4 moveto 233 (Reactivity on the Web: Paradigms) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3679.46 970.4 moveto 297 (and Applications of the Language XChange) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3772.96 952.4 moveto 110 (- Bry, Patranjan) alignedtext
+grestore
+% 2003-Papamarkos-ECARLSW.pdf->2005-Bry_etal-XChange.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 3676.97 1077.03 moveto
+3695.41 1065.54 3715.64 1052.94 3735.14 1040.8 curveto
+stroke
+0 0 0 edgecolor
+newpath 3737.1 1043.7 moveto
+3743.74 1035.45 lineto
+3733.4 1037.76 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 3737.1 1043.7 moveto
+3743.74 1035.45 lineto
+3733.4 1037.76 lineto
+closepath stroke
+grestore
+% 2005-May_etal-ARSW.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+1636.96 833 171.12 43.84 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+1618.46 847.4 moveto 37 (2005) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+1523.96 829.4 moveto 226 (Active rules in the semantic web) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+1558.46 811.4 moveto 157 (- May, Alferes, Amador) alignedtext
+grestore
+% 2003-Papamarkos-ECARLSW.pdf->2005-May_etal-ARSW.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 3344.37 1096.07 moveto
+3199.63 1081.9 3017.1 1062.37 2854.96 1040 curveto
+2467.11 986.49 2013.11 904.05 1784.48 861.14 curveto
+stroke
+0 0 0 edgecolor
+newpath 1784.91 857.66 moveto
+1774.44 859.25 lineto
+1783.62 864.54 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 1784.91 857.66 moveto
+1774.44 859.25 lineto
+1783.62 864.54 lineto
+closepath stroke
+grestore
+% 2005-Patranjan-TLE.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+4138.96 533 135.76 43.84 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4120.46 547.4 moveto 37 (2005) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4055.96 529.4 moveto 166 (The Language XChange) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4050.96 511.4 moveto 176 (- Patranjan \(Dissertation\)) alignedtext
+grestore
+% 2003-Papamarkos-ECARLSW.pdf->2005-Patranjan-TLE.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 3879.47 1097.89 moveto
+3958.38 1085.96 4030.71 1067.73 4057.96 1040 curveto
+4120.2 976.66 4134.62 704.82 4137.96 587.38 curveto
+stroke
+0 0 0 edgecolor
+newpath 4141.46 587.27 moveto
+4138.23 577.18 lineto
+4134.47 587.09 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 4141.46 587.27 moveto
+4138.23 577.18 lineto
+4134.47 587.09 lineto
+closepath stroke
+grestore
+% 2008-Schmidt_etal-BRAP.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+4527.96 533 234.97 56.57 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4509.46 556.4 moveto 37 (2008) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4447.96 538.4 moveto 160 (From Business Rules to) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4369.46 520.4 moveto 317 (Application Rules in Rich Internet Applications) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4416.46 502.4 moveto 223 (- Schmidt, Stuehmer, Stojanovic) alignedtext
+grestore
+% 2003-Papamarkos-ECARLSW.pdf->2008-Schmidt_etal-BRAP.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 3908.44 1107.21 moveto
+4223.34 1092.44 4676.64 1066.73 4705.96 1040 curveto
+4842.93 915.14 4859.35 779.82 4755.96 626 curveto
+4742.5 605.96 4723.88 590.24 4703.03 577.91 curveto
+stroke
+0 0 0 edgecolor
+newpath 4704.73 574.85 moveto
+4694.3 573 lineto
+4701.3 580.95 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 4704.73 574.85 moveto
+4694.3 573 lineto
+4701.3 580.95 lineto
+closepath stroke
+grestore
+% 2006-Alferes_Tagni-ICEEW.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+3675.96 683 183.14 56.57 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3657.46 706.4 moveto 37 (2006) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3606.46 688.4 moveto 139 (Implementation of a) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3554.46 670.4 moveto 243 (Complex Event Engine for the Web) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3624.46 652.4 moveto 103 (- Alferes, Tagni) alignedtext
+grestore
+% 2004-Papamarkos_etal-RDFTL.pdf->2006-Alferes_Tagni-ICEEW.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 3246.89 797.14 moveto
+3318.01 780.53 3402.91 760.06 3478.96 740 curveto
+3496.84 735.28 3515.58 730.13 3534.09 724.92 curveto
+stroke
+0 0 0 edgecolor
+newpath 3535.07 728.28 moveto
+3543.74 722.19 lineto
+3533.17 721.55 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 3535.07 728.28 moveto
+3543.74 722.19 lineto
+3533.17 721.55 lineto
+closepath stroke
+grestore
+% 2008-Schenk-ADNA.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+1128.96 533 185.97 56.57 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+1110.46 556.4 moveto 37 (2008) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+1046.96 538.4 moveto 164 (An Active Domain Node) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+1005.46 520.4 moveto 247 (Architecture For The Semantic Web) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+1048.96 502.4 moveto 160 (- Schenk \(Dissertation\)) alignedtext
+grestore
+% 2004-Papamarkos_etal-RDFTL.pdf->2008-Schenk-ADNA.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 2929.94 797.28 moveto
+2885.8 788.76 2837.72 780.76 2792.96 776 curveto
+2747.51 771.16 1181.39 771.17 1147.96 740 curveto
+1110.71 705.26 1108.76 645.9 1114.51 599.63 curveto
+stroke
+0 0 0 edgecolor
+newpath 1117.98 600.06 moveto
+1115.89 589.68 lineto
+1111.05 599.1 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 1117.98 600.06 moveto
+1115.89 589.68 lineto
+1111.05 599.1 lineto
+closepath stroke
+grestore
+% 2009-Alferes_etal-ERSW.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+2756.96 370 234.97 43.84 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+2738.46 384.4 moveto 37 (2009) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+2598.46 366.4 moveto 317 (Evolution and Reactivity in the Semantic Web) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+2682.96 348.4 moveto 148 (- Alferes, Eckert, May) alignedtext
+grestore
+% 2004-Papamarkos_etal-RDFTL.pdf->2009-Alferes_etal-ERSW.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 3229.51 795.27 moveto
+3255.04 781.97 3278.45 764.06 3293.96 740 curveto
+3321.41 697.41 3321 668.85 3293.96 626 curveto
+3247.05 551.67 3025.12 463.01 2881.65 411.93 curveto
+stroke
+0 0 0 edgecolor
+newpath 2882.48 408.51 moveto
+2871.89 408.47 lineto
+2880.14 415.11 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 2882.48 408.51 moveto
+2871.89 408.47 lineto
+2880.14 415.11 lineto
+closepath stroke
+grestore
+% 2005-Alferes_etal-GLER.pdf->2005-Berndtsson_Serioe-ECA_ruleCore.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 2731.39 793.12 moveto
+2756.58 786.49 2782.94 780.36 2807.96 776 curveto
+2914.65 757.4 3199.63 793.2 3293.96 740 curveto
+3348.1 709.47 3326.76 665.24 3374.96 626 curveto
+3400.95 604.85 3432.5 587.61 3463.23 573.98 curveto
+stroke
+0 0 0 edgecolor
+newpath 3464.94 577.05 moveto
+3472.73 569.86 lineto
+3462.16 570.62 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 3464.94 577.05 moveto
+3472.73 569.86 lineto
+3462.16 570.62 lineto
+closepath stroke
+grestore
+% 2005-Alferes_etal-GLER.pdf->2005-Patranjan-TLE.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 2730.78 792.92 moveto
+2756.14 786.26 2782.72 780.18 2807.96 776 curveto
+2877.46 764.5 3384.18 781.7 3440.96 740 curveto
+3484.61 707.95 3440.75 658.64 3483.96 626 curveto
+3560.3 568.34 3818.6 605.75 3912.96 590 curveto
+3950.54 583.73 3991.04 574.36 4027.24 565.02 curveto
+stroke
+0 0 0 edgecolor
+newpath 4028.54 568.3 moveto
+4037.33 562.39 lineto
+4026.77 561.53 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 4028.54 568.3 moveto
+4037.33 562.39 lineto
+4026.77 561.53 lineto
+closepath stroke
+grestore
+% 2007-Tagni-CET.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+4791.96 370 147.79 56.57 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4773.46 393.4 moveto 37 (2007) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4695.46 375.4 moveto 193 (Approach To Complex Event) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4715.96 357.4 moveto 152 (Detection In The Web) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4723.46 339.4 moveto 137 (- Tagni \(MSc Thesis\)) alignedtext
+grestore
+% 2005-Alferes_etal-GLER.pdf->2007-Tagni-CET.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 2731.09 793.05 moveto
+2756.36 786.4 2782.84 780.28 2807.96 776 curveto
+2926.74 755.76 3242.04 795.54 3348.96 740 curveto
+3406.74 709.99 3383.68 656.95 3440.96 626 curveto
+3583.6 548.94 3650.05 640.94 3803.96 590 curveto
+3897.45 559.06 3899.83 504.94 3993.96 476 curveto
+4266.7 392.15 4357.65 507.2 4634.96 440 curveto
+4654.9 435.17 4675.45 427.88 4694.85 419.81 curveto
+stroke
+0 0 0 edgecolor
+newpath 4696.45 422.93 moveto
+4704.28 415.79 lineto
+4693.71 416.5 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 4696.45 422.93 moveto
+4704.28 415.79 lineto
+4693.71 416.5 lineto
+closepath stroke
+grestore
+% UNAVAILABLE.txt#5
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+2156.96 683 161.93 56.57 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+2081.96 706.4 moveto 150 (2005 \(UNAVAILABLE\)) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+2052.96 688.4 moveto 208 (Design and Implementation of) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+2050.46 670.4 moveto 213 (an ECA Rule Markup Language) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+2089.46 652.4 moveto 135 (Seirioe, Berndtsson) alignedtext
+grestore
+% 2005-Alferes_etal-GLER.pdf->UNAVAILABLE.txt#5
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 2479.61 791.52 moveto
+2418.55 770.98 2344.95 746.22 2283.47 725.55 curveto
+stroke
+0 0 0 edgecolor
+newpath 2284.3 722.13 moveto
+2273.71 722.26 lineto
+2282.07 728.77 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 2284.3 722.13 moveto
+2273.71 722.26 lineto
+2282.07 728.77 lineto
+closepath stroke
+grestore
+% 2006-Knabke-Domain_Broker.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+224.96 533 193.95 43.84 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+206.46 547.4 moveto 37 (2006) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+95.46 529.4 moveto 259 (Domain Broker for the Semantic Web) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+150.46 511.4 moveto 149 (- Knabke \(BSc Thesis\)) alignedtext
+grestore
+% 2005-Alferes_etal-GLER.pdf->2006-Knabke-Domain_Broker.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 2428.29 817.87 moveto
+2269.1 804.67 2027.42 786.09 1816.96 776 curveto
+1774.36 773.96 315.58 766.24 281.96 740 curveto
+269.67 730.41 249.1 644.93 236.32 586.86 curveto
+stroke
+0 0 0 edgecolor
+newpath 239.73 586.1 moveto
+234.18 577.07 lineto
+232.9 587.59 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 239.73 586.1 moveto
+234.18 577.07 lineto
+232.9 587.59 lineto
+closepath stroke
+grestore
+% 2006-Schubert-ECA_Engine.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+420.96 683 130.11 43.84 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+402.46 697.4 moveto 37 (2006) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+336.96 679.4 moveto 168 (Prototypical ECA Engine) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+340.46 661.4 moveto 161 (- Schubert \(BSc Thesis\)) alignedtext
+grestore
+% 2005-Alferes_etal-GLER.pdf->2006-Schubert-ECA_Engine.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 2428.27 818.18 moveto
+2269.08 805.19 2027.39 786.74 1816.96 776 curveto
+1547.42 762.24 869.12 784.75 602.96 740 curveto
+574.9 735.28 545.16 727.31 518.05 718.79 curveto
+stroke
+0 0 0 edgecolor
+newpath 518.77 715.35 moveto
+508.18 715.64 lineto
+516.64 722.02 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 518.77 715.35 moveto
+508.18 715.64 lineto
+516.64 722.02 lineto
+closepath stroke
+grestore
+% 2007-Daniel_etal-ARRAM.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+2587.96 683 251.23 43.84 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+2569.46 697.4 moveto 37 (2007) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+2417.96 679.4 moveto 340 (Active Rules for Runtime Adaptivity Management) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+2446.96 661.4 moveto 282 (- Daniel, Matera, Morandi, Mortari, Pozzi) alignedtext
+grestore
+% 2005-Alferes_etal-GLER.pdf->2007-Daniel_etal-ARRAM.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 2597.29 776.29 moveto
+2596.01 763.46 2594.65 749.87 2593.38 737.15 curveto
+stroke
+0 0 0 edgecolor
+newpath 2596.86 736.76 moveto
+2592.38 727.16 lineto
+2589.89 737.46 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 2596.86 736.76 moveto
+2592.38 727.16 lineto
+2589.89 737.46 lineto
+closepath stroke
+grestore
+% 2007-Behrends_etal-CECAPA.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+872.96 683 227.9 56.57 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+854.46 706.4 moveto 37 (2007) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+798.96 688.4 moveto 148 (Combining ECA Rules) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+719.46 670.4 moveto 307 (with Process Algebras for the Semantic Web) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+757.96 652.4 moveto 230 (- Behrends, Fritzen, May, Schenk) alignedtext
+grestore
+% 2005-Alferes_etal-GLER.pdf->2007-Behrends_etal-CECAPA.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 2427.44 819.2 moveto
+2268.19 806.94 2026.92 788.99 1816.96 776 curveto
+1505.15 756.7 1424.26 783.99 1114.96 740 curveto
+1090.35 736.5 1064.55 731.69 1039.36 726.33 curveto
+stroke
+0 0 0 edgecolor
+newpath 1039.88 722.86 moveto
+1029.37 724.17 lineto
+1038.4 729.71 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 1039.88 722.86 moveto
+1029.37 724.17 lineto
+1038.4 729.71 lineto
+closepath stroke
+grestore
+% 2009-Schubert-RDF_Rules_MARS.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+696.96 533 183.85 43.84 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+678.46 547.4 moveto 37 (2009) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+574.96 529.4 moveto 244 (RDF Rules in the MARS Framework) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+615.46 511.4 moveto 163 (- Schubert \(MSc Thesis\)) alignedtext
+grestore
+% 2005-Alferes_etal-GLER.pdf->2009-Schubert-RDF_Rules_MARS.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 2427.88 818.19 moveto
+2268.68 805.23 2027.21 786.82 1816.96 776 curveto
+1751.41 772.63 681.66 787.12 635.96 740 curveto
+595.57 698.35 626.36 631.34 657.01 584.9 curveto
+stroke
+0 0 0 edgecolor
+newpath 660 586.72 moveto
+662.71 576.48 lineto
+654.2 582.79 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 660 586.72 moveto
+662.71 576.48 lineto
+654.2 582.79 lineto
+closepath stroke
+grestore
+% 2010-Anicic_etal-RBLCEPR.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+3070.96 683 213.75 56.57 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3052.46 706.4 moveto 37 (2010) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+2977.96 688.4 moveto 186 (A Rule-Based Language for) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+2927.46 670.4 moveto 287 (Complex Event Processing and Reasoning) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+2931.46 652.4 moveto 279 (- Anicic, Fodor, Rudolph, Stuehmer et al.) alignedtext
+grestore
+% 2005-Alferes_etal-GLER.pdf->2010-Anicic_etal-RBLCEPR.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 2729.3 792.51 moveto
+2789.68 773.15 2862.3 749.88 2925.03 729.77 curveto
+stroke
+0 0 0 edgecolor
+newpath 2926.15 733.09 moveto
+2934.61 726.7 lineto
+2924.02 726.42 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 2926.15 733.09 moveto
+2934.61 726.7 lineto
+2924.02 726.42 lineto
+closepath stroke
+grestore
+% 2005-Bailey_etal-FlavorsOfXChange.pdf->2005-Patranjan-TLE.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 4381.72 634.71 moveto
+4333.15 614.36 4277.37 590.99 4231.54 571.79 curveto
+stroke
+0 0 0 edgecolor
+newpath 4232.79 568.52 moveto
+4222.21 567.88 lineto
+4230.08 574.97 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 4232.79 568.52 moveto
+4222.21 567.88 lineto
+4230.08 574.97 lineto
+closepath stroke
+grestore
+% 2005-Bailey_etal-FlavorsOfXChange.pdf->2007-Tagni-CET.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 4672.93 648.89 moveto
+4732 633.61 4787.39 613.65 4804.96 590 curveto
+4837.33 546.41 4829.82 483.55 4816.7 436.17 curveto
+stroke
+0 0 0 edgecolor
+newpath 4819.98 434.93 moveto
+4813.82 426.31 lineto
+4813.26 436.89 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 4819.98 434.93 moveto
+4813.82 426.31 lineto
+4813.26 436.89 lineto
+closepath stroke
+grestore
+% 2005-Paschke-ECA_RuleML.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+3762.96 370 321.03 69.3 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3744.46 402.4 moveto 37 (2005) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3634.96 384.4 moveto 256 (ECA-RuleML: An Approach combining) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3543.96 366.4 moveto 438 (ECA Rules with temporal interval-based KR Event/Action Logics) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3651.96 348.4 moveto 222 (and Transactional Update Logics) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3730.46 330.4 moveto 65 (- Paschke) alignedtext
+grestore
+% 2005-Berndtsson_Serioe-ECA_ruleCore.pdf->2005-Paschke-ECA_RuleML.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 3633.66 489.75 moveto
+3648.59 475.92 3665.56 460.2 3682.19 444.8 curveto
+stroke
+0 0 0 edgecolor
+newpath 3684.84 447.12 moveto
+3689.8 437.76 lineto
+3680.08 441.99 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 3684.84 447.12 moveto
+3689.8 437.76 lineto
+3680.08 441.99 lineto
+closepath stroke
+grestore
+% 2005-Bry_etal-XChange.pdf->2005-Alferes_etal-GLER.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 3609.04 974.46 moveto
+3401.43 963.67 3081.48 940.07 2807.96 890 curveto
+2786.36 886.05 2763.73 880.85 2741.73 875.21 curveto
+stroke
+0 0 0 edgecolor
+newpath 2742.56 871.81 moveto
+2732 872.68 lineto
+2740.8 878.59 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 2742.56 871.81 moveto
+2732 872.68 lineto
+2740.8 878.59 lineto
+closepath stroke
+grestore
+% 2005-Bry_etal-XChange.pdf->2005-Bailey_etal-FlavorsOfXChange.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 4022.99 956.38 moveto
+4097.96 946.43 4184.39 935.29 4262.96 926 curveto
+4338.63 917.05 4552.99 946.64 4603.96 890 curveto
+4637.86 852.34 4624.97 822.1 4603.96 776 curveto
+4598.55 764.13 4590.8 753.19 4581.9 743.31 curveto
+stroke
+0 0 0 edgecolor
+newpath 4584.33 740.78 moveto
+4574.89 735.95 lineto
+4579.26 745.61 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 4584.33 740.78 moveto
+4574.89 735.95 lineto
+4579.26 745.61 lineto
+closepath stroke
+grestore
+% 2005-Bry_etal-XChange.pdf->2005-Berndtsson_Serioe-ECA_ruleCore.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 3855.79 926.91 moveto
+3888.98 851.12 3932.42 715.23 3867.96 626 curveto
+3858.53 612.95 3790.98 590.38 3724.48 570.75 curveto
+stroke
+0 0 0 edgecolor
+newpath 3725.26 567.33 moveto
+3714.68 567.88 lineto
+3723.29 574.05 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 3725.26 567.33 moveto
+3714.68 567.88 lineto
+3723.29 574.05 lineto
+closepath stroke
+grestore
+% 2005-Bry_etal-XChange.pdf->2005-May_etal-ARSW.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 3608.29 976.18 moveto
+3278.8 964.84 2637.29 938.39 2093.96 890 curveto
+1994.94 881.18 1884.31 867.48 1796.7 855.73 curveto
+stroke
+0 0 0 edgecolor
+newpath 1797.05 852.24 moveto
+1786.67 854.38 lineto
+1796.12 859.18 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 1797.05 852.24 moveto
+1786.67 854.38 lineto
+1796.12 859.18 lineto
+closepath stroke
+grestore
+% 2005-Bry_etal-XChange.pdf->2005-Patranjan-TLE.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 3927.36 932.49 moveto
+3945.38 920.28 3962.9 906.06 3976.96 890 curveto
+3998.34 865.59 4077.77 679.44 4116.89 586.07 curveto
+stroke
+0 0 0 edgecolor
+newpath 4120.14 587.36 moveto
+4120.78 576.79 lineto
+4113.69 584.66 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 4120.14 587.36 moveto
+4120.78 576.79 lineto
+4113.69 584.66 lineto
+closepath stroke
+grestore
+% 2005-Bry_etal-XChange.pdf->2006-Alferes_Tagni-ICEEW.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 3799.55 926.92 moveto
+3773.84 876.18 3735.98 801.45 3708.94 748.09 curveto
+stroke
+0 0 0 edgecolor
+newpath 3712 746.39 moveto
+3704.36 739.05 lineto
+3705.76 749.56 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 3712 746.39 moveto
+3704.36 739.05 lineto
+3705.76 749.56 lineto
+closepath stroke
+grestore
+% 2005-Bry_etal-XChange.pdf->2009-Alferes_etal-ERSW.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 3878.37 927.8 moveto
+3886.42 916.08 3893.54 903.22 3897.96 890 curveto
+3935.16 778.72 3951.94 730.18 3897.96 626 curveto
+3885.2 601.37 3863.94 611.95 3846.96 590 curveto
+3813.83 547.17 3847.8 507.79 3803.96 476 curveto
+3731.66 423.57 3089.1 454.41 3000.96 440 curveto
+2961.07 433.48 2918.44 422.64 2880.15 411.42 curveto
+stroke
+0 0 0 edgecolor
+newpath 2881.1 408.05 moveto
+2870.52 408.56 lineto
+2879.11 414.76 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 2881.1 408.05 moveto
+2870.52 408.56 lineto
+2879.11 414.76 lineto
+closepath stroke
+grestore
+% 2005-Eckert-RWEQCED.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+4368.96 833 225.77 56.57 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4350.46 856.4 moveto 37 (2005) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4238.46 838.4 moveto 261 (Reactivity on the Web: Event Queries) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4216.96 820.4 moveto 304 (and Composite Event Detection in XChange) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4296.46 802.4 moveto 145 (- Eckert \(MSc Thesis\)) alignedtext
+grestore
+% 2005-Bry_etal-XChange.pdf->2005-Eckert-RWEQCED.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 3977.94 941.42 moveto
+4049.32 921.63 4134.77 897.93 4207.55 877.75 curveto
+stroke
+0 0 0 edgecolor
+newpath 4208.58 881.1 moveto
+4217.28 875.06 lineto
+4206.71 874.36 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 4208.58 881.1 moveto
+4217.28 875.06 lineto
+4206.71 874.36 lineto
+closepath stroke
+grestore
+% 2005-Bry_etal-XChange.pdf->2007-Tagni-CET.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 4022.69 956.13 moveto
+4097.72 946.14 4184.27 935.03 4262.96 926 curveto
+4343.93 916.7 4557.98 931.78 4627.96 890 curveto
+4765.98 807.6 4783.03 743.74 4829.96 590 curveto
+4845.46 539.23 4833.5 479.82 4819.03 435.54 curveto
+stroke
+0 0 0 edgecolor
+newpath 4822.33 434.4 moveto
+4815.81 426.05 lineto
+4815.71 436.64 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 4822.33 434.4 moveto
+4815.81 426.05 lineto
+4815.71 436.64 lineto
+closepath stroke
+grestore
+% 2005-Bry_etal-XChange.pdf->2005-Paschke-ECA_RuleML.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 3909.03 930.2 moveto
+3921.17 918.5 3931.94 905.04 3938.96 890 curveto
+3988.59 783.68 3973.48 738.14 3938.96 626 curveto
+3918.3 558.86 3873.1 493.77 3833.68 446.03 curveto
+stroke
+0 0 0 edgecolor
+newpath 3836.26 443.65 moveto
+3827.16 438.22 lineto
+3830.88 448.13 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 3836.26 443.65 moveto
+3827.16 438.22 lineto
+3830.88 448.13 lineto
+closepath stroke
+grestore
+% 2006-Alferes_etal-ECALPL.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+1820.96 683 155.77 56.57 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+1802.46 706.4 moveto 37 (2006) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+1728.96 688.4 moveto 184 (An Event-Condition-Action) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+1718.46 670.4 moveto 205 (Logic Programming Language) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+1746.96 652.4 moveto 148 (- Alferes, Banti, Brogi) alignedtext
+grestore
+% 2005-Bry_etal-XChange.pdf->2006-Alferes_etal-ECALPL.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 3608.49 975.82 moveto
+3269.65 963.52 2635.05 935.25 2412.96 890 curveto
+2238.71 854.5 2045.84 780.04 1929.03 730.78 curveto
+stroke
+0 0 0 edgecolor
+newpath 1930.28 727.51 moveto
+1919.71 726.84 lineto
+1927.55 733.96 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 1930.28 727.51 moveto
+1919.71 726.84 lineto
+1927.55 733.96 lineto
+closepath stroke
+grestore
+% 2005-May_etal-ARSW.pdf->2006-Alferes_Tagni-ICEEW.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 1799.99 819.48 moveto
+1956.94 806.83 2201.05 788.11 2412.96 776 curveto
+2804.21 753.64 2903.83 776.97 3293.96 740 curveto
+3363.65 733.4 3440.02 722.7 3506.04 712.35 curveto
+stroke
+0 0 0 edgecolor
+newpath 3506.79 715.77 moveto
+3516.12 710.76 lineto
+3505.7 708.86 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 3506.79 715.77 moveto
+3516.12 710.76 lineto
+3505.7 708.86 lineto
+closepath stroke
+grestore
+% 2005-May_etal-ARSW.pdf->2009-Alferes_etal-ERSW.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 1627.43 788.87 moveto
+1620.19 742.58 1617.19 670.48 1655.96 626 curveto
+1769.7 495.52 2249.5 423.3 2536.84 391.01 curveto
+stroke
+0 0 0 edgecolor
+newpath 2537.43 394.47 moveto
+2546.98 389.88 lineto
+2536.66 387.51 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 2537.43 394.47 moveto
+2546.98 389.88 lineto
+2536.66 387.51 lineto
+closepath stroke
+grestore
+% 2005-May_etal-ARSW.pdf->2006-Knabke-Domain_Broker.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 1470.05 823.19 moveto
+1103.54 801.48 259.91 750.43 248.96 740 curveto
+208.69 701.64 208.13 634.71 214.11 587.35 curveto
+stroke
+0 0 0 edgecolor
+newpath 217.6 587.65 moveto
+215.52 577.27 lineto
+210.67 586.69 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 217.6 587.65 moveto
+215.52 577.27 lineto
+210.67 586.69 lineto
+closepath stroke
+grestore
+% 2005-May_etal-ARSW.pdf->2006-Schubert-ECA_Engine.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 1469.18 824.39 moveto
+1211.87 810.18 732.06 779.43 564.96 740 curveto
+546.13 735.56 526.51 729.11 508.03 722.13 curveto
+stroke
+0 0 0 edgecolor
+newpath 509.07 718.78 moveto
+498.48 718.44 lineto
+506.55 725.31 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 509.07 718.78 moveto
+498.48 718.44 lineto
+506.55 725.31 lineto
+closepath stroke
+grestore
+% 2005-May_etal-ARSW.pdf->2007-Behrends_etal-CECAPA.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 1492.26 809.42 moveto
+1387.26 791.77 1241.96 766.25 1114.96 740 curveto
+1092.49 735.36 1068.92 730.18 1045.67 724.9 curveto
+stroke
+0 0 0 edgecolor
+newpath 1046.26 721.45 moveto
+1035.73 722.63 lineto
+1044.7 728.27 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 1046.26 721.45 moveto
+1035.73 722.63 lineto
+1044.7 728.27 lineto
+closepath stroke
+grestore
+% 2005-May_etal-ARSW.pdf->2009-Schubert-RDF_Rules_MARS.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 1466.17 829.97 moveto
+1187.44 823.23 659.93 802.32 602.96 740 curveto
+568.78 702.6 583.45 672.76 602.96 626 curveto
+609.69 609.88 620.72 595.13 632.9 582.36 curveto
+stroke
+0 0 0 edgecolor
+newpath 635.59 584.62 moveto
+640.18 575.07 lineto
+630.63 579.67 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 635.59 584.62 moveto
+640.18 575.07 lineto
+630.63 579.67 lineto
+closepath stroke
+grestore
+% 2005-May_etal-ARSW.pdf->2006-Alferes_etal-ECALPL.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 1688.71 790.82 moveto
+1707.57 775.44 1729.24 757.77 1749.51 741.25 curveto
+stroke
+0 0 0 edgecolor
+newpath 1751.96 743.77 moveto
+1757.5 734.74 lineto
+1747.54 738.34 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 1751.96 743.77 moveto
+1757.5 734.74 lineto
+1747.54 738.34 lineto
+closepath stroke
+grestore
+% 2005-Patranjan-TLE.pdf->2009-Alferes_etal-ERSW.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 4059.44 497.27 moveto
+4037.08 488.75 4012.44 480.75 3988.96 476 curveto
+3558.3 388.8 3434.9 509.09 3000.96 440 curveto
+2960.94 433.63 2918.19 422.8 2879.83 411.54 curveto
+stroke
+0 0 0 edgecolor
+newpath 2880.76 408.17 moveto
+2870.18 408.67 lineto
+2878.77 414.88 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 2880.76 408.17 moveto
+2870.18 408.67 lineto
+2878.77 414.88 lineto
+closepath stroke
+grestore
+% 2005-Patranjan-TLE.pdf->2007-Tagni-CET.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 4218.61 497.2 moveto
+4239.51 489.06 4262.28 481.27 4283.96 476 curveto
+4436.35 438.97 4483.45 480.44 4634.96 440 curveto
+4654.54 434.78 4674.77 427.4 4693.94 419.38 curveto
+stroke
+0 0 0 edgecolor
+newpath 4695.44 422.55 moveto
+4703.26 415.4 lineto
+4692.68 416.11 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 4695.44 422.55 moveto
+4703.26 415.4 lineto
+4692.68 416.11 lineto
+closepath stroke
+grestore
+% 2008-Giurca_Pascalau-JSON_Rules.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+4526.96 370 98.99 43.84 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4508.46 384.4 moveto 37 (2008) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4488.46 366.4 moveto 77 (JSON Rules) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4464.96 348.4 moveto 124 (- Giurca, Pascalau) alignedtext
+grestore
+% 2008-Schmidt_etal-BRAP.pdf->2008-Giurca_Pascalau-JSON_Rules.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 4527.61 476.45 moveto
+4527.51 459.54 4527.4 441.05 4527.29 424.3 curveto
+stroke
+0 0 0 edgecolor
+newpath 4530.79 424.1 moveto
+4527.23 414.12 lineto
+4523.79 424.14 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 4530.79 424.1 moveto
+4527.23 414.12 lineto
+4523.79 424.14 lineto
+closepath stroke
+grestore
+% 2004-Fujima_etal-CCCCAE.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+5990.96 683 272.94 56.57 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+5972.46 706.4 moveto 37 (2004) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+5805.96 688.4 moveto 370 (Clip, Connect, Clone: Combining Application Elements) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+5820.46 670.4 moveto 341 (to Build Custom Interfaces for Information Access) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+5867.46 652.4 moveto 247 (- Fujima, Lunzer, Hornboek, Tanaka) alignedtext
+grestore
+% 2007-Wong_Hong-Marmite.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+5990.96 533 207.89 56.57 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+5972.46 556.4 moveto 37 (2007) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+5851.96 538.4 moveto 278 (Making Mashups with Marmite: Towards) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+5867.46 520.4 moveto 247 (End-User Programming for the Web) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+5943.46 502.4 moveto 95 (- Wong, Hong) alignedtext
+grestore
+% 2004-Fujima_etal-CCCCAE.pdf->2007-Wong_Hong-Marmite.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 5990.96 626.29 moveto
+5990.96 617.7 5990.96 608.78 5990.96 600 curveto
+stroke
+0 0 0 edgecolor
+newpath 5994.46 599.79 moveto
+5990.96 589.79 lineto
+5987.46 599.79 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 5994.46 599.79 moveto
+5990.96 589.79 lineto
+5987.46 599.79 lineto
+closepath stroke
+grestore
+% 2008-Fischer_etal-TASCG.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+5897.96 370 239 56.57 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+5879.46 393.4 moveto 37 (2008) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+5736.96 375.4 moveto 322 (Towards an Automatic Service Composition for) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+5765.96 357.4 moveto 264 (Generation of User-Sensitive Mashups) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+5807.46 339.4 moveto 181 (- Fischer, Bakalov, Nauerz) alignedtext
+grestore
+% 2007-Wong_Hong-Marmite.pdf->2008-Fischer_etal-TASCG.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 5958.96 476.9 moveto
+5951.28 463.46 5943.03 448.99 5935.14 435.17 curveto
+stroke
+0 0 0 edgecolor
+newpath 5938.02 433.15 moveto
+5930.03 426.2 lineto
+5931.94 436.62 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 5938.02 433.15 moveto
+5930.03 426.2 lineto
+5931.94 436.62 lineto
+closepath stroke
+grestore
+% 2009-Fischer_etal-EAACIGWS.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+6788.96 57 273.15 56.57 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+6770.46 80.4 moveto 37 (2009) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+6603.46 62.4 moveto 371 (An Evolutionary Algorithm for Automatic Composition) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+6614.46 44.4 moveto 349 (of Information-gathering Web Services in Mashups) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+6624.96 26.4 moveto 328 (- Fischer, Bakalov, Koenig-Ries, Nauerz, Welsch) alignedtext
+grestore
+% 2007-Wong_Hong-Marmite.pdf->2009-Fischer_etal-EAACIGWS.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 5842.59 493.33 moveto
+5819.64 487.4 5796.19 481.45 5773.96 476 curveto
+5704.01 458.85 5660.88 496.3 5615.96 440 curveto
+5577.16 391.36 5579.33 350.3 5615.96 300 curveto
+5719.92 157.23 6202.25 96.94 6515.13 72.53 curveto
+stroke
+0 0 0 edgecolor
+newpath 6515.56 76.01 moveto
+6525.27 71.75 lineto
+6515.03 69.03 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 6515.56 76.01 moveto
+6525.27 71.75 lineto
+6515.03 69.03 lineto
+closepath stroke
+grestore
+% 2009-Fischer_etal-OCAMG.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+6389.96 207 300.02 43.84 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+6371.46 221.4 moveto 37 (2009) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+6185.46 203.4 moveto 409 (An Overview of Current Approaches to Mashup Generation) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+6299.46 185.4 moveto 181 (- Fischer, Bakalov, Nauerz) alignedtext
+grestore
+% 2007-Wong_Hong-Marmite.pdf->2009-Fischer_etal-OCAMG.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 5841.92 493.41 moveto
+5750.89 469.06 5651.57 442.11 5649.96 440 curveto
+5612.19 390.55 5608.8 346.66 5649.96 300 curveto
+5680.64 265.22 5908.72 240.25 6103.66 224.99 curveto
+stroke
+0 0 0 edgecolor
+newpath 6104.1 228.47 moveto
+6113.8 224.2 lineto
+6103.56 221.49 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 6104.1 228.47 moveto
+6113.8 224.2 lineto
+6103.56 221.49 lineto
+closepath stroke
+grestore
+% 2008-Fischer-AGSMWP.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+7085.96 207 176.07 56.57 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+7067.46 230.4 moveto 37 (2008) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+7000.46 212.4 moveto 171 (Automatic Generation of) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+6969.46 194.4 moveto 233 (Semantic Mashups in Web Portals) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+7004.96 176.4 moveto 162 (- Fischer \(Diplomarbeit\)) alignedtext
+grestore
+% 2007-Wong_Hong-Marmite.pdf->2008-Fischer-AGSMWP.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 6131.87 491.33 moveto
+6157.02 485.23 6183.12 479.75 6207.96 476 curveto
+6254.15 469.03 7013.03 471.01 7047.96 440 curveto
+7060.36 428.99 7072.27 338.78 7079.35 273.91 curveto
+stroke
+0 0 0 edgecolor
+newpath 7082.86 274.05 moveto
+7080.45 263.73 lineto
+7075.9 273.3 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 7082.86 274.05 moveto
+7080.45 263.73 lineto
+7075.9 273.3 lineto
+closepath stroke
+grestore
+% 2007-Ennals_Gay-UFFPWM.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+6318.96 370 164.05 56.57 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+6300.46 393.4 moveto 37 (2007) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+6235.46 375.4 moveto 167 (User-Friendly Functional) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+6210.96 357.4 moveto 216 (Programming for Web Mashups) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+6265.96 339.4 moveto 106 (- Fischer, Ennal) alignedtext
+grestore
+% 2007-Wong_Hong-Marmite.pdf->2007-Ennals_Gay-UFFPWM.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 6091.15 483.21 moveto
+6130.74 463.54 6176.21 440.94 6216.06 421.14 curveto
+stroke
+0 0 0 edgecolor
+newpath 6217.86 424.15 moveto
+6225.26 416.56 lineto
+6214.75 417.88 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 6217.86 424.15 moveto
+6225.26 416.56 lineto
+6214.75 417.88 lineto
+closepath stroke
+grestore
+% 2006-Alferes_Tagni-ICEEW.pdf->2008-Schmidt_etal-BRAP.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 3844.31 660.83 moveto
+3966.7 643.84 4136.12 618.53 4283.96 590 curveto
+4306.39 585.67 4329.88 580.72 4353.05 575.59 curveto
+stroke
+0 0 0 edgecolor
+newpath 4353.96 578.97 moveto
+4362.96 573.38 lineto
+4352.43 572.14 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 4353.96 578.97 moveto
+4362.96 573.38 lineto
+4352.43 572.14 lineto
+closepath stroke
+grestore
+% 2004-Schaffert-Xcerpt.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+4467.96 983 196.08 56.57 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4449.46 1006.4 moveto 37 (2004) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4356.46 988.4 moveto 223 (Xcerpt: A Rule-Based Query and) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4336.96 970.4 moveto 262 (Transformation Language for the Web) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4381.96 952.4 moveto 172 (- Schaffert \(Dissertation\)) alignedtext
+grestore
+% 2004-Schaffert-Xcerpt.pdf->2005-Patranjan-TLE.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 4568.18 934.4 moveto
+4589.23 921.64 4610.37 906.7 4627.96 890 curveto
+4718.74 803.84 4810.79 718.02 4725.96 626 curveto
+4692.56 589.77 4331.96 601.13 4283.96 590 curveto
+4265.34 585.68 4245.95 579.4 4227.63 572.57 curveto
+stroke
+0 0 0 edgecolor
+newpath 4228.75 569.25 moveto
+4218.16 568.96 lineto
+4226.25 575.79 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 4228.75 569.25 moveto
+4218.16 568.96 lineto
+4226.25 575.79 lineto
+closepath stroke
+grestore
+% 2004-Schaffert-Xcerpt.pdf->2009-Alferes_etal-ERSW.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 4294.15 956.72 moveto
+4239.68 942.89 4181.44 921.86 4133.96 890 curveto
+4010.61 807.22 4037.73 727.18 3928.96 626 curveto
+3907.84 606.35 3892.29 613.06 3874.96 590 curveto
+3843.05 547.52 3881.13 508.32 3838.96 476 curveto
+3764.99 419.31 3092.95 454.95 3000.96 440 curveto
+2961.06 433.51 2918.43 422.69 2880.14 411.47 curveto
+stroke
+0 0 0 edgecolor
+newpath 2881.09 408.1 moveto
+2870.51 408.61 lineto
+2879.1 414.81 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 2881.09 408.1 moveto
+2870.51 408.61 lineto
+2879.1 414.81 lineto
+closepath stroke
+grestore
+% 2004-Schaffert-Xcerpt.pdf->2005-Eckert-RWEQCED.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 4431.1 927.15 moveto
+4424.72 917.48 4418.04 907.36 4411.53 897.49 curveto
+stroke
+0 0 0 edgecolor
+newpath 4414.29 895.32 moveto
+4405.86 888.9 lineto
+4408.44 899.18 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 4414.29 895.32 moveto
+4405.86 888.9 lineto
+4408.44 899.18 lineto
+closepath stroke
+grestore
+% 2004-Schaffert-Xcerpt.pdf->2007-Tagni-CET.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 4652.71 964.01 moveto
+4748.53 949.94 4851.61 926.7 4880.96 890 curveto
+4995.89 746.31 4943.92 648.89 4880.96 476 curveto
+4875.05 459.77 4865.44 444.29 4854.68 430.43 curveto
+stroke
+0 0 0 edgecolor
+newpath 4857.24 428.03 moveto
+4848.22 422.46 lineto
+4851.8 432.44 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 4857.24 428.03 moveto
+4848.22 422.46 lineto
+4851.8 432.44 lineto
+closepath stroke
+grestore
+% 2005-Eckert-RWEQCED.pdf->2005-Bailey_etal-FlavorsOfXChange.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 4416.26 777.57 moveto
+4425.09 767.23 4434.37 756.35 4443.37 745.81 curveto
+stroke
+0 0 0 edgecolor
+newpath 4446.03 748.08 moveto
+4449.86 738.2 lineto
+4440.7 743.54 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 4446.03 748.08 moveto
+4449.86 738.2 lineto
+4440.7 743.54 lineto
+closepath stroke
+grestore
+% 2005-Eckert-RWEQCED.pdf->2005-Patranjan-TLE.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 4279.74 781.08 moveto
+4263.52 769 4247.72 755.17 4234.96 740 curveto
+4196.72 694.52 4170.34 631.27 4155.04 586.69 curveto
+stroke
+0 0 0 edgecolor
+newpath 4158.35 585.56 moveto
+4151.85 577.19 lineto
+4151.72 587.79 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 4158.35 585.56 moveto
+4151.85 577.19 lineto
+4151.72 587.79 lineto
+closepath stroke
+grestore
+% 2005-Eckert-RWEQCED.pdf->2009-Alferes_etal-ERSW.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 4249.19 785.05 moveto
+4221.05 771.93 4191.77 756.67 4165.96 740 curveto
+4080.75 684.98 4068.83 658.44 3993.96 590 curveto
+3939.9 540.58 3942.35 504.69 3874.96 476 curveto
+3785.54 437.92 3096.91 455.51 3000.96 440 curveto
+2960.96 433.53 2918.21 422.68 2879.85 411.43 curveto
+stroke
+0 0 0 edgecolor
+newpath 2880.78 408.05 moveto
+2870.2 408.56 lineto
+2878.78 414.76 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 2880.78 408.05 moveto
+2870.2 408.56 lineto
+2878.78 414.76 lineto
+closepath stroke
+grestore
+% 2005-Eckert-RWEQCED.pdf->2007-Tagni-CET.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 4295.33 779.43 moveto
+4284.2 767.77 4274.33 754.52 4267.96 740 curveto
+4247.61 693.6 4233.43 663.08 4267.96 626 curveto
+4344.48 543.82 4691.8 668.63 4771.96 590 curveto
+4793.11 569.26 4796.02 493.44 4795 436.57 curveto
+stroke
+0 0 0 edgecolor
+newpath 4798.5 436.47 moveto
+4794.78 426.55 lineto
+4791.5 436.62 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 4798.5 436.47 moveto
+4794.78 426.55 lineto
+4791.5 436.62 lineto
+closepath stroke
+grestore
+% UNAVAILABLE.txt#5->2005-Berndtsson_Serioe-ECA_ruleCore.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 2267.64 641.69 moveto
+2287.5 635.55 2308.17 629.97 2327.96 626 curveto
+2521.72 587.18 3067.21 556.9 3372.76 542.4 curveto
+stroke
+0 0 0 edgecolor
+newpath 3373.26 545.88 moveto
+3383.08 541.91 lineto
+3372.93 538.89 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 3373.26 545.88 moveto
+3383.08 541.91 lineto
+3372.93 538.89 lineto
+closepath stroke
+grestore
+% UNAVAILABLE.txt#5->2009-Alferes_etal-ERSW.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 2247.11 635.97 moveto
+2360.82 576.65 2555.12 475.29 2668.18 416.31 curveto
+stroke
+0 0 0 edgecolor
+newpath 2669.94 419.35 moveto
+2677.18 411.62 lineto
+2666.7 413.14 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 2669.94 419.35 moveto
+2677.18 411.62 lineto
+2666.7 413.14 lineto
+closepath stroke
+grestore
+% 2009-Pascalau_Giurca-LWAECARE.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+1464.96 207 195.16 56.57 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+1446.46 230.4 moveto 37 (2009) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+1334.96 212.4 moveto 260 (A Lightweight Architecture of an ECA) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+1359.96 194.4 moveto 210 (Rule Engine for Web Browsers) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+1402.96 176.4 moveto 124 (- Pascalau, Giurca) alignedtext
+grestore
+% UNAVAILABLE.txt#5->2009-Pascalau_Giurca-LWAECARE.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 2083.56 632.51 moveto
+1954.09 543.45 1685.94 359.01 1549.17 264.92 curveto
+stroke
+0 0 0 edgecolor
+newpath 1550.98 261.92 moveto
+1540.75 259.13 lineto
+1547.01 267.69 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 1550.98 261.92 moveto
+1540.75 259.13 lineto
+1547.01 267.69 lineto
+closepath stroke
+grestore
+% 2007-Westphal-TSLA.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+335.96 370 161.22 56.57 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+317.46 393.4 moveto 37 (2007) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+237.96 375.4 moveto 196 (Translation of semantic level) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+229.96 357.4 moveto 212 (actions in an RDF Web Service) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+254.46 339.4 moveto 163 (- Westphal \(BSc Thesis\)) alignedtext
+grestore
+% 2006-Knabke-Domain_Broker.pdf->2007-Westphal-TSLA.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 254.71 489.32 moveto
+266.35 472.23 279.93 452.28 292.62 433.65 curveto
+stroke
+0 0 0 edgecolor
+newpath 295.64 435.43 moveto
+298.37 425.2 lineto
+289.85 431.49 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 295.64 435.43 moveto
+298.37 425.2 lineto
+289.85 431.49 lineto
+closepath stroke
+grestore
+% 2006-Schubert-ECA_Engine.pdf->2007-Tagni-CET.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 435.59 639.28 moveto
+455.36 581.46 489.77 485.69 503.96 476 curveto
+598.73 411.29 4522.83 464.38 4634.96 440 curveto
+4655.48 435.54 4676.58 428.24 4696.39 420.01 curveto
+stroke
+0 0 0 edgecolor
+newpath 4697.88 423.18 moveto
+4705.7 416.03 lineto
+4695.13 416.74 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 4697.88 423.18 moveto
+4705.7 416.03 lineto
+4695.13 416.74 lineto
+closepath stroke
+grestore
+% 2006-Schubert-ECA_Engine.pdf->2006-Knabke-Domain_Broker.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 368.18 642.61 moveto
+343.62 623.81 314.22 601.31 288.46 581.6 curveto
+stroke
+0 0 0 edgecolor
+newpath 290.3 578.6 moveto
+280.24 575.3 lineto
+286.05 584.16 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 290.3 578.6 moveto
+280.24 575.3 lineto
+286.05 584.16 lineto
+closepath stroke
+grestore
+% 2006-Schubert-ECA_Engine.pdf->2009-Schubert-RDF_Rules_MARS.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 489.9 645.54 moveto
+527.45 625.13 574.2 599.72 613.77 578.21 curveto
+stroke
+0 0 0 edgecolor
+newpath 615.51 581.25 moveto
+622.62 573.4 lineto
+612.16 575.1 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 615.51 581.25 moveto
+622.62 573.4 lineto
+612.16 575.1 lineto
+closepath stroke
+grestore
+% 2006-Schubert-ECA_Engine.pdf->2007-Westphal-TSLA.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 431.91 639.03 moveto
+440.47 596.02 447.9 529.39 427.96 476 curveto
+421.9 459.78 412.12 444.4 401.15 430.64 curveto
+stroke
+0 0 0 edgecolor
+newpath 403.66 428.18 moveto
+394.57 422.73 lineto
+398.27 432.66 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 403.66 428.18 moveto
+394.57 422.73 lineto
+398.27 432.66 lineto
+closepath stroke
+grestore
+% 2007-Behrends_etal-CECAPA.pdf->2008-Schenk-ADNA.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 961.78 630.96 moveto
+985.32 617.17 1010.81 602.23 1034.63 588.27 curveto
+stroke
+0 0 0 edgecolor
+newpath 1036.46 591.26 moveto
+1043.32 583.18 lineto
+1032.92 585.22 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 1036.46 591.26 moveto
+1043.32 583.18 lineto
+1032.92 585.22 lineto
+closepath stroke
+grestore
+% 2007-Behrends_etal-CECAPA.pdf->2009-Pascalau_Giurca-LWAECARE.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 884.39 626.22 moveto
+895.99 573.2 914.91 498.89 933.96 476 curveto
+1031.17 359.23 1191.85 287.86 1311.05 248.26 curveto
+stroke
+0 0 0 edgecolor
+newpath 1312.23 251.56 moveto
+1320.64 245.11 lineto
+1310.05 244.91 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 1312.23 251.56 moveto
+1320.64 245.11 lineto
+1310.05 244.91 lineto
+closepath stroke
+grestore
+% 2012-Zhao_etal-LCEMI.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+3762.96 207 256.18 56.57 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3744.46 230.4 moveto 37 (2012) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3589.46 212.4 moveto 347 (Loosely-Coupled and Event-Messaged Interactions) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3609.96 194.4 moveto 306 (with Reaction RuleML 1.0 in Rule Responder) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3614.46 176.4 moveto 297 (- Zhao, Teymourian, Paschke, Boley, Athan) alignedtext
+grestore
+% 2005-Paschke-ECA_RuleML.pdf->2012-Zhao_etal-LCEMI.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 3762.96 300.4 moveto
+3762.96 291.57 3762.96 282.55 3762.96 273.76 curveto
+stroke
+0 0 0 edgecolor
+newpath 3766.46 273.58 moveto
+3762.96 263.58 lineto
+3759.46 273.58 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 3766.46 273.58 moveto
+3762.96 263.58 lineto
+3759.46 273.58 lineto
+closepath stroke
+grestore
+% 2005-Kuester_etal-CIAASC.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+5554.96 533 210.22 56.57 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+5536.46 556.4 moveto 37 (2005) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+5413.96 538.4 moveto 282 (A Classification of Issues and Approaches) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+5438.96 520.4 moveto 232 (in Automatic Service Composition) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+5455.46 502.4 moveto 199 (- Kuester, Stern, Koenig-Ries) alignedtext
+grestore
+% 2005-Kuester_etal-CIAASC.pdf->2008-Fischer_etal-TASCG.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 5658.8 483.65 moveto
+5697.77 465.14 5742.28 443.98 5782.25 424.99 curveto
+stroke
+0 0 0 edgecolor
+newpath 5783.98 428.04 moveto
+5791.51 420.59 lineto
+5780.97 421.72 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 5783.98 428.04 moveto
+5791.51 420.59 lineto
+5780.97 421.72 lineto
+closepath stroke
+grestore
+% 2005-Kuester_etal-CIAASC.pdf->2009-Fischer_etal-EAACIGWS.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 5549.93 476.35 moveto
+5545.7 388.23 5552.87 221.07 5657.96 150 curveto
+5726.83 103.43 6196.57 77.84 6508.61 65.81 curveto
+stroke
+0 0 0 edgecolor
+newpath 6508.86 69.3 moveto
+6518.72 65.42 lineto
+6508.6 62.31 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 6508.86 69.3 moveto
+6518.72 65.42 lineto
+6508.6 62.31 lineto
+closepath stroke
+grestore
+% 2008-Fischer_etal-TASCG.pdf->2009-Fischer_etal-OCAMG.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 6036.98 323.94 moveto
+6106.59 300.88 6190.4 273.12 6258.88 250.43 curveto
+stroke
+0 0 0 edgecolor
+newpath 6260.05 253.73 moveto
+6268.44 247.26 lineto
+6257.84 247.08 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 6260.05 253.73 moveto
+6268.44 247.26 lineto
+6257.84 247.08 lineto
+closepath stroke
+grestore
+% UNAVAILABLE.txt#4
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+2770.96 57 299.11 43.84 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+2695.96 71.4 moveto 150 (2009 \(UNAVAILABLE\)) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+2567.46 53.4 moveto 407 (A Rule-Based Approach of Creating and Executing Mashups) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+2708.96 35.4 moveto 124 (- Pascalau, Giurca) alignedtext
+grestore
+% 2009-Pascalau_Giurca-LWAECARE.pdf->UNAVAILABLE.txt#4
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 1646.56 186.14 moveto
+1875.32 159.87 2269.35 114.61 2524.98 85.25 curveto
+stroke
+0 0 0 edgecolor
+newpath 2525.62 88.7 moveto
+2535.15 84.08 lineto
+2524.82 81.75 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 2525.62 88.7 moveto
+2535.15 84.08 lineto
+2524.82 81.75 lineto
+closepath stroke
+grestore
+% UNAVAILABLE.txt#7
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+420.96 833 230.02 56.57 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+345.96 856.4 moveto 150 (2006 \(UNAVAILABLE\)) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+265.96 838.4 moveto 310 (An ECA Engine for Deploying Heterogeneous) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+267.46 820.4 moveto 307 (Component Languages in the Semantic Web) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+299.96 802.4 moveto 242 (- Behrends, Fritzen, May, Schubert) alignedtext
+grestore
+% UNAVAILABLE.txt#7->2006-Schubert-ECA_Engine.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 420.96 776.29 moveto
+420.96 763.59 420.96 750.14 420.96 737.53 curveto
+stroke
+0 0 0 edgecolor
+newpath 424.46 737.16 moveto
+420.96 727.16 lineto
+417.46 737.16 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 424.46 737.16 moveto
+420.96 727.16 lineto
+417.46 737.16 lineto
+closepath stroke
+grestore
+% UNAVAILABLE.txt#7->2007-Behrends_etal-CECAPA.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 558.11 787.49 moveto
+611.41 769.8 672.56 749.51 726.7 731.54 curveto
+stroke
+0 0 0 edgecolor
+newpath 727.98 734.8 moveto
+736.37 728.33 lineto
+725.78 728.16 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 727.98 734.8 moveto
+736.37 728.33 lineto
+725.78 728.16 lineto
+closepath stroke
+grestore
+% UNAVAILABLE.txt#7->2009-Pascalau_Giurca-LWAECARE.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 274.05 789.47 moveto
+181.2 753.02 69.99 690.43 21.96 590 curveto
+-40.12 460.18 38.2 366.23 165.96 300 curveto
+260.5 250.99 919.38 223.75 1260.8 212.78 curveto
+stroke
+0 0 0 edgecolor
+newpath 1260.92 216.28 moveto
+1270.81 212.46 lineto
+1260.7 209.28 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 1260.92 216.28 moveto
+1270.81 212.46 lineto
+1260.7 209.28 lineto
+closepath stroke
+grestore
+% 2006-Merrill-MNBWA.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+6973.96 533 191.83 43.84 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+6955.46 547.4 moveto 37 (2006) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+6845.96 529.4 moveto 256 (Mashups: The new breed of Web app) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+6946.96 511.4 moveto 54 (- Merrill) alignedtext
+grestore
+% 2006-Merrill-MNBWA.pdf->2008-Fischer_etal-TASCG.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 6819.94 506.65 moveto
+6753.63 495.99 6675.14 484.27 6603.96 476 curveto
+6401.14 452.44 6346.96 475.91 6145.96 440 curveto
+6114.63 434.4 6081.56 426.51 6050.14 418.03 curveto
+stroke
+0 0 0 edgecolor
+newpath 6051.01 414.64 moveto
+6040.44 415.38 lineto
+6049.17 421.4 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 6051.01 414.64 moveto
+6040.44 415.38 lineto
+6049.17 421.4 lineto
+closepath stroke
+grestore
+% 2006-Merrill-MNBWA.pdf->2009-Fischer_etal-OCAMG.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 6815.49 508.09 moveto
+6696.74 488.05 6551.2 460.03 6529.96 440 curveto
+6483.06 395.76 6525.57 355.02 6491.96 300 curveto
+6482.48 284.47 6469.64 269.97 6456.28 257.26 curveto
+stroke
+0 0 0 edgecolor
+newpath 6458.55 254.58 moveto
+6448.83 250.38 lineto
+6453.81 259.73 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 6458.55 254.58 moveto
+6448.83 250.38 lineto
+6453.81 259.73 lineto
+closepath stroke
+grestore
+% 2006-Merrill-MNBWA.pdf->2008-Fischer-AGSMWP.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 7064.92 494.05 moveto
+7086.45 480.26 7106.7 462.44 7118.96 440 curveto
+7147.07 388.58 7133.32 321.63 7115.79 272.7 curveto
+stroke
+0 0 0 edgecolor
+newpath 7119.01 271.32 moveto
+7112.25 263.17 lineto
+7112.45 273.76 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 7119.01 271.32 moveto
+7112.25 263.17 lineto
+7112.45 273.76 lineto
+closepath stroke
+grestore
+% UNAVAILABLE.txt#8
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+8386.96 370 242.04 43.84 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+8311.96 384.4 moveto 150 (2007 \(UNAVAILABLE\)) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+8223.46 366.4 moveto 327 (Towards Service Composition Based on Mashup) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+8313.96 348.4 moveto 146 (- Liu, Hui, Sun, Liang) alignedtext
+grestore
+% 2006-Merrill-MNBWA.pdf->UNAVAILABLE.txt#8
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 7165.35 528.93 moveto
+7396.84 521.42 7797.6 500.15 8135.96 440 curveto
+8176.1 432.87 8219.08 422.08 8257.93 411.1 curveto
+stroke
+0 0 0 edgecolor
+newpath 8259.06 414.42 moveto
+8267.71 408.3 lineto
+8257.14 407.68 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 8259.06 414.42 moveto
+8267.71 408.3 lineto
+8257.14 407.68 lineto
+closepath stroke
+grestore
+% 2009-Fischer_etal-OCAMG.pdf->2009-Fischer_etal-EAACIGWS.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 6499.25 165.91 moveto
+6545.1 148.68 6598.99 128.42 6647.78 110.08 curveto
+stroke
+0 0 0 edgecolor
+newpath 6649.02 113.35 moveto
+6657.15 106.55 lineto
+6646.55 106.8 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 6649.02 113.35 moveto
+6657.15 106.55 lineto
+6646.55 106.8 lineto
+closepath stroke
+grestore
+% 2008-Fischer-AGSMWP.pdf->2009-Fischer_etal-EAACIGWS.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 6991.17 159.13 moveto
+6962.71 144.75 6931.21 128.84 6901.7 113.94 curveto
+stroke
+0 0 0 edgecolor
+newpath 6903.12 110.74 moveto
+6892.62 109.35 lineto
+6899.97 116.98 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 6903.12 110.74 moveto
+6892.62 109.35 lineto
+6899.97 116.98 lineto
+closepath stroke
+grestore
+% UNAVAILABLE.txt#9
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+8386.96 207 205.06 56.57 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+8311.96 230.4 moveto 150 (2008 \(UNAVAILABLE\)) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+8265.46 212.4 moveto 243 (Towards a mashup-driven end-user) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+8249.96 194.4 moveto 274 (programming of SOA-based applications) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+8356.96 176.4 moveto 60 (- Nestler) alignedtext
+grestore
+% UNAVAILABLE.txt#8->UNAVAILABLE.txt#9
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 8386.96 325.89 moveto
+8386.96 309.89 8386.96 291.44 8386.96 273.91 curveto
+stroke
+0 0 0 edgecolor
+newpath 8390.46 273.73 moveto
+8386.96 263.73 lineto
+8383.46 273.73 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 8390.46 273.73 moveto
+8386.96 263.73 lineto
+8383.46 273.73 lineto
+closepath stroke
+grestore
+% 2007-Ennals_Garofalakis-Mashmaker.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+6405.96 533 189 43.84 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+6387.46 547.4 moveto 37 (2007) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+6279.96 529.4 moveto 252 (MashMaker: Mashups for the Masses) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+6334.96 511.4 moveto 142 (- Ennals, Garofalakis) alignedtext
+grestore
+% 2007-Ennals_Garofalakis-Mashmaker.pdf->2008-Fischer-AGSMWP.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 6560.68 507.64 moveto
+6626.1 497.27 6703.16 485.5 6772.96 476 curveto
+6841.24 466.71 7034.6 490.98 7080.96 440 curveto
+7121.17 395.78 7116.64 325 7105.61 273.05 curveto
+stroke
+0 0 0 edgecolor
+newpath 7109.02 272.24 moveto
+7103.41 263.25 lineto
+7102.19 273.77 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 7109.02 272.24 moveto
+7103.41 263.25 lineto
+7102.19 273.77 lineto
+closepath stroke
+grestore
+% 2007-Ennals_Garofalakis-Mashmaker.pdf->2007-Ennals_Gay-UFFPWM.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 6382.65 489.32 moveto
+6373.69 472.54 6363.27 453.02 6353.49 434.69 curveto
+stroke
+0 0 0 edgecolor
+newpath 6356.54 432.97 moveto
+6348.74 425.8 lineto
+6350.36 436.27 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 6356.54 432.97 moveto
+6348.74 425.8 lineto
+6350.36 436.27 lineto
+closepath stroke
+grestore
+% 2009-Jarrar_Dikaiakos-MashQL.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+5182.96 370 225.07 43.84 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+5164.46 384.4 moveto 37 (2009) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+5031.46 366.4 moveto 303 (A Data Mashup Language for the Data Web) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+5120.96 348.4 moveto 124 (- Jarrar, Dikaiakos) alignedtext
+grestore
+% 2007-Ennals_Garofalakis-Mashmaker.pdf->2009-Jarrar_Dikaiakos-MashQL.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 6296.72 496.99 moveto
+6268.12 488.83 6237.12 481.08 6207.96 476 curveto
+5963.13 433.38 5897.07 466.44 5649.96 440 curveto
+5554.69 429.81 5449.08 414.33 5362.42 400.52 curveto
+stroke
+0 0 0 edgecolor
+newpath 5362.91 397.05 moveto
+5352.49 398.93 lineto
+5361.81 403.97 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 5362.91 397.05 moveto
+5352.49 398.93 lineto
+5361.81 403.97 lineto
+closepath stroke
+grestore
+% 2007-Ennals_Gay-UFFPWM.pdf->2009-Fischer_etal-OCAMG.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 6343.4 313.9 moveto
+6350.94 296.58 6359.23 277.55 6366.7 260.41 curveto
+stroke
+0 0 0 edgecolor
+newpath 6369.97 261.67 moveto
+6370.75 251.1 lineto
+6363.55 258.87 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 6369.97 261.67 moveto
+6370.75 251.1 lineto
+6363.55 258.87 lineto
+closepath stroke
+grestore
+% 2007-Ennals_Gay-UFFPWM.pdf->2008-Fischer-AGSMWP.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 6431.9 328.96 moveto
+6463.36 318.51 6497.75 307.99 6529.96 300 curveto
+6601.32 282.31 6780.42 253.35 6916.22 232.44 curveto
+stroke
+0 0 0 edgecolor
+newpath 6916.98 235.87 moveto
+6926.34 230.89 lineto
+6915.92 228.95 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 6916.98 235.87 moveto
+6926.34 230.89 lineto
+6915.92 228.95 lineto
+closepath stroke
+grestore
+% 2009-Giurca-PositionPaper.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+5089.96 207 186.88 56.57 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+5071.46 230.4 moveto 37 (2009) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4965.46 212.4 moveto 249 (Can Rule-Based Mashups play a role) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4980.46 194.4 moveto 219 (in the Cloud? \(A Position Paper\)) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+5062.46 176.4 moveto 55 (- Giurca) alignedtext
+grestore
+% 2009-Jarrar_Dikaiakos-MashQL.pdf->2009-Giurca-PositionPaper.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 5157.79 325.89 moveto
+5148.27 309.2 5137.22 289.84 5126.85 271.65 curveto
+stroke
+0 0 0 edgecolor
+newpath 5129.81 269.78 moveto
+5121.81 262.83 lineto
+5123.73 273.25 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 5129.81 269.78 moveto
+5121.81 262.83 lineto
+5123.73 273.25 lineto
+closepath stroke
+grestore
+% UNAVAILABLE.txt#6
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+1382.96 683 225.77 56.57 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+1307.96 706.4 moveto 150 (2008 \(UNAVAILABLE\)) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+1275.46 688.4 moveto 215 (Embedding Event Algebras and) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+1230.96 670.4 moveto 304 (Process for ECA Rules for the Semantic Web) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+1267.96 652.4 moveto 230 (- Behrends, Fritzen, May, Schenk) alignedtext
+grestore
+% UNAVAILABLE.txt#6->2008-Schenk-ADNA.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 1294.84 630.96 moveto
+1271.71 617.3 1246.69 602.52 1223.26 588.69 curveto
+stroke
+0 0 0 edgecolor
+newpath 1224.75 585.5 moveto
+1214.36 583.43 lineto
+1221.19 591.53 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 1224.75 585.5 moveto
+1214.36 583.43 lineto
+1221.19 591.53 lineto
+closepath stroke
+grestore
+% UNAVAILABLE.txt#6->2009-Alferes_etal-ERSW.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 1428.91 627.36 moveto
+1473.06 578.24 1544.49 509.41 1622.96 476 curveto
+1777.99 410.01 2229.14 384.9 2513.46 375.49 curveto
+stroke
+0 0 0 edgecolor
+newpath 2513.62 378.99 moveto
+2523.51 375.17 lineto
+2513.4 371.99 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 2513.62 378.99 moveto
+2523.51 375.17 lineto
+2513.4 371.99 lineto
+closepath stroke
+grestore
+% UNAVAILABLE.txt#6->2009-Pascalau_Giurca-LWAECARE.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 1392.69 626.53 moveto
+1407.9 538.26 1437.23 367.96 1453.46 273.76 curveto
+stroke
+0 0 0 edgecolor
+newpath 1456.93 274.22 moveto
+1455.18 263.77 lineto
+1450.04 273.03 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 1456.93 274.22 moveto
+1455.18 263.77 lineto
+1450.04 273.03 lineto
+closepath stroke
+grestore
+% 2008-Giurca_Pascalau-JSON_Rules.pdf->2009-Pascalau_Giurca-LWAECARE.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 4479.55 331.32 moveto
+4461.64 318.94 4440.39 306.71 4418.96 300 curveto
+4386.12 289.72 2332.87 231.33 1669.33 212.71 curveto
+stroke
+0 0 0 edgecolor
+newpath 1669.28 209.21 moveto
+1659.19 212.42 lineto
+1669.09 216.2 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 1669.28 209.21 moveto
+1659.19 212.42 lineto
+1669.09 216.2 lineto
+closepath stroke
+grestore
+% 2008-Giurca_Pascalau-JSON_Rules.pdf->2009-Giurca-PositionPaper.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 4577.25 331.85 moveto
+4594.75 320.12 4615.01 308.16 4634.96 300 curveto
+4641.96 297.14 4796.9 265.71 4924.05 240.17 curveto
+stroke
+0 0 0 edgecolor
+newpath 4924.82 243.59 moveto
+4933.93 238.19 lineto
+4923.44 236.73 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 4924.82 243.59 moveto
+4933.93 238.19 lineto
+4923.44 236.73 lineto
+closepath stroke
+grestore
+% 2012-Giurca_etal-RuleTheWeb.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+4526.96 207 265.17 43.84 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4508.46 221.4 moveto 37 (2012) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4347.46 203.4 moveto 359 (RuleTheWeb!: Rule-based Adaptive User Experience) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4431.96 185.4 moveto 190 (- Giurca, Tylkowski, Mueller) alignedtext
+grestore
+% 2008-Giurca_Pascalau-JSON_Rules.pdf->2012-Giurca_etal-RuleTheWeb.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 4526.96 325.89 moveto
+4526.96 305.96 4526.96 282.22 4526.96 261.21 curveto
+stroke
+0 0 0 edgecolor
+newpath 4530.46 261.15 moveto
+4526.96 251.15 lineto
+4523.46 261.15 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 4530.46 261.15 moveto
+4526.96 251.15 lineto
+4523.46 261.15 lineto
+closepath stroke
+grestore
+% 2008-Giurca_Pascalau-JSON_Rules.pdf->UNAVAILABLE.txt#4
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 4476.61 331.99 moveto
+4459.11 320.27 4438.87 308.28 4418.96 300 curveto
+4349.26 271 4324.1 289.27 4252.96 264 curveto
+4147.32 226.48 4135.96 180.05 4027.96 150 curveto
+3855.19 101.92 3388.37 77.28 3074.86 65.78 curveto
+stroke
+0 0 0 edgecolor
+newpath 3074.82 62.28 moveto
+3064.7 65.41 lineto
+3074.56 69.27 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 3074.82 62.28 moveto
+3064.7 65.41 lineto
+3074.56 69.27 lineto
+closepath stroke
+grestore
+% 2008-Keukelaere-SCMCDM.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+7417.96 370 246.99 56.57 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+7399.46 393.4 moveto 37 (2008) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+7290.96 375.4 moveto 254 (SMash: Secure Component Model for) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+7250.96 357.4 moveto 334 (Cross-Domain Mashups on Unmodified Browsers) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+7256.96 339.4 moveto 322 (- Keukelaere, Bhola, Steiner, Chari, Yoshihama) alignedtext
+grestore
+% 2008-Keukelaere-SCMCDM.pdf->2009-Fischer_etal-EAACIGWS.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 7395.52 313.66 moveto
+7372.19 262.66 7330.66 189.64 7270.96 150 curveto
+7230.98 123.45 7132.88 102.26 7035.54 86.85 curveto
+stroke
+0 0 0 edgecolor
+newpath 7035.93 83.37 moveto
+7025.51 85.29 lineto
+7034.85 90.29 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 7035.93 83.37 moveto
+7025.51 85.29 lineto
+7034.85 90.29 lineto
+closepath stroke
+grestore
+% 2008-Keukelaere-SCMCDM.pdf->2008-Fischer-AGSMWP.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 7313.37 318.65 moveto
+7274.57 299.6 7230.56 277.99 7191.66 258.9 curveto
+stroke
+0 0 0 edgecolor
+newpath 7192.93 255.62 moveto
+7182.41 254.35 lineto
+7189.84 261.9 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 7192.93 255.62 moveto
+7182.41 254.35 lineto
+7189.84 261.9 lineto
+closepath stroke
+grestore
+% 2008-Kuester_etal-Opossum.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+7904.96 370 222.24 56.57 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+7886.46 393.4 moveto 37 (2008) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+7755.46 375.4 moveto 299 (OPOSSum - An Online Portal to Collect and) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+7778.46 357.4 moveto 253 (Share Semantic Service Descriptions) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+7808.46 339.4 moveto 193 (- Kuester, Koenig-Ries, Krug) alignedtext
+grestore
+% 2008-Kuester_etal-Opossum.pdf->2009-Fischer_etal-EAACIGWS.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 7796.14 320.7 moveto
+7682.65 271.06 7498.52 195.51 7332.96 150 curveto
+7235.92 123.33 7126.94 102.89 7032.14 88.05 curveto
+stroke
+0 0 0 edgecolor
+newpath 7032.55 84.57 moveto
+7022.13 86.5 lineto
+7031.48 91.49 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 7032.55 84.57 moveto
+7022.13 86.5 lineto
+7031.48 91.49 lineto
+closepath stroke
+grestore
+% 2008-Kuester_etal-Opossum.pdf->2008-Fischer-AGSMWP.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 7768.68 325.32 moveto
+7737.76 316.13 7704.9 307.1 7673.96 300 curveto
+7536.56 268.47 7378.65 244.14 7261.09 228.29 curveto
+stroke
+0 0 0 edgecolor
+newpath 7261.3 224.78 moveto
+7250.92 226.92 lineto
+7260.37 231.72 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 7261.3 224.78 moveto
+7250.92 226.92 lineto
+7260.37 231.72 lineto
+closepath stroke
+grestore
+% 2008-Maraikar_etal-BMWSABRE.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+6788.96 370 249.82 43.84 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+6770.46 384.4 moveto 37 (2008) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+6619.96 366.4 moveto 338 (Building Mashups for The Enterprise with SABRE) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+6697.46 348.4 moveto 183 (- Maraikar, Lazovik, Arbab) alignedtext
+grestore
+% 2008-Maraikar_etal-BMWSABRE.pdf->2009-Fischer_etal-EAACIGWS.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 6788.96 325.82 moveto
+6788.96 273.25 6788.96 184.95 6788.96 123.97 curveto
+stroke
+0 0 0 edgecolor
+newpath 6792.46 123.67 moveto
+6788.96 113.67 lineto
+6785.46 123.67 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 6792.46 123.67 moveto
+6788.96 113.67 lineto
+6785.46 123.67 lineto
+closepath stroke
+grestore
+% 2008-Maraikar_etal-BMWSABRE.pdf->2009-Fischer_etal-OCAMG.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 6689.82 329.5 moveto
+6632.42 306.05 6560.04 276.48 6500.77 252.27 curveto
+stroke
+0 0 0 edgecolor
+newpath 6501.95 248.97 moveto
+6491.37 248.43 lineto
+6499.3 255.45 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 6501.95 248.97 moveto
+6491.37 248.43 lineto
+6499.3 255.45 lineto
+closepath stroke
+grestore
+% 2008-Maraikar_etal-BMWSABRE.pdf->2008-Fischer-AGSMWP.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 6865.45 328.02 moveto
+6902.84 307.5 6948.26 282.57 6988.15 260.68 curveto
+stroke
+0 0 0 edgecolor
+newpath 6990.01 263.65 moveto
+6997.1 255.77 lineto
+6986.65 257.51 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 6990.01 263.65 moveto
+6997.1 255.77 lineto
+6986.65 257.51 lineto
+closepath stroke
+grestore
+% 2008-Russell_etal-Nitelight.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+5146.96 533 179.81 56.57 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+5128.46 556.4 moveto 37 (2008) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+5048.96 538.4 moveto 196 (NITELIGHT: A Graphical Tool) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+5032.96 520.4 moveto 228 (for Semantic Query Construction) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+5027.46 502.4 moveto 239 (- Russell, Smart, Braines, Shadbolt) alignedtext
+grestore
+% 2008-Russell_etal-Nitelight.pdf->2009-Jarrar_Dikaiakos-MashQL.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 5159.45 476.45 moveto
+5163.19 459.54 5167.27 441.05 5170.97 424.3 curveto
+stroke
+0 0 0 edgecolor
+newpath 5174.48 424.64 moveto
+5173.22 414.12 lineto
+5167.64 423.13 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 5174.48 424.64 moveto
+5173.22 414.12 lineto
+5167.64 423.13 lineto
+closepath stroke
+grestore
+% UNAVAILABLE.txt#10
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+8892.96 370 191.83 43.84 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+8817.96 384.4 moveto 150 (2008 \(UNAVAILABLE\)) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+8764.96 366.4 moveto 256 (Understanding Mashup Development) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+8785.46 348.4 moveto 215 (- Yu, Benatallah, Casati, Daniel) alignedtext
+grestore
+% UNAVAILABLE.txt#10->UNAVAILABLE.txt#9
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 8781.6 334.13 moveto
+8707.65 310.3 8609.86 278.8 8530.14 253.12 curveto
+stroke
+0 0 0 edgecolor
+newpath 8531.1 249.75 moveto
+8520.51 250.02 lineto
+8528.95 256.42 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 8531.1 249.75 moveto
+8520.51 250.02 lineto
+8528.95 256.42 lineto
+closepath stroke
+grestore
+% 2012-Nitto_etal-RCESOA.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+8945.96 207 336.08 43.84 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+8927.46 221.4 moveto 37 (2012) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+8715.96 203.4 moveto 460 (Research Challenges on Engineering Service-Oriented Applications) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+8756.46 185.4 moveto 379 (- Di Nitto, Meilaender, Gorlatch, Metzger, Psaier, et al.) alignedtext
+grestore
+% UNAVAILABLE.txt#10->2012-Nitto_etal-RCESOA.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 8907.3 325.89 moveto
+8913.81 305.87 8921.57 282 8928.43 260.92 curveto
+stroke
+0 0 0 edgecolor
+newpath 8931.84 261.74 moveto
+8931.61 251.15 lineto
+8925.19 259.57 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 8931.84 261.74 moveto
+8931.61 251.15 lineto
+8925.19 259.57 lineto
+closepath stroke
+grestore
+% 2010-Boley_etal-RuleML.pdf
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+4255.96 370 154.15 56.57 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4237.46 393.4 moveto 37 (2010) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4154.96 375.4 moveto 202 (RuleML 1.0: The Overarching) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4165.46 357.4 moveto 181 (Specification of Web Rules) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4173.96 339.4 moveto 164 (- Boley, Paschke, Shafiq) alignedtext
+grestore
+% 2010-Boley_etal-RuleML.pdf->2012-Zhao_etal-LCEMI.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 4158.96 325.88 moveto
+4137.44 316.78 4114.59 307.66 4092.96 300 curveto
+4044.17 282.73 3990.45 266.46 3940.78 252.51 curveto
+stroke
+0 0 0 edgecolor
+newpath 3941.48 249.07 moveto
+3930.91 249.75 lineto
+3939.59 255.81 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 3941.48 249.07 moveto
+3930.91 249.75 lineto
+3939.59 255.81 lineto
+closepath stroke
+grestore
+% UNAVAILABLE.txt#11
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+3216.96 370 207.18 56.57 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3141.96 393.4 moveto 150 (2011 \(UNAVAILABLE\)) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3120.96 375.4 moveto 192 (Rule Responder: Rule-Based) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3078.46 357.4 moveto 277 (Agents for the Semantic-Pragmatic Web) alignedtext
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3160.96 339.4 moveto 112 (- Paschke, Boley) alignedtext
+grestore
+% UNAVAILABLE.txt#11->2012-Zhao_etal-LCEMI.pdf
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 3348.93 326.34 moveto
+3376.63 317.43 3405.7 308.25 3432.96 300 curveto
+3484.47 284.4 3540.77 268.22 3592.04 253.81 curveto
+stroke
+0 0 0 edgecolor
+newpath 3593.2 257.12 moveto
+3601.88 251.05 lineto
+3591.31 250.38 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 3593.2 257.12 moveto
+3601.88 251.05 lineto
+3591.31 250.38 lineto
+closepath stroke
+grestore
+endpage
+showpage
+grestore
+%%PageTrailer
+%%EndPage: 1
+%%Trailer
+%%Pages: 1
+%%BoundingBox: 36 36 9326 1208
+end
+restore
+%%EOF

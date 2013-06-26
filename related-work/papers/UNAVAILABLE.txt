@@ -1,0 +1,86 @@
+
+#1
+http://www.computer.org/csdl/trans/sc/preprint/06461877-abs.html
+2013 - Towards Complex Event Aware Services as Part of SOA
+Potocnik, Juric; University of Ljubljana, Faculty of Computer and Information Science, Ljubljana 
+Abstract:
+Complex Event Processing (CEP) has so far been implemented in technology and vendor-specific manner. Introducing CEP concepts to the Service Oriented Architecture (SOA) provides an opportunity to enhance the capabilities of SOA. We define a model that supports the CEP usage in SOA where the actual pattern recognition can be done by any external CEP Engine. We define a new service type - a Complex Event Aware (CEA) service that automatically reacts to complex events specified in its interface. The proposed model includes a CEP Manager that provides centralized management of complex events and, through its pluggable adapters, communicates with CEA Services and CEP Engines. It includes a CEP Registry and a CEP Repository enabling versioning and reuse of complex event types, and a CEP Dispatcher providing publish/subscribe communication framework. We design a generic XML schema for abstract complex event type definition and propose new extensions for Service Component Architecture (SCA) and Web Services Description Language (WSDL) specifications, which enable definitions of complex event types and complex event sinks in the CEA Service interface. As a proof-of-concept we develop a prototype implementation for the largest national telecommunication provider and in the real-world scenario show advantages of the proposed model.
+
+
+#2
+http://www.oldenbourg-link.com/doi/abs/10.1524/itit.2009.0548
+2009 - Provenance and Impact of CEP: A Retrospective View
+Chakravarthy, Adaikkalavan
+This paper retrospectively outlines the progress of event-based capability over the last three decades. It further briefly elaborates the impact of this technology and how it has been adapted for a variety of domains and applications. Although research on event-based approaches started in a humble manner with the intention of introducing triggers in database management systems for monitoring application state and to automate applications by reducing/eliminating user intervention, currently it has become a force to reckon with as it finds use in many diverse domains. This is primarily due to the fact that a large number of real-world applications are indeed event-driven for which this paradigm is the most appropriate.
+
+
+#3
+http://www.computer.org/csdl/proceedings/scc/2011/4462/00/4462a701-abs.html
+2009 - LiSEP: A Lightweight and Extensible Tool for Complex Event Processing
+Zappia, Parlanti, Paganelli
+Service-oriented enterprise platforms are increasingly called to support sense-and-respond capabilities in several application domains. In this context, Complex Event Processing is considered as a promising asset, as it enables to effectively extract meaningful events from raw data streams originated by sensing infrastructures, for enterprise processes and applications consumption. This paper proposes a novel CEP engine conceived with extensibility, interoperability, modularity and scalability requirements in mind. More specifically, we propose a Lightweight Stage-based Event Processor (LiSEP), based on a layered architectural design. Thanks to the adoption of Stage-Event Driven Architecture principles, core event processing logic is decoupled from low-level thread management issues. This results in an easy-to-understand and extensible implementation while testing results show performance scalability. We also report on the development of an ongoing case study on dangerous goods monitoring.
+
+
+#4
+http://link.springer.com/chapter/10.1007%2F978-3-642-04280-5_8
+2009 - A Rule-Based Approach of Creating and Executing Mashups
+Pascalau, Giurca
+This paper shows how business rules and particularly how JSON Rules can be used to model mashups together with underlining the advantages of this solution compared to traditional techniques. To achieve this, a concrete use case combining Monster Job Search and Google Maps is developed. In addition, we study the similarities between the conceptual models of mashup and Software as Service and argue towards a common sense by using their common root: the services choreography.
+
+
+#5
+http://link.springer.com/chapter/10.1007%2F11580072_9
+2005 - Design and Implementation of an ECA Rule Markup Language
+Seiriö, Berndtsson
+This paper presents the design and implementation of the rule engine ruleCore and the ECA rule markup language rCML. In particular, an extensive set of event operators are shown in the rCML rule markup language.
+
+
+#6
+http://iospress.metapress.com/content/k60782969485h3p2/
+2008 - Embedding Event Algebras and Process for ECA Rules for the Semantic Web
+Behrends, Fritzen, May, Schenk
+We describe how Event-Condition-Action (ECA) rules can be combined with event algebras like SNOOP for specification of the event part, and process algebras like CCS for specification of the action part to obtain a powerful, declarative formalism that also covers intuitively procedural tasks in an appropriate way. Since these formalisms have a concise formal semantics, verification and other kinds of reasoning about such specifications are possible. Using a rulemarkupwith cleanly distinguished rule components allows for such a compositional approach. The approach is currently under implementation in the MARS (Modular Active Rules for the Semantic Web) Framework.
+
+
+#7
+http://link.springer.com/chapter/10.1007%2F11896548_67
+2006 - An ECA Engine for Deploying Heterogeneous Component Languages in the Semantic Web
+Behrends, Fritzen, May, Schubert
+We describe a generic ECA service for implementing behavior using heterogeneous languages in the Semantic Web. The module details and implements our recent work on an ontology and language concept for a modular approach to ECA rules in the Semantic Web. The ECA level provides generic functionality independent from the actual languages and semantics of event detection, queries, and actions.
+
+
+#8
+http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=4278815
+2007 - Towards Service Composition Based on Mashup
+Liu, Hui, Sun, Liang
+Mashup is a hallmark of Web 2.0 and attracts both industry and academia. It refers to an ad hoc composition technology of Web applications that allows users to draw upon content retrieved from external data sources to create entirely new services. Compared to traditional "developer-centric" composition technologies, e.g., BPEI and WSCI, mashup provides a flexible and easy-of-use way for service composition on Web. It makes the consumers free to compose services as they wish as well as simplifies the composition task. This paper makes two contributions. Firstly, we propose the mashup architecture, extend current SOA model with mashup and analyze how it facilitates service composition. Secondly, we propose a mashup component model to help developers leverage to create their own composite services. A case study is given to illustrate how to do service composition by mashup. This paper also discusses about some interesting topics about mashup.
+
+
+#9
+http://dl.acm.org/citation.cfm?id=1497408
+2008 - Towards a mashup-driven end-user programming of SOA-based applications
+Nestler
+Recent technologies and standards in the field of Service-Orientated Architectures (SOA) have focused on Service-to-Service interaction and do not consider Service-to-User scenarios. This results in a lack of a service-consumer-orientation in order to empower the user to get easy access to the functionalities of services. The paper argues for the need of new concepts that extend existing mashup approaches to enable a more end-user driven application development. It presents an insight into existing mashup technologies and identifies shortcomings concerning the creation of more complex applications. The paper offers ways how to extend the existing concepts and shows their potential as a key technology for an end-user programming in the field of SOA. The empowerment of the actual service consumer can bridge the gap between the user and the service infrastructure.
+
+
+#10
+http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=4620093
+2008 - Understanding Mashup Development
+Yu, Benatallah, Casati, Daniel
+Web mashups are Web applications developed using contents and services available online. Despite rapidly increasing interest in mashups, comprehensive development tools and frameworks are lacking, and in most cases mashing up a new application implies a significant manual programming effort. This article overviews current tools, frameworks, and trends that aim to facilitate mashup development. The authors use a set of characteristic dimensions to highlight the strengths and weaknesses of some representative approaches.
+
+
+#11
+http://www.worldscientific.com/doi/abs/10.1142/S0218213011000528?journalCode=ijait
+2011 - Rule Responder: Rule-Based Agents for the Semantic-Pragmatic Web
+Paschke, Boley
+Rule Responder is a Pragmatic Web infrastructure for distributed rule-based event processing multi-agent eco-systems. This allows specifying virtual organizations — with their shared and individual (semantic and pragmatic) contexts, decisions, and actions/events for rule-based collaboration between the distributed members. The (semi-)autonomous agents use rule engines and Semantic Web rules to describe and execute derivation and reaction logic which declaratively implements the organizational semiotics and the different distributed system/agent topologies with their negotiation/coordination mechanisms. They employ ontologies in their knowledge bases to represent semantic domain vocabularies, normative pragmatics and pragmatic context of event-based conversations and actions.
+
+
+
+
+
+
+
+
+
