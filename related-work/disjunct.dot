@@ -46,6 +46,9 @@ digraph G {
 	[label="2008\nTraveling the Semantic Web through\nSpace, Time, and Theme\n- Sheth, Perry"];
 	"2008-Sheth_Perry-TSWSTT.pdf" -> "2013-Pongpaichet_etal-EventShop.pdf";
 
+	"2012-Barazzutti-ThriftyPrivacy.pdf"
+	[label="2012\nThrifty Privacy: Efﬁcient Support for\nPrivacy-Preserving Publish/Subscribe\n- Barazzutti, Felber, Mercier, Onica, Riviere"];
+
 	"2013-Pongpaichet_etal-EventShop.pdf"
 	[label="2013\nEventShop: Recognizing Situations\nin Web Data Streams\n- Pongpaichet, Singh, Gao, Jain"];
 
