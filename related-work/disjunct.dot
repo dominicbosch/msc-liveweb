@@ -9,12 +9,24 @@ digraph G {
 	"UNAVAILABLE.txt#3"
 	[label="2009\n(UNAVAILABLE)\nLiSEP: A Lightweight and Extensible\nTool for Complex Event Processing\n- Zappia, Parlanti, Paganelli"];
 
+	"2010-Muthusamy_Jacobsen-DSOABPE.pdf"
+	[label="2010\nA Distributed Service-Oriented\nArchitecture for Business Process Execution\n- Muthusamy, Jacobsen"];
+	"2010-Muthusamy_Jacobsen-DSOABPE.pdf" -> "2012-Hildebrandt_Zanitti-PEPL.pdf";
+
 	"2011-Zhou_etal-ISCEPF.pdf"
 	[label="2011\nTowards an Inexact Semantic\nComplex Event Processing Framework\n- Zhou, Simmhan, Prasanna"];
 
 	"2012-Cubo_etal-BACT.pdf"
 	[label="2012\nBehaviour-Aware Compositions of Things\n- Cubo, Brogi, Pimentel"];
 
+	"2012-Barazzutti-ThriftyPrivacy.pdf"
+	[label="2012\nThrifty Privacy: Efﬁcient Support for\nPrivacy-Preserving Publish/Subscribe\n- Barazzutti, Felber, Mercier, Onica, Riviere"];
+
+	"2012-Hildebrandt_Zanitti-PEPL.pdf"
+	[label="2012\nA Process-Oriented\nEvent-Based Programming Language\n- Hildebrandt, Zanitti"];
+
+	"2012-Stuehmer_etal-PLAY.pdf"
+	[label="2012\nWhere Events Meet Events: PLAY Event Marketplace\n- Stuehmer, Stojanovic, Obermeier, Gibert"];
 
 
 	"2004-Frei_etal-EAAMP.pdf"
@@ -45,9 +57,6 @@ digraph G {
 	"2008-Sheth_Perry-TSWSTT.pdf"
 	[label="2008\nTraveling the Semantic Web through\nSpace, Time, and Theme\n- Sheth, Perry"];
 	"2008-Sheth_Perry-TSWSTT.pdf" -> "2013-Pongpaichet_etal-EventShop.pdf";
-
-	"2012-Barazzutti-ThriftyPrivacy.pdf"
-	[label="2012\nThrifty Privacy: Efﬁcient Support for\nPrivacy-Preserving Publish/Subscribe\n- Barazzutti, Felber, Mercier, Onica, Riviere"];
 
 	"2013-Pongpaichet_etal-EventShop.pdf"
 	[label="2013\nEventShop: Recognizing Situations\nin Web Data Streams\n- Pongpaichet, Singh, Gao, Jain"];
