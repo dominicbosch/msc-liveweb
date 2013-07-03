@@ -1,13 +1,10 @@
 digraph G {
 
 	"UNAVAILABLE.txt#1"
-	[label="2013\n(UNAVAILABLE)\nTowards Complex Event Aware Services as Part of SOA\n- Potocnik, Juric"];
+	[label="2013\nTowards Complex Event Aware Services as Part of SOA\n- Potocnik, Juric"];
 
 	"UNAVAILABLE.txt#2"
-	[label="2009\n(UNAVAILABLE)\nProvenance and Impact of CEP: A Retrospective View\n- Chakravarthy, Adaikkalavan"];
-
-	"UNAVAILABLE.txt#3"
-	[label="2009\n(UNAVAILABLE)\nLiSEP: A Lightweight and Extensible\nTool for Complex Event Processing\n- Zappia, Parlanti, Paganelli"];
+	[label="2009\nProvenance and Impact of CEP: A Retrospective View\n- Chakravarthy, Adaikkalavan"];
 
 	"2010-Muthusamy_Jacobsen-DSOABPE.pdf"
 	[label="2010\nA Distributed Service-Oriented\nArchitecture for Business Process Execution\n- Muthusamy, Jacobsen"];
