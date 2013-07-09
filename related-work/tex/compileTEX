@@ -1,0 +1,5 @@
+#!/bin/bash
+latex related-work
+bibtex related-work
+latex related-work
+latex related-work
