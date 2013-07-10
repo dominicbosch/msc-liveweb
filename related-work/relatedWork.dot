@@ -1,7 +1,13 @@
 digraph G {
-//	page="85,110";
-
-
+//	size="46.61,66.22";		// A-1
+//	page="66.22,66.61";		// A-1
+//	page="33.11,46.61";		// A0
+//	page="46.61,33.11";		// A0
+//	page="23.39,33.11";		// A1
+//	page="16.53,23.39";		// A2
+//	page="11.69, 16.53";	// A3
+//	page="8.27, 11.69";		// A4
+//	rotate="90";
 //TODO add XPath and RDF ressources?
 
 /*
@@ -62,6 +68,10 @@ digraph G {
 	"2005-Bailey_etal-FlavorsOfXChange.pdf" -> "2005-Patranjan-TLE.pdf";
 	"2005-Bailey_etal-FlavorsOfXChange.pdf" -> "2007-Tagni-CET.pdf";
 
+	"2005-Ball_etal-OOjDrew.pdf"
+	[label="2005\nFlavours of XChange, a Rule-Based\nReactive Language for the (Semantic) Web\n- Bailey, Bry, Eckert, Patranjan"];
+	"2005-Ball_etal-OOjDrew.pdf" -> "2007-Paschke_etal-RuleResponder.pdf";
+
 	"2005-Berndtsson_Serioe-ECA_ruleCore.pdf"
 	[label="2005\nSupporting ECA rule markup in ruleCore\n- Berndtsson, Seirioe"];
 	"2005-Berndtsson_Serioe-ECA_ruleCore.pdf" -> "2005-Paschke-ECA_RuleML.pdf";
@@ -79,6 +89,7 @@ digraph G {
 	"2005-Bry_etal-XChange.pdf" -> "2006-Alferes_Tagni-ICEEW.pdf";
 	"2005-Bry_etal-XChange.pdf" -> "2007-Tagni-CET.pdf";
 	"2005-Bry_etal-XChange.pdf" -> "2009-Alferes_etal-ERSW.pdf";
+	"2005-Bry_etal-XChange.pdf" -> "2009-Paschke_Boley-RCER.pdf";
 
 	"2005-Eckert-RWEQCED.pdf"
 	[label="2005\nReactivity on the Web: Event Queries\nand Composite Event Detection in XChange\n- Eckert (MSc Thesis)"];
@@ -109,6 +120,7 @@ digraph G {
 
 	"2005-Paschke-ECA_RuleML.pdf"
 	[label="2005\nECA-RuleML: An Approach combining\nECA Rules with temporal interval-based KR Event/Action Logics\nand Transactional Update Logics\n- Paschke"];
+	"2005-Paschke-ECA_RuleML.pdf" -> "2009-Paschke_Boley-RCER.pdf";
 	"2005-Paschke-ECA_RuleML.pdf" -> "2012-Zhao_etal-LCEMI.pdf";
 	"2005-Paschke-ECA_RuleML.pdf" -> "2012-Paschke_etal-ReactionRuleML.pdf";
 
@@ -117,6 +129,7 @@ digraph G {
 	"2005-Seirioe_Berndtsson-DIECARML.pdf" -> "2005-Berndtsson_Serioe-ECA_ruleCore.pdf";
 	"2005-Seirioe_Berndtsson-DIECARML.pdf" -> "2009-Alferes_etal-ERSW.pdf";
 	"2005-Seirioe_Berndtsson-DIECARML.pdf" -> "2009-Pascalau_Giurca-LWAECARE.pdf";
+	"2005-Seirioe_Berndtsson-DIECARML.pdf" -> "2009-Paschke_Boley-RCER.pdf"
 	"2005-Seirioe_Berndtsson-DIECARML.pdf" -> "2009-Zappia_etal-LiSEP.pdf";
 	
 /*
@@ -135,6 +148,10 @@ digraph G {
 	"2006-Behrends_etal-ECAEDHCL.pdf" -> "2007-Behrends_etal-CECAPA.pdf";
 	"2006-Behrends_etal-ECAEDHCL.pdf" -> "2009-Pascalau_Giurca-LWAECARE.pdf";
 
+	"2006-Boley-RuleML.pdf"
+	[label="2006\nThe RuleML Family\nof Web Rule Languages\n- Boley"];
+	"2006-Boley-RuleML.pdf" -> "2007-Paschke_etal-RuleResponder.pdf";
+	
 	"2006-Knabke-Domain_Broker.pdf"
 	[label="2006\nDomain Broker for the Semantic Web\n- Knabke (BSc Thesis)"];
 	"2006-Knabke-Domain_Broker.pdf" -> "2007-Westphal-TSLA.pdf";
@@ -178,8 +195,9 @@ digraph G {
 
 	"2007-Paschke_etal-RuleResponder.pdf"
 	[label="2007\nRule Responder: RuleML-Based Agents\nfor Distributed Collaboration on the Pragmatic Web\n- Paschke, Boley, Craig, Kozlenkov"];
-	"2007-Paschke_etal-RuleResponder.pdf" -> "2010-Boley_etal-RuleML.pdf";
 	"2007-Paschke_etal-RuleResponder.pdf" -> "2009-Paschke_Boley-RCER.pdf";
+	"2007-Paschke_etal-RuleResponder.pdf" -> "2010-Boley_etal-RuleML.pdf";
+	"2007-Paschke_etal-RuleResponder.pdf" -> "2013_Zhao-Paschke_EDSWE.pdf" [style="dotted"];
 
 	"2007-Tagni-CET.pdf"
 	[label="2007\nApproach To Complex Event\nDetection In The Web\n- Tagni (MSc Thesis)"];
@@ -207,6 +225,7 @@ digraph G {
 	"UNAVAILABLE.txt#6" -> "2008-Schenk-ADNA.pdf";
 	"UNAVAILABLE.txt#6" -> "2009-Alferes_etal-ERSW.pdf";
 	"UNAVAILABLE.txt#6" -> "2009-Pascalau_Giurca-LWAECARE.pdf";
+	"UNAVAILABLE.txt#6" -> "2009-Paschke_Boley-RCER.pdf";
 
 	"2008-Fischer-AGSMWP.pdf"
 	[label="2008\nAutomatic Generation of\nSemantic Mashups in Web Portals\n- Fischer (Diplomarbeit)"];
@@ -315,6 +334,11 @@ digraph G {
 	"2010-Aghaee_Pautasso-MDHTML5.pdf"
 	[label="2010\nMashup Development with HTML5\n- Aghaee, Pautasso"];
 
+	"2010_Kozlenkov_Prova.pdf"
+	[label="2010\nProva Rule Language Version 3.0\n - User's Guide (Technical report)\n- Kozlenkov"];
+	"2010_Kozlenkov_Prova.pdf" -> "2013_Zhao-Paschke_EDSWE.pdf";
+	"2010_Kozlenkov_Prova.pdf" -> "2007-Paschke_etal-RuleResponder.pdf" [style="dotted"];
+
 /*
  *  2011
  */
@@ -345,11 +369,13 @@ digraph G {
 /*
  *  2013
  */
+ 	"2013_Zhao-Paschke_EDSWE.pdf"
+	[label="2013\nEvent-Driven Scientific Workflow Execution\n- Zhao, Paschke"];
 
 //A framework for network-wide semantic event correlation
 //http://proceedings.spiedigitallibr"2009-Fischer_etal-OCAMG.pdf"ary.org/proceeding.aspx?articleid=1692035
 
-//Josuttis, N.: SOA in Practice: The Art of Distributed System Design. O’Reilly, Sebastopol (2007)
+//Josuttis, N.: SOA in Practice: The Art of Distributed System Design. O'Reilly, Sebastopol (2007)
 //Kaye, D.: Loosely Coupled: The Missing Pieces of Web Services. RDS Press (2003)
 //Pautasso, Wilde: Why is the web loosely coupled?: a multi-faceted metric for service design
 //Niemann, Eckert, Repp, Steinmetz: Towards a Generic Governance Model for Service-oriented Architectures

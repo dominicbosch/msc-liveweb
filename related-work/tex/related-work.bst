@@ -773,6 +773,20 @@ FUNCTION {paper}
   fin.entry
 }
 
+FUNCTION {webpage}
+{ output.bibitem
+  format.authors output
+  title howpublished new.block.checkb
+  title output
+  howpublished new.block.checka
+  howpublished output
+  format.date output
+  new.block
+%  note emphasize output
+  note output
+  fin.entry
+}
+
 FUNCTION {phdthesis}
 { output.bibitem
   format.authors "author" output.check
