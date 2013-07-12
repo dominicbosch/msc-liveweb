@@ -178,6 +178,7 @@ digraph G {
 	[label="2007\nCombining ECA Rules\nwith Process Algebras for the Semantic Web\n- Behrends, Fritzen, May, Schenk"];
 	"2007-Behrends_etal-CECAPA.pdf" -> "2009-Pascalau_Giurca-LWAECARE.pdf";
 	"2007-Behrends_etal-CECAPA.pdf" -> "2008-Schenk-ADNA.pdf";
+	"2007-Behrends_etal-CECAPA.pdf" -> "2013-Hausmann_Bry-TCACEP.pdf";
 
 	"2007-Daniel_etal-ARRAM.pdf"
 	[label="2007\nActive Rules for Runtime Adaptivity Management\n- Daniel, Matera, Morandi, Mortari, Pozzi"];
@@ -192,6 +193,16 @@ digraph G {
 	[label="2007\nUser-Friendly Functional\nProgramming for Web Mashups\n- Fischer, Ennal"];
 	"2007-Ennals_Gay-UFFPWM.pdf" -> "2008-Fischer-AGSMWP.pdf";
 	"2007-Ennals_Gay-UFFPWM.pdf" -> "2009-Fischer_etal-OCAMG.pdf";
+
+	"2007-Paschke_etal-HRRLCEP.pdf"
+	[label="2007\nA Homogeneous Reaction\nRule Language for Complex Event Processing\n- Paschke, Kozlenkov, Boley"];
+	"2007-Paschke_etal-HRRLCEP.pdf" -> "2007-Paschke_etal-RuleResponder.pdf";
+	"2007-Paschke_etal-HRRLCEP.pdf" -> "2010-Anicic_etal-RBLCEPR.pdf";
+	"2007-Paschke_etal-HRRLCEP.pdf" -> "2012-Paschke_etal-ReactionRuleML.pdf";
+	"2007-Paschke_etal-HRRLCEP.pdf" -> "2008-Schmidt_etal-BRAP.pdf";
+	"2007-Paschke_etal-HRRLCEP.pdf" -> "2013-Hausmann_Bry-TCACEP.pdf";
+	"2007-Paschke_etal-HRRLCEP.pdf" -> "2013_Zhao-Paschke_EDSWE.pdf";
+	"2007-Paschke_etal-HRRLCEP.pdf" -> "2010-Anicic_etal-ETALIS.pdf";
 
 	"2007-Paschke_etal-RuleResponder.pdf"
 	[label="2007\nRule Responder: RuleML-Based Agents\nfor Distributed Collaboration on the Pragmatic Web\n- Paschke, Boley, Craig, Kozlenkov"];
@@ -323,8 +334,12 @@ digraph G {
 /*
  *  2010
  */
+ 	"2010-Anicic_etal-ETALIS.pdf"
+ 	[label="2010\nETALIS: A Rule-based System for Complex Event Processing\n- Anicic, Fodor, Stuehmer, Rudolph, Stojanovic"];
+
 	"2010-Anicic_etal-RBLCEPR.pdf"
 	[label="2010\nA Rule-Based Language for\nComplex Event Processing and Reasoning\n- Anicic, Fodor, Rudolph, Stuehmer et al."];
+	"2010-Anicic_etal-RBLCEPR.pdf" -> "2010-Anicic_etal-ETALIS.pdf";
 
 	"2010-Boley_etal-RuleML.pdf"
 	[label="2010\nRuleML 1.0: The Overarching\nSpecification of Web Rules\n- Boley, Paschke, Shafiq"];
@@ -371,6 +386,9 @@ digraph G {
  */
  	"2013_Zhao-Paschke_EDSWE.pdf"
 	[label="2013\nEvent-Driven Scientific Workflow Execution\n- Zhao, Paschke"];
+
+	"2013-Hausmann_Bry-TCACEP.pdf"
+	[label="2013\nTowards Complex Actions\nfor Complex Event Processing\n- 2013-Hausmann, Bry"];
 
 //A framework for network-wide semantic event correlation
 //http://proceedings.spiedigitallibr"2009-Fischer_etal-OCAMG.pdf"ary.org/proceeding.aspx?articleid=1692035
