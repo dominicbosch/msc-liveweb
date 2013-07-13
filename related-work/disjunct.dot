@@ -1,13 +1,15 @@
 digraph G {
 
 	"UNAVAILABLE.txt#1"
-	[label="2013\n(UNAVAILABLE)\nTowards Complex Event Aware Services as Part of SOA\n- Potocnik, Juric"];
+
+	[label="2013\nTowards Complex Event Aware Services as Part of SOA\n- Potocnik, Juric"];
 
 	"UNAVAILABLE.txt#2"
-	[label="2009\n(UNAVAILABLE)\nProvenance and Impact of CEP: A Retrospective View\n- Chakravarthy, Adaikkalavan"];
+	[label="2009\nProvenance and Impact of CEP: A Retrospective View\n- Chakravarthy, Adaikkalavan"];
 
-	"UNAVAILABLE.txt#3"
-	[label="2009\n(UNAVAILABLE)\nLiSEP: A Lightweight and Extensible\nTool for Complex Event Processing\n- Zappia, Parlanti, Paganelli"];
+	"2010-Muthusamy_Jacobsen-DSOABPE.pdf"
+	[label="2010\nA Distributed Service-Oriented\nArchitecture for Business Process Execution\n- Muthusamy, Jacobsen"];
+	"2010-Muthusamy_Jacobsen-DSOABPE.pdf" -> "2012-Hildebrandt_Zanitti-PEPL.pdf";
 
 	"2011-Zhou_etal-ISCEPF.pdf"
 	[label="2011\nTowards an Inexact Semantic\nComplex Event Processing Framework\n- Zhou, Simmhan, Prasanna"];
@@ -15,6 +17,14 @@ digraph G {
 	"2012-Cubo_etal-BACT.pdf"
 	[label="2012\nBehaviour-Aware Compositions of Things\n- Cubo, Brogi, Pimentel"];
 
+	"2012-Barazzutti-ThriftyPrivacy.pdf"
+	[label="2012\nThrifty Privacy: Efficient Support for\nPrivacy-Preserving Publish/Subscribe\n- Barazzutti, Felber, Mercier, Onica, Riviere"];
+
+	"2012-Hildebrandt_Zanitti-PEPL.pdf"
+	[label="2012\nA Process-Oriented\nEvent-Based Programming Language\n- Hildebrandt, Zanitti"];
+
+	"2012-Stuehmer_etal-PLAY.pdf"
+	[label="2012\nWhere Events Meet Events: PLAY Event Marketplace\n- Stuehmer, Stojanovic, Obermeier, Gibert"];
 
 
 	"2004-Frei_etal-EAAMP.pdf"
