@@ -42,23 +42,6 @@ Language XChange uses Xcerpt(?) to express web queries. MARS was postulated in 2
 In contrast to standard ECA rules, which typically only have one global state, messaging reaction rules maintain a local conversation state that refelects the process exe3cution state. This supports supports the performing of different activities within process instances managed in simultaneous conversation branches.
 CEP  provides enhanced situation awareness.
 
-\subsection{Markup Languages}
-
-
-\subsubsection{RuleML}
-RuleML~\cite{2006-Boley-RuleML.pdf} is a rule specification standard to express both forward and backward rules for derivation, reaction, rewriting, messaging, verification and transformation. The building blocks of RuleML are predicates, derivation rules, facts, queries, integrity constraints and transformation rules.
-
-The Rule Markup Initiative~\cite{wwwruleml}.
-
-
-\subsubsection{Reaction RuleML}
-Reaction RuleML~\cite{2012-Paschke_etal-ReactionRuleML.pdf} extends RuleML to allow reaction rules and complex event/action messages, e.g. for complex events processing (CEP). It adds various kinds of production, action, reaction and knowledge representation (KR) temporal/event/action logic rules, as well as (complex) event/action messages. It consists of one general reaction rule form that can be specialized, e.g. into production rules, trigger rules, ECA rules or messaging rules. Three different execution styles (active, messaging,  reasoning). Messages define inbound or outbound event messages and are used to interchange events and rule bases. A reaction rule can be globally or locally nested within other reaction or derivation rules.
-RuleML Interface Description Language (RuleML IDL) is a sublanguage of Reaction RuleML and allows the description of public rule functions.
-
-
-\subsubsection{JSON Rules}
-
-
 \subsection{Rule Engines}
 
 \subsubsection{Kynetic Rules Engine}
@@ -71,20 +54,48 @@ The authors of Rule Responder built their reference system on top of the Mule~\c
 \\
 An investigated use case for Rule Responder was a symposium organization as a virtual organization.
 
-\begin{figure*}[htb]
-\begin{center}
-%,angle=-90
-\includegraphics[scale=0.4]{img_rr01}
-\caption{Rule Responder Architecture, taken from \cite{2007-Paschke_etal-RuleResponder.pdf}}
-\end{center}
-\end{figure*}
+% \begin{figure*}[htb]
+% \begin{center}
+% %,angle=-90
+% \includegraphics[scale=0.4]{img_rr01}
+% \caption{Rule Responder Architecture, taken from \cite{2007-Paschke_etal-RuleResponder.pdf}}
+% \end{center}
+% \end{figure*}
 
+
+
+\subsubsection{Prova}
+Prova is a highly expressive rule language with a clear orientation towards CEP. It uses backward-reasoning logic to formalize decisions in terms of derivation. Forward-directed messaging of reaction rules supports distributed event and action processing. It is used by the authors of \cite{2013_Zhao-Paschke_EDSWE.pdf,2007-Paschke_etal-RuleResponder.pdf}. It allows for dynamic access to external data sources.
 
 
 \subsection{Rule Languages}
 \subsubsection{Kinetics Rule Language}
 
-\subsubsection{Prova}
+
+\subsubsection{(Reaction) RuleML}
+%\subsubsection{\textit{(Reaction) RuleML}}
+\textit{RuleML}~\cite{2006-Boley-RuleML.pdf} is a XML-based rule specification standard to express both forward and backward rules for derivation, reaction, rewriting, messaging, verification and transformation. The building blocks of \textit{RuleML} are predicates, derivation rules, facts, queries, integrity constraints and transformation rules. Its development is driven by the Rule Markup Initiative~\cite{wwwruleml}.
+\\\\
+With \textit{RuleML} being already a large specification, \textit{Reaction RuleML}~\cite{2012-Paschke_etal-ReactionRuleML.pdf} extends \textit{RuleML} towards reaction rules and complex event/action messages, e.g. for complex event processing (CEP). It adds various kinds of production, action, reaction and knowledge representation (KR) temporal/event/action logic rules, as well as (complex) event/action messages. It consists of one general reaction rule form that can be specialized, e.g. into production rules, trigger rules, ECA rules or messaging rules. Three different execution styles (active, messaging,  reasoning). Messages define inbound or outbound event messages and are used to interchange events and rule bases. A reaction rule can be globally or locally nested within other reaction or derivation rules. Additionally the RuleML Interface Description Language (\textit{RuleML IDL}) was provided, a sublanguage of \textit{Reaction RuleML} and allows the description of public rule functions as interfaces to hide program logic.
+\\\\
+As research continued in terms of reaction rules and \textit{Rule Responder}, the authors of \cite{2013_Zhao-Paschke_EDSWE.pdf} showed the adoption of event paradigms to support scientific workflow execution. In their work they point out the limitation of ECA frameworks when adopted to their use case. For highly distributed and loosley coupled scientific workflows, complicated conditional procedures and rules, which can also have local scopes, are required. This shows us their work is going towards large systems with a highly developed rule language that subsumes research from several fields. 
+
+
+%\begin{lstlisting}[breaklines]
+%<Rule>
+%  [...]
+%  <on>      </on>
+%   <if>      </if>
+%   <then>    </then>
+%   <do>      </do>
+%   <after>   </after>
+%   <else>    </else>
+%   <elsedo>  </elsedo>
+% </Rule>
+
+% \end{lstlisting}
+
+\subsubsection{JSON Rules}
 
 
 \subsubsection{OO jDrew}
@@ -107,9 +118,24 @@ The Binder Watcher use case was implemented in KRL (see appendix \ref{app:uc_bw_
 
 
 \section{Conclusion}
+What did we look at
+How is the evolving of the web possible with these approaches
+how are we going to make it reactive
+where does the reactiveness happen
+interchangeable events important, rules not so much?
+we only need events communicated and the communiation between them doesn't happen via a clumsy bus.
+mashups?
+flexibility and agility of the solution granted by interchangable rules, do we really need this?
+are we not more going towards a system which consumes events and has user defined rules.
+there the rules come into play and of course it would be nice to have them in a Reaction RuleML style.
+let users write rules in  RuleMl in a first stage, then simplify the vocabulariy as good as possible.
+instead of weaving stubs or proxies of existing service into a message oriented middleware (MoM), the web itself is used as the MoM. Through this a lightweighted and performant event-based architecture can be realized, which allows the orchestration of existing web and cloud applications.
 
+a choreography is when an agent forms a collaboration with another one in order to fulfill the task.
 
 \section{Future Work}
+
+graphical representation of the vocabulary to define rules.
 
 
 \bibliography{liveweb}
