@@ -8,7 +8,7 @@
 
 \begin{document}
 
-\title{Master Thesis Preparation}
+\title{Master Thesis Preparation\\Report}
 \date{\today}
 \author{Dominic Bosch \\ Departement Mathematics and Computer Science \\ University of Basel}
 
@@ -17,20 +17,18 @@
 \renewcommand{\abstractname}{}
 \begin{abstract}
 \textbf{Abstract.}
-The web continously evolves into bigger complexity, allowing for ever more powerful applications. The grand challange is to retain manageable interactions between cloud applications, while applying reactivity to them. To get a hold on this, we anticipate the next change in the evolution of the web: the live web, or reactive web. By considering cloud applications as event producers and action consumers we are able to apply a different level of abstraction to the web, which allows new perspectives and approaches to manifest the reactive web.
-%The web over time changed its role. In the first stage, it was a passive document storage driven in client-server mode. Using web 2.0 technology in the next phase more and more desk top computer usage went into the web. Today web clouds are proliferating. We anticipate a next change in the near future: The live web or reactive web.
-%The goal of this project is to enhance the web with rule-based event-condition-action (ECA) mechanisms  such that the web turns itself into an reactive entity. After an analysis of current approaches, a generalized ECA language together with a rule engine should be provided. For test and demonstration purposes, usage scenarios should be specified and new web services should be derived. As a case study, the rule engine should be integrated with the ProBinder~\cite{wwwprobinder} software, which is an advanced collaboration platform based on the shelf, binder, and register notion.
+In this report we summarize the research efforts during the preparation work for the master thesis. While identifying related work, it became clear that huge efforts in the research fields of event-driven architectures and user-driven mashup development has been done. On the other hand cloud application utilization is a most recent research field and continues to be a grand challenge as they evolve. Moreover the use of cloud applications seems to be a nice feature, rather than fonding the basis of research. To the best of our knowledge, no related work was found which funnels all these research fields into one, providing novel powerful ways to govern the web.
 \end{abstract}
 
-
 \section{Introduction}
-
-
+The web continuously evolves into bigger complexity, allowing for ever more powerful applications. The grand challenge is to retain manageable interactions between cloud applications, while adopting reactivity to them. To get a hold on this, we anticipate the next change in the evolution of the web: the live web, or reactive web. By considering cloud applications as event producers and action consumers we are able to apply a new level of abstraction to the web, which allows new perspectives and approaches to manifest the reactive web. Such an architecture has the potential to overcome limitations that have been encountered during previous research.
+%The web over time changed its role. In the first stage, it was a passive document storage driven in client-server mode. Using web 2.0 technology in the next phase more and more desk top computer usage went into the web. Today web clouds are proliferating. We anticipate a next change in the near future: The live web or reactive web.
+%The goal of this project is to enhance the web with rule-based event-condition-action (ECA) mechanisms  such that the web turns itself into an reactive entity. After an analysis of current approaches, a generalized ECA language together with a rule engine should be provided. For test and demonstration purposes, usage scenarios should be specified and new web services should be derived. As a case study, the rule engine should be integrated with the ProBinder~\cite{wwwprobinder} software, which is an advanced collaboration platform based on the shelf, binder, and register notion.
 
 \section{Related Work}
-
-Research which combines both the web area and rule-based approaches has been done by several researchers in many fields. One notable outcome is the language XChange~\cite{2005-Bry_etal-XChange.pdf}, which introduces reactivity to the web. XChange uses Xcerpt\cite{2004-Schaffert-Xcerpt.pdf}, a rule-based query and transformation Language for the web, to express web queries.
-% MARS~\cite{2009-Schubert-RDF_Rules_MARS.pdf}.
+\subsection{Reactivity in the Web}
+Research approaches to apply reactivity to the web has been done by several researchers in many fields. One notable outcome is the language \emph{XChange}~\cite{2005-Patranjan-TLE.pdf,2005-Bry_etal-XChange.pdf}, which introduces reactivity to the web. \emph{XChange} uses \emph{Xcerpt}~\cite{2004-Schaffert-Xcerpt.pdf}, a rule-based query and transformation Language for the web, to express web queries.
+%It is often referenced and served as a basis to many future research in terms of reactivity in the web.
 
 In ~\cite{2009-Paschke_Boley-RCER.pdf} the authors provide an overview of general descriptions and classifications from different research efforts in terms of events, rules and reactiveness. The different research domains they point out are:
  \begin{itemize}
@@ -41,43 +39,13 @@ In ~\cite{2009-Paschke_Boley-RCER.pdf} the authors provide an overview of genera
   \item Active Databases and ECA Rule Systems (on-if-do)
   \item Rule-Based Complex Event Processing (CEP) and Event Notification Systems
 \end{itemize}
-In contrast to standard ECA rules, which typically only have one global state, messaging reaction rules maintain a local conversation state that refelects the process execution state. This supports the performing of different activities within process instances managed in simultaneous conversation branches.
+In contrast to standard ECA rules, which typically only have one global state, messaging reaction rules maintain a local conversation state that refelects the process execution state. This supports the performing of different activities within process instances managed in simultaneous conversation branches. Today, powerful event languages (such as \emph{RuleML}) exist, which allow to express each of the afore mentioned categories.
 
-In \cite{2012-Giurca_etal-RuleTheWeb.pdf} research is done about semantic application vocabulary and business rules, which together allow smart suggestions to the user in a rule-based system. Their approach bases on DOM interactions and mashups would have to be constructed via them. Their work is interesting when allowing the users to customize their online context but it doesn't allow for cloud applications to be first-class citizens as part of on- and offline mashups.
+In \cite{2012-Giurca_etal-RuleTheWeb.pdf} semantic application vocabulary and business rules are examined, which together allow smart suggestions to the user in a rule-based system. Their approach bases on Distributed Object Model (DOM) interactions and mashups would have to be constructed indirectly via the DOM. Their work is interesting when allowing the users to customize their online context but it doesn't allow for cloud applications to be first-class citizens as part of on- and offline mashups.
 
-In \cite{2010-Ye_Jacobsen-EEWS.pdf} it is argued that, enhancing a Service oriented Architecture (SOA) with an event-driven SOA (EDSOA), leads to more flexible and adaptive SOA applications that can be informed about states of neighbouring components. but in their approach events are only an aid to react on unexpected behaviour, where we want to go towards a system which builds entirely on events, using their expressive power.
+From \cite{2010-Ye_Jacobsen-EEWS.pdf} follows, that enhancing a Service oriented Architecture (SOA) with an event-driven SOA (EDSOA), leads to more flexible and adaptive SOA applications that can be informed about states of neighbouring components. In their approach, events are only an aid to react on unexpected behaviour. But our research path leads us towards a system which builds entirely on events, using their expressive power as a basis.
 
 \subsection{Rule Engines and Languages}
-
-\subsubsection{Kinetic}
-The Kinetic Rules Engine (KRE) is a capable system presented in ~\cite{bookTheLiveWeb}. It is realized in Perl and uses its very own rule language, the Kinetic Rules Language (KRL). It is layed out to support CEP as well as a tight coupling with the user's browser through plugins or libraries loaded via the webpage. 
-
-
-
-% \begin{figure*}[htb]
-% \begin{center}
-% %,angle=-90
-% \includegraphics[scale=0.4]{img_rr01}
-% \caption{Rule Responder Architecture, taken from \cite{2007-Paschke_etal-RuleResponder.pdf}}
-% \end{center}
-% \end{figure*}
-
-
-
-\subsubsection{Prova}
-Prova is a highly expressive rule language with a clear orientation towards CEP. It uses backward-reasoning logic to formalize decisions in terms of derivation. Forward-directed messaging of reaction rules supports distributed event and action processing. It is used by the authors of \cite{2013_Zhao-Paschke_EDSWE.pdf,2007-Paschke_etal-RuleResponder.pdf}. It allows dynamic access to external data sources.
-
-
-\subsubsection{(Reaction) RuleML}
-%\subsubsection{\textit{(Reaction) RuleML}}
-\textit{RuleML}~\cite{2006-Boley-RuleML.pdf} is a XML-based rule specification standard to express both forward and backward rules for derivation, reaction, rewriting, messaging, verification and transformation. The building blocks of \textit{RuleML} are predicates, derivation rules, facts, queries, integrity constraints and transformation rules. Its development is driven by the Rule Markup Initiative~\cite{wwwruleml}.
-
-With \textit{RuleML} being already a large specification, \textit{Reaction RuleML}~\cite{2012-Paschke_etal-ReactionRuleML.pdf} extends \textit{RuleML} towards reaction rules and complex event/action messages, e.g. for complex event processing (CEP). It adds various kinds of production, action, reaction and knowledge representation (KR) temporal/event/action logic rules, as well as (complex) event/action messages. It consists of one general reaction rule form that can be specialized, e.g. into production rules, trigger rules, ECA rules or messaging rules. Three different execution styles (active, messaging,  reasoning). Messages define inbound or outbound event messages and are used to interchange events and rule bases. A reaction rule can be globally or locally nested within other reaction or derivation rules. Additionally the RuleML Interface Description Language (\textit{RuleML IDL}) was provided, a sublanguage of \textit{Reaction RuleML} and allows the description of public rule functions as interfaces to hide program logic.
-
-As research continued in terms of reaction rules and \textit{Rule Responder}, the authors of \cite{2013_Zhao-Paschke_EDSWE.pdf} showed the adoption of event paradigms to support scientific workflow execution. In their work they point out the limitation of ECA frameworks when adopted to their use case. For highly distributed and loosley coupled scientific workflows, complicated conditional procedures and rules, which can also have local scopes, are required. This shows us their work is going towards large systems with a highly developed rule language that subsumes research from several fields. 
-
-OO jDrew~\cite{2005-Ball_etal-OOjDrew.pdf} is a Java based rule engine, capable of parsing and executing RuleML.
-
 %\begin{lstlisting}[breaklines]
 %<Rule>
 %  [...]
@@ -89,19 +57,40 @@ OO jDrew~\cite{2005-Ball_etal-OOjDrew.pdf} is a Java based rule engine, capable 
 %   <else>    </else>
 %   <elsedo>  </elsedo>
 % </Rule>
-
 % \end{lstlisting}
+En excerpt of rule engines and languages is shortly introduced here. The recent trend seems to go towards funneling the different event-based approaches into CEP as highly expressive paradigm to incorporate all others. Of course more rule engines or languages exist, but they either go into similar categories as the presented ones, aren't developed anymore, or haven't been identified in related work as recent or active research.
+
+\subsubsection{Kynetx}
+The Kinetic Rules Engine (KRE) is a platform presented in \cite{bookTheLiveWeb}. It is realized in Perl and uses its very own rule language, the Kinetic Rules Language (KRL). It is layed out to support CEP as well as a tight coupling with the user's browser through plugins or libraries loaded via the webpage. It allows the access to remote resources and the processing of such data before passing it along to internal storage or again external resources, such as cloud applications. A live system~\cite{wwwkynetx} is available for testing and if desired also for productive use. Creating an own instance is quite a challenge due to it's numerous libraries. KRL needs quite some efforts to get used to and can't be entrusted to unexperienced users, thus a layer on top of this system would have to be implemented for our purposes.
+
+% \begin{figure*}[htb]
+% \begin{center}
+% %,angle=-90
+% \includegraphics[scale=0.4]{img_rr01}
+% \caption{Rule Responder Architecture, taken from \cite{2007-Paschke_etal-RuleResponder.pdf}}
+% \end{center}
+% \end{figure*}
 
 
+\subsubsection{(Reaction) RuleML}
+\textit{RuleML}~\cite{2006-Boley-RuleML.pdf} is a XML-based rule specification standard to express both forward and backward rules for derivation, reaction, rewriting, messaging, verification and transformation. The building blocks of \textit{RuleML} are predicates, derivation rules, facts, queries, integrity constraints and transformation rules. Its development is driven by the Rule Markup Initiative~\cite{wwwruleml}.
 
+With \textit{RuleML} being already a useful specification, \textit{Reaction RuleML}~\cite{2012-Paschke_etal-ReactionRuleML.pdf} extends \textit{RuleML} towards reaction rules and complex event/action messages, e.g. for CEP. It adds various kinds of production, action, reaction and knowledge representation (KR) temporal/event/action logic rules, as well as (complex) event/action messages. It consists of one general reaction rule form that can be specialized, e.g. into production rules, trigger rules, ECA rules or messaging rules. Three different execution styles (active, messaging and reasoning) of rules are incorporated. Definition of inbound or outbound event messages and are used to interchange events and rule bases. A reaction rule can be globally or locally nested within other reaction or derivation rules. Additionally the \emph{RuleML} Interface Description Language (\textit{RuleML IDL}) was provided in the same paper, a sub-language of \textit{Reaction RuleML} and allows the description of public rule functions as interfaces to hide program logic.
+
+\subsubsection{(OO) jDrew}
+Java Deductive Reasoning Engine for the Web (\emph{jDrew}~\cite{wwwjdrew}) is a reasoning engine written in Java for definite clause reasoning. jDrew can be embedded into larger systems through its APIs.
+Object-Oriented jDrew (\emph{OO jDrew}~\cite{2005-Ball_etal-OOjDrew.pdf,wwwoojdrew}) is a Java based rule engine, it serves as a reference implementation of \emph{RuleML}.
+
+\subsubsection{Prova}
+\emph{Prova}~\cite{wwwprova} is an expressive rule language and engine, both written in Java, with a main orientation to ECA rules. It uses backward-reasoning logic to formalize decisions in terms of derivation. Forward-directed messaging of reaction rules supports distributed event and action processing. It allows dynamic access to external data sources and is used by the authors of \cite{2013_Zhao-Paschke_EDSWE.pdf,2007-Paschke_etal-RuleResponder.pdf} for the \emph{RuleResponder's} proof of concept for transformations between different rule languages over \emph{RuleML}.
 
 \subsubsection{JSON Rules}
-JSON Rules\cite{2008-Giurca_Pascalau-JSON_Rules.pdf} has been invented due to an increasing need for rules in terms of semantic web applications and the emerging Rich Internet Applications (RIAs). JSON rules is capable of expressing production rules (if-do) as well as ECA rules (on-if-do). The rules engine is a forward chaining rule engine using a modified RETE~\cite{1982-Crockford-RETE.pdf} algorithm. The RETE working memory in this rule engine is the (event-based) Document Object Model (DOM) itself. An example~\cite{2009-Pascalau_Giurca-RBACEM.pdf} of (DOM-)rule-based creation and execution of mashups illustrates the powerful aspects of JSON Rules.
+\emph{JSON Rules}~\cite{2008-Giurca_Pascalau-JSON_Rules.pdf} has been invented due to an increasing need for rules in terms of semantic web applications and the emerging Rich Internet Applications (RIAs). \emph{JSON Rules} is capable of expressing production rules (if-do) as well as ECA rules (on-if-do). The rules engine is a forward chaining rule engine using a modified RETE~\cite{1982-Crockford-RETE.pdf} algorithm. The RETE working memory in this rule engine is the (event-based) Document Object Model (DOM) itself. An example~\cite{2009-Pascalau_Giurca-RBACEM.pdf} of (DOM-)rule-based creation and execution of mashups illustrates the powerful aspects of \emph{JSON Rules}. The current limitation to the DOM tree would require a generalization to adopt it also to other memory layouts.
 
 \subsection{Mashups}
-In \cite{2011-Pascalau-MBC.pdf}, one of the founders of JSON Rules proposes to look at mashups as user-behaviour in a certain context. A mashup, to achieve a user-defined goal, is modelled via Unified Modeling Language (UML) as a map containing contexts and behaviour desriptions. Contexts are defined as a set of concepts, concepts are defined as unit of knowledge created by unique combination of characteristics. A mashup is then defined as  set of contexts behaviour, where behaviour consists of rules and processes. The conceptual work done in this paper is interesting but the running example isn't accessible.
+In \cite{2011-Pascalau-MBC.pdf}, one of the founders of \emph{JSON Rules} proposes to look at mashups as user-behaviour in a certain context. A mashup, to achieve a user-defined goal, is modelled via Unified Modeling Language (UML) as a map containing contexts and behaviour desriptions. Concepts are defined as unit of knowledge created by unique combination of characteristics. Contexts are defined as a set of concepts. A mashup is then defined as  set of contexts behaviour, where behaviour consists of rules and processes. The conceptual work done in this paper is interesting but the promoted example isn't accessible.
 
-It is also important to understand what users expect from service mashups. In \cite{2010-Namoun_etal-EURCW.pdf} research is done in identifying user perceptions of services, their composition, user working ways and expectations towards a composition tool. They come up with a set of guidelines and recommendations to aid the development of mashup environments. A survey~\cite{2009-Fischer_etal-OCAMG.pdf} that went into a similar direction categorizes the different frameworks for user driven mashup development as based on:
+It is also important to understand what users expect from service mashups, in order to provide a useful platform to them. In \cite{2010-Namoun_etal-EURCW.pdf} research is done in identifying user perceptions of services, their composition, user working ways and expectations towards a composition tool. They come up with a set of recommendations to aid the development of mashup environments. A survey~\cite{2009-Fischer_etal-OCAMG.pdf} that went into a similar direction categorizes the different frameworks for user driven mashup development as based on:
  \begin{itemize}
 %\itemsep-1.5em
   \item Programming Paradigm
@@ -114,23 +103,26 @@ It is also important to understand what users expect from service mashups. In \c
 But even though large efforts are made in all these research fields, unexperienced users are still not able to build mashups without knowledge about numerous aspects of the framework or programming.
 
 \subsubsection{useKit}
-The idea of useKit~\cite{2010-Rizzotti_Burkhart-useKit.pdf} missions shows us the potential of user-defined cloud application mashups. While their approach is not event-based, it can be regarded as an evolution base for the web towards reactive cloud application mashups.
+The idea of \emph{useKit}~\cite{2010-Rizzotti_Burkhart-useKit.pdf} missions shows us the potential of user-manageable cloud application mashups. While their approach is not event-based, it can be regarded as a base for the web's evolution towards user-programmable reactive cloud application mashups.
 
 \subsubsection{Rule Responder}
-Rule Responder~\cite{2007-Paschke_etal-RuleResponder.pdf} is a project to extend the Semantic Web towards a Pragmatic Web infrastructure for collaborative human-computer networks, which they call an architecture of a Pragmatic Agent Web (PAW). It supports the formation of virtual groupings and allows semi-automated agents with their individual contexts, decisions and actions. The authors postulate agents empowered with automatic rule-driven data transformation, decision derivation from existing knowledge and reaction according to changed situations or occurred events. The work done in this project concentrates on a layer on top of a rule engine and language, and thus allows for a combination of arbitrary rule-based systems via their framework. This is achieved through the usage of general messge oriented communication interfaces and a platform-independent rule interchange format.
+\emph{Rule Responder}~\cite{2007-Paschke_etal-RuleResponder.pdf} is a project to extend the Semantic Web towards a Pragmatic Web infrastructure for collaborative human-computer networks, which they call an architecture of a Pragmatic Agent Web (PAW). It supports the formation of virtual groupings and allows semi-automated agents with their individual contexts, decisions and actions. The authors postulate agents empowered with automatic rule-driven data transformation, decision derivation from existing knowledge and reaction according to changed situations or occurred events. The work done in this project concentrates on a layer on top of a rule engine and language, and thus allows for a combination of arbitrary rule-based systems via their framework. This is achieved through the usage of general message oriented communication interfaces and a platform-independent rule interchange format (\emph{RuleML}).
 
-The authors of Rule Responder built their reference system\cite{wwwruleresponder} on top of the Mule~\cite{wwwmuleesb} open-source Enterprise Service Bus (ESB) which acts as a communication middleware. The decision to use Mule was made because it goes beyond the typical definition of an ESB by providing a distributable object broker to manage all sorts of service components. Each agent runs its own rbitrary rule engine. For demonstartion purposes Prova and OO jDrew were used to demonstrate the rule interchange between different rule engines.
+The authors of Rule Responder built their reference system\cite{wwwruleresponder} on top of the Mule~\cite{wwwmuleesb} open-source Enterprise Service Bus (ESB) which acts as a communication middleware. The decision to use Mule was made because it goes beyond the typical definition of an ESB by providing a distributable object broker to manage all sorts of service components. Each agent runs its own arbitrary rule engine. For demonstration purposes \emph{Prova} and \emph{OO jDrew} were used to demonstrate the rule interchange between different rule engines.
+
+As research continued in terms of reaction rules and \textit{Rule Responder}, the authors of \cite{2013_Zhao-Paschke_EDSWE.pdf} showed the adoption of event paradigms to support scientific workflow execution. In their work they point out the limitations of ECA frameworks when adopted to their use case. For highly distributed and loosely coupled scientific workflows, complicated conditional procedures and rules, which can also have local scopes, are required. This shows us their work is going towards large distributed systems with a highly developed rule language that subsumes research from several fields.
 
 \subsubsection{DashMash}
-The DashMash~\cite{2011-Cappiello_etal-DashMash.pdf} platform is an approach to give end-users the graphical tools in a browser to mash up web applications in a dashboard. A resource of (for stability reasons) trimmed services (such as GoogleMaps or TripAdvisor), filters, viewers and generic components is accessible to the users. DashMash uses an event-driven model of the presentation level, similar to a JSON Rules approach in \cite{2009-Pascalau_Giurca-RBACEM.pdf}. Events sent by the client to the server are used to update all viewers with the actual data the user is looking at.
+The DashMash~\cite{2011-Cappiello_etal-DashMash.pdf} platform is an approach to give end-users the graphical tools in a browser to mash up web applications in a dashboard. A resource of (for stability reasons) trimmed services (such as GoogleMaps or TripAdvisor), filters, viewers and generic components is accessible to the users. DashMash uses an event-driven model of the presentation level, similar to a JSON Rules approach in \cite{2009-Pascalau_Giurca-RBACEM.pdf}. There are events sent by the client to the server, but they are only used to update all viewers with the actual data the user is looking at.
 
 \section{Use Case Study}
-In order to verify some of the identified related work, use cases around the succcessor of useKit~\cite{2010-Rizzotti_Burkhart-useKit.pdf} (ProBinder~\cite{wwwprobinder}) have been derived and investigated. 
+In order to verify some of the identified related work, use cases around the successor of useKit~\cite{2010-Rizzotti_Burkhart-useKit.pdf} (ProBinder~\cite{wwwprobinder}) have been derived and investigated. 
+Three use cases have been identified to verify the feasîbility of certain existing infrastructures.
 
 \subsection{Binder Watcher}
-Binder Watcher is about binders being watched and actions that are taken after certain changes to a binder. Users of ProBinder, which are involved in many different companies and project binders, tend to be confronted with a large amount of information. It is a tedious task to get the user's context back into a clean state, where the ProBinder system is ready to reflect new recent changes in an optimal way to the user. By allowing the users to identify resources (binder tabs in this case, but could also be complete binders, persons, companies, \dots) of interest, the user task can be automated to a certain extent. As soon as changes are made to the resources of interest, they are marked as read and summarized. These summaries are then provided to the user, which allows him to identify the most important changes.
+Binder Watcher is about binders being watched and actions that are taken after certain changes to a binder. Users of ProBinder, which are involved in many different companies and project binders, tend to be confronted with a large amount of information. It is a tedious task to get the user's context back into a clean state, where the ProBinder system is ready to reflect new recent changes in an optimal way to the user. By allowing the users to identify resources (binder tabs in this case, but it could also be complete binders, persons, companies, \dots) of interest, the user task can be automated to a certain extent. As soon as changes are made to the resources of interest, they are marked as read and summarized. These summaries are then provided to the user, which allows him to identify the most important changes.
 
-The Binder Watcher use case was implemented in KRL (see \ref{app:uc_bw_krl}) and provided the important insight that the realization of such a use case in an ECA is a time-consuming challange. 
+The Binder Watcher use case was implemented in KRL (see \ref{app:uc_bw_krl}) and provided the important insight that the realization of such a use case in an ECA is a time-consuming challenge. 
 
 \subsection{Web Watcher}
 
@@ -143,37 +135,36 @@ How is the evolving of the web possible with these approaches
 how are we going to make it reactive
 where does the reactiveness happen
 interchangeable events important, rules not so much?
-we only need events communicated and the communiation between them doesn't happen via a clumsy bus.
+we only need events communicated and the communication between them doesn't happen via a clumsy bus.
 mashups?
 
 
-flexibility and agility of the solution granted by interchangable rules, do we really need this?
+flexibility and agility of the solution granted by interchangeable rules, do we really need this?
 are we not more going towards a system which consumes events and has user defined rules.
 there the rules come into play and of course it would be nice to have them in a Reaction RuleML style.
-let users write rules in  RuleMl in a first stage, then simplify the vocabulariy as good as possible.
+let users write rules in  RuleMl in a first stage, then simplify the vocabulary as good as possible.
 instead of weaving stubs or proxies of existing service into a message oriented middleware (MoM), the web itself is used as the MoM. Through this a lightweighted and performant event-based architecture can be realized, which allows the orchestration of existing web and cloud applications.
 
 a choreography is when an agent forms a collaboration with another one in order to fulfill the task.
 
 
 In \cite{2009-Pascalau_Giurca-LWAECARE.pdf}, the founders of JSON Rules~\cite{2008-Giurca_Pascalau-JSON_Rules.pdf} describe a lightweight architecture that allows to react and proact on behalf of events in the ontology of web browsers.
-JSON Rules seems to be very promising for our work because of its leightweight architecture and specialization on production and ECA rules. But the existing working memory architecture needs to be generalized to allow a different environment, other than just the DOM tree. The existing architecture could be used to allow the user to create local rules that do not access remote systems and thus runs into authentication issues.
+JSON Rules seems to be very promising for our work because of its lightweight architecture and specialization on production and ECA rules. But the existing working memory architecture needs to be generalized to allow a different environment, other than just the DOM tree. The existing architecture could be used to allow the user to create local rules that do not access remote systems and thus runs into authentication issues.
 
 Data flow instead of event flow, no reactivity.
 Under related work, \cite{2010-Namoun_etal-EURCW.pdf} pointed out the difficulties of unexperienced users to tackle the execution flow. This issue arose from their approach of displaying all services as very similar UI's. Adopting an event-based system, where event producers are clearly different from action consumers would address this issue in an intuitive way.
 
 \section{Future Work}
+Developing an event-driven architecture which regards cloud applications as event-based first-class citizens and allows for an intuitive user-driven mashup development is a research field that has, to the best of our knowledge, not been addressed yet. Looking at cloud-based applications as event producers and action consumers gives new ways to bring reactivity into the existing web. Such representations require a rule-based system that allows their interweaving. Not solely the interaction between cloud applications should be addressed, but also with the browser itself, since it is a tool which is predominantly used to access the web. This would empower the user to predefine influences and interactions on existing cloud applications before they are accessed, providing novel powerful ways to govern the web.
 
-Developing an ECA architecture which promotes cloud applications as event-based first-class citizens and allows for an intuitive user-driven mashup development is a research field that has, to the best of our knowledge, not been addressed yet. Looking at cloud-based applications as event producers and action consumers gives new ways to bring reactivity into the existing web. Such representations require a rule-based system that allows their interweaving. Not solely the interaction between cloud applications should be addressed, but also with the browser itself, since it is a tool which is prdominantly used to access the web. This would empower the user to predefine influences and interactions on existing cloud applications before they are accessed.
-
-Since the vision of on- and offline rules can't be covered with a single server application, the utilization of a fast, flexible and widely used technology such as JavaScript to tackle this challange seems to be favorable future work. JavaScript was mainly invented for browsers and is spread all over the web by now. Additionally, applications such as Node.js~\cite{wwwnodejs}, bring JavaScript to the server-side and tear down the communication efforts between cloud applications through JSON messages which are directly understood by modern browsers and cloud applications.
+Since the vision of on- and offline rules can't be covered with a single server application, the utilization of a fast, flexible and widely used technology such as JavaScript to tackle this challenge seems to be favorable future work. JavaScript was mainly invented for browsers and is spread all over the web by now. Additionally, applications such as Node.js~\cite{wwwnodejs}, bring JavaScript to the server-side and tear down the communication efforts between cloud applications through JSON messages which are directly understood by modern browsers and cloud applications.
 Preferably a lightweighted rules engine would be used to run the user-generated mashups. The KRE suits the demand for a certain coupling between the users browser and the remote rules engine to provide a powerful system. On the other hand the rules engine is not (yet) well documented, nit lightweighted and forged in Perl, a programming language that wasn't encountered during the research for related work on rule based systems.
 
 Sharing and thus exchanging of rules gives new ways for collaboration and the possibility for expert users to aid less experienced ones, giving them the chance to catch up. 
 In terms of usability an easy to understand way to create rules would have a large benefit. We envision a graphical toolkit that empowers users to build their own complex event-based cloud application mashups, powerful RIAs.
 
 It is interesting, that all related work we looked at, only used public cloud applications, thus omitting the challenge of authorization and security of the user's private context.
-If users are provided the tools to access public cloud APIs and create mashups with them, they are going to benefit from this. But mostly users these days are travelling in the web within their private, secured context. Thus the access to such resources are providing even more power- and meaningful tools to the user. 
+If users are provided the tools to access public cloud APIs and create mashups with them, they are going to benefit from this. But mostly users these days are traveling in the web within their private, secured context. Thus the access to such resources are providing even more power- and meaningful tools to the user. 
 
 \bibliography{liveweb}
 \bibliographystyle{related-work}
