@@ -71,7 +71,7 @@ digraph G {
 	"2005-Bailey_etal-FlavorsOfXChange.pdf" -> "2007-Tagni-CET.pdf";
 
 	"2005-Ball_etal-OOjDrew.pdf"
-	[label="2005\nFlavours of XChange, a Rule-Based\nReactive Language for the (Semantic) Web\n- Bailey, Bry, Eckert, Patranjan"];
+	[label="2005\nThe OO jDREW\nReference Implementation of RuleML\n- Ball, Boley, Hirtle, Mei, Spencer"];
 	"2005-Ball_etal-OOjDrew.pdf" -> "2007-Paschke_etal-RuleResponder.pdf";
 
 	"2005-Berndtsson_Serioe-ECA_ruleCore.pdf"
@@ -190,6 +190,8 @@ digraph G {
 	"2007-Ennals_Garofalakis-Mashmaker.pdf" -> "2007-Ennals_Gay-UFFPWM.pdf";
 	"2007-Ennals_Garofalakis-Mashmaker.pdf" -> "2008-Fischer-AGSMWP.pdf";
 	"2007-Ennals_Garofalakis-Mashmaker.pdf" -> "2009-Jarrar_Dikaiakos-MashQL.pdf";
+	"2007-Ennals_Garofalakis-Mashmaker.pdf" -> "2010-Rizotti_Burkhart-usekit.pdf";
+	"2007-Ennals_Garofalakis-Mashmaker.pdf" -> "2011-Latih_etal-Whip.pdf";
 
 	"2007-Ennals_Gay-UFFPWM.pdf"
 	[label="2007\nUser-Friendly Functional\nProgramming for Web Mashups\n- Fischer, Ennal"];
@@ -225,10 +227,16 @@ digraph G {
 	"2007-Wong_Hong-Marmite.pdf" -> "2008-Fischer-AGSMWP.pdf";
 	"2007-Wong_Hong-Marmite.pdf" -> "2009-Fischer_etal-EAACIGWS.pdf";
 	"2007-Wong_Hong-Marmite.pdf" -> "2009-Fischer_etal-OCAMG.pdf";
+	"2007-Wong_Hong-Marmite.pdf" -> "2010-Namoun_etal-EURCW.pdf";
+	"2007-Wong_Hong-Marmite.pdf" -> "2010-Rizotti_Burkhart-usekit.pdf";
+	"2007-Wong_Hong-Marmite.pdf" -> "2011-Cappiello_etal-EEUDM.pdf";
+	"2007-Wong_Hong-Marmite.pdf" -> "2011-Cappiello_etal-DashMash.pdf";
+	"2007-Wong_Hong-Marmite.pdf" -> "2011-Latih_etal-Whip.pdf";
 
 	"2007-Liu_etal-TSCBM.pdf"
 	[label="2007\nTowards Service Composition Based on Mashup\n- Liu, Hui, Sun, Liang"];
 	"2007-Liu_etal-TSCBM.pdf" -> "2008-Nestler-MEPSA.pdf";
+	"2007-Liu_etal-TSCBM.pdf" -> "2011-Cappiello_etal-DashMash.pdf"[style="dotted"];
 
 /*
  *  2008
@@ -329,6 +337,7 @@ digraph G {
 
 	"2009-Pascalau_Giurca-RBACEM.pdf"
 	[label="2009\nA Rule-Based Approach of Creating and Executing Mashups\n- Pascalau, Giurca"];
+	"2009-Pascalau_Giurca-RBACEM.pdf" -> "2011-Pascalau-MBC.pdf" [style="dotted"];
 
 	"2009-Zappia_etal-LiSEP.pdf"
 	[label="2009\nLiSEP: A Lightweight and Extensible\nTool for Complex Event Processing\n- Zappia, Parlanti, Paganelli"];
@@ -356,6 +365,14 @@ digraph G {
 	"2010_Kozlenkov_Prova.pdf" -> "2013_Zhao-Paschke_EDSWE.pdf";
 	"2010_Kozlenkov_Prova.pdf" -> "2007-Paschke_etal-RuleResponder.pdf" [style="dotted"];
 
+	"2010-Namoun_etal-EURCW.pdf"
+	[label="2010\nEnd User Requirements for the Composable Web\n- Namoun, Nestler, De Angeli"];
+	"2010-Namoun_etal-EURCW.pdf" -> "2011-Cappiello_etal-EEUDM.pdf";
+
+	"2010-Rizotti_Burkhart-usekit.pdf"
+	[label="2010\nuseKit - Lightweight Mashups for the Personalized Web\n- Rizzotti, Burkhart"];
+	"2010-Rizotti_Burkhart-usekit.pdf" -> "2011-Latih_etal-Whip.pdf";
+	
 /*
  *  2011
  */
@@ -364,6 +381,19 @@ digraph G {
 	"UNAVAILABLE.txt#11" -> "2012-Zhao_etal-LCEMI.pdf";
 	"UNAVAILABLE.txt#11" -> "2012-Paschke_etal-ReactionRuleML.pdf";
 
+	"2011-Cappiello_etal-DashMash.pdf"
+	[label="2011\nDashMash: A Mashup\nEnvironment for End User Development\n- Cappiello, Matera, Picozzi, Sprega,\nBarbagallo, Francalanci"];
+	"2011-Cappiello_etal-DashMash.pdf" -> "2011-Cappiello_etal-EEUDM.pdf";
+
+	"2011-Cappiello_etal-EEUDM.pdf"
+	[label="2011\nEnabling End User Development\nthrough Mashups: Requirements,\nAbstractions and Innovation Toolkits\n- Cappiello, Daniel, Matera, Picozzi, Weiss"];
+	
+	"2011-Pascalau-MBC.pdf"
+	[label="(2011)\nMashups: Behavior in Context(s)\n- Pascalau"];
+
+	"2011-Latih_etal-Whip.pdf"
+	[label="2011\nWhip: A Framework for\nMashup Development with\nBlock-based Development Approach\n- Latih, Patel, Zin, Yiqi, Muhammad"];
+	
 /*
  *  2012
  */
