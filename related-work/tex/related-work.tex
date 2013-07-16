@@ -125,46 +125,30 @@ Binder Watcher is about binders being watched and actions that are taken after c
 The Binder Watcher use case was implemented in KRL (see \ref{app:uc_bw_krl}) and provided the important insight that the realization of such a use case in an ECA is a time-consuming challenge. 
 
 \subsection{Web Watcher}
-
-\subsection{Calendar Manager}
-
+To bring reactivity to the static web, we have to enhance legacy resources, which are not event-ready. Changes in such resources have to be detected via e.g. web spiders or crawlers and transformed into events that can be processed by the rules engine. Such an auxiliary cloud application would turn the static web into a reactive system and free a future architecture from incorporating the pulling of events, thus allowing it to concentrate on its main business, i.e. event handling.
+A web watcher was implemented to monitor a predefined ProBinder tab and push changes as events into our proof of concept system, which is based on \emph{node.js}. These events are processed according to predefined rules and the action consumer was again \emph{ProBinder} which was used to creat an entry in another binder. This use case was mainly used to proof the accessibility of ProBinder via a remote system and the activation of the static web.
 
 \section{Conclusion}
-What did we look at
-How is the evolving of the web possible with these approaches
-how are we going to make it reactive
-where does the reactiveness happen
-interchangeable events important, rules not so much?
-we only need events communicated and the communication between them doesn't happen via a clumsy bus.
-mashups?
+In \cite{2009-Pascalau_Giurca-LWAECARE.pdf}, the founders of \emph{JSON Rules}~\cite{2008-Giurca_Pascalau-JSON_Rules.pdf} describe a lightweight architecture that allows to react and proact on behalf of events in the ontology of web browsers. \emph{JSON Rules} is promising for our work because of its lightweight architecture and specialization on production and ECA rules. But the existing working memory architecture needs to be generalized to allow a different environment, other than just the DOM tree. The existing architecture could be used to allow the user to create local rules that do not access remote systems and thus runs into authentication issues.
 
+Other approaches are server side rule engines either written in Perl or Java, where powerful tools are provided to process events and invoke manifold actions. But these approaches all lack an abstraction layer to introduce the programmability of the reactive web to a large audience of unexperienced users. Also, current approaches concentrate on data flows instead of event flows, thus not incorporating reactivity to the web.
 
-flexibility and agility of the solution granted by interchangeable rules, do we really need this?
-are we not more going towards a system which consumes events and has user defined rules.
-there the rules come into play and of course it would be nice to have them in a Reaction RuleML style.
-let users write rules in  RuleMl in a first stage, then simplify the vocabulary as good as possible.
-instead of weaving stubs or proxies of existing service into a message oriented middleware (MoM), the web itself is used as the MoM. Through this a lightweighted and performant event-based architecture can be realized, which allows the orchestration of existing web and cloud applications.
+With \emph{RuleML} a powerful, interchangeable expression language for event-based systems is present. It paves the way for distributed rule engines, such as one running in the browser and another on a server for cloud application access. But a rule engine that incorporates the requirements of a lightweighted architecture and user-readiness is missing. Under related work, \cite{2010-Namoun_etal-EURCW.pdf} pointed out the difficulties of unexperienced users to tackle the execution flow. This issue arose from their approach of displaying all services as very similar UI's. Adopting an event-based system. Event producers are clearly different from action consumers would address this issue in an user-intuitive way.
 
-a choreography is when an agent forms a collaboration with another one in order to fulfill the task.
-
-
-In \cite{2009-Pascalau_Giurca-LWAECARE.pdf}, the founders of JSON Rules~\cite{2008-Giurca_Pascalau-JSON_Rules.pdf} describe a lightweight architecture that allows to react and proact on behalf of events in the ontology of web browsers.
-JSON Rules seems to be very promising for our work because of its lightweight architecture and specialization on production and ECA rules. But the existing working memory architecture needs to be generalized to allow a different environment, other than just the DOM tree. The existing architecture could be used to allow the user to create local rules that do not access remote systems and thus runs into authentication issues.
-
-Data flow instead of event flow, no reactivity.
-Under related work, \cite{2010-Namoun_etal-EURCW.pdf} pointed out the difficulties of unexperienced users to tackle the execution flow. This issue arose from their approach of displaying all services as very similar UI's. Adopting an event-based system, where event producers are clearly different from action consumers would address this issue in an intuitive way.
+Large systems such as \emph{RuleResponder} weave stubs or proxies of existing service into a message oriented middleware (MoM). We envision the web itself is used as the middleware. Through this a lightweighted and performant event-based architecture can be realized, which allows the orchestration of existing web and cloud applications.
 
 \section{Future Work}
 Developing an event-driven architecture which regards cloud applications as event-based first-class citizens and allows for an intuitive user-driven mashup development is a research field that has, to the best of our knowledge, not been addressed yet. Looking at cloud-based applications as event producers and action consumers gives new ways to bring reactivity into the existing web. Such representations require a rule-based system that allows their interweaving. Not solely the interaction between cloud applications should be addressed, but also with the browser itself, since it is a tool which is predominantly used to access the web. This would empower the user to predefine influences and interactions on existing cloud applications before they are accessed, providing novel powerful ways to govern the web.
 
-Since the vision of on- and offline rules can't be covered with a single server application, the utilization of a fast, flexible and widely used technology such as JavaScript to tackle this challenge seems to be favorable future work. JavaScript was mainly invented for browsers and is spread all over the web by now. Additionally, applications such as Node.js~\cite{wwwnodejs}, bring JavaScript to the server-side and tear down the communication efforts between cloud applications through JSON messages which are directly understood by modern browsers and cloud applications.
-Preferably a lightweighted rules engine would be used to run the user-generated mashups. The KRE suits the demand for a certain coupling between the users browser and the remote rules engine to provide a powerful system. On the other hand the rules engine is not (yet) well documented, nit lightweighted and forged in Perl, a programming language that wasn't encountered during the research for related work on rule based systems.
+Since the vision of on- and offline rules can't be covered with a single server application, the utilization of a fast, flexible and widely used technology such as JavaScript to tackle this challenge seems to be favorable future work. JavaScript was mainly invented for browsers and is spread all over the web by now. Additionally, applications such as \emph{node.js}~\cite{wwwnodejs}, bring JavaScript to the server-side and tear down the communication efforts between cloud applications through JSON messages which are directly understood by modern browsers and cloud applications.
+Preferably a lightweighted rules engine would be used to run the user-generated mashups. The KRE suits the demand for a certain coupling between the users browser and the remote rules engine to provide a powerful system. On the other hand the rules engine is not (yet) well documented, not lightweighted and forged in Perl, a programming language that wasn't encountered during the research for related work on rule based systems.
 
-Sharing and thus exchanging of rules gives new ways for collaboration and the possibility for expert users to aid less experienced ones, giving them the chance to catch up. 
+Sharing and thus exchanging of rules gives new ways for collaboration and the possibility for expert users to aid less experienced ones, giving them the chance to catch up with the future platform. 
 In terms of usability an easy to understand way to create rules would have a large benefit. We envision a graphical toolkit that empowers users to build their own complex event-based cloud application mashups, powerful RIAs.
+A first approach could be to write rules in a certain language, e.g. \emph{RuleML} or \emph{JSON Rules}, then simplify the vocabulary until meaningful graphical representations are possible.
 
-It is interesting, that all related work we looked at, only used public cloud applications, thus omitting the challenge of authorization and security of the user's private context.
-If users are provided the tools to access public cloud APIs and create mashups with them, they are going to benefit from this. But mostly users these days are traveling in the web within their private, secured context. Thus the access to such resources are providing even more power- and meaningful tools to the user. 
+It is striking but not surprising, that all related work we looked at, only used public cloud applications, thus omitting the challenge of authorization and the safety of the user's private context.
+If users are provided the tools to access public cloud APIs and create mashups with them, they are going to benefit from this. But mostly users these days are traveling in the web within their private, secured context. Thus the access to such resources are providing even more power- and meaningful tools to the user. The future reactive web requires cloud applications that allow the registration of webhooks in order for the rules engine to receive events from resources other than the own system, thus using the internet as middleware for communication of push events.
 
 \bibliography{liveweb}
 \bibliographystyle{related-work}
@@ -339,5 +323,16 @@ ruleset a2236x4 {
   }
 }
 \end{lstlisting}
+
+\newpage
+\section{Web Watcher} 
+\subsection{node.js code}
+\begin{lstlisting}[breaklines]
+\end{lstlisting}
+
+\subsection{web crawler code}
+\begin{lstlisting}[breaklines]
+\end{lstlisting}
+
 
 \end{document}
