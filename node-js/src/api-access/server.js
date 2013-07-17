@@ -1,5 +1,6 @@
 var http = require("http");
 var url = require("url");
+var express = require('express');
 
 function start(route) {
   function onRequest(request, response) {
@@ -27,9 +28,20 @@ function start(route) {
     response.write("Hello World");
     response.end();
   }
+  
+	function onEvent(request, response) {
+  	
+    console.log(request.body);
 
+    response.write("Received Body");
+    response.end();
+  }
+
+	
+	var app = express();
+	app.post('/', onEvent);
+	app.listen(8125);
   http.createServer(onRequest).listen(8888);
   console.log("Server has started.");
 }
-
 exports.start = start;

@@ -1,0 +1,10 @@
+{
+  "name": "msc-apps",
+  "description": "Proof of concept apps",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "request": "2.22.0",
+    "express": "3.3.4"
+  }
+}
