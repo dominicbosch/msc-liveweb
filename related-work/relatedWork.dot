@@ -43,6 +43,7 @@ digraph G {
 	"2004-Schaffert-Xcerpt.pdf"
 	[label="2004\nXcerpt: A Rule-Based Query and\nTransformation Language for the Web\n- Schaffert (Dissertation)"];
 	"2004-Schaffert-Xcerpt.pdf" -> "2005-Eckert-RWEQCED.pdf";
+	"2004-Schaffert-Xcerpt.pdf" -> "2005-Bry_etal-XChange.pdf";
 	"2004-Schaffert-Xcerpt.pdf" -> "2005-Patranjan-TLE.pdf";
 	"2004-Schaffert-Xcerpt.pdf" -> "2007-Tagni-CET.pdf";
 	"2004-Schaffert-Xcerpt.pdf" -> "2009-Alferes_etal-ERSW.pdf";
