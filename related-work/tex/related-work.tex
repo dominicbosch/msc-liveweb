@@ -28,9 +28,8 @@ In today's large, powerful and dynamic web, the grand challenge is to retain man
 
 \section{Related Work}
 \subsection{Reactivity in the Web}
-Research approaches to apply reactivity to the web has been done by several researchers in many fields. One notable outcome is the language \emph{XChange}~\cite{2005-Patranjan-TLE.pdf,2005-Bry_etal-XChange.pdf}, which introduces reactivity to the web. \emph{XChange} uses \emph{Xcerpt}~\cite{2004-Schaffert-Xcerpt.pdf}, a rule-based query and transformation Language for the web, to express web queries.
+Research approaches to apply reactivity to the web has been done by several researchers in many fields.
 %It is often referenced and served as a basis to many future research in terms of reactivity in the web.
-
 In ~\cite{2009-Paschke_Boley-RCER.pdf} the authors provide an overview of general descriptions and classifications from different research efforts in terms of events, rules and reactiveness. The different research domains they point out are:
  \begin{itemize}
 %\itemsep-1.5em
@@ -61,6 +60,10 @@ From \cite{2010-Ye_Jacobsen-EEWS.pdf} follows, that enhancing a Service oriented
 % \end{lstlisting}
 En excerpt of rule engines and languages is shortly introduced here. The recent trend seems to go towards funneling the different event-based approaches into CEP as highly expressive paradigm to incorporate all others. Of course more rule engines or languages exist, but they either go into similar categories as the presented ones, aren't developed anymore, or haven't been identified in related work as recent or active research.
 
+\subsubsection{XChange/Xcerpt}
+One notable outcome of research in the last decade is the language \emph{XChange}~\cite{2005-Patranjan-TLE.pdf,2005-Bry_etal-XChange.pdf}, which introduces reactivity to the web. \emph{XChange} uses \emph{Xcerpt}~\cite{2004-Schaffert-Xcerpt.pdf}, a rule-based query and transformation Language for the web, to express web queries.
+\emph{XChange} was part of the REWERSE research project, funded by the EU and Switzerland and is discontinued since 2008. But the paradigms provided by both XChange and Xcerpt found their way into virtually every further research that was later done in the field of reactivity in the web. It mainly influenced both \emph{RuleML} and \emph{JSON Rules} and through this the whole field. 
+
 \subsubsection{Kynetx}
 The Kinetic Rules Engine (KRE) is a platform presented in \cite{bookTheLiveWeb}. It is realized in Perl and uses its very own rule language, the Kinetic Rules Language (KRL). It is layed out to support CEP as well as a tight coupling with the user's browser through plugins or libraries loaded via the webpage. It allows the access to remote resources and the processing of such data before passing it along to internal storage or again external resources, such as cloud applications. A live system~\cite{wwwkynetx} is available for testing and if desired also for productive use. Creating an own instance is quite a challenge due to it's numerous libraries. KRL needs quite some efforts to get used to and can't be entrusted to unexperienced users, thus a layer on top of this system would have to be implemented for our purposes.
 
@@ -80,13 +83,17 @@ With \textit{RuleML} being already a useful specification, \textit{Reaction Rule
 
 \subsubsection{(OO) jDrew}
 Java Deductive Reasoning Engine for the Web (\emph{jDrew}~\cite{wwwjdrew}) is a reasoning engine written in Java for definite clause reasoning. jDrew can be embedded into larger systems through its APIs.
-Object-Oriented jDrew (\emph{OO jDrew}~\cite{2005-Ball_etal-OOjDrew.pdf,wwwoojdrew}) is a Java based rule engine, it serves as a reference implementation of \emph{RuleML}.
+Object-Oriented jDrew (\emph{OO jDrew}~\cite{2005-Ball_etal-OOjDrew.pdf,wwwoojdrew}) is a Java based rule engine, it serves as a reference implementation of \emph{RuleML}. This project seems not to be very actively developped.
 
 \subsubsection{Prova}
-\emph{Prova}~\cite{wwwprova} is an expressive rule language and engine, both written in Java, with a main orientation to ECA rules. It uses backward-reasoning logic to formalize decisions in terms of derivation. Forward-directed messaging of reaction rules supports distributed event and action processing. It allows dynamic access to external data sources and is used by the authors of \cite{2013_Zhao-Paschke_EDSWE.pdf,2007-Paschke_etal-RuleResponder.pdf} for the \emph{RuleResponder's} proof of concept for transformations between different rule languages over \emph{RuleML}.
+\emph{Prova}~\cite{wwwprova} is an expressive rule language and engine, both written in Java, with a main orientation to ECA rules. It uses backward-reasoning logic to formalize decisions in terms of derivation. Forward-directed messaging of reaction rules supports distributed event and action processing. It allows dynamic access to external data sources and is used by the authors of \cite{2013_Zhao-Paschke_EDSWE.pdf,2007-Paschke_etal-RuleResponder.pdf} for the \emph{RuleResponder's} proof of concept for transformations between different rule languages over \emph{RuleML}. \emph{Prova} seems to be discontinued since early 2013. 
 
 \subsubsection{JSON Rules}
-\emph{JSON Rules}~\cite{2008-Giurca_Pascalau-JSON_Rules.pdf} has been invented due to an increasing need for rules in terms of semantic web applications and the emerging Rich Internet Applications (RIAs). \emph{JSON Rules} is capable of expressing production rules (if-do) as well as ECA rules (on-if-do). The rules engine is a forward chaining rule engine using a modified RETE~\cite{1982-Crockford-RETE.pdf} algorithm. The RETE working memory in this rule engine is the (event-based) Document Object Model (DOM) itself. An example~\cite{2009-Pascalau_Giurca-RBACEM.pdf} of (DOM-)rule-based creation and execution of mashups illustrates the powerful aspects of \emph{JSON Rules}. The current limitation to the DOM tree would require a generalization to adopt it also to other memory layouts.
+\emph{JSON Rules}~\cite{2008-Giurca_Pascalau-JSON_Rules.pdf} has been invented due to an increasing need for rules in terms of semantic web applications and the emerging Rich Internet Applications (RIAs). \emph{JSON Rules} is capable of expressing production rules (if-do) as well as ECA rules (on-if-do). The rules engine is a forward chaining rule engine using a modified RETE~\cite{1982-Crockford-RETE.pdf} algorithm. The RETE working memory in this rule engine is the (event-based) Document Object Model (DOM) itself. An example~\cite{2009-Pascalau_Giurca-RBACEM.pdf} of (DOM-)rule-based creation and execution of mashups illustrates the powerful aspects of \emph{JSON Rules}. The current limitation to the DOM tree would require a generalization to adopt it also to other memory layouts. The development of the \emph{JSON Rules} engine is discontinued.
+
+\subsubsection{Drools Fusion}
+\emph{Drools Fusion}~\cite{wwwdrools} is part of the jBoss open source community and allows the application of CEP and development in an eclipse-based IDE. Recently \emph{Drools 5} introduced the Business Logic integration Platform which provides a platform for Rules, Workflow and Event Processing. \emph{Drools Fusion} has its own rule language, \emph{Drools Rule Language (DRL)} This system has quite a heavy foot print, but active development is promising for a certain future stability.
+
 
 \subsection{Mashups}
 In \cite{2011-Pascalau-MBC.pdf}, one of the founders of \emph{JSON Rules} proposes to look at mashups as user-behaviour in a certain context. A mashup, to achieve a user-defined goal, is modelled via Unified Modeling Language (UML) as a map containing contexts and behaviour desriptions. Concepts are defined as unit of knowledge created by unique combination of characteristics. Contexts are defined as a set of concepts. A mashup is then defined as  set of contexts behaviour, where behaviour consists of rules and processes. The conceptual work done in this paper is interesting but the promoted example isn't accessible.
@@ -125,9 +132,14 @@ Binder Watcher is about binders being watched and actions that are taken after c
 
 The Binder Watcher use case was implemented in KRL (see \ref{app:uc_bw_krl}) and provided the important insight that the realization of such a use case in an ECA is a time-consuming challenge. 
 
-\subsection{Web Watcher}
+\subsection{Activating Legacy Resources}
 To bring reactivity to the static web, we have to enhance legacy resources, which are not event-ready. Changes in such resources have to be detected via e.g. web spiders or crawlers and transformed into events that can be processed by the rules engine. Such an auxiliary cloud application would turn the static web into a reactive system and free a future architecture from incorporating the pulling of events, thus allowing it to concentrate on its main business, i.e. event handling.
-A web watcher was implemented to monitor a predefined ProBinder tab and push changes as events into our proof of concept system, which is based on \emph{node.js}. These events are processed according to predefined rules and the action consumer was again \emph{ProBinder} which was used to creat an entry in another binder. This use case was mainly used to proof the accessibility of ProBinder via a remote system and the activation of the static web.
+
+\subsubsection{From the Web to the Cloud}
+A web watcher was implemented to monitor a predefined ProBinder tab, acting as a static resource. Changes to the tab are detected and pushed into our proof of concept system as events, which is based on \emph{node.js}. These events are processed according to predefined rules and the action consumer was again \emph{ProBinder} which was used to creat an entry in another binder. This use case was mainly used to proof the accessibility of ProBinder via a remote system and the activation of the static web.
+
+\subsubsection{From the Cloud to the Web}
+
 
 \section{Conclusion}
 In \cite{2009-Pascalau_Giurca-LWAECARE.pdf}, the founders of \emph{JSON Rules}~\cite{2008-Giurca_Pascalau-JSON_Rules.pdf} describe a lightweight architecture that allows to react and proact on behalf of events in the ontology of web browsers. \emph{JSON Rules} is promising for our work because of its lightweight architecture and specialization on production and ECA rules. But the existing working memory architecture needs to be generalized to allow a different environment, other than just the DOM tree. The existing architecture could be used to allow the user to create local rules that do not access remote systems and thus runs into authentication issues.
