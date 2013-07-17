@@ -233,7 +233,8 @@ FUNCTION {format.editors}
 FUNCTION {format.title}
 { title empty$
     { "" }
-    { title "t" change.case$ }
+    { title }
+    %{ title "t" change.case$ }
   if$
 }
 
@@ -539,7 +540,9 @@ FUNCTION {article}
 { output.bibitem
   format.authors "author" output.check
   new.block
-  format.title "title" output.check
+  title output.check
+  title output
+  %format.title "title" output.check
   new.block
   crossref missing$
     { journal emphasize "journal" output.check
