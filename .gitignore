@@ -2,3 +2,5 @@
 .project
 node-js/src/node_modules
 
+node-js/src/auth/credentials.json
+node-js/src/probinder/credentials.json

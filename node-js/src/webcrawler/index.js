@@ -1,23 +1,21 @@
 var request = require('request');
-var lifetime = 10;
+var diff = require('diff');
+var tmpLegacyContent = null;
 
-function runContentProducer() {
-	if(lifetime-- > 0) {
-		request.post(
-	    {
-	    	url: 'http://localhost:8125',
-		    form: {
-		    	key: 'value',
-		    	
-		    }
-		  },
-	    function (error, response, body) {
-        console.log('got reply:');
-        console.log(body);
-	    }
-		);
-	
-		setTimeout(runContentProducer, 20000);
+function runWebActivator() {
+	function handleResponse(error, response, body){
+	  if (!error && response.statusCode == 200) {
+			if(tmpLegacyContent){
+				var diffs = diff.diffLines(tmpLegacyContent, body);
+				console.log(diffs);
+			}
+			tmpLegacyContent = body;
+	  }
 	}
+	
+	request.get("https://probinder.com/binder/tab/view/id/16458#bc", handleResponse);
+	setTimeout(runWebActivator, 5000);
 }
-runContentProducer();
+runWebActivator();
+
+var diff = require('diff');
