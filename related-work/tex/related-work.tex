@@ -3,15 +3,124 @@
 \usepackage{cite}
 \usepackage{graphicx}
 \usepackage{listings}
-\lstset { basicstyle=\tiny }
+\usepackage{colortbl}
+\usepackage{fancyvrb}
+\usepackage{color}
+\usepackage[ascii]{inputenc}
+\usepackage{titling}
+\newcommand{\subtitle}[1]{%
+  \posttitle{%
+    \par\end{center}
+    \begin{center}\large#1\end{center}
+    \vskip0.5em}%
+}
+
 %\usepackage{appendix}
+
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+\pretitle{\begin{center}Master Thesis\\Preparation Report\end{center}\vspace*{15 mm}\begin{center}}
+
+\posttitle{\end{center}\begin{center}\end{center}}
 
 \begin{document}
 
-\title{Master Thesis Preparation\\Report}
+\title{\huge Towards The Reactive Web\vspace*{15 mm}}
+%\subtitle{Master Thesis\\Preparation Report}
 \date{\today}
-\author{Dominic Bosch \\ Departement Mathematics and Computer Science \\ University of Basel}
-
+%\author{Dominic Bosch \\ Departement Mathematics and Computer Science \\ University of Basel}
+\author{\fontsize{11}{9}\selectfont Dominic Bosch \\ Departement Mathematics and Computer Science \\ University of Basel}
 \maketitle
 
 \renewcommand{\abstractname}{}
@@ -45,7 +154,7 @@ In \cite{2012-Giurca_etal-RuleTheWeb.pdf} semantic application vocabulary and bu
 
 From \cite{2010-Ye_Jacobsen-EEWS.pdf} follows, that enhancing a Service oriented Architecture (SOA) with an event-driven SOA (EDSOA), leads to more flexible and adaptive SOA applications that can be informed about states of neighbouring components. In their approach, events are only an aid to react on unexpected behaviour. But our research path leads us towards a system which builds entirely on events, using their expressive power as a basis.
 
-\subsection{Rule Engines and Languages}
+\subsection{Rules Languages}
 %\begin{lstlisting}[breaklines]
 %<Rule>
 %  [...]
@@ -64,36 +173,56 @@ En excerpt of rule engines and languages is shortly introduced here. The recent 
 One notable outcome of research in the last decade is the language \emph{XChange}~\cite{2005-Patranjan-TLE.pdf,2005-Bry_etal-XChange.pdf}, which introduces reactivity to the web. \emph{XChange} uses \emph{Xcerpt}~\cite{2004-Schaffert-Xcerpt.pdf}, a rule-based query and transformation Language for the web, to express web queries.
 \emph{XChange} was part of the REWERSE research project, funded by the EU and Switzerland and is discontinued since 2008. But the paradigms provided by both XChange and Xcerpt found their way into virtually every further research that was later done in the field of reactivity in the web. It mainly influenced both \emph{RuleML} and \emph{JSON Rules} and through this the whole field. 
 
-\subsubsection{Kynetx}
-The Kinetic Rules Engine (KRE) is a platform presented in \cite{bookTheLiveWeb}. It is realized in Perl and uses its very own rule language, the Kinetic Rules Language (KRL). It is layed out to support CEP as well as a tight coupling with the user's browser through plugins or libraries loaded via the webpage. It allows the access to remote resources and the processing of such data before passing it along to internal storage or again external resources, such as cloud applications. A live system~\cite{wwwkynetx} is available for testing and if desired also for productive use. Creating an own instance is quite a challenge due to it's numerous libraries. KRL needs quite some efforts to get used to and can't be entrusted to unexperienced users, thus a layer on top of this system would have to be implemented for our purposes.
-
-% \begin{figure*}[htb]
-% \begin{center}
-% %,angle=-90
-% \includegraphics[scale=0.4]{img_rr01}
-% \caption{Rule Responder Architecture, taken from \cite{2007-Paschke_etal-RuleResponder.pdf}}
-% \end{center}
-% \end{figure*}
+\subsubsection{JSON Rules}
+\emph{JSON Rules}~\cite{2008-Giurca_Pascalau-JSON_Rules.pdf} has been invented due to an increasing need for rules in terms of semantic web applications and the emerging Rich Internet Applications (RIAs). \emph{JSON Rules} is capable of expressing production rules (if-do) as well as ECA rules (on-if-do). The rules engine is a forward chaining rule engine using a modified RETE~\cite{1982-Crockford-RETE.pdf} algorithm. The RETE working memory in this rule engine is the (event-based) Document Object Model (DOM) itself. An example~\cite{2009-Pascalau_Giurca-RBACEM.pdf} of (DOM-)rule-based creation and execution of mashups illustrates the powerful aspects of \emph{JSON Rules}. The current limitation to the DOM tree would require a generalization to adopt it also to other memory layouts. The development of the \emph{JSON Rules} engine is discontinued.
 
 
 \subsubsection{(Reaction) RuleML}
 \textit{RuleML}~\cite{2006-Boley-RuleML.pdf} is a XML-based rule specification standard to express both forward and backward rules for derivation, reaction, rewriting, messaging, verification and transformation. The building blocks of \textit{RuleML} are predicates, derivation rules, facts, queries, integrity constraints and transformation rules. Its development is driven by the Rule Markup Initiative~\cite{wwwruleml}.
 
-With \textit{RuleML} being already a useful specification, \textit{Reaction RuleML}~\cite{2012-Paschke_etal-ReactionRuleML.pdf} extends \textit{RuleML} towards reaction rules and complex event/action messages, e.g. for CEP. It adds various kinds of production, action, reaction and knowledge representation (KR) temporal/event/action logic rules, as well as (complex) event/action messages. It consists of one general reaction rule form that can be specialized, e.g. into production rules, trigger rules, ECA rules or messaging rules. Three different execution styles (active, messaging and reasoning) of rules are incorporated. Definition of inbound or outbound event messages and are used to interchange events and rule bases. A reaction rule can be globally or locally nested within other reaction or derivation rules. Additionally the \emph{RuleML} Interface Description Language (\textit{RuleML IDL}) was provided in the same paper, a sub-language of \textit{Reaction RuleML} and allows the description of public rule functions as interfaces to hide program logic.
+With \textit{RuleML} being already a useful specification, \textit{Reaction RuleML}~\cite{2012-Paschke_etal-ReactionRuleML.pdf} extends \textit{RuleML} towards reaction rules and complex event/action messages, e.g. for CEP. It adds various kinds of production, action, reaction and knowledge representation (KR) temporal/event/action logic rules, as well as (complex) event/action messages. It consists of one general reaction rule form that can be specialized, e.g. into production rules, trigger rules, ECA rules or messaging rules. Three different execution styles (active, messaging and reasoning) of rules are incorporated. Definition of inbound or outbound event messages are used to interchange events and rule bases. A reaction rule can be globally or locally nested within other reaction or derivation rules. Additionally the \emph{RuleML} Interface Description Language (\textit{RuleML IDL}) was provided in the same paper, a sub-language of \textit{Reaction RuleML} and allows the description of public rule functions as interfaces to hide program logic.
 
+\begin{figure*}[htb]
+%\begin{center}
+\centering
+%,angle=-90
+  \makebox[\textwidth][c]{\includegraphics[scale=0.6]{img_rw_1_large}}%
+
+\caption{Examined Rules Languages }
+%\end{center}
+\end{figure*}
+
+
+\subsection{Rules Engines}
 \subsubsection{(OO) jDrew}
 Java Deductive Reasoning Engine for the Web (\emph{jDrew}~\cite{wwwjdrew}) is a reasoning engine written in Java for definite clause reasoning. jDrew can be embedded into larger systems through its APIs.
-Object-Oriented jDrew (\emph{OO jDrew}~\cite{2005-Ball_etal-OOjDrew.pdf,wwwoojdrew}) is a Java based rule engine, it serves as a reference implementation of \emph{RuleML}. This project seems not to be very actively developped.
+Object-Oriented jDrew (\emph{OO jDrew}~\cite{2005-Ball_etal-OOjDrew.pdf,wwwoojdrew}) is a Java based rule engine, it serves as a reference implementation of \emph{RuleML}. This project seems not to be very actively developed.
 
 \subsubsection{Prova}
 \emph{Prova}~\cite{wwwprova} is an expressive rule language and engine, both written in Java, with a main orientation to ECA rules. It uses backward-reasoning logic to formalize decisions in terms of derivation. Forward-directed messaging of reaction rules supports distributed event and action processing. It allows dynamic access to external data sources and is used by the authors of \cite{2013_Zhao-Paschke_EDSWE.pdf,2007-Paschke_etal-RuleResponder.pdf} for the \emph{RuleResponder's} proof of concept for transformations between different rule languages over \emph{RuleML}. \emph{Prova} seems to be discontinued since early 2013. 
 
-\subsubsection{JSON Rules}
-\emph{JSON Rules}~\cite{2008-Giurca_Pascalau-JSON_Rules.pdf} has been invented due to an increasing need for rules in terms of semantic web applications and the emerging Rich Internet Applications (RIAs). \emph{JSON Rules} is capable of expressing production rules (if-do) as well as ECA rules (on-if-do). The rules engine is a forward chaining rule engine using a modified RETE~\cite{1982-Crockford-RETE.pdf} algorithm. The RETE working memory in this rule engine is the (event-based) Document Object Model (DOM) itself. An example~\cite{2009-Pascalau_Giurca-RBACEM.pdf} of (DOM-)rule-based creation and execution of mashups illustrates the powerful aspects of \emph{JSON Rules}. The current limitation to the DOM tree would require a generalization to adopt it also to other memory layouts. The development of the \emph{JSON Rules} engine is discontinued.
+\subsubsection{Kinetic}
+The Kinetic Rules Engine (KRE) is a platform presented in \cite{bookTheLiveWeb}. It is realized in Perl and uses its very own rule language, the Kinetic Rules Language (KRL). It is laid out to support CEP as well as a tight coupling with the user's browser through plugins or libraries loaded via the webpage. It allows the access to remote resources and the processing of such data before passing it along to internal storage or again external resources, such as cloud applications. A live system~\cite{wwwkynetx} is available for testing and if desired also for productive use. Creating an own instance is quite a challenge due to it's numerous libraries. KRL needs quite some efforts to get used to and can't be entrusted to inexperienced users, thus a layer on top of this system would have to be implemented for our purposes.
 
 \subsubsection{Drools Fusion}
 \emph{Drools Fusion}~\cite{wwwdrools} is part of the jBoss open source community and allows the application of CEP and development in an eclipse-based IDE. Recently \emph{Drools 5} introduced the Business Logic integration Platform which provides a platform for Rules, Workflow and Event Processing. \emph{Drools Fusion} has its own rule language, \emph{Drools Rule Language (DRL)} This system has quite a heavy foot print, but active development is promising for a certain future stability.
 
+\subsubsection{Rule Responder}
+\emph{Rule Responder}~\cite{2007-Paschke_etal-RuleResponder.pdf} is a project to extend the Semantic Web towards a Pragmatic Web infrastructure for collaborative human-computer networks, which they call an architecture of a Pragmatic Agent Web (PAW). It supports the formation of virtual groupings and allows semi-automated agents with their individual contexts, decisions and actions. The authors postulate agents empowered with automatic rule-driven data transformation, decision derivation from existing knowledge and reaction according to changed situations or occurred events. The work done in this project concentrates on a layer on top of a rule engine and language, and thus allows for a combination of arbitrary rule-based systems via their framework. This is achieved through the usage of general message oriented communication interfaces and a platform-independent rule interchange format (\emph{RuleML}).
+
+The authors of Rule Responder built their reference system\cite{wwwruleresponder} on top of the Mule~\cite{wwwmuleesb} open-source Enterprise Service Bus (ESB) which acts as a communication middleware. The decision to use Mule was made because it goes beyond the typical definition of an ESB by providing a distributable object broker to manage all sorts of service components. Each agent runs its own arbitrary rule engine. For demonstration purposes \emph{Prova} and \emph{OO jDrew} were used to demonstrate the rule interchange between different rule engines.
+
+As research continued in terms of reaction rules and \textit{Rule Responder}, the authors of \cite{2013_Zhao-Paschke_EDSWE.pdf} showed the adoption of event paradigms to support scientific workflow execution. In their work they point out the limitations of ECA frameworks when adapted to their use case. For highly distributed and loosely coupled scientific workflows, complicated conditional procedures and rules, which can also have local scopes, are required. This shows us their work is going towards large distributed systems with a highly developed rule language that subsumes research from several fields.
+
+\begin{figure*}[htb]
+%\begin{center}
+\centering
+%,angle=-90
+  \makebox[\textwidth][c]{\includegraphics[scale=0.6]{img_rw_2_large}}%
+
+\caption{Examined Rules Engines}
+%\end{center}
+\end{figure*}
 
 \subsection{Mashups}
 In \cite{2011-Pascalau-MBC.pdf}, one of the founders of \emph{JSON Rules} proposes to look at mashups as user-behaviour in a certain context. A mashup, to achieve a user-defined goal, is modelled via Unified Modeling Language (UML) as a map containing contexts and behaviour descriptions. Concepts are defined as unit of knowledge created by unique combination of characteristics. Contexts are defined as a set of concepts. A mashup is then defined as  set of contexts behaviour, where behaviour consists of rules and processes. The conceptual work done in this paper is interesting but the promoted example isn't accessible.
@@ -108,24 +237,27 @@ It is also important to understand what users expect from service mashups, in or
   \item Programming by Demonstration
   \item Automatic Creation of Mashups
 \end{itemize}
-But even though large efforts are made in all these research fields, unexperienced users are still not able to build mashups without knowledge about numerous aspects of the framework or programming.
+But even though large efforts are made in all these research fields, inexperienced users are still not able to build mashups without knowledge about numerous aspects of the framework or programming.
 
 \subsubsection{useKit}
 The idea of \emph{useKit}~\cite{2010-Rizzotti_Burkhart-useKit.pdf} missions shows us the potential of user-manageable cloud application mashups. While their approach is not event-based, it can be regarded as a base for the web's evolution towards user-programmable reactive cloud application mashups.
 
-\subsubsection{Rule Responder}
-\emph{Rule Responder}~\cite{2007-Paschke_etal-RuleResponder.pdf} is a project to extend the Semantic Web towards a Pragmatic Web infrastructure for collaborative human-computer networks, which they call an architecture of a Pragmatic Agent Web (PAW). It supports the formation of virtual groupings and allows semi-automated agents with their individual contexts, decisions and actions. The authors postulate agents empowered with automatic rule-driven data transformation, decision derivation from existing knowledge and reaction according to changed situations or occurred events. The work done in this project concentrates on a layer on top of a rule engine and language, and thus allows for a combination of arbitrary rule-based systems via their framework. This is achieved through the usage of general message oriented communication interfaces and a platform-independent rule interchange format (\emph{RuleML}).
-
-The authors of Rule Responder built their reference system\cite{wwwruleresponder} on top of the Mule~\cite{wwwmuleesb} open-source Enterprise Service Bus (ESB) which acts as a communication middleware. The decision to use Mule was made because it goes beyond the typical definition of an ESB by providing a distributable object broker to manage all sorts of service components. Each agent runs its own arbitrary rule engine. For demonstration purposes \emph{Prova} and \emph{OO jDrew} were used to demonstrate the rule interchange between different rule engines.
-
-As research continued in terms of reaction rules and \textit{Rule Responder}, the authors of \cite{2013_Zhao-Paschke_EDSWE.pdf} showed the adoption of event paradigms to support scientific workflow execution. In their work they point out the limitations of ECA frameworks when adapted to their use case. For highly distributed and loosely coupled scientific workflows, complicated conditional procedures and rules, which can also have local scopes, are required. This shows us their work is going towards large distributed systems with a highly developed rule language that subsumes research from several fields.
-
 \subsubsection{DashMash}
 The DashMash~\cite{2011-Cappiello_etal-DashMash.pdf} platform is an approach to give end-users the graphical tools in a browser to mash up web applications in a dashboard. A resource of (for stability reasons) trimmed services (such as GoogleMaps or TripAdvisor), filters, viewers and generic components is accessible to the users. DashMash uses an event-driven model of the presentation level, similar to a JSON Rules approach in \cite{2009-Pascalau_Giurca-RBACEM.pdf}. There are events sent by the client to the server, but they are only used to update all viewers with the actual data the user is looking at.
 
+\begin{figure*}[htb]
+%\begin{center}
+\centering
+%,angle=-90
+  \makebox[\textwidth][c]{\includegraphics[scale=0.6]{img_rw_3_large}}%
+
+\caption{Examined Mashup Approaches}
+%\end{center}
+\end{figure*}
+
 \section{Use Case Study}
 In order to verify some of the identified related work, use cases around the successor of useKit~\cite{2010-Rizzotti_Burkhart-useKit.pdf} (ProBinder~\cite{wwwprobinder}) have been derived and investigated. 
-Three use cases have been identified to verify the feasîbility of certain existing infrastructures.
+Three use cases have been identified to verify the feasibility of certain existing infrastructures.
 
 \subsection{Binder Watcher}
 Binder Watcher is about binders being watched and actions that are taken after certain changes to a binder. Users of ProBinder, which are involved in many different companies and project binders, tend to be confronted with a large amount of information. It is a tedious task to get the user's context back into a clean state, where the ProBinder system is ready to reflect new recent changes in an optimal way to the user. By allowing the users to identify resources (binder tabs in this case, but it could also be complete binders, persons, companies, \dots) of interest, the user task can be automated to a certain extent. As soon as changes are made to the resources of interest, they are marked as read and summarized. These summaries are then provided to the user, which allows him to identify the most important changes.
@@ -136,7 +268,7 @@ The Binder Watcher use case was implemented in KRL (see \ref{app:uc_bw_krl}) and
 To bring reactivity to the static web, we have to enhance legacy resources, which are not event-ready. Changes in such resources have to be detected via e.g. web spiders or crawlers and transformed into events that can be processed by the rules engine. Such an auxiliary cloud application would turn the static web into a reactive system and free a future architecture from incorporating the pulling of events, thus allowing it to concentrate on its main business, i.e. event handling.
 
 \subsubsection{From the Web to the Cloud}
-To make the static web active, an \emph{activator} monitors a predefined remote resource, e.g. a public ProBinder tab, accessed via the normal webpage, not the API. Changes to the tab are detected and pushed into the event-based system as events. In our case we built a reference system on top of \emph{node.js}. These events then have to be processed according to rules and finally actions are invoked, which could also be events again. For our study the action taken was again \emph{ProBinder} which was used to creat an entry in another binder, this time via the API. This use case was mainly used to proof the accessibility of ProBinder via a remote system and the activation of the static web.
+To make the static web active, an \emph{activator} monitors a predefined remote resource, e.g. a public ProBinder tab, accessed via the normal webpage, not the API. Changes to the tab are detected and pushed into the event-based system as events. In our case we built a reference system on top of \emph{node.js}. These events then have to be processed according to rules and finally actions are invoked, which could also be events again. For our study the action taken was again \emph{ProBinder} which was used to create an entry in another binder, this time via the API. This use case was mainly used to proof the accessibility of ProBinder via a remote system and the activation of the static web.
 
 \subsubsection{From the Cloud to the Web}
 Since cloud applications already provide quite a lot of notifications, they offer themselves as event producers. But most of todays notifications are received by pulling. Only few offer the possibility to register webhooks where they would push events to. The number of cloud applications that offer webhooks will most likely increase in the future and continue to make the web more reactive. But for now after dealing with the static web in the use case above, we need to deal with a semi-reactive web as well. These pull requests to such resources could again be taken care of by introducing an \emph{activator}, which polls periodically for updates and pushes them into the even-based system. 
@@ -146,12 +278,66 @@ If we have the static web as an action destination, the question is how a static
 Secondly, we simulate reactivity through our system. Actions taken on behalf of such a resource are stored in an internal state representation of the resource and if certain rules are met, the simulator could produce again events. Each user that is connected to our system, would then be able to experience this reactivity of static resources, and eventually also if other users interacted with the system.
 The third possibility is, rules could also run in a lightweighted architecture on the client browser, which influences the DOM tree to existing rules. Like this it would be easier to maintain a private view for users, but state changes could only be maintained during the browser sessions. Storing these state changes on the server side of the event-based system could overcome that shortfall and a combined solution seems to be a good proof of concept strategy. 
 
+\subsubsection{Node.js}
+In order to implement some proof of concept examples, \emph{node.js} was used as a basis to implement a custom module.
+\emph{node.js} is a powerful tool to build cloud applications. Because of its modularity and the package manager, slim instances can be run. Its main purpose is to be used as a webserver. By incorporating JavaScript's asynchronous design of callback functions into their architecture, locking situations are basically omitted. Thus it is a highly-scalable, asynchronous, event-driven architecture which found broad acceptance in the open-source comunity as well as for enterprises.
+
+The package manager \emph{npm} can be used to maintain dependencies of a custom \emph{node.js} module to other modules. This helpful feature ensures that everybody working with the user-defined module uses the same external modules and the respective versions. Also project repositories do not need to store the dependent libraries through this mechanism, thus saving space and traffic. 
+A name and a version are mandatory for a \emph{node.js} module. Knowing the name, e.g. \PY{n}{diff}, one can look up the latest version in the \emph{npm} repository by issuing following command:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{err}{\PYZdl{}} \PY{n}{npm} \PY{n}{show} \PY{n}{diff} \PY{n}{version}
+\PY{n}{npm} \PY{n}{http} \PY{n}{GET} \PY{n}{https}\PY{p}{:}\PY{o}{/}\PY{o}{/}\PY{n}{registry}\PY{o}{.}\PY{n}{npmjs}\PY{o}{.}\PY{n}{org}\PY{o}{/}\PY{n}{diff}
+\PY{n}{npm} \PY{n}{http} \PY{l+m+mi}{200} \PY{n}{https}\PY{p}{:}\PY{o}{/}\PY{o}{/}\PY{n}{registry}\PY{o}{.}\PY{n}{npmjs}\PY{o}{.}\PY{n}{org}\PY{o}{/}\PY{n}{diff}
+\PY{l+m+mf}{1.0}\PY{o}{.}\PY{l+m+mi}{5}
+\end{Verbatim}
+
+
+Now this dependency, together with the version one would like to use, can be inserted into the own project description file as shown below.
+For our small use case proof of concept project we only had to define the project description file called \PY{n}{package.json} in the root folder of the project:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{p}{\PYZob{}}
+	\PY{l+s+s2}{\PYZdq{}name\PYZdq{}}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}msc\PYZhy{}apps\PYZdq{}}\PY{p}{,}
+	\PY{l+s+s2}{\PYZdq{}description\PYZdq{}}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}Proof of concept apps\PYZdq{}}\PY{p}{,}
+	\PY{l+s+s2}{\PYZdq{}version\PYZdq{}}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}0.0.1\PYZdq{}}\PY{p}{,}
+	\PY{l+s+s2}{\PYZdq{}private\PYZdq{}}\PY{o}{:} \PY{k+kc}{true}\PY{p}{,}
+	\PY{l+s+s2}{\PYZdq{}dependencies\PYZdq{}}\PY{o}{:} \PY{p}{\PYZob{}}
+	\PY{l+s+s2}{\PYZdq{}request\PYZdq{}}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}2.22.0\PYZdq{}}\PY{p}{,}
+	\PY{l+s+s2}{\PYZdq{}express\PYZdq{}}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}3.3.4\PYZdq{}}\PY{p}{,}
+	\PY{l+s+s2}{\PYZdq{}diff\PYZdq{}}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}1.0.5\PYZdq{}}
+	\PY{p}{\PYZcb{}}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+Everybody who downloads this project needs to download the dependencies before using the module. This is done by running following command in the root directory of the project:
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{err}{\PYZdl{}} \PY{n}{npm} \PY{n}{install}
+\end{Verbatim}
+If any dependencies change in the future the same command can be run again to update the local project.
+A simple Hello World example of \emph{node.js} looks like this:
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kd}{var} \PY{n+nx}{http} \PY{o}{=} \PY{n+nx}{require}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}http\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\PY{k+kd}{var} \PY{n+nx}{server} \PY{o}{=} \PY{n+nx}{http}\PY{p}{.}\PY{n+nx}{createServer}\PY{p}{(}\PY{k+kd}{function} \PY{p}{(}\PY{n+nx}{request}\PY{p}{,} \PY{n+nx}{response}\PY{p}{)} \PY{p}{\PYZob{}}
+  \PY{n+nx}{response}\PY{p}{.}\PY{n+nx}{writeHead}\PY{p}{(}\PY{l+m+mi}{200}\PY{p}{,} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}Content\PYZhy{}Type\PYZdq{}}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}text/plain\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{;}
+  \PY{n+nx}{response}\PY{p}{.}\PY{n+nx}{end}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}Hello World\PYZbs{}n\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{;}
+\PY{n+nx}{server}\PY{p}{.}\PY{n+nx}{listen}\PY{p}{(}\PY{l+m+mi}{8000}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+After executing this by typing (if the above code was stored in a file called \PY{n}{index.js})
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{err}{\PYZdl{}} \PY{n}{node} \PY{n}{index.js}
+\end{Verbatim}
+the webserver is accessible on port 8000 (by typing \PY{n}{localhost:8000} in the browser bar), and responds with ''Hello World''.
+Examples of the use case implementations in \emph{node.js} can be found in the appendix.
+
 \section{Conclusion}
 In \cite{2009-Pascalau_Giurca-LWAECARE.pdf}, the founders of \emph{JSON Rules}~\cite{2008-Giurca_Pascalau-JSON_Rules.pdf} describe a lightweight architecture that allows to react and proact on behalf of events in the ontology of web browsers. \emph{JSON Rules} is promising for our work because of its lightweight architecture and specialization on production and ECA rules. But the existing working memory architecture needs to be generalized to allow a different environment, other than just the DOM tree. The existing architecture could be used to allow the user to create local rules that do not access remote systems and thus runs into authentication issues.
 
-Other approaches are server side rule engines either written in Perl or Java, where powerful tools are provided to process events and invoke manifold actions. But these approaches all lack an abstraction layer to introduce the programmability of the reactive web to a large audience of unexperienced users. Also, current approaches concentrate on data flows instead of event flows, thus not incorporating reactivity to the web.
+Other approaches are server side rule engines either written in Perl or Java, where powerful tools are provided to process events and invoke manifold actions. But these approaches all lack an abstraction layer to introduce the programmability of the reactive web to a large audience of inexperienced users. Also, current approaches concentrate on data flows instead of event flows, thus not incorporating reactivity to the web.
 
-With \emph{RuleML} a powerful, interchangeable expression language for event-based systems is present. It paves the way for distributed rule engines, such as one running in the browser and another on a server for cloud application access. But a rule engine that incorporates the requirements of a lightweighted architecture and user-readiness is missing. Under related work, \cite{2010-Namoun_etal-EURCW.pdf} pointed out the difficulties of unexperienced users to tackle the execution flow. This issue arose from their approach of displaying all services as very similar UI's. Adopting an event-based system. Event producers are clearly different from action consumers would address this issue in an user-intuitive way.
+With \emph{RuleML} a powerful, interchangeable expression language for event-based systems is present. It paves the way for distributed rule engines, such as one running in the browser and another on a server for cloud application access. But a rule engine that incorporates the requirements of a lightweighted architecture and user-readiness is missing. Under related work, \cite{2010-Namoun_etal-EURCW.pdf} pointed out the difficulties of inexperienced users to tackle the execution flow. This issue arose from their approach of displaying all services as very similar UI's. By introducing an event-based system, event producers would be clearly different from action consumers. This would address this issue in an user-intuitive way.
 
 Large systems such as \emph{RuleResponder} weave stubs or proxies of existing service into a message oriented middleware (MoM). We envision the web itself is used as the middleware. Through this a lightweighted and performant event-based architecture can be realized, which allows the orchestration of existing web and cloud applications.
 
@@ -173,184 +359,186 @@ If users are provided the tools to access public cloud APIs and create mashups w
 
 \newpage
 \appendix
+\lstset { basicstyle=\tiny }
 \renewcommand\thesection{Appendix \Alph{section}}
 
 \section{Binder Watcher KRL code} \label{app:uc_bw_krl}
-\begin{lstlisting}[breaklines]
-ruleset a2236x4 {
-  meta {
-  	name "ProBinder Flag Notification Handler"
-  	description "This is a first example on how to react on ProBinder Events"
-  	author "dominic.bosch"
-    //ProBinder IDs:
-    // userID: 10595
-    // companyID: 643
-    // contextID: 16694
-    // followerID: 12613
+\begin{Verbatim}[fontsize=\scriptsize,commandchars=\\\{\}]
+\PY{n}{ruleset} \PY{n}{a2236x4} \PY{p}{\PYZob{}}
+  \PY{n}{meta} \PY{p}{\PYZob{}}
+    \PY{n}{name} \PY{l+s}{\PYZdq{}}\PY{l+s}{ProBinder Flag Notification Handler}\PY{l+s}{\PYZdq{}}
+    \PY{n}{description} \PY{l+s}{\PYZdq{}}\PY{l+s}{This is a first example on how to react on ProBinder Events}\PY{l+s}{\PYZdq{}}
+    \PY{n}{author} \PY{l+s}{\PYZdq{}}\PY{l+s}{dominic.bosch}\PY{l+s}{\PYZdq{}}
+    \PY{o}{/}\PY{o}{/}\PY{n}{ProBinder} \PY{n}{IDs}\PY{p}{:}
+    \PY{o}{/}\PY{o}{/} \PY{n}{userID}\PY{p}{:} \PY{l+m+mi}{10595}
+    \PY{o}{/}\PY{o}{/} \PY{n}{companyID}\PY{p}{:} \PY{l+m+mi}{643}
+    \PY{o}{/}\PY{o}{/} \PY{n}{contextID}\PY{p}{:} \PY{l+m+mi}{16694}
+    \PY{o}{/}\PY{o}{/} \PY{n}{followerID}\PY{p}{:} \PY{l+m+mi}{12613}
     
-  	logging on
-  }
+    \PY{n}{logging} \PY{n}{on}
+  \PY{p}{\PYZcb{}}
   
-  dispatch {}
+  \PY{n}{dispatch} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
   
-  global {}
+  \PY{k}{global} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
   
-  // Reset all entitiy variables
-  rule resetAll {
-    select when probinder resetall
-      send_directive("Full Reset");
-      fired {
-        clear ent:userID;
-        clear ent:companyID;
-        clear ent:contextID;
-        clear ent:credentials;
-        clear ent:followers;
-        clear ent:newContents;
-        clear ent:summary;
-        clear ent:temp;
-      }
-  }
+  \PY{o}{/}\PY{o}{/} \PY{n}{Reset} \PY{n}{all} \PY{n}{entitiy} \PY{n}{variables}
+  \PY{n}{rule} \PY{n}{resetAll} \PY{p}{\PYZob{}}
+    \PY{n}{select} \PY{n}{when} \PY{n}{probinder} \PY{n}{resetall}
+      \PY{n}{send\PYZus{}directive}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Full Reset}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+      \PY{n}{fired} \PY{p}{\PYZob{}}
+        \PY{n}{clear} \PY{n}{ent}\PY{p}{:}\PY{n}{userID}\PY{p}{;}
+        \PY{n}{clear} \PY{n}{ent}\PY{p}{:}\PY{n}{companyID}\PY{p}{;}
+        \PY{n}{clear} \PY{n}{ent}\PY{p}{:}\PY{n}{contextID}\PY{p}{;}
+        \PY{n}{clear} \PY{n}{ent}\PY{p}{:}\PY{n}{credentials}\PY{p}{;}
+        \PY{n}{clear} \PY{n}{ent}\PY{p}{:}\PY{n}{followers}\PY{p}{;}
+        \PY{n}{clear} \PY{n}{ent}\PY{p}{:}\PY{n}{newContents}\PY{p}{;}
+        \PY{n}{clear} \PY{n}{ent}\PY{p}{:}\PY{n}{summary}\PY{p}{;}
+        \PY{n}{clear} \PY{n}{ent}\PY{p}{:}\PY{n}{temp}\PY{p}{;}
+      \PY{p}{\PYZcb{}}
+  \PY{p}{\PYZcb{}}
   
-  // reset the unread content data structures
-  rule reset {
-    select when probinder reset
-      send_directive("Reset, user credentials and followers still kept");
-      fired {
-        clear ent:newContents;
-        clear ent:summary;
-        clear ent:temp;
-      }
-  }
+  \PY{o}{/}\PY{o}{/} \PY{n}{reset} \PY{n}{the} \PY{n}{unread} \PY{n}{content} \PY{n}{data} \PY{n}{structures}
+  \PY{n}{rule} \PY{n}{reset} \PY{p}{\PYZob{}}
+    \PY{n}{select} \PY{n}{when} \PY{n}{probinder} \PY{n}{reset}
+      \PY{n}{send\PYZus{}directive}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Reset, user credentials and followers still kept}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+      \PY{n}{fired} \PY{p}{\PYZob{}}
+        \PY{n}{clear} \PY{n}{ent}\PY{p}{:}\PY{n}{newContents}\PY{p}{;}
+        \PY{n}{clear} \PY{n}{ent}\PY{p}{:}\PY{n}{summary}\PY{p}{;}
+        \PY{n}{clear} \PY{n}{ent}\PY{p}{:}\PY{n}{temp}\PY{p}{;}
+      \PY{p}{\PYZcb{}}
+  \PY{p}{\PYZcb{}}
   
-  // The user registers himself with email and password for the ProBinder API...
-  rule register_user {
-    select when probinder register
-      if (event:attr('userID').as("str") neq 'null'
-          && event:attr('companyID').as("str") neq 'null'
-          && event:attr('contextID').as("str") neq 'null'
-          && event:attr('email').as("str") neq 'null'
-          && event:attr('password').as("str") neq 'null') then {
-        send_directive("user registered");
-      }
-      fired {
-        set ent:userID event:attr('userID');
-        set ent:companyID event:attr('companyID');
-        set ent:contextID event:attr('contextID');
-        set ent:credentials uri:escape(event:attr('email')) + ":" + uri:escape(event:attr('password'));
-      }
-  }
+  \PY{o}{/}\PY{o}{/} \PY{n}{The} \PY{n}{user} \PY{n}{registers} \PY{n}{himself} \PY{n}{with} \PY{n}{email} \PY{n}{and} \PY{n}{password} \PY{n}{for} \PY{n}{the} \PY{n}{ProBinder} \PY{n}{API}\PY{o}{.}\PY{o}{.}\PY{o}{.}
+  \PY{n}{rule} \PY{n}{register\PYZus{}user} \PY{p}{\PYZob{}}
+    \PY{n}{select} \PY{n}{when} \PY{n}{probinder} \PY{n}{register}
+      \PY{k}{if} \PY{p}{(}\PY{n}{event}\PY{p}{:}\PY{n}{attr}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{userID}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{k}{as}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{str}\PY{l+s}{\PYZdq{}}\PY{p}{)} \PY{n}{neq} \PY{l+s}{\PYZsq{}}\PY{l+s}{null}\PY{l+s}{\PYZsq{}}
+          \PY{o}{\PYZam{}}\PY{o}{\PYZam{}} \PY{n}{event}\PY{p}{:}\PY{n}{attr}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{companyID}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{k}{as}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{str}\PY{l+s}{\PYZdq{}}\PY{p}{)} \PY{n}{neq} \PY{l+s}{\PYZsq{}}\PY{l+s}{null}\PY{l+s}{\PYZsq{}}
+          \PY{o}{\PYZam{}}\PY{o}{\PYZam{}} \PY{n}{event}\PY{p}{:}\PY{n}{attr}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{contextID}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{k}{as}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{str}\PY{l+s}{\PYZdq{}}\PY{p}{)} \PY{n}{neq} \PY{l+s}{\PYZsq{}}\PY{l+s}{null}\PY{l+s}{\PYZsq{}}
+          \PY{o}{\PYZam{}}\PY{o}{\PYZam{}} \PY{n}{event}\PY{p}{:}\PY{n}{attr}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{email}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{k}{as}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{str}\PY{l+s}{\PYZdq{}}\PY{p}{)} \PY{n}{neq} \PY{l+s}{\PYZsq{}}\PY{l+s}{null}\PY{l+s}{\PYZsq{}}
+          \PY{o}{\PYZam{}}\PY{o}{\PYZam{}} \PY{n}{event}\PY{p}{:}\PY{n}{attr}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{password}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{k}{as}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{str}\PY{l+s}{\PYZdq{}}\PY{p}{)} \PY{n}{neq} \PY{l+s}{\PYZsq{}}\PY{l+s}{null}\PY{l+s}{\PYZsq{}}\PY{p}{)} \PY{n}{then} \PY{p}{\PYZob{}}
+        \PY{n}{send\PYZus{}directive}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{user registered}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+      \PY{p}{\PYZcb{}}
+      \PY{n}{fired} \PY{p}{\PYZob{}}
+        \PY{n+nb}{set} \PY{n}{ent}\PY{p}{:}\PY{n}{userID} \PY{n}{event}\PY{p}{:}\PY{n}{attr}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{userID}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n+nb}{set} \PY{n}{ent}\PY{p}{:}\PY{n}{companyID} \PY{n}{event}\PY{p}{:}\PY{n}{attr}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{companyID}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n+nb}{set} \PY{n}{ent}\PY{p}{:}\PY{n}{contextID} \PY{n}{event}\PY{p}{:}\PY{n}{attr}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{contextID}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n+nb}{set} \PY{n}{ent}\PY{p}{:}\PY{n}{credentials} \PY{n}{uri}\PY{p}{:}\PY{n}{escape}\PY{p}{(}\PY{n}{event}\PY{p}{:}\PY{n}{attr}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{email}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+s}{\PYZdq{}}\PY{l+s}{:}\PY{l+s}{\PYZdq{}} \PY{o}{+} \PY{n}{uri}\PY{p}{:}\PY{n}{escape}\PY{p}{(}\PY{n}{event}\PY{p}{:}\PY{n}{attr}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{password}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+      \PY{p}{\PYZcb{}}
+  \PY{p}{\PYZcb{}}
   
-  // The user sent an event that tells us he wants to follow somebody
-  rule new_user_to_follow {
-    select when probinder newfollower
-      pre{
-        listFollowers = ent:followers || {};
-        newfollower = event:attr('followerID').as("str");
-        listFollowers = listFollowers.put([newfollower], "true");
-      }
-      if (event:attr('userID') == ent:userID
-          && newfollower neq "null") then {
-            send_directive("New ProBinder User added to followers");
-      }
-      fired{
-        set ent:followers listFollowers
-      }
-  }
+  \PY{o}{/}\PY{o}{/} \PY{n}{The} \PY{n}{user} \PY{n}{sent} \PY{n}{an} \PY{n}{event} \PY{n}{that} \PY{n}{tells} \PY{n}{us} \PY{n}{he} \PY{n}{wants} \PY{n}{to} \PY{n}{follow} \PY{n}{somebody}
+  \PY{n}{rule} \PY{n}{new\PYZus{}user\PYZus{}to\PYZus{}follow} \PY{p}{\PYZob{}}
+    \PY{n}{select} \PY{n}{when} \PY{n}{probinder} \PY{n}{newfollower}
+      \PY{n}{pre}\PY{p}{\PYZob{}}
+        \PY{n}{listFollowers} \PY{o}{=} \PY{n}{ent}\PY{p}{:}\PY{n}{followers} \PY{o}{|}\PY{o}{|} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}\PY{p}{;}
+        \PY{n}{newfollower} \PY{o}{=} \PY{n}{event}\PY{p}{:}\PY{n}{attr}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{followerID}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{k}{as}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{str}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{listFollowers} \PY{o}{=} \PY{n}{listFollowers}\PY{o}{.}\PY{n}{put}\PY{p}{(}\PY{p}{[}\PY{n}{newfollower}\PY{p}{]}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{true}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+      \PY{p}{\PYZcb{}}
+      \PY{k}{if} \PY{p}{(}\PY{n}{event}\PY{p}{:}\PY{n}{attr}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{userID}\PY{l+s}{\PYZsq{}}\PY{p}{)} \PY{o}{==} \PY{n}{ent}\PY{p}{:}\PY{n}{userID}
+          \PY{o}{\PYZam{}}\PY{o}{\PYZam{}} \PY{n}{newfollower} \PY{n}{neq} \PY{l+s}{\PYZdq{}}\PY{l+s}{null}\PY{l+s}{\PYZdq{}}\PY{p}{)} \PY{n}{then} \PY{p}{\PYZob{}}
+            \PY{n}{send\PYZus{}directive}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{New ProBinder User added to followers}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+      \PY{p}{\PYZcb{}}
+      \PY{n}{fired}\PY{p}{\PYZob{}}
+        \PY{n+nb}{set} \PY{n}{ent}\PY{p}{:}\PY{n}{followers} \PY{n}{listFollowers}
+      \PY{p}{\PYZcb{}}
+  \PY{p}{\PYZcb{}}
   
-  // Let the KRE check ProBinder for new unread content and process it immediately
-  rule check_for_unread_content {
-    select when probinder check
-      pre {
-        r = http:get("https://" + ent:credentials + "@probinder.com/service/36/unreadcontent");
-        arr = r{"content"}.decode();
-      }
-      send_directive("Checked ProBinder for unread content, found: " + arr.length());
-      fired {
-        set ent:newContents arr;
-        raise explicit event processnewcontents;
-      }
+  \PY{o}{/}\PY{o}{/} \PY{n}{Let} \PY{n}{the} \PY{n}{KRE} \PY{n}{check} \PY{n}{ProBinder} \PY{n}{for} \PY{n}{new} \PY{n}{unread} \PY{n}{content} \PY{n}{and} \PY{n}{process} \PY{n}{it} \PY{n}{immediately}
+  \PY{n}{rule} \PY{n}{check\PYZus{}for\PYZus{}unread\PYZus{}content} \PY{p}{\PYZob{}}
+    \PY{n}{select} \PY{n}{when} \PY{n}{probinder} \PY{n}{check}
+      \PY{n}{pre} \PY{p}{\PYZob{}}
+        \PY{n}{r} \PY{o}{=} \PY{n}{http}\PY{p}{:}\PY{n}{get}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{https://}\PY{l+s}{\PYZdq{}} \PY{o}{+} \PY{n}{ent}\PY{p}{:}\PY{n}{credentials} \PY{o}{+} \PY{l+s}{\PYZdq{}}\PY{l+s}{@probinder.com/service/36/unreadcontent}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{arr} \PY{o}{=} \PY{n}{r}\PY{p}{\PYZob{}}\PY{l+s}{\PYZdq{}}\PY{l+s}{content}\PY{l+s}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{o}{.}\PY{n}{decode}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+      \PY{p}{\PYZcb{}}
+      \PY{n}{send\PYZus{}directive}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Checked ProBinder for unread content, found: }\PY{l+s}{\PYZdq{}} \PY{o}{+} \PY{n}{arr}\PY{o}{.}\PY{n}{length}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+      \PY{n}{fired} \PY{p}{\PYZob{}}
+        \PY{n+nb}{set} \PY{n}{ent}\PY{p}{:}\PY{n}{newContents} \PY{n}{arr}\PY{p}{;}
+        \PY{k}{raise} \PY{n}{explicit} \PY{n}{event} \PY{n}{processnewcontents}\PY{p}{;}
+      \PY{p}{\PYZcb{}}
     
-  }
+  \PY{p}{\PYZcb{}}
   
-  // Work (new unread content) from ProBinder to process
-  rule process_new_contents {
-    select when explicit processnewcontents
-    // Process only the unread contents from people we are following,
-    // filter condition omits unnecessary rules invocation
-    foreach ent:newContents.filter(
-      function(d) {ent:followers.pick("$."+d.pick("$.userId")) != null}
-    ) setting(nc)
-      pre {
-        s = ent:summary || {};
-        cid = nc.pick("$.id");
-        r = http:get("https://" + ent:credentials
-          + "@probinder.com/service/2/get?id=" + cid
-          + "&service=" + nc.pick("$.serviceId"));
-        arr = r{"content"}.decode();
+  \PY{o}{/}\PY{o}{/} \PY{n}{Work} \PY{p}{(}\PY{n}{new} \PY{n}{unread} \PY{n}{content}\PY{p}{)} \PY{n}{from} \PY{n}{ProBinder} \PY{n}{to} \PY{n}{process}
+  \PY{n}{rule} \PY{n}{process\PYZus{}new\PYZus{}contents} \PY{p}{\PYZob{}}
+    \PY{n}{select} \PY{n}{when} \PY{n}{explicit} \PY{n}{processnewcontents}
+    \PY{o}{/}\PY{o}{/} \PY{n}{Process} \PY{n}{only} \PY{n}{the} \PY{n}{unread} \PY{n}{contents} \PY{n}{from} \PY{n}{people} \PY{n}{we} \PY{n}{are} \PY{n}{following}\PY{p}{,}
+    \PY{o}{/}\PY{o}{/} \PY{n}{filter} \PY{n}{condition} \PY{n}{omits} \PY{n}{unnecessary} \PY{n}{rules} \PY{n}{invocation}
+    \PY{n}{foreach} \PY{n}{ent}\PY{p}{:}\PY{n}{newContents}\PY{o}{.}\PY{n}{filter}\PY{p}{(}
+      \PY{n}{function}\PY{p}{(}\PY{n}{d}\PY{p}{)} \PY{p}{\PYZob{}}\PY{n}{ent}\PY{p}{:}\PY{n}{followers}\PY{o}{.}\PY{n}{pick}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZdl{}.}\PY{l+s}{\PYZdq{}}\PY{o}{+}\PY{n}{d}\PY{o}{.}\PY{n}{pick}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZdl{}.userId}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{)} \PY{o}{!=} \PY{n}{null}\PY{p}{\PYZcb{}}
+    \PY{p}{)} \PY{n}{setting}\PY{p}{(}\PY{n}{nc}\PY{p}{)}
+      \PY{n}{pre} \PY{p}{\PYZob{}}
+        \PY{n}{s} \PY{o}{=} \PY{n}{ent}\PY{p}{:}\PY{n}{summary} \PY{o}{|}\PY{o}{|} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}\PY{p}{;}
+        \PY{n}{cid} \PY{o}{=} \PY{n}{nc}\PY{o}{.}\PY{n}{pick}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZdl{}.id}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{r} \PY{o}{=} \PY{n}{http}\PY{p}{:}\PY{n}{get}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{https://}\PY{l+s}{\PYZdq{}} \PY{o}{+} \PY{n}{ent}\PY{p}{:}\PY{n}{credentials}
+          \PY{o}{+} \PY{l+s}{\PYZdq{}}\PY{l+s}{@probinder.com/service/2/get?id=}\PY{l+s}{\PYZdq{}} \PY{o}{+} \PY{n}{cid}
+          \PY{o}{+} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZam{}service=}\PY{l+s}{\PYZdq{}} \PY{o}{+} \PY{n}{nc}\PY{o}{.}\PY{n}{pick}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZdl{}.serviceId}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+        \PY{n}{arr} \PY{o}{=} \PY{n}{r}\PY{p}{\PYZob{}}\PY{l+s}{\PYZdq{}}\PY{l+s}{content}\PY{l+s}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{o}{.}\PY{n}{decode}\PY{p}{(}\PY{p}{)}\PY{p}{;}
         
-        userid = arr.pick("$.userId");
-        storeKey = arr.pick("$.lastModified");
-        truncStr = arr.pick("$.text");//.extract(re/^.{100}/gi); // should shorten the text...
+        \PY{n}{userid} \PY{o}{=} \PY{n}{arr}\PY{o}{.}\PY{n}{pick}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZdl{}.userId}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{storeKey} \PY{o}{=} \PY{n}{arr}\PY{o}{.}\PY{n}{pick}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZdl{}.lastModified}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{truncStr} \PY{o}{=} \PY{n}{arr}\PY{o}{.}\PY{n}{pick}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZdl{}.text}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}\PY{o}{/}\PY{o}{/}\PY{o}{.}\PY{n}{extract}\PY{p}{(}\PY{n}{re}\PY{o}{/}\PY{o}{\PYZca{}}\PY{o}{.}\PY{p}{\PYZob{}}\PY{l+m+mi}{100}\PY{p}{\PYZcb{}}\PY{o}{/}\PY{n}{gi}\PY{p}{)}\PY{p}{;} \PY{o}{/}\PY{o}{/} \PY{n}{should} \PY{n}{shorten} \PY{n}{the} \PY{n}{text}\PY{o}{.}\PY{o}{.}\PY{o}{.}
         
-      //TODO Process different kind of unread contents differently
-        str = {"content": truncStr}; //[0]
-        s = s.put([userid, storeKey], str);
-      }
-      http:get("https://" + ent:credentials + "@probinder.com/service/2/setread?id=" + cid);
-      always {
-        set ent:summary s;
-      }
+      \PY{o}{/}\PY{o}{/}\PY{n}{TODO} \PY{n}{Process} \PY{n}{different} \PY{n}{kind} \PY{n}{of} \PY{n}{unread} \PY{n}{contents} \PY{n}{differently}
+        \PY{n+nb}{str} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s}{\PYZdq{}}\PY{l+s}{content}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{n}{truncStr}\PY{p}{\PYZcb{}}\PY{p}{;} \PY{o}{/}\PY{o}{/}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        \PY{n}{s} \PY{o}{=} \PY{n}{s}\PY{o}{.}\PY{n}{put}\PY{p}{(}\PY{p}{[}\PY{n}{userid}\PY{p}{,} \PY{n}{storeKey}\PY{p}{]}\PY{p}{,} \PY{n+nb}{str}\PY{p}{)}\PY{p}{;}
+      \PY{p}{\PYZcb{}}
+      \PY{n}{http}\PY{p}{:}\PY{n}{get}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{https://}\PY{l+s}{\PYZdq{}} \PY{o}{+} \PY{n}{ent}\PY{p}{:}\PY{n}{credentials} \PY{o}{+} \PY{l+s}{\PYZdq{}}\PY{l+s}{@probinder.com/service/2/setread?id=}\PY{l+s}{\PYZdq{}} \PY{o}{+} \PY{n}{cid}\PY{p}{)}\PY{p}{;}
+      \PY{n}{always} \PY{p}{\PYZob{}}
+        \PY{n+nb}{set} \PY{n}{ent}\PY{p}{:}\PY{n}{summary} \PY{n}{s}\PY{p}{;}
+      \PY{p}{\PYZcb{}}
     
-  }
+  \PY{p}{\PYZcb{}}
   
-  rule send_summary{
-    select when probinder heartbeat
-    always {
-      clear ent:temp;
-      raise explicit event filltemp;
-    }
-  }
+  \PY{n}{rule} \PY{n}{send\PYZus{}summary}\PY{p}{\PYZob{}}
+    \PY{n}{select} \PY{n}{when} \PY{n}{probinder} \PY{n}{heartbeat}
+    \PY{n}{always} \PY{p}{\PYZob{}}
+      \PY{n}{clear} \PY{n}{ent}\PY{p}{:}\PY{n}{temp}\PY{p}{;}
+      \PY{k}{raise} \PY{n}{explicit} \PY{n}{event} \PY{n}{filltemp}\PY{p}{;}
+    \PY{p}{\PYZcb{}}
+  \PY{p}{\PYZcb{}}
   
-  rule fill_temp{
-    select when explicit filltemp
-    always {
-      set ent:temp ent:summary;
-      raise explicit event mergecontent;
-    }
-  }
+  \PY{n}{rule} \PY{n}{fill\PYZus{}temp}\PY{p}{\PYZob{}}
+    \PY{n}{select} \PY{n}{when} \PY{n}{explicit} \PY{n}{filltemp}
+    \PY{n}{always} \PY{p}{\PYZob{}}
+      \PY{n+nb}{set} \PY{n}{ent}\PY{p}{:}\PY{n}{temp} \PY{n}{ent}\PY{p}{:}\PY{n}{summary}\PY{p}{;}
+      \PY{k}{raise} \PY{n}{explicit} \PY{n}{event} \PY{n}{mergecontent}\PY{p}{;}
+    \PY{p}{\PYZcb{}}
+  \PY{p}{\PYZcb{}}
   
-  // When somebody sends a periodic heartbeat, this summary is produced
-  // The periodic invocation of this rule might be possible to implement in the KRE
-  rule merge_content {
-    select when explicit mergecontent
-    foreach ent:temp setting (userID)
-      pre {
-        s = ent:temp;
-        userBulk = s.pick("$."+userID);
-        sumry = userBulk.pick("$..content").join(" ");
-      }
-      http:get("https://" + ent:credentials + "@probinder.com/service/27/save?companyId="
-        + ent:companyID + "&context=" + ent:contextID + "&text=test");
-      send_directive("Stored summary in your predefined binder:" + sumry);
+  \PY{o}{/}\PY{o}{/} \PY{n}{When} \PY{n}{somebody} \PY{n}{sends} \PY{n}{a} \PY{n}{periodic} \PY{n}{heartbeat}\PY{p}{,} \PY{n}{this} \PY{n}{summary} \PY{n}{is} \PY{n}{produced}
+  \PY{o}{/}\PY{o}{/} \PY{n}{The} \PY{n}{periodic} \PY{n}{invocation} \PY{n}{of} \PY{n}{this} \PY{n}{rule} \PY{n}{might} \PY{n}{be} \PY{n}{possible} \PY{n}{to} \PY{n}{implement} \PY{n}{in} \PY{n}{the} \PY{n}{KRE}
+  \PY{n}{rule} \PY{n}{merge\PYZus{}content} \PY{p}{\PYZob{}}
+    \PY{n}{select} \PY{n}{when} \PY{n}{explicit} \PY{n}{mergecontent}
+    \PY{n}{foreach} \PY{n}{ent}\PY{p}{:}\PY{n}{temp} \PY{n}{setting} \PY{p}{(}\PY{n}{userID}\PY{p}{)}
+      \PY{n}{pre} \PY{p}{\PYZob{}}
+        \PY{n}{s} \PY{o}{=} \PY{n}{ent}\PY{p}{:}\PY{n}{temp}\PY{p}{;}
+        \PY{n}{userBulk} \PY{o}{=} \PY{n}{s}\PY{o}{.}\PY{n}{pick}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZdl{}.}\PY{l+s}{\PYZdq{}}\PY{o}{+}\PY{n}{userID}\PY{p}{)}\PY{p}{;}
+        \PY{n}{sumry} \PY{o}{=} \PY{n}{userBulk}\PY{o}{.}\PY{n}{pick}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZdl{}..content}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{ }\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+      \PY{p}{\PYZcb{}}
+      \PY{n}{http}\PY{p}{:}\PY{n}{get}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{https://}\PY{l+s}{\PYZdq{}} \PY{o}{+} \PY{n}{ent}\PY{p}{:}\PY{n}{credentials} \PY{o}{+} \PY{l+s}{\PYZdq{}}\PY{l+s}{@probinder.com/service/27/save?companyId=}\PY{l+s}{\PYZdq{}}
+        \PY{o}{+} \PY{n}{ent}\PY{p}{:}\PY{n}{companyID} \PY{o}{+} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZam{}context=}\PY{l+s}{\PYZdq{}} \PY{o}{+} \PY{n}{ent}\PY{p}{:}\PY{n}{contextID} \PY{o}{+} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZam{}text=test}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+      \PY{n}{send\PYZus{}directive}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Stored summary in your predefined binder:}\PY{l+s}{\PYZdq{}} \PY{o}{+} \PY{n}{sumry}\PY{p}{)}\PY{p}{;}
 
-  }
+  \PY{p}{\PYZcb{}}
   
-  rule print_summary {
-    select when probinder printsum
-      send_directive(ent:summary);
-  }
-}
-\end{lstlisting}
+  \PY{n}{rule} \PY{n}{print\PYZus{}summary} \PY{p}{\PYZob{}}
+    \PY{n}{select} \PY{n}{when} \PY{n}{probinder} \PY{n}{printsum}
+      \PY{n}{send\PYZus{}directive}\PY{p}{(}\PY{n}{ent}\PY{p}{:}\PY{n}{summary}\PY{p}{)}\PY{p}{;}
+  \PY{p}{\PYZcb{}}
+\PY{p}{\PYZcb{}}
 
-\newpage
-\section{Web Watcher} 
-\subsection{node.js code}
-\begin{lstlisting}[breaklines]
-\end{lstlisting}
+\end{Verbatim}
 
-\subsection{web crawler code}
-\begin{lstlisting}[breaklines]
-\end{lstlisting}
+%\newpage
+%\section{Web Watcher} 
+%\subsection{node.js code}
+%\begin{lstlisting}[breaklines]
+%\end{lstlisting}
+
+%\subsection{web crawler code}
+%\begin{lstlisting}[breaklines]
+%\end{lstlisting}
 
 
 \end{document}
