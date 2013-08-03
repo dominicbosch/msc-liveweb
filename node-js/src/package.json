@@ -1,7 +1,7 @@
 {
   "name": "msc-apps",
   "author": "Dominic Bosch",
-  "description": "Node.js examples for the ProBinder API",
+  "description": "Node.js examples",
   "version": "0.0.1",
   "private": true,
   "repository": {

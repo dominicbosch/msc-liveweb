@@ -20,6 +20,7 @@ function init(args){
   else filepath = './credentials.json';
   fs.readFile(filepath, 'utf8', function (err, data) {
     if (err) {
+      console.log('ERROR: Loading credentials file');
       if(args && args.error) args.error(err);
       return;
     }

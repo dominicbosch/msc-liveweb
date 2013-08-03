@@ -46,9 +46,48 @@ function onRequest(request, response) {
 engine.insertRule({
   id: 'rule_1',
   condition: {
-    type: 'newcontent',
+    type: 'unreadcontent',
     userid: '12613'
   },
+  actions: [
+    {
+      /*
+       * Call the probinder service to store new events as a text
+       */
+      type: 'servicecall',
+      apiprovider: 'probinder',
+      method: 'call',
+      arguments: {
+        service: '27',
+        method: 'save',
+        data: {
+          companyId: '643',
+          context: '17209',
+          text: '$X.username wrote: $X.text'
+        }
+      }
+    },
+    {
+      /*
+       * Call a probinder service to set the new content unread
+       */
+      type: 'servicecall',
+      apiprovider: 'probinder',
+      method: 'call',
+      arguments: {
+        service: '2',
+        method: 'setread',
+        data: {
+          id: '$X.contentid'
+        }
+      }
+    }
+  ]
+});
+
+engine.insertRule({
+  id: 'rule_2',
+  condition: { type: 'newstudent' },
   actions: [
     {
       type: 'servicecall',
@@ -60,18 +99,40 @@ engine.insertRule({
         data: {
           companyId: '643',
           context: '17209',
-          text: '$X.username wrote: $X.text',
-          test: { t: 'brunt', o: {g: 'goozee'} }
+          text: '$X.username wrote: $X.text'
         }
       }
-    }
+    },
+    {
+      /*
+       * Call the probinder service to store new students in the course tab
+       */
+      type: 'servicecall',
+      apiprovider: 'probinder',
+      method: 'call',
+      arguments: {
+        service: '27',
+        method: 'save',
+        data: {
+          companyId: '643',
+          context: '17210',
+          text: 'A new student registered for the course: $X.username wrote: $X.text'
+        }
+      }
+    },
   ]
 });
 
 /*
- * Start the server that listens for events
+ * Initialize the rules engine
  */
-var app = express();
-app.post('/', onRequest);
-app.listen(8125);
-console.log("Server has started.");
+engine.init(function(){
+  /*
+   * Start the server that listens for events after the engine initialized
+   */
+  var app = express();
+  app.post('/', onRequest);
+  app.listen(8125);
+  console.log("Server has started.");
+
+});

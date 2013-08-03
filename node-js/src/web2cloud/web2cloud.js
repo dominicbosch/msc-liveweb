@@ -67,8 +67,12 @@ function processContentArray(arr) {
  * @param {Object} response
  */
 function pushContentAsEvent(response) {
+  /*
+   * TODO request seems not to handle JSON object properly,
+   *    thus use flat structure for now
+   */
   var event = {
-    type: 'newcontent',
+    type: 'unreadcontent',
     eventid: 'web2cloud' + iEvent++,
     userid: response.userId,
     username: response.username,
