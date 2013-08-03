@@ -1,5 +1,5 @@
-
-var probinder = require("./probinder");
+'use strict';
+var probinder = require("../probinder/probinder");
 
 setTimeout(function() {
 	probinder.getPage("https://probinder.com/binder/tab/view/id/17092");
