@@ -8,12 +8,17 @@
 \usepackage{color}
 \usepackage[ascii]{inputenc}
 \usepackage{titling}
+\usepackage{titlesec}
 \newcommand{\subtitle}[1]{%
   \posttitle{%
     \par\end{center}
     \begin{center}\large#1\end{center}
     \vskip0.5em}%
 }
+\setlength{\parskip}{\baselineskip}
+\titlespacing\section{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
+\titlespacing\subsection{0pt}{10pt plus 3pt minus 1pt}{0pt plus 1pt minus 1pt}
+\titlespacing\subsubsection{0pt}{8pt plus 2pt minus 0pt}{0pt plus 0pt minus 0pt}
 
 %\usepackage{appendix}
 
@@ -110,17 +115,25 @@
 \def\PYZrb{]}
 \makeatother
 
-\pretitle{\begin{center}Master Thesis\\Preparation Report\end{center}\vspace*{15 mm}\begin{center}}
+%\pretitle{\begin{center}Master Thesis\\Preparation Report\\\vspace*{4 mm}\today\end{center}\vspace*{15 mm}\begin{center}}
 
-\posttitle{\end{center}\begin{center}\end{center}}
+%\posttitle{\end{center}\begin{center}\end{center}}
 
 \begin{document}
 
 \title{\huge Towards The Reactive Web\vspace*{15 mm}}
 %\subtitle{Master Thesis\\Preparation Report}
 \date{\today}
+%\date{}
 %\author{Dominic Bosch \\ Departement Mathematics and Computer Science \\ University of Basel}
-\author{\fontsize{11}{9}\selectfont Dominic Bosch \\ Departement Mathematics and Computer Science \\ University of Basel}
+\author{\fontsize{11}{9}\selectfont
+Master Thesis\\
+Preparation Report\\
+\vspace*{10 mm}\\
+Dominic Bosch\\
+Departement Mathematics and Computer Science\\
+University of Basel
+}
 \maketitle
 
 \renewcommand{\abstractname}{}
@@ -227,7 +240,7 @@ As research continued in terms of reaction rules and \textit{Rule Responder}, th
 \subsection{Mashups}
 In \cite{2011-Pascalau-MBC.pdf}, one of the founders of \emph{JSON Rules} proposes to look at mashups as user-behaviour in a certain context. A mashup, to achieve a user-defined goal, is modelled via Unified Modeling Language (UML) as a map containing contexts and behaviour descriptions. Concepts are defined as unit of knowledge created by unique combination of characteristics. Contexts are defined as a set of concepts. A mashup is then defined as  set of contexts behaviour, where behaviour consists of rules and processes. The conceptual work done in this paper is interesting but the promoted example isn't accessible.
 
-It is also important to understand what users expect from service mashups, in order to provide a useful platform to them. In \cite{2010-Namoun_etal-EURCW.pdf} research is done in identifying user perceptions of services, their composition, user working ways and expectations towards a composition tool. They come up with a set of recommendations to aid the development of mashup environments. A survey~\cite{2009-Fischer_etal-OCAMG.pdf} that went into a similar direction categorizes the different frameworks for user driven mashup development as based on:
+It is also important to understand what users expect from service mashups, in order to provide a useful platform to them. In \cite{2010-Namoun_etal-EURCW.pdf} research is done in identifying user perceptions of services, their composition, user working ways and expectations towards a composition tool. They come up with a set of recommendations to aid the development of mashup environments. A survey~\cite{2009-Fischer_etal-OCAMG.pdf} that went into a similar direction categorizes the different frameworks for user driven mashup development as based on:\\
  \begin{itemize}
 %\itemsep-1.5em
   \item Programming Paradigm
@@ -255,35 +268,11 @@ The DashMash~\cite{2011-Cappiello_etal-DashMash.pdf} platform is an approach to 
 %\end{center}
 \end{figure*}
 
-\section{Use Case Study}
-In order to verify some of the identified related work, use cases around the successor of useKit~\cite{2010-Rizzotti_Burkhart-useKit.pdf} (ProBinder~\cite{wwwprobinder}) have been derived and investigated. 
-Three use cases have been identified to verify the feasibility of certain existing infrastructures.
-
-\subsection{Binder Watcher}
-Binder Watcher is about binders being watched and actions that are taken after certain changes to a binder. Users of ProBinder, which are involved in many different companies and project binders, tend to be confronted with a large amount of information. It is a tedious task to get the user's context back into a clean state, where the ProBinder system is ready to reflect new recent changes in an optimal way to the user. By allowing the users to identify resources (binder tabs in this case, but it could also be complete binders, persons, companies, \dots) of interest, the user task can be automated to a certain extent. As soon as changes are made to the resources of interest, they are marked as read and summarized. These summaries are then provided to the user, which allows him to identify the most important changes.
-
-The Binder Watcher use case was implemented in KRL (see \ref{app:uc_bw_krl}) and provided the important insight that the realization of such a use case in an ECA is a time-consuming challenge. 
-
-\subsection{Activating Legacy Resources}
-To bring reactivity to the static web, we have to enhance legacy resources, which are not event-ready. Changes in such resources have to be detected via e.g. web spiders or crawlers and transformed into events that can be processed by the rules engine. Such an auxiliary cloud application would turn the static web into a reactive system and free a future architecture from incorporating the pulling of events, thus allowing it to concentrate on its main business, i.e. event handling.
-
-\subsubsection{From the Web to the Cloud}
-To make the static web active, an \emph{activator} monitors a predefined remote resource, e.g. a public ProBinder tab, accessed via the normal webpage, not the API. Changes to the tab are detected and pushed into the event-based system as events. In our case we built a reference system on top of \emph{node.js}. These events then have to be processed according to rules and finally actions are invoked, which could also be events again. For our study the action taken was again \emph{ProBinder} which was used to create an entry in another binder, this time via the API. This use case was mainly used to proof the accessibility of ProBinder via a remote system and the activation of the static web.
-
-\subsubsection{From the Cloud to the Web}
-Since cloud applications already provide quite a lot of notifications, they offer themselves as event producers. But most of todays notifications are received by pulling. Only few offer the possibility to register webhooks where they would push events to. The number of cloud applications that offer webhooks will most likely increase in the future and continue to make the web more reactive. But for now after dealing with the static web in the use case above, we need to deal with a semi-reactive web as well. These pull requests to such resources could again be taken care of by introducing an \emph{activator}, which polls periodically for updates and pushes them into the even-based system. 
-Now the system is able to check these events for conditions and invokes actions according to existing rules.
-
-If we have the static web as an action destination, the question is how a static resource is going to react to such an action invocation. There are basically three possibilities to that, first we could implement an interface to the provider of the static resource in order to really change the resource, visible for every body in the web.
-Secondly, we simulate reactivity through our system. Actions taken on behalf of such a resource are stored in an internal state representation of the resource and if certain rules are met, the simulator could produce again events. Each user that is connected to our system, would then be able to experience this reactivity of static resources, and eventually also if other users interacted with the system.
-The third possibility is, rules could also run in a lightweighted architecture on the client browser, which influences the DOM tree to existing rules. Like this it would be easier to maintain a private view for users, but state changes could only be maintained during the browser sessions. Storing these state changes on the server side of the event-based system could overcome that shortfall and a combined solution seems to be a good proof of concept strategy. 
-
-\subsubsection{Node.js}
-In order to implement some proof of concept examples, \emph{node.js} was used as a basis to implement a custom module.
-\emph{node.js} is a powerful tool to build cloud applications. Because of its modularity and the package manager, slim instances can be run. Its main purpose is to be used as a webserver. By incorporating JavaScript's asynchronous design of callback functions into their architecture, locking situations are basically omitted. Thus it is a highly-scalable, asynchronous, event-driven architecture which found broad acceptance in the open-source comunity as well as for enterprises.
+\subsection{Node.js}
+\emph{node.js} is a powerful tool to build cloud applications, which use the internet as a communication layer. Because of \emph{node.js's} modularity and the package manager, slim instances can be run. Its main purpose is to be used as a webserver. By incorporating JavaScript's asynchronous design of callback functions into their architecture, locking situations are basically omitted. Thus it is a highly-scalable, asynchronous, event-driven architecture which found its acceptance in the open-source comunity as well as for enterprises.
 
 The package manager \emph{npm} can be used to maintain dependencies of a custom \emph{node.js} module to other modules. This helpful feature ensures that everybody working with the user-defined module uses the same external modules and the respective versions. Also project repositories do not need to store the dependent libraries through this mechanism, thus saving space and traffic. 
-A name and a version are mandatory for a \emph{node.js} module. Knowing the name, e.g. \PY{n}{diff}, one can look up the latest version in the \emph{npm} repository by issuing following command:
+A name and a version are mandatory for a \emph{node.js} module. Knowing the name, e.g. \emph{diff}, one can look up the latest version in the \emph{npm} repository by issuing following command:
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{err}{\PYZdl{}} \PY{n}{npm} \PY{n}{show} \PY{n}{diff} \PY{n}{version}
@@ -292,21 +281,26 @@ A name and a version are mandatory for a \emph{node.js} module. Knowing the name
 \PY{l+m+mf}{1.0}\PY{o}{.}\PY{l+m+mi}{5}
 \end{Verbatim}
 
-
 Now this dependency, together with the version one would like to use, can be inserted into the own project description file as shown below.
-For our small use case proof of concept project we only had to define the project description file called \PY{n}{package.json} in the root folder of the project:
+For our small use case proof of concept project we only had to define the project description file called \emph{package.json} in the root folder of the project:
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{p}{\PYZob{}}
-	\PY{l+s+s2}{\PYZdq{}name\PYZdq{}}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}msc\PYZhy{}apps\PYZdq{}}\PY{p}{,}
-	\PY{l+s+s2}{\PYZdq{}description\PYZdq{}}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}Proof of concept apps\PYZdq{}}\PY{p}{,}
-	\PY{l+s+s2}{\PYZdq{}version\PYZdq{}}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}0.0.1\PYZdq{}}\PY{p}{,}
-	\PY{l+s+s2}{\PYZdq{}private\PYZdq{}}\PY{o}{:} \PY{k+kc}{true}\PY{p}{,}
-	\PY{l+s+s2}{\PYZdq{}dependencies\PYZdq{}}\PY{o}{:} \PY{p}{\PYZob{}}
-	\PY{l+s+s2}{\PYZdq{}request\PYZdq{}}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}2.22.0\PYZdq{}}\PY{p}{,}
-	\PY{l+s+s2}{\PYZdq{}express\PYZdq{}}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}3.3.4\PYZdq{}}\PY{p}{,}
-	\PY{l+s+s2}{\PYZdq{}diff\PYZdq{}}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}1.0.5\PYZdq{}}
-	\PY{p}{\PYZcb{}}
+  \PY{l+s+s2}{\PYZdq{}name\PYZdq{}}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}msc\PYZhy{}apps\PYZdq{}}\PY{p}{,}
+  \PY{l+s+s2}{\PYZdq{}author\PYZdq{}}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}Dominic Bosch\PYZdq{}}\PY{p}{,}
+  \PY{l+s+s2}{\PYZdq{}description\PYZdq{}}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}Node.js examples\PYZdq{}}\PY{p}{,}
+  \PY{l+s+s2}{\PYZdq{}version\PYZdq{}}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}0.0.1\PYZdq{}}\PY{p}{,}
+  \PY{l+s+s2}{\PYZdq{}private\PYZdq{}}\PY{o}{:} \PY{k+kc}{true}\PY{p}{,}
+  \PY{l+s+s2}{\PYZdq{}repository\PYZdq{}}\PY{o}{:} \PY{p}{\PYZob{}}
+    \PY{l+s+s2}{\PYZdq{}type\PYZdq{}} \PY{o}{:} \PY{l+s+s2}{\PYZdq{}git\PYZdq{}}\PY{p}{,}
+    \PY{l+s+s2}{\PYZdq{}url\PYZdq{}} \PY{o}{:} \PY{l+s+s2}{\PYZdq{}https://github.com/dominicbosch/msc\PYZhy{}liveweb.git\PYZdq{}}
+  \PY{p}{\PYZcb{}}\PY{p}{,}
+  \PY{l+s+s2}{\PYZdq{}dependencies\PYZdq{}}\PY{o}{:} \PY{p}{\PYZob{}}
+    \PY{l+s+s2}{\PYZdq{}express\PYZdq{}}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}3.3.4\PYZdq{}}\PY{p}{,}
+    \PY{l+s+s2}{\PYZdq{}diff\PYZdq{}}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}1.0.5\PYZdq{}}\PY{p}{,}
+    \PY{l+s+s2}{\PYZdq{}needle\PYZdq{}}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}0.5.6\PYZdq{}}\PY{p}{,}
+    \PY{l+s+s2}{\PYZdq{}socket.io\PYZdq{}}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}0.9.16\PYZdq{}}
+  \PY{p}{\PYZcb{}}
 \PY{p}{\PYZcb{}}
 \end{Verbatim}
 
@@ -314,6 +308,7 @@ Everybody who downloads this project needs to download the dependencies before u
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{err}{\PYZdl{}} \PY{n}{npm} \PY{n}{install}
 \end{Verbatim}
+
 If any dependencies change in the future the same command can be run again to update the local project.
 A simple Hello World example of \emph{node.js} looks like this:
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -325,12 +320,137 @@ A simple Hello World example of \emph{node.js} looks like this:
 \PY{n+nx}{server}\PY{p}{.}\PY{n+nx}{listen}\PY{p}{(}\PY{l+m+mi}{8000}\PY{p}{)}\PY{p}{;}
 \end{Verbatim}
 
-After executing this by typing (if the above code was stored in a file called \PY{n}{index.js})
+After executing this by typing (if the above code was stored in a file called \emph{index.js}):
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{err}{\PYZdl{}} \PY{n}{node} \PY{n}{index.js}
 \end{Verbatim}
 the webserver is accessible on port 8000 (by typing \PY{n}{localhost:8000} in the browser bar), and responds with ''Hello World''.
-Examples of the use case implementations in \emph{node.js} can be found in the appendix.
+The code of the ECA rules engine implementation in \emph{node.js} can be found in the appendix.
+
+\section{Use Case Study}
+In order to verify some of the identified related work, use cases around the successor of useKit~\cite{2010-Rizzotti_Burkhart-useKit.pdf} (ProBinder~\cite{wwwprobinder}) have been derived and investigated. 
+Three use cases have been identified to verify the feasibility of certain existing infrastructures.
+
+\subsection{Binder Watcher}
+Binder Watcher is about binders being watched and actions that are taken after certain changes to a binder. Users of ProBinder, which are involved in many different companies and project binders, tend to be confronted with a large amount of information. It is a tedious task to get the user's context back into a clean state, where the ProBinder system is ready to reflect new recent changes in an optimal way to the user. By allowing the users to identify resources (binder tabs in this case, but it could also be complete binders, persons, companies, \dots) of interest, the user task can be automated to a certain extent. As soon as changes are made to the resources of interest, they are marked as read and summarized. These summaries are then provided to the user, which allows him to identify the most important changes.
+
+The Binder Watcher use case was implemented in KRL (see \ref{app:uc_bw_krl}) and provided the important insight that the realization of such a use case in an ECA is a time-consuming challenge. 
+
+\subsection{Activating Legacy Resources}
+To bring reactivity to the static or semi-static web, we have to activate legacy resources, which are not event-ready. Changes in such resources have to be detected via e.g. web spiders or crawlers and transformed into events that can be processed by the rules engine. Such an auxiliary cloud application would turn the static web into a reactive system and free a future architecture from incorporating the pulling of events, thus allowing it to concentrate on its main business, i.e. event handling.
+Since cloud applications already provide quite a lot of notifications, they offer themselves as event producers. Even though still a lot of today's notifications are retreived by pulling, the number of cloud applications, that offer webhooks to support push notifications, seems to increase in the future and continue to make the web more reactive. But for now we want to deal with a semi-reactive web as well. Pull requests to such resources could again be taken care of by introducing an \emph{activator}, which polls periodically for updates and pushes them into the even-based system. 
+Now the system is able to check these events for conditions and invokes actions according to existing rules.
+
+In order to implement some proof of concept examples, \emph{node.js} was used as a basis to implement a lightweighted ECA rules engine in \emph{JavaScript} with influences from JSON Rules\cite{2008-Giurca_Pascalau-JSON_Rules.pdf}.
+
+\subsubsection{From the Web to the Cloud}
+To make the static web active, an \emph{activator} monitors a predefined remote resource, e.g. a public ProBinder tab, accessed via the normal webpage, not the API. Changes to the tab are detected and pushed into the event-based system as events. For our ECA framework we introduced the \emph{unreadcontent} event:
+\begin{Verbatim}[fontsize=\scriptsize,commandchars=\\\{\}]
+\PY{p}{\PYZob{}}
+  \PY{n+nx}{type}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}unreadcontent\PYZsq{}}\PY{p}{,}
+  \PY{n+nx}{eventid}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}web2cloud0\PYZsq{}}\PY{p}{,}
+  \PY{n+nx}{userid}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}12613\PYZsq{}}\PY{p}{,}
+  \PY{n+nx}{username}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}John Doe\PYZsq{}}\PY{p}{,}
+  \PY{n+nx}{contentid}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}100231\PYZsq{}}\PY{p}{,}
+  \PY{n+nx}{text}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}Some lengthy unread content\PYZsq{}}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+These events then have to be processed according to existing rules in the framework and finally actions are invoked, which could also be events again.
+An example ECA rule for the engine to process new unread content is shown below:
+\begin{Verbatim}[fontsize=\scriptsize,commandchars=\\\{\}]
+\PY{p}{\PYZob{}}
+  \PY{n+nx}{id}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}rule\PYZus{}1\PYZsq{}}\PY{p}{,}
+  \PY{n+nx}{condition}\PY{o}{:} \PY{p}{\PYZob{}}
+    \PY{n+nx}{type}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}unreadcontent\PYZsq{}}\PY{p}{,}
+    \PY{n+nx}{userid}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}12613\PYZsq{}}
+  \PY{p}{\PYZcb{}}\PY{p}{,}
+  \PY{n+nx}{actions}\PY{o}{:} \PY{p}{[}
+    \PY{p}{\PYZob{}}
+      \PY{c+cm}{/*}
+\PY{c+cm}{       * Call the probinder service to store new events as a text}
+\PY{c+cm}{       */}
+      \PY{n+nx}{type}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}servicecall\PYZsq{}}\PY{p}{,}
+      \PY{n+nx}{apiprovider}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}probinder\PYZsq{}}\PY{p}{,}
+      \PY{n+nx}{method}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}call\PYZsq{}}\PY{p}{,}
+      \PY{n+nx}{arguments}\PY{o}{:} \PY{p}{\PYZob{}}
+        \PY{n+nx}{service}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}27\PYZsq{}}\PY{p}{,}
+        \PY{n+nx}{method}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}save\PYZsq{}}\PY{p}{,}
+        \PY{n+nx}{data}\PY{o}{:} \PY{p}{\PYZob{}}
+          \PY{n+nx}{companyId}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}643\PYZsq{}}\PY{p}{,}
+          \PY{n+nx}{context}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}17209\PYZsq{}}\PY{p}{,}
+          \PY{n+nx}{text}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}\PYZdl{}X.username wrote: \PYZdl{}X.text\PYZsq{}}
+        \PY{p}{\PYZcb{}}
+      \PY{p}{\PYZcb{}}
+    \PY{p}{\PYZcb{}}\PY{p}{,}
+    \PY{p}{\PYZob{}}
+      \PY{c+cm}{/*}
+\PY{c+cm}{       * Call a probinder service to set the new content unread}
+\PY{c+cm}{       */}
+      \PY{n+nx}{type}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}servicecall\PYZsq{}}\PY{p}{,}
+      \PY{n+nx}{apiprovider}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}probinder\PYZsq{}}\PY{p}{,}
+      \PY{n+nx}{method}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}call\PYZsq{}}\PY{p}{,}
+      \PY{n+nx}{arguments}\PY{o}{:} \PY{p}{\PYZob{}}
+        \PY{n+nx}{service}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}2\PYZsq{}}\PY{p}{,}
+        \PY{n+nx}{method}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}setread\PYZsq{}}\PY{p}{,}
+        \PY{n+nx}{data}\PY{o}{:} \PY{p}{\PYZob{}}
+          \PY{n+nx}{id}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}\PYZdl{}X.contentid\PYZsq{}}
+        \PY{p}{\PYZcb{}}
+      \PY{p}{\PYZcb{}}
+    \PY{p}{\PYZcb{}}
+  \PY{p}{]}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+For our study the action taken was again \emph{ProBinder} which was used to create an entry in another binder, this time via the API. To empower our ECA rules engine to issue requests to ProBinder the module \emph{probinder} was implemented. This use case was mainly used to proof the accessibility of ProBinder via a remote system and the activation of the static web.
+
+The \emph{id} is the unique identifier for the rule. The condition is checked against the event properties of each event and if all conditions are met, the actions are invoked. In the above example the rule's conditions select only the events which are of the type \emph{unreadcontent} and contain the user id \emph{12613}, which refers to a person we want to follow. The \emph{actions} property is an array of different actions to be invoked. In our example these are two ProBinder API calls.
+
+The first action invokes the \emph{call} method of the internal ProBinder interface module. The call function offers access to all services and methods of the ProBinder API\cite{wwwprobinderapi}. Here we call the \emph{save} function of the \emph{Text(27)} service, together with an appropriate binder tab identifier \emph{companyId} and \emph{context}. The text to be entered is a combination of a string and event properties. By using \emph{\$X} as the event variable, it is possible to use properties of it in the actions.
+
+The second action invokes again the ProBinder interface module, this time to mark the processed content as read via the \emph{setread} function of the \emph{Content(2)} service. The content id is also fetched from the event via the event object selector \emph{\$X}.
+
+
+\subsubsection{From the Cloud to the Web}
+The use case here is a \emph{newstudent} event being pushed into the ECA rules engine:
+\begin{Verbatim}[fontsize=\scriptsize,commandchars=\\\{\}]
+\PY{p}{\PYZob{}}
+    \PY{n+nx}{type}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}newstudent\PYZsq{}}\PY{p}{,}
+    \PY{n+nx}{eventid}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}cloud2web0\PYZsq{}}\PY{p}{,}
+    \PY{n+nx}{courseid}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}cs101\PYZsq{}}\PY{p}{,}
+    \PY{n+nx}{uniid}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}bhtest00\PYZsq{}}\PY{p}{,}
+    \PY{n+nx}{probinderid}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}12613\PYZsq{}}\PY{p}{,}
+    \PY{n+nx}{email}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}thelatest\PYZus{}user\PYZus{}cs101@unibas.ch\PYZsq{}}\PY{p}{,}
+    \PY{n+nx}{username}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}A new student\PYZsq{}}
+  \PY{p}{\PYZcb{}}
+\end{Verbatim}
+This corresponds to a new student which registered for a course. We could now invoke actions in the ProBinder framework like creating a tab for a student in an appropriate binder, but this was shown in the last section already.
+
+If we have the static web as an action destination, the question is how a static resource is going to react to such an action invocation. There are basically three possibilities to that, first we could implement an interface to the provider of the static resource in order to really change the resource, detectable for everybody in the web.
+Secondly, we simulate reactivity through our system. Actions taken on behalf of such a resource are stored in an internal state representation of the resource and if certain rules are met, the simulator could produce again events. Each user that is connected to our system, would then be able to experience this reactivity of static resources, and eventually also if other users interacted with the system.
+The third possibility is, rules could also run in a lightweighted architecture on the client browser, which influences the DOM tree according to existing rules. Like this it would be easier to maintain a private view for users, but state changes could only be maintained during the browser sessions. Storing these state changes on the server side of the event-based system could overcome that shortfall and a combined solution seems to be a good proof of concept strategy.
+
+In order to test \emph{node.js's} capabilities for this task, we added a module in the inference engine which deals with a \emph{usernotify} action. The server was enhanced with bidirectional communication between the client browser and the ECA rules engine server. This allows us to push events into the client browser where it can be processed. The result was the amendment of each new student's information to the static webpage.
+The rule we implemented to processes a \emph{newstudent} event was:
+\\\\
+\begin{Verbatim}[fontsize=\scriptsize,commandchars=\\\{\}]
+\PY{p}{\PYZob{}}
+  \PY{n+nb}{id}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{rule\PYZus{}2}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+  \PY{n}{condition}\PY{p}{:} \PY{p}{\PYZob{}} \PY{n+nb}{type}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{newstudent}\PY{l+s}{\PYZsq{}} \PY{p}{\PYZcb{}}\PY{p}{,}
+  \PY{n}{actions}\PY{p}{:} \PY{p}{[}
+    \PY{p}{\PYZob{}}
+      \PY{n+nb}{type}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{usernotify}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+      \PY{n}{arguments}\PY{p}{:} \PY{p}{\PYZob{}}
+        \PY{n}{courseid}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZdl{}X.courseid}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+        \PY{n}{username}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZdl{}X.username}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+        \PY{n}{uniid}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZdl{}X.uniid}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+        \PY{n}{email}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZdl{}X.email}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+        \PY{n}{probinderid}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZdl{}X.probinderid}\PY{l+s}{\PYZsq{}}
+      \PY{p}{\PYZcb{}}
+    \PY{p}{\PYZcb{}}
+  \PY{p}{]}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+This rule causes the rules engine to push these events to all connected client browsers where they are processed further. In our example a new student's information is added to the table in the appropriate course webpage.
 
 \section{Conclusion}
 In \cite{2009-Pascalau_Giurca-LWAECARE.pdf}, the founders of \emph{JSON Rules}~\cite{2008-Giurca_Pascalau-JSON_Rules.pdf} describe a lightweight architecture that allows to react and proact on behalf of events in the ontology of web browsers. \emph{JSON Rules} is promising for our work because of its lightweight architecture and specialization on production and ECA rules. But the existing working memory architecture needs to be generalized to allow a different environment, other than just the DOM tree. The existing architecture could be used to allow the user to create local rules that do not access remote systems and thus runs into authentication issues.
@@ -360,9 +480,12 @@ If users are provided the tools to access public cloud APIs and create mashups w
 \newpage
 \appendix
 \lstset { basicstyle=\tiny }
-\renewcommand\thesection{Appendix \Alph{section}}
+%\renewcommand\thesection{Appendix \Alph{section}}
+%\renewcommand\thesubsection{\Alph{section}}
+%\renewcommand{\thesubsection}{\Alph{subsection}}
 
-\section{Binder Watcher KRL code} \label{app:uc_bw_krl}
+\section*{Appendix}
+\section{Binder Watcher KRL Code} \label{app:uc_bw_krl}
 \begin{Verbatim}[fontsize=\scriptsize,commandchars=\\\{\}]
 \PY{n}{ruleset} \PY{n}{a2236x4} \PY{p}{\PYZob{}}
   \PY{n}{meta} \PY{p}{\PYZob{}}
@@ -374,7 +497,6 @@ If users are provided the tools to access public cloud APIs and create mashups w
     \PY{o}{/}\PY{o}{/} \PY{n}{companyID}\PY{p}{:} \PY{l+m+mi}{643}
     \PY{o}{/}\PY{o}{/} \PY{n}{contextID}\PY{p}{:} \PY{l+m+mi}{16694}
     \PY{o}{/}\PY{o}{/} \PY{n}{followerID}\PY{p}{:} \PY{l+m+mi}{12613}
-    
     \PY{n}{logging} \PY{n}{on}
   \PY{p}{\PYZcb{}}
   
@@ -530,15 +652,677 @@ If users are provided the tools to access public cloud APIs and create mashups w
 
 \end{Verbatim}
 
-%\newpage
-%\section{Web Watcher} 
-%\subsection{node.js code}
-%\begin{lstlisting}[breaklines]
-%\end{lstlisting}
+\newpage
+\section{ECA Rules Engine Resources}
+\subsection{Node.js Rules Engine Code}
+\subsubsection{ecaserver.js}
+\begin{Verbatim}[fontsize=\scriptsize,commandchars=\\\{\}]
+\PY{l+s}{\PYZsq{}}\PY{l+s}{use strict}\PY{l+s}{\PYZsq{}}\PY{p}{;}
+\PY{n}{var} \PY{n}{express} \PY{o}{=} \PY{n}{require}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{express}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\PY{n}{var} \PY{n}{qs} \PY{o}{=} \PY{n}{require}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{querystring}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\PY{n}{var} \PY{n}{engine} \PY{o}{=} \PY{n}{require}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{./ecainference}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
 
-%\subsection{web crawler code}
-%\begin{lstlisting}[breaklines]
-%\end{lstlisting}
 
+\PY{o}{/}\PY{o}{*}\PY{o}{*}
+ \PY{o}{*} \PY{n}{If} \PY{n}{a} \PY{n}{request} \PY{o+ow}{is} \PY{n}{made} \PY{n}{to} \PY{n}{the} \PY{n}{server}\PY{p}{,} \PY{n}{this} \PY{n}{function} \PY{o+ow}{is} \PY{n}{used} \PY{n}{to} \PY{n}{handle} \PY{n}{it}\PY{o}{.}
+ \PY{o}{*}\PY{o}{/}
+\PY{n}{function} \PY{n}{onRequest}\PY{p}{(}\PY{n}{request}\PY{p}{,} \PY{n}{response}\PY{p}{)} \PY{p}{\PYZob{}}
+  
+  \PY{o}{/}\PY{o}{*}\PY{o}{*}
+   \PY{o}{*} \PY{n}{Handles} \PY{n}{erroneous} \PY{n}{requests}\PY{o}{.}
+   \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{Object}\PY{p}{\PYZcb{}} \PY{n}{msg} \PY{n}{the} \PY{n}{error} \PY{n}{message} \PY{n}{to} \PY{n}{be} \PY{n}{returned}
+   \PY{o}{*}\PY{o}{/}
+  \PY{n}{function} \PY{n}{answerError}\PY{p}{(}\PY{n}{msg}\PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{n}{response}\PY{o}{.}\PY{n}{writeHead}\PY{p}{(}\PY{l+m+mi}{400}\PY{p}{,} \PY{p}{\PYZob{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{Content\PYZhy{}Type}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{text/plain}\PY{l+s}{\PYZdq{}} \PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{;}
+    \PY{n}{response}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{msg}\PY{p}{)}\PY{p}{;}
+    \PY{n}{response}\PY{o}{.}\PY{n}{end}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+  \PY{p}{\PYZcb{}}
+  
+  \PY{o}{/}\PY{o}{*}\PY{o}{*}
+   \PY{o}{*} \PY{n}{Handles} \PY{n}{correct} \PY{n}{event} \PY{n}{posts}\PY{p}{,} \PY{n}{replies} \PY{n}{thank} \PY{n}{you}\PY{o}{.}
+   \PY{o}{*}\PY{o}{/}
+  \PY{n}{function} \PY{n}{answerSuccess}\PY{p}{(}\PY{p}{)}\PY{p}{\PYZob{}}
+    \PY{n}{response}\PY{o}{.}\PY{n}{writeHead}\PY{p}{(}\PY{l+m+mi}{200}\PY{p}{,} \PY{p}{\PYZob{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{Content\PYZhy{}Type}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{text/plain}\PY{l+s}{\PYZdq{}} \PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{;}
+    \PY{n}{response}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Thank you for the event!}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+    \PY{n}{response}\PY{o}{.}\PY{n}{end}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+  \PY{p}{\PYZcb{}}
+  
+  \PY{n}{var} \PY{n}{body} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsq{}}\PY{p}{;}
+  \PY{n}{request}\PY{o}{.}\PY{n}{on}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{data}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{function} \PY{p}{(}\PY{n}{data}\PY{p}{)} \PY{p}{\PYZob{}} \PY{n}{body} \PY{o}{+}\PY{o}{=} \PY{n}{data}\PY{p}{;} \PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{;}
+  \PY{n}{request}\PY{o}{.}\PY{n}{on}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{end}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{function} \PY{p}{(}\PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{n}{var} \PY{n}{obj} \PY{o}{=} \PY{n}{qs}\PY{o}{.}\PY{n}{parse}\PY{p}{(}\PY{n}{body}\PY{p}{)}\PY{p}{;}
+    \PY{o}{/}\PY{o}{*}
+     \PY{o}{*} \PY{n}{If} \PY{n}{required} \PY{n}{event} \PY{n}{properties} \PY{n}{are} \PY{n}{present} \PY{n}{we} \PY{n}{process} \PY{n}{the} \PY{n}{event}
+     \PY{o}{*}\PY{o}{/}
+    \PY{k}{if}\PY{p}{(}\PY{n}{obj} \PY{o}{\PYZam{}}\PY{o}{\PYZam{}} \PY{n}{obj}\PY{o}{.}\PY{n}{type} \PY{o}{\PYZam{}}\PY{o}{\PYZam{}} \PY{n}{obj}\PY{o}{.}\PY{n}{eventid}\PY{p}{)}\PY{p}{\PYZob{}}
+      \PY{n}{answerSuccess}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+      \PY{n}{engine}\PY{o}{.}\PY{n}{processRequest}\PY{p}{(}\PY{n}{obj}\PY{p}{)}\PY{p}{;}
+    \PY{p}{\PYZcb{}} \PY{k}{else} \PY{n}{answerError}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Your event was missing important parameters!}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+  \PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+
+\PY{o}{/}\PY{o}{*}
+ \PY{o}{*} \PY{n}{Insert} \PY{n}{a} \PY{n+nb}{set} \PY{n}{of} \PY{n}{rules} \PY{n}{into} \PY{n}{the} \PY{n}{rules} \PY{n}{repository}
+ \PY{o}{*}\PY{o}{/}
+\PY{n}{engine}\PY{o}{.}\PY{n}{insertRule}\PY{p}{(}\PY{p}{\PYZob{}}
+  \PY{n+nb}{id}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{rule\PYZus{}1}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+  \PY{n}{condition}\PY{p}{:} \PY{p}{\PYZob{}}
+    \PY{n+nb}{type}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{unreadcontent}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+    \PY{n}{userid}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{12613}\PY{l+s}{\PYZsq{}}
+  \PY{p}{\PYZcb{}}\PY{p}{,}
+  \PY{n}{actions}\PY{p}{:} \PY{p}{[}
+    \PY{p}{\PYZob{}}
+      \PY{o}{/}\PY{o}{*}
+       \PY{o}{*} \PY{n}{Call} \PY{n}{the} \PY{n}{probinder} \PY{n}{service} \PY{n}{to} \PY{n}{store} \PY{n}{new} \PY{n}{events} \PY{k}{as} \PY{n}{a} \PY{n}{text}
+       \PY{o}{*}\PY{o}{/}
+      \PY{n+nb}{type}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{servicecall}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+      \PY{n}{apiprovider}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{probinder}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+      \PY{n}{method}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{call}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+      \PY{n}{arguments}\PY{p}{:} \PY{p}{\PYZob{}}
+        \PY{n}{service}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{27}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+        \PY{n}{method}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{save}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+        \PY{n}{data}\PY{p}{:} \PY{p}{\PYZob{}}
+          \PY{n}{companyId}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{643}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+          \PY{n}{context}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{17209}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+          \PY{n}{text}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZdl{}X.username wrote: \PYZdl{}X.text}\PY{l+s}{\PYZsq{}}
+        \PY{p}{\PYZcb{}}
+      \PY{p}{\PYZcb{}}
+    \PY{p}{\PYZcb{}}\PY{p}{,}
+    \PY{p}{\PYZob{}}
+      \PY{o}{/}\PY{o}{*}
+       \PY{o}{*} \PY{n}{Call} \PY{n}{a} \PY{n}{probinder} \PY{n}{service} \PY{n}{to} \PY{n+nb}{set} \PY{n}{the} \PY{n}{new} \PY{n}{content} \PY{n}{unread}
+       \PY{o}{*}\PY{o}{/}
+      \PY{n+nb}{type}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{servicecall}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+      \PY{n}{apiprovider}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{probinder}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+      \PY{n}{method}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{call}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+      \PY{n}{arguments}\PY{p}{:} \PY{p}{\PYZob{}}
+        \PY{n}{service}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{2}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+        \PY{n}{method}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{setread}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+        \PY{n}{data}\PY{p}{:} \PY{p}{\PYZob{}}
+          \PY{n+nb}{id}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZdl{}X.contentid}\PY{l+s}{\PYZsq{}}
+        \PY{p}{\PYZcb{}}
+      \PY{p}{\PYZcb{}}
+    \PY{p}{\PYZcb{}}
+  \PY{p}{]}
+\PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{;}
+
+\PY{n}{engine}\PY{o}{.}\PY{n}{insertRule}\PY{p}{(}\PY{p}{\PYZob{}}
+  \PY{n+nb}{id}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{rule\PYZus{}2}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+  \PY{n}{condition}\PY{p}{:} \PY{p}{\PYZob{}} \PY{n+nb}{type}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{newstudent}\PY{l+s}{\PYZsq{}} \PY{p}{\PYZcb{}}\PY{p}{,}
+  \PY{n}{actions}\PY{p}{:} \PY{p}{[}
+    \PY{p}{\PYZob{}}
+      \PY{n+nb}{type}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{usernotify}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+      \PY{n}{arguments}\PY{p}{:} \PY{p}{\PYZob{}}
+        \PY{n}{courseid}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZdl{}X.courseid}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+        \PY{n}{username}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZdl{}X.username}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+        \PY{n}{uniid}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZdl{}X.uniid}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+        \PY{n}{email}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZdl{}X.email}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+        \PY{n}{probinderid}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZdl{}X.probinderid}\PY{l+s}{\PYZsq{}}
+      \PY{p}{\PYZcb{}}
+    \PY{p}{\PYZcb{}}
+  \PY{p}{]}
+\PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{;}
+
+\PY{o}{/}\PY{o}{*}
+ \PY{o}{*} \PY{n}{Initialize} \PY{n}{the} \PY{n}{rules} \PY{n}{engine}
+ \PY{o}{*}\PY{o}{/}
+\PY{n}{engine}\PY{o}{.}\PY{n}{init}\PY{p}{(}\PY{n}{function}\PY{p}{(}\PY{p}{)}\PY{p}{\PYZob{}}
+  \PY{o}{/}\PY{o}{*}
+   \PY{o}{*} \PY{n}{Start} \PY{n}{the} \PY{n}{server} \PY{n}{that} \PY{n}{listens} \PY{k}{for} \PY{n}{events} \PY{n}{after} \PY{n}{the} \PY{n}{engine} \PY{n}{initialized}
+   \PY{o}{*}\PY{o}{/}
+  \PY{n}{var} \PY{n}{app} \PY{o}{=} \PY{n}{express}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+  \PY{n}{app}\PY{o}{.}\PY{n}{post}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{/}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{onRequest}\PY{p}{)}\PY{p}{;}
+  \PY{n}{app}\PY{o}{.}\PY{n}{listen}\PY{p}{(}\PY{l+m+mi}{8125}\PY{p}{)}\PY{p}{;} \PY{o}{/}\PY{o}{/} \PY{n}{uni}\PY{o}{\PYZhy{}}\PY{n}{directional} \PY{n}{event} \PY{n}{channel}
+  
+  \PY{n}{console}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Server has started.}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+
+\PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+\newpage
+\subsubsection{ecainference.js}
+\begin{Verbatim}[fontsize=\scriptsize,commandchars=\\\{\}]
+\PY{l+s}{\PYZsq{}}\PY{l+s}{use strict}\PY{l+s}{\PYZsq{}}\PY{p}{;}
+\PY{o}{/}\PY{o}{*}
+ \PY{o}{*} \PY{n}{Load} \PY{n}{the} \PY{n}{bidirectional} \PY{n}{event} \PY{n}{server} \PY{n}{instance}
+ \PY{o}{*}\PY{o}{/}
+\PY{n}{var} \PY{n}{bidir} \PY{o}{=} \PY{n}{require}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{./bidir}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\PY{n}{var} \PY{n}{regex} \PY{o}{=} \PY{o}{/}\PYZbs{}\PY{err}{\PYZdl{}}\PY{n}{X}\PYZbs{}\PY{o}{.}\PY{p}{(}\PY{p}{[}\PY{n}{A}\PY{o}{\PYZhy{}}\PY{n}{z}\PY{p}{]}\PY{o}{|}\PYZbs{}\PY{o}{.}\PY{p}{)}\PY{o}{*}\PY{p}{[}\PY{n}{A}\PY{o}{\PYZhy{}}\PY{n}{z}\PY{p}{]}\PY{o}{/}\PY{n}{g}\PY{p}{;} \PY{o}{/}\PY{o}{/} \PY{n}{find} \PY{n}{properties} \PY{n}{of} \PY{err}{\PYZdl{}}\PY{n}{X}
+\PY{n}{var} \PY{n}{listRules} \PY{o}{=} \PY{p}{[}\PY{p}{]}\PY{p}{;}
+\PY{n}{var} \PY{n}{apiinterfaces} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}\PY{p}{;}
+
+\PY{o}{/}\PY{o}{*}\PY{o}{*}
+ \PY{o}{*} \PY{n}{Initialize} \PY{n}{the} \PY{n}{rules} \PY{n}{engine}\PY{o}{.}
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{function}\PY{p}{\PYZcb{}} \PY{n}{callback} \PY{n}{The} \PY{n}{callback} \PY{n}{function} \PY{n}{on} \PY{n}{successful} \PY{n}{init}
+ \PY{o}{*}\PY{o}{/}
+\PY{n}{function} \PY{n}{init}\PY{p}{(}\PY{n}{callback}\PY{p}{)} \PY{p}{\PYZob{}}
+  \PY{n}{apiinterfaces}\PY{o}{.}\PY{n}{probinder} \PY{o}{=} \PY{n}{require}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{../probinder/probinder}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+  \PY{n}{apiinterfaces}\PY{o}{.}\PY{n}{probinder}\PY{o}{.}\PY{n}{init}\PY{p}{(}\PY{p}{\PYZob{}}
+    \PY{n+nb}{file}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{../probinder/credentials.json}\PY{l+s}{\PYZsq{}}\PY{p}{,} 
+    \PY{n}{success}\PY{p}{:} \PY{n}{callback}
+  \PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+
+\PY{o}{/}\PY{o}{*}\PY{o}{*}
+ \PY{o}{*} \PY{n}{Insert} \PY{n}{a} \PY{n}{rule} \PY{n}{into} \PY{n}{the} \PY{n}{eca} \PY{n}{rules} \PY{n}{repository}
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{Object}\PY{p}{\PYZcb{}} \PY{n}{rule} \PY{n}{the} \PY{n}{rule} \PY{n+nb}{object}
+ \PY{o}{*}\PY{o}{/}
+\PY{n}{function} \PY{n}{insertRule}\PY{p}{(}\PY{n}{rule}\PY{p}{)} \PY{p}{\PYZob{}}
+  \PY{n}{listRules}\PY{o}{.}\PY{n}{push}\PY{p}{(}\PY{n}{rule}\PY{p}{)}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+
+\PY{o}{/}\PY{o}{*}\PY{o}{*}
+ \PY{o}{*} \PY{n}{Handles} \PY{n}{correctly} \PY{n}{posted} \PY{n}{events}
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{Object}\PY{p}{\PYZcb{}} \PY{n}{evt} \PY{n}{The} \PY{n}{event} \PY{n+nb}{object}
+ \PY{o}{*}\PY{o}{/}
+\PY{n}{function} \PY{n}{processRequest}\PY{p}{(}\PY{n}{evt}\PY{p}{)} \PY{p}{\PYZob{}}
+  \PY{n}{console}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{received event: }\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+  \PY{n}{console}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{evt}\PY{p}{)}\PY{p}{;}
+  \PY{n}{var} \PY{n}{actions} \PY{o}{=} \PY{n}{checkEvent}\PY{p}{(}\PY{n}{evt}\PY{p}{)}\PY{p}{;}
+  \PY{k}{for}\PY{p}{(}\PY{n}{var} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{;} \PY{n}{i} \PY{o}{\PYZlt{}} \PY{n}{actions}\PY{o}{.}\PY{n}{length}\PY{p}{;} \PY{n}{i}\PY{o}{+}\PY{o}{+}\PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{n}{invokeAction}\PY{p}{(}\PY{n}{evt}\PY{p}{,} \PY{n}{actions}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+  \PY{p}{\PYZcb{}}
+\PY{p}{\PYZcb{}}
+
+\PY{o}{/}\PY{o}{*}\PY{o}{*}
+ \PY{o}{*} \PY{n}{Check} \PY{n}{an} \PY{n}{event} \PY{n}{against} \PY{n}{the} \PY{n}{rules} \PY{n}{repository} \PY{o+ow}{and} \PY{k}{return} \PY{n}{the} \PY{n}{actions}
+ \PY{o}{*} \PY{k}{if} \PY{n}{the} \PY{n}{conditons} \PY{n}{are} \PY{n}{met}\PY{o}{.}
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{Object}\PY{p}{\PYZcb{}} \PY{n}{evt} \PY{n}{the} \PY{n}{event} \PY{n}{to} \PY{n}{check}
+ \PY{o}{*}\PY{o}{/}
+\PY{n}{function} \PY{n}{checkEvent}\PY{p}{(}\PY{n}{evt}\PY{p}{)} \PY{p}{\PYZob{}}
+  \PY{n}{var} \PY{n}{actions} \PY{o}{=} \PY{p}{[}\PY{p}{]}\PY{p}{;}
+  \PY{k}{for}\PY{p}{(}\PY{n}{var} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{;} \PY{n}{i} \PY{o}{\PYZlt{}} \PY{n}{listRules}\PY{o}{.}\PY{n}{length}\PY{p}{;} \PY{n}{i}\PY{o}{+}\PY{o}{+}\PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{k}{if}\PY{p}{(}\PY{n}{validConditions}\PY{p}{(}\PY{n}{evt}\PY{p}{,} \PY{n}{listRules}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{p}{\PYZob{}}
+      \PY{n}{actions} \PY{o}{=} \PY{n}{actions}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{n}{listRules}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{actions}\PY{p}{)}\PY{p}{;}
+    \PY{p}{\PYZcb{}}
+  \PY{p}{\PYZcb{}}
+  \PY{k}{return} \PY{n}{actions}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+
+\PY{o}{/}\PY{o}{*}\PY{o}{*}
+ \PY{o}{*} \PY{n}{Checks} \PY{n}{whether} \PY{n+nb}{all} \PY{n}{conditions} \PY{n}{of} \PY{n}{the} \PY{n}{rule} \PY{n}{are} \PY{n}{met} \PY{n}{by} \PY{n}{the} \PY{n}{event}\PY{o}{.}
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{Object}\PY{p}{\PYZcb{}} \PY{n}{evt} \PY{n}{the} \PY{n}{event} \PY{n}{to} \PY{n}{check}
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{Object}\PY{p}{\PYZcb{}} \PY{n}{rule} \PY{n}{the} \PY{n}{rule} \PY{k}{with} \PY{n}{its} \PY{n}{conditions}
+ \PY{o}{*}\PY{o}{/}
+\PY{n}{function} \PY{n}{validConditions}\PY{p}{(}\PY{n}{evt}\PY{p}{,} \PY{n}{rule}\PY{p}{)} \PY{p}{\PYZob{}}
+  \PY{k}{for}\PY{p}{(}\PY{n}{var} \PY{n+nb}{property} \PY{o+ow}{in} \PY{n}{rule}\PY{o}{.}\PY{n}{condition}\PY{p}{)}\PY{p}{\PYZob{}}
+    \PY{k}{if}\PY{p}{(}\PY{err}{!}\PY{n}{evt}\PY{p}{[}\PY{n+nb}{property}\PY{p}{]} \PY{o}{|}\PY{o}{|} \PY{n}{evt}\PY{p}{[}\PY{n+nb}{property}\PY{p}{]} \PY{o}{!=} \PY{n}{rule}\PY{o}{.}\PY{n}{condition}\PY{p}{[}\PY{n+nb}{property}\PY{p}{]}\PY{p}{)} \PY{k}{return} \PY{n}{false}\PY{p}{;}
+  \PY{p}{\PYZcb{}}
+  \PY{k}{return} \PY{n}{true}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+
+\PY{o}{/}\PY{o}{*}\PY{o}{*}
+ \PY{o}{*} \PY{n}{Invoke} \PY{n}{an} \PY{n}{action} \PY{n}{according} \PY{n}{to} \PY{n}{its} \PY{n+nb}{type}\PY{o}{.}
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{Object}\PY{p}{\PYZcb{}} \PY{n}{evt} \PY{n}{The} \PY{n}{event} \PY{n}{that} \PY{n}{invoked} \PY{n}{the} \PY{n}{action}
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{Object}\PY{p}{\PYZcb{}} \PY{n}{action} \PY{n}{The} \PY{n}{action} \PY{n}{to} \PY{n}{be} \PY{n}{onvoked}
+ \PY{o}{*}\PY{o}{/}
+\PY{n}{function} \PY{n}{invokeAction}\PY{p}{(}\PY{n}{evt}\PY{p}{,} \PY{n}{action}\PY{p}{)} \PY{p}{\PYZob{}}
+  \PY{n}{var} \PY{n}{actionargs} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}\PY{p}{;}
+  \PY{n}{preprocessActionArguments}\PY{p}{(}\PY{n}{evt}\PY{p}{,} \PY{n}{action}\PY{o}{.}\PY{n}{arguments}\PY{p}{,} \PY{n}{actionargs}\PY{p}{)}\PY{p}{;}
+  \PY{n}{switch}\PY{p}{(}\PY{n}{action}\PY{o}{.}\PY{n}{type}\PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{n}{case} \PY{l+s}{\PYZsq{}}\PY{l+s}{servicecall}\PY{l+s}{\PYZsq{}}\PY{p}{:}
+      \PY{n}{var} \PY{n}{srvc} \PY{o}{=} \PY{n}{apiinterfaces}\PY{p}{[}\PY{n}{action}\PY{o}{.}\PY{n}{apiprovider}\PY{p}{]}\PY{p}{;}
+      \PY{k}{if}\PY{p}{(}\PY{n}{srvc}\PY{p}{)} \PY{p}{\PYZob{}}\PY{o}{/}\PY{o}{/} \PY{n}{The} \PY{n}{first} \PY{n}{three} 
+        \PY{n}{srvc}\PY{p}{[}\PY{n}{action}\PY{o}{.}\PY{n}{method}\PY{p}{]}\PY{p}{(}\PY{n}{actionargs}\PY{p}{)}\PY{p}{;}
+      \PY{p}{\PYZcb{}}
+      \PY{k}{else} \PY{n}{console}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{no api interface found for: }\PY{l+s}{\PYZsq{}} \PY{o}{+} \PY{n}{action}\PY{o}{.}\PY{n}{apiprovider}\PY{p}{)}\PY{p}{;}
+      \PY{k}{break}\PY{p}{;}
+    \PY{n}{case} \PY{l+s}{\PYZsq{}}\PY{l+s}{usernotify}\PY{l+s}{\PYZsq{}}\PY{p}{:}
+      \PY{n}{bidir}\PY{o}{.}\PY{n}{sendEvent}\PY{p}{(}\PY{n}{actionargs}\PY{p}{)}\PY{p}{;}
+      \PY{k}{break}\PY{p}{;}
+    \PY{n}{default}\PY{p}{:} \PY{n}{console}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{no action available for: }\PY{l+s}{\PYZsq{}} \PY{o}{+} \PY{n}{action}\PY{o}{.}\PY{n}{type}\PY{p}{)}\PY{p}{;}
+  \PY{p}{\PYZcb{}}
+\PY{p}{\PYZcb{}}
+
+\PY{o}{/}\PY{o}{*}\PY{o}{*}
+ \PY{o}{*} \PY{n}{Action} \PY{n}{properties} \PY{n}{may} \PY{n}{contain} \PY{n}{event} \PY{n}{properties} \PY{n}{which} \PY{n}{need} \PY{n}{to} \PY{n}{be} \PY{n}{resolved} \PY{n}{beforehand}\PY{o}{.}
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{Object}\PY{p}{\PYZcb{}} \PY{n}{evt} \PY{n}{The} \PY{n}{event} \PY{n}{whose} \PY{n+nb}{property} \PY{n}{values} \PY{n}{can} \PY{n}{be} \PY{n}{used} \PY{o+ow}{in} \PY{n}{the} \PY{n}{rules} \PY{n}{action}
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{Object}\PY{p}{\PYZcb{}} \PY{n}{act} \PY{n}{The} \PY{n}{rules} \PY{n}{action} \PY{n}{arguments}
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{Object}\PY{p}{\PYZcb{}} \PY{n}{res} \PY{n}{The} \PY{n+nb}{object} \PY{n}{to} \PY{n}{be} \PY{n}{used} \PY{n}{to} \PY{n}{enter} \PY{n}{the} \PY{n}{new} \PY{n}{properties}
+ \PY{o}{*}\PY{o}{/}
+\PY{n}{function} \PY{n}{preprocessActionArguments}\PY{p}{(}\PY{n}{evt}\PY{p}{,} \PY{n}{act}\PY{p}{,} \PY{n}{res}\PY{p}{)} \PY{p}{\PYZob{}}
+  \PY{k}{for}\PY{p}{(}\PY{n}{var} \PY{n}{prop} \PY{o+ow}{in} \PY{n}{act}\PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{o}{/}\PY{o}{*}
+     \PY{o}{*} \PY{n}{If} \PY{n}{the} \PY{n+nb}{property} \PY{o+ow}{is} \PY{n}{an} \PY{n+nb}{object} \PY{n}{itself} \PY{n}{we} \PY{n}{go} \PY{n}{into} \PY{n}{recursion}
+     \PY{o}{*}\PY{o}{/}
+    \PY{k}{if}\PY{p}{(}\PY{n}{typeof} \PY{n}{act}\PY{p}{[}\PY{n}{prop}\PY{p}{]} \PY{o}{==}\PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{object}\PY{l+s}{\PYZsq{}}\PY{p}{)} \PY{p}{\PYZob{}}
+      \PY{n}{res}\PY{p}{[}\PY{n}{prop}\PY{p}{]} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}\PY{p}{;}
+      \PY{n}{preprocessActionArguments}\PY{p}{(}\PY{n}{evt}\PY{p}{,} \PY{n}{act}\PY{p}{[}\PY{n}{prop}\PY{p}{]}\PY{p}{,} \PY{n}{res}\PY{p}{[}\PY{n}{prop}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+    \PY{p}{\PYZcb{}}
+    \PY{k}{else} \PY{p}{\PYZob{}}
+      \PY{n}{var} \PY{n}{arr} \PY{o}{=} \PY{n}{act}\PY{p}{[}\PY{n}{prop}\PY{p}{]}\PY{o}{.}\PY{n}{match}\PY{p}{(}\PY{n}{regex}\PY{p}{)}\PY{p}{;}
+      \PY{o}{/}\PY{o}{*}
+       \PY{o}{*} \PY{n}{If} \PY{n}{rules} \PY{n}{action} \PY{n+nb}{property} \PY{n}{holds} \PY{n}{event} \PY{n}{properties} \PY{n}{we} \PY{n}{resolve} \PY{n}{them} \PY{o+ow}{and}
+       \PY{o}{*} \PY{n}{replace} \PY{n}{the} \PY{n}{original} \PY{n}{action} \PY{n+nb}{property}
+       \PY{o}{*}\PY{o}{/}
+      \PY{k}{if}\PY{p}{(}\PY{n}{arr}\PY{p}{)} \PY{p}{\PYZob{}}
+        \PY{n}{var} \PY{n}{txt} \PY{o}{=} \PY{n}{act}\PY{p}{[}\PY{n}{prop}\PY{p}{]}\PY{p}{;}
+        \PY{k}{for}\PY{p}{(}\PY{n}{var} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{;} \PY{n}{i} \PY{o}{\PYZlt{}} \PY{n}{arr}\PY{o}{.}\PY{n}{length}\PY{p}{;} \PY{n}{i}\PY{o}{+}\PY{o}{+}\PY{p}{)} \PY{p}{\PYZob{}}
+          \PY{o}{/}\PY{o}{*}
+           \PY{o}{*} \PY{n}{The} \PY{n}{first} \PY{n}{three} \PY{n}{characters} \PY{n}{are} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZdl{}X.}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{followed} \PY{n}{by} \PY{n}{the} \PY{n+nb}{property}
+           \PY{o}{*}\PY{o}{/}
+          \PY{n}{txt} \PY{o}{=} \PY{n}{txt}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{n}{arr}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{evt}\PY{p}{[}\PY{n}{arr}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{substring}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+        \PY{p}{\PYZcb{}}
+        \PY{n}{res}\PY{p}{[}\PY{n}{prop}\PY{p}{]} \PY{o}{=} \PY{n}{txt}\PY{p}{;}
+      \PY{p}{\PYZcb{}}
+    \PY{p}{\PYZcb{}}
+  \PY{p}{\PYZcb{}}
+\PY{p}{\PYZcb{}}
+
+\PY{n}{exports}\PY{o}{.}\PY{n}{init} \PY{o}{=} \PY{n}{init}\PY{p}{;}
+\PY{n}{exports}\PY{o}{.}\PY{n}{insertRule} \PY{o}{=} \PY{n}{insertRule}\PY{p}{;}
+\PY{n}{exports}\PY{o}{.}\PY{n}{processRequest} \PY{o}{=} \PY{n}{processRequest}\PY{p}{;}
+\end{Verbatim}
+
+\newpage
+\subsubsection{bidir.js}
+\begin{Verbatim}[fontsize=\scriptsize,commandchars=\\\{\}]
+\PY{l+s}{\PYZsq{}}\PY{l+s}{use strict}\PY{l+s}{\PYZsq{}}\PY{p}{;}
+\PY{n}{var} \PY{n}{app} \PY{o}{=} \PY{n}{require}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{http}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{createServer}\PY{p}{(}\PY{n}{handler}\PY{p}{)}\PY{p}{,}
+  \PY{n}{io} \PY{o}{=} \PY{n}{require}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{socket.io}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{listen}\PY{p}{(}\PY{n}{app}\PY{p}{,} \PY{p}{\PYZob{}} \PY{n}{log}\PY{p}{:} \PY{n}{false} \PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{,}
+  \PY{n}{fs} \PY{o}{=} \PY{n}{require}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{fs}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+  
+\PY{n}{app}\PY{o}{.}\PY{n}{listen}\PY{p}{(}\PY{l+m+mi}{8080}\PY{p}{)}\PY{p}{;}
+
+\PY{n}{function} \PY{n}{handler} \PY{p}{(}\PY{n}{req}\PY{p}{,} \PY{n}{res}\PY{p}{)} \PY{p}{\PYZob{}}
+  \PY{n}{console}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Somebody requested: }\PY{l+s}{\PYZsq{}} \PY{o}{+} \PY{n}{req}\PY{o}{.}\PY{n}{url}\PY{p}{)}\PY{p}{;}
+  \PY{n}{var} \PY{n}{fl} \PY{o}{=} \PY{n}{req}\PY{o}{.}\PY{n}{url}\PY{p}{;}
+  \PY{k}{if}\PY{p}{(}\PY{n}{fl} \PY{o}{==} \PY{l+s}{\PYZsq{}}\PY{l+s}{/}\PY{l+s}{\PYZsq{}}\PY{p}{)} \PY{n}{fl} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{/course101.html}\PY{l+s}{\PYZsq{}}\PY{p}{;}
+  \PY{n}{fs}\PY{o}{.}\PY{n}{readFile}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{./webpage}\PY{l+s}{\PYZsq{}} \PY{o}{+} \PY{n}{fl}\PY{p}{,}
+  \PY{n}{function} \PY{p}{(}\PY{n}{err}\PY{p}{,} \PY{n}{data}\PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{k}{if} \PY{p}{(}\PY{n}{err}\PY{p}{)} \PY{p}{\PYZob{}}
+      \PY{n}{res}\PY{o}{.}\PY{n}{writeHead}\PY{p}{(}\PY{l+m+mi}{500}\PY{p}{)}\PY{p}{;}
+      \PY{k}{return} \PY{n}{res}\PY{o}{.}\PY{n}{end}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Error loading }\PY{l+s}{\PYZsq{}} \PY{o}{+} \PY{n}{req}\PY{o}{.}\PY{n}{url}\PY{p}{)}\PY{p}{;}
+    \PY{p}{\PYZcb{}}
+    \PY{n}{res}\PY{o}{.}\PY{n}{writeHead}\PY{p}{(}\PY{l+m+mi}{200}\PY{p}{)}\PY{p}{;}
+    \PY{n}{res}\PY{o}{.}\PY{n}{end}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{;}
+  \PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+
+\PY{n}{function} \PY{n}{sendEvent}\PY{p}{(}\PY{n}{evt}\PY{p}{)} \PY{p}{\PYZob{}}
+  \PY{n}{io}\PY{o}{.}\PY{n}{sockets}\PY{o}{.}\PY{n}{emit}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{engine}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{evt}\PY{p}{)}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+
+\PY{n}{exports}\PY{o}{.}\PY{n}{sendEvent} \PY{o}{=} \PY{n}{sendEvent}\PY{p}{;}
+\end{Verbatim}
+
+
+
+\newpage
+\subsection{ProBinder Module Code}
+\subsubsection{probinder.js}
+\begin{Verbatim}[fontsize=\scriptsize,commandchars=\\\{\}]
+
+\PY{l+s}{\PYZsq{}}\PY{l+s}{use strict}\PY{l+s}{\PYZsq{}}\PY{p}{;}
+\PY{n}{var} \PY{n}{request} \PY{o}{=} \PY{n}{require}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{needle}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\PY{n}{var} \PY{n}{fs} \PY{o}{=} \PY{n}{require}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{fs}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\PY{n}{var} \PY{n}{urlService} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{https://probinder.com/service/}\PY{l+s}{\PYZsq{}}\PY{p}{;}
+\PY{n}{var} \PY{n}{credentials}\PY{p}{;}
+
+\PY{o}{/}\PY{o}{*}\PY{o}{*}
+ \PY{o}{*} \PY{n}{Initializes} \PY{n}{the} \PY{n}{probinder} \PY{n}{API} \PY{n}{interfaces} \PY{n}{by} \PY{n}{loading} \PY{n}{the} \PY{n}{required} \PY{n}{credentials}\PY{o}{.}
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{Object}\PY{p}{\PYZcb{}} \PY{p}{[}\PY{n}{args}\PY{p}{]} \PY{n}{The} \PY{n}{optional} \PY{n}{arguments} \PY{n+nb}{object}
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{String}\PY{p}{\PYZcb{}} \PY{p}{[}\PY{n}{args}\PY{o}{.}\PY{n}{file}\PY{p}{]} \PY{n}{the} \PY{n}{location} \PY{n}{of} \PY{n}{the} \PY{n}{credentials} \PY{n+nb}{file}\PY{p}{,}
+ \PY{o}{*}    \PY{k}{else} \PY{l+s}{\PYZsq{}}\PY{l+s}{./credentials.json}\PY{l+s}{\PYZsq{}} \PY{o+ow}{is} \PY{n}{assumed}
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{function}\PY{p}{\PYZcb{}} \PY{p}{[}\PY{n}{args}\PY{o}{.}\PY{n}{success}\PY{p}{]} \PY{n}{a} \PY{n}{callback} \PY{n}{function} \PY{n}{to} \PY{n}{be} \PY{n}{called} \PY{n}{when}
+ \PY{o}{*}    \PY{n}{credentials} \PY{n}{were} \PY{n}{successfully} \PY{n}{loaded}
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{function}\PY{p}{\PYZcb{}} \PY{p}{[}\PY{n}{args}\PY{o}{.}\PY{n}{error}\PY{p}{]}  \PY{n}{a} \PY{n}{callback} \PY{n}{function} \PY{n}{to} \PY{n}{be} \PY{n}{called} \PY{n}{when}
+ \PY{o}{*}    \PY{n}{loading} \PY{n}{of} \PY{n}{credentials} \PY{n}{failed}
+ \PY{o}{*}\PY{o}{/}
+\PY{n}{function} \PY{n}{init}\PY{p}{(}\PY{n}{args}\PY{p}{)}\PY{p}{\PYZob{}}
+  \PY{n}{var} \PY{n}{filepath}\PY{p}{;}
+  \PY{k}{if}\PY{p}{(}\PY{n}{args} \PY{o}{\PYZam{}}\PY{o}{\PYZam{}} \PY{n}{args}\PY{o}{.}\PY{n}{file}\PY{p}{)} \PY{n}{filepath} \PY{o}{=} \PY{n}{args}\PY{o}{.}\PY{n}{file}\PY{p}{;}
+  \PY{k}{else} \PY{n}{filepath} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{./credentials.json}\PY{l+s}{\PYZsq{}}\PY{p}{;}
+  \PY{n}{fs}\PY{o}{.}\PY{n}{readFile}\PY{p}{(}\PY{n}{filepath}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{utf8}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{function} \PY{p}{(}\PY{n}{err}\PY{p}{,} \PY{n}{data}\PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{k}{if} \PY{p}{(}\PY{n}{err}\PY{p}{)} \PY{p}{\PYZob{}}
+      \PY{n}{console}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{ERROR: Loading credentials file}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+      \PY{k}{if}\PY{p}{(}\PY{n}{args} \PY{o}{\PYZam{}}\PY{o}{\PYZam{}} \PY{n}{args}\PY{o}{.}\PY{n}{error}\PY{p}{)} \PY{n}{args}\PY{o}{.}\PY{n}{error}\PY{p}{(}\PY{n}{err}\PY{p}{)}\PY{p}{;}
+      \PY{k}{return}\PY{p}{;}
+    \PY{p}{\PYZcb{}}
+    \PY{n}{credentials} \PY{o}{=} \PY{n}{JSON}\PY{o}{.}\PY{n}{parse}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{;}
+    \PY{k}{if}\PY{p}{(}\PY{n}{credentials} \PY{o}{\PYZam{}}\PY{o}{\PYZam{}} \PY{n}{credentials}\PY{o}{.}\PY{n}{username} \PY{o}{\PYZam{}}\PY{o}{\PYZam{}} \PY{n}{credentials}\PY{o}{.}\PY{n}{password}\PY{p}{)} \PY{p}{\PYZob{}}
+      \PY{k}{if}\PY{p}{(}\PY{n}{args} \PY{o}{\PYZam{}}\PY{o}{\PYZam{}} \PY{n}{args}\PY{o}{.}\PY{n}{success}\PY{p}{)} \PY{n}{args}\PY{o}{.}\PY{n}{success}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+    \PY{p}{\PYZcb{}} \PY{k}{else} \PY{p}{\PYZob{}}
+      \PY{n}{credentials} \PY{o}{=} \PY{n}{null}\PY{p}{;}
+      \PY{n}{console}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{ERROR: credentials file corrupt}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+      \PY{k}{if}\PY{p}{(}\PY{n}{args} \PY{o}{\PYZam{}}\PY{o}{\PYZam{}} \PY{n}{args}\PY{o}{.}\PY{n}{error}\PY{p}{)} \PY{n}{args}\PY{o}{.}\PY{n}{error}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+    \PY{p}{\PYZcb{}}
+  \PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{;}
+\PY{p}{\PYZcb{}}\PY{p}{;}
+
+\PY{o}{/}\PY{o}{*}\PY{o}{*}
+ \PY{o}{*} \PY{n}{Reset} \PY{n}{eventually} \PY{n}{loaded} \PY{n}{credentials}
+ \PY{o}{*}\PY{o}{/}
+\PY{n}{function} \PY{n}{purgeCredentials}\PY{p}{(}\PY{p}{)} \PY{p}{\PYZob{}}
+  \PY{n}{credentials} \PY{o}{=} \PY{n}{null}\PY{p}{;}
+\PY{p}{\PYZcb{}}\PY{p}{;}
+
+\PY{o}{/}\PY{o}{*}\PY{o}{*}
+ \PY{o}{*} \PY{n}{Verify} \PY{n}{whether} \PY{n}{the} \PY{n}{arguments} \PY{n}{match} \PY{n}{the} \PY{n}{existing} \PY{n}{credentials}\PY{o}{.}
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{String}\PY{p}{\PYZcb{}} \PY{n}{username} \PY{n}{the} \PY{n}{username}
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{String}\PY{p}{\PYZcb{}} \PY{n}{password} \PY{n}{the} \PY{n}{password}
+ \PY{o}{*}\PY{o}{/}
+\PY{n}{function} \PY{n}{verifyCredentials}\PY{p}{(}\PY{n}{username}\PY{p}{,} \PY{n}{password}\PY{p}{)} \PY{p}{\PYZob{}}
+  \PY{k}{if}\PY{p}{(}\PY{err}{!}\PY{n}{credentials}\PY{p}{)} \PY{k}{return} \PY{n}{false}\PY{p}{;}
+  \PY{k}{return} \PY{n}{credentials}\PY{o}{.}\PY{n}{username} \PY{o}{==}\PY{o}{=} \PY{n}{username}
+    \PY{o}{\PYZam{}}\PY{o}{\PYZam{}} \PY{n}{credentials}\PY{o}{.}\PY{n}{password} \PY{o}{==}\PY{o}{=} \PY{n}{password}\PY{p}{;}
+\PY{p}{\PYZcb{}}\PY{p}{;}
+
+\PY{o}{/}\PY{o}{*}\PY{o}{*}
+ \PY{o}{*} \PY{n}{Call} \PY{n}{the} \PY{n}{ProBinder} \PY{n}{service} \PY{k}{with} \PY{n}{the} \PY{n}{given} \PY{n}{parameters}\PY{o}{.}
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{Object}\PY{p}{\PYZcb{}} \PY{n}{args} \PY{n}{the} \PY{n}{required} \PY{n}{function} \PY{n}{arguments} \PY{n+nb}{object}
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{Object}\PY{p}{\PYZcb{}} \PY{p}{[}\PY{n}{args}\PY{o}{.}\PY{n}{data}\PY{p}{]} \PY{n}{the} \PY{n}{data} \PY{n}{to} \PY{n}{be} \PY{n}{posted}
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{String}\PY{p}{\PYZcb{}} \PY{n}{args}\PY{o}{.}\PY{n}{service} \PY{n}{the} \PY{n}{required} \PY{n}{service} \PY{n}{identifier} \PY{n}{to} \PY{n}{be} \PY{n}{appended} \PY{n}{to} \PY{n}{the} \PY{n}{url}
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{String}\PY{p}{\PYZcb{}} \PY{n}{args}\PY{o}{.}\PY{n}{method} \PY{n}{the} \PY{n}{required} \PY{n}{method} \PY{n}{identifier} \PY{n}{to} \PY{n}{be} \PY{n}{appended} \PY{n}{to} \PY{n}{the} \PY{n}{url}
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{function}\PY{p}{\PYZcb{}} \PY{p}{[}\PY{n}{args}\PY{o}{.}\PY{n}{succes}\PY{p}{]} \PY{n}{the} \PY{n}{function} \PY{n}{to} \PY{n}{be} \PY{n}{called} \PY{n}{on} \PY{n}{success}\PY{p}{,}
+ \PY{o}{*}    \PY{n}{receives} \PY{n}{the} \PY{n}{response} \PY{n}{body} \PY{n}{String} \PY{o+ow}{or} \PY{n}{Buffer}\PY{o}{.}
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{function}\PY{p}{\PYZcb{}} \PY{p}{[}\PY{n}{args}\PY{o}{.}\PY{n}{error}\PY{p}{]} \PY{n}{the} \PY{n}{function} \PY{n}{to} \PY{n}{be} \PY{n}{called} \PY{n}{on} \PY{n}{error}\PY{p}{,}
+ \PY{o}{*}    \PY{n}{receives} \PY{n}{an} \PY{n}{error}\PY{p}{,} \PY{n}{an} \PY{n}{http}\PY{o}{.}\PY{n}{ClientResponse} \PY{n+nb}{object} \PY{o+ow}{and} \PY{n}{a} \PY{n}{response} \PY{n}{body}
+ \PY{o}{*}    \PY{n}{String} \PY{o+ow}{or} \PY{n}{Buffer}\PY{o}{.}
+ \PY{o}{*}\PY{o}{/}
+\PY{n}{function} \PY{n}{call}\PY{p}{(}\PY{n}{args}\PY{p}{)} \PY{p}{\PYZob{}}
+  \PY{k}{if}\PY{p}{(}\PY{err}{!}\PY{n}{args} \PY{o}{|}\PY{o}{|} \PY{err}{!}\PY{n}{args}\PY{o}{.}\PY{n}{service} \PY{o}{|}\PY{o}{|} \PY{err}{!}\PY{n}{args}\PY{o}{.}\PY{n}{method}\PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{n}{console}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{ERROR: Too few arguments!}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+    \PY{k}{return}\PY{p}{;}
+  \PY{p}{\PYZcb{}}
+  \PY{k}{if}\PY{p}{(}\PY{n}{request} \PY{o}{\PYZam{}}\PY{o}{\PYZam{}} \PY{n}{credentials}\PY{p}{)}\PY{p}{\PYZob{}}
+    \PY{n}{request}\PY{o}{.}\PY{n}{post}\PY{p}{(}\PY{n}{urlService} \PY{o}{+} \PY{n}{args}\PY{o}{.}\PY{n}{service} \PY{o}{+} \PY{l+s}{\PYZsq{}}\PY{l+s}{/}\PY{l+s}{\PYZsq{}} \PY{o}{+} \PY{n}{args}\PY{o}{.}\PY{n}{method}\PY{p}{,}
+      \PY{n}{args}\PY{o}{.}\PY{n}{data}\PY{p}{,}
+      \PY{n}{credentials}\PY{p}{,}
+      \PY{n}{function}\PY{p}{(}\PY{n}{error}\PY{p}{,} \PY{n}{response}\PY{p}{,} \PY{n}{body}\PY{p}{)} \PY{p}{\PYZob{}} \PY{o}{/}\PY{o}{/} \PY{n}{The} \PY{n}{callback}
+        \PY{k}{if} \PY{p}{(}\PY{err}{!}\PY{n}{error}\PY{p}{)} \PY{p}{\PYZob{}} \PY{o}{/}\PY{o}{/}\PY{p}{)} \PY{o}{\PYZam{}}\PY{o}{\PYZam{}} \PY{n}{response}\PY{o}{.}\PY{n}{statusCode} \PY{o}{==} \PY{l+m+mi}{200}\PY{p}{)} \PY{p}{\PYZob{}}
+          \PY{k}{if}\PY{p}{(}\PY{n}{args} \PY{o}{\PYZam{}}\PY{o}{\PYZam{}} \PY{n}{args}\PY{o}{.}\PY{n}{success}\PY{p}{)} \PY{n}{args}\PY{o}{.}\PY{n}{success}\PY{p}{(}\PY{n}{body}\PY{p}{)}\PY{p}{;}
+        \PY{p}{\PYZcb{}} \PY{k}{else} \PY{p}{\PYZob{}}
+          \PY{k}{if}\PY{p}{(}\PY{n}{args} \PY{o}{\PYZam{}}\PY{o}{\PYZam{}} \PY{n}{args}\PY{o}{.}\PY{n}{error}\PY{p}{)} \PY{n}{args}\PY{o}{.}\PY{n}{error}\PY{p}{(}\PY{n}{error}\PY{p}{,} \PY{n}{response}\PY{p}{,} \PY{n}{body}\PY{p}{)}\PY{p}{;}
+          \PY{k}{else} \PY{n}{console}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Error during serivce call: }\PY{l+s}{\PYZsq{}} \PY{o}{+} \PY{n}{error}\PY{o}{.}\PY{n}{message}\PY{p}{)}\PY{p}{;}
+        \PY{p}{\PYZcb{}}
+      \PY{p}{\PYZcb{}}
+    \PY{p}{)}\PY{p}{;}
+  \PY{p}{\PYZcb{}} \PY{k}{else} \PY{n}{console}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{request or credentials object not ready!}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\PY{p}{\PYZcb{}}\PY{p}{;}
+
+\PY{o}{/}\PY{o}{*}\PY{o}{*}
+ \PY{o}{*} \PY{n}{Calls} \PY{n}{the} \PY{n}{user}\PY{l+s}{\PYZsq{}}\PY{l+s}{s unread content service.}
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{Object}\PY{p}{\PYZcb{}} \PY{p}{[}\PY{n}{args}\PY{p}{]} \PY{n}{the} \PY{n}{optional} \PY{n+nb}{object} \PY{n}{containing} \PY{n}{the} \PY{n}{success}
+ \PY{o}{*}    \PY{o+ow}{and} \PY{n}{error} \PY{n}{callback} \PY{n}{methods}
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{function}\PY{p}{\PYZcb{}} \PY{p}{[}\PY{n}{args}\PY{o}{.}\PY{n}{succes}\PY{p}{]} \PY{n}{refer} \PY{n}{to} \PY{n}{call} \PY{n}{function}
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{function}\PY{p}{\PYZcb{}} \PY{p}{[}\PY{n}{args}\PY{o}{.}\PY{n}{error}\PY{p}{]} \PY{n}{refer} \PY{n}{to} \PY{n}{call} \PY{n}{function}
+ \PY{o}{*}\PY{o}{/}
+\PY{n}{function} \PY{n}{getUnreadContents}\PY{p}{(}\PY{n}{args}\PY{p}{)} \PY{p}{\PYZob{}}
+  \PY{k}{if}\PY{p}{(}\PY{err}{!}\PY{n}{args}\PY{p}{)} \PY{n}{args} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}\PY{p}{;}
+  \PY{n}{call}\PY{p}{(}\PY{p}{\PYZob{}}
+    \PY{n}{service}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{36}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+    \PY{n}{method}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{unreadcontent}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+    \PY{n}{success}\PY{p}{:} \PY{n}{args}\PY{o}{.}\PY{n}{success}\PY{p}{,}
+    \PY{n}{error}\PY{p}{:} \PY{n}{args}\PY{o}{.}\PY{n}{error}
+  \PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{;}
+\PY{p}{\PYZcb{}}\PY{p}{;}
+
+\PY{o}{/}\PY{o}{*}\PY{o}{*}
+ \PY{o}{*} \PY{n}{Calls} \PY{n}{the} \PY{n}{content} \PY{n}{service} \PY{k}{for} \PY{n}{a} \PY{n}{binder} \PY{n}{tab}\PY{o}{.}
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{Object}\PY{p}{\PYZcb{}} \PY{n}{args} \PY{n}{the} \PY{n+nb}{object} \PY{n}{containing} \PY{n}{the} \PY{n}{binder} \PY{n}{tab} \PY{n+nb}{id}\PY{p}{,} \PY{n}{success}
+ \PY{o}{*}    \PY{o+ow}{and} \PY{n}{error} \PY{n}{callback} \PY{n}{methods}
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{String}\PY{p}{\PYZcb{}} \PY{n}{tabid} \PY{n}{the} \PY{n}{binder} \PY{n}{tab} \PY{n+nb}{id}
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{function}\PY{p}{\PYZcb{}} \PY{p}{[}\PY{n}{args}\PY{o}{.}\PY{n}{succes}\PY{p}{]} \PY{n}{refer} \PY{n}{to} \PY{n}{call} \PY{n}{function}
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{function}\PY{p}{\PYZcb{}} \PY{p}{[}\PY{n}{args}\PY{o}{.}\PY{n}{error}\PY{p}{]} \PY{n}{refer} \PY{n}{to} \PY{n}{call} \PY{n}{function}
+ \PY{o}{*}\PY{o}{/}
+\PY{n}{function} \PY{n}{getBinderTabContents}\PY{p}{(}\PY{n}{args}\PY{p}{)}\PY{p}{\PYZob{}}
+  \PY{k}{if}\PY{p}{(}\PY{err}{!}\PY{n}{args} \PY{o}{|}\PY{o}{|} \PY{err}{!}\PY{n}{args}\PY{o}{.}\PY{n}{tabid}\PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{n}{console}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{ERROR: Too few arguments!}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+    \PY{k}{return}\PY{p}{;}
+  \PY{p}{\PYZcb{}}
+  \PY{n}{call}\PY{p}{(}\PY{p}{\PYZob{}}
+    \PY{n}{service}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{18}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+    \PY{n}{method}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{content}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+    \PY{n}{data}\PY{p}{:} \PY{p}{\PYZob{}} \PY{n+nb}{id}\PY{p}{:} \PY{n}{args}\PY{o}{.}\PY{n}{tabid} \PY{p}{\PYZcb{}}\PY{p}{,}
+    \PY{n}{success}\PY{p}{:} \PY{n}{args}\PY{o}{.}\PY{n}{success}\PY{p}{,}
+    \PY{n}{error}\PY{p}{:} \PY{n}{args}\PY{o}{.}\PY{n}{error}
+  \PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+\PY{o}{/}\PY{o}{*}\PY{o}{*}
+ \PY{o}{*} \PY{n}{Calls} \PY{n}{the} \PY{n}{content} \PY{n}{get} \PY{n}{service} \PY{k}{with} \PY{n}{the} \PY{n}{content} \PY{n+nb}{id} \PY{o+ow}{and} \PY{n}{the} \PY{n}{service} \PY{n+nb}{id} \PY{n}{provided}\PY{o}{.} 
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{Object}\PY{p}{\PYZcb{}} \PY{n}{args} \PY{n}{the} \PY{n+nb}{object} \PY{n}{containing} \PY{n}{the} \PY{n}{service} \PY{n+nb}{id} \PY{o+ow}{and} \PY{n}{the} \PY{n}{content} \PY{n+nb}{id}\PY{p}{,}
+ \PY{o}{*}    \PY{n}{success} \PY{o+ow}{and} \PY{n}{error} \PY{n}{callback} \PY{n}{methods}
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{String}\PY{p}{\PYZcb{}} \PY{n}{args}\PY{o}{.}\PY{n}{serviceid} \PY{n}{the} \PY{n}{service} \PY{n+nb}{id} \PY{n}{that} \PY{o+ow}{is} \PY{n}{able} \PY{n}{to} \PY{n}{process} \PY{n}{this} \PY{n}{content}
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{String}\PY{p}{\PYZcb{}} \PY{n}{args}\PY{o}{.}\PY{n}{contentid} \PY{n}{the} \PY{n}{content} \PY{n+nb}{id}
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{function}\PY{p}{\PYZcb{}} \PY{p}{[}\PY{n}{args}\PY{o}{.}\PY{n}{succes}\PY{p}{]} \PY{n}{to} \PY{n}{be} \PY{n}{called} \PY{n}{on} \PY{n}{success}\PY{p}{,} \PY{n}{receives} \PY{n}{the} \PY{n}{service}\PY{p}{,} \PY{n}{content}
+ \PY{o}{*}    \PY{o+ow}{and} \PY{n}{user} \PY{n+nb}{id}\PY{l+s}{\PYZsq{}}\PY{l+s}{s along with the content}
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{function}\PY{p}{\PYZcb{}} \PY{p}{[}\PY{n}{args}\PY{o}{.}\PY{n}{error}\PY{p}{]} \PY{n}{refer} \PY{n}{to} \PY{n}{call} \PY{n}{function}
+ \PY{o}{*}\PY{o}{/}
+\PY{n}{function} \PY{n}{getContent}\PY{p}{(}\PY{n}{args}\PY{p}{)}\PY{p}{\PYZob{}}
+  \PY{k}{if}\PY{p}{(}\PY{err}{!}\PY{n}{args} \PY{o}{|}\PY{o}{|} \PY{err}{!}\PY{n}{args}\PY{o}{.}\PY{n}{serviceid} \PY{o}{|}\PY{o}{|} \PY{err}{!}\PY{n}{args}\PY{o}{.}\PY{n}{contentid}\PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{n}{console}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{ERROR: Too few arguments!}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+    \PY{k}{return}\PY{p}{;}
+  \PY{p}{\PYZcb{}}
+  \PY{n}{call}\PY{p}{(}\PY{p}{\PYZob{}}
+    \PY{n}{service}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{2}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+    \PY{n}{method}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{get}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+    \PY{n}{data}\PY{p}{:} \PY{p}{\PYZob{}} \PY{n+nb}{id}\PY{p}{:} \PY{n}{args}\PY{o}{.}\PY{n}{contentid}\PY{p}{,} \PY{n}{service}\PY{p}{:} \PY{n}{args}\PY{o}{.}\PY{n}{serviceid} \PY{p}{\PYZcb{}}\PY{p}{,}
+    \PY{n}{success}\PY{p}{:} \PY{n}{args}\PY{o}{.}\PY{n}{success}\PY{p}{,}
+    \PY{n}{error}\PY{p}{:} \PY{n}{args}\PY{o}{.}\PY{n}{error}
+  \PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+
+\PY{n}{exports}\PY{o}{.}\PY{n}{init} \PY{o}{=} \PY{n}{init}\PY{p}{;}
+\PY{n}{exports}\PY{o}{.}\PY{n}{purgeCredentials} \PY{o}{=} \PY{n}{purgeCredentials}\PY{p}{;}
+\PY{n}{exports}\PY{o}{.}\PY{n}{verifyCredentials} \PY{o}{=} \PY{n}{verifyCredentials}\PY{p}{;}
+\PY{n}{exports}\PY{o}{.}\PY{n}{call} \PY{o}{=} \PY{n}{call}\PY{p}{;}
+\PY{n}{exports}\PY{o}{.}\PY{n}{getUnreadContents} \PY{o}{=} \PY{n}{getUnreadContents}\PY{p}{;}
+\PY{n}{exports}\PY{o}{.}\PY{n}{getBinderTabContents} \PY{o}{=} \PY{n}{getBinderTabContents}\PY{p}{;}
+\PY{n}{exports}\PY{o}{.}\PY{n}{getContent} \PY{o}{=} \PY{n}{getContent}\PY{p}{;}
+  
+\end{Verbatim}
+
+
+\newpage
+\subsection{Webpage Code}
+\subsubsection{index101.html}
+\begin{Verbatim}[fontsize=\scriptsize,commandchars=\\\{\}]
+\PY{c+cp}{\PYZlt{}!DOCTYPE html\PYZgt{}}
+\PY{n+nt}{\PYZlt{}html}\PY{n+nt}{\PYZgt{}}
+  \PY{n+nt}{\PYZlt{}head}\PY{n+nt}{\PYZgt{}}
+    \PY{n+nt}{\PYZlt{}title}\PY{n+nt}{\PYZgt{}}Cloud2Web Example \PYZhy{} Course 101\PY{n+nt}{\PYZlt{}/title\PYZgt{}}
+    \PY{n+nt}{\PYZlt{}script }\PY{n+na}{src=}\PY{l+s}{\PYZdq{}http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js\PYZdq{}}\PY{n+nt}{\PYZgt{}}\PY{n+nt}{\PYZlt{}/script\PYZgt{}}
+    \PY{n+nt}{\PYZlt{}script }\PY{n+na}{src=}\PY{l+s}{\PYZdq{}/socket.io/socket.io.js\PYZdq{}}\PY{n+nt}{\PYZgt{}}\PY{n+nt}{\PYZlt{}/script\PYZgt{}}
+    \PY{n+nt}{\PYZlt{}script }\PY{n+na}{src=}\PY{l+s}{\PYZdq{}ecainterface.js\PYZdq{}}\PY{n+nt}{\PYZgt{}}\PY{n+nt}{\PYZlt{}/script\PYZgt{}}
+    \PY{n+nt}{\PYZlt{}link} \PY{n+na}{rel=}\PY{l+s}{\PYZdq{}stylesheet\PYZdq{}} \PY{n+na}{type=}\PY{l+s}{\PYZdq{}text/css\PYZdq{}} \PY{n+na}{href=}\PY{l+s}{\PYZdq{}style.css\PYZdq{}} \PY{n+nt}{/\PYZgt{}}
+  \PY{n+nt}{\PYZlt{}/head\PYZgt{}}
+  \PY{n+nt}{\PYZlt{}body}\PY{n+nt}{\PYZgt{}}
+    \PY{n+nt}{\PYZlt{}div} \PY{n+na}{class=}\PY{l+s}{\PYZdq{}header\PYZdq{}}\PY{n+nt}{\PYZgt{}}Static course page \PYZhy{} CS 101\PY{n+nt}{\PYZlt{}/div\PYZgt{}}
+    \PY{n+nt}{\PYZlt{}p}\PY{n+nt}{\PYZgt{}}This is a course webpage with student information for the course CS 101.\PY{n+nt}{\PYZlt{}/p\PYZgt{}}
+    \PY{n+nt}{\PYZlt{}div} \PY{n+na}{class=}\PY{l+s}{\PYZdq{}title\PYZdq{}}\PY{n+nt}{\PYZgt{}}Students:\PY{n+nt}{\PYZlt{}/div\PYZgt{}}
+    \PY{n+nt}{\PYZlt{}table} \PY{n+na}{id=}\PY{l+s}{\PYZdq{}studentinfo\PYZus{}cs101\PYZdq{}}\PY{n+nt}{\PYZgt{}}
+      \PY{n+nt}{\PYZlt{}tr}\PY{n+nt}{\PYZgt{}}\PY{n+nt}{\PYZlt{}th}\PY{n+nt}{\PYZgt{}}Username\PY{n+nt}{\PYZlt{}/th\PYZgt{}}\PY{n+nt}{\PYZlt{}th}\PY{n+nt}{\PYZgt{}}Uni\PYZhy{}Id\PY{n+nt}{\PYZlt{}/th\PYZgt{}}
+          \PY{n+nt}{\PYZlt{}th}\PY{n+nt}{\PYZgt{}}E\PYZhy{}Mail\PY{n+nt}{\PYZlt{}/th\PYZgt{}}\PY{n+nt}{\PYZlt{}th}\PY{n+nt}{\PYZgt{}}ProBinder\PYZhy{}Id\PY{n+nt}{\PYZlt{}/th\PYZgt{}}\PY{n+nt}{\PYZlt{}/tr\PYZgt{}}
+      \PY{n+nt}{\PYZlt{}tr}\PY{n+nt}{\PYZgt{}}\PY{n+nt}{\PYZlt{}td}\PY{n+nt}{\PYZgt{}}First 101 Student\PY{n+nt}{\PYZlt{}/td\PYZgt{}}\PY{n+nt}{\PYZlt{}td}\PY{n+nt}{\PYZgt{}}staticuser\PYZus{}101\PYZus{}01\PY{n+nt}{\PYZlt{}/td\PYZgt{}}
+          \PY{n+nt}{\PYZlt{}td}\PY{n+nt}{\PYZgt{}}test\PYZus{}101\PYZus{}1@unibas.ch\PY{n+nt}{\PYZlt{}/td\PYZgt{}}\PY{n+nt}{\PYZlt{}td}\PY{n+nt}{\PYZgt{}}xyz\PYZus{}101\PYZus{}01\PY{n+nt}{\PYZlt{}/td\PYZgt{}}\PY{n+nt}{\PYZlt{}/tr\PYZgt{}}
+      \PY{n+nt}{\PYZlt{}tr}\PY{n+nt}{\PYZgt{}}\PY{n+nt}{\PYZlt{}td}\PY{n+nt}{\PYZgt{}}Second 101 Student\PY{n+nt}{\PYZlt{}/td\PYZgt{}}\PY{n+nt}{\PYZlt{}td}\PY{n+nt}{\PYZgt{}}staticuser\PYZus{}101\PYZus{}02\PY{n+nt}{\PYZlt{}/td\PYZgt{}}
+          \PY{n+nt}{\PYZlt{}td}\PY{n+nt}{\PYZgt{}}test\PYZus{}101\PYZus{}2@unibas.ch\PY{n+nt}{\PYZlt{}/td\PYZgt{}}\PY{n+nt}{\PYZlt{}td}\PY{n+nt}{\PYZgt{}}xyz\PYZus{}101\PYZus{}02\PY{n+nt}{\PYZlt{}/td\PYZgt{}}\PY{n+nt}{\PYZlt{}/tr\PYZgt{}}
+      \PY{n+nt}{\PYZlt{}tr}\PY{n+nt}{\PYZgt{}}\PY{n+nt}{\PYZlt{}td}\PY{n+nt}{\PYZgt{}}Third 101 Student\PY{n+nt}{\PYZlt{}/td\PYZgt{}}\PY{n+nt}{\PYZlt{}td}\PY{n+nt}{\PYZgt{}}staticuser\PYZus{}101\PYZus{}03\PY{n+nt}{\PYZlt{}/td\PYZgt{}}
+          \PY{n+nt}{\PYZlt{}td}\PY{n+nt}{\PYZgt{}}test\PYZus{}101\PYZus{}3@unibas.ch\PY{n+nt}{\PYZlt{}/td\PYZgt{}}\PY{n+nt}{\PYZlt{}td}\PY{n+nt}{\PYZgt{}}xyz\PYZus{}101\PYZus{}03\PY{n+nt}{\PYZlt{}/td\PYZgt{}}\PY{n+nt}{\PYZlt{}/tr\PYZgt{}}
+    \PY{n+nt}{\PYZlt{}/table\PYZgt{}}
+  \PY{n+nt}{\PYZlt{}/body\PYZgt{}}
+\PY{n+nt}{\PYZlt{}/html\PYZgt{}}
+\end{Verbatim}
+
+\subsubsection{ecainterface.js}
+\begin{Verbatim}[fontsize=\scriptsize,commandchars=\\\{\}]
+\PY{k+kd}{var} \PY{n+nx}{socket} \PY{o}{=} \PY{n+nx}{io}\PY{p}{.}\PY{n+nx}{connect}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}http://localhost\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\PY{n+nx}{socket}\PY{p}{.}\PY{n+nx}{on}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}engine\PYZsq{}}\PY{p}{,} \PY{k+kd}{function} \PY{p}{(}\PY{n+nx}{data}\PY{p}{)} \PY{p}{\PYZob{}}
+  \PY{n+nx}{console}\PY{p}{.}\PY{n+nx}{log}\PY{p}{(}\PY{n+nx}{data}\PY{p}{)}\PY{p}{;}
+  \PY{k+kd}{var} \PY{n+nx}{tr} \PY{o}{=} \PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}\PYZlt{}tr\PYZgt{}\PYZsq{}}\PY{p}{)}\PY{p}{.}\PY{n+nx}{attr}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}class\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}new\PYZsq{}}\PY{p}{)}\PY{p}{;}
+  \PY{n+nx}{tr}\PY{p}{.}\PY{n+nx}{append}\PY{p}{(}\PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}\PYZlt{}td\PYZgt{}\PYZsq{}}\PY{p}{)}\PY{p}{.}\PY{n+nx}{text}\PY{p}{(}\PY{n+nx}{data}\PY{p}{.}\PY{n+nx}{username}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+  \PY{n+nx}{tr}\PY{p}{.}\PY{n+nx}{append}\PY{p}{(}\PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}\PYZlt{}td\PYZgt{}\PYZsq{}}\PY{p}{)}\PY{p}{.}\PY{n+nx}{text}\PY{p}{(}\PY{n+nx}{data}\PY{p}{.}\PY{n+nx}{uniid}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+  \PY{n+nx}{tr}\PY{p}{.}\PY{n+nx}{append}\PY{p}{(}\PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}\PYZlt{}td\PYZgt{}\PYZsq{}}\PY{p}{)}\PY{p}{.}\PY{n+nx}{text}\PY{p}{(}\PY{n+nx}{data}\PY{p}{.}\PY{n+nx}{email}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+  \PY{n+nx}{tr}\PY{p}{.}\PY{n+nx}{append}\PY{p}{(}\PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}\PYZlt{}td\PYZgt{}\PYZsq{}}\PY{p}{)}\PY{p}{.}\PY{n+nx}{text}\PY{p}{(}\PY{n+nx}{data}\PY{p}{.}\PY{n+nx}{probinderid}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+  \PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}\PYZsh{}studentinfo\PYZus{}\PYZsq{}}\PY{o}{+}\PY{n+nx}{data}\PY{p}{.}\PY{n+nx}{courseid}\PY{p}{)}\PY{p}{.}\PY{n+nx}{append}\PY{p}{(}\PY{n+nx}{tr}\PY{p}{)}\PY{p}{;}
+\PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+\newpage
+\subsubsection{style.css}
+\begin{Verbatim}[fontsize=\scriptsize,commandchars=\\\{\}]
+\PY{n}{body} \PY{p}{\PYZob{}}
+  \PY{n}{font}\PY{o}{\PYZhy{}}\PY{n}{size}\PY{p}{:} \PY{l+m+mi}{12}\PY{n}{px}\PY{p}{;}
+  \PY{n}{font}\PY{o}{\PYZhy{}}\PY{n}{family}\PY{p}{:} \PY{n}{verdana}\PY{p}{,}\PY{n}{helvetica}\PY{p}{,}\PY{n}{arial}\PY{p}{,}\PY{n}{sans}\PY{o}{\PYZhy{}}\PY{n}{serif}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+
+\PY{o}{.}\PY{n}{header} \PY{p}{\PYZob{}}
+  \PY{n}{font}\PY{o}{\PYZhy{}}\PY{n}{weight}\PY{p}{:} \PY{n}{bold}\PY{p}{;}
+  \PY{n}{font}\PY{o}{\PYZhy{}}\PY{n}{size}\PY{p}{:} \PY{l+m+mi}{16}\PY{n}{px}\PY{p}{;}
+  \PY{n}{color}\PY{p}{:} \PY{c}{\PYZsh{}666;}
+  \PY{n}{padding}\PY{o}{\PYZhy{}}\PY{n}{bottom}\PY{p}{:} \PY{l+m+mi}{10}\PY{n}{px}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+
+\PY{o}{.}\PY{n}{title} \PY{p}{\PYZob{}}
+  \PY{n}{font}\PY{o}{\PYZhy{}}\PY{n}{weight}\PY{p}{:} \PY{n}{bold}\PY{p}{;}
+  \PY{n}{font}\PY{o}{\PYZhy{}}\PY{n}{size}\PY{p}{:} \PY{l+m+mi}{14}\PY{n}{px}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+
+\PY{n}{table} \PY{n}{td} \PY{p}{\PYZob{}}
+  \PY{n}{margin} \PY{l+m+mi}{0}\PY{n}{px}\PY{p}{;}
+  \PY{n}{padding}\PY{p}{:} \PY{l+m+mi}{3}\PY{n}{px} \PY{l+m+mi}{10}\PY{n}{px} \PY{l+m+mi}{3}\PY{n}{px} \PY{l+m+mi}{10}\PY{n}{px}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+
+\PY{n}{table} \PY{n}{tr}\PY{o}{.}\PY{n}{new} \PY{p}{\PYZob{}}
+  \PY{n}{background}\PY{o}{\PYZhy{}}\PY{n}{color}\PY{p}{:} \PY{c}{\PYZsh{}A3FFB6;}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+\newpage
+\subsection{Event Producers}
+
+\subsubsection{web2cloud.js}
+\begin{Verbatim}[fontsize=\scriptsize,commandchars=\\\{\}]
+\PY{l+s}{\PYZsq{}}\PY{l+s}{use strict}\PY{l+s}{\PYZsq{}}\PY{p}{;}
+\PY{n}{var} \PY{n}{request} \PY{o}{=} \PY{n}{require}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{needle}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\PY{n}{var} \PY{n}{pb} \PY{o}{=} \PY{n}{require}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{../probinder/probinder}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\PY{n}{var} \PY{n}{urlServer} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{localhost:8125}\PY{l+s}{\PYZsq{}}\PY{p}{;}
+\PY{n}{var} \PY{n}{iEvent} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{;}
+
+\PY{o}{/}\PY{o}{*}
+ \PY{o}{*} \PY{n}{Let} \PY{n}{the} \PY{n}{probinder} \PY{n}{module} \PY{n}{load} \PY{n}{the} \PY{n}{credentials} \PY{o+ow}{and} \PY{n}{notify} \PY{n}{this} \PY{n}{module} \PY{n}{of} \PY{n}{its}
+ \PY{o}{*} \PY{n}{success} \PY{n}{by} \PY{n}{calling} \PY{n}{the} \PY{n}{ready} \PY{n}{function}
+ \PY{o}{*}\PY{o}{/}
+\PY{n}{pb}\PY{o}{.}\PY{n}{init}\PY{p}{(}\PY{p}{\PYZob{}}
+  \PY{n+nb}{file}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{../probinder/credentials.json}\PY{l+s}{\PYZsq{}}\PY{p}{,} 
+  \PY{n}{success}\PY{p}{:} \PY{n}{ready}
+\PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{;}
+
+\PY{o}{/}\PY{o}{*}
+ \PY{o}{*} \PY{n}{If} \PY{n}{probinder} \PY{n}{loaded} \PY{n}{successfully}\PY{p}{,} \PY{n}{this} \PY{n}{function} \PY{o+ow}{is} \PY{n}{invoked}
+ \PY{o}{*}\PY{o}{/}
+\PY{n}{function} \PY{n}{ready}\PY{p}{(}\PY{p}{)}\PY{p}{\PYZob{}}
+  \PY{o}{/}\PY{o}{*} 
+   \PY{o}{*} \PY{n}{We} \PY{n}{fetch} \PY{n}{the} \PY{n}{unread} \PY{n}{contents} \PY{k}{as} \PY{n}{a} \PY{n}{pull} \PY{n}{request} \PY{k+kn}{from} \PY{n+nn}{probinder.} \PY{n+nn}{this} \PY{n+nn}{represents}
+   \PY{o}{*} \PY{n}{the} \PY{n}{monitoring} \PY{n}{of} \PY{n}{a} \PY{n}{static} \PY{n}{resource}\PY{p}{,} \PY{n}{even} \PY{n}{though} \PY{n}{probinder} \PY{o+ow}{is} \PY{o+ow}{not} \PY{n}{static}\PY{o}{.}
+   \PY{o}{*} \PY{n}{Incorporating} \PY{n}{a} \PY{n}{webcrawler} \PY{n}{on} \PY{n}{a} \PY{n}{real} \PY{n}{static} \PY{n}{resource} \PY{n}{would} \PY{n}{have} \PY{n}{increased}
+   \PY{o}{*} \PY{n}{the} \PY{n}{complexity} \PY{n}{greatly} \PY{o+ow}{and} \PY{n}{it} \PY{n}{also} \PY{n}{isn}\PY{l+s}{\PYZsq{}}\PY{l+s}{t the core of this usability study}
+   \PY{o}{*}\PY{o}{/}
+  \PY{n}{console}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Fetching eventual new contents}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+  \PY{n}{pb}\PY{o}{.}\PY{n}{getUnreadContents}\PY{p}{(}\PY{p}{\PYZob{}}
+    \PY{n}{success}\PY{p}{:} \PY{n}{processContentArray}\PY{p}{,}
+    \PY{n}{error}\PY{p}{:} \PY{n}{function}\PY{p}{(}\PY{n}{error}\PY{p}{,} \PY{n}{response}\PY{p}{,} \PY{n}{body}\PY{p}{)} \PY{p}{\PYZob{}}
+      \PY{n}{console}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Unable to fetch unread contents: }\PY{l+s}{\PYZsq{}} \PY{o}{+} \PY{n}{error}\PY{o}{.}\PY{n}{message}\PY{p}{)}\PY{p}{;}
+    \PY{p}{\PYZcb{}}
+  \PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{;}
+  
+  \PY{o}{/}\PY{o}{*}
+   \PY{o}{*} \PY{n}{Fetch} \PY{n}{unread} \PY{n}{contents} \PY{n}{every} \PY{l+m+mi}{20} \PY{n}{seconds}
+   \PY{o}{*}\PY{o}{/}
+  \PY{n}{setTimeout}\PY{p}{(}\PY{n}{ready}\PY{p}{,} \PY{l+m+mi}{20000}\PY{p}{)}\PY{p}{;}
+  \PY{o}{/}\PY{o}{/} \PY{n}{pb}\PY{o}{.}\PY{n}{getBinderTabContents}\PY{p}{(}\PY{p}{\PYZob{}}
+    \PY{o}{/}\PY{o}{/} \PY{n}{tabid}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{16420}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+    \PY{o}{/}\PY{o}{/} \PY{n}{success}\PY{p}{:} \PY{n}{processContentArray}\PY{p}{,}
+    \PY{o}{/}\PY{o}{/} \PY{n}{error}\PY{p}{:} \PY{n}{function}\PY{p}{(}\PY{n}{error}\PY{p}{,} \PY{n}{response}\PY{p}{,} \PY{n}{body}\PY{p}{)} \PY{p}{\PYZob{}}
+      \PY{o}{/}\PY{o}{/} \PY{n}{console}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Unable to fetch binder tab contents: }\PY{l+s}{\PYZsq{}} \PY{o}{+} \PY{n}{error}\PY{o}{.}\PY{n}{message}\PY{p}{)}\PY{p}{;}
+    \PY{o}{/}\PY{o}{/} \PY{p}{\PYZcb{}}
+  \PY{o}{/}\PY{o}{/} \PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+
+\PY{o}{/}\PY{o}{*}\PY{o}{*}
+ \PY{o}{*} \PY{n}{Content} \PY{n}{lists} \PY{n}{arrive} \PY{n}{usually} \PY{k}{as} \PY{n}{an} \PY{n}{array} \PY{n}{of} \PY{n}{metadata} \PY{n}{information} \PY{n}{which} \PY{n}{allow}
+ \PY{o}{*} \PY{n}{the} \PY{n}{user} \PY{n}{of} \PY{n}{the} \PY{n}{probinder} \PY{n}{API} \PY{n}{to} \PY{n}{retrieve} \PY{n}{the} \PY{n}{actual} \PY{n}{content}\PY{o}{.}
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{Object}\PY{p}{\PYZcb{}} \PY{n}{arr} \PY{n}{the} \PY{n}{array} \PY{n}{containing} \PY{n}{the} \PY{n}{content} \PY{n}{metadata}
+ \PY{o}{*}\PY{o}{/}
+\PY{n}{function} \PY{n}{processContentArray}\PY{p}{(}\PY{n}{arr}\PY{p}{)} \PY{p}{\PYZob{}}
+  \PY{k}{if}\PY{p}{(}\PY{n}{arr}\PY{o}{.}\PY{n}{length} \PY{o}{==}\PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)} \PY{n}{console}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{nothing to process}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+  \PY{k}{for}\PY{p}{(}\PY{n}{var} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{;} \PY{n}{i} \PY{o}{\PYZlt{}} \PY{n}{arr}\PY{o}{.}\PY{n}{length}\PY{p}{;} \PY{n}{i}\PY{o}{+}\PY{o}{+}\PY{p}{)}\PY{p}{\PYZob{}}
+    \PY{n}{console}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Fetching content for }\PY{l+s}{\PYZsq{}} \PY{o}{+} \PY{n}{arr}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{id}\PY{p}{)}\PY{p}{;}
+    \PY{n}{pb}\PY{o}{.}\PY{n}{getContent}\PY{p}{(}\PY{p}{\PYZob{}}
+      \PY{n}{serviceid}\PY{p}{:} \PY{n}{arr}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{serviceId}\PY{p}{,}
+      \PY{n}{contentid}\PY{p}{:} \PY{n}{arr}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{id}\PY{p}{,}
+      \PY{n}{userid}\PY{p}{:} \PY{n}{arr}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{userId}\PY{p}{,}
+      \PY{n}{success}\PY{p}{:} \PY{n}{pushContentAsEvent}
+    \PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{;}
+  \PY{p}{\PYZcb{}}
+\PY{p}{\PYZcb{}}
+
+\PY{o}{/}\PY{o}{*}\PY{o}{*}
+ \PY{o}{*} \PY{n}{After} \PY{n}{the} \PY{n}{content} \PY{n}{has} \PY{n}{been} \PY{n}{retrieved} \PY{n}{via} \PY{n}{the} \PY{n}{appropriate} \PY{n}{service} 
+ \PY{o}{*} \PY{n+nd}{@param} \PY{p}{\PYZob{}}\PY{n}{Object}\PY{p}{\PYZcb{}} \PY{n}{response}
+ \PY{o}{*}\PY{o}{/}
+\PY{n}{function} \PY{n}{pushContentAsEvent}\PY{p}{(}\PY{n}{response}\PY{p}{)} \PY{p}{\PYZob{}}
+  \PY{n}{var} \PY{n}{event} \PY{o}{=} \PY{p}{\PYZob{}}
+    \PY{n+nb}{type}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{unreadcontent}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+    \PY{n}{eventid}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{web2cloud}\PY{l+s}{\PYZsq{}} \PY{o}{+} \PY{n}{iEvent}\PY{o}{+}\PY{o}{+}\PY{p}{,}
+    \PY{n}{userid}\PY{p}{:} \PY{n}{response}\PY{o}{.}\PY{n}{userId}\PY{p}{,}
+    \PY{n}{username}\PY{p}{:} \PY{n}{response}\PY{o}{.}\PY{n}{username}\PY{p}{,}
+    \PY{n}{contentid}\PY{p}{:} \PY{n}{response}\PY{o}{.}\PY{n}{id}\PY{p}{,}
+    \PY{n}{text}\PY{p}{:} \PY{n}{response}\PY{o}{.}\PY{n}{text}
+  \PY{p}{\PYZcb{}}\PY{p}{;}
+  \PY{n}{request}\PY{o}{.}\PY{n}{post}\PY{p}{(}\PY{n}{urlServer}\PY{p}{,}
+    \PY{n}{event}\PY{p}{,}
+    \PY{n}{function}\PY{p}{(}\PY{n}{error}\PY{p}{,} \PY{n}{response}\PY{p}{,} \PY{n}{body}\PY{p}{)} \PY{p}{\PYZob{}} \PY{o}{/}\PY{o}{/} \PY{n}{The} \PY{n}{callback}
+      \PY{k}{if} \PY{p}{(}\PY{err}{!}\PY{n}{error} \PY{o}{\PYZam{}}\PY{o}{\PYZam{}} \PY{n}{response}\PY{o}{.}\PY{n}{statusCode} \PY{o}{==} \PY{l+m+mi}{200}\PY{p}{)} \PY{p}{\PYZob{}}
+        \PY{n}{console}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{event sent, response: }\PY{l+s}{\PYZsq{}} \PY{o}{+} \PY{n}{body}\PY{p}{)}\PY{p}{;}
+      \PY{p}{\PYZcb{}} \PY{k}{else} \PY{p}{\PYZob{}}
+        \PY{n}{console}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{event error, response: }\PY{l+s}{\PYZsq{}} \PY{o}{+} \PY{n}{body}\PY{p}{)}\PY{p}{;}
+      \PY{p}{\PYZcb{}}
+    \PY{p}{\PYZcb{}}
+  \PY{p}{)}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+\subsubsection{web2cloud.js}
+\begin{Verbatim}[fontsize=\scriptsize,commandchars=\\\{\}]
+
+\PY{l+s}{\PYZsq{}}\PY{l+s}{use strict}\PY{l+s}{\PYZsq{}}\PY{p}{;}
+\PY{n}{var} \PY{n}{request} \PY{o}{=} \PY{n}{require}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{needle}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\PY{n}{var} \PY{n}{pb} \PY{o}{=} \PY{n}{require}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{../probinder/probinder}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\PY{n}{var} \PY{n}{urlServer} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{localhost:8125}\PY{l+s}{\PYZsq{}}\PY{p}{;}
+
+\PY{o}{/}\PY{o}{*}
+ \PY{o}{*} \PY{n}{Let} \PY{n}{the} \PY{n}{probinder} \PY{n}{module} \PY{n}{load} \PY{n}{the} \PY{n}{credentials} \PY{o+ow}{and} \PY{n}{notify} \PY{n}{this} \PY{n}{module} \PY{n}{of} \PY{n}{its}
+ \PY{o}{*} \PY{n}{success} \PY{n}{by} \PY{n}{calling} \PY{n}{the} \PY{n}{ready} \PY{n}{function}
+ \PY{o}{*}\PY{o}{/}
+\PY{n}{pb}\PY{o}{.}\PY{n}{init}\PY{p}{(}\PY{p}{\PYZob{}}
+  \PY{n+nb}{file}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{../probinder/credentials.json}\PY{l+s}{\PYZsq{}}\PY{p}{,} 
+  \PY{n}{success}\PY{p}{:} \PY{n}{ready}
+\PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{;}
+
+\PY{n}{function} \PY{n}{ready}\PY{p}{(}\PY{p}{)} \PY{p}{\PYZob{}}
+  \PY{n}{var} \PY{n}{event} \PY{o}{=} \PY{p}{\PYZob{}}
+    \PY{n+nb}{type}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{newstudent}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+    \PY{n}{eventid}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{cloud2web0}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+    \PY{n}{courseid}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{cs101}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+    \PY{n}{uniid}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{bhtest00}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+    \PY{n}{probinderid}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{12613}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+    \PY{n}{email}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{thelatest\PYZus{}user\PYZus{}cs101@unibas.ch}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+    \PY{n}{username}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{Another new student}\PY{l+s}{\PYZsq{}}
+  \PY{p}{\PYZcb{}}\PY{p}{;}
+  \PY{n}{request}\PY{o}{.}\PY{n}{post}\PY{p}{(}\PY{n}{urlServer}\PY{p}{,}
+    \PY{n}{event}\PY{p}{,}
+    \PY{n}{function}\PY{p}{(}\PY{n}{error}\PY{p}{,} \PY{n}{response}\PY{p}{,} \PY{n}{body}\PY{p}{)} \PY{p}{\PYZob{}} \PY{o}{/}\PY{o}{/} \PY{n}{The} \PY{n}{callback}
+      \PY{n}{console}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{body}\PY{p}{)}\PY{p}{;}
+      \PY{k}{if} \PY{p}{(}\PY{err}{!}\PY{n}{error} \PY{o}{\PYZam{}}\PY{o}{\PYZam{}} \PY{n}{response}\PY{o}{.}\PY{n}{statusCode} \PY{o}{==} \PY{l+m+mi}{200}\PY{p}{)} \PY{p}{\PYZob{}}
+        \PY{n}{console}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{event sent, response: }\PY{l+s}{\PYZsq{}} \PY{o}{+} \PY{n}{body}\PY{p}{)}\PY{p}{;}
+      \PY{p}{\PYZcb{}} \PY{k}{else} \PY{p}{\PYZob{}}
+        \PY{n}{console}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{event error, response: }\PY{l+s}{\PYZsq{}} \PY{o}{+} \PY{n}{body}\PY{p}{)}\PY{p}{;}
+      \PY{p}{\PYZcb{}}
+    \PY{p}{\PYZcb{}}
+  \PY{p}{)}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
 
 \end{document}
