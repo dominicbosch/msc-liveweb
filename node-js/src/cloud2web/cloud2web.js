@@ -19,17 +19,21 @@ function ready() {
     courseid: 'cs101',
     uniid: 'bhtest00',
     probinderid: '12613',
-    email: 'dominic.bosch.db@gmail.com',
-    username: 'Test Student'
+    email: 'thelatest_user_cs101@unibas.ch',
+    username: 'Another new student'
   };
   request.post(urlServer,
     event,
     function(error, response, body) { // The callback
+      console.log(body);
       if (!error && response.statusCode == 200) {
         console.log('event sent, response: ' + body);
       } else {
-        console.log(error.message);
+        console.log('event error, response: ' + body);
       }
     }
   );
 }
+
+
+

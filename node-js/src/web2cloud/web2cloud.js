@@ -85,7 +85,7 @@ function pushContentAsEvent(response) {
       if (!error && response.statusCode == 200) {
         console.log('event sent, response: ' + body);
       } else {
-        console.log(error.message);
+        console.log('event error, response: ' + body);
       }
     }
   );

@@ -1,4 +1,8 @@
 'use strict';
+/*
+ * Load the bidirectional event server instance
+ */
+var bidir = require('./bidir');
 var regex = /\$X\.([A-z]|\.)*[A-z]/g; // find properties of $X
 var listRules = [];
 var apiinterfaces = {};
@@ -29,6 +33,8 @@ function insertRule(rule) {
  * @param {Object} evt The event object
  */
 function processRequest(evt) {
+  console.log('received event: ');
+  console.log(evt);
   var actions = checkEvent(evt);
   for(var i = 0; i < actions.length; i++) {
     invokeAction(evt, actions[i]);
@@ -68,14 +74,18 @@ function validConditions(evt, rule) {
  * @param {Object} action The action to be onvoked
  */
 function invokeAction(evt, action) {
+  var actionargs = {};
+  preprocessActionArguments(evt, action.arguments, actionargs);
   switch(action.type) {
     case 'servicecall':
       var srvc = apiinterfaces[action.apiprovider];
       if(srvc) {// The first three 
-        preprocessActionArguments(evt, action.arguments);
-        srvc[action.method](action.arguments);
+        srvc[action.method](actionargs);
       }
       else console.log('no api interface found for: ' + action.apiprovider);
+      break;
+    case 'usernotify':
+      bidir.sendEvent(actionargs);
       break;
     default: console.log('no action available for: ' + action.type);
   }
@@ -84,29 +94,33 @@ function invokeAction(evt, action) {
 /**
  * Action properties may contain event properties which need to be resolved beforehand.
  * @param {Object} evt The event whose property values can be used in the rules action
- * @param {Object} obj The rules action arguments
+ * @param {Object} act The rules action arguments
+ * @param {Object} res The object to be used to enter the new properties
  */
-function preprocessActionArguments(evt, obj) {
-  for(var prop in obj) {
+function preprocessActionArguments(evt, act, res) {
+  for(var prop in act) {
     /*
      * If the property is an object itself we go into recursion
      */
-    if(typeof obj[prop] === 'object') preprocessActionArguments(evt, obj[prop]);
+    if(typeof act[prop] === 'object') {
+      res[prop] = {};
+      preprocessActionArguments(evt, act[prop], res[prop]);
+    }
     else {
-      var arr = obj[prop].match(regex);
+      var arr = act[prop].match(regex);
       /*
        * If rules action property holds event properties we resolve them and
        * replace the original action property
        */
       if(arr) {
-        var txt = obj[prop];
+        var txt = act[prop];
         for(var i = 0; i < arr.length; i++) {
           /*
            * The first three characters are '$X.', followed by the property
            */
           txt = txt.replace(arr[i], evt[arr[i].substring(3)]);
         }
-        obj[prop] = txt;
+        res[prop] = txt;
       }
     }
   }
