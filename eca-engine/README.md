@@ -1,0 +1,1 @@
+This folder continues examples of an ECA engine and how certain use cases could be implemented together with a rules language.
