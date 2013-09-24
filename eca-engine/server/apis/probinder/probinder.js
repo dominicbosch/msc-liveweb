@@ -2,38 +2,26 @@
 var request = require('needle');
 var fs = require('fs');
 var urlService = 'https://probinder.com/service/';
-var credentials;
+var credentials = null;
 
 /**
- * Initializes the probinder API interfaces by loading the required credentials.
- * @param {Object} [args] The optional arguments object
- * @param {String} [args.file] the location of the credentials file,
- *    else './credentials.json' is assumed
- * @param {function} [args.success] a callback function to be called when
- *    credentials were successfully loaded
- * @param {function} [args.error]  a callback function to be called when
- *    loading of credentials failed
+ * Takes the actions to make this module ready when it is loaded
  */
-function init(args){
-  var filepath;
-  if(args && args.file) filepath = args.file;
-  else filepath = './credentials.json';
-  fs.readFile(filepath, 'utf8', function (err, data) {
+function init() {
+  fs.readFile(__dirname + '/credentials.json', 'utf8', function (err, data) {
     if (err) {
       console.log('ERROR: Loading credentials file');
-      if(args && args.error) args.error(err);
       return;
     }
     credentials = JSON.parse(data);
     if(credentials && credentials.username && credentials.password) {
-      if(args && args.success) args.success();
+      console.log('ProBinder interface successfully loaded credentials file');
     } else {
       credentials = null;
       console.log('ERROR: credentials file corrupt');
-      if(args && args.error) args.error();
     }
   });
-};
+}
 
 /**
  * Reset eventually loaded credentials
@@ -148,7 +136,8 @@ function getContent(args){
   });
 }
 
-exports.init = init;
+init();
+
 exports.purgeCredentials = purgeCredentials;
 exports.verifyCredentials = verifyCredentials;
 exports.call = call;

@@ -8,14 +8,9 @@ var apiinterfaces = {};
 
 /**
  * Initialize the rules engine.
- * @param {function} callback The callback function on successful init
  */
-function init(callback) {
-  apiinterfaces.probinder = require('../probinder/probinder');
-  apiinterfaces.probinder.init({
-    file: '../probinder/credentials.json', 
-    success: callback
-  });
+function init() {
+  apiinterfaces.probinder = require(__dirname + '/apis/probinder/probinder');
 }
 
 /**
@@ -122,6 +117,7 @@ function preprocessActionArguments(evt, act, res) {
   }
 }
 
-exports.init = init;
+init();
+
 exports.insertRule = insertRule;
 exports.processRequest = processRequest;

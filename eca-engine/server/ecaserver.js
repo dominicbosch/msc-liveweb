@@ -5,7 +5,6 @@ var fs = require('fs');
 var engine = require('./ecainference');
 
 /**
- * repo check
  * If a request is made to the server, this function is used to handle it.
  */
 function onRequest(request, response) {
@@ -37,7 +36,7 @@ function onRequest(request, response) {
       /*
        * If required event properties are present we process the event
        */
-      if(obj && obj.type && obj.eventid){
+      if(obj && obj.event && obj.eventid){
         answerSuccess();
         engine.processRequest(obj);
       } else answerError('Your event was missing important parameters!');
@@ -55,15 +54,10 @@ fs.readFile('config.json', 'utf8', function (err, data) {
   for(var i = 0; i < arr.length; i++) engine.insertRule(arr[i]);
   
   /*
-   * Initialize the rules engine after rules were loaded
+   * Start the server that listens for events after the engine initialized
    */
-  engine.init(function(){
-    /*
-     * Start the server that listens for events after the engine initialized
-     */
-    var app = express();
-    app.post('/', onRequest);
-    app.listen(config.inboundport); // inbound event channel
-    console.log("Server has started.");
-  });
+  var app = express();
+  app.post('/', onRequest);
+  app.listen(config.inboundport); // inbound event channel
+  console.log("Server has started.");
 });

@@ -1,0 +1,14 @@
+{
+  "name": "msc-eca-engine",
+  "author": "Dominic Bosch",
+  "description": "ECA inference engine example",
+  "version": "0.0.1",
+  "private": true,
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/dominicbosch/msc-liveweb.git"
+  },
+  "dependencies": {
+    "needle": "0.5.9"
+  }
+}

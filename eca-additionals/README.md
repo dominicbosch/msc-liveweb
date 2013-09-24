@@ -1,0 +1,1 @@
+This folder continues examples of event producers and other helpful modules.
