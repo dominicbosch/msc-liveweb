@@ -1,0 +1,56 @@
+{
+  "inboundport": 8125, 
+  "rules": [
+    {
+      "id": "rule_1",
+      "condition": {
+        "type": "unreadcontent",
+        "userid": "12613"
+      },
+      "actions": [
+        {
+          "type": "servicecall",
+          "apiprovider": "probinder",
+          "method": "call",
+          "arguments": {
+            "service": "27",
+            "method": "save",
+            "data": {
+              "companyId": "643",
+              "context": "17209",
+              "text": "$X.username wrote: $X.text"
+            }
+          }
+        },
+        {
+          "type": "servicecall",
+          "apiprovider": "probinder",
+          "method": "call",
+          "arguments": {
+            "service": "2",
+            "method": "setread",
+            "data": {
+              "id": "$X.contentid"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule_2",
+      "condition": { "type": "newstudent" },
+      "actions": [
+        {
+          "type": "usernotify",
+          "arguments": {
+            "courseid": "$X.courseid",
+            "username": "$X.username",
+            "uniid": "$X.uniid",
+            "email": "$X.email",
+            "probinderid": "$X.probinderid"
+          }
+        }
+      ]
+    }
+  ]
+}

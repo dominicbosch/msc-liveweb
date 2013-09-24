@@ -8,6 +8,10 @@
     "type" : "git",
     "url" : "https://github.com/dominicbosch/msc-liveweb.git"
   },
+  "dependencies": {
+    "express": "3.4.0",
+    "needle": "0.5.9"
+  },
   "__comment": {
     "dependencies": {
       "express": "3.3.4",
