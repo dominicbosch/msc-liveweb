@@ -6,6 +6,7 @@ var engine = require('./ecainference');
 
 /**
  * If a request is made to the server, this function is used to handle it.
+ * 
  */
 function onRequest(request, response) {
   
