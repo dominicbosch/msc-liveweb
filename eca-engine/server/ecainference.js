@@ -66,6 +66,7 @@ function checkEvent(evt) {
   var actions = [];
   for(var rn in listRules) {
     if(listRules[rn].event === evt.event && validConditions(evt, listRules[rn])) {
+      console.log('Engine> Rule "' + rn + '" fired');
       actions = actions.concat(listRules[rn].actions);
     }
   }

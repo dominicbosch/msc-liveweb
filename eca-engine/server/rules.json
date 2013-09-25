@@ -1,5 +1,17 @@
 [
   {
+    "id": "rule_0",
+    "event": "mail",
+    "condition": {},
+    "actions": [
+      {
+        "type": "webapicall",
+        "apiprovider": "probinder",
+        "method": "makeEntry"
+      }
+    ]
+  },
+  {
     "id": "rule_1",
     "event": "mail",
     "condition": {},
@@ -17,14 +29,29 @@
   {
     "id": "rule_2",
     "event": "mail",
-    "condition": { "sender": "mscliveweb"},
+    "condition": { "sender": "sender2"},
     "actions": [
       {
         "type": "webapicall",
         "apiprovider": "probinder",
         "method": "makeEntry",
         "arguments": {
-          "content": "Rule#2: $X.subject"
+          "content": "Rule#2: $X.textbody"
+        }
+      }
+    ]
+  },
+  {
+    "id": "rule_emailyak",
+    "event": "yakmail",
+    "condition": { "FromAddress": "dominic.bosch.db@gmail.com"},
+    "actions": [
+      {
+        "type": "webapicall",
+        "apiprovider": "probinder",
+        "method": "makeEntry",
+        "arguments": {
+          "content": "Received from EmailYak: $X.textbody"
         }
       }
     ]

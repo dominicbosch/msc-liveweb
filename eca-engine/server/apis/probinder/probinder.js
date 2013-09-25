@@ -142,11 +142,8 @@ function getContent(args){
  * @param {String} args.content the content to be posted
  */
 function makeEntry(args){
-  if(!args.content) {
-    console.trace('ERROR: Too few arguments!');
-    console.log(args);
-    return;
-  }
+  if(!args) args = {};
+  if(!args.content) args.content = 'Rule#0 says you received a new mail!';
   call({
     service: '27',
     method: 'save',

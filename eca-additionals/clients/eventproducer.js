@@ -97,7 +97,7 @@ function checkMails() {
         var mails = JSON.parse(body).Emails;
         // if(mails.length == 0) console.log('No new mails received!');
         for(var i = 0; i < mails.length; i++) {
-          mails[i].event = 'mail';
+          mails[i].event = 'yakmail';
           mails[i].eventid = 'eventproducer' + eId++;
           pushEvent(mails[i]);
         }

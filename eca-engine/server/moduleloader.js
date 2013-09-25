@@ -21,7 +21,7 @@ function init(funcApi, funcPush) {
 function processUserInput(chunk) {
   var arr = chunk.replace(/\n/g, "").split(' ');
   if(arr.length < 2) {
-    console.log('Too few arguments!');
+    console.log('Too few arguments! Type (loadrule|loadapi) eventuall followed by a custom module name');
     return;
   }
   switch(arr[0]) {
