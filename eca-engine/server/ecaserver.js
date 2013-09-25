@@ -1,8 +1,13 @@
 'use strict';
-var express = require('express');
-var qs = require('querystring');
-var fs = require('fs');
-var engine = require('./ecainference');
+var express = require('express'),
+  qs = require('querystring'),
+  fs = require('fs'),
+  engine = require('./ecainference');
+  // engine = require('child_process').fork('./ecainference');
+//   
+// engine.on('close', function (code) {
+  // console.log('child process exited with code ' + code);
+// });
 
 /**
  * If a request is made to the server, this function is used to handle it.
@@ -22,9 +27,9 @@ function onRequest(request, response) {
   /**
    * Handles correct event posts, replies thank you.
    */
-  function answerSuccess(){
+  function answerSuccess(msg){
     response.writeHead(200, { "Content-Type": "text/plain" });
-    response.write("Thank you for the event!");
+    response.write("Thank you for the event (" + msg + ")!");
     response.end();
   }
   
@@ -36,9 +41,9 @@ function onRequest(request, response) {
       /*
        * If required event properties are present we process the event
        */
-      if(obj && obj.event && obj.eventid){
-        answerSuccess();
-        engine.processRequest(obj);
+      if(obj && obj.event && obj.id){
+        answerSuccess(obj.event + '[' + obj.id + ']');
+        engine.pushEvent(obj);
       } else answerError('Your event was missing important parameters!');
     });
   } else answerError('Illegal request method found!');
@@ -46,12 +51,10 @@ function onRequest(request, response) {
 
 fs.readFile('config.json', 'utf8', function (err, data) {
   if (err) {
-    console.log('ERROR: Loading config file');
+    console.trace('ERROR: Loading config file');
     return;
   }
   var config = JSON.parse(data);
-  var arr = config.rules;
-  for(var i = 0; i < arr.length; i++) engine.insertRule(arr[i]);
   
   /*
    * Start the server that listens for events after the engine initialized

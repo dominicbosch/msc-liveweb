@@ -1,0 +1,32 @@
+[
+  {
+    "id": "rule_1",
+    "event": "mail",
+    "condition": {},
+    "actions": [
+      {
+        "type": "webapicall",
+        "apiprovider": "probinder",
+        "method": "makeEntry",
+        "arguments": {
+          "content": "Rule#1: $X.subject" 
+        }
+      }
+    ]
+  },
+  {
+    "id": "rule_2",
+    "event": "mail",
+    "condition": { "sender": "mscliveweb"},
+    "actions": [
+      {
+        "type": "webapicall",
+        "apiprovider": "probinder",
+        "method": "makeEntry",
+        "arguments": {
+          "content": "Rule#2: $X.subject"
+        }
+      }
+    ]
+  }
+]

@@ -10,7 +10,7 @@ var credentials = null;
 function init() {
   fs.readFile(__dirname + '/credentials.json', 'utf8', function (err, data) {
     if (err) {
-      console.log('ERROR: Loading credentials file');
+      console.trace('ERROR: Loading credentials file');
       return;
     }
     credentials = JSON.parse(data);
@@ -18,7 +18,7 @@ function init() {
       console.log('ProBinder interface successfully loaded credentials file');
     } else {
       credentials = null;
-      console.log('ERROR: credentials file corrupt');
+      console.trace('ERROR: credentials file corrupt');
     }
   });
 }
@@ -55,7 +55,7 @@ function verifyCredentials(username, password) {
  */
 function call(args) {
   if(!args || !args.service || !args.method) {
-    console.log('ERROR: Too few arguments!');
+    console.trace('ERROR: Too few arguments!');
     return;
   }
 	if(request && credentials){
@@ -67,11 +67,11 @@ function call(args) {
           if(args && args.success) args.success(body);
         } else {
           if(args && args.error) args.error(error, response, body);
-          else console.log('Error during serivce call: ' + error.message);
+          else console.trace('Error during serivce call: ' + error.message);
         }
       }
     );
-	} else console.log('request or credentials object not ready!');
+	} else console.trace('request or credentials object not ready!');
 };
 
 /**
@@ -101,7 +101,7 @@ function getUnreadContents(args) {
  */
 function getBinderTabContents(args){
   if(!args || !args.tabid) {
-    console.log('ERROR: Too few arguments!');
+    console.trace('ERROR: Too few arguments!');
     return;
   }
   call({
@@ -124,7 +124,7 @@ function getBinderTabContents(args){
  */
 function getContent(args){
   if(!args || !args.serviceid || !args.contentid) {
-    console.log('ERROR: Too few arguments!');
+    console.trace('ERROR: Too few arguments!');
     return;
   }
   call({
@@ -136,6 +136,28 @@ function getContent(args){
   });
 }
 
+/**
+ * Does everything to post something in a binder
+ * @param {Object} args the object containing the content
+ * @param {String} args.content the content to be posted
+ */
+function makeEntry(args){
+  if(!args.content) {
+    console.trace('ERROR: Too few arguments!');
+    console.log(args);
+    return;
+  }
+  call({
+    service: '27',
+    method: 'save',
+    data: {
+      companyId: '961',
+      context: '17930',
+      text: args.content
+    }
+  });
+}
+
 init();
 
 exports.purgeCredentials = purgeCredentials;
@@ -144,4 +166,5 @@ exports.call = call;
 exports.getUnreadContents = getUnreadContents;
 exports.getBinderTabContents = getBinderTabContents;
 exports.getContent = getContent;
+exports.makeEntry = makeEntry;
   

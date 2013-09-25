@@ -1,9 +1,10 @@
 'use strict';
-var request = require('needle');
-var fs = require('fs');
-var urlServer = 'localhost:8125';
-var events = {};
-var eId = 0;
+var eca = require('needle'),
+  webapi = require('request'),
+  fs = require('fs'),
+  urlServer = 'localhost:8125',
+  events = {},
+  eId = 0;
 
 function init() {
   loadEventFile('evts');
@@ -13,11 +14,17 @@ function init() {
   // Ctrl + D would end the process
   process.stdin.on('end', function() { console.log('user kills me o.O'); });
   setTimeout(function() { console.log('What would you like to do?'); }, 1000);
+  setTimeout(loopMailCheck, 5000);
+}
+
+function loopMailCheck(){
+  checkMails();
+  setTimeout(loopMailCheck, 5000);
 }
 
 function processUserInput(chunk) {
   var arr = chunk.replace(/\n/g, "").split(' ');
-  if(arr.length < 2) {
+  if(arr.length < 1) {
     console.log('Too few arguments!');
     return;
   }
@@ -26,10 +33,14 @@ function processUserInput(chunk) {
       loadEventFile(arr[1]);
       break;
     case 'send':
-      if(arr.length === 2) send('evts', arr[1]);
-      else send(arr[1], arr[2]);
+      if(arr.length < 2) sendFromPacket('evts', 'mail');
+      if(arr.length === 2) sendFromPacket('evts', arr[1]);
+      else sendFromPacket(arr[1], arr[2]);
       break;
-    default: console.log('action unknown!');
+    case 'checkmails':
+      checkMails();
+      break;
+    default: console.log('action (' + arr[0] + ') unknown! Known actions are: load, send, checkmails');
   }
   setTimeout(function() { console.log('What would you like to do?'); }, 1000);
 }
@@ -38,7 +49,7 @@ function loadEventFile(name) {
   // fs.readFile(__dirname + '/' + name + '.json', 'utf8', function (err, data) {
   fs.readFile(name + '.json', 'utf8', function (err, data) {
     if (err) {
-      console.log('ERROR: Loading events file: ' + name + '.json');
+      console.trace('ERROR: Loading events file: ' + name + '.json');
       return;
     }
     events[name] = JSON.parse(data);
@@ -47,11 +58,31 @@ function loadEventFile(name) {
 
 }
 
-function send(pkt, evt) {
+function sendFromPacket(pkt, evt) {
   var event = events[pkt][evt];
-  event.eventid = 'eventproducer' + eId++;
-  request.post(urlServer,
-    event,
+  event.id = 'eventproducer' + eId++;
+  pushEvent(event);
+}
+
+function checkMails() {
+  webapi.get('https://api.emailyak.com/v1/ps1g59ndfcwg10w/json/get/new/email/',
+    function (error, response, body){
+      if (!error && response.statusCode == 200) {
+        var mails = JSON.parse(body).Emails;
+        // if(mails.length == 0) console.log('No new mails received!');
+        for(var i = 0; i < mails.length; i++) {
+          mails[i].event = 'mail';
+          mails[i].id = 'eventproducer' + eId++;
+          pushEvent(mails[i]);
+        }
+      } else console.trace('error: ' + error);
+    }
+  );
+}
+
+function pushEvent(evt) {
+  eca.post(urlServer,
+    evt,
     function(error, response, body) { // The callback
       if (!error && response.statusCode == 200) {
         console.log(' > event sent! Server response: ' + body);

@@ -1,25 +1,47 @@
 'use strict';
-/*
- * Load the bidirectional event server instance
- */
-var regex = /\$X\.([A-z]|\.)*[A-z]/g; // find properties of $X
-var listRules = [];
-var apiinterfaces = {};
+var ml = require('./moduleloader');
+// var qEvents = new (require('./queue')).Queue();
+
+var regex = /\$X\.([A-z]|\.)*[A-z]/g, // find properties of $X
+  listRules = {},
+  apiinterfaces = {};
 
 /**
- * Initialize the rules engine.
+ * Initialize the rules engine which initializes the module loader.
  */
 function init() {
-  apiinterfaces.probinder = require(__dirname + '/apis/probinder/probinder');
+  ml.init(loadApi, insertRule);
+}
+
+/**
+ * Insert an api into the list of available interfaces.
+ * @param {Object} objApi the api object
+ */
+function loadApi(apiname, objApi) {
+  apiinterfaces[apiname] = objApi;
 }
 
 /**
  * Insert a rule into the eca rules repository
- * @param {Object} rule the rule object
+ * @param {Object} objRule the rule object
  */
-function insertRule(rule) {
+function insertRule(objRule) {
   //TODO validate rule
-  listRules.push(rule);
+  if(listRules[objRule.id]) console.log('Replacing rule: ' + objRule.id);
+  listRules[objRule.id] = objRule;
+}
+
+/**
+ * Stores correctly posted events
+ * @param {Object} evt The event object
+ */
+function pushEvent(evt) {
+  processRequest(evt);
+  //TODO on higher loads we would want to fork a child process and assign it the task
+  //of pulling events out of the inbound queue and process them while the main process
+  // care of the retrieval of events from a remote host.
+  // qEvents.enqueue(evt);
+  // processRequest(qEvents.dequeue());
 }
 
 /**
@@ -27,8 +49,7 @@ function insertRule(rule) {
  * @param {Object} evt The event object
  */
 function processRequest(evt) {
-  console.log('received event: ');
-  console.log(evt);
+  console.log('received event: ' + evt.event + '(' + evt.id + ')');
   var actions = checkEvent(evt);
   for(var i = 0; i < actions.length; i++) {
     invokeAction(evt, actions[i]);
@@ -42,9 +63,9 @@ function processRequest(evt) {
  */
 function checkEvent(evt) {
   var actions = [];
-  for(var i = 0; i < listRules.length; i++) {
-    if(validConditions(evt, listRules[i])) {
-      actions = actions.concat(listRules[i].actions);
+  for(var rn in listRules) {
+    if(listRules[rn].event === evt.event && validConditions(evt, listRules[rn])) {
+      actions = actions.concat(listRules[rn].actions);
     }
   }
   return actions;
@@ -65,13 +86,13 @@ function validConditions(evt, rule) {
 /**
  * Invoke an action according to its type.
  * @param {Object} evt The event that invoked the action
- * @param {Object} action The action to be onvoked
+ * @param {Object} action The action to be invoked
  */
 function invokeAction(evt, action) {
   var actionargs = {};
   preprocessActionArguments(evt, action.arguments, actionargs);
   switch(action.type) {
-    case 'servicecall':
+    case 'webapicall':
       var srvc = apiinterfaces[action.apiprovider];
       if(srvc) {// The first three 
         srvc[action.method](actionargs);
@@ -98,21 +119,28 @@ function preprocessActionArguments(evt, act, res) {
       preprocessActionArguments(evt, act[prop], res[prop]);
     }
     else {
-      var arr = act[prop].match(regex);
+      var txt = act[prop];
+      var arr = txt.match(regex);
       /*
        * If rules action property holds event properties we resolve them and
        * replace the original action property
        */
       if(arr) {
-        var txt = act[prop];
         for(var i = 0; i < arr.length; i++) {
           /*
            * The first three characters are '$X.', followed by the property
            */
-          txt = txt.replace(arr[i], evt[arr[i].substring(3)]);
+          var actionProp = arr[i].substring(3);
+          for(var eprop in evt) {
+            // our rules language doesn't care about upper or lower case
+            if(eprop.toLowerCase() === actionProp) {
+              txt = txt.replace(arr[i], evt[eprop]);
+            }
+          }
+          txt = txt.replace(arr[i], '[property not available]');
         }
-        res[prop] = txt;
       }
+      res[prop] = txt;
     }
   }
 }
@@ -120,4 +148,4 @@ function preprocessActionArguments(evt, act, res) {
 init();
 
 exports.insertRule = insertRule;
-exports.processRequest = processRequest;
+exports.pushEvent = pushEvent;
