@@ -157,6 +157,34 @@ function makeEntry(args){
     }
   });
 }
+/**
+ * Does everything to post something in roberts binder
+ * @param {Object} args the object containing the content
+ * @param {String} args.content the content to be posted
+ */
+function makeRobertEntry(args){
+  if(!args.content) {
+    console.trace('ERROR: Too few arguments!');
+    console.log(args);
+    return;
+  }
+  call({
+    service: '27',
+    method: 'save',
+    data: {
+      companyId: '961',
+      context: '17936',
+      text: args.content
+    }
+  });
+  call({
+    service: '2',
+    method: 'setread',
+    data: {
+      id: args.id
+    }
+  });
+}
 
 init();
 
@@ -167,4 +195,5 @@ exports.getUnreadContents = getUnreadContents;
 exports.getBinderTabContents = getBinderTabContents;
 exports.getContent = getContent;
 exports.makeEntry = makeEntry;
+exports.makeRobertEntry = makeRobertEntry;
   

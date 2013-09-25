@@ -2,7 +2,8 @@
 var ml = require('./moduleloader');
 // var qEvents = new (require('./queue')).Queue();
 
-var regex = /\$X\.([A-z]|\.)*[A-z]/g, // find properties of $X
+var regex = /\$X\.[\w\.\[\]]*/g, // find properties of $X
+// var regex = /\$X\.([0-9A-z\.\[\]])*[A-z]/g, // find properties of $X
   listRules = {},
   apiinterfaces = {};
 
@@ -49,7 +50,7 @@ function pushEvent(evt) {
  * @param {Object} evt The event object
  */
 function processRequest(evt) {
-  console.log('received event: ' + evt.event + '(' + evt.id + ')');
+  console.log('received event: ' + evt.event + '(' + evt.eventid + ')');
   var actions = checkEvent(evt);
   for(var i = 0; i < actions.length; i++) {
     invokeAction(evt, actions[i]);
@@ -110,6 +111,18 @@ function invokeAction(evt, action) {
  * @param {Object} res The object to be used to enter the new properties
  */
 function preprocessActionArguments(evt, act, res) {
+  // function findPropRecursive(obj, depth) {
+    // console.log('at ' + depth + ': ');
+    // console.log(obj);
+    // for(var p in obj) {
+      // if(p.toLowerCase() === arrActionProp[depth]) {
+        // console.log('found: ' + p);
+        // if(depth + 1 == arrActionProp.length) {
+          // return obj[p];
+        // } else return findPropRecursive(obj[p], depth + 1);
+      // }
+    // }
+  // }
   for(var prop in act) {
     /*
      * If the property is an object itself we go into recursion
@@ -131,6 +144,9 @@ function preprocessActionArguments(evt, act, res) {
            * The first three characters are '$X.', followed by the property
            */
           var actionProp = arr[i].substring(3);
+          // var arrActionProp = arr[i].substring(3).split('.');
+          // var p = findPropRecursive(evt, 0);
+          // console.log('finally found: ' + p + ' for ' + arr[i]);
           for(var eprop in evt) {
             // our rules language doesn't care about upper or lower case
             if(eprop.toLowerCase() === actionProp) {

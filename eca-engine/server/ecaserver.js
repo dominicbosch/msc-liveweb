@@ -41,8 +41,8 @@ function onRequest(request, response) {
       /*
        * If required event properties are present we process the event
        */
-      if(obj && obj.event && obj.id){
-        answerSuccess(obj.event + '[' + obj.id + ']');
+      if(obj && obj.event && obj.eventid){
+        answerSuccess(obj.event + '[' + obj.eventid + ']');
         engine.pushEvent(obj);
       } else answerError('Your event was missing important parameters!');
     });

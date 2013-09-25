@@ -1,8 +1,38 @@
 {
-  "mail": {
+  "mail1": {
     "event": "mail",
     "sender": "mscliveweb",
     "subject": "This is the subject",
     "body": "<div><div class=\"adM\"></div><p>Hey,</p><p><a href=\"http://soundcloud.com/liftboi#utm_campaign=bulk&amp;utm_content=track_notification&amp;utm_medium=notification&amp;utm_source=soundcloud&amp;utm_term=20130918\" target=\"_blank\">Liftboi</a> (Liftboi, Neue Euphorie) justsent a private track called<a href=\"http://soundcloud.com/liftboi/wiegenfest/for/dominicbosch#utm_campaign=bulk&amp;utm_content=track_notification&amp;utm_medium=notification&amp;utm_source=soundcloud&amp;utm_term=20130918\" target=\"_blank\">Wiegenfest (1 yr Liftboi)</a> to999+ people.<br></p><p><a href=\"http://soundcloud.com/liftboi/wiegenfest/for/dominicbosch#utm_campaign=bulk&amp;utm_content=track_notification&amp;utm_medium=notification&amp;utm_source=soundcloud&amp;utm_term=20130918\" target=\"_blank\">Listen to Wiegenfest (1 yr Liftboi)</a></p><p>From your friends at SoundCloud.<br><br>..............................<wbr>..<br></p><p><a href=\"http://soundcloud.com/settings/email#utm_campaign=bulk&amp;utm_content=track_notification&amp;utm_medium=notification&amp;utm_source=soundcloud&amp;utm_term=20130918\" target=\"_blank\">Manage notifications</a> | <a href=\"http://help.soundcloud.com?anchor=utm_campaign%3Dbulk%26utm_content%3Dtrack_notification%26utm_medium%3Dnotification%26utm_source%3Dsoundcloud%26utm_term%3D20130918\" target=\"_blank\">FAQs &amp; Help</a> | <a href=\"http://soundcloud.com/#utm_campaign=bulk&amp;utm_content=track_notification&amp;utm_medium=notification&amp;utm_source=soundcloud&amp;utm_term=20130918\" target=\"_blank\">Your SoundCloud</a></p><div class=\"yj6qo\"></div><div class=\"adL\"></div></div>"
+  },
+  "mail2": {
+    "event": "mail",
+    "sender": "mscliveweb",
+    "subject": "This is the subject",
+    "body": "<div><div class=\"adM\"></div><p>Hey,</p><p><a href=\"http://soundcloud.com/liftboi#utm_campaign=bulk&amp;utm_content=track_notification&amp;utm_medium=notification&amp;utm_source=soundcloud&amp;utm_term=20130918\" target=\"_blank\">Liftboi</a> (Liftboi, Neue Euphorie) justsent a private track called<a href=\"http://soundcloud.com/liftboi/wiegenfest/for/dominicbosch#utm_campaign=bulk&amp;utm_content=track_notification&amp;utm_medium=notification&amp;utm_source=soundcloud&amp;utm_term=20130918\" target=\"_blank\">Wiegenfest (1 yr Liftboi)</a> to999+ people.<br></p><p><a href=\"http://soundcloud.com/liftboi/wiegenfest/for/dominicbosch#utm_campaign=bulk&amp;utm_content=track_notification&amp;utm_medium=notification&amp;utm_source=soundcloud&amp;utm_term=20130918\" target=\"_blank\">Listen to Wiegenfest (1 yr Liftboi)</a></p><p>From your friends at SoundCloud.<br><br>..............................<wbr>..<br></p><p><a href=\"http://soundcloud.com/settings/email#utm_campaign=bulk&amp;utm_content=track_notification&amp;utm_medium=notification&amp;utm_source=soundcloud&amp;utm_term=20130918\" target=\"_blank\">Manage notifications</a> | <a href=\"http://help.soundcloud.com?anchor=utm_campaign%3Dbulk%26utm_content%3Dtrack_notification%26utm_medium%3Dnotification%26utm_source%3Dsoundcloud%26utm_term%3D20130918\" target=\"_blank\">FAQs &amp; Help</a> | <a href=\"http://soundcloud.com/#utm_campaign=bulk&amp;utm_content=track_notification&amp;utm_medium=notification&amp;utm_source=soundcloud&amp;utm_term=20130918\" target=\"_blank\">Your SoundCloud</a></p><div class=\"yj6qo\"></div><div class=\"adL\"></div></div>"
+  },
+  "debug": {
+    "event": "newfile",
+    "fileIds": [ "23678", "23677" ],
+    "id": "118755",
+    "createDate": "2013-09-25 11:02:28",
+    "lastModified": "2013-09-25 11:05:34",
+    "time": "1 hour ago",
+    "userId": "10595",
+    "username": "Dominic Bosch",
+    "uri": "https://probinder.com/content/view/id/118755/architecture_green-pdf",
+    "localUri": "https://probinder.com/content/view/id/118755/architecture_green-pdf",
+    "title": "Architecture_green.pdf",
+    "serviceId": "32",
+    "userIds": [ "10595" ],
+    "description": "",
+    "context": [
+      {
+        "id": "17935",
+        "name": "New Files",
+        "remove": "true",
+        "uri": "/content/context/id/17935/new-files"
+      }
+    ]
   }
 }
