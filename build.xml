@@ -1,7 +1,7 @@
 <project name="msc-liveweb" default="loadlibs" basedir=".">
   <description>
   Eases distributed project handling.
-	Be sure to install node.js
+	Be sure to install node.js.
   </description>
 
   <property name="dir.nodejs" location="node-js/src" />
