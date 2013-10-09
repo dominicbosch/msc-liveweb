@@ -9,7 +9,7 @@
     "url" : "https://github.com/dominicbosch/msc-liveweb.git"
   },
   "dependencies": {
-    "needle": "0.5.9",
+    "needle": "0.6.1",
     "request": "2.27.0"
   }
 }

@@ -2,6 +2,7 @@
 var express = require('express'),
   qs = require('querystring'),
   fs = require('fs'),
+  path = require('path'),
   engine = require('./ecainference');
   // engine = require('child_process').fork('./ecainference');
 //   
@@ -49,7 +50,7 @@ function onRequest(request, response) {
   } else answerError('Illegal request method found!');
 }
 
-fs.readFile('config.json', 'utf8', function (err, data) {
+fs.readFile(path.resolve(__dirname, 'config', 'config.json'), 'utf8', function (err, data) {
   if (err) {
     console.trace('ERROR: Loading config file');
     return;

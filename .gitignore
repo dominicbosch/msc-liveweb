@@ -1,4 +1,5 @@
 *~
 .project
+.pydevproject
 *credentials.json
 *node_modules

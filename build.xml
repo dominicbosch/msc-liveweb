@@ -3,22 +3,19 @@
   Eases distributed project handling.
 	Be sure to install node.js
   </description>
-	
-  <property name="execNode" location="C:\Program Files\nodejs\node" />
-  <property name="execNpm" location="C:\Program Files\nodejs\npm.cmd" />
 
   <property name="dir.nodejs" location="node-js/src" />
   <property name="dir.ecaadd" location="eca-additionals" />
   <property name="dir.ecaengine" location="eca-engine" />
 
 	<target name="loadlibs">
-    <exec executable="${execNpm}" dir="${dir.nodejs}">
+    <exec executable="npm" dir="${dir.nodejs}">
       <arg value="install"/> 
     </exec>
-    <exec executable="${execNpm}" dir="${dir.ecaadd}">
+    <exec executable="npm" dir="${dir.ecaadd}">
       <arg value="install"/> 
     </exec>
-    <exec executable="${execNpm}" dir="${dir.ecaengine}">
+    <exec executable="npm" dir="${dir.ecaengine}">
       <arg value="install"/> 
     </exec>
   </target>

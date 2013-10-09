@@ -1,4 +1,5 @@
 var fs = require('fs'),
+  path = require('path'),
   funcLoadApi, funcLoadRule;
 
 /**
@@ -9,6 +10,7 @@ function init(funcApi, funcPush) {
   funcLoadApi = funcApi;
   funcLoadRule = funcPush;
   loadApiFile('probinder');
+  loadApiFile('wikipedia');
   loadRulesFile('rules');
   process.stdin.resume();
   process.stdin.setEncoding('utf8');
@@ -21,30 +23,30 @@ function init(funcApi, funcPush) {
 function processUserInput(chunk) {
   var arr = chunk.replace(/\n/g, "").split(' ');
   if(arr.length < 2) {
-    console.log('Too few arguments! Type (loadrule|loadapi) eventuall followed by a custom module name');
+    console.log('Too few arguments! Type (loadrules|loadapi) eventuall followed by a custom module name');
     return;
   }
   switch(arr[0]) {
-    case 'loadrule':
+    case 'loadrules':
       loadRulesFile(arr[1]);
       break;
     case 'loadapi':
       loadApiFile(arr[1]);
       break;
-    default: console.log('action (' + arr[0] + ') unknown! Known actions are: loadrule, loadapi');
+    default: console.log('action (' + arr[0] + ') unknown! Known actions are: loadrules, loadapi');
   }
   setTimeout(function() { console.log('What would you like to do?'); }, 1000);
 }
 
 function loadApiFile(name) {
-  funcLoadApi(name, require('./apis/' + name + '/' + name + '.js'));
+  funcLoadApi(name, path.resolve(__dirname, 'apis', name, name + '.js'));
   console.log('API ' + name + ' loaded');
 }
 
 function loadRulesFile(name) {
   if(!funcLoadRule) console.trace('ERROR: no rule loader function available');
   // fs.readFile(__dirname + '/' + name + '.json', 'utf8', function (err, data) {
-  fs.readFile(name + '.json', 'utf8', function (err, data) {
+  fs.readFile(path.resolve(__dirname, 'rules', name + '.json'), 'utf8', function (err, data) {
     if (err) {
       console.trace('ERROR: Loading rules file: ' + name + '.json');
       return;
