@@ -5,21 +5,21 @@ var ml = require('./moduleloader');
 var regex = /\$X\.[\w\.\[\]]*/g, // find properties of $X
 // var regex = /\$X\.([0-9A-z\.\[\]])*[A-z]/g, // find properties of $X
   listRules = {},
-  apiinterfaces = {};
+  listActionApis = {};
 
 /**
  * Initialize the rules engine which initializes the module loader.
  */
 function init() {
-  ml.init(loadApi, insertRule);
+  ml.init(loadActionApi, insertRule);
 }
 
 /**
  * Insert an api into the list of available interfaces.
  * @param {Object} objApi the api object
  */
-function loadApi(apiname, objApi) {
-  apiinterfaces[apiname] = objApi;
+function loadActionApi(apiname, objApi) {
+  listActionApis[apiname] = objApi;
 }
 
 /**
@@ -92,17 +92,12 @@ function validConditions(evt, rule) {
  */
 function invokeAction(evt, action) {
   var actionargs = {};
-  preprocessActionArguments(evt, action.arguments, actionargs);
-  switch(action.type) {
-    case 'webapicall':
-      var srvc = apiinterfaces[action.apiprovider];
-      if(srvc) {// The first three 
-        srvc[action.method](actionargs);
-      }
-      else console.log('no api interface found for: ' + action.apiprovider);
-      break;
-    default: console.log('no action available for: ' + action.type);
+  var srvc = listActionApis[action.apiprovider];
+  if(srvc) {
+    preprocessActionArguments(evt, action.arguments, actionargs);
+    srvc[action.method](actionargs);
   }
+  else console.log('no api interface found for: ' + action.apiprovider);
 }
 
 /**

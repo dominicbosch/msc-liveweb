@@ -3,11 +3,11 @@ var fs = require('fs'),
 
 /**
  * @param funcApi the function this class pushes its apis to
- * @param funcPush the function this class pushes its rules to
+ * @param funcRule the function this class pushes its rules to
  */
-function init(funcApi, funcPush) {
+function init(funcApi, funcRule) {
   funcLoadApi = funcApi;
-  funcLoadRule = funcPush;
+  funcLoadRule = funcRule;
   loadApiFile('probinder');
   loadRulesFile('rules');
   process.stdin.resume();

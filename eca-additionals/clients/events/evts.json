@@ -1,15 +1,15 @@
 {
+  "mail0": {
+    "event": "mail"
+  },
   "mail1": {
     "event": "mail",
-    "sender": "sender1",
-    "subject": "mail #1 subject",
-    "textbody": "mail #1 lengthy body"
+    "subject": "mail #1 subject"
   },
   "mail2": {
     "event": "mail",
     "sender": "sender2",
-    "subject": "mail #2 subject",
-    "textbody": "mail #2 lengthy body"
+    "subject": "mail #2 subject"
   },
   "debug": {
     "event": "newfile",

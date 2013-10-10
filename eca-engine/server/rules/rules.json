@@ -2,10 +2,8 @@
   {
     "id": "rule_0",
     "event": "mail",
-    "condition": {},
     "actions": [
       {
-        "type": "webapicall",
         "apiprovider": "probinder",
         "method": "makeEntry"
       }
@@ -14,10 +12,8 @@
   {
     "id": "rule_1",
     "event": "mail",
-    "condition": {},
     "actions": [
       {
-        "type": "webapicall",
         "apiprovider": "probinder",
         "method": "makeEntry",
         "arguments": {
@@ -32,11 +28,10 @@
     "condition": { "sender": "sender2"},
     "actions": [
       {
-        "type": "webapicall",
         "apiprovider": "probinder",
         "method": "makeEntry",
         "arguments": {
-          "content": "Rule#2: $X.textbody"
+          "content": "Rule#2: $X.subject"
         }
       }
     ]
@@ -47,7 +42,6 @@
     "condition": { "FromAddress": "dominic.bosch.db@gmail.com"},
     "actions": [
       {
-        "type": "webapicall",
         "apiprovider": "probinder",
         "method": "makeEntry",
         "arguments": {
@@ -62,7 +56,6 @@
     "condition": { "serviceId": "32"},
     "actions": [
       {
-        "type": "webapicall",
         "apiprovider": "probinder",
         "method": "makeRobertEntry",
         "arguments": {
