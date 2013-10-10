@@ -1,8 +1,8 @@
 'use strict';
-var request = require('needle');
-var fs = require('fs');
-var urlService = 'https://probinder.com/service/';
-var credentials = null;
+var request = require('needle'),
+  fs = require('fs'),
+  urlService = 'https://probinder.com/service/',
+  credentials = null;
 
 /**
  * Takes the actions to make this module ready when it is loaded
@@ -10,7 +10,7 @@ var credentials = null;
 function init() {
   fs.readFile(__dirname + '/credentials.json', 'utf8', function (err, data) {
     if (err) {
-      console.trace('ERROR: Loading credentials file');
+      console.trace('ERROR: Loading credentials file! Did you create it already?');
       return;
     }
     credentials = JSON.parse(data);

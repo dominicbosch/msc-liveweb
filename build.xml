@@ -1,0 +1,22 @@
+<project name="msc-liveweb" default="loadlibs" basedir=".">
+  <description>
+  Eases distributed project handling.
+	Be sure to install node.js.
+  </description>
+
+  <property name="dir.nodejs" location="node-js/src" />
+  <property name="dir.ecaadd" location="eca-additionals" />
+  <property name="dir.ecaengine" location="eca-engine" />
+
+	<target name="loadlibs">
+    <exec executable="npm" dir="${dir.nodejs}">
+      <arg value="install"/> 
+    </exec>
+    <exec executable="npm" dir="${dir.ecaadd}">
+      <arg value="install"/> 
+    </exec>
+    <exec executable="npm" dir="${dir.ecaengine}">
+      <arg value="install"/> 
+    </exec>
+  </target>
+</project>

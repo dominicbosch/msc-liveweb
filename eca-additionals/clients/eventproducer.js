@@ -1,6 +1,7 @@
 'use strict';
 var eca = require('needle'),
   webapi = require('request'),
+  path = require('path'),
   fs = require('fs'),
   credentials = null,
   urlServer = 'localhost:8125',
@@ -8,7 +9,6 @@ var eca = require('needle'),
   eId = 0;
 
 function init() {
-  loadCredentials();
   loadEventFile('evts');
   process.stdin.resume();
   process.stdin.setEncoding('utf8');
@@ -50,20 +50,9 @@ function processUserInput(chunk) {
   // setTimeout(function() { console.log('What would you like to do?'); }, 1000);
 }
 
-function loadCredentials(){
-  fs.readFile('credentials.json', 'utf8', function (err, data) {
-    if (err) {
-      console.trace('ERROR: Loading credentials');
-      return;
-    }
-    credentials = JSON.parse(data);
-    console.log('Successfully loaded credentials');
-  });
-}
-
 function loadEventFile(name) {
   // fs.readFile(__dirname + '/' + name + '.json', 'utf8', function (err, data) {
-  fs.readFile(name + '.json', 'utf8', function (err, data) {
+  fs.readFile(path.resolve(__dirname, 'events', name + '.json'), 'utf8', function (err, data) {
     if (err) {
       console.trace('ERROR: Loading events file: ' + name + '.json');
       return;
