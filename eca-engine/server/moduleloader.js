@@ -20,18 +20,20 @@ function init(funcApi, funcPush) {
 
 function processUserInput(chunk) {
   var arr = chunk.replace(/\n/g, "").split(' ');
-  if(arr.length < 2) {
-    console.log('Too few arguments! Type (loadrule|loadapi) eventuall followed by a custom module name');
+  if(arr.length < 1) {
+    console.log('Too few arguments! Type (loadrules|loadapi) eventuall followed by a custom module name');
     return;
   }
   switch(arr[0]) {
-    case 'loadrule':
-      loadRulesFile(arr[1]);
+    case 'loadrules':
+      if(arr.length == 1) loadRulesFile('rules');
+      else loadRulesFile(arr[1]);
       break;
     case 'loadapi':
-      loadApiFile(arr[1]);
+      if(arr.length == 1) loadApiFile('probinder');
+      else loadApiFile(arr[1]);
       break;
-    default: console.log('action (' + arr[0] + ') unknown! Known actions are: loadrule, loadapi');
+    default: console.log('action (' + arr[0] + ') unknown! Known actions are: loadrules, loadapi');
   }
   setTimeout(function() { console.log('What would you like to do?'); }, 1000);
 }

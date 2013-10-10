@@ -139,12 +139,14 @@ function preprocessActionArguments(evt, act, res) {
        * If rules action property holds event properties we resolve them and
        * replace the original action property
        */
+      // console.log(evt);
       if(arr) {
         for(var i = 0; i < arr.length; i++) {
           /*
            * The first three characters are '$X.', followed by the property
            */
-          var actionProp = arr[i].substring(3);
+          var actionProp = arr[i].substring(3).toLowerCase();
+          // console.log(actionProp);
           // var arrActionProp = arr[i].substring(3).split('.');
           // var p = findPropRecursive(evt, 0);
           // console.log('finally found: ' + p + ' for ' + arr[i]);

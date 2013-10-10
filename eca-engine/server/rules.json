@@ -67,7 +67,7 @@
         "method": "makeRobertEntry",
         "arguments": {
           "id": "$X.id",
-          "content": "New file ($X.title) in tab '$X.context[0][name]', find it <a href=\"https://probinder.com/binder/content/view/id/$X.id\">here</a>!"
+          "content": "New file ($X.title) in tab '$X.context[0][name]', find it <a href=\"https://probinder.com/file/$X.fileIds[0]\">here</a>!"
         }
       }
     ]

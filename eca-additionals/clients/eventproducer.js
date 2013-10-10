@@ -91,11 +91,11 @@ function loopMailCheck(){
 }
 
 function checkMails() {
-  webapi.get('https://api.emailyak.com/v1/' + credentials.emailyak + '/json/get/new/email/',
+  webapi.get('https://api.emailyak.com/v1/' 
+      + credentials.emailyak + '/json/get/new/email/',
     function (error, response, body){
       if (!error && response.statusCode == 200) {
         var mails = JSON.parse(body).Emails;
-        // if(mails.length == 0) console.log('No new mails received!');
         for(var i = 0; i < mails.length; i++) {
           mails[i].event = 'yakmail';
           mails[i].eventid = 'eventproducer' + eId++;
