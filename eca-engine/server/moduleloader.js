@@ -8,7 +8,9 @@ var fs = require('fs'),
 function init(funcApi, funcRule) {
   funcLoadApi = funcApi;
   funcLoadRule = funcRule;
+  loadApiFile('webapi');
   loadApiFile('probinder');
+  loadApiFile('wikipedia');
   loadRulesFile('rules');
   process.stdin.resume();
   process.stdin.setEncoding('utf8');

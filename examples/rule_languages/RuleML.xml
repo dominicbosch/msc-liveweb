@@ -1,0 +1,32 @@
+
+	<Rule style="active">
+		<on>
+			<Event>
+				<signature>
+					<Atom>
+						<Rel per="value">mail</Rel>
+					</Atom>
+				</signature>
+			</Event>
+		</on>
+		<do>
+			<Atom>
+				<Rel per="effect">createContent</Rel>
+			</Atom>
+		</do>
+	</Rule>
+
+
+<!--
+	<do>
+		<Atom>
+			<oid>
+				<Ind iri="https://probinder.com/service/27" />
+			</oid>
+			<Rel per="effect">save</Rel>
+			<Var>companyId</Var>
+			<Var>context</Var>
+			<Var>text</Var>
+		</Atom>
+	</do>
+-->
