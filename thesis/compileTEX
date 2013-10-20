@@ -1,0 +1,6 @@
+#!/bin/bash
+latex thesis
+bibtex thesis
+latex thesis
+latex thesis
+pdflatex thesis
