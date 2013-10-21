@@ -74,7 +74,7 @@
 \expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
 \expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
 \expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
-\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+%\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
 \expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
 \expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
 \expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
@@ -93,6 +93,7 @@
 \expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
 \expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
 \expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+%\expandafter\def\csname PY@tok@err\endcsname{}
 
 \def\PYZbs{\char`\\}
 \def\PYZus{\char`\_}
@@ -147,25 +148,49 @@ t.b.d.
 \section{Related Work}
 
 \subsection{Rules Languages}
-Oldest first
+In this section we examine different existing rule languages with respect to a simple use case.
+We want the rule language react on the receipt of an email (event), check for a distinct email address (condition) and store it in a remote location, via a Web API (action).
+The email only contains the parts we require for this use case (the sender and a subject). A JSON representation of the email would be:
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{p}{\PYZob{}}
+  \PY{l+s}{\PYZdq{}}\PY{l+s}{event}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{email}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+  \PY{l+s}{\PYZdq{}}\PY{l+s}{sender}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{sender@mail.com}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+  \PY{l+s}{\PYZdq{}}\PY{l+s}{subject}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{An important message!}\PY{l+s}{\PYZdq{}}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
 
 \subsubsection{RDF \& XML}
-Proposed 2003
-It is an early paper on the subject, paving the way for future research\cite{Papamarkos03event-condition-actionrule}.
-The ECA rule languages for RDF 
+An early ECA Rule Language for XML repositories\cite{Papamarkos03event-condition-actionrule} was postulated in 2003 and was picked up by many researches afterwards. It was designed to react on insert and delete events within XML repositories and as an action change XML documents.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{ON} \PY{n}{INSERT} \PY{n}{document}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{inbound\PYZus{}queue.xml}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{o}{/}\PY{n}{mails}\PY{o}{/}\PY{n}{mail}
+\PY{n}{IF} \PY{err}{\PYZdl{}}\PY{n}{delta}\PY{o}{/}\PY{n}{sender}\PY{p}{[}\PY{o}{.}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{sender@mail.com}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+\PY{n}{DO} \PY{n}{DELETE} \PY{n}{document}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{inbound\PYZus{}queue.xml}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{o}{/}\PY{n}{mails}\PY{o}{/}\PY{n}{mail}\PY{p}{;}
+   \PY{n}{LET} \PY{err}{\PYZdl{}}\PY{n}{api} \PY{o}{=} \PY{n}{resource}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{www.webapi.com}\PY{l+s}{\PYZdq{}}\PY{p}{)} \PY{n}{IN}
+   \PY{n}{INSERT} \PY{p}{(}\PY{err}{\PYZdl{}}\PY{n}{api}\PY{p}{,} \PY{n}{newcontent}\PY{p}{,} 
+      \PY{o}{\PYZlt{}}\PY{n}{content}\PY{o}{\PYZgt{}}\PY{n}{New} \PY{n}{mail}\PY{p}{:} \PY{p}{\PYZob{}}\PY{err}{\PYZdl{}}\PY{n}{delta}\PY{o}{/}\PY{n}{subject}\PY{p}{\PYZcb{}}\PY{o}{\PYZlt{}}\PY{o}{/}\PY{n}{content}\PY{o}{\PYZgt{}}\PY{p}{)}
+\end{Verbatim}
+
+Now apart from implementing a rules engine, we would also need to add an XML document event manager which interpretes and pushes events into the XML file \emph{inbound\_queue.xml}. Then again this instance would interprete the ouptuts of the ECA engine, which would theoretically manifest in other XML documents, and produce meaningful actions on remote hosts. This wouldn't be an architecture which has its focus on the solution of our use case and, as a result, add complexity and create an unnecessary overhead.
+
+\subsubsection{Notation 3}
+To make the lengthy RDF definitions smaller and more readable, Notation 3\cite{wwwn3} was designed and announced in 2005. Through the implies operator(=\textgreater) an "event" can be connected to an "action", both expressed in RDF's subject, predicate, object notation, which makes the expression of ECA rules a complicated and not very intuitive task. A solution to our use case would somewhat look like:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{p}{\PYZob{}} \PY{err}{?}\PY{n}{x} \PY{p}{:}\PY{n}{event} \PY{l+s}{\PYZdq{}}\PY{l+s}{email}\PY{l+s}{\PYZdq{}}\PY{o}{.} \PY{err}{?}\PY{n}{x} \PY{p}{:}\PY{n}{sender} \PY{l+s}{\PYZdq{}}\PY{l+s}{sender@mail.com}\PY{l+s}{\PYZdq{}} \PY{p}{\PYZcb{}} \PY{o}{=}\PY{o}{\PYZgt{}} \PY{p}{\PYZob{}} \PY{p}{:}\PY{n}{webapi} \PY{p}{:}\PY{n}{newcontent} \PY{err}{?}\PY{n}{x}\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+It's obvious that these rules are meant to express relations between entities and is not really suitable for our use case and would need another interpreter to infer the actions. But concepts and ideas of the work that was done in these consortias could eventully still find influence into our solution.
+
 
 \subsubsection{XChange/Xcerpt}
 
 
 \subsubsection{JSON Rules}
 t.b.d.
-
-\subsubsection{N3}
-t.b.d.
 \emph{JSON Rules}~\cite{2008-Giurca_Pascalau-JSON_Rules.pdf}
 
-\subsubsection{RIF-PRD}
-t.b.d.
 
 \subsubsection{R2ML}
 t.b.d.

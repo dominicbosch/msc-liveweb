@@ -1,14 +1,20 @@
  <r2ml:RuleBase xmlns:r2ml="http://www.rewerse.net/I1/2006/R2ML"
  		xmlns:dc="http://purl.org/dc/elements/1.1/" 
-		xmlns:ex="http://www.bookingservice.com/schema" 
+		xmlns:ex="http://www.probinder.com/schema" 
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xmlns:r2mlv="http://www.rewerse.net/I1/2006/R2ML/R2MLV"   
 		xsi:schemaLocation="http://www.rewerse.net/I1/2006/R2ML   
-http://oxygen.informatik.tu-cottbus.de/R2ML/0.5/R2ML.xsd">
+				http://oxygen.informatik.tu-cottbus.de/R2ML/0.5/R2ML.xsd">
 
 	<r2ml:ReactionRuleSet r2ml:ruleSetID="UseCase_Set_1">
 		<r2ml:ReactionRule r2ml:ruleID="Rule_1">
-
+			<r2ml:triggeringEventExpr>
+				<r2ml:AtomicEventExpression r2ml:eventType="ex:mail">
+					<r2ml:contextArgument>
+						<r2ml:ObjectVariable r2ml:name="pbmail" r2ml:class="ex:mail"/>
+					</r2ml:contextArgument>
+				</r2ml:AtomicEventExpression>
+			</r2ml:triggeringEventExpr>
 		</r2ml:ReactionRule>
 	</r2ml:ReactionRuleSet>
 </r2ml:RuleBase>

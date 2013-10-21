@@ -1,0 +1,6 @@
+ON INSERT document('inbound_queue.xml')/mails/mail
+IF $delta/sender[.='sender@mail.com']
+DO DELETE document('inbound_queue.xml')/mails/mail;
+   LET $api = resource("www.webapi.com") IN
+   INSERT ($api, newcontent, 
+      <content>New mail: {$delta/subject}</content>)

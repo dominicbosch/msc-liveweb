@@ -4,3 +4,9 @@
 .settings
 *credentials.json
 *node_modules
+thesis/thesis.aux
+thesis/thesis.bbl
+thesis/thesis.blg
+thesis/thesis.dvi
+thesis/thesis.log
+thesis/thesis.aux

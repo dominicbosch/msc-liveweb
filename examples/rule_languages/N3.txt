@@ -1,0 +1,1 @@
+{ ?x :event "email". ?x :sender "sender@mail.com" } => { :webapi :newcontent ?x}
