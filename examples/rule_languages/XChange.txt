@@ -1,0 +1,15 @@
+TRANSACTION
+	in { 
+		resource { "http://www.webapi.com"},
+		newcontents {{
+			insert newcontent { var Mail }
+		}}
+	}
+ON
+	xchange:event {{
+		xchange:sender { "http://mailserver.com" },
+		var Mail -> email {{
+			sender { "sender@mail.com" }
+		}}
+	}}
+END

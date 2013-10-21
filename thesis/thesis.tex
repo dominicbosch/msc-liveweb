@@ -148,10 +148,11 @@ t.b.d.
 \section{Related Work}
 
 \subsection{Rules Languages}
+\cite{2009-Paschke_Boley-RCER.pdf} gave a good oveview over existing approaches in 2009.
 In this section we examine different existing rule languages with respect to a simple use case.
 We want the rule language react on the receipt of an email (event), check for a distinct email address (condition) and store it in a remote location, via a Web API (action).
 The email only contains the parts we require for this use case (the sender and a subject). A JSON representation of the email would be:
-\begin{Verbatim}[commandchars=\\\{\}]
+\begin{Verbatim}[fontsize=\small,commandchars=\\\{\}]
 \PY{p}{\PYZob{}}
   \PY{l+s}{\PYZdq{}}\PY{l+s}{event}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{email}\PY{l+s}{\PYZdq{}}\PY{p}{,}
   \PY{l+s}{\PYZdq{}}\PY{l+s}{sender}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{sender@mail.com}\PY{l+s}{\PYZdq{}}\PY{p}{,}
@@ -163,7 +164,7 @@ The email only contains the parts we require for this use case (the sender and a
 \subsubsection{RDF \& XML}
 An early ECA Rule Language for XML repositories\cite{Papamarkos03event-condition-actionrule} was postulated in 2003 and was picked up by many researches afterwards. It was designed to react on insert and delete events within XML repositories and as an action change XML documents.
 
-\begin{Verbatim}[commandchars=\\\{\}]
+\begin{Verbatim}[fontsize=\small,commandchars=\\\{\}]
 \PY{n}{ON} \PY{n}{INSERT} \PY{n}{document}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{inbound\PYZus{}queue.xml}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{o}{/}\PY{n}{mails}\PY{o}{/}\PY{n}{mail}
 \PY{n}{IF} \PY{err}{\PYZdl{}}\PY{n}{delta}\PY{o}{/}\PY{n}{sender}\PY{p}{[}\PY{o}{.}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{sender@mail.com}\PY{l+s}{\PYZsq{}}\PY{p}{]}
 \PY{n}{DO} \PY{n}{DELETE} \PY{n}{document}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{inbound\PYZus{}queue.xml}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{o}{/}\PY{n}{mails}\PY{o}{/}\PY{n}{mail}\PY{p}{;}
@@ -175,22 +176,92 @@ An early ECA Rule Language for XML repositories\cite{Papamarkos03event-condition
 Now apart from implementing a rules engine, we would also need to add an XML document event manager which interpretes and pushes events into the XML file \emph{inbound\_queue.xml}. Then again this instance would interprete the ouptuts of the ECA engine, which would theoretically manifest in other XML documents, and produce meaningful actions on remote hosts. This wouldn't be an architecture which has its focus on the solution of our use case and, as a result, add complexity and create an unnecessary overhead.
 
 \subsubsection{Notation 3}
-To make the lengthy RDF definitions smaller and more readable, Notation 3\cite{wwwn3} was designed and announced in 2005. Through the implies operator(=\textgreater) an "event" can be connected to an "action", both expressed in RDF's subject, predicate, object notation, which makes the expression of ECA rules a complicated and not very intuitive task. A solution to our use case would somewhat look like:
+To make the lengthy RDF definitions smaller and more readable, Notation 3\cite{wwwn3} was designed and announced in 2005. Through the implies operator(=\textgreater) an "event" can be connected to an "action", both expressed in RDF's subject, predicate, object notation, which makes the expression of ECA rules a complicated and not very intuitive task. A solution to our use case would look as follows:
 
-\begin{Verbatim}[commandchars=\\\{\}]
-\PY{p}{\PYZob{}} \PY{err}{?}\PY{n}{x} \PY{p}{:}\PY{n}{event} \PY{l+s}{\PYZdq{}}\PY{l+s}{email}\PY{l+s}{\PYZdq{}}\PY{o}{.} \PY{err}{?}\PY{n}{x} \PY{p}{:}\PY{n}{sender} \PY{l+s}{\PYZdq{}}\PY{l+s}{sender@mail.com}\PY{l+s}{\PYZdq{}} \PY{p}{\PYZcb{}} \PY{o}{=}\PY{o}{\PYZgt{}} \PY{p}{\PYZob{}} \PY{p}{:}\PY{n}{webapi} \PY{p}{:}\PY{n}{newcontent} \PY{err}{?}\PY{n}{x}\PY{p}{\PYZcb{}}
+\begin{Verbatim}[fontsize=\small,commandchars=\\\{\}]
+\PY{p}{\PYZob{}} \PY{err}{?}\PY{n}{x} \PY{p}{:}\PY{n}{event} \PY{l+s}{\PYZdq{}}\PY{l+s}{email}\PY{l+s}{\PYZdq{}}\PY{o}{.} \PY{err}{?}\PY{n}{x} \PY{p}{:}\PY{n}{sender} \PY{l+s}{\PYZdq{}}\PY{l+s}{sender@mail.com}\PY{l+s}{\PYZdq{}} \PY{p}{\PYZcb{}} 
+    \PY{o}{=}\PY{o}{\PYZgt{}} \PY{p}{\PYZob{}} \PY{p}{:}\PY{n}{webapi} \PY{p}{:}\PY{n}{newcontent} \PY{err}{?}\PY{n}{x}\PY{p}{\PYZcb{}}
 \end{Verbatim}
 
-It's obvious that these rules are meant to express relations between entities and is not really suitable for our use case and would need another interpreter to infer the actions. But concepts and ideas of the work that was done in these consortias could eventully still find influence into our solution.
-
+It's obvious that this language is used to express relations between entities and thus not really suitable for our use case, since we would require another interpreter to infer the actions. But concepts and ideas of the work that was done in these consortias could eventully still find influence into our solution.
 
 \subsubsection{XChange/Xcerpt}
+The rule language XChange\cite{2005-Patranjan-TLE.pdf} was the outcome of the REWERSE project and acted as an influence in many further researches. The language was designed to add reactive behaviour to a "static" web which is represented through XML resources. Thus we have action logics to alter such resources through insertions and deletions. Since we aim to utilize web API's for our rule language we need a more generic approach which adds flexibility in term of the API provided. But the thorough research done with the language XChange holds valuable concepts, especially in terms of temporal evet composition. This could be a rule according to our use case:
 
+\begin{Verbatim}[fontsize=\small,commandchars=\\\{\}]
+\PY{n}{TRANSACTION}
+  \PY{o+ow}{in} \PY{p}{\PYZob{}} 
+    \PY{n}{resource} \PY{p}{\PYZob{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{http://www.webapi.com}\PY{l+s}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{,}
+    \PY{n}{newcontents} \PY{p}{\PYZob{}}\PY{p}{\PYZob{}}
+      \PY{n}{insert} \PY{n}{newcontent} \PY{p}{\PYZob{}} \PY{n}{var} \PY{n}{Mail} \PY{p}{\PYZcb{}}
+    \PY{p}{\PYZcb{}}\PY{p}{\PYZcb{}}
+  \PY{p}{\PYZcb{}}
+\PY{n}{ON}
+  \PY{n}{xchange}\PY{p}{:}\PY{n}{event} \PY{p}{\PYZob{}}\PY{p}{\PYZob{}}
+    \PY{n}{xchange}\PY{p}{:}\PY{n}{sender} \PY{p}{\PYZob{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{http://mailserver.com}\PY{l+s}{\PYZdq{}} \PY{p}{\PYZcb{}}\PY{p}{,}
+    \PY{n}{var} \PY{n}{Mail} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}} \PY{n}{email} \PY{p}{\PYZob{}}\PY{p}{\PYZob{}}
+      \PY{n}{sender} \PY{p}{\PYZob{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{sender@mail.com}\PY{l+s}{\PYZdq{}} \PY{p}{\PYZcb{}}
+    \PY{p}{\PYZcb{}}\PY{p}{\PYZcb{}}
+  \PY{p}{\PYZcb{}}\PY{p}{\PYZcb{}}
+\PY{n}{END}
+\end{Verbatim}
+
+But XChange is designed to access other resources in an action and thus provides powerful tools:
+
+\begin{Verbatim}[fontsize=\small,commandchars=\\\{\}]
+\PY{n}{TRANSACTION}
+  \PY{p}{[}\PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}
+\PY{n}{ON}
+  \PY{p}{[}\PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}
+\PY{n}{FROM}
+  \PY{o+ow}{in} \PY{p}{\PYZob{}} 
+    \PY{n}{resource} \PY{p}{\PYZob{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{http://www.weather.com}\PY{l+s}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{,}
+    \PY{n}{temperatures} \PY{p}{\PYZob{}}\PY{p}{\PYZob{}}
+      \PY{n}{var} \PY{n}{T} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}} \PY{n}{temperature} \PY{p}{\PYZob{}}\PY{p}{\PYZob{}}
+        \PY{n}{datetime} \PY{p}{\PYZob{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{2013\PYZhy{}10\PYZhy{}20\PYZhy{}08:00:00AM}\PY{l+s}{\PYZdq{}} \PY{p}{\PYZcb{}}
+      \PY{p}{\PYZcb{}}\PY{p}{\PYZcb{}}
+    \PY{p}{\PYZcb{}}\PY{p}{\PYZcb{}}
+  \PY{p}{\PYZcb{}}
+\PY{n}{END}
+\end{Verbatim}
 
 \subsubsection{JSON Rules}
-t.b.d.
-\emph{JSON Rules}~\cite{2008-Giurca_Pascalau-JSON_Rules.pdf}
+In 2008 \emph{JSON Rules}~\cite{2008-Giurca_Pascalau-JSON_Rules.pdf} was introduced as a language to easily react on specific DOM tree compositions.
+The usage of JavaScript allowed them to provide simple functions which could be called directly by the actions, thus abstracting functionality from the language.
+This key concept found influence into our language as it allows different layers of abstractions.
+Through this it is possible to provide generic functions for expert user as well as very limited functions with only few possibilities for parameterization to be used by unexperienced persons.
+A drawback of this language is its binding to DOM tree events, where we would want to react on any events happening in the world.
+Also the temporal composition to complex events is not a subject of their work and needs further attention.
 
+\begin{Verbatim}[fontsize=\small,commandchars=\\\{\}]
+\PY{p}{\PYZob{}}
+  \PY{l+s}{\PYZdq{}}\PY{l+s}{id}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{0}\PY{p}{,}
+  \PY{l+s}{\PYZdq{}}\PY{l+s}{conditions}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{p}{[}
+    \PY{p}{\PYZob{}}
+      \PY{l+s}{\PYZdq{}}\PY{l+s}{type}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{email}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+      \PY{l+s}{\PYZdq{}}\PY{l+s}{constraints}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{p}{[}
+        \PY{p}{\PYZob{}}
+          \PY{l+s}{\PYZdq{}}\PY{l+s}{propertyName}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{sender}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+          \PY{l+s}{\PYZdq{}}\PY{l+s}{operator}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{EQ}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+          \PY{l+s}{\PYZdq{}}\PY{l+s}{restriction}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{p}{\PYZob{}}
+            \PY{l+s}{\PYZdq{}}\PY{l+s}{type}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{String}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+            \PY{l+s}{\PYZdq{}}\PY{l+s}{value}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{sender@mail.com}\PY{l+s}{\PYZdq{}}
+          \PY{p}{\PYZcb{}}
+        \PY{p}{\PYZcb{}}\PY{p}{,}
+        \PY{p}{\PYZob{}}
+          \PY{l+s}{\PYZdq{}}\PY{l+s}{bind}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZdl{}S}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+          \PY{l+s}{\PYZdq{}}\PY{l+s}{propertyName}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{subject}\PY{l+s}{\PYZdq{}}
+        \PY{p}{\PYZcb{}}
+      \PY{p}{]}
+    \PY{p}{\PYZcb{}}
+  \PY{p}{]}\PY{p}{,}
+  \PY{l+s}{\PYZdq{}}\PY{l+s}{actions}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{p}{[}
+    \PY{p}{\PYZob{}}
+      \PY{l+s}{\PYZdq{}}\PY{l+s}{webapi(}\PY{l+s}{\PYZsq{}}\PY{l+s}{addcontent}\PY{l+s}{\PYZsq{}}\PY{l+s}{, \PYZdl{}S)}\PY{l+s}{\PYZdq{}}
+    \PY{p}{\PYZcb{}}
+  \PY{p}{]}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
 
 \subsubsection{R2ML}
 t.b.d.
@@ -208,10 +279,11 @@ t.b.d.
 t.b.d.
 
 \subsubsection{KRL}
+\cite{bookTheLiveWeb}
 t.b.d.
 
 \subsubsection{(Reaction) RuleML}
-\textit{RuleML}~\cite{2006-Boley-RuleML.pdf}
+\textit{RuleML}~\cite{2006-Boley-RuleML.pdf}\cite{2012-Paschke_etal-ReactionRuleML.pdf}
 \begin{figure*}[htb]
 %\begin{center}
 \centering
@@ -229,20 +301,13 @@ t.b.d.
 t.b.d.
 
 
-\subsubsection{Kinetic}
-t.b.d.
-
-
 \subsubsection{Drools Fusion}
 t.b.d.
 
 
-\subsubsection{Rule Responder}
-t.b.d.
-
 
 \section{Conclusion}
-t.b.d.
+Most of the examined rule languages are designed for the interchangability of rules between different service providers. We do not attempt to jump into this domain but we rather pick up important concepts to manifest web API's as first class citizens of our rule language. This allows the ad-hoc design and implementation of reactive rules between existing web API's without the need for their cooperation in setting up their endpoint in a special way.
 
 \section{Future Work}
 t.b.d.
@@ -260,7 +325,7 @@ t.b.d.
 \subsection{Node.js Rules Engine Code}
 \subsubsection{ecaserver.js}
 
-\begin{Verbatim}[fontsize=\scriptsize,commandchars=\\\{\}]
+\begin{Verbatim}[fontsize=\small,commandchars=\\\{\}]
 \PY{l+s}{\PYZsq{}}\PY{l+s}{use strict}\PY{l+s}{\PYZsq{}}\PY{p}{;}
 \PY{n}{var} \PY{n}{express} \PY{o}{=} \PY{n}{require}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{express}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
 \PY{n}{var} \PY{n}{qs} \PY{o}{=} \PY{n}{require}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{querystring}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}

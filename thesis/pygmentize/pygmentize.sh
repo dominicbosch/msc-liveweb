@@ -1,5 +1,6 @@
 #!/bin/bash
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 if [[ "$#" -gt 0 ]]; then
-	format="-f $1"
+	format="-l $1"
 fi
-eval "pygmentize $format -O full sourcecode.py > pygmentized.tex"
+eval "pygmentize -f latex $format -O full $DIR/sourcecode.py > $DIR/pygmentized.tex"
