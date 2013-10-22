@@ -2,31 +2,25 @@
 	<Rule style="active">
 		<on>
 			<Event>
-				<signature>
-					<Atom>
-						<Rel per="value">mail</Rel>
-					</Atom>
-				</signature>
+				<Atom>
+					<Rel per="value">mail</Rel>
+          <Var>sender</Var>
+          <Var>subject</Var>
+				</Atom>
 			</Event>
 		</on>
-		<do>
-			<Atom>
-				<Rel per="effect">createContent</Rel>
-			</Atom>
-		</do>
+    <if>
+      <Atom>
+        <op><Rel>equals</Rel></op>
+        <Var>sender</Var>
+        <Ind>sender@mail.com</Ind>
+      </Atom>
+    </if>
+  	<do>
+      <Atom>
+        <oid><Ind uri="http://webapi.com"/></oid>
+        <Rel>newcontent</Rel>
+        <Var>subject</Var> 
+      </Atom>
+    </do>
 	</Rule>
-
-
-<!--
-	<do>
-		<Atom>
-			<oid>
-				<Ind iri="https://probinder.com/service/27" />
-			</oid>
-			<Rel per="effect">save</Rel>
-			<Var>companyId</Var>
-			<Var>context</Var>
-			<Var>text</Var>
-		</Atom>
-	</do>
--->

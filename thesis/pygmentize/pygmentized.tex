@@ -106,30 +106,28 @@
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{p}{\PYZob{}}
-	\PY{l+s}{\PYZdq{}}\PY{l+s}{id}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{0}\PY{p}{,}
-	\PY{l+s}{\PYZdq{}}\PY{l+s}{conditions}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{p}{[}
+	\PY{n+nt}{\PYZdq{}id\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{0}\PY{p}{,}
+	\PY{n+nt}{\PYZdq{}conditions\PYZdq{}}\PY{p}{:} \PY{p}{[}
 		\PY{p}{\PYZob{}}
-			\PY{l+s}{\PYZdq{}}\PY{l+s}{type}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{email}\PY{l+s}{\PYZdq{}}\PY{p}{,}
-			\PY{l+s}{\PYZdq{}}\PY{l+s}{constraints}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{p}{[}
+			\PY{n+nt}{\PYZdq{}type\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}email\PYZdq{}}\PY{p}{,}
+			\PY{n+nt}{\PYZdq{}constraints\PYZdq{}}\PY{p}{:} \PY{p}{[}
 				\PY{p}{\PYZob{}}
-					\PY{l+s}{\PYZdq{}}\PY{l+s}{propertyName}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{sender}\PY{l+s}{\PYZdq{}}\PY{p}{,}
-					\PY{l+s}{\PYZdq{}}\PY{l+s}{operator}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{EQ}\PY{l+s}{\PYZdq{}}\PY{p}{,}
-					\PY{l+s}{\PYZdq{}}\PY{l+s}{restriction}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{p}{\PYZob{}}
-						\PY{l+s}{\PYZdq{}}\PY{l+s}{type}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{String}\PY{l+s}{\PYZdq{}}\PY{p}{,}
-						\PY{l+s}{\PYZdq{}}\PY{l+s}{value}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{sender@mail.com}\PY{l+s}{\PYZdq{}}
+					\PY{n+nt}{\PYZdq{}propertyName\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}sender\PYZdq{}}\PY{p}{,}
+					\PY{n+nt}{\PYZdq{}operator\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}EQ\PYZdq{}}\PY{p}{,}
+					\PY{n+nt}{\PYZdq{}restriction\PYZdq{}}\PY{p}{:} \PY{p}{\PYZob{}}
+						\PY{n+nt}{\PYZdq{}type\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}String\PYZdq{}}\PY{p}{,}
+						\PY{n+nt}{\PYZdq{}value\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}sender@mail.com\PYZdq{}}
 					\PY{p}{\PYZcb{}}
 				\PY{p}{\PYZcb{}}\PY{p}{,}
 				\PY{p}{\PYZob{}}
-					\PY{l+s}{\PYZdq{}}\PY{l+s}{bind}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZdl{}S}\PY{l+s}{\PYZdq{}}\PY{p}{,}
-					\PY{l+s}{\PYZdq{}}\PY{l+s}{propertyName}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{subject}\PY{l+s}{\PYZdq{}}
+					\PY{n+nt}{\PYZdq{}bind\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}\PYZdl{}S\PYZdq{}}\PY{p}{,}
+					\PY{n+nt}{\PYZdq{}propertyName\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}subject\PYZdq{}}
 				\PY{p}{\PYZcb{}}
 			\PY{p}{]}
 		\PY{p}{\PYZcb{}}
 	\PY{p}{]}\PY{p}{,}
-	\PY{l+s}{\PYZdq{}}\PY{l+s}{actions}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{p}{[}
-		\PY{p}{\PYZob{}}
-			\PY{l+s}{\PYZdq{}}\PY{l+s}{webapi(}\PY{l+s}{\PYZsq{}}\PY{l+s}{addcontent}\PY{l+s}{\PYZsq{}}\PY{l+s}{, \PYZdl{}S)}\PY{l+s}{\PYZdq{}}
-		\PY{p}{\PYZcb{}}
+	\PY{n+nt}{\PYZdq{}actions\PYZdq{}}\PY{p}{:} \PY{p}{[}
+		\PY{l+s+s2}{\PYZdq{}webapi(\PYZsq{}addcontent\PYZsq{}, \PYZdl{}S)\PYZdq{}}
 	\PY{p}{]}
 \PY{p}{\PYZcb{}}
 \end{Verbatim}

@@ -20,8 +20,6 @@
 		}
 	],
 	"actions": [
-		{
-			"webapi('addcontent', $S)"
-		}
+		"webapi('addcontent', $S)"
 	]
 }

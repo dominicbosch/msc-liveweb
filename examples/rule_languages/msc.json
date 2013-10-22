@@ -1,0 +1,15 @@
+{
+  "event": "mail",
+  "conditions": [
+    { "sender": "sender@mail.com"},
+  ],
+  "actions": [
+    {
+      "api": "webapi",
+      "method": "newcontent",
+      "arguments": {
+        "text": "$X.subject"
+      }
+    }
+  ]
+}

@@ -170,6 +170,7 @@ The email only contains the parts we require for this use case (the sender and a
 \end{Verbatim}
 
 
+\newpage
 \subsubsection{RDF \& XML}
 An early ECA Rule Language for XML repositories\cite{Papamarkos03event-condition-actionrule} was postulated in 2003 and was picked up by many researches afterwards. It was designed to react on insert and delete events within XML repositories and as an action change XML documents.
 
@@ -189,7 +190,7 @@ To make the lengthy RDF definitions smaller and more readable, Notation 3\cite{w
 
 \begin{Verbatim}[fontsize=\small,commandchars=\\\{\}]
 \PY{p}{\PYZob{}} \PY{err}{?}\PY{n}{x} \PY{p}{:}\PY{n}{event} \PY{l+s}{\PYZdq{}}\PY{l+s}{email}\PY{l+s}{\PYZdq{}}\PY{o}{.} \PY{err}{?}\PY{n}{x} \PY{p}{:}\PY{n}{sender} \PY{l+s}{\PYZdq{}}\PY{l+s}{sender@mail.com}\PY{l+s}{\PYZdq{}} \PY{p}{\PYZcb{}} 
-    \PY{o}{=}\PY{o}{\PYZgt{}} \PY{p}{\PYZob{}} \PY{p}{:}\PY{n}{webapi} \PY{p}{:}\PY{n}{newcontent} \PY{err}{?}\PY{n}{x}\PY{p}{\PYZcb{}}
+    \PY{o}{=}\PY{o}{\PYZgt{}} \PY{p}{\PYZob{}} \PY{p}{:}\PY{n}{webapi} \PY{p}{:}\PY{n}{newcontent} \PY{err}{?}\PY{n}{x} \PY{p}{\PYZcb{}}
 \end{Verbatim}
 
 It's obvious that this language is used to express relations between entities and thus not really suitable for our use case, since we would require another interpreter to infer the actions. But concepts and ideas of the work that was done in these consortias could eventully still find influence into our solution.
@@ -199,7 +200,7 @@ The rule language XChange\cite{2005-Patranjan-TLE.pdf} was the outcome of the RE
 
 \begin{Verbatim}[fontsize=\small,commandchars=\\\{\}]
 \PY{n}{TRANSACTION}
-  \PY{o+ow}{in} \PY{p}{\PYZob{}} 
+  \PY{n}{in} \PY{p}{\PYZob{}} 
     \PY{n}{resource} \PY{p}{\PYZob{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{http://www.webapi.com}\PY{l+s}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{,}
     \PY{n}{newcontents} \PY{p}{\PYZob{}}\PY{p}{\PYZob{}}
       \PY{n}{insert} \PY{n}{newcontent} \PY{p}{\PYZob{}} \PY{n}{var} \PY{n}{Mail} \PY{p}{\PYZcb{}}
@@ -223,7 +224,7 @@ But XChange is designed to access other resources in an action and thus provides
 \PY{n}{ON}
   \PY{p}{[}\PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}
 \PY{n}{FROM}
-  \PY{o+ow}{in} \PY{p}{\PYZob{}} 
+  \PY{n}{in} \PY{p}{\PYZob{}} 
     \PY{n}{resource} \PY{p}{\PYZob{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{http://www.weather.com}\PY{l+s}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{,}
     \PY{n}{temperatures} \PY{p}{\PYZob{}}\PY{p}{\PYZob{}}
       \PY{n}{var} \PY{n}{T} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}} \PY{n}{temperature} \PY{p}{\PYZob{}}\PY{p}{\PYZob{}}
@@ -234,6 +235,7 @@ But XChange is designed to access other resources in an action and thus provides
 \PY{n}{END}
 \end{Verbatim}
 
+\newpage
 \subsubsection{JSON Rules}
 In 2008 \emph{JSON Rules}~\cite{2008-Giurca_Pascalau-JSON_Rules.pdf} was introduced as a language to easily react on specific DOM tree compositions.
 The usage of JavaScript allowed them to provide simple functions which could be called directly by the actions, thus abstracting functionality from the language.
@@ -242,36 +244,55 @@ Through this it is possible to provide generic functions for expert user as well
 A drawback of this language is its binding to DOM tree events, where we would want to react on any events happening in the world.
 Also the temporal composition to complex events is not a subject of their work and needs further attention.
 
+
 \begin{Verbatim}[fontsize=\small,commandchars=\\\{\}]
 \PY{p}{\PYZob{}}
-  \PY{l+s}{\PYZdq{}}\PY{l+s}{id}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{0}\PY{p}{,}
-  \PY{l+s}{\PYZdq{}}\PY{l+s}{conditions}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{p}{[}
+  \PY{n+nt}{\PYZdq{}id\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{0}\PY{p}{,}
+  \PY{n+nt}{\PYZdq{}conditions\PYZdq{}}\PY{p}{:} \PY{p}{[}
     \PY{p}{\PYZob{}}
-      \PY{l+s}{\PYZdq{}}\PY{l+s}{type}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{email}\PY{l+s}{\PYZdq{}}\PY{p}{,}
-      \PY{l+s}{\PYZdq{}}\PY{l+s}{constraints}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{p}{[}
+      \PY{n+nt}{\PYZdq{}type\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}email\PYZdq{}}\PY{p}{,}
+      \PY{n+nt}{\PYZdq{}constraints\PYZdq{}}\PY{p}{:} \PY{p}{[}
         \PY{p}{\PYZob{}}
-          \PY{l+s}{\PYZdq{}}\PY{l+s}{propertyName}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{sender}\PY{l+s}{\PYZdq{}}\PY{p}{,}
-          \PY{l+s}{\PYZdq{}}\PY{l+s}{operator}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{EQ}\PY{l+s}{\PYZdq{}}\PY{p}{,}
-          \PY{l+s}{\PYZdq{}}\PY{l+s}{restriction}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{p}{\PYZob{}}
-            \PY{l+s}{\PYZdq{}}\PY{l+s}{type}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{String}\PY{l+s}{\PYZdq{}}\PY{p}{,}
-            \PY{l+s}{\PYZdq{}}\PY{l+s}{value}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{sender@mail.com}\PY{l+s}{\PYZdq{}}
+          \PY{n+nt}{\PYZdq{}propertyName\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}sender\PYZdq{}}\PY{p}{,}
+          \PY{n+nt}{\PYZdq{}operator\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}EQ\PYZdq{}}\PY{p}{,}
+          \PY{n+nt}{\PYZdq{}restriction\PYZdq{}}\PY{p}{:} \PY{p}{\PYZob{}}
+            \PY{n+nt}{\PYZdq{}type\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}String\PYZdq{}}\PY{p}{,}
+            \PY{n+nt}{\PYZdq{}value\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}sender@mail.com\PYZdq{}}
           \PY{p}{\PYZcb{}}
         \PY{p}{\PYZcb{}}\PY{p}{,}
         \PY{p}{\PYZob{}}
-          \PY{l+s}{\PYZdq{}}\PY{l+s}{bind}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZdl{}S}\PY{l+s}{\PYZdq{}}\PY{p}{,}
-          \PY{l+s}{\PYZdq{}}\PY{l+s}{propertyName}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{subject}\PY{l+s}{\PYZdq{}}
+          \PY{n+nt}{\PYZdq{}bind\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}\PYZdl{}S\PYZdq{}}\PY{p}{,}
+          \PY{n+nt}{\PYZdq{}propertyName\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}subject\PYZdq{}}
         \PY{p}{\PYZcb{}}
       \PY{p}{]}
     \PY{p}{\PYZcb{}}
   \PY{p}{]}\PY{p}{,}
-  \PY{l+s}{\PYZdq{}}\PY{l+s}{actions}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{p}{[}
-    \PY{p}{\PYZob{}}
-      \PY{l+s}{\PYZdq{}}\PY{l+s}{webapi(}\PY{l+s}{\PYZsq{}}\PY{l+s}{addcontent}\PY{l+s}{\PYZsq{}}\PY{l+s}{, \PYZdl{}S)}\PY{l+s}{\PYZdq{}}
-    \PY{p}{\PYZcb{}}
+  \PY{n+nt}{\PYZdq{}actions\PYZdq{}}\PY{p}{:} \PY{p}{[}
+    \PY{l+s+s2}{\PYZdq{}webapi(\PYZsq{}addcontent\PYZsq{}, \PYZdl{}S)\PYZdq{}}
   \PY{p}{]}
 \PY{p}{\PYZcb{}}
 \end{Verbatim}
 
+\subsubsection{KRL}
+A most recent (2011) open-source development is the Kinetic Rules Engine together with the Kinetics Rule Language~\cite{bookTheLiveWeb}.
+It is built for the purpose of adding reactivity to the cloud.
+The language is based on declarative syntax, enriched with imparative elements.
+But it is a tedious task to get into a whole new language and their caveats.
+\emph{authorization?}
+
+\begin{Verbatim}[fontsize=\small,commandchars=\\\{\}]
+\PY{n}{rule} \PY{n}{store\PYZus{}mail} \PY{p}{\PYZob{}}
+  \PY{n}{select} \PY{n}{when} \PY{n}{mail} \PY{n}{newmail}
+      \PY{n}{sender} \PY{n}{re}\PY{c}{\PYZsh{}sender@mail.com\PYZsh{}}
+      \PY{n}{subject} \PY{n}{re}\PY{c}{\PYZsh{}*\PYZsh{} setting(subj)  }
+    \PY{n}{http}\PY{p}{:}\PY{n}{post}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{http://www.webapi.com/newcontent}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+      \PY{k}{with} \PY{n}{params} \PY{o}{=} \PY{p}{\PYZob{}}
+        \PY{l+s}{\PYZdq{}}\PY{l+s}{text}\PY{l+s}{\PYZdq{}}\PY{p}{:} \PY{n}{subj}
+      \PY{p}{\PYZcb{}}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+\newpage
 \subsubsection{(Reaction) RuleML}
 The basis of \emph{RuleML}~\cite{2006-Boley-RuleML.pdf} is datalog, a language in the intersection of SQL and Prolog.
 In 2012 the \emph{Reaction RuleML}~\cite{2012-Paschke_etal-ReactionRuleML.pdf} language incorporated several different types of rules into the RuleML syntax, to establish a uniform syntax and interchangability of rules.
@@ -280,14 +301,62 @@ In 2012 the \emph{Reaction RuleML}~\cite{2012-Paschke_etal-ReactionRuleML.pdf} l
 
 R2ML allows usage for RuleML together with many other dialects. Really!?
 
+\begin{Verbatim}[fontsize=\small,commandchars=\\\{\}]
+  \PY{n+nt}{\PYZlt{}Rule} \PY{n+na}{style=}\PY{l+s}{\PYZdq{}active\PYZdq{}}\PY{n+nt}{\PYZgt{}}
+    \PY{n+nt}{\PYZlt{}on}\PY{n+nt}{\PYZgt{}}
+      \PY{n+nt}{\PYZlt{}Event}\PY{n+nt}{\PYZgt{}}
+        \PY{n+nt}{\PYZlt{}Atom}\PY{n+nt}{\PYZgt{}}
+          \PY{n+nt}{\PYZlt{}Rel} \PY{n+na}{per=}\PY{l+s}{\PYZdq{}value\PYZdq{}}\PY{n+nt}{\PYZgt{}}mail\PY{n+nt}{\PYZlt{}/Rel\PYZgt{}}
+          \PY{n+nt}{\PYZlt{}Var}\PY{n+nt}{\PYZgt{}}sender\PY{n+nt}{\PYZlt{}/Var\PYZgt{}}
+          \PY{n+nt}{\PYZlt{}Var}\PY{n+nt}{\PYZgt{}}subject\PY{n+nt}{\PYZlt{}/Var\PYZgt{}}
+        \PY{n+nt}{\PYZlt{}/Atom\PYZgt{}}
+      \PY{n+nt}{\PYZlt{}/Event\PYZgt{}}
+    \PY{n+nt}{\PYZlt{}/on\PYZgt{}}
+    \PY{n+nt}{\PYZlt{}if}\PY{n+nt}{\PYZgt{}}
+      \PY{n+nt}{\PYZlt{}Atom}\PY{n+nt}{\PYZgt{}}
+        \PY{n+nt}{\PYZlt{}op}\PY{n+nt}{\PYZgt{}}\PY{n+nt}{\PYZlt{}Rel}\PY{n+nt}{\PYZgt{}}equals\PY{n+nt}{\PYZlt{}/Rel\PYZgt{}}\PY{n+nt}{\PYZlt{}/op\PYZgt{}}
+        \PY{n+nt}{\PYZlt{}Var}\PY{n+nt}{\PYZgt{}}sender\PY{n+nt}{\PYZlt{}/Var\PYZgt{}}
+        \PY{n+nt}{\PYZlt{}Ind}\PY{n+nt}{\PYZgt{}}sender@mail.com\PY{n+nt}{\PYZlt{}/Ind\PYZgt{}}
+      \PY{n+nt}{\PYZlt{}/Atom\PYZgt{}}
+    \PY{n+nt}{\PYZlt{}/if\PYZgt{}}
+    \PY{n+nt}{\PYZlt{}do}\PY{n+nt}{\PYZgt{}}
+      \PY{n+nt}{\PYZlt{}Atom}\PY{n+nt}{\PYZgt{}}
+        \PY{n+nt}{\PYZlt{}oid}\PY{n+nt}{\PYZgt{}}\PY{n+nt}{\PYZlt{}Ind} \PY{n+na}{uri=}\PY{l+s}{\PYZdq{}http://webapi.com\PYZdq{}}\PY{n+nt}{/\PYZgt{}}\PY{n+nt}{\PYZlt{}/oid\PYZgt{}}
+        \PY{n+nt}{\PYZlt{}Rel}\PY{n+nt}{\PYZgt{}}newcontent\PY{n+nt}{\PYZlt{}/Rel\PYZgt{}}
+        \PY{n+nt}{\PYZlt{}Var}\PY{n+nt}{\PYZgt{}}subject\PY{n+nt}{\PYZlt{}/Var\PYZgt{}} 
+      \PY{n+nt}{\PYZlt{}/Atom\PYZgt{}}
+    \PY{n+nt}{\PYZlt{}/do\PYZgt{}}
+  \PY{n+nt}{\PYZlt{}/Rule\PYZgt{}}
+\end{Verbatim}
 
-\subsubsection{ETALIS}
-ETALIS~\cite{anicic2010arlfcepar} allows powerful temporal composition of events.
+\newpage
+\subsubsection{Own Rules}
 
-\subsubsection{KRL}
-\cite{bookTheLiveWeb}
-t.b.d.
+\begin{Verbatim}[fontsize=\small,commandchars=\\\{\}]
+\PY{k}{on} \PY{n}{mail}
+\PY{k}{if} \PY{n}{sender}\PY{o}{=}\PY{l+s+ss}{\PYZdq{}sender@mail.com\PYZdq{}}
+\PY{k}{do} \PY{n}{webapi}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{newcontent}\PY{p}{(}\PY{n}{subject}\PY{p}{)}
+\end{Verbatim}
 
+Would be translated into:
+
+\begin{Verbatim}[fontsize=\small,commandchars=\\\{\}]
+\PY{p}{\PYZob{}}
+  \PY{n+nt}{\PYZdq{}event\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}mail\PYZdq{}}\PY{p}{,}
+  \PY{n+nt}{\PYZdq{}conditions\PYZdq{}}\PY{p}{:} \PY{p}{[}
+    \PY{p}{\PYZob{}} \PY{n+nt}{\PYZdq{}sender\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}sender@mail.com\PYZdq{} }\PY{p}{\PYZcb{}}\PY{p}{,}
+  \PY{p}{]}\PY{p}{,}
+  \PY{n+nt}{\PYZdq{}actions\PYZdq{}}\PY{p}{:} \PY{p}{[}
+    \PY{p}{\PYZob{}}
+      \PY{n+nt}{\PYZdq{}api\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}webapi\PYZdq{}}\PY{p}{,}
+      \PY{n+nt}{\PYZdq{}method\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}newcontent\PYZdq{}}\PY{p}{,}
+      \PY{n+nt}{\PYZdq{}arguments\PYZdq{}}\PY{p}{:} \PY{p}{\PYZob{}}
+        \PY{n+nt}{\PYZdq{}text\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}\PYZdl{}X.subject\PYZdq{}}
+      \PY{p}{\PYZcb{}}
+    \PY{p}{\PYZcb{}}
+  \PY{p}{]}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
 
 \section{Conclusion}
 Most of the examined rule languages are designed for the interchangability of rules between different service providers. We do not attempt to jump into this domain but we rather pick up important concepts to manifest web API's as first class citizens of our rule language. This allows the ad-hoc design and implementation of reactive rules between existing web API's without the need for their cooperation in setting up their endpoint in a special way.

@@ -1,0 +1,3 @@
+on mail
+if sender="sender@mail.com"
+do webapi->newcontent(subject)

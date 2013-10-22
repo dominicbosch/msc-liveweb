@@ -1,0 +1,9 @@
+rule store_mail {
+  select when mail newmail
+      sender re#sender@mail.com#
+      subject re#*# setting(subj)  
+    http:post("http://www.webapi.com/newcontent")
+      with params = {
+        "text": subj
+      }
+}
