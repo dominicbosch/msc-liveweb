@@ -13,3 +13,43 @@
     }
   ]
 }
+
+{
+  "event": "mail",
+  "conditions": [
+    { "sender": "sender@mail.com" },
+  ],
+  "actions": [
+    {
+      "api": "probinder",
+      "method": "call",
+      "arguments": {
+        "service": "27",
+        "method": "save",
+        "data": {
+          "companyId": "961",
+          "context": "17930",
+          "text": "$X.subject"
+        }
+      }
+    }
+  ]
+}
+
+function call(args) {
+  require('needle').post(
+    'https://probinder.com/service/' + args.service + '/' + args.method,
+    args.data,
+    args.credentials
+  );
+};
+
+on unread
+if serviceId=32
+do probinder->newfile(id, title, context[0][name])
+
+
+on unread
+if serviceId=27?(text) and contextID=1130145?
+do probinder->annotate(tags)
+
