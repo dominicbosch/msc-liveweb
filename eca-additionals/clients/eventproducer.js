@@ -86,9 +86,11 @@ function checkMails() {
       if (!error && response.statusCode == 200) {
         var mails = JSON.parse(body).Emails;
         for(var i = 0; i < mails.length; i++) {
-          mails[i].event = 'yakmail';
-          mails[i].eventid = 'eventproducer' + eId++;
-          pushEvent(mails[i]);
+          pushEvent({
+            event: 'yakmail',
+            eventid: 'eventproducer' + eId++,
+            data: mails[i]
+          });
         }
       } else console.trace('error: ' + error);
     }
@@ -110,10 +112,11 @@ function checkUnread() {
             id: poorcontent[i].id
           },
           function(fullcontent){
-            // if(fullcontent.serviceId == '32') console.log(fullcontent);
-            fullcontent.event = 'newfile';
-            fullcontent.eventid = 'eventproducer' + eId++;
-            pushEvent(fullcontent);
+            pushEvent({
+              event: 'newfile',
+              eventid: 'eventproducer' + eId++,
+              data: fullcontent
+            });
           }
         );
       }

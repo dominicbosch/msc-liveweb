@@ -1,5 +1,6 @@
 'use strict';
-var request = require('request');
+var request = require('needle');
+// var request = require('request');
 var urlService = 'http://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&exchars=200&explaintext&titles=Computer%20science';
 //http://www.mediawiki.org/wiki/API:Search
 /*

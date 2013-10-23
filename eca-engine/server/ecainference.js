@@ -1,25 +1,33 @@
 'use strict';
-var ml = require('./moduleloader');
-// var qEvents = new (require('./queue')).Queue();
+var ml = require('./moduleloader'),
+  cp = require('child_process'),
+  poller = cp.fork('./eventpoller'),
+  qEvents = new (require('./queue')).Queue();
+
+poller.on('message', function(evt) {
+  pushEvent(evt);
+});
 
 var regex = /\$X\.[\w\.\[\]]*/g, // find properties of $X
 // var regex = /\$X\.([0-9A-z\.\[\]])*[A-z]/g, // find properties of $X
   listRules = {},
-  listActionApis = {};
+  listActionModules = {};
 
 /**
  * Initialize the rules engine which initializes the module loader.
  */
 function init() {
-  ml.init(loadActionApi, insertRule);
+  ml.init(loadActionModule, insertRule);
+  setTimeout(queryQueue, 1000); // wait a bit for everything to init
 }
 
 /**
- * Insert an api into the list of available interfaces.
- * @param {Object} objApi the api object
+ * Insert an action module into the list of available interfaces.
+ * @param {Object} objModule the action module object
  */
-function loadActionApi(apiname, objApi) {
-  listActionApis[apiname] = objApi;
+function loadActionModule(name, objModule) {
+  console.log('Action module "' + name + '" loaded');
+  listActionModules[name] = objModule;
 }
 
 /**
@@ -30,19 +38,25 @@ function insertRule(objRule) {
   //TODO validate rule
   if(listRules[objRule.id]) console.log('Replacing rule: ' + objRule.id);
   listRules[objRule.id] = objRule;
+  
+  // Notify poller about eventual candidate
+  poller.send(objRule.event);
+}
+
+function queryQueue() {
+  var evt = qEvents.dequeue();
+  if(evt) {
+    processRequest(evt);
+  }
+  setTimeout(queryQueue, 50); //TODO adapt to load
 }
 
 /**
- * Stores correctly posted events
+ * Stores correctly posted events in the queue
  * @param {Object} evt The event object
  */
 function pushEvent(evt) {
-  processRequest(evt);
-  //TODO on higher loads we would want to fork a child process and assign it the task
-  //of pulling events out of the inbound queue and process them while the main process
-  // care of the retrieval of events from a remote host.
-  // qEvents.enqueue(evt);
-  // processRequest(qEvents.dequeue());
+  qEvents.enqueue(evt);
 }
 
 /**
@@ -50,7 +64,7 @@ function pushEvent(evt) {
  * @param {Object} evt The event object
  */
 function processRequest(evt) {
-  console.log('received event: ' + evt.event + '(' + evt.eventid + ')');
+  console.log('processing event: ' + evt.event + '(' + evt.eventid + ')');
   var actions = checkEvent(evt);
   for(var i = 0; i < actions.length; i++) {
     invokeAction(evt, actions[i]);
@@ -65,7 +79,9 @@ function processRequest(evt) {
 function checkEvent(evt) {
   var actions = [];
   for(var rn in listRules) {
-    if(listRules[rn].event === evt.event && validConditions(evt, listRules[rn])) {
+    //TODO this needs to get depth safe, not only data but eventually also
+    // on one level above (eventid and other meta)
+    if(listRules[rn].event === evt.event && validConditions(evt.data, listRules[rn])) {
       console.log('Engine> Rule "' + rn + '" fired');
       actions = actions.concat(listRules[rn].actions);
     }
@@ -92,10 +108,11 @@ function validConditions(evt, rule) {
  */
 function invokeAction(evt, action) {
   var actionargs = {};
-  var srvc = listActionApis[action.apiprovider];
+  var srvc = listActionModules[action.apiprovider];
   if(srvc) {
-    preprocessActionArguments(evt, action.arguments, actionargs);
-    srvc[action.method](actionargs);
+    //FIXME preprocessing not only on data
+    preprocessActionArguments(evt.data, action.arguments, actionargs);
+    if(srvc[action.method]) srvc[action.method](actionargs);
   }
   else console.log('no api interface found for: ' + action.apiprovider);
 }
@@ -107,18 +124,6 @@ function invokeAction(evt, action) {
  * @param {Object} res The object to be used to enter the new properties
  */
 function preprocessActionArguments(evt, act, res) {
-  // function findPropRecursive(obj, depth) {
-    // console.log('at ' + depth + ': ');
-    // console.log(obj);
-    // for(var p in obj) {
-      // if(p.toLowerCase() === arrActionProp[depth]) {
-        // console.log('found: ' + p);
-        // if(depth + 1 == arrActionProp.length) {
-          // return obj[p];
-        // } else return findPropRecursive(obj[p], depth + 1);
-      // }
-    // }
-  // }
   for(var prop in act) {
     /*
      * If the property is an object itself we go into recursion
@@ -142,9 +147,6 @@ function preprocessActionArguments(evt, act, res) {
            */
           var actionProp = arr[i].substring(3).toLowerCase();
           // console.log(actionProp);
-          // var arrActionProp = arr[i].substring(3).split('.');
-          // var p = findPropRecursive(evt, 0);
-          // console.log('finally found: ' + p + ' for ' + arr[i]);
           for(var eprop in evt) {
             // our rules language doesn't care about upper or lower case
             if(eprop.toLowerCase() === actionProp) {

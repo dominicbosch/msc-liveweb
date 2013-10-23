@@ -1,4 +1,6 @@
-on mail
-do 	probinder->call("27","save",
-		["961", "17930", subject]
-	)
+
+
+on probinder->unread
+if serviceId=32
+do probinder->setRead(id),
+   probinder->makeFileEntry(service, id)

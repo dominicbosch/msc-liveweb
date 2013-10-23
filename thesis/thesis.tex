@@ -390,16 +390,16 @@ Would be translated into:
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{n+nt}{on} \PY{n}{yakmail}
-\PY{n+nt}{if} \PY{n}{FromAddress}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{dominic.bosch.db@gmail.com}\PY{l+s}{\PYZdq{}}
+\PY{n+nt}{on} \PY{n}{emailyak}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{newMail}
+\PY{n+nt}{if} \PY{n}{FromAddress}\PY{o}{=}\PY{l+s+ss}{\PYZdq{}}\PY{l+s+ss}{dominic.bosch.db@gmail.com}\PY{l+s+ss}{\PYZdq{}}
 \PY{n+nt}{do} \PY{n}{probinder}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{newContent}\PY{p}{(}\PY{n}{TextBody}\PY{p}{)}
 \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{n+nt}{on} \PY{n}{probinder}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{unread}
+\PY{n+nt}{on} \PY{n}{probinder}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{unreadContent}
 \PY{n+nt}{if} \PY{n}{serviceId}\PY{o}{=}\PY{l+m+mi}{32}
 \PY{n+nt}{do} \PY{n}{probinder}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{markread}\PY{p}{(}\PY{n}{id}\PY{p}{)}\PY{p}{,}
-   \PY{n}{probinder}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{newfile}\PY{p}{(}\PY{n}{id}\PY{p}{,} \PY{n}{title}\PY{p}{,} \PY{c}{[}\PY{c}{context} \PY{c}{name}\PY{c}{]}\PY{p}{)}
+   \PY{n}{probinder}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{createContent}\PY{p}{(}\PY{n}{id}\PY{p}{,} \PY{n}{title}\PY{p}{,} \PY{n}{tab_name}\PY{p}{)}
 \end{Verbatim}
 
 \newpage
@@ -441,6 +441,14 @@ Would be translated into:
 \PY{k}{do} \PY{n}{probinder}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{call}\PY{p}{(}\PY{l+s+ss}{\PYZdq{}27\PYZdq{}}\PY{p}{,}\PY{l+s+ss}{\PYZdq{}save\PYZdq{}}\PY{p}{,}
      \PY{p}{[}\PY{l+s+ss}{\PYZdq{}961\PYZdq{}}\PY{p}{,} \PY{l+s+ss}{\PYZdq{}17930\PYZdq{}}\PY{p}{,} \PY{n}{subject}\PY{p}{]}
    \PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{on} \PY{n}{probinder}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{unread}
+\PY{k}{if} \PY{n}{serviceId}\PY{o}{=}\PY{l+m+mi}{32}
+\PY{k}{do} \PY{n}{probinder}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{setRead}\PY{p}{(}\PY{p}{id}\PY{p}{)}\PY{p}{,}
+   \PY{n}{probinder}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{makeFileEntry}\PY{p}{(}\PY{n}{service}\PY{p}{,} \PY{p}{id}\PY{p}{)}
 \end{Verbatim}
 
 

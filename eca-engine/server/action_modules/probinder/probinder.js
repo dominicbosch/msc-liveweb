@@ -1,4 +1,9 @@
 'use strict';
+
+/**
+ * ProBinder ACTION MODULE
+ */
+
 var request = require('needle'),
   fs = require('fs'),
   urlService = 'https://probinder.com/service/',
@@ -14,9 +19,7 @@ function init() {
       return;
     }
     credentials = JSON.parse(data);
-    if(credentials && credentials.username && credentials.password) {
-      console.log('ProBinder interface successfully loaded credentials file');
-    } else {
+    if(!credentials || !credentials.username || !credentials.password) {
       credentials = null;
       console.trace('ERROR: credentials file corrupt');
     }
@@ -63,7 +66,7 @@ function call(args) {
       args.data,
       credentials,
       function(error, response, body) { // The callback
-        if (!error) { //) && response.statusCode == 200) {
+        if(!error && response && response.statusCode == 200) {
           if(args && args.success) args.success(body);
         } else {
           if(args && args.error) args.error(error, response, body);
@@ -149,31 +152,47 @@ function makeEntry(args){
     method: 'save',
     data: {
       companyId: '961',
-      context: '17930',
-      text: args.content
-    }
-  });
-}
-/**
- * Does everything to post something in roberts binder
- * @param {Object} args the object containing the content
- * @param {String} args.content the content to be posted
- */
-function makeRobertEntry(args){
-  if(!args.content) {
-    console.trace('ERROR: Too few arguments!');
-    console.log(args);
-    return;
-  }
-  call({
-    service: '27',
-    method: 'save',
-    data: {
-      companyId: '961',
       context: '17936',
       text: args.content
     }
   });
+}
+
+/**
+ * Does everything to post a file info in a binder tabe
+ * @param {Object} args the object containing the content
+ * @param {String} args.service the content service
+ * @param {String} args.id the content id
+ */
+function makeFileEntry(args){
+  if(!args || !args.service || !args.id) {
+    console.trace('ERROR: Too few arguments!');
+    return;
+  }
+  getContent({
+    serviceid: args.service,
+    contentid: args.id,
+    success: function(data) {
+      call({
+        service: '27',
+        method: 'save',
+        data: {
+          companyId: '961',
+          context: '17936',
+          text: 'New file (' + data.title + ') in tab \"' + data.context[0].name 
+            + '\", find it <a href=\"https://probinder.com/file/' + data.fileIds[0] + '\">here</a>!'
+        }
+      });
+    }
+  });
+}
+
+/**
+ * Does everything to post something in a binder
+ * @param {Object} args the object containing the content
+ * @param {String} args.content the content to be posted
+ */
+function setRead(args){
   call({
     service: '2',
     method: 'setread',
@@ -192,5 +211,6 @@ exports.getUnreadContents = getUnreadContents;
 exports.getBinderTabContents = getBinderTabContents;
 exports.getContent = getContent;
 exports.makeEntry = makeEntry;
-exports.makeRobertEntry = makeRobertEntry;
+exports.makeFileEntry = makeFileEntry;
+exports.setRead = setRead;
   

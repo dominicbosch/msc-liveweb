@@ -105,10 +105,10 @@
 \section*{}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{k}{on} \PY{n}{mail}
-\PY{k}{do} 	\PY{n}{probinder}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{k}{call}\PY{p}{(}\PY{l+s+ss}{\PYZdq{}27\PYZdq{}}\PY{p}{,}\PY{l+s+ss}{\PYZdq{}save\PYZdq{}}\PY{p}{,}
-		\PY{p}{[}\PY{l+s+ss}{\PYZdq{}961\PYZdq{}}\PY{p}{,} \PY{l+s+ss}{\PYZdq{}17930\PYZdq{}}\PY{p}{,} \PY{n}{subject}\PY{p}{]}
-	\PY{p}{)}
+\PY{n}{on} \PY{n}{probinder}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{unread}
+\PY{k}{if} \PY{n}{serviceId}\PY{o}{=}\PY{l+m+mi}{32}
+\PY{n}{do} \PY{n}{probinder}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{setRead}\PY{p}{(}\PY{n+nb}{id}\PY{p}{)}\PY{p}{,}
+   \PY{n}{probinder}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{makeFileEntry}\PY{p}{(}\PY{n}{service}\PY{p}{,} \PY{n+nb}{id}\PY{p}{)}
 \end{Verbatim}
 
 \end{document}

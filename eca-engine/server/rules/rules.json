@@ -51,16 +51,37 @@
     ]
   },
   {
-    "id": "rule_robert",
-    "event": "newfile",
+    "id": "rule_pull_emailyak",
+    "event": "emailyak->newMail",
+    "condition": { "FromAddress": "dominic.bosch.db@gmail.com"},
+    "actions": [
+      {
+        "apiprovider": "probinder",
+        "method": "makeEntry",
+        "arguments": {
+          "content": "Received from EmailYak: $X.textbody"
+        }
+      }
+    ]
+  },
+  {
+    "id": "rule_pull_probinder",
+    "event": "probinder->unread",
     "condition": { "serviceId": "32"},
     "actions": [
       {
         "apiprovider": "probinder",
-        "method": "makeRobertEntry",
+        "method": "makeFileEntry",
         "arguments": {
-          "id": "$X.id",
-          "content": "New file ($X.title) in tab '$X.context[0][name]', find it <a href=\"https://probinder.com/file/$X.fileIds[0]\">here</a>!"
+          "service": "$X.serviceId",
+          "id": "$X.id"
+        }
+      },
+      {
+        "apiprovider": "probinder",
+        "method": "setRead",
+        "arguments": {
+          "id": "$X.id"
         }
       }
     ]
