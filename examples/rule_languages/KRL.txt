@@ -7,3 +7,26 @@ rule store_mail {
         "text": subj
       }
 }
+
+ruleset a2236x5 {
+	rule register_temperature {
+		select when temperature update
+			if (event:attr("temp") > 20 
+				&& ent:old_temp <= 20) then {}
+			fired {
+				raise explicit event temp_over_20;
+			}
+			always {
+				set ent:old_temp event:attr("temp");
+			}
+	}
+
+	rule temp_over_threshold {
+		select when explicit event temp_over_20
+			http:get("https://" + ent:credentials 
+				+ "@probinder.com/service/27/save?companyId="
+				+ ent:companyID + "&context=" + ent:contextID
+				+ "&text=temp&nbsp;over&nbsp;20&nbsp;degrees.");
+	}
+
+}

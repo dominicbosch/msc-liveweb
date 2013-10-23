@@ -292,6 +292,32 @@ But it is a tedious task to get into a whole new language and their caveats.
 \PY{p}{\PYZcb{}}
 \end{Verbatim}
 
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{ruleset} \PY{n}{a2236x5} \PY{p}{\PYZob{}}
+  \PY{n}{rule} \PY{n}{register\PYZus{}temperature} \PY{p}{\PYZob{}}
+    \PY{n}{select} \PY{n}{when} \PY{n}{temperature} \PY{n}{update}
+      \PY{k}{if} \PY{p}{(}\PY{n}{event}\PY{p}{:}\PY{n}{attr}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{temp}\PY{l+s}{\PYZdq{}}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{20} 
+        \PY{o}{\PYZam{}}\PY{o}{\PYZam{}} \PY{n}{ent}\PY{p}{:}\PY{n}{old\PYZus{}temp} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{20}\PY{p}{)} \PY{n}{then} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+      \PY{n}{fired} \PY{p}{\PYZob{}}
+        \PY{k}{raise} \PY{n}{explicit} \PY{n}{event} \PY{n}{temp\PYZus{}over\PYZus{}20}\PY{p}{;}
+      \PY{p}{\PYZcb{}}
+      \PY{n}{always} \PY{p}{\PYZob{}}
+        \PY{n+nb}{set} \PY{n}{ent}\PY{p}{:}\PY{n}{old\PYZus{}temp} \PY{n}{event}\PY{p}{:}\PY{n}{attr}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{temp}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+      \PY{p}{\PYZcb{}}
+  \PY{p}{\PYZcb{}}
+
+  \PY{n}{rule} \PY{n}{temp\PYZus{}over\PYZus{}threshold} \PY{p}{\PYZob{}}
+    \PY{n}{select} \PY{n}{when} \PY{n}{explicit} \PY{n}{event} \PY{n}{temp\PYZus{}over\PYZus{}20}
+      \PY{n}{http}\PY{p}{:}\PY{n}{get}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{https://}\PY{l+s}{\PYZdq{}} \PY{o}{+} \PY{n}{ent}\PY{p}{:}\PY{n}{credentials} 
+        \PY{o}{+} \PY{l+s}{\PYZdq{}}\PY{l+s}{@probinder.com/service/27/save?companyId=}\PY{l+s}{\PYZdq{}}
+        \PY{o}{+} \PY{n}{ent}\PY{p}{:}\PY{n}{companyID} \PY{o}{+} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZam{}context=}\PY{l+s}{\PYZdq{}} \PY{o}{+} \PY{n}{ent}\PY{p}{:}\PY{n}{contextID}
+        \PY{o}{+} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZam{}text=temp\PYZam{}nbsp;over\PYZam{}nbsp;20\PYZam{}nbsp;degrees.}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+  \PY{p}{\PYZcb{}}
+
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
 \newpage
 \subsubsection{(Reaction) RuleML}
 The basis of \emph{RuleML}~\cite{2006-Boley-RuleML.pdf} is datalog, a language in the intersection of SQL and Prolog.
@@ -357,6 +383,66 @@ Would be translated into:
   \PY{p}{]}
 \PY{p}{\PYZcb{}}
 \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nt}{on} \PY{n}{weather}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{tempRaisesAbove}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}
+\PY{n+nt}{do} \PY{n}{probinder}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{addContent}\PY{p}{(}\PY{n}{temp}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nt}{on} \PY{n}{yakmail}
+\PY{n+nt}{if} \PY{n}{FromAddress}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{dominic.bosch.db@gmail.com}\PY{l+s}{\PYZdq{}}
+\PY{n+nt}{do} \PY{n}{probinder}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{newContent}\PY{p}{(}\PY{n}{TextBody}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nt}{on} \PY{n}{probinder}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{unread}
+\PY{n+nt}{if} \PY{n}{serviceId}\PY{o}{=}\PY{l+m+mi}{32}
+\PY{n+nt}{do} \PY{n}{probinder}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{markread}\PY{p}{(}\PY{n}{id}\PY{p}{)}\PY{p}{,}
+   \PY{n}{probinder}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{newfile}\PY{p}{(}\PY{n}{id}\PY{p}{,} \PY{n}{title}\PY{p}{,} \PY{c}{[}\PY{c}{context} \PY{c}{name}\PY{c}{]}\PY{p}{)}
+\end{Verbatim}
+
+\newpage
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kd}{function} \PY{n+nx}{call}\PY{p}{(}\PY{n+nx}{args}\PY{p}{)} \PY{p}{\PYZob{}}
+  \PY{n+nx}{require}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}needle\PYZsq{}}\PY{p}{)}\PY{p}{.}\PY{n+nx}{post}\PY{p}{(}
+    \PY{l+s+s1}{\PYZsq{}https://probinder.com/service/\PYZsq{}} 
+      \PY{o}{+} \PY{n+nx}{args}\PY{p}{.}\PY{n+nx}{service} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}/\PYZsq{}} \PY{o}{+} \PY{n+nx}{args}\PY{p}{.}\PY{n+nx}{method}\PY{p}{,}
+    \PY{n+nx}{args}\PY{p}{.}\PY{n+nx}{data}\PY{p}{,}
+    \PY{n+nx}{args}\PY{p}{.}\PY{n+nx}{credentials}
+  \PY{p}{)}\PY{p}{;}
+\PY{p}{\PYZcb{}}\PY{p}{;}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kd}{function} \PY{n+nx}{createContent}\PY{p}{(}\PY{n+nx}{txt}\PY{p}{)}\PY{p}{\PYZob{}}
+  \PY{n+nx}{call}\PY{p}{(}\PY{p}{\PYZob{}}
+    \PY{n+nx}{service}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}27\PYZsq{}}\PY{p}{,}
+    \PY{n+nx}{method}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}save\PYZsq{}}\PY{p}{,}
+    \PY{n+nx}{data}\PY{o}{:} \PY{p}{\PYZob{}}
+      \PY{n+nx}{companyId}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}961\PYZsq{}}\PY{p}{,}
+      \PY{n+nx}{context}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}17930\PYZsq{}}\PY{p}{,}
+      \PY{n+nx}{text}\PY{o}{:} \PY{n+nx}{txt}
+    \PY{p}{\PYZcb{}}
+  \PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{on} \PY{n}{mail}
+\PY{k}{do} \PY{n}{probinder}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{createContent}\PY{p}{(}\PY{n}{subject}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{on} \PY{n}{mail}
+\PY{k}{do} \PY{n}{probinder}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{call}\PY{p}{(}\PY{l+s+ss}{\PYZdq{}27\PYZdq{}}\PY{p}{,}\PY{l+s+ss}{\PYZdq{}save\PYZdq{}}\PY{p}{,}
+     \PY{p}{[}\PY{l+s+ss}{\PYZdq{}961\PYZdq{}}\PY{p}{,} \PY{l+s+ss}{\PYZdq{}17930\PYZdq{}}\PY{p}{,} \PY{n}{subject}\PY{p}{]}
+   \PY{p}{)}
+\end{Verbatim}
+
 
 \section{Conclusion}
 Most of the examined rule languages are designed for the interchangability of rules between different service providers. We do not attempt to jump into this domain but we rather pick up important concepts to manifest web API's as first class citizens of our rule language. This allows the ad-hoc design and implementation of reactive rules between existing web API's without the need for their cooperation in setting up their endpoint in a special way.

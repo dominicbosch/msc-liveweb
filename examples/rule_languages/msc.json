@@ -43,13 +43,3 @@ function call(args) {
     args.credentials
   );
 };
-
-on unread
-if serviceId=32
-do probinder->newfile(id, title, context[0][name])
-
-
-on unread
-if serviceId=27?(text) and contextID=1130145?
-do probinder->annotate(tags)
-

@@ -63,5 +63,27 @@ fs.readFile(path.resolve(__dirname, 'config', 'config.json'), 'utf8', function (
   var app = express();
   app.post('/', onRequest);
   app.listen(config.inboundport); // inbound event channel
+  //TODO spawn new process that pulls
+  var cp = require('child_process');
+
+// var child = cp.fork('./worker');
+// 
+// child.on('message', function(m) {
+  // // Receive results from child process
+  // console.log('received: ' + m);
+// });
+// 
+// // Send child process some work
+// child.send('Please up-case this string');
+// 
+// //// worker.js:
+// process.on('message', function(m) {
+  // // Do work  (in this case just up-case the string
+  // m = m.toUpperCase();
+// 
+  // // Pass results back to parent process
+  // process.send(m.toUpperCase(m));
+// });
+
   console.log("Server has started.");
 });

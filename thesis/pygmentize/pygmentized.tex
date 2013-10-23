@@ -105,31 +105,10 @@
 \section*{}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{p}{\PYZob{}}
-	\PY{n+nt}{\PYZdq{}id\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{0}\PY{p}{,}
-	\PY{n+nt}{\PYZdq{}conditions\PYZdq{}}\PY{p}{:} \PY{p}{[}
-		\PY{p}{\PYZob{}}
-			\PY{n+nt}{\PYZdq{}type\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}email\PYZdq{}}\PY{p}{,}
-			\PY{n+nt}{\PYZdq{}constraints\PYZdq{}}\PY{p}{:} \PY{p}{[}
-				\PY{p}{\PYZob{}}
-					\PY{n+nt}{\PYZdq{}propertyName\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}sender\PYZdq{}}\PY{p}{,}
-					\PY{n+nt}{\PYZdq{}operator\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}EQ\PYZdq{}}\PY{p}{,}
-					\PY{n+nt}{\PYZdq{}restriction\PYZdq{}}\PY{p}{:} \PY{p}{\PYZob{}}
-						\PY{n+nt}{\PYZdq{}type\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}String\PYZdq{}}\PY{p}{,}
-						\PY{n+nt}{\PYZdq{}value\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}sender@mail.com\PYZdq{}}
-					\PY{p}{\PYZcb{}}
-				\PY{p}{\PYZcb{}}\PY{p}{,}
-				\PY{p}{\PYZob{}}
-					\PY{n+nt}{\PYZdq{}bind\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}\PYZdl{}S\PYZdq{}}\PY{p}{,}
-					\PY{n+nt}{\PYZdq{}propertyName\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}subject\PYZdq{}}
-				\PY{p}{\PYZcb{}}
-			\PY{p}{]}
-		\PY{p}{\PYZcb{}}
-	\PY{p}{]}\PY{p}{,}
-	\PY{n+nt}{\PYZdq{}actions\PYZdq{}}\PY{p}{:} \PY{p}{[}
-		\PY{l+s+s2}{\PYZdq{}webapi(\PYZsq{}addcontent\PYZsq{}, \PYZdl{}S)\PYZdq{}}
-	\PY{p}{]}
-\PY{p}{\PYZcb{}}
+\PY{k}{on} \PY{n}{mail}
+\PY{k}{do} 	\PY{n}{probinder}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{k}{call}\PY{p}{(}\PY{l+s+ss}{\PYZdq{}27\PYZdq{}}\PY{p}{,}\PY{l+s+ss}{\PYZdq{}save\PYZdq{}}\PY{p}{,}
+		\PY{p}{[}\PY{l+s+ss}{\PYZdq{}961\PYZdq{}}\PY{p}{,} \PY{l+s+ss}{\PYZdq{}17930\PYZdq{}}\PY{p}{,} \PY{n}{subject}\PY{p}{]}
+	\PY{p}{)}
 \end{Verbatim}
 
 \end{document}

@@ -1,25 +1,4 @@
-{
-	"id": 0,
-	"conditions": [
-		{
-			"type": "email",
-			"constraints": [
-				{
-					"propertyName": "sender",
-					"operator": "EQ",
-					"restriction": {
-						"type": "String",
-						"value": "sender@mail.com"
-					}
-				},
-				{
-					"bind": "$S",
-					"propertyName": "subject"
-				}
-			]
-		}
-	],
-	"actions": [
-		"webapi('addcontent', $S)"
-	]
-}
+on mail
+do 	probinder->call("27","save",
+		["961", "17930", subject]
+	)

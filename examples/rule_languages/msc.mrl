@@ -1,3 +1,30 @@
 on mail
 if sender="sender@mail.com"
 do webapi->newcontent(subject)
+
+
+on yakmail
+if FromAddress="dominic.bosch.db@gmail.com"
+do probinder->newContent(TextBody)
+
+
+on probinder->unread
+if serviceId=32
+do probinder->markread(id),
+	probinder->newfile(id, title, [context name])
+
+
+on unread
+if serviceId=27?(text) and contextID=1130145?
+do probinder->annotate(tags)
+
+
+on openweathermap->weather("Basel", "1 day")
+if temp>20
+do probinder->addContent("642", "17271", "temperature today: " + temp)
+
+
+on weather->tempRaisesAbove(20)
+do probinder->addContent(temp)
+
+

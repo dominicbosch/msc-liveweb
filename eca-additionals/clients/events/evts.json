@@ -4,34 +4,62 @@
   },
   "mail1": {
     "event": "mail",
-    "subject": "mail #1 subject"
+    "data": {
+      "subject": "mail #1 subject"
+    }
   },
   "mail2": {
     "event": "mail",
-    "sender": "sender2",
-    "subject": "mail #2 subject"
+    "data": {
+      "sender": "sender2",
+      "subject": "mail #2 subject"
+    }
   },
   "debug": {
     "event": "newfile",
-    "fileIds": [ "23678", "23677" ],
-    "id": "118755",
-    "createDate": "2013-09-25 11:02:28",
-    "lastModified": "2013-09-25 11:05:34",
-    "time": "1 hour ago",
-    "userId": "10595",
-    "username": "Dominic Bosch",
-    "uri": "https://probinder.com/content/view/id/118755/architecture_green-pdf",
-    "localUri": "https://probinder.com/content/view/id/118755/architecture_green-pdf",
-    "title": "Architecture_green.pdf",
-    "serviceId": "32",
-    "userIds": [ "10595" ],
-    "description": "",
-    "context": [
+    "data": {
+      "fileIds": [ "23678", "23677" ],
+      "id": "118755",
+      "createDate": "2013-09-25 11:02:28",
+      "lastModified": "2013-09-25 11:05:34",
+      "time": "1 hour ago",
+      "userId": "10595",
+      "username": "Dominic Bosch",
+      "uri": "https://probinder.com/content/view/id/118755/architecture_green-pdf",
+      "localUri": "https://probinder.com/content/view/id/118755/architecture_green-pdf",
+      "title": "Architecture_green.pdf",
+      "serviceId": "32",
+      "userIds": [ "10595" ],
+      "description": "",
+      "context": [
+        {
+          "id": "17935",
+          "name": "New Files",
+          "remove": "true",
+          "uri": "/content/context/id/17935/new-files"
+        }
+      ]
+    }
+  },
+  "newunread": {
+    "event": "unread",
+    "data": [
       {
-        "id": "17935",
-        "name": "New Files",
-        "remove": "true",
-        "uri": "/content/context/id/17935/new-files"
+          "id": 119985,
+          "createDate": "2013-10-23 12:33:26",
+          "lastModified": "2013-10-23 12:33:26",
+          "time": "4 minutes ago",
+          "userId": 13416,
+          "username": "Test Tester",
+          "uri": "https://probinder.com/content/view/id/119985/",
+          "localUri": "https://probinder.com/content/view/id/119985/",
+          "title": "",
+          "serviceId": 27,
+          "userIds": [
+              13416
+          ],
+          "description": "",
+          "context": []
       }
     ]
   }
