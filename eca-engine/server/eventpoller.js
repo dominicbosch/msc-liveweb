@@ -24,6 +24,26 @@ process.on('message', function(prop) {
   }
 });
 
+function loadModule(directory, name) {
+  try {
+    var mod = require(path.resolve(directory, name, name + '.js'));
+    if(mod) {
+      if(fs.existsSync(path.resolve(directory, name, 'credentials.json'))) {
+        fs.readFile(path.resolve(directory, name, 'credentials.json'), 'utf8', function (err, data) {
+          if (err) {
+            console.trace('ERROR: Loading credentials file for "' + name + '"!');
+            return;
+          }
+          if(mod.loadCredentials) mod.loadCredentials(JSON.parse(data));
+        });
+      }
+      listEventModules[name] = mod;
+    }
+  } catch(err) {
+    console.log('FAILED loading event module "' + name + '"');
+  }
+}
+
 function loadModules(directory) {
   fs.readdir(path.resolve(__dirname, directory), function (err, list) {
     if (err) {
@@ -33,8 +53,7 @@ function loadModules(directory) {
     list.forEach(function (file) {
       fs.stat(path.resolve(__dirname, directory, file), function (err, stat) {
         if (stat && stat.isDirectory()) {
-          listEventModules[file] = require(path.resolve(directory, file, file + '.js'));
-          console.log('Event module "' + file + '" loaded');
+          loadModule(path.resolve(__dirname, directory), file);
         }
       });
     });
@@ -43,12 +62,9 @@ function loadModules(directory) {
 
 function checkRemotes() {
   for(var prop in listPoll) {
-    listPoll[prop](function(obj) { 
-      process.send({
-        event: prop,
-        eventid: 'polled_' + eId++,
-        data: obj
-      });
+    listPoll[prop](prop, function(obj) {
+      obj.eventid = 'polled_' + eId++;
+      process.send(obj);
     });
   }
 }

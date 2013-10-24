@@ -8,22 +8,14 @@ var request = require('needle'),
   fs = require('fs'),
   urlService = 'https://probinder.com/service/',
   credentials = null;
-
-/**
- * Takes the actions to make this module ready when it is loaded
- */
-function init() {
-  fs.readFile(__dirname + '/credentials.json', 'utf8', function (err, data) {
-    if (err) {
-      console.trace('ERROR: Loading credentials file! Did you create it already?');
-      return;
-    }
-    credentials = JSON.parse(data);
-    if(!credentials || !credentials.username || !credentials.password) {
-      credentials = null;
-      console.trace('ERROR: credentials file corrupt');
-    }
-  });
+  
+function loadCredentials(cred) {
+  if(!cred || !cred.username || !cred.password) {
+    console.trace('ERROR: ProBinder event module credentials file corrupt');
+  } else {
+    credentials = cred;
+    console.log('Successfully loaded credentials for ProBinder event module');
+  }
 }
 
 /**
@@ -64,19 +56,18 @@ function call(args) {
  * @param {Object} [args] the optional object containing the success
  *    and error callback methods
  */
-function unread(callback) {
+function unread(prop, callback) { //FIXME ugly prop in here
   call({
     service: '36',
     method: 'unreadcontent',
     success: function(data) {
-      for(var i = 0; i < data.length; i++) callback(data[i]);
+      for(var i = 0; i < data.length; i++) callback({ event: prop, data: data[i] });
     }
   });
   
 };
 
-init();
-
+exports.loadCredentials = loadCredentials;
 exports.call = call;
 exports.unread = unread;
   

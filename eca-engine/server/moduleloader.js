@@ -33,11 +33,31 @@ function processUserInput(chunk) {
     case 'loadaction':
       var name = 'probinder';
       if(arr.length > 1) name = arr[1];
-      funcLoadAction(name, require('./action_modules/' + name + '/' + name + '.js'));
+      loadModule(path.resolve(__dirname, 'action_modules'), name, funcLoadAction);
       break;
     default: console.log('action (' + arr[0] + ') unknown! Known actions are: loadrules, loadaction');
   }
   setTimeout(function() { console.log('What would you like to do?'); }, 1000);
+}
+
+function loadModule(directory, name, callback) {
+  try {
+    var mod = require(path.resolve(directory, name, name + '.js'));
+    if(mod) {
+      if(fs.existsSync(path.resolve(directory, name, 'credentials.json'))) {
+        fs.readFile(path.resolve(directory, name, 'credentials.json'), 'utf8', function (err, data) {
+          if (err) {
+            console.trace('ERROR: Loading credentials file!');
+            return;
+          }
+          if(mod.loadCredentials) mod.loadCredentials(JSON.parse(data));
+        });
+      }
+      callback(name, mod);
+    }
+  } catch(err) {
+    console.log('FAILED loading module "' + name + '"');
+  }
 }
 
 function loadModules(directory, callback) {
@@ -48,7 +68,9 @@ function loadModules(directory, callback) {
     }
     list.forEach(function (file) {
       fs.stat(path.resolve(__dirname, directory, file), function (err, stat) {
-        if (stat && stat.isDirectory()) callback(file, require(path.resolve(directory, file, file + '.js')));
+        if (stat && stat.isDirectory()) {
+          loadModule(path.resolve(__dirname, directory), file, callback);
+        }
       });
     });
   });

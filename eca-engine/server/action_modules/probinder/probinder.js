@@ -9,21 +9,13 @@ var request = require('needle'),
   urlService = 'https://probinder.com/service/',
   credentials = null;
 
-/**
- * Takes the actions to make this module ready when it is loaded
- */
-function init() {
-  fs.readFile(__dirname + '/credentials.json', 'utf8', function (err, data) {
-    if (err) {
-      console.trace('ERROR: Loading credentials file! Did you create it already?');
-      return;
-    }
-    credentials = JSON.parse(data);
-    if(!credentials || !credentials.username || !credentials.password) {
-      credentials = null;
-      console.trace('ERROR: credentials file corrupt');
-    }
-  });
+function loadCredentials(cred) {
+  if(!cred || !cred.username || !cred.password) {
+    console.trace('ERROR: ProBinder action module credentials file corrupt');
+  } else {
+    credentials = cred;
+    console.log('Successfully loaded credentials for ProBinder action module');
+  }
 }
 
 /**
@@ -202,8 +194,7 @@ function setRead(args){
   });
 }
 
-init();
-
+exports.loadCredentials = loadCredentials;
 exports.purgeCredentials = purgeCredentials;
 exports.verifyCredentials = verifyCredentials;
 exports.call = call;
