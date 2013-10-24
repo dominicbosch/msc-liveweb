@@ -11,7 +11,8 @@
   "dependencies": {
     "express": "3.4.0",
     "needle": "0.6.1",
-    "request": "2.27.0"
+    "request": "2.27.0",
+    "redis": "0.9.0"
   },
   "__comment": {
     "dependencies": {

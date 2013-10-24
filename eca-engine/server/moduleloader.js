@@ -44,6 +44,7 @@ function loadModule(directory, name, callback) {
   try {
     var mod = require(path.resolve(directory, name, name + '.js'));
     if(mod) {
+      //TODO credentials need to be personalized
       if(fs.existsSync(path.resolve(directory, name, 'credentials.json'))) {
         fs.readFile(path.resolve(directory, name, 'credentials.json'), 'utf8', function (err, data) {
           if (err) {
