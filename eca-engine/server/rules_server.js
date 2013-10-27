@@ -5,7 +5,7 @@ var express = require('express'),
   fs = require('fs'),
   path = require('path'),
   // engine = cp.fork('./ecainference'),
-  engine = require('./ecainference');
+  engine = require('./engine');
   
 /**
  * If a request is made to the server, this function is used to handle it.

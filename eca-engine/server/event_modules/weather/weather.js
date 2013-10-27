@@ -1,5 +1,9 @@
-//http://api.openweathermap.org/data/2.5/weather?q=Basel&APPID=244a2aef6a1367ea21458cd14e1a6ec4
-var credentials;
+
+
+var request = require('needle'),
+  urlService = 'http://api.openweathermap.org/data/2.5/weather',
+  credentials,
+  old_temp;
 
 function loadCredentials(cred) {
   if(!cred || !cred.key) {
@@ -10,5 +14,18 @@ function loadCredentials(cred) {
   }
 }
 
+function tempRaisesAbove(prop, degree) {
+  request.get(urlService + '?APPID=' + credentials.key + '&q=Basel',
+    function(error, response, body) { // The callback
+      if (!error) { //) && response.statusCode == 200) {
+        if(args && args.success) args.success(body);
+      } else {
+        if(args && args.error) args.error(error, response, body);
+        else console.trace('Error during serivce call: ' + error.message);
+      }
+    }
+  );
+}
 
+exports.tempRaisesAbove = tempRaisesAbove;
 exports.loadCredentials = loadCredentials;

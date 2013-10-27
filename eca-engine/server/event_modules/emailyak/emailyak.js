@@ -18,12 +18,12 @@ function loadCredentials(cred) {
 }
 
 //FIXME every second mail gets lost?
-function newMail(prop, callback) { //FIXME not beautiful to have to set prop each time here
+function newMail(callback) { //FIXME not beautiful to have to set prop each time here
   webapi.get('https://api.emailyak.com/v1/' + credentials.key + '/json/get/new/email/',
     function (error, response, body){
       if (!error && response.statusCode == 200) {
         var mails = JSON.parse(body).Emails;
-        for(var i = 0; i < mails.length; i++) callback({ event: prop, data: mails[i] });
+        for(var i = 0; i < mails.length; i++) callback(mails[i]);
       } else console.trace('error: ' + error);
     }
   );

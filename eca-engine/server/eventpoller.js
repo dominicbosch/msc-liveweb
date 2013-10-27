@@ -10,6 +10,7 @@ var fs = require('fs'),
 
 process.on('message', function(prop) {
   var arrModule = prop.split('->');
+  // var arrModule = obj.module.split('->');
   if(arrModule.length > 1){
     var module = listEventModules[arrModule[0]];
     for(var i = 1; i < arrModule.length; i++) {
@@ -61,11 +62,25 @@ function loadModules(directory) {
 }
 
 function checkRemotes() {
+  // console.log('poller polls...');
   for(var prop in listPoll) {
-    listPoll[prop](prop, function(obj) {
-      obj.eventid = 'polled_' + eId++;
-      process.send(obj);
-    });
+    listPoll[prop](
+    /*
+     * what a trick to get prop local :-P
+     * define and instantly call anonymous function with param prop.
+     * This places the value of prop into the context of the callback
+     * and thus doesn't change when the for loop keeps iterating over listPoll
+     */
+      (function(p) {
+        return function(obj) {
+          process.send({
+            event: p,
+            eventid: 'polled_' + eId++,
+            data: obj
+          });
+        };
+      })(prop)
+    );
   }
 }
 

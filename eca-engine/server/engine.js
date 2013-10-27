@@ -1,8 +1,9 @@
 'use strict';
 var ml = require('./moduleloader'),
-  cp = require('child_process'),
-  poller = cp.fork('./eventpoller'),
-  qEvents = new (require('./queue')).Queue();
+    db = require('./db_interface'),
+    cp = require('child_process'),
+    poller = cp.fork('./eventpoller'),
+    qEvents = new (require('./queue')).Queue();
 
 poller.on('message', function(evt) {
   pushEvent(evt);
@@ -38,6 +39,15 @@ function insertRule(objRule) {
   //TODO validate rule
   if(listRules[objRule.id]) console.log('Replacing rule: ' + objRule.id);
   listRules[objRule.id] = objRule;
+  //TODO rule will be instead of event: "mod":
+  /*
+   * event: {
+   *   type: "mod",
+   *   arguments: [
+   *     ...
+   *   ] 
+   * }
+   */
   
   // Notify poller about eventual candidate
   poller.send(objRule.event);

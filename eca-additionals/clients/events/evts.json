@@ -1,21 +1,5 @@
 {
-  "mail0": {
-    "event": "mail"
-  },
-  "mail1": {
-    "event": "mail",
-    "data": {
-      "subject": "mail #1 subject"
-    }
-  },
-  "mail2": {
-    "event": "mail",
-    "data": {
-      "sender": "sender2",
-      "subject": "mail #2 subject"
-    }
-  },
-  "debug": {
+  "newfile": {
     "event": "newfile",
     "data": {
       "fileIds": [ "23678", "23677" ],
@@ -43,24 +27,55 @@
   },
   "newunread": {
     "event": "unread",
-    "data": [
+    "data": {
+      "id": 119985,
+      "createDate": "2013-10-23 12:33:26",
+      "lastModified": "2013-10-23 12:33:26",
+      "time": "4 minutes ago",
+      "userId": 13416,
+      "username": "Test Tester",
+      "uri": "https://probinder.com/content/view/id/119985/",
+      "localUri": "https://probinder.com/content/view/id/119985/",
+      "title": "",
+      "serviceId": 27,
+      "userIds": [
+        13416
+      ],
+      "description": "",
+      "context": []
+    }
+  },
+  "yakmail": {
+    "Status": 200,
+    "Start": 0,
+    "End": 1,
+    "Message": "Success",
+    "Emails": [
       {
-          "id": 119985,
-          "createDate": "2013-10-23 12:33:26",
-          "lastModified": "2013-10-23 12:33:26",
-          "time": "4 minutes ago",
-          "userId": 13416,
-          "username": "Test Tester",
-          "uri": "https://probinder.com/content/view/id/119985/",
-          "localUri": "https://probinder.com/content/view/id/119985/",
-          "title": "",
-          "serviceId": 27,
-          "userIds": [
-              13416
-          ],
-          "description": "",
-          "context": []
+        "EmailID": "yrmibigi",
+        "Received": "2013-10-24T05:27:49",
+        "ToAddress": "test@mscliveweb.simpleyak.com",
+        "ParsedData": [
+          {
+            "Data": "fyi",
+            "Part": 0,
+            "Type": "Email"
+          },
+          {
+            "Data": "lengthy\n\ncontent\n\nfyi",
+            "Part": 1,
+            "Type": "Email"
+          }
+        ],
+        "FromName": "Dominic Bosch",
+        "ToAddressList": "test@mscliveweb.simpleyak.com",
+        "FromAddress": "dominic.bosch.db@gmail.com",
+        "HtmlBody": "<div dir=\"ltr\">fyi<br><br><div class=\"gmail_quote\">---------- Forwarded message ----------<br>From: <b class=\"gmail_sendername\">Dominic Bosch</b> <span dir=\"ltr\">&lt;<a href=\"mailto:dominic.bosch.db@gmail.com\">dominic.bosch.db@gmail.com</a>&gt;</span><br>\nDate: 2013/10/24<br>Subject: Fwd: test subject<br>To: <a href=\"mailto:test@mscliveweb.simpleyak.com\">test@mscliveweb.simpleyak.com</a><br><br><br><div dir=\"ltr\"><br><br><div class=\"gmail_quote\">---------- Forwarded message ----------<br>\nFrom: <b class=\"gmail_sendername\">Dominic Bosch</b> <span dir=\"ltr\">&lt;<a href=\"mailto:dominic.bosch.db@gmail.com\" target=\"_blank\">dominic.bosch.db@gmail.com</a>&gt;</span><br>\nDate: 2013/10/24<br>Subject: test subject<br>To: <a href=\"mailto:test@mscliveweb.simpleyak.com\" target=\"_blank\">test@mscliveweb.simpleyak.com</a><br><br><br><div dir=\"ltr\">lengthy<div><br></div><div>content</div><div><br>\n</div><div>fyi</div>\n</div>\n</div><br></div>\n</div><br></div>",
+        "CcAddressList": "",
+        "TextBody": "fyi\n\n---------- Forwarded message ----------\nFrom: Dominic Bosch <dominic.bosch.db@gmail.com>\nDate: 2013/10/24\nSubject: Fwd: test subject\nTo: test@mscliveweb.simpleyak.com\n\n\n\n\n---------- Forwarded message ----------\nFrom: Dominic Bosch <dominic.bosch.db@gmail.com>\nDate: 2013/10/24\nSubject: test subject\nTo: test@mscliveweb.simpleyak.com\n\n\nlengthy\n\ncontent\n\nfyi",
+        "Subject": "Fwd: test subject"
       }
-    ]
+    ],
+    "TotalEmails": 1
   }
 }

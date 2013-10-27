@@ -56,12 +56,12 @@ function call(args) {
  * @param {Object} [args] the optional object containing the success
  *    and error callback methods
  */
-function unread(prop, callback) { //FIXME ugly prop in here
+function unread(callback) { //FIXME ugly prop in here
   call({
     service: '36',
     method: 'unreadcontent',
     success: function(data) {
-      for(var i = 0; i < data.length; i++) callback({ event: prop, data: data[i] });
+      for(var i = 0; i < data.length; i++) callback(data[i]);
     }
   });
   

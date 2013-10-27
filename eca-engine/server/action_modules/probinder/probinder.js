@@ -94,19 +94,19 @@ function getUnreadContents(args) {
  * @param {function} [args.succes] refer to call function
  * @param {function} [args.error] refer to call function
  */
-function getBinderTabContents(args){
-  if(!args || !args.tabid) {
-    console.trace('ERROR: Too few arguments!');
-    return;
-  }
-  call({
-    service: '18',
-    method: 'content',
-    data: { id: args.tabid },
-    success: args.success,
-    error: args.error
-  });
-}
+// function getBinderTabContents(args){
+  // if(!args || !args.tabid) {
+    // console.trace('ERROR: Too few arguments!');
+    // return;
+  // }
+  // call({
+    // service: '18',
+    // method: 'content',
+    // data: { id: args.tabid },
+    // success: args.success,
+    // error: args.error
+  // });
+// }
 /**
  * Calls the content get service with the content id and the service id provided. 
  * @param {Object} args the object containing the service id and the content id,
@@ -199,7 +199,7 @@ exports.purgeCredentials = purgeCredentials;
 exports.verifyCredentials = verifyCredentials;
 exports.call = call;
 exports.getUnreadContents = getUnreadContents;
-exports.getBinderTabContents = getBinderTabContents;
+// exports.getBinderTabContents = getBinderTabContents;
 exports.getContent = getContent;
 exports.makeEntry = makeEntry;
 exports.makeFileEntry = makeFileEntry;
