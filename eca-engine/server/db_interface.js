@@ -15,11 +15,11 @@ function init(db_port){
 
 
 function helloworld() {
-  client.set("test", "wow");
+  client.set("tester", "wow");
   client.get("missingkey", function(err, reply) {
     console.log(reply);
   });
-  client.get("test", function(err, reply) {
+  client.get("tester", function(err, reply) {
     console.log(reply);
   });
   client.hmset("hashset", {
