@@ -1,3 +1,4 @@
 {
-  "inboundport": 8125
+  "http_port": 8125,
+  "db_port": 6379
 }

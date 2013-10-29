@@ -1,9 +1,8 @@
 'use strict';
 var ml = require('./moduleloader'),
-    db = require('./db_interface'),
     cp = require('child_process'),
     poller = cp.fork('./eventpoller'),
-    qEvents = new (require('./queue')).Queue();
+    qEvents = new (require('./queue')).Queue(); // export queue into redis
 
 poller.on('message', function(evt) {
   pushEvent(evt);
