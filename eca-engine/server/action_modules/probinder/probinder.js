@@ -1,20 +1,19 @@
 'use strict';
 
+var needle = require('needle');
 /**
  * ProBinder ACTION MODULE
  */
 
-var request = require('needle'),
-  fs = require('fs'),
-  urlService = 'https://probinder.com/service/',
+var urlService = 'https://probinder.com/service/',
   credentials = null;
 
 function loadCredentials(cred) {
   if(!cred || !cred.username || !cred.password) {
-    console.trace('ERROR: ProBinder action module credentials file corrupt');
+    console.error('ERROR: ProBinder AM credentials file corrupt');
   } else {
     credentials = cred;
-    console.log('Successfully loaded credentials for ProBinder action module');
+    console.log('Successfully loaded credentials for ProBinder AM');
   }
 }
 
@@ -50,11 +49,11 @@ function verifyCredentials(username, password) {
  */
 function call(args) {
   if(!args || !args.service || !args.method) {
-    console.trace('ERROR: Too few arguments!');
+    console.error('ERROR in ProBinder AM call: Too few arguments!');
     return;
   }
-	if(request && credentials){
-    request.post(urlService + args.service + '/' + args.method,
+	if(credentials){
+    needle.post(urlService + args.service + '/' + args.method,
       args.data,
       credentials,
       function(error, response, body) { // The callback
@@ -62,11 +61,11 @@ function call(args) {
           if(args && args.success) args.success(body);
         } else {
           if(args && args.error) args.error(error, response, body);
-          else console.trace('Error during serivce call: ' + error.message);
+          else console.error('Error during ProBinder AM call: ' + error.message);
         }
       }
     );
-	} else console.trace('request or credentials object not ready!');
+	} else console.error('ERROR ProBinder AM: request or credentials object not ready!');
 };
 
 /**
@@ -87,27 +86,6 @@ function getUnreadContents(args) {
 };
 
 /**
- * Calls the content service for a binder tab.
- * @param {Object} args the object containing the binder tab id, success
- *    and error callback methods
- * @param {String} tabid the binder tab id
- * @param {function} [args.succes] refer to call function
- * @param {function} [args.error] refer to call function
- */
-// function getBinderTabContents(args){
-  // if(!args || !args.tabid) {
-    // console.trace('ERROR: Too few arguments!');
-    // return;
-  // }
-  // call({
-    // service: '18',
-    // method: 'content',
-    // data: { id: args.tabid },
-    // success: args.success,
-    // error: args.error
-  // });
-// }
-/**
  * Calls the content get service with the content id and the service id provided. 
  * @param {Object} args the object containing the service id and the content id,
  *    success and error callback methods
@@ -119,7 +97,7 @@ function getUnreadContents(args) {
  */
 function getContent(args){
   if(!args || !args.serviceid || !args.contentid) {
-    console.trace('ERROR: Too few arguments!');
+    console.error('ERROR in ProBinder AM getContent: Too few arguments!');
     return;
   }
   call({
@@ -158,7 +136,7 @@ function makeEntry(args){
  */
 function makeFileEntry(args){
   if(!args || !args.service || !args.id) {
-    console.trace('ERROR: Too few arguments!');
+    console.error('ERROR in ProBinder AM makeFileEntry: Too few arguments!');
     return;
   }
   getContent({

@@ -1,12 +1,7 @@
 'use strict';
-var ml = require('./moduleloader'),
-    cp = require('child_process'),
-    poller = cp.fork('./eventpoller'),
-    qEvents = new (require('./queue')).Queue(); // export queue into redis
 
-poller.on('message', function(evt) {
-  pushEvent(evt);
-});
+var cp = require('child_process'), poller,
+    qEvents = new (require('./queue')).Queue(); // export queue into redis
 
 var regex = /\$X\.[\w\.\[\]]*/g, // find properties of $X
 // var regex = /\$X\.([0-9A-z\.\[\]])*[A-z]/g, // find properties of $X
@@ -16,8 +11,12 @@ var regex = /\$X\.[\w\.\[\]]*/g, // find properties of $X
 /**
  * Initialize the rules engine which initializes the module loader.
  */
-function init() {
-  ml.init(loadActionModule, insertRule);
+function init(db_port) {
+  poller = cp.fork('./eventpoller', [db_port]);
+  poller.on('message', function(evt) {
+    pushEvent(evt);
+  });
+  //TODO maybe we should fork a child process for the engine
   setTimeout(queryQueue, 1000); // wait a bit for everything to init
 }
 
@@ -26,7 +25,7 @@ function init() {
  * @param {Object} objModule the action module object
  */
 function loadActionModule(name, objModule) {
-  console.log('Action module "' + name + '" loaded');
+  console.log(' | EN | Action module "' + name + '" loaded');
   listActionModules[name] = objModule;
 }
 
@@ -34,10 +33,11 @@ function loadActionModule(name, objModule) {
  * Insert a rule into the eca rules repository
  * @param {Object} objRule the rule object
  */
-function insertRule(objRule) {
+function loadRule(objRule) {
   //TODO validate rule
-  if(listRules[objRule.id]) console.log('Replacing rule: ' + objRule.id);
+  if(listRules[objRule.id]) console.log(' | EN | Replacing rule: ' + objRule.id);
   listRules[objRule.id] = objRule;
+  
   //TODO rule will be instead of event: "mod":
   /*
    * event: {
@@ -49,7 +49,11 @@ function insertRule(objRule) {
    */
   
   // Notify poller about eventual candidate
-  poller.send(objRule.event);
+  try {
+    poller.send(objRule.event);
+  } catch (err) {
+    console.log(' | EN | ERROR: Unable to inform poller about new active rule!');
+  }
 }
 
 function queryQueue() {
@@ -73,7 +77,7 @@ function pushEvent(evt) {
  * @param {Object} evt The event object
  */
 function processRequest(evt) {
-  console.log('processing event: ' + evt.event + '(' + evt.eventid + ')');
+  console.log(' | EN | processing event: ' + evt.event + '(' + evt.eventid + ')');
   var actions = checkEvent(evt);
   for(var i = 0; i < actions.length; i++) {
     invokeAction(evt, actions[i]);
@@ -91,7 +95,7 @@ function checkEvent(evt) {
     //TODO this needs to get depth safe, not only data but eventually also
     // on one level above (eventid and other meta)
     if(listRules[rn].event === evt.event && validConditions(evt.data, listRules[rn])) {
-      console.log('Engine> Rule "' + rn + '" fired');
+      console.log(' | EN | Rule "' + rn + '" fired');
       actions = actions.concat(listRules[rn].actions);
     }
   }
@@ -121,9 +125,13 @@ function invokeAction(evt, action) {
   if(srvc) {
     //FIXME preprocessing not only on data
     preprocessActionArguments(evt.data, action.arguments, actionargs);
-    if(srvc[action.method]) srvc[action.method](actionargs);
+    try {
+      if(srvc[action.method]) srvc[action.method](actionargs);
+    } catch(err) {
+      console.error(' | EN | ERROR during action execution: ' + err);
+    }
   }
-  else console.log('no api interface found for: ' + action.apiprovider);
+  else console.log(' | EN | No api interface found for: ' + action.apiprovider);
 }
 
 /**
@@ -170,7 +178,7 @@ function preprocessActionArguments(evt, act, res) {
   }
 }
 
-init();
-
-exports.insertRule = insertRule;
+exports.init = init;
+exports.loadActionModule = loadActionModule;
+exports.loadRule = loadRule;
 exports.pushEvent = pushEvent;

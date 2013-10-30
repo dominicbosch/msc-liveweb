@@ -1,6 +1,6 @@
 'use strict';
   
-var request = require('needle');
+var needle = require('needle');
 
 /**
  * Call any arbitrary webAPI.
@@ -13,20 +13,18 @@ var request = require('needle');
  */
 function call(args) {
   if(!args || !args.url) {
-    console.trace('ERROR: Too few arguments!');
+    console.error('ERROR in WebAPI AM call: Too few arguments!');
     return;
   }
-  if(request){
-    request.post(args.url,
-      args.data,
-      args.credentials,
-      function(error, response, body) {
-        if (!error) console.log('Successful webAPI call to ' + args.url);
-        else console.trace('Error during webAPI call to ' + args.url
-           + ': ' + error.message);
-      }
-    );
-  } else console.trace('request object not ready!');
+  needle.post(args.url,
+    args.data,
+    args.credentials,
+    function(error, response, body) {
+      if (!error) console.log('Successful webAPI AM call to ' + args.url);
+      else console.error('Error during webAPI AM call to ' + args.url
+         + ': ' + error.message);
+    }
+  );
 };
 
 exports.call = call;

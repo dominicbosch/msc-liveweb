@@ -1,20 +1,21 @@
 'use strict';
 
+var needle = require('needle');
+
 /*
  * ProBinder EVENT MODULE
  */
 
 var request = require('needle'),
-  fs = require('fs'),
   urlService = 'https://probinder.com/service/',
   credentials = null;
   
 function loadCredentials(cred) {
   if(!cred || !cred.username || !cred.password) {
-    console.trace('ERROR: ProBinder event module credentials file corrupt');
+    console.error('ERROR: ProBinder EM credentials file corrupt');
   } else {
     credentials = cred;
-    console.log('Successfully loaded credentials for ProBinder event module');
+    console.log('Successfully loaded credentials for ProBinder EM');
   }
 }
 
@@ -32,11 +33,11 @@ function loadCredentials(cred) {
  */
 function call(args) {
   if(!args || !args.service || !args.method) {
-    console.trace('ERROR: Too few arguments!');
+    console.error('ERROR in ProBinder EM call: Too few arguments!');
     return;
   }
-	if(request && credentials){
-    request.post(urlService + args.service + '/' + args.method,
+	if(credentials){
+    needle.post(urlService + args.service + '/' + args.method,
       args.data,
       credentials,
       function(error, response, body) { // The callback
@@ -44,11 +45,11 @@ function call(args) {
           if(args && args.success) args.success(body);
         } else {
           if(args && args.error) args.error(error, response, body);
-          else console.trace('Error during serivce call: ' + error.message);
+          else console.error('ERROR during ProBinder EM call: ' + error.message);
         }
       }
     );
-	} else console.trace('request or credentials object not ready!');
+	} else console.error('ProBinder EM request or credentials object not ready!');
 };
 
 /**

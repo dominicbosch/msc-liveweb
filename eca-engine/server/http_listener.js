@@ -1,18 +1,19 @@
 'use strict';
+
 var express = require('express'),
   qs = require('querystring'),
   eventHandler;
   
 function init(http_port, funcEvtHandler) {
   if(!http_port || !funcEvtHandler) {
-    console.trace('ERROR: either port or eventHandler function not defined!');
+    console.error(' | HL | ERROR: either port or eventHandler function not defined!');
     return;
   }
   eventHandler = funcEvtHandler;
   var app = express();
   app.post('/', onRequest);
   app.listen(http_port); // inbound event channel
-  console.log("Started listening for http requests on port " + http_port);
+  console.log(" | HL | Started listening for http requests on port " + http_port);
 }  
   
 /**

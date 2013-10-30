@@ -17,7 +17,8 @@
   "__comment": {
     "dependencies": {
       "diff": "1.0.5",
-      "socket.io": "0.9.16"
+      "socket.io": "0.9.16",
+      "contextify": "0.1.6"
     }
   }
 }

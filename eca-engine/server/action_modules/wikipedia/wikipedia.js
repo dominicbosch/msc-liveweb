@@ -1,6 +1,7 @@
 'use strict';
-var request = require('needle');
-// var request = require('request');
+
+var needle = require('needle');
+
 var urlService = 'http://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&exchars=200&explaintext&titles=Computer%20science';
 //http://www.mediawiki.org/wiki/API:Search
 /*
@@ -17,7 +18,7 @@ function search(text) {
 }
 
 function requestTitle(title, cbDone, cbFail) {
-  request.get('http://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&exchars=200&explaintext&titles=' + encodeURI(title), 
+  needle.get('http://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&exchars=200&explaintext&titles=' + encodeURI(title), 
     function handleResponse(error, response, body) {
       obj = JSON.parse(body);
       if(error || response.statusCode != 200 || !obj || !obj.query || !obj.query.pages || obj.query.pages['-1']) {
@@ -31,7 +32,7 @@ function requestTitle(title, cbDone, cbFail) {
 }
 
 function searchText(text, cbDone, cbFail) {
-  request.get('http://en.wikipedia.org/w/api.php?format=json&action=query&list=search&srwhat=text&srlimit=3&srsearch=' + encodeURI(text), 
+  needle.get('http://en.wikipedia.org/w/api.php?format=json&action=query&list=search&srwhat=text&srlimit=3&srsearch=' + encodeURI(text), 
     function handleResponse(error, response, body) {
       obj = JSON.parse(body);
       if(error || response.statusCode != 200 || !obj || !obj.query || !obj.query.search || obj.query.search.length == 0) {
