@@ -1,23 +1,70 @@
 'use strict';
 
-var cp = require('child_process'), poller,
+var cp = require('child_process'), lm = require('./load_modules'),
+    poller, db,
     qEvents = new (require('./queue')).Queue(); // export queue into redis
 
 var regex = /\$X\.[\w\.\[\]]*/g, // find properties of $X
 // var regex = /\$X\.([0-9A-z\.\[\]])*[A-z]/g, // find properties of $X
   listRules = {},
-  listActionModules = {};
+  listActionModules = {}, 
+  actionsLoaded = false, eventsLoaded = false;
 
 /**
  * Initialize the rules engine which initializes the module loader.
  */
-function init(db_port) {
+function init(db_link, db_port) {
+  db = db_link;
+  loadActions();
   poller = cp.fork('./eventpoller', [db_port]);
   poller.on('message', function(evt) {
-    pushEvent(evt);
+    if(evt.event === 'ep_finished_loading') {
+      eventsLoaded = true;
+      tryToLoadRules();
+    } else pushEvent(evt);
   });
-  //TODO maybe we should fork a child process for the engine
-  setTimeout(queryQueue, 1000); // wait a bit for everything to init
+  //start to poll the event queue
+  pollQueue();
+}
+
+function loadActions() {
+  db.getActionModules(function(err, obj) {
+    if(err) console.error(' | EN | ERROR retrieving Action Modules from DB!');
+    else {
+      if(!obj) {
+        console.log(' | EN | No Action Modules found in DB!');
+        actionsLoaded = true;
+        tryToLoadRules();
+      } else {
+        var m, semaphore = 0;
+        for(var el in obj) {
+          semaphore++;
+          console.log(' | EN | Loading Action Module from DB: ' + el);
+          m = lm.compile(obj[el], el);
+          db.getActionModuleAuth(el, function(mod) {
+            return function(err, obj) {
+              if(--semaphore == 0) {
+                actionsLoaded = true;
+                tryToLoadRules();
+              }
+              if(obj && mod.loadCredentials) mod.loadCredentials(JSON.parse(obj));
+            };
+          }(m));
+          listActionModules[el] = m;
+        }
+      }
+      }
+  });
+}
+
+function tryToLoadRules() {
+  if(eventsLoaded && actionsLoaded) {
+    db.getRules(function(err, obj) {
+      console.log(obj);
+      console.log(obj);
+      // for(var el in obj) loadRule(JSON.parse(obj[el]));
+    });
+  }
 }
 
 /**
@@ -50,18 +97,18 @@ function loadRule(objRule) {
   
   // Notify poller about eventual candidate
   try {
-    poller.send(objRule.event);
+    poller.send('event|'+objRule.event);
   } catch (err) {
     console.log(' | EN | ERROR: Unable to inform poller about new active rule!');
   }
 }
 
-function queryQueue() {
+function pollQueue() {
   var evt = qEvents.dequeue();
   if(evt) {
-    processRequest(evt);
+    processEvent(evt);
   }
-  setTimeout(queryQueue, 50); //TODO adapt to load
+  setTimeout(pollQueue, 50); //TODO adapt to load
 }
 
 /**
@@ -76,7 +123,7 @@ function pushEvent(evt) {
  * Handles correctly posted events
  * @param {Object} evt The event object
  */
-function processRequest(evt) {
+function processEvent(evt) {
   console.log(' | EN | processing event: ' + evt.event + '(' + evt.eventid + ')');
   var actions = checkEvent(evt);
   for(var i = 0; i < actions.length; i++) {
@@ -178,7 +225,17 @@ function preprocessActionArguments(evt, act, res) {
   }
 }
 
+function loadEventModule(args) {
+  if(args && args.name) poller.send('cmd|loadevent|'+args.name);
+}
+
+function loadEventModules() {
+  poller.send('cmd|loadevents');
+}
+
 exports.init = init;
 exports.loadActionModule = loadActionModule;
 exports.loadRule = loadRule;
+exports.loadEventModule = loadEventModule;
+exports.loadEventModules = loadEventModules;
 exports.pushEvent = pushEvent;

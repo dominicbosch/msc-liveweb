@@ -9,6 +9,7 @@ var fs = require('fs'),
   path = require('path'),
   db = require('./db_interface'),
   lm = require('./load_modules'),
+  listMessageActions = {},
   listEventModules = {},
   listPoll = {},  //TODO this will change in the future because it could have
                   //several parameterized (user-specific) instances of each event module 
@@ -17,8 +18,31 @@ var fs = require('fs'),
 
 db.init(process.argv[2]);
 
-process.on('message', function(prop) {
-  var arrModule = prop.split('->');
+db.getEventModules(function(err, obj) {
+  if(err) console.error(' | EP | ERROR retrieving Event Modules from DB!');
+  else {
+    if(!obj) {
+      console.log(' | EP | No Event Modules found in DB!');
+      process.send({ event: 'ep_finished_loading' });
+    } else {
+      var m, semaphore = 0;
+      for(var el in obj) {
+        semaphore++;
+        m = lm.compile(obj[el], el);
+        db.getEventModuleAuth(el, function(mod) {
+          return function(err, obj) {
+            if(--semaphore === 0) process.send({ event: 'ep_finished_loading' });
+            if(obj && mod.loadCredentials) mod.loadCredentials(JSON.parse(obj));
+          };
+        }(m));
+        listEventModules[el] = m;
+      }
+    }
+  }
+});
+
+listMessageActions['event'] = function(args) {
+  var prop = args[1], arrModule = prop.split('->');
   // var arrModule = obj.module.split('->');
   if(arrModule.length > 1){
     var module = listEventModules[arrModule[0]];
@@ -31,6 +55,32 @@ process.on('message', function(prop) {
     } else {
       console.log(' | EP | No property "' + prop + '" found');
     }
+  }
+};
+
+function loadEventCallback(name, data, mod, auth) {
+  db.storeEventModule(name, data); // store module in db
+  if(auth) db.storeEventModuleAuth(name, auth);
+  listEventModules[name] = mod; // store compiled module for polling
+}
+
+listMessageActions['cmd'] = function(args) {
+  switch(args[1]) {
+    case 'loadevent':
+      lm.loadModule('event_modules', args[2], loadEventCallback);
+      break;
+    case 'loadevents':
+      lm.loadModules('event_modules', loadEventCallback);
+      break;
+  }
+};
+
+process.on('message', function(strProps) {
+  var arrProps = strProps.split('|');
+  if(arrProps.length < 2) console.error(' | EP | ERROR: too few parameter in message!');
+  else {
+    var func = listMessageActions[arrProps[0]];
+    if(func) func(arrProps);
   }
 });
 
@@ -61,10 +111,5 @@ function pollLoop() {
   checkRemotes();
   setTimeout(pollLoop, 10000);
 }
-
-lm.loadModules('event_modules', function(name, data, mod) {
-  db.storeEventModule(name, data); // store module in db
-  listEventModules[name] = mod; // store compiled module for polling
-});
 
 pollLoop();
