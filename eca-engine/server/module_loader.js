@@ -63,5 +63,5 @@ function loadModules(directory, callback) {
 
 exports.loadModule = loadModule;
 exports.loadModules = loadModules;
-exports.compile = requireFromString;
+exports.requireFromString = requireFromString;
 

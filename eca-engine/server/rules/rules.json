@@ -1,21 +1,10 @@
 [
   {
-    "id": "rule_0",
-    "event": "mail",
-    "actions": [
-      {
-        "apiprovider": "probinder",
-        "method": "makeEntry"
-      }
-    ]
-  },
-  {
     "id": "rule_1",
     "event": "mail",
     "actions": [
       {
-        "apiprovider": "probinder",
-        "method": "makeEntry",
+        "module": "probinder->newContent",
         "arguments": {
           "content": "Rule#1: $X.subject" 
         }
@@ -25,11 +14,10 @@
   {
     "id": "rule_2",
     "event": "mail",
-    "condition": { "sender": "sender2"},
+    "condition": { "sender": "sender2" },
     "actions": [
       {
-        "apiprovider": "probinder",
-        "method": "makeEntry",
+        "module": "probinder->newContent",
         "arguments": {
           "content": "Rule#2: $X.subject"
         }
@@ -39,11 +27,10 @@
   {
     "id": "rule_emailyak",
     "event": "yakmail",
-    "condition": { "FromAddress": "dominic.bosch.db@gmail.com"},
+    "condition": { "FromAddress": "dominic.bosch.db@gmail.com" },
     "actions": [
       {
-        "apiprovider": "probinder",
-        "method": "makeEntry",
+        "module": "probinder->newContent",
         "arguments": {
           "content": "Received from EmailYak: $X.textbody"
         }
@@ -53,11 +40,10 @@
   {
     "id": "rule_pull_emailyak",
     "event": "emailyak->newMail",
-    "condition": { "FromAddress": "dominic.bosch.db@gmail.com"},
+    "condition": { "FromAddress": "dominic.bosch.db@gmail.com" },
     "actions": [
       {
-        "apiprovider": "probinder",
-        "method": "makeEntry",
+        "module": "probinder->newContent",
         "arguments": {
           "content": "Received from EmailYak: $X.textbody"
         }
@@ -67,19 +53,17 @@
   {
     "id": "rule_pull_probinder",
     "event": "probinder->unread",
-    "condition": { "serviceId": "32"},
+    "condition": { "serviceId": "32" },
     "actions": [
       {
-        "apiprovider": "probinder",
-        "method": "makeFileEntry",
+        "module": "probinder->makeFileEntry",
         "arguments": {
           "service": "$X.serviceId",
           "id": "$X.id"
         }
       },
       {
-        "apiprovider": "probinder",
-        "method": "setRead",
+        "module": "probinder->setRead",
         "arguments": {
           "id": "$X.id"
         }

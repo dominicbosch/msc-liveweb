@@ -1,21 +1,46 @@
 'use strict';
 
-var redis = require("redis"), db;
+var redis = require('redis'),
+    crypto = require('crypto'),
+    crypto_key, db;
 
 /**
  * Initializes the DB connection.
  * @param {int} db_port the port where the DB listens to requests
  */
-function init(db_port, cbDone){
-  if(!db_port) {
-    console.error(' | DB | ERROR: No DB port defined!');
+function init(db_port, key, cbDone){
+  if(!db_port || !key) {
+    console.error(' | DB | ERROR: No DB port or cipher key defined!');
     return;
   }
+  crypto_key = key;
   db = redis.createClient(db_port);
   db.on("error", function (err) {
     console.error(" | DB | Received error message from DB: " + err);
   });
   if(cbDone) cbDone();
+}
+
+function encrypt(plainText) {
+  if(!plainText) return null;
+  try {
+    var enciph = crypto.createCipher('aes-256-cbc', crypto_key);
+    return enciph.update(plainText, 'utf8', 'base64') + enciph.final('base64');
+  } catch (err) {
+    console.error(' | DB | ERROR in encrypting: ' + err);
+    return null;
+  }
+}
+
+function decrypt(crypticText) {
+  if(!crypticText) return null;
+  try {
+    var deciph = crypto.createDecipher('aes-256-cbc', crypto_key);
+    return deciph.update(crypticText, 'base64', 'utf8') + deciph.final('utf8');
+  } catch (err) {
+    console.error(' | DB | ERROR in decrypting: ' + err);
+    return null;
+  }
 }
 
 /**
@@ -46,9 +71,9 @@ function getSetRecords(set, funcSingle, callback) {
       if(reply.length === 0) {
         callback(null, null);
       } else {
-        var semaphor = reply.length, objReplies = {};
+        var semaphore = reply.length, objReplies = {};
         setTimeout(function() {
-          if(semaphor > 0) {
+          if(semaphore > 0) {
             callback('Timeout fetching ' + set, null);
           }
         }, 1000);
@@ -58,7 +83,7 @@ function getSetRecords(set, funcSingle, callback) {
               if(err) console.error(' | DB | Error fetching single element: ' + prop);
               else {
                 objReplies[prop] = reply;
-                if(--semaphor === 0) callback(null, objReplies);
+                if(--semaphore === 0) callback(null, objReplies);
               }
             };
           }(reply[i]));
@@ -84,7 +109,7 @@ function storeActionModule(id, data) {
  * @param {function} callback the callback to receive the answer (err, obj)
  */
 function getActionModule(id, callback) {
-  db.get('action_module_' + id, callback);
+  if(callback) db.get('action_module_' + id, callback);
 }
 
 /**
@@ -102,8 +127,10 @@ function getActionModules(callback) {
  * @param {String} data the string representation
  */
 function storeActionModuleAuth(id, data) {
-  db.sadd('action_modules_auth', id, replyHandler('storing action module auth key ' + id));
-  db.set('action_module_' + id +'_auth', data, replyHandler('storing action module auth ' + id));
+  if(data) {
+    db.sadd('action_modules_auth', id, replyHandler('storing action module auth key ' + id));
+    db.set('action_module_' + id +'_auth', encrypt(data), replyHandler('storing action module auth ' + id));
+  }
 }
 
 /**
@@ -112,7 +139,7 @@ function storeActionModuleAuth(id, data) {
  * @param {function} callback the callback to receive the answer (err, obj)
  */
 function getActionModuleAuth(id, callback) {
-  db.get('action_module_' + id + '_auth', callback);
+  if(callback) db.get('action_module_' + id + '_auth', function(err, txt) { callback(err, decrypt(txt)); });
 }
 
 /**
@@ -131,7 +158,7 @@ function storeEventModule(id, data) {
  * @param {function} callback the callback to receive the answer (err, obj)
  */
 function getEventModule(id, callback) {
-  db.get('event_module_' + id, callback);
+  if(callback) db.get('event_module_' + id, callback);
 }
 
 /**
@@ -148,8 +175,10 @@ function getEventModules(callback) {
  * @param {String} data the string representation
  */
 function storeEventModuleAuth(id, data) {
-  db.sadd('event_modules_auth', id, replyHandler('storing event module auth key ' + id));
-  db.set('event_module_' + id +'_auth', data, replyHandler('storing event module auth ' + id));
+  if(data) {
+    db.sadd('event_modules_auth', id, replyHandler('storing event module auth key ' + id));
+    db.set('event_module_' + id +'_auth', encrypt(data), replyHandler('storing event module auth ' + id));
+  }
 }
 
 /**
@@ -158,7 +187,7 @@ function storeEventModuleAuth(id, data) {
  * @param {function} callback the callback to receive the answer (err, obj)
  */
 function getEventModuleAuth(id, callback) {
-  db.get('event_module_' + id +'_auth', callback);
+  if(callback) db.get('event_module_' + id +'_auth', function(err, txt) { callback(err, decrypt(txt)); });
 }
 
 /**
@@ -168,7 +197,7 @@ function getEventModuleAuth(id, callback) {
  */
 function storeRule(id, data) {
   db.sadd('rules', id, replyHandler('storing rule key ' + id));
-  db.set('rules_' + id, data, replyHandler('storing rule ' + id));
+  db.set('rule_' + id, data, replyHandler('storing rule ' + id));
 }
 
 /**
@@ -177,10 +206,6 @@ function storeRule(id, data) {
  * @param {function} callback the callback to receive the answer (err, obj)
  */
 function getRule(id, callback) {
-  // db.get('rule_' + id, function(err, obj) {
-    // console.log(err);
-    // console.log(obj);
-  // });
   db.get('rule_' + id, callback);
 }
 

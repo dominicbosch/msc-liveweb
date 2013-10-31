@@ -4,31 +4,24 @@ var express = require('express'),
   http_listener = require('./http_listener'),
   db = require('./db_interface'),
   engine = require('./engine'),
-  ml = require('./moduleloader'),
+  mm = require('./module_manager'),
   fs = require('fs'),
-  path = require('path');
+  path = require('path'),
+  objCmds = {
+    'loadrules': mm.loadRulesFile,
+    'loadaction': mm.loadActionModule,
+    'loadactions':  mm.loadActionModules,
+    'loadevent': engine.loadEventModule,
+    'loadevents': engine.loadEventModules,
+    'shutdown': null, //TODO implement
+    'restart': null   //TODO implement
+  };
   
 function handleAdminCommands(args) {
-  //TODO replace ugly switch with an object
-  switch(args.cmd) {
-    case 'loadrules':
-      ml.loadRulesFile(args);
-      break;
-    case 'loadaction':
-      ml.loadActionModule(args);
-      break;
-    case 'loadactions':
-      ml.loadActionModules();
-      break;
-    case 'loadevent':
-      engine.loadEventModule(args);
-      break;
-    case 'loadevents':
-      engine.loadEventModules();
-      break;
-    default: 
-      console.log('unknown command');
-  }
+  if(args && args.cmd) {
+    var func = objCmds[args.cmd];
+    if(func) func(args);
+  } else console.log(' | RS | No command in request');
 }
 
 fs.readFile(path.resolve(__dirname, 'config', 'config.json'), 'utf8', function (err, data) {
@@ -37,16 +30,16 @@ fs.readFile(path.resolve(__dirname, 'config', 'config.json'), 'utf8', function (
     return;
   }
   var config = JSON.parse(data);
-  if(!config.http_port || !config.db_port) {
-    console.error(' | RS | ERROR: you forgot to define either http_port or db_port, or even both!');
+  if(!config.http_port || !config.db_port || !config.crypto_key) {
+    console.error(' | RS | ERROR: you forgot to define either http_port, db_port, crypto_key, or even all of them!');
   } else {
     console.log(' | RS | Initialzing DB');
-    db.init(config.db_port, function() {
-      engine.init(db, config.db_port);
+    db.init(config.db_port, config.crypto_key, function() {
+      engine.init(db, config.db_port, config.crypto_key);
     });
     console.log(' | RS | Initialzing http listener');
     http_listener.init(config.http_port, handleAdminCommands, engine.pushEvent);
-    console.log(' | RS | Initialzing module loader');
-    ml.init(db, engine.loadActionModule, engine.loadRule);
+    console.log(' | RS | Initialzing module manager');
+    mm.init(db, engine.loadActionModule, engine.loadRule);
   }
 });

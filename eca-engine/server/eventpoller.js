@@ -8,7 +8,7 @@ if(process.argv.length < 3) {
 var fs = require('fs'),
   path = require('path'),
   db = require('./db_interface'),
-  lm = require('./load_modules'),
+  ml = require('./module_loader'),
   listMessageActions = {},
   listEventModules = {},
   listPoll = {},  //TODO this will change in the future because it could have
@@ -16,7 +16,10 @@ var fs = require('fs'),
   eId = 0;
 //TODO allow different polling intervals (a wrapper together with settimeout per to be polled could be an easy and solution)
 
-db.init(process.argv[2]);
+db.init(process.argv[2], process.argv[3]);
+
+//TODO eventpoller will not load event modules from filesystem, this will be done by
+// the moduel manager and the eventpoller receives messages about new/updated active rules 
 
 db.getEventModules(function(err, obj) {
   if(err) console.error(' | EP | ERROR retrieving Event Modules from DB!');
@@ -28,13 +31,14 @@ db.getEventModules(function(err, obj) {
       var m, semaphore = 0;
       for(var el in obj) {
         semaphore++;
-        m = lm.compile(obj[el], el);
+        m = ml.requireFromString(obj[el], el);
         db.getEventModuleAuth(el, function(mod) {
           return function(err, obj) {
             if(--semaphore === 0) process.send({ event: 'ep_finished_loading' });
             if(obj && mod.loadCredentials) mod.loadCredentials(JSON.parse(obj));
           };
         }(m));
+        console.log(' | EP | Loading Event Module: ' + el);
         listEventModules[el] = m;
       }
     }
@@ -50,7 +54,7 @@ listMessageActions['event'] = function(args) {
       if(module) module = module[arrModule[i]];
     }
     if(module) {
-      console.log(' | EP | Found property "' + prop + '", adding it to polling list');
+      console.log(' | EP | Found active event module "' + prop + '", adding it to polling list');
       listPoll[prop] = module;
     } else {
       console.log(' | EP | No property "' + prop + '" found');
@@ -64,13 +68,15 @@ function loadEventCallback(name, data, mod, auth) {
   listEventModules[name] = mod; // store compiled module for polling
 }
 
+//TODO this goes into module_manager, this will receive notification about
+// new loaded/stored event modules and fetch them from the db
 listMessageActions['cmd'] = function(args) {
   switch(args[1]) {
     case 'loadevent':
-      lm.loadModule('event_modules', args[2], loadEventCallback);
+      ml.loadModule('event_modules', args[2], loadEventCallback);
       break;
     case 'loadevents':
-      lm.loadModules('event_modules', loadEventCallback);
+      ml.loadModules('event_modules', loadEventCallback);
       break;
   }
 };

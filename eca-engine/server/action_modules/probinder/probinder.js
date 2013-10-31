@@ -114,7 +114,7 @@ function getContent(args){
  * @param {Object} args the object containing the content
  * @param {String} args.content the content to be posted
  */
-function makeEntry(args){
+function newContent(args){
   if(!args) args = {};
   if(!args.content) args.content = 'Rule#0 says you received a new mail!';
   call({
@@ -179,7 +179,7 @@ exports.call = call;
 exports.getUnreadContents = getUnreadContents;
 // exports.getBinderTabContents = getBinderTabContents;
 exports.getContent = getContent;
-exports.makeEntry = makeEntry;
+exports.newContent = newContent;
 exports.makeFileEntry = makeFileEntry;
 exports.setRead = setRead;
   

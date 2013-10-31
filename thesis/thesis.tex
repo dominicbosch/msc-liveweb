@@ -417,7 +417,7 @@ Would be translated into:
 
 
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{k+kd}{function} \PY{n+nx}{createContent}\PY{p}{(}\PY{n+nx}{txt}\PY{p}{)}\PY{p}{\PYZob{}}
+\PY{k+kd}{function} \PY{n+nx}{newContent}\PY{p}{(}\PY{n+nx}{txt}\PY{p}{)}\PY{p}{\PYZob{}}
   \PY{n+nx}{call}\PY{p}{(}\PY{p}{\PYZob{}}
     \PY{n+nx}{service}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}27\PYZsq{}}\PY{p}{,}
     \PY{n+nx}{method}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}save\PYZsq{}}\PY{p}{,}
@@ -451,6 +451,45 @@ Would be translated into:
    \PY{n}{probinder}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{makeFileEntry}\PY{p}{(}\PY{n}{service}\PY{p}{,} \PY{p}{id}\PY{p}{)}
 \end{Verbatim}
 
+\newpage
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+    \PY{n+nt}{\PYZdq{}event\PYZdq{}}\PY{err}{:} \PY{l+s+s2}{\PYZdq{}emailyak\PYZhy{}\PYZgt{}newMail\PYZdq{}}\PY{err}{,}
+    \PY{n+nt}{\PYZdq{}condition\PYZdq{}}\PY{err}{:} \PY{p}{\PYZob{}} \PY{n+nt}{\PYZdq{}FromAddress\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}dominic.bosch.db@gmail.com\PYZdq{}}\PY{p}{\PYZcb{}}\PY{err}{,}
+    \PY{n+nt}{\PYZdq{}actions\PYZdq{}}\PY{err}{:} \PY{p}{[}
+      \PY{p}{\PYZob{}}
+        \PY{n+nt}{\PYZdq{}module\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}probinder\PYZhy{}\PYZgt{}newContent\PYZdq{}}\PY{p}{,}
+        \PY{n+nt}{\PYZdq{}arguments\PYZdq{}}\PY{p}{:} \PY{p}{\PYZob{}}
+          \PY{n+nt}{\PYZdq{}content\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}Received from EmailYak: \PYZdl{}X.TextBody\PYZdq{}}
+        \PY{p}{\PYZcb{}}
+      \PY{p}{\PYZcb{}}
+    \PY{p}{]}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kd}{function} \PY{n+nx}{newMail}\PY{p}{(}\PY{n+nx}{callback}\PY{p}{)} \PY{p}{\PYZob{}}
+  \PY{n+nx}{needle}\PY{p}{.}\PY{n+nx}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}https://api.emailyak.com/v1/\PYZsq{}}\PY{o}{+}\PY{n+nx}{key}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}/json/get/new/email/\PYZsq{}}\PY{p}{,}
+    \PY{k+kd}{function} \PY{p}{(}\PY{n+nx}{error}\PY{p}{,} \PY{n+nx}{response}\PY{p}{,} \PY{n+nx}{body}\PY{p}{)}\PY{p}{\PYZob{}}
+        \PY{k+kd}{var} \PY{n+nx}{mails} \PY{o}{=} \PY{n+nx}{JSON}\PY{p}{.}\PY{n+nx}{parse}\PY{p}{(}\PY{n+nx}{body}\PY{p}{)}\PY{p}{.}\PY{n+nx}{Emails}\PY{p}{;}
+        \PY{k}{for}\PY{p}{(}\PY{k+kd}{var} \PY{n+nx}{i} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{;} \PY{n+nx}{i} \PY{o}{\PYZlt{}} \PY{n+nx}{mails}\PY{p}{.}\PY{n+nx}{length}\PY{p}{;} \PY{n+nx}{i}\PY{o}{++}\PY{p}{)} \PY{n+nx}{callback}\PY{p}{(}\PY{n+nx}{mails}\PY{p}{[}\PY{n+nx}{i}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+    \PY{p}{\PYZcb{}}
+  \PY{p}{)}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{p}{\PYZob{}}
+  
+  \PY{n+nt}{\PYZdq{}event\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}emailyak\PYZhy{}\PYZgt{}newMail\PYZdq{}}\PY{p}{,}
+  \PY{n+nt}{\PYZdq{}ToAddressList\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}test@mscliveweb.simpleyak.com\PYZdq{}}\PY{p}{,}
+  \PY{n+nt}{\PYZdq{}FromAddress\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}dominic.bosch.db@gmail.com\PYZdq{}}\PY{p}{,}
+  \PY{n+nt}{\PYZdq{}TextBody\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}Lengthy body [...]\PYZdq{}}\PY{p}{,}
+  \PY{n+nt}{\PYZdq{}Subject\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}Fwd: test subject\PYZdq{}}\PY{p}{,}
+  \PY{err}{[}\PY{err}{.}\PY{err}{.}\PY{err}{.}\PY{err}{]}
+
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
 
 \section{Conclusion}
 Most of the examined rule languages are designed for the interchangability of rules between different service providers. We do not attempt to jump into this domain but we rather pick up important concepts to manifest web API's as first class citizens of our rule language. This allows the ad-hoc design and implementation of reactive rules between existing web API's without the need for their cooperation in setting up their endpoint in a special way.

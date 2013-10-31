@@ -1,6 +1,6 @@
 'use strict';
 
-var cp = require('child_process'), lm = require('./load_modules'),
+var cp = require('child_process'), ml = require('./module_loader'),
     poller, db,
     qEvents = new (require('./queue')).Queue(); // export queue into redis
 
@@ -13,10 +13,10 @@ var regex = /\$X\.[\w\.\[\]]*/g, // find properties of $X
 /**
  * Initialize the rules engine which initializes the module loader.
  */
-function init(db_link, db_port) {
+function init(db_link, db_port, crypto_key) {
   db = db_link;
   loadActions();
-  poller = cp.fork('./eventpoller', [db_port]);
+  poller = cp.fork('./eventpoller', [db_port, crypto_key]);
   poller.on('message', function(evt) {
     if(evt.event === 'ep_finished_loading') {
       eventsLoaded = true;
@@ -40,7 +40,7 @@ function loadActions() {
         for(var el in obj) {
           semaphore++;
           console.log(' | EN | Loading Action Module from DB: ' + el);
-          m = lm.compile(obj[el], el);
+          m = ml.requireFromString(obj[el], el);
           db.getActionModuleAuth(el, function(mod) {
             return function(err, obj) {
               if(--semaphore == 0) {
@@ -60,9 +60,7 @@ function loadActions() {
 function tryToLoadRules() {
   if(eventsLoaded && actionsLoaded) {
     db.getRules(function(err, obj) {
-      console.log(obj);
-      console.log(obj);
-      // for(var el in obj) loadRule(JSON.parse(obj[el]));
+      for(var el in obj) loadRule(JSON.parse(obj[el]));
     });
   }
 }
@@ -82,6 +80,7 @@ function loadActionModule(name, objModule) {
  */
 function loadRule(objRule) {
   //TODO validate rule
+  console.log(' | EN | Loading Rule: ' + objRule.id);
   if(listRules[objRule.id]) console.log(' | EN | Replacing rule: ' + objRule.id);
   listRules[objRule.id] = objRule;
   
@@ -167,18 +166,23 @@ function validConditions(evt, rule) {
  * @param {Object} action The action to be invoked
  */
 function invokeAction(evt, action) {
-  var actionargs = {};
-  var srvc = listActionModules[action.apiprovider];
-  if(srvc) {
+  var actionargs = {},
+      arrModule = action.module.split('->');
+  if(arrModule.length < 2) {
+    console.error(' | EN | Invalid rule detected!');
+    return;
+  }
+  var srvc = listActionModules[arrModule[0]];
+  if(srvc && srvc[arrModule[1]]) {
     //FIXME preprocessing not only on data
     preprocessActionArguments(evt.data, action.arguments, actionargs);
     try {
-      if(srvc[action.method]) srvc[action.method](actionargs);
+      if(srvc[arrModule[1]]) srvc[arrModule[1]](actionargs);
     } catch(err) {
       console.error(' | EN | ERROR during action execution: ' + err);
     }
   }
-  else console.log(' | EN | No api interface found for: ' + action.apiprovider);
+  else console.log(' | EN | No api interface found for: ' + action.module);
 }
 
 /**
