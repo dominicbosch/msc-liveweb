@@ -218,6 +218,7 @@ function getRules(callback) {
 }
 
 exports.init = init;
+exports.shutDown = function() { db.quit(); };
 
 exports.storeActionModule = storeActionModule;
 exports.getActionModule = getActionModule;

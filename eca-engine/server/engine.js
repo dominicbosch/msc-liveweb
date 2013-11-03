@@ -1,7 +1,7 @@
 'use strict';
 
 var cp = require('child_process'), ml = require('./module_loader'),
-    poller, db,
+    poller, db, isRunning = true,
     qEvents = new (require('./queue')).Queue(); // export queue into redis
 
 var regex = /\$X\.[\w\.\[\]]*/g, // find properties of $X
@@ -16,6 +16,7 @@ var regex = /\$X\.[\w\.\[\]]*/g, // find properties of $X
 function init(db_link, db_port, crypto_key) {
   db = db_link;
   loadActions();
+  console.log('starting event poller');
   poller = cp.fork('./eventpoller', [db_port, crypto_key]);
   poller.on('message', function(evt) {
     if(evt.event === 'ep_finished_loading') {
@@ -103,11 +104,13 @@ function loadRule(objRule) {
 }
 
 function pollQueue() {
-  var evt = qEvents.dequeue();
-  if(evt) {
-    processEvent(evt);
+  if(isRunning) {
+    var evt = qEvents.dequeue();
+    if(evt) {
+      processEvent(evt);
+    }
+    setTimeout(pollQueue, 50); //TODO adapt to load
   }
-  setTimeout(pollQueue, 50); //TODO adapt to load
 }
 
 /**
@@ -237,9 +240,17 @@ function loadEventModules() {
   poller.send('cmd|loadevents');
 }
 
+function shutDown() {
+  console.log(' | EN | Shutting down Poller and DB Link');
+  isRunning = false;
+  poller.send('cmd|shutdown');
+  db.shutDown();
+}
+
 exports.init = init;
 exports.loadActionModule = loadActionModule;
 exports.loadRule = loadRule;
 exports.loadEventModule = loadEventModule;
 exports.loadEventModules = loadEventModules;
 exports.pushEvent = pushEvent;
+exports.shutDown = shutDown;

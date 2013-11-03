@@ -1,7 +1,6 @@
 'use strict';
 
-var express = require('express'),
-  http_listener = require('./http_listener'),
+var http_listener = require('./http_listener'),
   db = require('./db_interface'),
   engine = require('./engine'),
   mm = require('./module_manager'),
@@ -13,7 +12,7 @@ var express = require('express'),
     'loadactions':  mm.loadActionModules,
     'loadevent': engine.loadEventModule,
     'loadevents': engine.loadEventModules,
-    'shutdown': null, //TODO implement
+    'shutdown': shutDown,
     'restart': null   //TODO implement
   };
   
@@ -22,6 +21,12 @@ function handleAdminCommands(args) {
     var func = objCmds[args.cmd];
     if(func) func(args);
   } else console.log(' | RS | No command in request');
+}
+
+function shutDown() {
+  console.log(' | RS | Received shut down command');
+  engine.shutDown();
+  http_listener.shutDown();
 }
 
 fs.readFile(path.resolve(__dirname, 'config', 'config.json'), 'utf8', function (err, data) {

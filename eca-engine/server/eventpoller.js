@@ -10,9 +10,11 @@ var fs = require('fs'),
   db = require('./db_interface'),
   ml = require('./module_loader'),
   listMessageActions = {},
+  listAdminCommands = {},
   listEventModules = {},
   listPoll = {},  //TODO this will change in the future because it could have
                   //several parameterized (user-specific) instances of each event module 
+  isRunning = true,
   eId = 0;
 //TODO allow different polling intervals (a wrapper together with settimeout per to be polled could be an easy and solution)
 
@@ -68,17 +70,25 @@ function loadEventCallback(name, data, mod, auth) {
   listEventModules[name] = mod; // store compiled module for polling
 }
 
+listAdminCommands['loadevent'] = function(args) {
+  ml.loadModule('event_modules', args[2], loadEventCallback);
+};
+
+listAdminCommands['loadevents'] = function(args) {
+  ml.loadModules('event_modules', loadEventCallback);
+};
+
+listAdminCommands['shutdown'] = function(args) {
+  console.log(' | EP | Shutting down DB Link');
+  isRunning = false;
+  db.shutDown();
+};
+
 //TODO this goes into module_manager, this will receive notification about
 // new loaded/stored event modules and fetch them from the db
 listMessageActions['cmd'] = function(args) {
-  switch(args[1]) {
-    case 'loadevent':
-      ml.loadModule('event_modules', args[2], loadEventCallback);
-      break;
-    case 'loadevents':
-      ml.loadModules('event_modules', loadEventCallback);
-      break;
-  }
+  var func = listAdminCommands[args[1]];
+  if(typeof(func) === 'function') func(args);
 };
 
 process.on('message', function(strProps) {
@@ -92,7 +102,9 @@ process.on('message', function(strProps) {
 
 function checkRemotes() {
   // console.log('poller polls...');
+  var txt = ' | EP | Polled active event modules: ';
   for(var prop in listPoll) {
+    txt += prop + ', ';
     listPoll[prop](
     /*
      * what a hack to get prop local :-P
@@ -111,11 +123,14 @@ function checkRemotes() {
       })(prop)
     );
   }
+  console.log(txt);
 }
 
 function pollLoop() {
-  checkRemotes();
-  setTimeout(pollLoop, 10000);
+  if(isRunning) {
+    checkRemotes();
+    setTimeout(pollLoop, 10000);
+  }
 }
 
 pollLoop();

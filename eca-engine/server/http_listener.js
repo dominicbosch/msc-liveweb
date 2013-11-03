@@ -1,9 +1,9 @@
 'use strict';
 
-var express = require('express'),
+var port = require('express')(),
   qs = require('querystring'),
-  adminHandler, eventHandler;
-  
+  adminHandler, eventHandler, server;
+
 function init(http_port, funcAdminHandler, funcEvtHandler) {
   if(!http_port || !funcEvtHandler) {
     console.error(' | HL | ERROR: either port or eventHandler function not defined!');
@@ -11,10 +11,9 @@ function init(http_port, funcAdminHandler, funcEvtHandler) {
   }
   adminHandler = funcAdminHandler;
   eventHandler = funcEvtHandler;
-  var app = express();
-  app.get('/admin', onAdminCommand);
-  app.post('/pushEvents', onPushEvent);
-  app.listen(http_port); // inbound event channel
+  port.get('/admin', onAdminCommand);
+  port.post('/pushEvents', onPushEvent);
+  server = port.listen(http_port); // inbound event channel
   console.log(" | HL | Started listening for http requests on port " + http_port);
 }
 
@@ -63,3 +62,7 @@ function onPushEvent(request, response) {
 }
 
 exports.init = init;
+exports.shutDown = function() {
+  console.log(' | EP | Shutting down HTTP listener');
+  process.exit();
+};
