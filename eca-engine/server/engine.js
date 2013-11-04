@@ -16,7 +16,6 @@ var regex = /\$X\.[\w\.\[\]]*/g, // find properties of $X
 function init(db_link, db_port, crypto_key) {
   db = db_link;
   loadActions();
-  console.log('starting event poller');
   poller = cp.fork('./eventpoller', [db_port, crypto_key]);
   poller.on('message', function(evt) {
     if(evt.event === 'ep_finished_loading') {

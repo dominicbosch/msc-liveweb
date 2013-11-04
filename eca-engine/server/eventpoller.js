@@ -102,9 +102,9 @@ process.on('message', function(strProps) {
 
 function checkRemotes() {
   // console.log('poller polls...');
-  var txt = ' | EP | Polled active event modules: ';
+  var i = 0, txt = ' | EP | Polled active event modules: ';
   for(var prop in listPoll) {
-    txt += prop + ', ';
+    txt += '(' + i + ') ' + prop + ', ';
     listPoll[prop](
     /*
      * what a hack to get prop local :-P
@@ -123,7 +123,8 @@ function checkRemotes() {
       })(prop)
     );
   }
-  console.log(txt);
+  if(i > 0) console.log(txt);
+  else console.log(' | EP | Nothing to poll...');
 }
 
 function pollLoop() {
