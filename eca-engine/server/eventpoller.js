@@ -5,6 +5,8 @@ if(process.argv.length < 3) {
   return;
 }
 
+//TODO create module that handles logging for all modules, we need date timestamps
+
 var fs = require('fs'),
   path = require('path'),
   db = require('./db_interface'),
@@ -102,7 +104,7 @@ process.on('message', function(strProps) {
 
 function checkRemotes() {
   // console.log('poller polls...');
-  var i = 0, txt = ' | EP | Polled active event modules: ';
+  var i = 0, txt = ' | EP | ' + new Date().toISOString() + ' Polled active event modules: ';
   for(var prop in listPoll) {
     txt += '(' + i + ') ' + prop + ', ';
     listPoll[prop](
@@ -124,7 +126,7 @@ function checkRemotes() {
     );
   }
   if(i > 0) console.log(txt);
-  else console.log(' | EP | Nothing to poll...');
+  else console.log(' | EP | ' + new Date().toISOString() + ' Nothing to poll...');
 }
 
 function pollLoop() {
