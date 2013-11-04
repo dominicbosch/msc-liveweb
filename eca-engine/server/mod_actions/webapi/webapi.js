@@ -14,7 +14,7 @@ var needle = require('needle');
 function call(args) {
   if(!args || !args.url) {
     console.error('ERROR in WebAPI AM call: Too few arguments!');
-    return;
+    return null;
   }
   needle.post(args.url,
     args.data,

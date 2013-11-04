@@ -1,7 +1,7 @@
 'use strict';
 
 var cp = require('child_process'), ml = require('./module_loader'),
-    log = requier('./logging'),
+    log = require('./logging'),
     poller, db, isRunning = true,
     qEvents = new (require('./queue')).Queue(); // export queue into redis
 
@@ -31,17 +31,17 @@ function init(db_link, db_port, crypto_key) {
 
 function loadActions() {
   db.getActionModules(function(err, obj) {
-    if(err) console.error(' | EN | ERROR retrieving Action Modules from DB!');
+    if(err) log.error('EN', 'retrieving Action Modules from DB!');
     else {
       if(!obj) {
-        console.log(' | EN | No Action Modules found in DB!');
+        log.print('EN', 'No Action Modules found in DB!');
         actionsLoaded = true;
         tryToLoadRules();
       } else {
         var m, semaphore = 0;
         for(var el in obj) {
           semaphore++;
-          console.log(' | EN | Loading Action Module from DB: ' + el);
+          log.print('EN', 'Loading Action Module from DB: ' + el);
           m = ml.requireFromString(obj[el], el);
           db.getActionModuleAuth(el, function(mod) {
             return function(err, obj) {
@@ -72,7 +72,7 @@ function tryToLoadRules() {
  * @param {Object} objModule the action module object
  */
 function loadActionModule(name, objModule) {
-  console.log(' | EN | Action module "' + name + '" loaded');
+  log.print('EN', 'Action module "' + name + '" loaded');
   listActionModules[name] = objModule;
 }
 
@@ -82,25 +82,15 @@ function loadActionModule(name, objModule) {
  */
 function loadRule(objRule) {
   //TODO validate rule
-  console.log(' | EN | Loading Rule: ' + objRule.id);
-  if(listRules[objRule.id]) console.log(' | EN | Replacing rule: ' + objRule.id);
+  log.print('EN', 'Loading Rule: ' + objRule.id);
+  if(listRules[objRule.id]) log.print('EN', 'Replacing rule: ' + objRule.id);
   listRules[objRule.id] = objRule;
-  
-  //TODO rule will be instead of event: "mod":
-  /*
-   * event: {
-   *   type: "mod",
-   *   arguments: [
-   *     ...
-   *   ] 
-   * }
-   */
-  
+
   // Notify poller about eventual candidate
   try {
     poller.send('event|'+objRule.event);
   } catch (err) {
-    console.log(' | EN | ERROR: Unable to inform poller about new active rule!');
+    log.print('EN', 'Unable to inform poller about new active rule!');
   }
 }
 
@@ -127,7 +117,7 @@ function pushEvent(evt) {
  * @param {Object} evt The event object
  */
 function processEvent(evt) {
-  console.log(' | EN | processing event: ' + evt.event + '(' + evt.eventid + ')');
+  log.print('EN', 'processing event: ' + evt.event + '(' + evt.eventid + ')');
   var actions = checkEvent(evt);
   for(var i = 0; i < actions.length; i++) {
     invokeAction(evt, actions[i]);
@@ -145,7 +135,7 @@ function checkEvent(evt) {
     //TODO this needs to get depth safe, not only data but eventually also
     // on one level above (eventid and other meta)
     if(listRules[rn].event === evt.event && validConditions(evt.data, listRules[rn])) {
-      console.log(' | EN | Rule "' + rn + '" fired');
+      log.print('EN', 'Rule "' + rn + '" fired');
       actions = actions.concat(listRules[rn].actions);
     }
   }
@@ -173,7 +163,7 @@ function invokeAction(evt, action) {
   var actionargs = {},
       arrModule = action.module.split('->');
   if(arrModule.length < 2) {
-    console.error(' | EN | Invalid rule detected!');
+    log.error('EN', 'Invalid rule detected!');
     return;
   }
   var srvc = listActionModules[arrModule[0]];
@@ -183,10 +173,10 @@ function invokeAction(evt, action) {
     try {
       if(srvc[arrModule[1]]) srvc[arrModule[1]](actionargs);
     } catch(err) {
-      console.error(' | EN | ERROR during action execution: ' + err);
+      log.error('EN', 'during action execution: ' + err);
     }
   }
-  else console.log(' | EN | No api interface found for: ' + action.module);
+  else log.print('EN', 'No api interface found for: ' + action.module);
 }
 
 /**
@@ -233,16 +223,20 @@ function preprocessActionArguments(evt, act, res) {
   }
 }
 
-function loadEventModule(args) {
-  if(args && args.name) poller.send('cmd|loadevent|'+args.name);
+function loadEventModule(args, answHandler) {
+  if(args && args.name) {
+  	answHandler.answerSuccess('Loading event module ' + args.name + '...');
+  	poller.send('cmd|loadevent|'+args.name);
+  } else if(args) answHandler.answerError(args.name + ' not found');
 }
 
-function loadEventModules() {
+function loadEventModules(args, answHandler) {
+	answHandler.answerSuccess('Loading event moules...');
   poller.send('cmd|loadevents');
 }
 
 function shutDown() {
-  console.log(' | EN | Shutting down Poller and DB Link');
+  log.print('EN', 'Shutting down Poller and DB Link');
   isRunning = false;
   poller.send('cmd|shutdown');
   db.shutDown();

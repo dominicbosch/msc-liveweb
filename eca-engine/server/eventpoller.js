@@ -1,11 +1,14 @@
+// # Event Poller
+
 'use strict';
 
 if(process.argv.length < 3) {
-  console.log('ERROR: No DB port defined! Not starting poller...');
+  log.error('EP', 'No DB port defined! Not starting poller...');
 } else {
   (function() {
     var fs = require('fs'),
       path = require('path'),
+      log = require('./logging'),
       db = require('./db_interface'),
       ml = require('./module_loader'),
       listMessageActions = {},
@@ -23,10 +26,10 @@ if(process.argv.length < 3) {
     // the moduel manager and the eventpoller receives messages about new/updated active rules 
     
     db.getEventModules(function(err, obj) {
-      if(err) console.error(' | EP | ERROR retrieving Event Modules from DB!');
+      if(err) log.error('EP', 'retrieving Event Modules from DB!');
       else {
         if(!obj) {
-          console.log(' | EP | No Event Modules found in DB!');
+          log.print('EP', 'No Event Modules found in DB!');
           process.send({ event: 'ep_finished_loading' });
         } else {
           var m, semaphore = 0;
@@ -39,7 +42,7 @@ if(process.argv.length < 3) {
                 if(obj && mod.loadCredentials) mod.loadCredentials(JSON.parse(obj));
               };
             }(m));
-            console.log(' | EP | Loading Event Module: ' + el);
+            log.print('EP', 'Loading Event Module: ' + el);
             listEventModules[el] = m;
           }
         }
@@ -55,10 +58,10 @@ if(process.argv.length < 3) {
           if(module) module = module[arrModule[i]];
         }
         if(module) {
-          console.log(' | EP | Found active event module "' + prop + '", adding it to polling list');
+          log.print('EP', 'Found active event module "' + prop + '", adding it to polling list');
           listPoll[prop] = module;
         } else {
-          console.log(' | EP | No property "' + prop + '" found');
+          log.print('EP', 'No property "' + prop + '" found');
         }
       }
     };
@@ -72,7 +75,7 @@ if(process.argv.length < 3) {
     };
     
     listAdminCommands['shutdown'] = function(args) {
-      console.log(' | EP | Shutting down DB Link');
+      log.print('EP', 'Shutting down DB Link');
       isRunning = false;
       db.shutDown();
     };
@@ -86,7 +89,7 @@ if(process.argv.length < 3) {
     
     process.on('message', function(strProps) {
       var arrProps = strProps.split('|');
-      if(arrProps.length < 2) console.error(' | EP | ERROR: too few parameter in message!');
+      if(arrProps.length < 2) log.error('EP', 'too few parameter in message!');
       else {
         var func = listMessageActions[arrProps[0]];
         if(func) func(arrProps);
@@ -99,8 +102,7 @@ if(process.argv.length < 3) {
     }
     
     function checkRemotes() {
-      // console.log('poller polls...');
-      var txt = ' | EP | Polled active event modules: ';
+      var txt = 'Polled active event modules: ';
       for(var prop in listPoll) {
         txt += prop + ', ';
         listPoll[prop](
@@ -121,7 +123,7 @@ if(process.argv.length < 3) {
           })(prop)
         );
       }
-      console.log(txt);
+      log.print('EP', txt);
     }
     
     function pollLoop() {
@@ -130,8 +132,7 @@ if(process.argv.length < 3) {
         setTimeout(pollLoop, 10000);
       }
     }
-  
-    
+
     pollLoop();
   })();
 }

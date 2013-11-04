@@ -34,7 +34,7 @@ function loadCredentials(cred) {
 function call(args) {
   if(!args || !args.service || !args.method) {
     console.error('ERROR in ProBinder EM call: Too few arguments!');
-    return;
+    return null;
   }
 	if(credentials){
     needle.post(urlService + args.service + '/' + args.method,

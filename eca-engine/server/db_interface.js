@@ -13,6 +13,7 @@
 'use strict';
 var redis = require('redis'),
     crypto = require('crypto'),
+    log = require('./logging'),
     crypto_key, db;
 
 
@@ -22,13 +23,13 @@ var redis = require('redis'),
 // @param {int} db_port the port where the DB listens to requests
 exports.init = function(db_port, key, cbDone){
   if(!db_port || !key) {
-    console.error(' | DB | ERROR: No DB port or cipher key defined!');
+    log.error('DB', 'No DB port or cipher key defined!');
     return null;
   }
   crypto_key = key;
   db = redis.createClient(db_port);
   db.on("error", function (err) {
-    console.error(" | DB | Received error message from DB: " + err);
+    log.error('DB', ' Message from DB: ' + err);
   });
   if(cbDone) cbDone();
 };
@@ -40,9 +41,11 @@ function encrypt(plainText) {
   if(!plainText) return null;
   try {
     var enciph = crypto.createCipher('aes-256-cbc', crypto_key);
-    return enciph.update(plainText, 'utf8', 'base64') + enciph.final('base64');
+    var et = enciph.update(plainText, 'utf8', 'base64') + enciph.final('base64');
+    log.print('DB', 'Encrypted credentials into: ' + et);
+    return et;
   } catch (err) {
-    console.error(' | DB | ERROR in encrypting: ' + err);
+    log.error('DB', 'in encrypting: ' + err);
     return null;
   }
 }
@@ -56,7 +59,7 @@ function decrypt(crypticText) {
     var deciph = crypto.createDecipher('aes-256-cbc', crypto_key);
     return deciph.update(crypticText, 'base64', 'utf8') + deciph.final('utf8');
   } catch (err) {
-    console.error(' | DB | ERROR in decrypting: ' + err);
+    log.error('DB', 'in decrypting: ' + err);
     return null;
   }
 }
@@ -68,8 +71,8 @@ function decrypt(crypticText) {
  */
 function replyHandler(action) {
   return function(err, reply) {
-    if(err) console.error(' | DB | ERROR during "' + action + '": ' + err);
-    else console.log(' | DB | ' + action + ': ' + reply);
+    if(err) log.error('DB', ' during "' + action + '": ' + err);
+    else log.print('DB', action + ': ' + reply);
   };
 }
 
@@ -86,7 +89,7 @@ function replyHandler(action) {
  */
 function getSetRecords(set, funcSingle, callback) {
   db.smembers(set, function(err, reply) {
-    if(err) console.error(' | DB | ERROR fetching ' + set + ': ' + err);
+    if(err) log.error('DB', 'fetching ' + set + ': ' + err);
     else {
       if(reply.length === 0) {
         callback(null, null);
@@ -100,7 +103,7 @@ function getSetRecords(set, funcSingle, callback) {
         for(var i = 0; i < reply.length; i++){
           funcSingle(reply[i], function(prop) {
             return function(err, reply) {
-              if(err) console.error(' | DB | Error fetching single element: ' + prop);
+              if(err) log.error('DB', ' fetching single element: ' + prop);
               else {
                 objReplies[prop] = reply;
                 if(--semaphore === 0) callback(null, objReplies);
@@ -202,7 +205,7 @@ exports.getEventModule = function(id, callback) {
  * @param {function} callback the callback that receives the arguments (err, obj)
  */
 exports.getEventModules = function(callback) {
-  getSetRecords('event_modules', getEventModule, callback);
+  getSetRecords('event_modules', exports.getEventModule, callback);
 };
 
 /**

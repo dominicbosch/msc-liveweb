@@ -50,7 +50,7 @@ function verifyCredentials(username, password) {
 function call(args) {
   if(!args || !args.service || !args.method) {
     console.error('ERROR in ProBinder AM call: Too few arguments!');
-    return;
+    return null;
   }
 	if(credentials){
     needle.post(urlService + args.service + '/' + args.method,
@@ -98,7 +98,7 @@ function getUnreadContents(args) {
 function getContent(args){
   if(!args || !args.serviceid || !args.contentid) {
     console.error('ERROR in ProBinder AM getContent: Too few arguments!');
-    return;
+    return null;
   }
   call({
     service: '2',
@@ -137,7 +137,7 @@ function newContent(args){
 function makeFileEntry(args){
   if(!args || !args.service || !args.id) {
     console.error('ERROR in ProBinder AM makeFileEntry: Too few arguments!');
-    return;
+    return null;
   }
   getContent({
     serviceid: args.service,

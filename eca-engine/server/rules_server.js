@@ -26,6 +26,7 @@ var http_listener = require('./http_listener'),
   db = require('./db_interface'),
   engine = require('./engine'),
   mm = require('./module_manager'),
+  log = require('./logging'),
   fs = require('fs'),
   path = require('path'),
   objCmds = {
@@ -38,35 +39,42 @@ var http_listener = require('./http_listener'),
     'restart': null   //TODO implement
   };
   
-function handleAdminCommands(args) {
+function handleAdminCommands(args, answHandler) {
   if(args && args.cmd) {
     var func = objCmds[args.cmd];
-    if(func) func(args);
-  } else console.log(' | RS | No command in request');
+    if(func) func(args, answHandler);
+  } else log.print('RS', 'No command in request');
+  setTimeout(function(ah) {
+  	answHandler = ah;
+  	return function() {
+  		if(!answHandler.isAnswered()) answHandler.answerError('Not handeled...');
+  	};
+  }, 2000);
 }
 
-function shutDown() {
-  console.log(' | RS | Received shut down command');
+function shutDown(args, answHandler) {
+	answHandler.answerSuccess('Goodbye!');
+  log.print('RS', 'Received shut down command!');
   engine.shutDown();
   http_listener.shutDown();
 }
 
 fs.readFile(path.resolve(__dirname, 'config', 'config.json'), 'utf8', function (err, data) {
   if (err) {
-    console.error(' | RS | ERROR: Loading config file');
+    log.error('RS', 'Loading config file');
     return;
   }
   var config = JSON.parse(data);
   if(!config.http_port || !config.db_port || !config.crypto_key) {
-    console.error(' | RS | ERROR: you forgot to define either http_port, db_port, crypto_key, or even all of them!');
+    log.error('RS', 'you forgot to define either http_port, db_port, crypto_key, or even all of them!');
   } else {
-    console.log(' | RS | Initialzing DB');
+    log.print('RS', 'Initialzing DB');
     db.init(config.db_port, config.crypto_key, function() {
       engine.init(db, config.db_port, config.crypto_key);
     });
-    console.log(' | RS | Initialzing http listener');
+    log.print('RS', 'Initialzing http listener');
     http_listener.init(config.http_port, handleAdminCommands, engine.pushEvent);
-    console.log(' | RS | Initialzing module manager');
+    log.print('RS', 'Initialzing module manager');
     mm.init(db, engine.loadActionModule, engine.loadRule);
   }
 });
