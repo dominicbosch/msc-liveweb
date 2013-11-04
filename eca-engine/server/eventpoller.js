@@ -106,7 +106,7 @@ function checkRemotes() {
   // console.log('poller polls...');
   var i = 0, txt = ' | EP | ' + new Date().toISOString() + ' Polled active event modules: ';
   for(var prop in listPoll) {
-    txt += '(' + i + ') ' + prop + ', ';
+    txt += '(' + i++ + ') ' + prop + ', ';
     listPoll[prop](
     /*
      * what a hack to get prop local :-P
