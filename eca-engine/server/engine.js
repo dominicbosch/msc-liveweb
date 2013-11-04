@@ -235,7 +235,7 @@ function loadEventModule(args, resp, aS, aE) {
   if(args && args.name) {
   	aS(resp, 'Loading event module ' + args.name);
   	poller.send('cmd|loadevent|'+args.name);
-  } if(args) aE(resp, args.name + ' not found');
+  } else if(args) aE(resp, args.name + ' not found');
 }
 
 function loadEventModules(args, resp, aS, aE) {

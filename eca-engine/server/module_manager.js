@@ -23,7 +23,7 @@ function loadRulesFile(args, resp, answSuccess, answError) {
       var arr = JSON.parse(data), txt = '';
       console.log(' | ML | Loading ' + arr.length + ' rules:');
       for(var i = 0; i < arr.length; i++) {
-      	txt += arr[i] + ', ';
+      	txt += arr[i].id + ', ';
         db.storeRule(arr[i].id, JSON.stringify(arr[i]));
         funcLoadRule(arr[i]);
       }
@@ -40,7 +40,7 @@ function loadActionCallback(name, data, mod, auth) {
 
 function loadActionModule(args, resp, answSuccess, answError) {
   if(args && args.name) {
-		answSuccess(resp, 'Loading action module ' + args.name + '...');
+		// answSuccess(resp, 'Loading action module ' + args.name + '...');
     ml.loadModule('action_modules', args.name, loadActionCallback);
   }
 }
