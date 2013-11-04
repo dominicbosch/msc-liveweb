@@ -10,7 +10,7 @@ function init(db_link, fLoadAction, fLoadRule) {
   funcLoadRule = fLoadRule;
 }
 
-function loadRulesFile(args) {
+function loadRulesFile(args, answSuccess, answError) {
   if(!args) args = {};
   if(!args.name) args.name = 'rules';
   if(!funcLoadRule) console.error(' | ML | ERROR: no rule loader function available');
@@ -20,12 +20,14 @@ function loadRulesFile(args) {
         console.error(' | ML | ERROR: Loading rules file: ' + args.name + '.json');
         return;
       }
-      var arr = JSON.parse(data);
+      var arr = JSON.parse(data), txt = '';
       console.log(' | ML | Loading ' + arr.length + ' rules:');
       for(var i = 0; i < arr.length; i++) {
+      	txt += arr[i] + ', ';
         db.storeRule(arr[i].id, JSON.stringify(arr[i]));
         funcLoadRule(arr[i]);
       }
+      answSuccess('Yep, loaded rules: ' + txt);
     });
   }
 }
@@ -36,13 +38,15 @@ function loadActionCallback(name, data, mod, auth) {
   if(auth) db.storeActionModuleAuth(name, auth);
 }
 
-function loadActionModule(args) {
+function loadActionModule(args, answSuccess, answError) {
   if(args && args.name) {
+		answSuccess('Loading action module ' + args.name + '...');
     ml.loadModule('action_modules', args.name, loadActionCallback);
   }
 }
 
-function loadActionModules() {
+function loadActionModules(args, answSuccess, answError) {
+	answSuccess('Loading action modules...');
   ml.loadModules('action_modules', loadActionCallback);
 }
 
