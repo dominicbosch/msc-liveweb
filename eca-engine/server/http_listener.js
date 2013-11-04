@@ -36,11 +36,12 @@ function answerError(resp, msg) {
   resp.end();
 }
 
+//FIXME this answer handling is a very ugly hack, improve!
 function onAdminCommand(request, response) {
   var q = request.query;
   console.log(' | HL | Received admin request: ' + request.originalUrl);
   if(q.cmd) {
-    adminHandler(q, answerSuccess, answerError);
+    adminHandler(q, response, answerSuccess, answerError);
     // answerSuccess(response, 'Thank you, we try our best!');
   } else answerError(response, 'I\'m not sure about what you want from me...');
 }

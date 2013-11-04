@@ -16,15 +16,15 @@ var http_listener = require('./http_listener'),
     'restart': null   //TODO implement
   };
   
-function handleAdminCommands(args, answSuccess, answError) {
+function handleAdminCommands(args, resp, answSuccess, answError) {
   if(args && args.cmd) {
     var func = objCmds[args.cmd];
-    if(func) func(args, answSuccess, answError);
+    if(func) func(args, resp, answSuccess, answError);
   } else console.log(' | RS | No command in request');
 }
 
-function shutDown(args, answSuccess, answError) {
-	answSuccess('Goodbye!');
+function shutDown(args, resp, answSuccess, answError) {
+	answSuccess(resp, 'Goodbye!');
   console.log(' | RS | Received shut down command');
   engine.shutDown();
   http_listener.shutDown();

@@ -231,15 +231,15 @@ function preprocessActionArguments(evt, act, res) {
   }
 }
 
-function loadEventModule(args, aS, aE) {
+function loadEventModule(args, resp, aS, aE) {
   if(args && args.name) {
-  	aS('Loading event module ' + args.name);
+  	aS(resp, 'Loading event module ' + args.name);
   	poller.send('cmd|loadevent|'+args.name);
-  } if(args) aE(args.name + ' not found');
+  } if(args) aE(resp, args.name + ' not found');
 }
 
-function loadEventModules(args, aS, aE) {
-	aS('Loading event moules...');
+function loadEventModules(args, resp, aS, aE) {
+	aS(resp, 'Loading event moules...');
   poller.send('cmd|loadevents');
 }
 
