@@ -1,22 +1,23 @@
 'use strict';
 
 var cp = require('child_process'), ml = require('./module_loader'),
+    log = requier('./logging'),
     poller, db, isRunning = true,
     qEvents = new (require('./queue')).Queue(); // export queue into redis
 
 var regex = /\$X\.[\w\.\[\]]*/g, // find properties of $X
-// var regex = /\$X\.([0-9A-z\.\[\]])*[A-z]/g, // find properties of $X
   listRules = {},
   listActionModules = {}, 
   actionsLoaded = false, eventsLoaded = false;
-
-/**
+/*
  * Initialize the rules engine which initializes the module loader.
+ * @param {Object} db_link the link to the db, see [db\_interface](db_interface.html)
+ * @param {String} db_port the db port
+ * @param {String} crypto_key the key to be used for encryption on the db, max legnth 256
  */
 function init(db_link, db_port, crypto_key) {
   db = db_link;
   loadActions();
-  console.log('starting event poller');
   poller = cp.fork('./eventpoller', [db_port, crypto_key]);
   poller.on('message', function(evt) {
     if(evt.event === 'ep_finished_loading') {

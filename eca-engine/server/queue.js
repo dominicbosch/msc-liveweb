@@ -1,17 +1,17 @@
-/*
-Queue.js
+// *(will be replaced by a Redis DB queue)*
 
-A function to represent a queue
+// Queue.js
+// ========
+// 
+// *A function to represent a queue*
 
-Created by Stephen Morley - http://code.stephenmorley.org/ - and released under
-the terms of the CC0 1.0 Universal legal code:
+// *Created by Stephen Morley - http://code.stephenmorley.org/ - and released under
+// the terms of the CC0 1.0 Universal legal code:*
 
-http://creativecommons.org/publicdomain/zero/1.0/legalcode
-*/
+// *http://creativecommons.org/publicdomain/zero/1.0/legalcode*
 
-/* Creates a new queue. A queue is a first-in-first-out (FIFO) data structure -
- * items are added to the end of the queue and removed from the front.
- */
+// *items are added to the end of the queue and removed from the front.*
+
 exports.Queue = function(){
   // initialise the queue and offset
   var queue  = [];

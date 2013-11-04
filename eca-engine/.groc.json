@@ -1,0 +1,10 @@
+{
+  "glob": [
+    "README.md",
+    "server/*.js",
+    "server/mod_actions/**/*.js",
+    "server/mod_events/**/*.js",
+    "server/rules/*.json"
+    ]
+}
+

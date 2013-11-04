@@ -1,15 +1,47 @@
+/*
+# Module Manager
+> The module manager takes care of the module and rules loading in the initialization
+> phase and on user request.
+
+> Event and Action modules are loaded as strings and stored in the database,
+> then compiled into node modules and  and rules
+ */
 var fs = require('fs'),
   path = require('path'),
   ml = require('./module_loader'),
-  db = null,
-  funcLoadAction, funcLoadRule;
+  db = null, funcLoadAction, funcLoadRule;
 
 function init(db_link, fLoadAction, fLoadRule) {
   db = db_link;
   funcLoadAction = fLoadAction;
   funcLoadRule = fLoadRule;
 }
+/*
+# A First Level Header
 
+
+A Second Level Header
+---------------------
+
+Now is the time for all good men to come to
+the aid of their country. This is just a
+regular paragraph.
+
+The quick brown fox jumped over the lazy
+dog's back.
+
+### Header 3
+
+> This is a blockquote.
+> 
+> This is the second paragraph in the blockquote.
+>
+> ## This is an H2 in a blockquote
+
+This is the function documentation
+@param {Object} [args] the optional arguments
+@param {String} [args.name] the optional name in the arguments
+ */
 function loadRulesFile(args) {
   if(!args) args = {};
   if(!args.name) args.name = 'rules';
@@ -30,6 +62,13 @@ function loadRulesFile(args) {
   }
 }
 
+/**
+ * 
+ * @param {Object} name
+ * @param {Object} data
+ * @param {Object} mod
+ * @param {String} [auth] The string representation of the auth json
+ */
 function loadActionCallback(name, data, mod, auth) {
   db.storeActionModule(name, data); // store module in db
   funcLoadAction(name, mod); // hand compiled module back
@@ -38,12 +77,12 @@ function loadActionCallback(name, data, mod, auth) {
 
 function loadActionModule(args) {
   if(args && args.name) {
-    ml.loadModule('action_modules', args.name, loadActionCallback);
+    ml.loadModule('mod_actions', args.name, loadActionCallback);
   }
 }
 
 function loadActionModules() {
-  ml.loadModules('action_modules', loadActionCallback);
+  ml.loadModules('mod_actions', loadActionCallback);
 }
 
 exports.init = init;
