@@ -16,16 +16,22 @@ var http_listener = require('./http_listener'),
     'restart': null   //TODO implement
   };
   
-function handleAdminCommands(args, resp, answSuccess, answError) {
+function handleAdminCommands(args, answHandler) {
   if(args && args.cmd) {
     var func = objCmds[args.cmd];
-    if(func) func(args, resp, answSuccess, answError);
+    if(func) func(args, answHandler);
   } else console.log(' | RS | No command in request');
+  setTimeout(function(ah) {
+  	answHandler = ah;
+  	return function() {
+  		if(!answHandler.isAnswered()) answHandler.answerError('Not handeled...');
+  	}
+  }, 2000);
 }
 
-function shutDown(args, resp, answSuccess, answError) {
-	answSuccess(resp, 'Goodbye!');
-  console.log(' | RS | Received shut down command');
+function shutDown(args, answHandler) {
+	answHandler.answerSuccess('Goodbye!');
+  console.log(' | RS | Received shut down command!');
   engine.shutDown();
   http_listener.shutDown();
 }

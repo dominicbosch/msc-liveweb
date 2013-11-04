@@ -17,6 +17,28 @@ function init(http_port, funcAdminHandler, funcEvtHandler) {
   console.log(" | HL | Started listening for http requests on port " + http_port);
 }
 
+function answerHandler(r) {
+	var response = r, hasBeenAnswered = false;
+	function postAnswer(msg) {
+		if(!hasBeenAnswered) {
+		  response.write(msg);
+		  response.end();
+		  hasBeenAnswered = true;
+		}
+	}
+	return {
+		answerSuccess: function(msg) {
+		  if(!hasBeenAnswered) response.writeHead(200, { "Content-Type": "text/plain" });
+		  postAnswer(msg);
+		},
+		answerError: function(msg) {
+  		if(!hasBeenAnswered) response.writeHead(400, { "Content-Type": "text/plain" });
+		  postAnswer(msg);
+		},
+		isAnswered: function() { return hasBeenAnswered; }
+	};
+};
+
 /**
  * Handles correct event posts, replies thank you.
  */
@@ -41,7 +63,7 @@ function onAdminCommand(request, response) {
   var q = request.query;
   console.log(' | HL | Received admin request: ' + request.originalUrl);
   if(q.cmd) {
-    adminHandler(q, response, answerSuccess, answerError);
+    adminHandler(q, answerHandler(response));
     // answerSuccess(response, 'Thank you, we try our best!');
   } else answerError(response, 'I\'m not sure about what you want from me...');
 }

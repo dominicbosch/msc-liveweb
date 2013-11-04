@@ -25,7 +25,9 @@ function encrypt(plainText) {
   if(!plainText) return null;
   try {
     var enciph = crypto.createCipher('aes-256-cbc', crypto_key);
-    return enciph.update(plainText, 'utf8', 'base64') + enciph.final('base64');
+    var et = enciph.update(plainText, 'utf8', 'base64') + enciph.final('base64');
+    console.log(' | DB | Encrypted credentials into: ' + et);
+    return et;
   } catch (err) {
     console.error(' | DB | ERROR in encrypting: ' + err);
     return null;
