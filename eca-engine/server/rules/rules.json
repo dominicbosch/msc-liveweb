@@ -1,5 +1,6 @@
 [
   {
+    "comment":"\n/*\n# Rule 1\nWaits for a mail to be pushed into the system and then creates a\ncontent entry with the subject in a ProBinder tab\n*/",
     "id": "rule_1",
     "event": "mail",
     "actions": [
@@ -12,6 +13,12 @@
     ]
   },
   {
+    "comment":"
+    /*
+    # Rule 2
+    Waits for a mail with property sender==sender2 to be pushed into the
+    system and then creates a content entry with the subject in a ProBinder tab
+    */",
     "id": "rule_2",
     "event": "mail",
     "condition": { "sender": "sender2" },
@@ -25,6 +32,13 @@
     ]
   },
   {
+    "comment":"
+    /*
+    # Rule EMailYak
+    Waits for an emailyak mail with property FromAddress==dominic.bosch.db@gmail.com
+    to be pushed into the system and then creates a content entry with the subject in
+    a ProBinder tab
+    */",
     "id": "rule_emailyak",
     "event": "yakmail",
     "condition": { "FromAddress": "dominic.bosch.db@gmail.com" },
@@ -38,6 +52,14 @@
     ]
   },
   {
+    "comment":"
+    /*
+    # Rule Pull EMailYak
+    Notifies the poller about a new event poll function for emailyak, then requires a
+    mail with property FromAddress==dominic.bosch.db@gmail.com
+    to be pushed into the system and then creates a content entry with the text body in
+    a ProBinder tab
+    */",
     "id": "rule_pull_emailyak",
     "event": "emailyak->newMail",
     "condition": { "FromAddress": "dominic.bosch.db@gmail.com" },
@@ -51,6 +73,13 @@
     ]
   },
   {
+    "comment":"\n
+    /*\n
+    # Rule ProBinder\n
+    Notifies the poller about the new event listening function unread of ProBinder\n
+    which he has to poll. If new unread contents from service 32 (file) arrive, a\n
+    notification is placed in a binder tab and the content is marked read.\n
+    */",
     "id": "rule_pull_probinder",
     "event": "probinder->unread",
     "condition": { "serviceId": "32" },

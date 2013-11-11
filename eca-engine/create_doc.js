@@ -1,5 +1,8 @@
 var groc = require('groc');
-
+/*
+ * # groc Documentation
+ * Create the documentation to be displayed through the webserver.
+ */
 groc.CLI([
   "README.md",
   "server/*.js",

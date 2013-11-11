@@ -44,6 +44,7 @@ This is the function documentation
 @param {String} [args.name] the optional name in the arguments
  */
 function loadRulesFile(args, answHandler) {
+  //FIXME if a corrupt rule file is read the system crashes, prevent this also for event and action modules
   if(!args) args = {};
   if(!args.name) args.name = 'rules';
   if(!funcLoadRule) log.error('ML', 'no rule loader function available');

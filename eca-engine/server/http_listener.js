@@ -1,6 +1,8 @@
+// # HTTP Listener
+// Isso
 'use strict';
-
-var port = require('express')(),
+var express = require('express'),
+    port = express(),
     log = require('./logging'),
     qs = require('querystring'),
     adminHandler, eventHandler, server;
@@ -12,6 +14,9 @@ function init(http_port, funcAdminHandler, funcEvtHandler) {
   }
   adminHandler = funcAdminHandler;
   eventHandler = funcEvtHandler;
+  // port.get('/doc*', onDocRequest);
+  port.use('/doc', express.static(__dirname + '/../doc'));
+  port.use('/doc', express.static(__dirname + '/../doc-na'));
   port.get('/admin', onAdminCommand);
   port.post('/pushEvents', onPushEvent);
   server = port.listen(http_port); // inbound event channel
@@ -39,6 +44,13 @@ function answerHandler(r) {
 		isAnswered: function() { return hasBeenAnswered; }
 	};
 };
+
+// function onDocRequest(request, response) {
+  // var pth = request.url;
+  // pth = pth.substring(4);
+  // if(pth.substring(pth.length-1) === '/') pth += 'index.html';
+  // console.log(pth);
+// }
 
 /**
  * Handles correct event posts, replies thank you.
