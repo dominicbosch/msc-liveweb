@@ -1,7 +1,8 @@
 *~
-.project
-.pydevproject
-.settings
+*.log
 *credentials.json
 *node_modules
 doc
+.project
+.pydevproject
+.settings
