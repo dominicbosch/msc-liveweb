@@ -1,10 +1,7 @@
-
-\documentclass{article}
+\documentclass{beamer}
+\usepackage{beamerthemesplit}
+\usepackage{lmodern}
 \usepackage{fancyvrb}
-\usepackage{color}
-\usepackage[ascii]{inputenc}
-
-
 
 \makeatletter
 \def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
@@ -100,21 +97,186 @@
 \makeatother
 
 
+
+\title{Node.js}   
+\author{Dominic Bosch} 
+\date{\today} 
+
 \begin{document}
 
-\section*{}
+\frame{\titlepage} 
+\frame{\tableofcontents} 
 
-\begin{Verbatim}[commandchars=\\\{\}]
-\PY{p}{\PYZob{}}
-	
-  	\PY{n+nt}{\PYZdq{}event\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}emailyak\PYZhy{}\PYZgt{}newMail\PYZdq{}}\PY{p}{,}
-	\PY{n+nt}{\PYZdq{}ToAddressList\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}test@mscliveweb.simpleyak.com\PYZdq{}}\PY{p}{,}
-	\PY{n+nt}{\PYZdq{}FromAddress\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}dominic.bosch.db@gmail.com\PYZdq{}}\PY{p}{,}
-	\PY{n+nt}{\PYZdq{}TextBody\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}Lengthy body [...]\PYZdq{}}\PY{p}{,}
-	\PY{n+nt}{\PYZdq{}Subject\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}Fwd: test subject\PYZdq{}}\PY{p}{,}
-	\PY{err}{[}\PY{err}{.}\PY{err}{.}\PY{err}{.}\PY{err}{]}
 
-\PY{p}{\PYZcb{}}
+\section{What is it}
+
+\subsection{General Attributes}
+\frame{
+\begin{itemize}
+	\item<1-> Software Platform
+	\item<2-> Scalable Networking applications
+	\item<3-> Asynchronous events, Non-blocking I/O
+	\item<4-> Applications written in JavaScript
+	\item<5-> Many built-in libraries
+	\item<6-> Custom libraries from Package Manager NPM
+\end{itemize}
+}
+
+\section{The callback paradigm}
+
+\begin{frame}[fragile,t]
+\vspace*{\baselineskip}
+\begin{onlyenv}<1->
+\textbf{Synchronous functions:}
+\begin{Verbatim}[fontsize=\scriptsize]
+  var fs = require('fs');
+  try {
+    var data = fs.readFileSync('./cryptico.js','utf8');
+  } catch (err) {
+
+  }
 \end{Verbatim}
+\end{onlyenv}
+
+\vspace*{\baselineskip}
+
+\begin{onlyenv}<2->
+\textbf{Asynchronous functions:}
+\begin{Verbatim}[fontsize=\scriptsize]
+  var fs = require('fs');
+  var fAsyncCalled = function(err, data) {
+    if(err){
+      console.log('Error during file retrieval!');
+      return;
+    }
+  };
+  fs.readFile('./cryptico.js','utf8', fAsyncCalled);
+\end{Verbatim}
+\end{onlyenv}
+\end{frame}
+
+\subsection{Program and Forget}
+
+\subsection{setTimeout Example}
+\frame[containsverbatim]{
+\textbf{Why is this not going to work?}
+	\vspace*{\baselineskip}
+\begin{Verbatim}[fontsize=\scriptsize]
+  for( var i = 0; i < 100; i++ ) {
+    setTimeout( function() {
+      console.log(i);
+    }, 1000);
+  }
+\end{Verbatim}
+}
+
+\frame[containsverbatim]{
+\textbf{Solution:}	
+	\begin{Verbatim}[fontsize=\scriptsize]
+  var fDelayed = function(id) {
+    return function() {
+      console.log(id);
+    };
+  };
+  for( var i = 0; i < 100; i++ ) {
+    setTimeout( fDelayed(i), 1000);
+  }
+	\end{Verbatim}
+  Registers the value of \path{i} by value and not by reference in the anonyomous function which is returned on the first function call of \path{fDelayed(i)}.
+}
+
+\frame[containsverbatim]{
+\textbf{(Almost) Real-life example:}	
+	% \begin{Verbatim}[fontsize=\scriptsize]
+  % function fetchUserObjectsAsync( arrNames, cbAnswer ){
+  %   var semaphore = arrNames.length,
+  %   objUsers = {},
+  %   fGetUserAsync = function( name, cbLocal ){
+  %   	db.getUser(name, cbLocal);
+  %   },
+  %   fJoin = function( uName ) {
+  %     return function( err, obj ) {
+  %       --semaphore
+  %       if( err || !obj ) return;
+  %       objUsers[ uName ] = obj;
+  %       if( semaphore === 0 ){
+  %         cbAnswer( null, objReplies );
+  %       }
+  %     }
+  %   };
+    
+  %   for( var name in arrNames ){
+  %     fGetUserAsync( user, fJoin( name ));
+  %   }
+  % }
+
+\begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+  \PY{k+kd}{function} \PY{n+nx}{fetchUserObjectsAsync}\PY{p}{(} \PY{n+nx}{arrNames}\PY{p}{,} \PY{n+nx}{cbAnswer} \PY{p}{)}\PY{p}{\PYZob{}}
+    \PY{k+kd}{var} \PY{n+nx}{semaphore} \PY{o}{=} \PY{n+nx}{arrNames}\PY{p}{.}\PY{n+nx}{length}\PY{p}{,}
+    \PY{n+nx}{objUsers} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}\PY{p}{,}
+    \PY{n+nx}{fGetUserAsync} \PY{o}{=} \PY{k+kd}{function}\PY{p}{(} \PY{n+nx}{name}\PY{p}{,} \PY{n+nx}{cbLocal} \PY{p}{)}\PY{p}{\PYZob{}}
+      \PY{n+nx}{db}\PY{p}{.}\PY{n+nx}{getUser}\PY{p}{(}\PY{n+nx}{name}\PY{p}{,} \PY{n+nx}{cbLocal}\PY{p}{)}\PY{p}{;}
+    \PY{p}{\PYZcb{}}\PY{p}{,}
+    \PY{n+nx}{fJoin} \PY{o}{=} \PY{k+kd}{function}\PY{p}{(} \PY{n+nx}{uName} \PY{p}{)} \PY{p}{\PYZob{}}
+      \PY{k}{return} \PY{k+kd}{function}\PY{p}{(} \PY{n+nx}{err}\PY{p}{,} \PY{n+nx}{obj} \PY{p}{)} \PY{p}{\PYZob{}}
+        \PY{o}{\PYZhy{}\PYZhy{}}\PY{n+nx}{semaphore}
+        \PY{k}{if}\PY{p}{(} \PY{n+nx}{err} \PY{o}{||} \PY{o}{!}\PY{n+nx}{obj} \PY{p}{)} \PY{k}{return}\PY{p}{;}
+        \PY{n+nx}{objUsers}\PY{p}{[} \PY{n+nx}{uName} \PY{p}{]} \PY{o}{=} \PY{n+nx}{obj}\PY{p}{;}
+        \PY{k}{if}\PY{p}{(} \PY{n+nx}{semaphore} \PY{o}{===} \PY{l+m+mi}{0} \PY{p}{)}\PY{p}{\PYZob{}}
+          \PY{n+nx}{cbAnswer}\PY{p}{(} \PY{k+kc}{null}\PY{p}{,} \PY{n+nx}{objReplies} \PY{p}{)}\PY{p}{;}
+        \PY{p}{\PYZcb{}}
+      \PY{p}{\PYZcb{}}
+    \PY{p}{\PYZcb{}}\PY{p}{;}
+    
+    \PY{k}{for}\PY{p}{(} \PY{k+kd}{var} \PY{n+nx}{name} \PY{k}{in} \PY{n+nx}{arrNames} \PY{p}{)}\PY{p}{\PYZob{}}
+      \PY{n+nx}{fGetUserAsync}\PY{p}{(} \PY{n+nx}{user}\PY{p}{,} \PY{n+nx}{fJoin}\PY{p}{(} \PY{n+nx}{name} \PY{p}{)}\PY{p}{)}\PY{p}{;}
+    \PY{p}{\PYZcb{}}
+  \PY{p}{\PYZcb{}}
+	\end{Verbatim}
+}
+\section{Everything is a Module in Node.js}
+\frame{	
+\begin{itemize}
+	\item<1-> Load Modules via require:
+	\begin{itemize}
+	\item<2-> Built-in: \path{require('fs');}
+	\item<3-> Project: \path{require('./my-module');}
+	\end{itemize}
+	\item<4-> Modules are cached!
+\end{itemize}
+}
+
+\subsection{Built-in Modules}
+\frame{
+http://nodejs.org/api/
+}
+
+\subsection{Node Packaged Modules (NPM)}
+\frame{
+\begin{itemize}
+	\item<1-> Url: https://www.npmjs.org/
+	\item<2-> Everybody can publish to NPM!
+	\item<3-> Global/Local/Project installation
+\end{itemize}
+}
+\frame{
+My Favorite: Project Installation\\
+package.json\\
+npm install\\
+track version\\
+Example of how peope still could break your roject: groc/jade\\
+}
+% \frame{
+% \begin{figure}
+% \includegraphics[scale=1]{node_modules2} 
+% \caption{show an example picture}
+% \end{figure}
+% }
+
+\subsection{Custom JS Modules}
+\frame{
+place index.js into node-modules - cryptico.js
+
+}
 
 \end{document}

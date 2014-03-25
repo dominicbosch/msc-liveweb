@@ -9,6 +9,8 @@
 \usepackage[ascii]{inputenc}
 \usepackage{titling}
 \usepackage{titlesec}
+\usepackage[toc,page]{appendix}
+%\usepackage[titletoc]{appendix}
 \newcommand{\subtitle}[1]{%
   \posttitle{%
     \par\end{center}
@@ -20,7 +22,6 @@
 \titlespacing\subsection{0pt}{10pt plus 3pt minus 1pt}{0pt plus 1pt minus 1pt}
 \titlespacing\subsubsection{0pt}{8pt plus 2pt minus 0pt}{0pt plus 0pt minus 0pt}
 
-%\usepackage{appendix}
 
 \makeatletter
 \def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
@@ -128,7 +129,7 @@
 %\date{}
 %\author{Dominic Bosch \\ Departement Mathematics and Computer Science \\ University of Basel}
 \author{\fontsize{11}{9}\selectfont
-Master Thesis Report\\
+Master Thesis\\
 \vspace*{10 mm}\\
 Dominic Bosch\\
 Departement Mathematics and Computer Science\\
@@ -142,8 +143,91 @@ University of Basel
 t.b.d.
 \end{abstract}
 
+
+\newpage
+\tableofcontents
+\newpage
+
+
 \section{Introduction}
 t.b.d.
+
+\subsection{Related Work}
+t.b.d.
+Grunt to build project
+jsprime to make code safe
+stylus for css
+
+\section{Conceptual Model for Reactive Web Systems}
+t.b.d.
+why are we now suddenly responsive? we loosened up certain things
+
+
+\section{The "XYZ" Prototype System}
+
+\subsection{Architecture}
+
+
+
+
+\textbf{Examples for XYZ:}
+\begin{itemize}
+  \item \textbf{DECADE (Demonstrative ECA Dedicated Engine)}
+  \item \textbf{RECAST (Reactive ECA Service Trigger)}
+  \item \textbf{PECAN (Productive ECA eNgine)}
+  \item \textbf{ICECAP (Inet-Service Calls through ECA Paradigm)}
+\end{itemize}
+
+\textbf{R:}
+\begin{itemize}
+  \item Reactive
+  \item 
+  \item 
+  \item 
+\end{itemize}
+
+\textbf{S:}
+\begin{itemize}
+  \item System
+  \item Services
+  \item 
+  \item 
+\end{itemize}
+
+\textbf{T:}
+\begin{itemize}
+  \item Tenant
+  \item Tutor
+  \item Time
+  \item Trigger
+  \item Tender
+  \item Tunnel
+  \item Tinderbox
+  \item Toolbox
+  \item Toolmaker
+  \item Transporter
+  \item Transmitter
+\end{itemize}
+
+\textbf{Other names:}
+\begin{itemize}
+  \item pecan (Productive ECA eNgine)
+  \item decade (Demonstrative ECA Dedicated Engine)
+    \\dedicated, derive
+  \item decant
+  \item recall (Reactive ECA Leverage)
+  \item recap (Reactive ECA Paradigm)
+  \item recast
+  \item icecap (Inet-Service Calls through ECA Paradigm)
+  \item theca: outer sheath of the pupa of certain insects
+  \item hecate: (Greek mythology) Greek goddess of fertility who later became associated with Persephone as goddess of the underworld and protector of witches
+\end{itemize}
+
+\section{Discussion \& Results}
+Use Cases
+%http://khanlou.com/2014/03/model-view-whatever/
+
+\newpage
 
 \begin{figure*}[htb]
 %\begin{center}
@@ -154,9 +238,9 @@ t.b.d.
 %\end{center}
 \end{figure*}
 
-\section{Related Work}
+%\section{Related Work}
 
-\subsection{Rules Languages}
+%\subsection{Rules Languages}
 \cite{2009-Paschke_Boley-RCER.pdf} gave a good oveview over existing approaches in 2009.
 In this section we examine different existing rule languages with respect to a simple use case.
 We want the rule language react on the receipt of an email (event), check for a distinct email address (condition) and store it in a remote location, via a Web API (action).
@@ -171,7 +255,7 @@ The email only contains the parts we require for this use case (the sender and a
 
 
 \newpage
-\subsubsection{RDF \& XML}
+%\subsubsection{RDF \& XML}
 An early ECA Rule Language for XML repositories\cite{Papamarkos03event-condition-actionrule} was postulated in 2003 and was picked up by many researches afterwards. It was designed to react on insert and delete events within XML repositories and as an action change XML documents.
 
 \begin{Verbatim}[fontsize=\small,commandchars=\\\{\}]
@@ -185,7 +269,7 @@ An early ECA Rule Language for XML repositories\cite{Papamarkos03event-condition
 
 Now apart from implementing a rules engine, we would also need to add an XML document event manager which interpretes and pushes events into the XML file \emph{inbound\_queue.xml}. Then again this instance would interprete the ouptuts of the ECA engine, which would theoretically manifest in other XML documents, and produce meaningful actions on remote hosts. This wouldn't be an architecture which has its focus on the solution of our use case and, as a result, add complexity and create an unnecessary overhead.
 
-\subsubsection{Notation 3}
+%\subsubsection{Notation 3}
 To make the lengthy RDF definitions smaller and more readable, Notation 3\cite{wwwn3} was designed and announced in 2005. Through the implies operator(=\textgreater) an "event" can be connected to an "action", both expressed in RDF's subject, predicate, object notation, which makes the expression of ECA rules a complicated and not very intuitive task. A solution to our use case would look as follows:
 
 \begin{Verbatim}[fontsize=\small,commandchars=\\\{\}]
@@ -195,7 +279,7 @@ To make the lengthy RDF definitions smaller and more readable, Notation 3\cite{w
 
 It's obvious that this language is used to express relations between entities and thus not really suitable for our use case, since we would require another interpreter to infer the actions. But concepts and ideas of the work that was done in these consortias could eventully still find influence into our solution.
 
-\subsubsection{XChange/Xcerpt}
+%\subsubsection{XChange/Xcerpt}
 The rule language XChange\cite{2005-Patranjan-TLE.pdf} was the outcome of the REWERSE project and acted as an influence in many further researches. The language was designed to add reactive behaviour to a "static" web which is represented through XML resources. Thus we have action logics to alter such resources through insertions and deletions. Since we aim to utilize web API's for our rule language we need a more generic approach which adds flexibility in term of the API provided. But the thorough research done with the language XChange holds valuable concepts, especially in terms of temporal evet composition. This could be a rule according to our use case:
 
 \begin{Verbatim}[fontsize=\small,commandchars=\\\{\}]
@@ -236,7 +320,7 @@ But XChange is designed to access other resources in an action and thus provides
 \end{Verbatim}
 
 \newpage
-\subsubsection{JSON Rules}
+%\subsubsection{JSON Rules}
 In 2008 \emph{JSON Rules}~\cite{2008-Giurca_Pascalau-JSON_Rules.pdf} was introduced as a language to easily react on specific DOM tree compositions.
 The usage of JavaScript allowed them to provide simple functions which could be called directly by the actions, thus abstracting functionality from the language.
 This key concept found influence into our language as it allows different layers of abstractions.
@@ -273,7 +357,7 @@ Also the temporal composition to complex events is not a subject of their work a
 \PY{p}{\PYZcb{}}
 \end{Verbatim}
 
-\subsubsection{KRL}
+%\subsubsection{KRL}
 A most recent (2011) open-source development is the Kinetic Rules Engine together with the Kinetics Rule Language~\cite{bookTheLiveWeb}.
 It is built for the purpose of adding reactivity to the cloud.
 The language is based on declarative syntax, enriched with imparative elements.
@@ -319,7 +403,7 @@ But it is a tedious task to get into a whole new language and their caveats.
 
 
 \newpage
-\subsubsection{(Reaction) RuleML}
+%\subsubsection{(Reaction) RuleML}
 The basis of \emph{RuleML}~\cite{2006-Boley-RuleML.pdf} is datalog, a language in the intersection of SQL and Prolog.
 In 2012 the \emph{Reaction RuleML}~\cite{2012-Paschke_etal-ReactionRuleML.pdf} language incorporated several different types of rules into the RuleML syntax, to establish a uniform syntax and interchangability of rules.
 \emph{Reaction RuleML} is a valuable resource in terms of manifold research that has been done in the domain of rule languages, but the syntax is not user-friendly.
@@ -356,7 +440,7 @@ R2ML allows usage for RuleML together with many other dialects. Really!?
 \end{Verbatim}
 
 \newpage
-\subsubsection{Own Rules}
+%\subsubsection{Own Rules}
 
 \begin{Verbatim}[fontsize=\small,commandchars=\\\{\}]
 \PY{k}{on} \PY{n}{mail}
@@ -491,30 +575,30 @@ Would be translated into:
 \PY{p}{\PYZcb{}}
 \end{Verbatim}
 
-\section{Conclusion}
+%\section{Conclusion}
 Most of the examined rule languages are designed for the interchangability of rules between different service providers. We do not attempt to jump into this domain but we rather pick up important concepts to manifest web API's as first class citizens of our rule language. This allows the ad-hoc design and implementation of reactive rules between existing web API's without the need for their cooperation in setting up their endpoint in a special way.
 
-\section{Future Work}
+%\section{Future Work}
 t.b.d.
+
 
 \bibliography{thesisbib}
 \bibliographystyle{thesisbst}
 
 \newpage
-\appendix
-\lstset { basicstyle=\tiny }
+\renewcommand*\appendixpagename{APPENDIX}
+\renewcommand*\appendixtocname{APPENDIX}
+%\begin{appendices}
+ % \section{ECA Rules Engine Resources}
+  %  \subsection{Node.js Rules Engine Code}
+   % \subsubsection{ecaserver.js}
 
-\section*{Appendix}
-t.b.d.
-\section{ECA Rules Engine Resources}
-\subsection{Node.js Rules Engine Code}
-\subsubsection{ecaserver.js}
-
-\begin{Verbatim}[fontsize=\small,commandchars=\\\{\}]
-\PY{l+s}{\PYZsq{}}\PY{l+s}{use strict}\PY{l+s}{\PYZsq{}}\PY{p}{;}
-\PY{n}{var} \PY{n}{express} \PY{o}{=} \PY{n}{require}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{express}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
-\PY{n}{var} \PY{n}{qs} \PY{o}{=} \PY{n}{require}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{querystring}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
-\PY{n}{var} \PY{n}{engine} \PY{o}{=} \PY{n}{require}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{./ecainference}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
-\end{Verbatim}
-
+    \begin{Verbatim}[fontsize=\small,commandchars=\\\{\}]
+    \PY{l+s}{\PYZsq{}}\PY{l+s}{use strict}\PY{l+s}{\PYZsq{}}\PY{p}{;}
+    \PY{n}{var} \PY{n}{express} \PY{o}{=} \PY{n}{require}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{express}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+    \PY{n}{var} \PY{n}{qs} \PY{o}{=} \PY{n}{require}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{querystring}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+    \PY{n}{var} \PY{n}{engine} \PY{o}{=} \PY{n}{require}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{./ecainference}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+    \end{Verbatim}
+%t.b.d.
+%\end{appendices}
 \end{document}
