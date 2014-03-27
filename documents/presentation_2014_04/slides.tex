@@ -3,6 +3,8 @@
 \usepackage{lmodern}
 \usepackage{fancyvrb}
 
+\setbeamertemplate{navigation symbols}{}%remove navigation symbols
+
 \makeatletter
 \def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
     \let\PY@ul=\relax \let\PY@tc=\relax%
@@ -165,7 +167,7 @@
   for( var i = 0; i < 100; i++ ) {
     setTimeout( function() {
       console.log(i);
-    }, 1000);
+    }, 3000);
   }
 \end{Verbatim}
 }
@@ -179,7 +181,7 @@
     };
   };
   for( var i = 0; i < 100; i++ ) {
-    setTimeout( fDelayed(i), 1000);
+    setTimeout( fDelayed(i), 3000);
   }
 	\end{Verbatim}
   Registers the value of \path{i} by value and not by reference in the anonyomous function which is returned on the first function call of \path{fDelayed(i)}.
