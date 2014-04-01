@@ -1,9 +1,14 @@
-\documentclass{beamer}
+\documentclass[x11names]{beamer}
 \usepackage{beamerthemesplit}
 \usepackage{lmodern}
 \usepackage{fancyvrb}
+\usepackage{color}
+\usepackage[ascii]{inputenc}
+\usepackage{graphicx}
 
 \setbeamertemplate{navigation symbols}{}%remove navigation symbols
+\setbeamercolor{eecks} {bg=Ivory3, fg=RoyalBlue3}
+\setbeamercolor{eecks2}{bg=Ivory1, fg=RoyalBlue4}
 
 \makeatletter
 \def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
@@ -100,185 +105,387 @@
 
 
 
-\title{Node.js}   
+\title{CS212 Webtechnologien: Node.js}
 \author{Dominic Bosch} 
 \date{\today} 
 
 \begin{document}
 
-\frame{\titlepage} 
+\frame[plain]{
+\begin{center}
+\begin{figure}
+\includegraphics[width=0.5\linewidth]{nodejs-biglogo}
+\end{figure}
+\end{center}
+\titlepage} 
 \frame{\tableofcontents} 
 
-
-\section{What is it}
-
-\subsection{General Attributes}
+\section{Introduction}
 \frame{
 \begin{itemize}
 	\item<1-> Software Platform
-	\item<2-> Scalable Networking applications
-	\item<3-> Asynchronous events, Non-blocking I/O
-	\item<4-> Applications written in JavaScript
-	\item<5-> Many built-in libraries
-	\item<6-> Custom libraries from Package Manager NPM
+  \item<2-> Applications written in JavaScript
+  \item<3-> ''Server-side''
+  \item<4-> Scalable Networking
+  \item<5-> Asynchronous events, Non-blocking I/O
+	\item<6-> Built-in \& Package Manager Modules
 \end{itemize}
 }
 
-\section{The callback paradigm}
+
+
+\section{Event-Driven Design}
+
+
+\subsection{Blocking \& Non-Blocking I/O}
 
 \begin{frame}[fragile,t]
+\textbf{Blocking \& Non-Blocking I/O Examples:}
 \vspace*{\baselineskip}
-\begin{onlyenv}<1->
-\textbf{Synchronous functions:}
-\begin{Verbatim}[fontsize=\scriptsize]
-  var fs = require('fs');
-  try {
-    var data = fs.readFileSync('./cryptico.js','utf8');
-  } catch (err) {
-
-  }
+\begin{beamerboxesrounded}[lower=eecks2,upper=eecks,
+shadow=true]{Blocking I/O:}
+\vspace*{0.5\baselineskip}
+\begin{Verbatim}[fontsize=\scriptsize,commandchars=\\\{\}]
+  \PY{k+kd}{var} \PY{n+nx}{fs} \PY{o}{=} \PY{n+nx}{require}\PY{p}{(} \PY{l+s+s1}{\PYZsq{}fs\PYZsq{}} \PY{p}{)}\PY{p}{;}
+  \PY{k}{try} \PY{p}{\PYZob{}}
+    \PY{k+kd}{var} \PY{n+nx}{data} \PY{o}{=} \PY{n+nx}{fs}\PY{p}{.}\PY{n+nx}{readFileSync}\PY{p}{(} \PY{l+s+s1}{\PYZsq{}./cryptico.js\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}utf8\PYZsq{}} \PY{p}{)}\PY{p}{;}
+  \PY{p}{\PYZcb{}} \PY{k}{catch} \PY{p}{(} \PY{n+nx}{err} \PY{p}{)} \PY{p}{\PYZob{}} \PY{c+cm}{/* Error Handler */} \PY{p}{\PYZcb{}}
 \end{Verbatim}
-\end{onlyenv}
+\vspace*{0.25\baselineskip}
+\end{beamerboxesrounded}
 
-\vspace*{\baselineskip}
+\vspace*{0.5\baselineskip}
 
 \begin{onlyenv}<2->
-\textbf{Asynchronous functions:}
-\begin{Verbatim}[fontsize=\scriptsize]
-  var fs = require('fs');
-  var fAsyncCalled = function(err, data) {
-    if(err){
-      console.log('Error during file retrieval!');
-      return;
-    }
-  };
-  fs.readFile('./cryptico.js','utf8', fAsyncCalled);
+\begin{beamerboxesrounded}[lower=eecks2,upper=eecks,
+shadow=true]{Non-Blocking I/O:}
+\vspace*{0.5\baselineskip}
+\begin{Verbatim}[fontsize=\scriptsize,commandchars=\\\{\}]
+  \PY{k+kd}{var} \PY{n+nx}{fs} \PY{o}{=} \PY{n+nx}{require}\PY{p}{(} \PY{l+s+s1}{\PYZsq{}fs\PYZsq{}} \PY{p}{)}\PY{p}{;}
+  \PY{k+kd}{var} \PY{n+nx}{fAsyncCalled} \PY{o}{=} \PY{k+kd}{function}\PY{p}{(} \PY{n+nx}{err}\PY{p}{,} \PY{n+nx}{data} \PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{k}{if}\PY{p}{(} \PY{n+nx}{err} \PY{p}{)}\PY{p}{\PYZob{}} \PY{c+cm}{/* Error Handler */} \PY{p}{\PYZcb{}}
+  \PY{p}{\PYZcb{}}\PY{p}{;}
+  \PY{n+nx}{fs}\PY{p}{.}\PY{n+nx}{readFile}\PY{p}{(} \PY{l+s+s1}{\PYZsq{}./cryptico.js\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}utf8\PYZsq{}}\PY{p}{,} \PY{n+nx}{fAsyncCalled} \PY{p}{)}\PY{p}{;}
 \end{Verbatim}
+\vspace*{0.25\baselineskip}
+\end{beamerboxesrounded}
 \end{onlyenv}
 \end{frame}
 
-\subsection{Program and Forget}
 
-\subsection{setTimeout Example}
-\frame[containsverbatim]{
-\textbf{Why is this not going to work?}
-	\vspace*{\baselineskip}
-\begin{Verbatim}[fontsize=\scriptsize]
-  for( var i = 0; i < 100; i++ ) {
-    setTimeout( function() {
-      console.log(i);
-    }, 3000);
-  }
+\subsection{Asynchronous Events}
+
+\frame{
+\textbf{Asynchronous Events}
+\begin{itemize}
+  \item<1-> Allow non-blocking, ...
+  \item<2-> ... scalable application design
+  \item<3-> Time awareness is important
+  \item<4-> Global variables almost extinguished
+\end{itemize}
+}
+
+
+\begin{frame}[fragile]
+\textbf{Well known for Browser (DOM) Events:\vspace*{\baselineskip}}
+\begin{beamerboxesrounded}[lower=eecks2,upper=eecks,
+shadow=true]{Onload Event Listener (Browser)}
+\vspace*{\baselineskip}
+\begin{Verbatim}[fontsize=\scriptsize,commandchars=\\\{\}]
+\PY{c+cp}{\PYZlt{}!doctype html\PYZgt{}}
+\PY{n+nt}{\PYZlt{}html}\PY{n+nt}{\PYZgt{}}
+  \PY{n+nt}{\PYZlt{}head}\PY{n+nt}{\PYZgt{}}\PY{n+nt}{\PYZlt{}/head\PYZgt{}}
+  \PY{n+nt}{\PYZlt{}body}\PY{n+nt}{\PYZgt{}}
+    \PY{n+nt}{\PYZlt{}script}\PY{n+nt}{\PYZgt{}}
+      \PY{k+kd}{var} \PY{n+nx}{triggerAlert} \PY{o}{=} \PY{k+kd}{function} \PY{p}{(}\PY{p}{)} \PY{p}{\PYZob{}}
+        \PY{n+nb}{window}\PY{p}{.}\PY{n+nx}{alert}\PY{p}{(} \PY{l+s+s2}{\PYZdq{}Document loaded\PYZdq{}} \PY{p}{)}\PY{p}{;}
+      \PY{p}{\PYZcb{}}\PY{p}{;}
+      \PY{n+nb}{window}\PY{p}{.}\PY{n+nx}{addEventListener}\PY{p}{(} \PY{l+s+s2}{\PYZdq{}onload\PYZdq{}}\PY{p}{,} \PY{n+nx}{triggerAlert} \PY{p}{)}\PY{p}{;}
+    \PY{n+nt}{\PYZlt{}/script\PYZgt{}}
+  \PY{n+nt}{\PYZlt{}/body\PYZgt{}}
+\PY{n+nt}{\PYZlt{}/html\PYZgt{}}
 \end{Verbatim}
+\vspace*{0.5\baselineskip}
+\end{beamerboxesrounded}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\textbf{Node.js Example:\vspace*{\baselineskip}}
+\begin{beamerboxesrounded}[lower=eecks2,upper=eecks,
+shadow=true]{Login Handler}
+\vspace*{\baselineskip}
+\begin{Verbatim}[fontsize=\scriptsize,commandchars=\\\{\}]
+\PY{k+kd}{var} \PY{n+nx}{express} \PY{o}{=} \PY{n+nx}{require}\PY{p}{(} \PY{l+s+s1}{\PYZsq{}express\PYZsq{}} \PY{p}{)}\PY{p}{,} \PY{c+c1}{// Load Server Module}
+  \PY{n+nx}{app} \PY{o}{=} \PY{n+nx}{express}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+
+\PY{k+kd}{var} \PY{n+nx}{handleLogin} \PY{o}{=} \PY{k+kd}{function}\PY{p}{(} \PY{n+nx}{req}\PY{p}{,} \PY{n+nx}{resp} \PY{p}{)} \PY{p}{\PYZob{}}
+  \PY{k+kd}{var} \PY{n+nx}{body} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}\PYZsq{}}\PY{p}{;}
+  \PY{n+nx}{req}\PY{p}{.}\PY{n+nx}{on}\PY{p}{(} \PY{l+s+s1}{\PYZsq{}data\PYZsq{}}\PY{p}{,} \PY{k+kd}{function}\PY{p}{(} \PY{n+nx}{data} \PY{p}{)} \PY{p}{\PYZob{}} \PY{n+nx}{body} \PY{o}{+=} \PY{n+nx}{data}\PY{p}{;} \PY{p}{\PYZcb{}} \PY{p}{)}\PY{p}{;}
+  \PY{n+nx}{req}\PY{p}{.}\PY{n+nx}{on}\PY{p}{(} \PY{l+s+s1}{\PYZsq{}end\PYZsq{}}\PY{p}{,} \PY{k+kd}{function}\PY{p}{(}\PY{p}{)} \PY{p}{\PYZob{}}
+     \PY{c+cm}{/* Process the request stored in body */}
+  \PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+
+\PY{n+nx}{app}\PY{p}{.}\PY{n+nx}{post}\PY{p}{(} \PY{l+s+s1}{\PYZsq{}/login\PYZsq{}}\PY{p}{,} \PY{n+nx}{handleLogin} \PY{p}{)}\PY{p}{;}
+\PY{n+nx}{app}\PY{p}{.}\PY{n+nx}{listen}\PY{p}{(} \PY{l+m+mi}{8111} \PY{p}{)}\PY{p}{;} \PY{c+c1}{// Start Listening on port 8111}
+\end{Verbatim}
+\vspace*{0.5\baselineskip}
+\end{beamerboxesrounded}
+\end{frame}
+
+
+\subsection{Time Awareness}
+
+\frame{
+
+\textbf{Importance of time awareness:}\\
+\vspace*{\baselineskip}
+\textit{Declare functions \textbf{before} you \textbf{actually} assign them to an event that happens in the \textbf{future}!}
 }
 
 \frame[containsverbatim]{
-\textbf{Solution:}	
-	\begin{Verbatim}[fontsize=\scriptsize]
-  var fDelayed = function(id) {
-    return function() {
-      console.log(id);
-    };
-  };
-  for( var i = 0; i < 100; i++ ) {
-    setTimeout( fDelayed(i), 3000);
-  }
-	\end{Verbatim}
-  Registers the value of \path{i} by value and not by reference in the anonyomous function which is returned on the first function call of \path{fDelayed(i)}.
-}
-
-\frame[containsverbatim]{
-\textbf{(Almost) Real-life example:}	
-	% \begin{Verbatim}[fontsize=\scriptsize]
-  % function fetchUserObjectsAsync( arrNames, cbAnswer ){
-  %   var semaphore = arrNames.length,
-  %   objUsers = {},
-  %   fGetUserAsync = function( name, cbLocal ){
-  %   	db.getUser(name, cbLocal);
-  %   },
-  %   fJoin = function( uName ) {
-  %     return function( err, obj ) {
-  %       --semaphore
-  %       if( err || !obj ) return;
-  %       objUsers[ uName ] = obj;
-  %       if( semaphore === 0 ){
-  %         cbAnswer( null, objReplies );
-  %       }
-  %     }
-  %   };
-    
-  %   for( var name in arrNames ){
-  %     fGetUserAsync( user, fJoin( name ));
-  %   }
+\textbf{Why is this doing the wrong thing?\vspace*{\baselineskip}}
+  % for( var i = 0; i < 100; i++ ) {
+  %   setTimeout( function() {
+  %     console.log(i);
+  %   }, 3000);
   % }
+\begin{beamerboxesrounded}[lower=eecks2,upper=eecks,
+shadow=true]{Print 0..99 in 3 seconds}
+\begin{Verbatim}[fontsize=\scriptsize,commandchars=\\\{\}]
+  \PY{k}{for}\PY{p}{(} \PY{k+kd}{var} \PY{n+nx}{i} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{;} \PY{n+nx}{i} \PY{o}{\PYZlt{}} \PY{l+m+mi}{100}\PY{p}{;} \PY{n+nx}{i}\PY{o}{++} \PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{n+nx}{setTimeout}\PY{p}{(} \PY{k+kd}{function}\PY{p}{(}\PY{p}{)} \PY{p}{\PYZob{}}
+      \PY{n+nx}{console}\PY{p}{.}\PY{n+nx}{log}\PY{p}{(}\PY{n+nx}{i}\PY{p}{)}\PY{p}{;}
+    \PY{p}{\PYZcb{}}\PY{p}{,} \PY{l+m+mi}{3000}\PY{p}{)}\PY{p}{;}
+  \PY{p}{\PYZcb{}}
+\end{Verbatim}
+\vspace*{0.5\baselineskip}
+\end{beamerboxesrounded}
+}
 
-\begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
-  \PY{k+kd}{function} \PY{n+nx}{fetchUserObjectsAsync}\PY{p}{(} \PY{n+nx}{arrNames}\PY{p}{,} \PY{n+nx}{cbAnswer} \PY{p}{)}\PY{p}{\PYZob{}}
-    \PY{k+kd}{var} \PY{n+nx}{semaphore} \PY{o}{=} \PY{n+nx}{arrNames}\PY{p}{.}\PY{n+nx}{length}\PY{p}{,}
-    \PY{n+nx}{objUsers} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}\PY{p}{,}
-    \PY{n+nx}{fGetUserAsync} \PY{o}{=} \PY{k+kd}{function}\PY{p}{(} \PY{n+nx}{name}\PY{p}{,} \PY{n+nx}{cbLocal} \PY{p}{)}\PY{p}{\PYZob{}}
-      \PY{n+nx}{db}\PY{p}{.}\PY{n+nx}{getUser}\PY{p}{(}\PY{n+nx}{name}\PY{p}{,} \PY{n+nx}{cbLocal}\PY{p}{)}\PY{p}{;}
-    \PY{p}{\PYZcb{}}\PY{p}{,}
-    \PY{n+nx}{fJoin} \PY{o}{=} \PY{k+kd}{function}\PY{p}{(} \PY{n+nx}{uName} \PY{p}{)} \PY{p}{\PYZob{}}
-      \PY{k}{return} \PY{k+kd}{function}\PY{p}{(} \PY{n+nx}{err}\PY{p}{,} \PY{n+nx}{obj} \PY{p}{)} \PY{p}{\PYZob{}}
-        \PY{o}{\PYZhy{}\PYZhy{}}\PY{n+nx}{semaphore}
-        \PY{k}{if}\PY{p}{(} \PY{n+nx}{err} \PY{o}{||} \PY{o}{!}\PY{n+nx}{obj} \PY{p}{)} \PY{k}{return}\PY{p}{;}
-        \PY{n+nx}{objUsers}\PY{p}{[} \PY{n+nx}{uName} \PY{p}{]} \PY{o}{=} \PY{n+nx}{obj}\PY{p}{;}
-        \PY{k}{if}\PY{p}{(} \PY{n+nx}{semaphore} \PY{o}{===} \PY{l+m+mi}{0} \PY{p}{)}\PY{p}{\PYZob{}}
-          \PY{n+nx}{cbAnswer}\PY{p}{(} \PY{k+kc}{null}\PY{p}{,} \PY{n+nx}{objReplies} \PY{p}{)}\PY{p}{;}
-        \PY{p}{\PYZcb{}}
-      \PY{p}{\PYZcb{}}
+\frame[containsverbatim]{
+\textbf{Solution:\vspace*{\baselineskip}}
+\begin{beamerboxesrounded}[lower=eecks2,upper=eecks,
+shadow=true]{Print 0..99 in 3 seconds}
+\begin{Verbatim}[fontsize=\scriptsize,commandchars=\\\{\}]
+  \PY{k+kd}{var} \PY{n+nx}{fDelayed} \PY{o}{=} \PY{k+kd}{function}\PY{p}{(}\PY{n+nx}{id}\PY{p}{)} \PY{p}{\PYZob{}} \PY{c+c1}{// Declare a function...}
+    \PY{k}{return} \PY{k+kd}{function}\PY{p}{(}\PY{p}{)} \PY{p}{\PYZob{}} \PY{c+c1}{// ( \PYZlt{}\PYZhy{}\PYZhy{} Anonymous function )}
+      \PY{n+nx}{console}\PY{p}{.}\PY{n+nx}{log}\PY{p}{(}\PY{n+nx}{id}\PY{p}{)}\PY{p}{;}
     \PY{p}{\PYZcb{}}\PY{p}{;}
-    
-    \PY{k}{for}\PY{p}{(} \PY{k+kd}{var} \PY{n+nx}{name} \PY{k}{in} \PY{n+nx}{arrNames} \PY{p}{)}\PY{p}{\PYZob{}}
-      \PY{n+nx}{fGetUserAsync}\PY{p}{(} \PY{n+nx}{user}\PY{p}{,} \PY{n+nx}{fJoin}\PY{p}{(} \PY{n+nx}{name} \PY{p}{)}\PY{p}{)}\PY{p}{;}
+  \PY{p}{\PYZcb{}}\PY{p}{;}
+  \PY{k}{for}\PY{p}{(} \PY{k+kd}{var} \PY{n+nx}{i} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{;} \PY{n+nx}{i} \PY{o}{\PYZlt{}} \PY{l+m+mi}{100}\PY{p}{;} \PY{n+nx}{i}\PY{o}{++} \PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{c+c1}{// ... before you assign it to an event happening in the future:}
+    \PY{n+nx}{setTimeout}\PY{p}{(} \PY{n+nx}{fDelayed}\PY{p}{(}\PY{n+nx}{i}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{3000}\PY{p}{)}\PY{p}{;}
+  \PY{p}{\PYZcb{}}
+\end{Verbatim}
+\vspace*{0.5\baselineskip}
+\end{beamerboxesrounded}\\
+  % var fDelayed = function(id) { // Declare a function...
+  %   return function() { // ( <-- Anonymous function )
+  %     console.log(id);
+  %   };
+  % };
+  % for( var i = 0; i < 100; i++ ) {
+  %   // ... before you assign it to an event happening in the future:
+  %   setTimeout( fDelayed(i), 3000);
+  % }
+\vspace{0.5\baselineskip}
+  Registers \path{i} by value and not by reference in the anonyomous function which is returned on the first function call of \path{fDelayed(i)}.
+}
+
+
+\frame[containsverbatim]{
+\textbf{Real Life example:}	
+% function fetchUserObjectsAsync( arrNames, cbAnswer ){
+%   var semaphore = arrNames.length, // Number of objects to fetch
+%   objUsers = {},
+%   fGetUserAsync = function( name, cbLocal ){
+%     db.getUser(name, cbLocal);    // fork a token for the DB request
+%   },
+%   fJoin = function( uName ) {     // register username by value
+%     return function( err, obj ) { // Join the forked tokens
+%       --semaphore                 // Decrement the semaphore
+%       // Store the object for the user:
+%       if( !err && obj ) objUsers[ uName ] = obj;
+%       if( semaphore === 0 ){      // If all DB requests returned
+%         cbAnswer( null, objReplies ); // answer the overall request
+%       }
+%     }
+%   }; // <-- Until here only var declarations! Now the function code:
+%   for( var name in arrNames ){ // fetch object for each username
+%     fGetUserAsync( user, fJoin( name ));
+%   }
+% }
+\begin{beamerboxesrounded}[lower=eecks2,upper=eecks,
+shadow=true]{Fetch User Objects from Database}
+\begin{Verbatim}[fontsize=\scriptsize,commandchars=\\\{\}]
+\PY{k+kd}{function} \PY{n+nx}{fetchUserObjectsAsync}\PY{p}{(} \PY{n+nx}{arrNames}\PY{p}{,} \PY{n+nx}{cbAnswer} \PY{p}{)}\PY{p}{\PYZob{}}
+  \PY{k+kd}{var} \PY{n+nx}{semaphore} \PY{o}{=} \PY{n+nx}{arrNames}\PY{p}{.}\PY{n+nx}{length}\PY{p}{,} \PY{c+c1}{// Number of objects to fetch}
+  \PY{n+nx}{objUsers} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}\PY{p}{,}
+  \PY{n+nx}{fGetUserAsync} \PY{o}{=} \PY{k+kd}{function}\PY{p}{(} \PY{n+nx}{name}\PY{p}{,} \PY{n+nx}{cbLocal} \PY{p}{)}\PY{p}{\PYZob{}}
+    \PY{n+nx}{db}\PY{p}{.}\PY{n+nx}{getUser}\PY{p}{(}\PY{n+nx}{name}\PY{p}{,} \PY{n+nx}{cbLocal}\PY{p}{)}\PY{p}{;}    \PY{c+c1}{// fork a token for the DB request}
+  \PY{p}{\PYZcb{}}\PY{p}{,}
+  \PY{n+nx}{fJoin} \PY{o}{=} \PY{k+kd}{function}\PY{p}{(} \PY{n+nx}{uName} \PY{p}{)} \PY{p}{\PYZob{}}     \PY{c+c1}{// register username by value}
+    \PY{k}{return} \PY{k+kd}{function}\PY{p}{(} \PY{n+nx}{err}\PY{p}{,} \PY{n+nx}{obj} \PY{p}{)} \PY{p}{\PYZob{}} \PY{c+c1}{// Join the forked tokens}
+      \PY{o}{\PYZhy{}\PYZhy{}}\PY{n+nx}{semaphore}                 \PY{c+c1}{// Decrement the semaphore}
+      \PY{c+c1}{// Store the object for the user:}
+      \PY{k}{if}\PY{p}{(} \PY{o}{!}\PY{n+nx}{err} \PY{o}{\PYZam{}\PYZam{}} \PY{n+nx}{obj} \PY{p}{)} \PY{n+nx}{objUsers}\PY{p}{[} \PY{n+nx}{uName} \PY{p}{]} \PY{o}{=} \PY{n+nx}{obj}\PY{p}{;}
+      \PY{k}{if}\PY{p}{(} \PY{n+nx}{semaphore} \PY{o}{===} \PY{l+m+mi}{0} \PY{p}{)}\PY{p}{\PYZob{}}      \PY{c+c1}{// If all DB requests returned}
+        \PY{n+nx}{cbAnswer}\PY{p}{(} \PY{k+kc}{null}\PY{p}{,} \PY{n+nx}{objReplies} \PY{p}{)}\PY{p}{;} \PY{c+c1}{// answer the overall request}
+      \PY{p}{\PYZcb{}}
+    \PY{p}{\PYZcb{}}
+  \PY{p}{\PYZcb{}}\PY{p}{;} \PY{c+c1}{// \PYZlt{}\PYZhy{}\PYZhy{} Until here only var declarations! Now the function code:}
+  \PY{k}{for}\PY{p}{(} \PY{k+kd}{var} \PY{n+nx}{name} \PY{k}{in} \PY{n+nx}{arrNames} \PY{p}{)}\PY{p}{\PYZob{}} \PY{c+c1}{// fetch object for each username}
+    \PY{n+nx}{fGetUserAsync}\PY{p}{(} \PY{n+nx}{user}\PY{p}{,} \PY{n+nx}{fJoin}\PY{p}{(} \PY{n+nx}{name} \PY{p}{)}\PY{p}{)}\PY{p}{;}
+  \PY{p}{\PYZcb{}}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+\end{beamerboxesrounded}
+}
+
+
+
+\section{Node.js Apps are the glue between Modules}
+\frame{
+Node.js is all about writing, loading and glueing together powerful modules!\\
+\vspace{0.5\baselineskip}
+\textbf{Ways to load modules:} 
+\begin{itemize}
+	\item<1-> Built-in
+	\item<2-> Node Packet Manager
+	\item<4-> Your Project Modules
+\end{itemize}
+\vspace{0.5\baselineskip}
+\uncover<4>{
+\textbf{  $\Rightarrow$ Modules are cached!}
+}
+}
+
+
+\subsection{Built-in}
+\begin{frame}
+\textbf{Built-in Modules:}
+\begin{itemize}
+  \item<1-> Identify the module:\\
+    \qquad\path{http://nodejs.org/api/}
+  \item<2-> Load the module:\\
+    \qquad\texttt{var fs = require( 'fs' );}
+\end{itemize}
+\begin{center}
+\begin{figure}
+\includegraphics[width=0.75\linewidth]{nodejs-api}
+\end{figure}
+\end{center}
+\end{frame}
+
+\subsection{Node Packet Manager}
+\frame{
+\textbf{Node Packaged Modules (NPM):}
+\begin{itemize}
+  \item<1-> Identify the module: \path{https://www.npmjs.org/}
+  \item<2-> Install the module in one of the following ways:
+  \begin{itemize}
+    \item<3-> Globally for the whole system:\\
+      \texttt{npm install -g express}
+    \item<4-> Locally into the project folder:\\
+      \texttt{npm install express}
+    \item<5-> \textbf{Through configuration file}
+  \end{itemize}
+  \item<6-> Load the module via:\\
+    \texttt{var express = require( 'express' );}
+\end{itemize}
+\begin{center}
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{npmpage}
+\end{figure}
+\end{center}
+}
+
+\frame{
+Shortcomings of global and local installation:\\
+\qquad\texttt{npm install [-g] express}
+\vspace{0.5\baselineskip}
+\begin{itemize}
+  \item<2-> Installs latest version\\
+    $\rightarrow$ \textit{What if you need an older version?}
+  \item<3-> Each module needs to be installed/removed seperately\\
+    $\rightarrow$ \textit{Portability of large projects?}
+  \item<4-> Collaboration not as easy as it could be
+\end{itemize}
+\uncover<5>{
+$\Rightarrow$ \textbf{Load NPM module through configuration file}
+}
+}
+
+% \frame{
+% \textbf{NPM Installation via Configuration File:}\\
+% Place configuration file in project folder
+
+\begin{frame}[t,fragile]
+\textbf{NPM management through Configuration File:\\
+\vspace*{0.25\baselineskip}}
+\begin{itemize}
+  \item<2-> Place package.json in project folder
+  \item<3-> \texttt{npm install}
+\end{itemize}
+\begin{onlyenv}<2->
+\begin{beamerboxesrounded}[lower=eecks2,upper=eecks,shadow=true]{package.json}
+\vspace*{0.5\baselineskip}
+\begin{Verbatim}[fontsize=\scriptsize,commandchars=\\\{\}]
+  \PY{p}{\PYZob{}}
+    \PY{l+s+s2}{\PYZdq{}name\PYZdq{}}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}my\PYZhy{}module\PYZdq{}}\PY{p}{,}
+    \PY{l+s+s2}{\PYZdq{}author\PYZdq{}}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}Dominic Bosch\PYZdq{}}\PY{p}{,}
+    \PY{l+s+s2}{\PYZdq{}description\PYZdq{}}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}My Module\PYZdq{}}\PY{p}{,}
+    \PY{l+s+s2}{\PYZdq{}version\PYZdq{}}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}0.1.0\PYZdq{}}\PY{p}{,}
+    \PY{l+s+s2}{\PYZdq{}private\PYZdq{}}\PY{o}{:} \PY{k+kc}{true}\PY{p}{,}
+    \PY{l+s+s2}{\PYZdq{}repository\PYZdq{}}\PY{o}{:} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}\PY{p}{,}
+    \PY{l+s+s2}{\PYZdq{}dependencies\PYZdq{}}\PY{o}{:} \PY{p}{\PYZob{}}
+      \PY{l+s+s2}{\PYZdq{}express\PYZdq{}}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}3.4.8\PYZdq{}}\PY{p}{,}
+      \PY{l+s+s2}{\PYZdq{}groc\PYZdq{}}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}0.6.1\PYZdq{}}
     \PY{p}{\PYZcb{}}
   \PY{p}{\PYZcb{}}
-	\end{Verbatim}
-}
-\section{Everything is a Module in Node.js}
-\frame{	
+\end{Verbatim}
+\vspace*{0.25\baselineskip}
+\end{beamerboxesrounded}
+\end{onlyenv}
+\end{frame}
+
+
+\subsection{Your Project Modules}
+\begin{frame}[t,fragile]
 \begin{itemize}
-	\item<1-> Load Modules via require:
-	\begin{itemize}
-	\item<2-> Built-in: \path{require('fs');}
-	\item<3-> Project: \path{require('./my-module');}
-	\end{itemize}
-	\item<4-> Modules are cached!
+  \item<1-> You will write more than one module in your project
+  \item<2-> Attach to \textbf{\texttt{exports}} to be visible from outside
+  \item<3-> Load Modules:\\
+  \qquad\texttt{var oe = require( './other-example' )}
 \end{itemize}
-}
+\begin{onlyenv}<2->
+\begin{beamerboxesrounded}[lower=eecks2,upper=eecks,shadow=true]{example-module.js}
+\vspace*{0.5\baselineskip}
+\begin{Verbatim}[fontsize=\scriptsize,commandchars=\\\{\}]
+\PY{k+kd}{var} \PY{n+nx}{fs} \PY{o}{=} \PY{n+nx}{require}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}fs\PYZsq{}}\PY{p}{)}\PY{p}{,}
+  \PY{n+nx}{oe} \PY{o}{=} \PY{n+nx}{require}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}./other\PYZhy{}example\PYZsq{}}\PY{p}{)}\PY{p}{;}
 
-\subsection{Built-in Modules}
-\frame{
-http://nodejs.org/api/
-}
+\PY{n+nx}{exports}\PY{p}{.}\PY{n+nx}{loadFile} \PY{o}{=} \PY{k+kd}{function}\PY{p}{(} \PY{n+nx}{path} \PY{p}{)} \PY{p}{\PYZob{}}
+  \PY{n+nx}{oe}\PY{p}{.}\PY{n+nx}{inform}\PY{p}{(} \PY{n+nx}{path} \PY{p}{)}\PY{p}{;}
+  \PY{k}{try} \PY{p}{\PYZob{}}
+    \PY{k}{return} \PY{n+nx}{JSON}\PY{p}{.}\PY{n+nx}{parse}\PY{p}{(} \PY{n+nx}{fs}\PY{p}{.}\PY{n+nx}{readFileSync}\PY{p}{(} \PY{n+nx}{path} \PY{p}{)} \PY{p}{)}\PY{p}{;}
+  \PY{p}{\PYZcb{}} \PY{k}{catch} \PY{p}{(}\PY{n+nx}{e}\PY{p}{)} \PY{p}{\PYZob{}} \PY{c+cm}{/* [Error Handler] */} \PY{p}{\PYZcb{}}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+\vspace*{0.25\baselineskip}
+\end{beamerboxesrounded}
+\end{onlyenv}
+\end{frame}
 
-\subsection{Node Packaged Modules (NPM)}
-\frame{
-\begin{itemize}
-	\item<1-> Url: https://www.npmjs.org/
-	\item<2-> Everybody can publish to NPM!
-	\item<3-> Global/Local/Project installation
-\end{itemize}
-}
-\frame{
-My Favorite: Project Installation\\
-package.json\\
-npm install\\
-track version\\
-Example of how peope still could break your roject: groc/jade\\
-}
-% \frame{
-% \begin{figure}
-% \includegraphics[scale=1]{node_modules2} 
-% \caption{show an example picture}
-% \end{figure}
-% }
 
-\subsection{Custom JS Modules}
-\frame{
-place index.js into node-modules - cryptico.js
-
-}
+\begin{frame}
+\begin{center}
+\textbf{Thank You!\\
+\vspace*{0.5\baselineskip}
+... and have fun developping your own Node.js modules!}
+\end{center}
+\end{frame}
 
 \end{document}

@@ -1,22 +1,9 @@
+var fs = require('fs'),
+  oe = require('./other-example');
 
-  function fetchUserObjectsAsync( arrNames, cbAnswer ){
-    var semaphore = arrNames.length,
-    objUsers = {},
-    fGetUserAsync = function( name, cbLocal ){
-      db.getUser(name, cbLocal);
-    },
-    fJoin = function( uName ) {
-      return function( err, obj ) {
-        --semaphore
-        if( err || !obj ) return;
-        objUsers[ uName ] = obj;
-        if( semaphore === 0 ){
-          cbAnswer( null, objReplies );
-        }
-      }
-    };
-    
-    for( var name in arrNames ){
-      fGetUserAsync( user, fJoin( name ));
-    }
-  }
+exports.loadFile = function( path ) {
+  oe.inform( path );
+  try {
+    return JSON.parse( fs.readFileSync( path ) );
+  } catch (e) { /* [Error Handler] */ }
+}

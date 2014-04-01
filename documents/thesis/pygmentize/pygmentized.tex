@@ -105,27 +105,15 @@
 \section*{}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-  \PY{k+kd}{function} \PY{n+nx}{fetchUserObjectsAsync}\PY{p}{(} \PY{n+nx}{arrNames}\PY{p}{,} \PY{n+nx}{cbAnswer} \PY{p}{)}\PY{p}{\PYZob{}}
-    \PY{k+kd}{var} \PY{n+nx}{semaphore} \PY{o}{=} \PY{n+nx}{arrNames}\PY{p}{.}\PY{n+nx}{length}\PY{p}{,}
-    \PY{n+nx}{objUsers} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}\PY{p}{,}
-    \PY{n+nx}{fGetUserAsync} \PY{o}{=} \PY{k+kd}{function}\PY{p}{(} \PY{n+nx}{name}\PY{p}{,} \PY{n+nx}{cbLocal} \PY{p}{)}\PY{p}{\PYZob{}}
-    	\PY{n+nx}{db}\PY{p}{.}\PY{n+nx}{getUser}\PY{p}{(}\PY{n+nx}{name}\PY{p}{,} \PY{n+nx}{cbLocal}\PY{p}{)}\PY{p}{;}
-    \PY{p}{\PYZcb{}}\PY{p}{,}
-    \PY{n+nx}{fJoin} \PY{o}{=} \PY{k+kd}{function}\PY{p}{(} \PY{n+nx}{uName} \PY{p}{)} \PY{p}{\PYZob{}}
-      \PY{k}{return} \PY{k+kd}{function}\PY{p}{(} \PY{n+nx}{err}\PY{p}{,} \PY{n+nx}{obj} \PY{p}{)} \PY{p}{\PYZob{}}
-        \PY{o}{\PYZhy{}\PYZhy{}}\PY{n+nx}{semaphore}
-        \PY{k}{if}\PY{p}{(} \PY{n+nx}{err} \PY{o}{||} \PY{o}{!}\PY{n+nx}{obj} \PY{p}{)} \PY{k}{return}\PY{p}{;}
-        \PY{n+nx}{objUsers}\PY{p}{[} \PY{n+nx}{uName} \PY{p}{]} \PY{o}{=} \PY{n+nx}{obj}\PY{p}{;}
-        \PY{k}{if}\PY{p}{(} \PY{n+nx}{semaphore} \PY{o}{===} \PY{l+m+mi}{0} \PY{p}{)}\PY{p}{\PYZob{}}
-          \PY{n+nx}{cbAnswer}\PY{p}{(} \PY{k+kc}{null}\PY{p}{,} \PY{n+nx}{objReplies} \PY{p}{)}\PY{p}{;}
-        \PY{p}{\PYZcb{}}
-      \PY{p}{\PYZcb{}}
-    \PY{p}{\PYZcb{}}\PY{p}{;}
-    
-    \PY{k}{for}\PY{p}{(} \PY{k+kd}{var} \PY{n+nx}{name} \PY{k}{in} \PY{n+nx}{arrNames} \PY{p}{)}\PY{p}{\PYZob{}}
-      \PY{n+nx}{fGetUserAsync}\PY{p}{(} \PY{n+nx}{user}\PY{p}{,} \PY{n+nx}{fJoin}\PY{p}{(} \PY{n+nx}{name} \PY{p}{)}\PY{p}{)}\PY{p}{;}
-    \PY{p}{\PYZcb{}}
-  \PY{p}{\PYZcb{}}
+\PY{k+kd}{var} \PY{n+nx}{fs} \PY{o}{=} \PY{n+nx}{require}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}fs\PYZsq{}}\PY{p}{)}\PY{p}{,}
+  \PY{n+nx}{oe} \PY{o}{=} \PY{n+nx}{require}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}./other\PYZhy{}example\PYZsq{}}\PY{p}{)}\PY{p}{;}
+
+\PY{n+nx}{exports}\PY{p}{.}\PY{n+nx}{loadFile} \PY{o}{=} \PY{k+kd}{function}\PY{p}{(} \PY{n+nx}{path} \PY{p}{)} \PY{p}{\PYZob{}}
+  \PY{n+nx}{oe}\PY{p}{.}\PY{n+nx}{inform}\PY{p}{(} \PY{n+nx}{path} \PY{p}{)}\PY{p}{;}
+  \PY{k}{try} \PY{p}{\PYZob{}}
+    \PY{k}{return} \PY{n+nx}{JSON}\PY{p}{.}\PY{n+nx}{parse}\PY{p}{(} \PY{n+nx}{fs}\PY{p}{.}\PY{n+nx}{readFileSync}\PY{p}{(} \PY{n+nx}{path} \PY{p}{)} \PY{p}{)}\PY{p}{;}
+  \PY{p}{\PYZcb{}} \PY{k}{catch} \PY{p}{(}\PY{n+nx}{e}\PY{p}{)} \PY{p}{\PYZob{}} \PY{c+cm}{/* [Error Handler] */} \PY{p}{\PYZcb{}}
+\PY{p}{\PYZcb{}}
 \end{Verbatim}
 
 \end{document}
