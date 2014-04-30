@@ -122,6 +122,7 @@
 
 \section{Introduction}
 \frame{
+\textbf{What defines Node.js?}
 \begin{itemize}
 	\item<1-> Software Platform
   \item<2-> Applications written in JavaScript
@@ -186,8 +187,9 @@ shadow=true]{Non-Blocking I/O:}
 }
 
 
-\begin{frame}[fragile]
+\begin{frame}[t,fragile]
 \textbf{Well known for Browser (DOM) Events:\vspace*{\baselineskip}}
+\begin{onlyenv}<2->
 \begin{beamerboxesrounded}[lower=eecks2,upper=eecks,
 shadow=true]{Onload Event Listener (Browser)}
 \vspace*{\baselineskip}
@@ -207,6 +209,7 @@ shadow=true]{Onload Event Listener (Browser)}
 \end{Verbatim}
 \vspace*{0.5\baselineskip}
 \end{beamerboxesrounded}
+\end{onlyenv}
 \end{frame}
 
 
@@ -354,7 +357,7 @@ Node.js is all about writing, loading and glueing together powerful modules!\\
 \begin{itemize}
 	\item<1-> Built-in
 	\item<2-> Node Packet Manager
-	\item<4-> Your Project Modules
+	\item<3-> Your Project Modules
 \end{itemize}
 \vspace{0.5\baselineskip}
 \uncover<4>{
@@ -403,7 +406,7 @@ Node.js is all about writing, loading and glueing together powerful modules!\\
 }
 
 \frame{
-Shortcomings of global and local installation:\\
+\textbf{Shortcomings of global and local installation:\\}
 \qquad\texttt{npm install [-g] express}
 \vspace{0.5\baselineskip}
 \begin{itemize}
@@ -479,6 +482,38 @@ $\Rightarrow$ \textbf{Load NPM module through configuration file}
 \end{onlyenv}
 \end{frame}
 
+
+\subsection{Node.js in my Master Thesis Project}
+\begin{frame}
+\textbf{Advantages of Node.js}
+\begin{itemize}
+  \item<1-> Non-Blocking ...
+  \item<2-> ... Asynchronous $\Rightarrow$ Scales!
+  \item<3-> One Language for a distributed system
+  \item<4-> Simple communication between remote systems
+  \item<5-> Fast deployment, \textit{( almost )} wherever you want 
+
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}
+\textbf{NPM Modules used:}
+\begin{itemize}
+  \item<1-> \textbf{CoffeeScript:} Compiler
+  \item<2-> \textbf{Optimist:} Command line arguments 
+  \item<3-> \textbf{Bunyan:} Logging
+  \item<4-> \textbf{Needle:} HTTP Requests
+  \item<5-> \textbf{Express:} Webserver
+  \item<6-> \textbf{CryptoJS / Cryptico:} Encryption / Hashing
+  \item<7-> \textbf{Redis:} DB Interface
+  \item<8-> \textbf{JS-select:} JSON node selector
+  \item<9-> \textbf{Mustache:} HTML templates
+  \item<10-> \textbf{Groc:} Create code documentation
+  \item<11-> \textbf{Nodeunit:} Unit Testing
+\end{itemize}
+\end{frame}
 
 \begin{frame}
 \begin{center}

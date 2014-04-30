@@ -1,5 +1,10 @@
 \contentsline {section}{\numberline {1}Introduction}{3}
 \contentsline {subsection}{\numberline {1.1}Related Work}{3}
 \contentsline {section}{\numberline {2}Conceptual Model for Reactive Web Systems}{3}
-\contentsline {section}{\numberline {3}The "XYZ" Prototype System}{3}
-\contentsline {section}{\numberline {4}Discussion \& Results}{5}
+\contentsline {subsection}{\numberline {2.1}Use Cases}{3}
+\contentsline {subsection}{\numberline {2.2}Event Condition Action (ECA) Model}{3}
+\contentsline {section}{\numberline {3}The "GEEK" Prototype System}{3}
+\contentsline {subsection}{\numberline {3.1}Architecture}{3}
+\contentsline {subsection}{\numberline {3.2}Complexity in Highly Asynchronous Systems}{3}
+\contentsline {section}{\numberline {4}Discussion \& Results}{4}
+\contentsline {section}{\numberline {5}Future Work}{5}

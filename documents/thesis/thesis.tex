@@ -150,23 +150,116 @@ t.b.d.
 
 
 \section{Introduction}
-t.b.d.
+The web is evolving in an ever faster pace.
+New services provide powerful tools to govern data and functionality in the web.
+Allowing access to these services via API is increasingly popular and allows to mash up these services
+
+Practically all services flood the user with events
+The web should be event driven, that's why we need an engine that deals with events and makes the web reactive
+There's still the challenge of filtering
+What's important to whom
+Plus the user needs to have tools to combine and add programmability to the combination,( such as conditions, selection of provided arguments and so on)
+
+
+
 
 \subsection{Related Work}
-t.b.d.
+Reactivity in the web
+Zapier, IFTTT
+import.io
+
+
 Grunt to build project
 jsprime to make code safe
 stylus for css
 
 \section{Conceptual Model for Reactive Web Systems}
-t.b.d.
+
+
+\subsection{Use Cases}
+Temperature warning, using import.io
+
+
+\subsection{Event Condition Action (ECA) Model}
 why are we now suddenly responsive? we loosened up certain things
 
 
-\section{The "XYZ" Prototype System}
+\section{The "GEEK" Prototype System}
+
+General-Purpose ECA Engine Kernel
+
+
+
+
+
 
 \subsection{Architecture}
 
+
+\subsection{Complexity in Asynchronous Systems}
+Variable bindings
+Error tracing
+
+Apply variable number of function arguments to function
+
+
+
+\section{Discussion \& Results}
+Use Cases
+%http://khanlou.com/2014/03/model-view-whatever/
+
+\newpage
+
+
+\section{Future Work}
+t.b.d.
+CEP
+We have seen that the ECA approach is already a powerful one to make the web reactive.
+A future improvement of this could be to adopt Complex Event Processing (CEP).
+This would mean that several events could be stored in a rule and be evaluated in terms of time constraints.
+Through this more complex events can be created as a result of several atomic events which would lead into semantically more complex events.
+A change in paradigm will result in an approach where events are not just processed when they are entering the system and evaluated against rules, but these events would need to be stored for quite a long time.
+Also the rules will not all be checked for each event but they are subject to a scheduler.
+It can be decided when and how often a rule is evaluated and all events will be checked at these point in times, whether they are candidates for firing the rule.
+A relational database will be needed in order to search through the timestamps
+
+
+\bibliography{thesisbib}
+\bibliographystyle{thesisbst}
+
+\newpage
+\renewcommand*\appendixpagename{APPENDIX}
+\renewcommand*\appendixtocname{APPENDIX}
+%\begin{appendices}
+ % \section{ECA Rules Engine Resources}
+  %  \subsection{Node.js Rules Engine Code}
+   % \subsubsection{ecaserver.js}
+
+    \begin{Verbatim}[fontsize=\small,commandchars=\\\{\}]
+    \PY{l+s}{\PYZsq{}}\PY{l+s}{use strict}\PY{l+s}{\PYZsq{}}\PY{p}{;}
+    \PY{n}{var} \PY{n}{express} \PY{o}{=} \PY{n}{require}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{express}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+    \PY{n}{var} \PY{n}{qs} \PY{o}{=} \PY{n}{require}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{querystring}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+    \PY{n}{var} \PY{n}{engine} \PY{o}{=} \PY{n}{require}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{./ecainference}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+    \end{Verbatim}
+%t.b.d.
+%\end{appendices}
+
+\newpage
+
+
+WebAPI
+ECA
+Engine
+Reactive
+Web
+Demo
+WebAPI
+System
+Services
+Multipurpose 
+Prototype
+Kernel
+General-Purpose
 
 
 
@@ -178,36 +271,6 @@ why are we now suddenly responsive? we loosened up certain things
   \item \textbf{ICECAP (Inet-Service Calls through ECA Paradigm)}
 \end{itemize}
 
-\textbf{R:}
-\begin{itemize}
-  \item Reactive
-  \item 
-  \item 
-  \item 
-\end{itemize}
-
-\textbf{S:}
-\begin{itemize}
-  \item System
-  \item Services
-  \item 
-  \item 
-\end{itemize}
-
-\textbf{T:}
-\begin{itemize}
-  \item Tenant
-  \item Tutor
-  \item Time
-  \item Trigger
-  \item Tender
-  \item Tunnel
-  \item Tinderbox
-  \item Toolbox
-  \item Toolmaker
-  \item Transporter
-  \item Transmitter
-\end{itemize}
 
 \textbf{Other names:}
 \begin{itemize}
@@ -223,12 +286,9 @@ why are we now suddenly responsive? we loosened up certain things
   \item hecate: (Greek mythology) Greek goddess of fertility who later became associated with Persephone as goddess of the underworld and protector of witches
 \end{itemize}
 
-\section{Discussion \& Results}
-Use Cases
-%http://khanlou.com/2014/03/model-view-whatever/
+
 
 \newpage
-
 \begin{figure*}[htb]
 %\begin{center}
 \centering
@@ -578,27 +638,5 @@ Would be translated into:
 %\section{Conclusion}
 Most of the examined rule languages are designed for the interchangability of rules between different service providers. We do not attempt to jump into this domain but we rather pick up important concepts to manifest web API's as first class citizens of our rule language. This allows the ad-hoc design and implementation of reactive rules between existing web API's without the need for their cooperation in setting up their endpoint in a special way.
 
-%\section{Future Work}
-t.b.d.
 
-
-\bibliography{thesisbib}
-\bibliographystyle{thesisbst}
-
-\newpage
-\renewcommand*\appendixpagename{APPENDIX}
-\renewcommand*\appendixtocname{APPENDIX}
-%\begin{appendices}
- % \section{ECA Rules Engine Resources}
-  %  \subsection{Node.js Rules Engine Code}
-   % \subsubsection{ecaserver.js}
-
-    \begin{Verbatim}[fontsize=\small,commandchars=\\\{\}]
-    \PY{l+s}{\PYZsq{}}\PY{l+s}{use strict}\PY{l+s}{\PYZsq{}}\PY{p}{;}
-    \PY{n}{var} \PY{n}{express} \PY{o}{=} \PY{n}{require}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{express}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
-    \PY{n}{var} \PY{n}{qs} \PY{o}{=} \PY{n}{require}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{querystring}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
-    \PY{n}{var} \PY{n}{engine} \PY{o}{=} \PY{n}{require}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{./ecainference}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
-    \end{Verbatim}
-%t.b.d.
-%\end{appendices}
 \end{document}
