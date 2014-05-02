@@ -215,21 +215,34 @@ Plus the user needs to have tools to combine and add programmability to the comb
 % (Categorized section at the end about existing rule languages)
 
 \subsubsection{WebAPI Mashups}
-Mashups are a way to combine information and functionality of more than one resource.
+Mashups combine information and functionality of more than one resource in a single place.
+The mashing up of such resources allows new points of view on data, or even ways to interact with them.
+Simple functions are combined into more powerful ones which influence data and services in a way their founders eventually didn't even think of.
 They have been developped ever since services in the web started to exist and were accessible in a more or less convenient way.
-The mashing up of such resources allowed additional informations and enhanced functionalities to be provided in one place.
-One of the earliest inventors of such a webservice mashup has been Paul Rademacher.
-In the same year after Google Maps came up in 2005, he invented a site\cite{rademacherOne,rademacherTwo} that displayed Craigslist houses on a Google Map.
-With no Google Maps API at that time, it must have been a big effort to reverse engineer Google Map's functionalities.
+One of the earliest inventors of such a webservice mashup is Paul Rademacher.
+In the same year after Google Maps came up in 2005, he invented a site\cite{wwwRademacherOne,wwwRademacherTwo} that displayed Craigslist houses on a Google Map.
+With no Google Maps API at that time, he needed time and skills to reverse engineer Google Map's functionalities.
 
-A large number of such "static" mashups were and still are developped.
-They are static in the way that they aggregate a fixed (and mostly a low) number of such resources in order to provide an elevated in one specialized domain.
-Examples
 
-In the past years, the research and development of platforms to allow users to flexibly mashup WebAPIs on their own attracted a great deal of attention.
-With IFTTT and Zapier, two powerful platforms have evolved out of this process.
-Users that register on their platform are provided with a multitude of WebAPI functions that act as event triggers and such that are used to execute actions.
+A large number of such "static" mashups were and are still developped.
+They are static in the way that they aggregate a fixed (and mostly low) number, of either data or functionality resources, to provide an enhanced resource in a specialized domain.
+Of course Mashups can be mashed up again, to provide even more sophisticated functionality and data.
+Some latest example Mashups, taken from the ProgrammableWeb\cite{wwwProgrammableWeb} directory, are:
+
+\begin{itemize}
+  \item Wifi and Plugs\cite{wwwWifiAndPlugs}: MapBox, Google Docs and Import.io API's used to display where Wi-Fi and plugs are available in London.
+  \item MapLight\cite{wwwMapLight}: GovTrack.us and OpenSecrets API's used to combine political results with financial contributions to show how capital contributions affect voting.
+  \item Shared Count\cite{wwwSharedCount}: Facebook, LinkedIn, Pinterest and Twitter API's used to display informations about how well spread a URL is on social media sites.
+\end{itemize}
+
+In the past few years, research and development for platforms to allow users to flexibly mashup WebAPIs got attention.
+With IFTTT and Zapier, two platforms have evolved out of this process.
+Users that register on those platforms are provided with a multitude of WebAPI functions that act as event triggers and such that are used to execute actions.
 The user is then free to combine these event triggers and actions in the way it suits best, creating helpful WebAPI mashups on their own.
+
+% Since this is a quite new field the why and how is hidden from the research.
+% you need events
+% you need rules / rule language
 
 
 \section{Conceptual Model for Reactive Web Systems}

@@ -3,8 +3,8 @@
 \contentsline {subsubsection}{\numberline {1.1.1}WebAPI Mashups}{3}
 \contentsline {section}{\numberline {2}Conceptual Model for Reactive Web Systems}{4}
 \contentsline {subsection}{\numberline {2.1}Event Condition Action (ECA) Model in the Web}{4}
-\contentsline {section}{\numberline {3}The "XYZ" Prototype System}{4}
-\contentsline {subsection}{\numberline {3.1}Gathering Event Triggers}{4}
+\contentsline {section}{\numberline {3}The "XYZ" Prototype System}{5}
+\contentsline {subsection}{\numberline {3.1}Gathering Event Triggers}{5}
 \contentsline {subsubsection}{\numberline {3.1.1}Polling for Events}{5}
 \contentsline {subsubsection}{\numberline {3.1.2}Webhooks}{5}
 \contentsline {subsection}{\numberline {3.2}Actions}{5}
