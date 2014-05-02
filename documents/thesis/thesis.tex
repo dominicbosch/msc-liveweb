@@ -1,3 +1,15 @@
+
+
+
+% HOT TOPICS:
+%  - Figures
+%  - ECA Paradigm explanation
+%  - 
+
+
+
+
+
 \documentclass[11pt]{article}%,twocolumn
 \usepackage{url}
 \usepackage{cite}
@@ -140,7 +152,9 @@ University of Basel
 \renewcommand{\abstractname}{}
 \begin{abstract}
 \textbf{Abstract.}
-t.b.d.
+
+T.B.D.
+
 \end{abstract}
 
 
@@ -149,9 +163,35 @@ t.b.d.
 \newpage
 
 
+
 \section{Introduction}
-The web is evolving in an ever faster pace.
-New services provide powerful tools to govern data and functionality in the web.
+% NOTES / TODOs:
+%
+% Take from preparation
+%
+% Definitions! need to be in text
+% WebAPI
+% Engine
+% Event Poller
+% Action Invoker
+% Rules
+% Rule Language (JSON Object?)
+% Reactivity
+% Programmablity of the web
+
+
+% SYSTEM??? what do we call it in the theory part?
+% what do we call it when we talk about the prototype system??
+% Do I reference my own work?
+
+
+The fast evolving web has brought up a trend towards easy to master interfaces to services, the so called WebAPIs.
+They do not only provide access to mere services but whole applications that allow access over WebAPIs.
+These trending WebAPIs benefit from a RESTful architecture which predominantly uses HTTP and thus relies on the most basic and powerful operations and the basis of the Web itself, the HTTP protocol. 
+
+quick (handling/mastering) accessible services and even whole web applications through so called Web APIs.
+WebAPIs provide powerful tools to govern data and functionality in the web independently of any user interface from the service provider.
+The relatively
 Allowing access to these services via API is increasingly popular and allows to mash up these services
 
 Practically all services flood the user with events
@@ -162,81 +202,136 @@ Plus the user needs to have tools to combine and add programmability to the comb
 
 
 
-
-SYSTEM??? what do we call it in the theory part?
-what do we call it when we talk about the prototype system??
-Do I reference my own work?
-
 \subsection{Related Work}
-Reactivity in the web
-Zapier, IFTTT
-import.io
+% NOTES / TODOs:
+%
+% Zapier, IFTTT
+% import.io
+% Show kynetix?
+
+% Grunt to build project
+% jsprime to make code safe
+% stylus for css
+% (Categorized section at the end about existing rule languages)
+
+\subsubsection{WebAPI Mashups}
+Mashups are a way to combine information and functionality of more than one resource.
+They have been developped ever since services in the web started to exist and were accessible in a more or less convenient way.
+The mashing up of such resources allowed additional informations and enhanced functionalities to be provided in one place.
+One of the earliest inventors of such a webservice mashup has been Paul Rademacher.
+In the same year after Google Maps came up in 2005, he invented a site\cite{rademacherOne,rademacherTwo} that displayed Craigslist houses on a Google Map.
+With no Google Maps API at that time, it must have been a big effort to reverse engineer Google Map's functionalities.
+
+A large number of such "static" mashups were and still are developped.
+They are static in the way that they aggregate a fixed (and mostly a low) number of such resources in order to provide an elevated in one specialized domain.
+Examples
+
+In the past years, the research and development of platforms to allow users to flexibly mashup WebAPIs on their own attracted a great deal of attention.
+With IFTTT and Zapier, two powerful platforms have evolved out of this process.
+Users that register on their platform are provided with a multitude of WebAPI functions that act as event triggers and such that are used to execute actions.
+The user is then free to combine these event triggers and actions in the way it suits best, creating helpful WebAPI mashups on their own.
 
 
-Grunt to build project
-jsprime to make code safe
-stylus for css
-(Section at the end about existing rule languages)
+\section{Conceptual Model for Reactive Web Systems}
+% NOTES / TODOs:
+%
+% Rahmenbedingungen
+% Vorzuege
+% Notwendigkeiten
+% Architektur
 
 
-
-\subsection{Use Cases}
-Temperature warning, using import.io
-
-
-\subsection{Event Condition Action (ECA) Model}
-why are we now suddenly responsive? we loosened up certain things
+\subsection{Event Condition Action (ECA) Model in the Web}
+% NOTES / TODOs:
+%
+% Model / Schema
+% Zeit / Verteiltheit
+% RL <-> ECA
+% why are we now suddenly responsive? we loosened up certain things
 
 Existing ECA systems (List examples) all act on local data.
 Looking at (Wikipedia...) their definition is actions on local data.
 This does only add reactivity to these systems and not to the Web per se.
 
-Such systems are merely event sinks which add no value to the Web, but for their users.
+Such systems are merely event sinks which add fairly any value to the Web, except for the individual users and the system itself.
 We are taking a step further and allow not only the chaining up of several remote ECA engines, but also the invocation of actions on any arbitrary Web accessible service.
 
 
-\section{Event Gathering}
+
+\section{The "XYZ" Prototype System}
+% NOTES / TODOs:
+%
+% Architecture scheme, implementation
+% callback functions, hot plugin
+% js-select selectors
+% List of condition operators
+% Why JS, why wasnt it used before? is it used now?
+% Transactions in businesses, find use case. how would we lose events?
+% Terminierungsproblem (compiler bau), loesungsansaetze
+
+
+
+\subsection{Gathering Event Triggers}
+
 Event Gathering is the E in ECA and without one of these letters such a system would not run.
 It is of utmost importance to find as much as possible ways to get data into a system.
 
-\subsection{Polling for Events}
 
 
-\subsection{Webhooks}
+\subsubsection{Polling for Events}
+
+
+
+\subsubsection{Webhooks}
 Which 
 
 
 
-\section{The "GEEK" Prototype System}
-
-General-Purpose ECA Engine Kernel
+\subsection{Actions}
 
 
 
+\subsection{ECA Rules}
 
 
 
 \subsection{Architecture}
 
 
-\subsection{Complexity in Asynchronous Systems}
-Variable bindings
-Error tracing
 
-Apply variable number of function arguments to function
+\subsection{Complexity in Asynchronous Systems}
+% NOTES / TODOs:
+%
+% Variable bindings
+% Asynchronity and Closures
+% Closures (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures)$
+% Closures are functions that refer to independent (free) variables. 
+% In other words, the function defined in the closure 'remembers' the environment in which it was created in. 
+
+% Error tracing
+
+% Apply variable number of function arguments to function
 
 
 
 \section{Discussion \& Results}
-Use Cases
+
+
+
+\subsection{Use Cases}
+% NOTES / TODOs:
+%
+% Temperature warning, using import.io
+% Tutorial example: as seen by user, as seen by the developer
 %http://khanlou.com/2014/03/model-view-whatever/
 
 \newpage
 
 
 \section{Future Work}
-t.b.d.
-CEP
+% NOTES / TODOs:
+%
+% CEP
 We have seen that the ECA approach is already a powerful one to make the web reactive.
 A future improvement of this could be to adopt Complex Event Processing (CEP).
 This would mean that several events could be stored in a rule and be evaluated in terms of time constraints.
@@ -268,46 +363,37 @@ A relational database will be needed in order to search through the timestamps
 %\end{appendices}
 
 \newpage
+% WECAST
 
+% WebAPI
+% ECA
+% Engine
+% Reactive
+% Web
+% Demo
+% WebAPI
+% System
+% Services
+% Multipurpose 
+% Prototype
+% Kernel
+% General-Purpose
+% Programmable
 
-WebAPI
-ECA
-Engine
-Reactive
-Web
-Demo
-WebAPI
-System
-Services
-Multipurpose 
-Prototype
-Kernel
-General-Purpose
-
+% Programmable Web 
+% General-Purpose ECA Engine Kernel
 
 
 \textbf{Examples for XYZ:}
 \begin{itemize}
-  \item \textbf{DECADE (Demonstrative ECA Dedicated Engine)}
-  \item \textbf{RECAST (Reactive ECA Service Trigger)}
-  \item \textbf{PECAN (Productive ECA eNgine)}
-  \item \textbf{ICECAP (Inet-Service Calls through ECA Paradigm)}
+  \item \textbf{GEEK} (General-Purpose ECA Engine Kernel)
+  \item \textbf{DECADE} (Dynamic ECA Demo Engine)
+  \item \textbf{WECAST} (WebAPI ECA Service Trigger)
+  \item \textbf{RECAST} (Reactive ECA Service Trigger)
+  \item \textbf{PECAN} (Productive ECA eNgine)
+  \item \textbf{ICECAP} (Inet-Service Calls through ECA Paradigm)
 \end{itemize}
 
-
-\textbf{Other names:}
-\begin{itemize}
-  \item pecan (Productive ECA eNgine)
-  \item decade (Demonstrative ECA Dedicated Engine)
-    \\dedicated, derive
-  \item decant
-  \item recall (Reactive ECA Leverage)
-  \item recap (Reactive ECA Paradigm)
-  \item recast
-  \item icecap (Inet-Service Calls through ECA Paradigm)
-  \item theca: outer sheath of the pupa of certain insects
-  \item hecate: (Greek mythology) Greek goddess of fertility who later became associated with Persephone as goddess of the underworld and protector of witches
-\end{itemize}
 
 
 
