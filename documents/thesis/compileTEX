@@ -5,4 +5,5 @@ latex thesis
 bibtex thesis
 latex thesis
 latex thesis
-pdflatex thesis
+dvips thesis.dvi
+ps2pdf thesis.ps

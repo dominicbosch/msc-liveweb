@@ -10,7 +10,7 @@
 \contentsline {subsection}{\numberline {3.2}Actions}{5}
 \contentsline {subsection}{\numberline {3.3}ECA Rules}{5}
 \contentsline {subsection}{\numberline {3.4}Architecture}{5}
-\contentsline {subsection}{\numberline {3.5}Complexity in Asynchronous Systems}{5}
-\contentsline {section}{\numberline {4}Discussion \& Results}{5}
-\contentsline {subsection}{\numberline {4.1}Use Cases}{5}
-\contentsline {section}{\numberline {5}Future Work}{6}
+\contentsline {subsection}{\numberline {3.5}Asynchronous Systems \& Closures}{5}
+\contentsline {section}{\numberline {4}Discussion \& Results}{6}
+\contentsline {subsection}{\numberline {4.1}Use Cases}{6}
+\contentsline {section}{\numberline {5}Future Work}{7}
