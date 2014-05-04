@@ -10,7 +10,7 @@
 
 
 
-\documentclass[11pt]{article}%,twocolumn
+\documentclass[11pt,a4paper,twoside,openright]{book}%,twocolumn
 \usepackage{url}
 \usepackage{cite}
 \usepackage{graphicx}
@@ -149,13 +149,15 @@ University of Basel
 }
 \maketitle
 
-\renewcommand{\abstractname}{}
-\begin{abstract}
-\textbf{Abstract.}
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+% \renewcommand{\abstractname}{}
+% \begin{abstract}
+% \textbf{Abstract.}
 
-T.B.D.
+% T.B.D.
 
-\end{abstract}
+% \end{abstract}
 
 
 \newpage
@@ -284,7 +286,7 @@ We are taking a step further and allow not only the chaining up of several remot
 
 
 
-\subsection{Gathering Event Triggers}
+\subsection{Event Triggers}
 
 Event Gathering is the E in ECA and without one of these letters such a system would not run.
 It is of utmost importance to find as much as possible ways to get data into a system.
@@ -322,7 +324,10 @@ Which
 
 % write about arallel as well?
 
-Certain optimization approaches and techniques that regained importance through upcoming programming languages require special attention to avoid common pitfalls.
+Certain optimization approaches and programming language concepts require special attention to avoid common pitfalls.
+If such approaches and concepts come together, which is the case when closures are used in asynchronous systems, random inconsistencies will be the result if they are not taken care of.
+
+
 Looking at an example of sequential code execution ( Figure~\ref{fig:Closures_Synchronous} ), we see that function execution of fA is halted until function fB is finished.
 If fB happens to be a latency-driven I/O operation the completion of fA could be deferred for a relatively long time.
 While the application waits for the completion of the I/O operation, some remaining operations in fA could eventually already be executed without causing any race conditions.

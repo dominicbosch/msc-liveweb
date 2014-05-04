@@ -1,0 +1,51 @@
+\documentclass[11pt,a4paper,oneside]{book}
+% \documentclass[11pt,a4paper,twoside,openright]{book}
+\usepackage{url}
+\usepackage{makeidx}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{fancyvrb}
+\usepackage{color}
+
+\makeindex
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\footnotesize\leftmark}
+\lfoot{Towards the Reactive Web}
+\rfoot{\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0.3pt}
+
+\makeatletter
+\renewcommand\chapter{\if@openright\cleardoublepage\else\clearpage\fi
+  \thispagestyle{fancy}%
+  \global\@topnum\z@
+  \@afterindentfalse
+  \secdef\@chapter\@schapter}
+\makeatother
+
+\input{includes/codehighlighting}
+
+\begin{document}
+
+\frontmatter
+	\input{includes/titlepage}
+	\input{includes/dedication}
+	\tableofcontents
+	\listoffigures
+	\listoftables
+	\lstlistoflistings
+
+\mainmatter
+	\input{includes/introduction}
+	\input{includes/concept}
+	\input{includes/prototype}
+	\input{includes/discussion}
+\backmatter
+	\include{includes/appendix}
+	\bibliography{thesisbib}
+	\bibliographystyle{thesisbst}
+	\printindex% I am not sure where I should use \printindex
+\end{document}

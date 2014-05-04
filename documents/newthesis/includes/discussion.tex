@@ -1,0 +1,27 @@
+
+\chapter{Discussion \& Results}
+
+
+
+\subsection{Use Cases}
+% NOTES / TODOs:
+%
+% Temperature warning, using import.io
+% Tutorial example: as seen by user, as seen by the developer
+%http://khanlou.com/2014/03/model-view-whatever/
+
+\newpage
+
+
+\section{Future Work}
+% NOTES / TODOs:
+%
+% CEP
+We have seen that the ECA approach is already a powerful one to make the web reactive.
+A future improvement of this could be to adopt Complex Event Processing (CEP).
+This would mean that several events could be stored in a rule and be evaluated in terms of time constraints.
+Through this more complex events can be created as a result of several atomic events which would lead into semantically more complex events.
+A change in paradigm will result in an approach where events are not just processed when they are entering the system and evaluated against rules, but these events would need to be stored for quite a long time.
+Also the rules will not all be checked for each event but they are subject to a scheduler.
+It can be decided when and how often a rule is evaluated and all events will be checked at these point in times, whether they are candidates for firing the rule.
+A relational database will be needed in order to search through the timestamps
