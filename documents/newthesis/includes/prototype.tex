@@ -51,52 +51,41 @@ Which
 
 % write about arallel as well?
 
-Certain optimization approaches and programming language concepts require special attention to avoid common pitfalls.
-If such approaches and concepts come together, which is the case when closures are used in asynchronous systems, random inconsistencies will be the result if they are not taken care of.
+Often optimization approaches and programming language concepts require special attention to avoid common pitfalls.
+When closures are used in asynchronous systems, developers need to be very careful not to end up with randomly inconsistent states.
 
 
-Looking at an example of sequential code execution ( Figure~\ref{fig:Closures_Synchronous} ), we see that function execution of fA is halted until function fB is finished.
-If fB happens to be a latency-driven I/O operation the completion of fA could be deferred for a relatively long time.
-While the application waits for the completion of the I/O operation, some remaining operations in fA could eventually already be executed without causing any race conditions.
-
+Looking at an example of sequential code execution in figure~\ref{fig:Closures_Synchronous}, we see that function execution of \texttt{fA} is halted until function \texttt{fB} is finished.
+If \texttt{fB} happens to be a latency-driven I/O operation the completion of \texttt{fA} could be deferred for a relatively long time.
+While the application waits for the completion of the I/O operation, some remaining operations in \texttt{fA} could eventually already be executed without causing any race conditions.
 \begin{figure}[h!]
 \centering
   \includegraphics{figures/Closures_Synchronous}
-\caption{Synchronous Function Calls}
+\caption{Synchronous Function Call}
 \label{fig:Closures_Synchronous}
 \end{figure}
 
-Non-blocking operations are a remedy for optimzed resource allocation and opens ways to overcome such unnecessary resource bindings.
-Asynchronous code execution allows non-blocking and thus scalable applications.
+
+Asynchronous code execution, as shown in figure~\ref{fig:Closures_Asynchronous}, allows non-blocking and thus scalable applications.
+Non-blocking operations are a remedy for optimzed resource allocation and open ways to overcome previously described unnecessary resource bindings.
 Processing any kind of latency-driven I/O operation asynchronously ( e.g. filesystem access and socket communication ) exploits resources that would otherwise be bound while waiting for completion.
 Such operations are processed and completed whenever required resources are available.
-Often other operations depend on the completion of asynchronous operations, hence their execution needs to be deferred.
-This required code execution deferral is achieved through the application of callback functions.
-Any code placed in a callback function, which is assigned to an asynchronous operation, is only executed when the respective asynchronous operation completed.
-This leads to stacking of functions and operations
-
-
-
-Such callback functions are passed as arguments to asynchronous operations and executed as soon as the operation finishes.
-
-By deferring the executiong of operations that depend on the 
-
-asynchronously results in dynamic code which exploits .
-
-together with closures they 
-
-Test reference Figure ~\ref{fig:Closures_Synchronous}
-
-
-
-\begin{figure*}[htb]
-%\begin{center}
+\begin{figure}[h!]
 \centering
-%,angle=-90
-  \makebox[\textwidth][c]{\includegraphics{figures/Closures_Asynchronous}}%
-\caption{Asynchronous Function Calls}
-%\end{center}
-\end{figure*}
+  \includegraphics{figures/Closures_Asynchronous}
+\caption{Asynchronous Function Call}
+\label{fig:Closures_Asynchronous}
+\end{figure}
+
+
+Often other operations depend on the completion of asynchronous operations, hence their execution needs to be deferred.
+This necessary code execution deferral is achieved through the use of callback functions, denoted \texttt{fCB} in figure~\ref{fig:Closures_Asynchronous}.
+Any code placed in a callback function, which is assigned to an asynchronous operation, is only executed after the respective asynchronous operation completed.
+This allows stacking of functions and operations upon each other which results in a flexible, event driven application.
+
+
+If we look at the example in figure~\ref{fig:Closures_Asynchronous} and assume closures as defined in \cite{EcmaScript}, .
+ 
 
 
 \begin{figure*}[htb]

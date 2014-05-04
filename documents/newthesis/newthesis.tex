@@ -1,4 +1,5 @@
 \documentclass[11pt,a4paper,oneside]{book}
+\usepackage[a4paper, portrait, margin=1in]{geometry}
 % \documentclass[11pt,a4paper,twoside,openright]{book}
 \usepackage{url}
 \usepackage{makeidx}
@@ -7,6 +8,8 @@
 \usepackage{fancyhdr}
 \usepackage{fancyvrb}
 \usepackage{color}
+
+\input{includes/codehighlighting}
 
 \makeindex
 
@@ -26,13 +29,12 @@
   \secdef\@chapter\@schapter}
 \makeatother
 
-\input{includes/codehighlighting}
 
 \begin{document}
 
 \frontmatter
 	\input{includes/titlepage}
-	\input{includes/dedication}
+	\input{includes/acknowledgment}
 	\tableofcontents
 	\listoffigures
 	\listoftables
