@@ -1,0 +1,9 @@
+#!/bin/bash
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $DIR
+latex newthesis
+bibtex newthesis
+latex newthesis
+latex newthesis
+dvips newthesis.dvi
+ps2pdf newthesis.ps
