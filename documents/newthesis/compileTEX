@@ -3,6 +3,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $DIR
 latex newthesis
 bibtex newthesis
+makeindex -s newthesis.mst newthesis
 latex newthesis
 latex newthesis
 dvips newthesis.dvi

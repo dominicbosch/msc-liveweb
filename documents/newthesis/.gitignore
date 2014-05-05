@@ -3,6 +3,8 @@
 *.blg
 *.dvi
 *.idx
+*.ilg
+*.ind
 *.lof
 *.lol
 *.lot

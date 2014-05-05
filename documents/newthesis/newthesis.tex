@@ -1,5 +1,5 @@
 \documentclass[11pt,a4paper,oneside]{book}
-\usepackage[a4paper, portrait, margin=1in]{geometry}
+\usepackage[a4paper, portrait, margin=1.1in]{geometry}
 % \documentclass[11pt,a4paper,twoside,openright]{book}
 \usepackage{url}
 \usepackage{makeidx}
@@ -7,9 +7,12 @@
 \usepackage{graphicx}
 \usepackage{fancyhdr}
 \usepackage{fancyvrb}
-\usepackage{color}
+\usepackage[usenames,dvipsnames]{color}
 
 \input{includes/codehighlighting}
+
+\setcounter{secnumdepth}{3}
+% \setcounter{tocdepth}{3}
 
 \makeindex
 
@@ -36,9 +39,6 @@
 	\input{includes/titlepage}
 	\input{includes/acknowledgment}
 	\tableofcontents
-	\listoffigures
-	\listoftables
-	\lstlistoflistings
 
 \mainmatter
 	\input{includes/introduction}
@@ -47,7 +47,12 @@
 	\input{includes/discussion}
 \backmatter
 	\include{includes/appendix}
+	\addcontentsline{toc}{chapter}{Bibliography}
 	\bibliography{thesisbib}
 	\bibliographystyle{thesisbst}
-	\printindex% I am not sure where I should use \printindex
+	\listoffigures
+	\listoftables
+	\lstlistoflistings
+	\addcontentsline{toc}{chapter}{Index}
+	\printindex
 \end{document}
