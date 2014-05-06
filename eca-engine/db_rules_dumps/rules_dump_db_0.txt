@@ -1,0 +1,14 @@
+{"id":"Interval Statistics: 4 Hours","event":"Log Stub -> call","event_interval":240,"conditions":[".nested_property:val(\"has this value\")"],"actions":["ProBinder -> setRead"]}
+{"id":"Check Mails half daily","event":"EmailYak -> newMail","event_interval":720,"conditions":[".nested_property:val(\"has this value\")"],"actions":["ProBinder -> newContent"]}
+{"id":"Interval Statistics: 2 Days","event":"Log Stub -> call","event_interval":2880,"conditions":[".nested_property:val(\"has this value\")"],"actions":["ProBinder -> setRead"]}
+{"id":"Interval Statistics: 30 Minutes","event":"Log Stub -> call","event_interval":30,"conditions":[".nested_property:val(\"has this value\")"],"actions":["ProBinder -> setRead"]}
+{"id":"Interval Statistics: 8 Hours","event":"Log Stub -> call","event_interval":480,"conditions":[".nested_property:val(\"has this value\")"],"actions":["ProBinder -> setRead"]}
+{"id":"Interval Statistics: 12 Hours","event":"Log Stub -> call","event_interval":720,"conditions":[".nested_property:val(\"has this value\")"],"actions":["ProBinder -> setRead"]}
+{"id":"Interval Statistics: 1 Day","event":"Log Stub -> call","event_interval":1440,"conditions":[".nested_property:val(\"has this value\")"],"actions":["ProBinder -> setRead"]}
+{"id":"Interval Statistics: 8 Days","event":"Log Stub -> call","event_interval":11520,"conditions":[".nested_property:val(\"has this value\")"],"actions":["ProBinder -> setRead"]}
+{"id":"Interval Statistics: 5 Minutes","event":"Log Stub -> call","event_interval":5,"conditions":[".nested_property:val(\"has this value\")"],"actions":["ProBinder -> setRead"]}
+{"id":"Interval Statistics: 10 Minutes","event":"Log Stub -> call","event_interval":10,"conditions":[".nested_property:val(\"has this value\")"],"actions":["ProBinder -> setRead"]}
+{"id":"Interval Statistics: 1 Minute","event":"Log Stub -> call","event_interval":1,"conditions":[".nested_property:val(\"has this value\")"],"actions":["ProBinder -> setRead"]}
+{"id":"Interval Statistics: 2 Hours","event":"Log Stub -> call","event_interval":120,"conditions":[".nested_property:val(\"has this value\")"],"actions":["ProBinder -> setRead"]}
+{"id":"Interval Statistics: 4 Days","event":"Log Stub -> call","event_interval":5760,"conditions":[".nested_property:val(\"has this value\")"],"actions":["ProBinder -> setRead"]}
+{"id":"Interval Statistics: 1 Hour","event":"Log Stub -> call","event_interval":60,"conditions":[".nested_property:val(\"has this value\")"],"actions":["ProBinder -> setRead"]}

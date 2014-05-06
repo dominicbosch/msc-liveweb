@@ -1,0 +1,9 @@
+[UTC|2014-04-21T22:27:01.058Z] {INIT} Rule 'Interval Statistics: 2 Days' initialized. Interval set to 2880 minutes
+[UTC|2014-04-21T22:27:02.103Z] {Log Stub} Event Poller called: 2 days call
+[UTC|2014-04-23T22:27:02.104Z] {Log Stub} Event Poller called: 2 days call
+[UTC|2014-04-25T22:27:02.110Z] {Log Stub} Event Poller called: 2 days call
+[UTC|2014-04-27T22:27:02.113Z] {Log Stub} Event Poller called: 2 days call
+[UTC|2014-04-29T22:27:02.114Z] {Log Stub} Event Poller called: 2 days call
+[UTC|2014-05-01T22:27:02.119Z] {Log Stub} Event Poller called: 2 days call
+[UTC|2014-05-03T22:27:02.120Z] {Log Stub} Event Poller called: 2 days call
+[UTC|2014-05-05T22:27:02.128Z] {Log Stub} Event Poller called: 2 days call

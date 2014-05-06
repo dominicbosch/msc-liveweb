@@ -1,0 +1,2 @@
+{"id":"Webhook to IM Broadcaster","eventtype":"Webhook","eventname":"ZapierIM","conditions":[],"actions":["IM Broadcaster -> message"]}
+{"id":"Register User to IM Broadcaster","eventtype":"Webhook","eventname":"EmailYakMail","conditions":[{"selector":".Subject","type":"string","operator":"instr","compare":"newimuser"}],"actions":["Webhook -> post"]}

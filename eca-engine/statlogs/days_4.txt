@@ -1,0 +1,5 @@
+[UTC|2014-04-21T22:25:42.750Z] {INIT} Rule 'Interval Statistics: 4 Days' initialized. Interval set to 5760 minutes
+[UTC|2014-04-21T22:25:43.797Z] {Log Stub} Event Poller called: 4 days call
+[UTC|2014-04-25T22:25:43.798Z] {Log Stub} Event Poller called: 4 days call
+[UTC|2014-04-29T22:25:43.800Z] {Log Stub} Event Poller called: 4 days call
+[UTC|2014-05-03T22:25:43.804Z] {Log Stub} Event Poller called: 4 days call

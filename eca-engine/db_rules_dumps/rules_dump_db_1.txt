@@ -1,0 +1,1 @@
+{"id":"Notify about new breached Site","event":"Security -> newBreachedSite","event_start":"2014-04-22T18:12:00.000Z","event_interval":1440,"conditions":[],"actions":["EmailYak -> sendMail"],"timestamp":"2014-04-22T18:11:28.799Z"}

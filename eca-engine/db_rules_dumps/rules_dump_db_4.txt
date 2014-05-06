@@ -1,0 +1,18 @@
+{"id":"Evaluate Deferred Uptime Statistics","eventtype":"Custom Event","eventname":"DeferredUptimeStatistics","conditions":[],"actions":["EmailYak -> sendMail"]}
+{"id":"Binder Summary To Mail","eventtype":"Custom Event","eventname":"ProBinderSummary","conditions":[],"actions":["EmailYak -> sendMail"]}
+{"id":"Parse new student mail","eventtype":"Event Poller","eventname":"EmailYak -> newMail","eventstart":"2014-05-14T08:30:00.000Z","eventinterval":10,"conditions":[{"selector":".FromAddress","type":"string","operator":"==","compare":"dominic.bosch@stud.unibas.ch"},{"selector":".Subject","type":"string","operator":"instr","compare":"New Student"}],"actions":["Converter -> parseTextToJSON"],"timestamp":"2014-04-27T20:11:01.504Z"}
+{"id":"My 'geolocation' Rule","eventtype":"Webhook","eventname":"geolocation","conditions":[],"actions":["Logger -> log"]}
+{"id":"Log Geoloc","eventtype":"Webhook","eventname":"geolocation","conditions":[],"actions":["Logger -> log"]}
+{"id":"Geolocation: Calculate distance to unibas","eventtype":"Webhook","eventname":"github","conditions":[{"selector":".nested_property","type":"string","operator":"<=","compare":"has this value"}],"actions":["Converter -> LongLatToMeterDistance"]}
+{"id":"button-click hello in subject","eventtype":"Custom Event","eventname":"button-click","conditions":[{"selector":".subject","type":"string","operator":"instr","compare":"hello"}],"actions":["Logger -> log"]}
+{"id":"close to university send email","eventtype":"Custom Event","eventname":"latlongtodist","conditions":[{"selector":".distance","type":"value","operator":">","compare":100}],"actions":["EmailYak -> sendMail","Logger -> log"]}
+{"id":"button-click log subject","eventtype":"Custom Event","eventname":"button-click","conditions":[],"actions":["Logger -> log"]}
+{"id":"log geoloc","eventtype":"Webhook","eventname":"geolocation","conditions":[],"actions":["ProBinderLig -> log"]}
+{"id":"Continuous Logging","eventtype":"Event Poller","eventname":"Continuously -> push","eventstart":"2014-04-28T11:46:00.000Z","eventinterval":1,"conditions":[],"actions":["Logger -> log"],"timestamp":"2014-04-28T11:45:19.180Z"}
+{"id":"My 'button-click' Rule","eventtype":"Custom Event","eventname":"button-click","conditions":[],"actions":["Logger -> log"]}
+{"id":"Alert about breached Account","eventtype":"Event Poller","eventname":"Security -> breachedAccount","eventstart":"2014-05-14T06:00:00.000Z","eventinterval":1440,"conditions":[],"actions":["EmailYak -> sendMail"],"timestamp":"2014-04-27T20:08:10.653Z"}
+{"id":"Log Github","eventtype":"Webhook","eventname":"github","conditions":[],"actions":["Logger -> log"]}
+{"id":"Summarize ProBinder Tab entries","eventtype":"Event Poller","eventname":"ProBinder -> unreadContent","eventstart":"2014-05-14T09:00:00.000Z","eventinterval":120,"conditions":[{"selector":".context > .id","type":"value","operator":"==","compare":18749}],"actions":["Converter -> accumulateEvents","ProBinder -> setRead"],"timestamp":"2014-04-27T20:05:33.311Z"}
+{"id":"My 'geo2location' Rule","eventtype":"Webhook","eventname":"geo2location","conditions":[],"actions":["Converter -> LongLatToMeterDistance"]}
+{"id":"Prepare new Student","eventtype":"Custom Event","eventname":"NewStudentParsedMail","conditions":[],"actions":["UC Robert -> newStudent"]}
+{"id":"Geolocation: Mail if close to university","eventtype":"Custom Event","eventname":"DistanceCalc","conditions":[{"selector":".PRISTdistance","type":"value","operator":"<","compare":400}],"actions":["EmailYak -> sendMail","Logger -> log"]}

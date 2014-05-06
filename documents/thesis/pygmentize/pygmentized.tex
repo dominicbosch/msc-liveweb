@@ -104,15 +104,14 @@
 
 \section*{}
 
-\begin{Verbatim}[commandchars=\\\{\}]
-\PY{k+kd}{var} \PY{n+nx}{fs} \PY{o}{=} \PY{n+nx}{require}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}fs\PYZsq{}}\PY{p}{)}\PY{p}{,}
-  \PY{n+nx}{oe} \PY{o}{=} \PY{n+nx}{require}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}./other\PYZhy{}example\PYZsq{}}\PY{p}{)}\PY{p}{;}
-
-\PY{n+nx}{exports}\PY{p}{.}\PY{n+nx}{loadFile} \PY{o}{=} \PY{k+kd}{function}\PY{p}{(} \PY{n+nx}{path} \PY{p}{)} \PY{p}{\PYZob{}}
-  \PY{n+nx}{oe}\PY{p}{.}\PY{n+nx}{inform}\PY{p}{(} \PY{n+nx}{path} \PY{p}{)}\PY{p}{;}
-  \PY{k}{try} \PY{p}{\PYZob{}}
-    \PY{k}{return} \PY{n+nx}{JSON}\PY{p}{.}\PY{n+nx}{parse}\PY{p}{(} \PY{n+nx}{fs}\PY{p}{.}\PY{n+nx}{readFileSync}\PY{p}{(} \PY{n+nx}{path} \PY{p}{)} \PY{p}{)}\PY{p}{;}
-  \PY{p}{\PYZcb{}} \PY{k}{catch} \PY{p}{(}\PY{n+nx}{e}\PY{p}{)} \PY{p}{\PYZob{}} \PY{c+cm}{/* [Error Handler] */} \PY{p}{\PYZcb{}}
+\begin{Verbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PY{p}{\PYZob{}}
+	\PY{n+nt}{\PYZdq{}eventname\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}email\PYZdq{}}\PY{p}{,}
+	\PY{n+nt}{\PYZdq{}body\PYZdq{}}\PY{p}{:} \PY{p}{\PYZob{}}
+			\PY{n+nt}{\PYZdq{}sender\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}sender@mail.com\PYZdq{}}\PY{p}{,}
+			\PY{n+nt}{\PYZdq{}subject\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}Important subject!\PYZdq{}}\PY{p}{,}
+			\PY{n+nt}{\PYZdq{}textbody\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}Hi User,\PYZbs{}n\PYZbs{}nThis is a lengthy mail body\PYZdq{}}
+	\PY{p}{\PYZcb{}}
 \PY{p}{\PYZcb{}}
 \end{Verbatim}
 

@@ -11,11 +11,14 @@
 
 \input{includes/codehighlighting}
 
+% How deep numbering is applied to titles
 \setcounter{secnumdepth}{3}
 % \setcounter{tocdepth}{3}
 
+% Prepare the word index
 \makeindex
 
+% Prepare header and footer
 \pagestyle{fancy}
 \fancyhf{}
 \rhead{\footnotesize\leftmark}
@@ -24,6 +27,7 @@
 \renewcommand{\headrulewidth}{0.3pt}
 \renewcommand{\footrulewidth}{0.3pt}
 
+% Apply page style also to chapter's first page
 \makeatletter
 \renewcommand\chapter{\if@openright\cleardoublepage\else\clearpage\fi
   \thispagestyle{fancy}%
