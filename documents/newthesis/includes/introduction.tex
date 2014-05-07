@@ -8,16 +8,16 @@ These trending WebAPIs benefit from a RESTful architecture which predominantly u
 
 % TODO Enough on WebAPI's?
 
-quick (handling/mastering) accessible services and even whole web applications through so called Web APIs.
-WebAPIs provide powerful tools to govern data and functionality in the web independently of any user interface from the service provider.
-The relatively
-Allowing access to these services via API is increasingly popular and allows to mash up these services
+% quick (handling/mastering) accessible services and even whole web applications through so called Web APIs.
+% WebAPIs provide powerful tools to govern data and functionality in the web independently of any user interface from the service provider.
+% The relatively
+% Allowing access to these services via API is increasingly popular and allows to mash up these services
 
-Practically all services flood the user with events
-The web should be event driven, that's why we need an engine that deals with events and makes the web reactive
-There's still the challenge of filtering
-What's important to whom
-Plus the user needs to have tools to combine and add programmability to the combination,( such as conditions, selection of provided arguments and so on)
+% Practically all services flood the user with events
+% The web should be event driven, that's why we need an engine that deals with events and makes the web reactive
+% There's still the challenge of filtering
+% What's important to whom
+% Plus the user needs to have tools to combine and add programmability to the combination,( such as conditions, selection of provided arguments and so on)
 
 % % TODO Reactivity
 % \index{Reactivity}
@@ -86,16 +86,22 @@ The user is then free to combine these event triggers and actions in the way it 
 % ECA
 % \index{ECA}
 
-
-% Several different rule languages have been developped for different purposes and vary grately in terms of usability for ECA Rules together with WebAPI mashups.
-
-
 %TODO Table with categorization of Rule languages
 
-\cite{2009-Paschke_Boley-RCER.pdf} gave a good oveview over existing approaches.
-In this section we examine different existing rule languages with respect to a simple use case.
-We want the rule language react on the receipt of an email (event), check for a distinct email address (condition) and store it in a remote location, via a Web API (action).
-The email only contains the parts we require for this use case (the sender and a subject). A JSON representation of the email would be:
+Several different rule languages have been developped for different purposes over the last years and they vary grately in their purpose.
+% terms of usability for ECA Rules together with WebAPI mashups.
+A compilation of research on different emerging rule-based languages and technologies \cite{2009-Paschke_Boley-RCER.pdf} gives an oveview over such efforts.
+We examined different existing rule languages with respect to a certain use case to identify its applicability for reactivity in the web. % TODO find other word as applicability
+The use case is defined such that the rule needs to suffice the ECA paradigm:
+
+\begin{itemize}
+  \item Event: Receipt of an Email
+  \item Condition: Check for a certain sender
+  \item Action: Store it remotely via a WebAPI
+\end{itemize}
+
+We defined an email event which the rule languages need to be able to process.
+The JSON representation of the given email event is shown in Listing~\ref{lstemail}.
 
 \begin{Verbatim}[frame=single,fontsize=\footnotesize,commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1,xleftmargin
 =.3in]
@@ -108,7 +114,7 @@ The email only contains the parts we require for this use case (the sender and a
   \PY{p}{\PYZcb{}}
 \PY{p}{\PYZcb{}}
 \end{Verbatim}
-\begin{lstlisting}[caption=Example E-Mail event expressed in JSON]
+\begin{lstlisting}[label=lstemail,caption=Example E-Mail event expressed in JSON]
 \end{lstlisting}
 
 \subsection{RDF \& XML}
