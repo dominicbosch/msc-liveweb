@@ -7,7 +7,10 @@
 \usepackage{graphicx}
 \usepackage{fancyhdr}
 \usepackage{fancyvrb}
+\usepackage{parskip}
 \usepackage[usenames,dvipsnames]{color}
+
+\renewcommand{\familydefault}{\sfdefault}
 
 \input{includes/codehighlighting}
 
@@ -36,6 +39,8 @@
   \secdef\@chapter\@schapter}
 \makeatother
 
+\setlength{\parindent}{15pt}
+% \setlength{\parskip}{.5\baselineskip}%
 
 \begin{document}
 

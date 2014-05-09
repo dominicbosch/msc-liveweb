@@ -1,15 +1,41 @@
 \chapter{Introduction}
-
-The fast evolving web has brought up a trend towards easy to master interfaces to services, the so called WebAPIs.
-\index{WebAPI}
-They do not only provide access to mere services but whole applications that allow access over WebAPIs.
-These trending WebAPIs benefit from a RESTful architecture which predominantly uses HTTP and thus relies on the most basic and powerful operations and the basis of the Web itself, the HTTP protocol. 
+The fast evolving web provides ever more data and functionalities, both in terms of volume and also complexity.
+Together with the ubiquitous access to the web through mobile devices and their push notifications, users get flooded with informations and, in turn, also produce increasingly more information.
+Governing the web's information flood is getting more difficult and even fairly impossible for human beings with the tools given.
 
 
-% TODO Enough on WebAPI's?
+It becomes important to the individual to be able to filter out personally important bits and pieces.
+Basic filters are often available but they do not allow smart filtering in any way.
+Also, apart from smart filtering of information, people should have the possibility to aggregate important information in their desired place and in a way it's most useful for themselves.
+Such an aggregation implies access to services that consume data and produce an output, be it an answer or storing the data.
+This means the user should get access to data and functionality services in a way that she can combine the possibilities in a suitable way to generated the most valuable output for her.
+Even if the web service access gets simpler these days, the average user is not able to weild them.
+The challenge to provide users with ways to handle these already simpler accessible services, called Web API's has received a notable amount of attention over the last few years.
+% TODO
+% It is a promising research field that leads towards reactivity in the web through programmability.
+
+
+
+
+Currently only few possibilities exist in the web to turn the web into reactive entity, which allows to process information as it arises.
+
+
+
+\section{Web Services / Web API's}
+\index{Web Service}
+\index{Web API}
+Data and functionalities in the web were always accessible via web services
+Web API 
+
+
+The fast evolving web has brought up a trend towards easy to master interfaces to services, the so called Web APIs.
+They do not only provide access to mere services but whole applications that allow access over Web APIs.
+These trending Web APIs benefit from a RESTful architecture which predominantly uses HTTP and thus relies on the most basic and powerful operations and the basis of the Web itself, the HTTP protocol. 
+
+% TODO Enough on Web API's?
 
 % quick (handling/mastering) accessible services and even whole web applications through so called Web APIs.
-% WebAPIs provide powerful tools to govern data and functionality in the web independently of any user interface from the service provider.
+% Web APIs provide powerful tools to govern data and functionality in the web independently of any user interface from the service provider.
 % The relatively
 % Allowing access to these services via API is increasingly popular and allows to mash up these services
 
@@ -39,13 +65,14 @@ These trending WebAPIs benefit from a RESTful architecture which predominantly u
 % \index{Webhooks}
 
 
-\section{WebAPI Mashups}
-\index{WebAPI Mashups}
-Mashups combine information and functionality of more than one resource in a single place.
-The mashing up of such resources allows new points of view on data, or even ways to interact with them.
-Simple functions are combined into more powerful ones which influence data and services in a way their founders eventually didn't even think of.
-They have been developped ever since services in the web started to exist and were accessible in a more or less convenient way.
-One of the earliest inventors of such a webservice mashup is Paul Rademacher.
+\section{Mashups}
+\index{Mashups}
+Mashups combine information and functionality of more than one web service in a single place.
+The mashing up of such web services allows data to be enhanced with new informations, processing / refinement of the information, or even ways to interact with them, e.g. through Google Maps.
+Simple functions from different sources can be combined into more powerful ones, which influence data and services in a way their founders eventually didn't even think of.
+Web service mashups have been developped ever since services in the web started to exist and were accessible in a more or less convenient way.
+We introduce Paul Rademacher as an example for how recent the invention of web service mashups are.
+He's one of the first inventors of such a web service mashup.
 In the same year after Google Maps came up in 2005, he invented a site\cite{wwwRademacherOne,wwwRademacherTwo} that displayed Craigslist houses on a Google Map.
 With no Google Maps API at that time, he needed time and skills to reverse engineer Google Map's functionalities.
 
@@ -61,10 +88,10 @@ Some latest example Mashups, taken from the ProgrammableWeb\cite{wwwProgrammable
   \item Shared Count\cite{wwwSharedCount}: Facebook, LinkedIn, Pinterest and Twitter API's used to display informations about how well spread a URL is on social media sites.
 \end{itemize}
 
-In the past few years, research and development for platforms to allow users to flexibly mashup WebAPIs got attention.
+In the past few years, research and development for platforms to allow users to flexibly mashup Web APIs got attention.
 With IFTTT and Zapier, two platforms have evolved out of this process.
-Users that register on those platforms are provided with a multitude of WebAPI functions that act as event triggers and such that are used to execute actions.
-The user is then free to combine these event triggers and actions in the way it suits best, creating helpful WebAPI mashups on their own.
+Users that register on those platforms are provided with a multitude of Web API functions that act as event triggers and such that are used to execute actions.
+The user is then free to combine these event triggers and actions in the way it suits best, creating helpful Web API mashups on their own.
 
 % Since this is a quite new field the why and how is hidden from the research.
 % you need events
@@ -78,8 +105,17 @@ The user is then free to combine these event triggers and actions in the way it 
 \index{Rules}
 \index{Rule Language}
 
+It turns out that Web API mashing up is not able to bring reactivity to the web.
+They are merely aggregations of services that only provide data or functions but no write possibilities such as web applications provide.
+% only limited functionalty
+% limited parametrization
+% often only read / new aggregation / no writes
+% TODO find mashup that does writes in a system! (not existing right?)
+
+Thus 
+
 % TODO
-% To allow user-defined WebAPI mashups, a rule language is required which is capable to express ECA Rules. 
+% To allow user-defined Web API mashups, a rule language is required which is capable to express ECA Rules. 
 
 
 % TODO
@@ -89,7 +125,7 @@ The user is then free to combine these event triggers and actions in the way it 
 %TODO Table with categorization of Rule languages
 
 Several different rule languages have been developped for different purposes over the last years and they vary grately in their purpose.
-% terms of usability for ECA Rules together with WebAPI mashups.
+% terms of usability for ECA Rules together with Web API mashups.
 A compilation of research on different emerging rule-based languages and technologies \cite{2009-Paschke_Boley-RCER.pdf} gives an oveview over such efforts.
 We examined different existing rule languages with respect to a certain use case to identify its applicability for reactivity in the web. % TODO find other word as applicability
 The use case is defined such that the rule needs to suffice the ECA paradigm:
@@ -97,7 +133,7 @@ The use case is defined such that the rule needs to suffice the ECA paradigm:
 \begin{itemize}
   \item Event: Receipt of an Email
   \item Condition: Check for a certain sender
-  \item Action: Store it remotely via a WebAPI
+  \item Action: Store it remotely via a Web API
 \end{itemize}
 
 We defined an email event which the rule languages need to be able to process.
@@ -143,12 +179,11 @@ To make the lengthy RDF definitions smaller and more readable, Notation 3\cite{w
 		=> { :webapi :newcontent ?x }
 \end{lstlisting}
 
-
-It's obvious that this language is used to express relations between entities and thus not really suitable for our use case, since we would require another interpreter to infer the actions. But concepts and ideas of the work that was done in these consortias could eventually still find influence into our solution.
+This language is used to express relations between entities and thus not really suitable for our use case, since we would require another interpreter to infer the actions. But concepts and ideas of the work that was done in these consortias could eventually still find influence into our solution.
 
 \subsection{XChange/Xcerpt}
 \index{XChange}\index{Xcerpt}
-The rule language XChange\cite{2005-Patranjan-TLE.pdf} was the outcome of the REWERSE project and acted as an influence in many further researches. The language was designed to add reactive behaviour to a "static" web which is represented through XML resources. Thus we have action logics to alter such resources through insertions and deletions. Since we aim to utilize web API's for our rule language we need a more generic approach which adds flexibility in term of the API provided. But the thorough research done with the language XChange holds valuable concepts, especially in terms of temporal evet composition. This could be a rule according to our use case:
+The rule language XChange\cite{2005-Patranjan-TLE.pdf} was the outcome of the REWERSE (\cite{wwwRewerse}, Reasoning on the Web with Rules and Semantics) project, which was funded by the EU and Switzerland. Their work influenced a number of future research. The language was designed to add reactive behaviour to a "static" web which is represented through XML resources. Thus we have action logics to alter such resources through insertions and deletions. Since we aim to utilize web API's for our rule language we need a more generic approach which adds flexibility in term of the API provided. But the thorough research done with the language XChange holds valuable concepts, especially in terms of temporal evet composition. This could be a rule according to our use case:
 
 \begin{lstlisting}[frame=single,float=h,label=lstxchange1,language=XChange,caption=E-Mail Example rule expressed in XChange]
 	TRANSACTION

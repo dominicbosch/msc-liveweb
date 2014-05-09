@@ -18,9 +18,14 @@
 
 
 % \section{Event Condition Action (ECA) Model in the Web}
+In the last section we showed how mashups create additional value for the web by combining several WebAPI's.
+But it turned out, that such mashups are closed systems, which ofen only allow little degree of parametrization.
+To get past such limitations and define a conceptual model for reactive web systems, it is necessary to define a 
 
+existing rule languages, rule engines, 
 
-Existing ECA systems (List examples) all act on local data.
+Existing ECA systems all act on local data.
+% (List examples) 
 Looking at (Wikipedia...) their definition is actions on local data.
 This does only add reactivity to these systems and not to the Web per se.
 
@@ -29,9 +34,16 @@ We are taking a step further and allow not only the chaining up of several remot
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=0.6\textwidth]{figures/Conceptual_Model}
+  \includegraphics{figures/Conceptual_Model_Simple}
+  \caption{Reactor ;) Conceptual model for reactive web systems}
+  \label{fig:Conceptual_Model_Simple}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics{figures/Conceptual_Model}
   \caption{Conceptual model for reactive Web Systems}
-  \label{fig:Architecture_woEP}
+  \label{fig:Conceptual_Model}
 \end{figure}
 
 
