@@ -14,7 +14,6 @@
 % smart filtering
 % aggregation of information in whatever location user wants
 % 
-
 The "XYZ" prototype system is the realisation of a reactive web system.
 It was developped during the research for this thesis and acts as a platform for feasibility studies of certain use cases.
 
@@ -26,14 +25,14 @@ It was developped during the research for this thesis and acts as a platform for
 Since "XYZ"'s core functionalty is the communication with resources in the web, the architecture bases on HTTP protocol in several parts.
 For example the events are meant to be retrieved completely via HTTP, the user interface is a webpage which posts requests to the system and most actions are also meant to be HTTP requests, or at least using them to gather information.
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
 	\centering
   \includegraphics[width=0.8\textwidth]{figures/Architecture_woET}
 	\caption{"XYZ" Architecture}
 	\label{fig:Architecture_woEP}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
 	\centering
   \includegraphics[width=0.9\textwidth]{figures/Architecture_wET}
 	\caption{"XYZ" Architecture}
@@ -99,7 +98,7 @@ When closures are used as asynchronous functions, developers need to be very car
 Looking at an example of sequential code execution in Figure~\ref{fig:Closures_Synchronous}, we see that function execution of \texttt{fA} is halted until function \texttt{fB} is finished.
 If \texttt{fB} happens to be a latency-driven I/O operation the completion of \texttt{fA} could be deferred for a relatively long time.
 While the application waits for the completion of the I/O operation, some remaining operations in \texttt{fA} could eventually already be executed without causing any race conditions.
-\begin{figure}[h!]
+\begin{figure}[!ht]
 	\centering
   \includegraphics{figures/Closures_Synchronous}
 	\caption{Synchronous Function Call}
@@ -111,7 +110,7 @@ Asynchronous code execution, as shown in Figure~\ref{fig:Closures_Asynchronous},
 Non-blocking operations are a remedy for optimzed resource allocation and open up ways to overcome previously described unnecessary resource bindings.
 Processing any kind of latency-driven I/O operation asynchronously ( e.g. filesystem access and socket communication ) exploits resources that would otherwise be bound while waiting for completion.
 Such operations are processed and completed whenever required resources are available.
-\begin{figure}[h!]
+\begin{figure}[!ht]
 	\centering
   \includegraphics{figures/Closures_Asynchronous}
 	\caption{Asynchronous Function Call}
@@ -133,13 +132,13 @@ This will be most obvious in a loop that immediately invokes \texttt{fB} several
 In such a setup \texttt{c} will have different values in the same part of different invocations of \texttt{fB}.
 This might be a very well hidden pitfall since often developers will take care that the context will not change during execution of \texttt{fA}.
 But it is likely that the context will change if \texttt{fA} is invoked again while \texttt{fB} is still running, which is a common behaviour in event-driven architectures.
-\begin{figure}[h!]
+\begin{figure}[!ht]
 	\centering
   \includegraphics{figures/Closures_Closure-1}
 	\caption{Closure Scope and referenced context}
 	\label{fig:Closures_Closure-1}
 \end{figure}
-\begin{figure}[h!]
+\begin{figure}[!ht]
 	\centering
   \includegraphics{figures/Closures_Closure-2}
 	\caption{Closure context changes in a loop}
@@ -153,15 +152,17 @@ The argument passed to \texttt{fB} is the context ( \texttt{c} in Figure~\ref{fi
 \texttt{fC} has now \texttt{c} as a fixed context, which can't be overwritten anymore.
 Now the only thing left is \texttt{fC} needs to be invoked and it will retain the original context.
 This implementation is necessary when the closure acts as a callback function for asynchronous operations, to preserve the original context in case it is required within the callback function.
-\begin{figure}[h!]
+\begin{figure}[!ht]
 	\centering
   \includegraphics{figures/Closures_Closure-3}
 	\caption{Closure context shielding}
 	\label{fig:Closures_Closure-3}
 \end{figure}
 
+% TODO try async closures in other programming languages
+
 \newpage
-\section{"XYZ" Name discussion}
+{\huge "XYZ" Name discussion}
 % WECAST
 
 % WebAPI

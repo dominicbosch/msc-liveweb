@@ -8,15 +8,19 @@
 \usepackage{fancyhdr}
 \usepackage{fancyvrb}
 \usepackage{parskip}
+\usepackage{pdfpages}
+\usepackage{chngpage}
+\usepackage[toc,header]{appendix}
 \usepackage[usenames,dvipsnames]{color}
 
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 \renewcommand{\familydefault}{\sfdefault}
 
 \input{includes/codehighlighting}
 
 % How deep numbering is applied to titles
-\setcounter{secnumdepth}{3}
-% \setcounter{tocdepth}{1}
+% \setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{1}
 
 % Prepare the word index
 \makeindex
@@ -51,11 +55,12 @@
 
 \mainmatter
 	\input{includes/introduction}
+	\input{includes/related}
 	\input{includes/concept}
 	\input{includes/prototype}
 	\input{includes/discussion}
-\backmatter
 	\include{includes/appendix}
+\backmatter
 	\addcontentsline{toc}{chapter}{Bibliography}
 	\bibliography{thesisbib}
 	\bibliographystyle{thesisbst}
@@ -64,4 +69,6 @@
 	\lstlistoflistings
 	\addcontentsline{toc}{chapter}{Index}
 	\printindex
+	\include{includes/scientificintegrity}
+
 \end{document}
