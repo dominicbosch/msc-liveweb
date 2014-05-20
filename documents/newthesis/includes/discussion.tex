@@ -15,7 +15,10 @@
 % We are taking a step further and allow not only the chaining up of several remote ECA engines, but also the invocation of actions on any arbitrary Web accessible service.
 
 
-\section{Future Work}
+\section{Use Cases?}
+
+
+\section{Future Work?}
 % NOTES / TODOs:
 %
 % CEP
@@ -27,3 +30,8 @@ A change in paradigm will result in an approach where events are not just proces
 Also the rules will not all be checked for each event but they are subject to a scheduler.
 It can be decided when and how often a rule is evaluated and all events will be checked at these point in times, whether they are candidates for firing the rule.
 A relational database will be needed in order to search through the timestamps
+
+% Transactions for business. find use case.and explain how we would loose events.
+% TODO pathologische beispiele
+% Endless loops -> child_process to be killed when not responding. what about async callbacks?
+

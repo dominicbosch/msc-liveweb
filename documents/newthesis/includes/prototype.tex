@@ -14,6 +14,10 @@
 % smart filtering
 % aggregation of information in whatever location user wants
 % 
+
+% as seen by user,
+% as seen by developer
+
 The "XYZ" prototype system is the realisation of a reactive web system.
 It was developped during the research for this thesis and acts as a platform for feasibility studies of certain use cases.
 
@@ -40,7 +44,7 @@ For example the events are meant to be retrieved completely via HTTP, the user i
 \end{figure}
 
 
-\section{Event Triggers}
+\section{Event Trigger}
 
 Event Gathering is the E in ECA and without one of these letters such a system would not run.
 It is of utmost importance to find as much as possible ways to get data into a system.
@@ -49,37 +53,45 @@ It is of utmost importance to find as much as possible ways to get data into a s
 
 \subsection{Polling}
 
-
-
 \subsection{Webhooks}
 
 
 
 
-\section{Conditions}
 
 
 
+\section{Action Invoker}
 
-\section{Actions}
-
-\subsection{Aditional Information}
 % Not only from events
 % import.io
 
-\section{ECA Rules}
+\section{ECA Rules in the Engine}
+% TODO Conditions
+% Explain rules, transferrability to language?
+
+% dynamic code modules to shield system from user modules
+
+%explain modules and their properties / user associations
 
 
 
-
-
-\section{Engine}
 
 % Apply variable number of function arguments to function
 
+% \section{Grab data from anywhere}
 
+% TODO figure: Wer hat welche rollen?
+% TODO figure: Event fluss in verschiedenen UCs
+% TODO figure: event anomalien (3-4 knoten)
+% TODO figure: Unterschied Push / Pull -> unter introduction bei webhooks?
 
+% Callbacks / Webhooks semantical similarities but at different layers
 
+\section{Node.js}
+% Why JS, why wasn't it used up to now? is it used now?
+
+% TODO figure: Callback; Result ensurance (ergebnissichherung) wird direkt mit funktion mitgeschickt
 
 \section{Asynchronous Closures}
 % NOTES / TODOs:
@@ -161,8 +173,6 @@ This implementation is necessary when the closure acts as a callback function fo
 
 % TODO try async closures in other programming languages
 
-
-\section{Node.js}
 
 \subsection{Benchmarking JavaScript vs. Java}
 
@@ -288,6 +298,9 @@ process.exit( 0 );
 
 \end{lstlisting}
 
+% TODO terminierungsproblem, testing, web server, timeout, stacked callbacks.
+%compilerbau?
+%loesungsansätze?
 
 \newpage
 {\huge "XYZ" Name discussion}
