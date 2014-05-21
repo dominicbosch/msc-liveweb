@@ -37,6 +37,8 @@ These trending Web APIs benefit from a RESTful architecture which predominantly 
 % % TODO engine
 % \index{Engine}
 
+\section{Webhooks}
+
 % % TODO Webhooks
 % \index{Webhooks}
 
@@ -137,7 +139,7 @@ The JSON representation of the given email event is shown in Listing~\ref{lstema
 \index{XML}
 An early ECA Rule Language for XML repositories\cite{Papamarkos03event-condition-actionrule} was postulated in 2003 and was picked up by many researches afterwards. It was designed to react on insert and delete events within XML repositories and as an action change XML documents.
 
-\begin{lstlisting}[frame=single,float=h,label=lstrdf,language=RDF,caption=E-Mail Example rule expressed in RDF]
+\begin{lstlisting}[frame=single,float=ht,label=lstrdf,language=RDF,caption=E-Mail Example rule expressed in RDF]
 	ON INSERT document(’inbound_queue.xml’)/mails/mail
 	IF $delta/sender[.=’sender@mail.com’]
 	DO DELETE document(’inbound_queue.xml’)/mails/mail;
@@ -153,7 +155,7 @@ Now apart from implementing a rules engine, we would also need to add an XML doc
 \index{Notation 3}
 To make the lengthy RDF definitions smaller and more readable, Notation 3\cite{wwwn3} was designed and announced in 2005. Through the implies operator(=\textgreater) an "event" can be connected to an "action", both expressed in RDF's subject, predicate, object notation, which makes the expression of ECA rules a complicated and not very intuitive task. A solution to our use case would look as follows:
 
-\begin{lstlisting}[frame=single,float=h,label=lstn3,language=N3,caption=E-Mail Example rule expressed in Notation 3]
+\begin{lstlisting}[frame=single,float=ht,label=lstn3,language=N3,caption=E-Mail Example rule expressed in Notation 3]
 	{ ?x :event "email". ?x :sender "sender@mail.com" }
 		=> { :webapi :newcontent ?x }
 \end{lstlisting}
@@ -164,7 +166,7 @@ This language is used to express relations between entities and thus not really 
 \index{XChange}\index{Xcerpt}
 The rule language XChange\cite{2005-Patranjan-TLE.pdf} was the outcome of the REWERSE (\cite{wwwRewerse}, Reasoning on the Web with Rules and Semantics) project, which was funded by the EU and Switzerland. Their work influenced a number of future research. The language was designed to add reactive behaviour to a "static" web which is represented through XML resources. Thus we have action logics to alter such resources through insertions and deletions. Since we aim to utilize web API's for our rule language we need a more generic approach which adds flexibility in term of the API provided. But the thorough research done with the language XChange holds valuable concepts, especially in terms of temporal evet composition. This could be a rule according to our use case:
 
-\begin{lstlisting}[frame=single,float=h,label=lstxchange1,language=XChange,caption=E-Mail Example rule expressed in XChange]
+\begin{lstlisting}[frame=single,float=ht,label=lstxchange1,language=XChange,caption=E-Mail Example rule expressed in XChange]
 	TRANSACTION
 		in {
 			resource { "http://www.webapi.com"},
@@ -184,7 +186,7 @@ The rule language XChange\cite{2005-Patranjan-TLE.pdf} was the outcome of the RE
 
 But XChange is designed to access other resources in an action and thus provides powerful tools:
 
-\begin{lstlisting}[frame=single,float=h,label=lstxchange2,language=XChange,caption=XChange Rule accesses remote resource]
+\begin{lstlisting}[frame=single,float=ht,label=lstxchange2,language=XChange,caption=XChange Rule accesses remote resource]
 	TRANSACTION
 		[...]
 	ON
@@ -310,7 +312,5 @@ Most of the examined rule languages are designed for the interchangability of ru
 % TODO Rechtfertigung wieso nicht verwendet
 % Java EE und KRL nicht anwendbar
 
-
-% \subsection{Webhooks}
 
 % TODO performance artikel / paper ueber node.js

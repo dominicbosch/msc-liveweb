@@ -1,5 +1,5 @@
 \chapter{Introduction}
-The fast evolving web provides ever more data and functionalities, both in terms of volume and also complexity.
+The fast evolving web provides ever more devices that produce data and offer functionalities, both in terms of volume and also complexity.
 Together with the ubiquitous access to the web through mobile devices and their push notifications, users get flooded with informations and, in turn, also produce increasingly more information.
 Governing the web's information flood is getting more difficult and even fairly impossible for human beings with the tools given.
 
@@ -7,20 +7,28 @@ Governing the web's information flood is getting more difficult and even fairly 
 It becomes important to the individual to be able to filter out personally important bits and pieces.
 Basic filters are often available but they do not allow smart filtering in any way.
 Also, apart from smart filtering of information, people should have the possibility to aggregate important information in their desired place and in a way it's most useful for themselves.
-Such an aggregation implies access to services that consume data and produce an output, be it an answer or storing the data.
+Such an aggregation implies access to services that consume data and produce an output, be it a data answer or storage.
 This means the user should get access to data and functionality services in a way that she can combine the possibilities in a suitable way to generated the most valuable output for her.
 Even if the web service access gets simpler these days, the average user is not able to weild them.
 The challenge to provide users with ways to handle these already simpler accessible services, called Web API's has received a notable amount of attention over the last few years.
-% TODO
-% It is a promising research field that leads towards reactivity in the web through programmability.
-
 
 % % TODO Reactivity!! allgemein
 % \index{Reactivity}
 
 % % TODO Programmability of the Web
 % \index{Programmability}
+%  -> in general, both should go into related work?
 
+It is a promising research field that leads towards reactivity in the web through programmability.
+Currently somebody that want's to program the web, requires deep knowledge of the required services and their functionality.
+There are a few possibilities in the web that go towards easing the programmability of the web, but they are either complicated to weild themselves or mere data copy or mashup tasks.
+Our research in this thesis is about easing the programmability of the web and therefore to achieve the reactive web. 
 
-
-Currently only few possibilities exist in the web to turn the web into reactive entity, which allows to process information as it arises.
+\begin{lstlisting}[frame=single,float=h,label=lst_rdf,language=RDF,caption=E-Mail Example rule expressed in RDF]
+  ON INSERT document(’inbound_queue.xml’)/mails/mail
+  IF $delta/sender[.=’sender@mail.com’]
+  DO DELETE document(’inbound_queue.xml’)/mails/mail;
+    LET $api = resource("www.webapi.com") IN
+    INSERT ($api, newcontent,
+      <content>New mail: {$delta/subject}</content>)
+\end{lstlisting}

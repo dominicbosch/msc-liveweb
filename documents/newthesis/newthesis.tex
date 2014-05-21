@@ -8,9 +8,11 @@
 \usepackage{fancyhdr}
 \usepackage{fancyvrb}
 \usepackage{parskip}
-\usepackage{pdfpages}
 \usepackage{chngpage}
-\usepackage[toc,header]{appendix}
+\usepackage{lmodern}
+% \usepackage{pdfpages}
+% \usepackage[nottoc]{tocbibind}
+\usepackage[toc,page,header]{appendix}
 \usepackage[usenames,dvipsnames]{color}
 
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
@@ -51,24 +53,41 @@
 \frontmatter
 	\input{includes/titlepage}
 	% \input{includes/acknowledgment}
-	\tableofcontents
+	{\tableofcontents}
+	\listoffigures
+	\listoftables
+	\lstlistoflistings
 
 \mainmatter
 	\input{includes/introduction}
 	\input{includes/related}
 	\input{includes/concept}
+	\input{includes/programming}
 	\input{includes/prototype}
 	\input{includes/discussion}
-	\include{includes/appendix}
-\backmatter
+
+% Bibliography
 	\addcontentsline{toc}{chapter}{Bibliography}
 	\bibliography{thesisbib}
 	\bibliographystyle{thesisbst}
-	% \listoffigures
-	% \listoftables
-	% \lstlistoflistings
+
+% Index
 	\addcontentsline{toc}{chapter}{Index}
 	\printindex
-	% \include{includes/scientificintegrity}
+
+% Appendix
+	\begin{appendices}
+	\addtocontents{toc}{\setcounter{tocdepth}{-1}}
+	\input{includes/appendixa}
+	\input{includes/appendixb}
+	\input{includes/appendixc}
+	
+	\end{appendices}
+
+	\addtocontents{toc}{\setcounter{tocdepth}{1}}
+\backmatter
+
+	\include{includes/scientificintegrity}
+	% \addtocontents{toc}{\setcounter{tocdepth}{1}}
 
 \end{document}
