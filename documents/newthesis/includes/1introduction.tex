@@ -19,16 +19,9 @@ The challenge to provide users with ways to handle these already simpler accessi
 % \index{Programmability}
 %  -> in general, both should go into related work?
 
+% TODO Information Space
+
 It is a promising research field that leads towards reactivity in the web through programmability.
 Currently somebody that want's to program the web, requires deep knowledge of the required services and their functionality.
 There are a few possibilities in the web that go towards easing the programmability of the web, but they are either complicated to weild themselves or mere data copy or mashup tasks.
 Our research in this thesis is about easing the programmability of the web and therefore to achieve the reactive web. 
-
-\begin{lstlisting}[frame=single,float=h,label=lst_rdf,language=RDF,caption=E-Mail Example rule expressed in RDF]
-  ON INSERT document(’inbound_queue.xml’)/mails/mail
-  IF $delta/sender[.=’sender@mail.com’]
-  DO DELETE document(’inbound_queue.xml’)/mails/mail;
-    LET $api = resource("www.webapi.com") IN
-    INSERT ($api, newcontent,
-      <content>New mail: {$delta/subject}</content>)
-\end{lstlisting}

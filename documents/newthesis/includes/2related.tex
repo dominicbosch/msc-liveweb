@@ -1,8 +1,32 @@
 \chapter{Related Work}
 
-\section{Web Services / Web API's}
 \index{Web Service}
 \index{Web API}
+% Web Services – Opportunities and Challenges
+% NICOLETA DAVID, CLAUDIA-GEORGETA CARSTEA,
+% IOAN-GHEORGHE RATIU, LUCIAN PATRASCU, DANIELA DAMIAN
+%Web Services term refers to available programmatic interfaces that are used in the World Wide Web for application-to-application communication.
+
+% An approach to develop a layered architecture from software engineering, principles was proposed by Gerber et al. [23], referred to as the Comprehensive, Functional, Layered (CFL) architecture for the Semantic Web. C
+ % - Gerber A., van der Merwe A. and Barnard A. Towards a Semantic Web Layered Architecture. In Proceedings of IASTED International Conference on Software Engineering, (SE2007), Innsbruck, Austria. IASTED 2007. ISBN 978-0-88986-641-6, pp. 353–362.
+
+% http://benchmarksgame.alioth.debian.org/u64/benchmark.php?test=all&lang=java&lang2=v8&data=u64 seem to back our findings
+% https://www.paypal-engineering.com/2013/11/22/node-js-at-paypal/ as well
+% https://vividcortex.com/blog/2013/12/09/analysis-of-paypals-node-vs-java-benchmarks/ interpretes above results:
+% My guess is that Node is encouraging good programmer practices in terms of scalability, and Java less so. In other words, programmers probably have to work less hard to avoid bad scalability bottlenecks in Node than in Java.
+
+
+% XML SOAP WSDL UDDI RDF OWL
+% microformats: xhtml rss
+
+% http://www.w3.org/TR/ws-gloss/: A Web service is a software system designed to support interoperable machine-to-machine interaction over a network.
+% http://www.informationweek.com/from-edi-to-xml-and-uddi-a-brief-history-of-web-services/d/d-id/1012008?
+% -> Common Object Request Broker Architecture, Distributed Component Object Model, Unix Remote Procedure Call, and Java Remote Method Invocation. Each of those technologies failed to gain significant market share or enough momentum to succeed.
+% CORBA , RMI
+% XML officially became a standard in February 1998, when the World Wide Web Consortium announced that XML 1.0 had reached draft recommendation status: suitable for deployment in applications.
+% SOAP won over WDDX (Web Distributed Data Exchange)
+% SOAP 1.0, its specification for a standardized message-passing protocol based on XML.
+% REST
 % TODO dienste services WebAPI belegen mit referenzen wo begriff wie gebraucht wird
 % Begriffe festnageln, definieren
 Data and functionalities in the web were always accessible via web services, whatever this means.
@@ -37,14 +61,12 @@ These trending Web APIs benefit from a RESTful architecture which predominantly 
 % % TODO engine
 % \index{Engine}
 
-\section{Webhooks}
 
 % % TODO Webhooks
 % \index{Webhooks}
 
 % TODO Categorize Related Work!
 
-\section{Mashups}
 \index{Mashups}
 Mashups combine information and functionality of more than one web service in a single place.
 The mashing up of such web services allows data to be enhanced with new informations, processing / refinement of the information, or even ways to interact with them, e.g. through Google Maps.
@@ -77,11 +99,10 @@ The user is then free to combine these event triggers and actions in the way it 
 % you need events
 % you need rules / rule language
 
+% TODO REST paper, Craigslist artcile / Paper
 
 
 
-
-\section{Rule Languages \& Engines}
 \index{Rule}
 \index{Engine}
 \index{Rule Language}
@@ -118,92 +139,28 @@ The use case is defined such that the rule needs to suffice the ECA paradigm:
 \end{itemize}
 
 We defined an email event which the rule languages need to be able to process.
-The JSON representation of the given email event is shown in Listing~\ref{lstemail}.
+The JSON representation of the given email event as depicted in the appendix. %is shown in Listing~\ref{lstemail}.
 
-\begin{Verbatim}[frame=single,fontsize=\footnotesize,commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1,xleftmargin
-=.3in]
-\PY{p}{\PYZob{}}
-  \PY{n+nt}{\PYZdq{}eventname\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}email\PYZdq{}}\PY{p}{,}
-  \PY{n+nt}{\PYZdq{}body\PYZdq{}}\PY{p}{:} \PY{p}{\PYZob{}}
-    \PY{n+nt}{\PYZdq{}sender\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}sender@mail.com\PYZdq{}}\PY{p}{,}
-    \PY{n+nt}{\PYZdq{}subject\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}Important subject!\PYZdq{}}\PY{p}{,}
-    \PY{n+nt}{\PYZdq{}textbody\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}Hi User,\PYZbs{}n\PYZbs{}nThis is a lengthy mail body\PYZdq{}}
-  \PY{p}{\PYZcb{}}
-\PY{p}{\PYZcb{}}
-\end{Verbatim}
-\begin{lstlisting}[label=lstemail,caption=Example E-Mail event expressed in JSON]
-\end{lstlisting}
+% FIXME Leave out what was not inspiring!
 
-\subsection{RDF \& XML}
 \index{RDF}
 \index{XML}
 An early ECA Rule Language for XML repositories\cite{Papamarkos03event-condition-actionrule} was postulated in 2003 and was picked up by many researches afterwards. It was designed to react on insert and delete events within XML repositories and as an action change XML documents.
 
-\begin{lstlisting}[frame=single,float=ht,label=lstrdf,language=RDF,caption=E-Mail Example rule expressed in RDF]
-	ON INSERT document(’inbound_queue.xml’)/mails/mail
-	IF $delta/sender[.=’sender@mail.com’]
-	DO DELETE document(’inbound_queue.xml’)/mails/mail;
-		LET $api = resource("www.webapi.com") IN
-		INSERT ($api, newcontent,
-			<content>New mail: {$delta/subject}</content>)
-\end{lstlisting}
-
 
 Now apart from implementing a rules engine, we would also need to add an XML document event manager which interpretes and pushes events into the XML file \emph{inbound\_queue.xml}. Then again this instance would interprete the ouptuts of the ECA engine, which would theoretically manifest in other XML documents, and produce meaningful actions on remote hosts. This wouldn't be an architecture which has its focus on the solution of our use case and, as a result, add complexity and create an unnecessary overhead.
 
-\subsection{Notation 3}
 \index{Notation 3}
 To make the lengthy RDF definitions smaller and more readable, Notation 3\cite{wwwn3} was designed and announced in 2005. Through the implies operator(=\textgreater) an "event" can be connected to an "action", both expressed in RDF's subject, predicate, object notation, which makes the expression of ECA rules a complicated and not very intuitive task. A solution to our use case would look as follows:
 
-\begin{lstlisting}[frame=single,float=ht,label=lstn3,language=N3,caption=E-Mail Example rule expressed in Notation 3]
-	{ ?x :event "email". ?x :sender "sender@mail.com" }
-		=> { :webapi :newcontent ?x }
-\end{lstlisting}
-
 This language is used to express relations between entities and thus not really suitable for our use case, since we would require another interpreter to infer the actions. But concepts and ideas of the work that was done in these consortias could eventually still find influence into our solution.
 
-\subsection{XChange/Xcerpt}
 \index{XChange}\index{Xcerpt}
 The rule language XChange\cite{2005-Patranjan-TLE.pdf} was the outcome of the REWERSE (\cite{wwwRewerse}, Reasoning on the Web with Rules and Semantics) project, which was funded by the EU and Switzerland. Their work influenced a number of future research. The language was designed to add reactive behaviour to a "static" web which is represented through XML resources. Thus we have action logics to alter such resources through insertions and deletions. Since we aim to utilize web API's for our rule language we need a more generic approach which adds flexibility in term of the API provided. But the thorough research done with the language XChange holds valuable concepts, especially in terms of temporal evet composition. This could be a rule according to our use case:
 
-\begin{lstlisting}[frame=single,float=ht,label=lstxchange1,language=XChange,caption=E-Mail Example rule expressed in XChange]
-	TRANSACTION
-		in {
-			resource { "http://www.webapi.com"},
-			newcontents {{
-				insert newcontent { var Mail }
-			}}
-		}
-	ON
-		xchange:event {{
-			xchange:sender { "http://mailserver.com" },
-			var Mail -> email {{
-				sender { "sender@mail.com" }
-			}}
-		}}
-	END
-\end{lstlisting}
 
 But XChange is designed to access other resources in an action and thus provides powerful tools:
 
-\begin{lstlisting}[frame=single,float=ht,label=lstxchange2,language=XChange,caption=XChange Rule accesses remote resource]
-	TRANSACTION
-		[...]
-	ON
-		[...]
-	FROM
-		in {
-			resource { "http://www.weather.com"},
-			temperatures {{
-				var T -> temperature {{
-					datetime { "2013-10-20-08:00:00AM" }
-				}}
-			}}
-		}
-	END
-\end{lstlisting}
-
-\subsection{JSON Rules}
 \index{JSON Rules}
 In 2008 \emph{JSON Rules}~\cite{2008-Giurca_Pascalau-JSON_Rules.pdf} was introduced as a language to easily react on specific DOM tree compositions.
 The usage of JavaScript allowed them to provide simple functions which could be called directly by the actions, thus abstracting functionality from the language.
@@ -213,39 +170,6 @@ A drawback of this language is its binding to DOM tree events, where we would wa
 Also the temporal composition to complex events is not a subject of their work and needs further attention.
 
 
-\begin{Verbatim}[frame=single,fontsize=\footnotesize,commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1,xleftmargin
-=.3in]
-\PY{p}{\PYZob{}}
-    \PY{n+nt}{\PYZdq{}id\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{0}\PY{p}{,}
-    \PY{n+nt}{\PYZdq{}conditions\PYZdq{}}\PY{p}{:} \PY{p}{[}
-        \PY{p}{\PYZob{}}
-            \PY{n+nt}{\PYZdq{}type\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}email\PYZdq{}}\PY{p}{,}
-            \PY{n+nt}{\PYZdq{}constraints\PYZdq{}}\PY{p}{:} \PY{p}{[}
-                \PY{p}{\PYZob{}}
-                    \PY{n+nt}{\PYZdq{}propertyName\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}sender\PYZdq{}}\PY{p}{,}
-                    \PY{n+nt}{\PYZdq{}operator\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}EQ\PYZdq{}}\PY{p}{,}
-                    \PY{n+nt}{\PYZdq{}restriction\PYZdq{}}\PY{p}{:} \PY{p}{\PYZob{}}
-                        \PY{n+nt}{\PYZdq{}type\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}String\PYZdq{}}\PY{p}{,}
-                        \PY{n+nt}{\PYZdq{}value\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}sender@mail.com\PYZdq{}}
-                    \PY{p}{\PYZcb{}}
-                \PY{p}{\PYZcb{}}\PY{p}{,}
-                \PY{p}{\PYZob{}}
-                    \PY{n+nt}{\PYZdq{}bind\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}\PYZdl{}S\PYZdq{}}\PY{p}{,}
-                    \PY{n+nt}{\PYZdq{}propertyName\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}subject\PYZdq{}}
-                \PY{p}{\PYZcb{}}
-            \PY{p}{]}
-        \PY{p}{\PYZcb{}}
-    \PY{p}{]}\PY{p}{,}
-    \PY{n+nt}{\PYZdq{}actions\PYZdq{}}\PY{p}{:} \PY{p}{[}
-        \PY{l+s+s2}{\PYZdq{}webapi(\PYZsq{}addcontent\PYZsq{}, \PYZdl{}S)\PYZdq{}}
-    \PY{p}{]}
-\PY{p}{\PYZcb{}}
-\end{Verbatim}
-\begin{lstlisting}[caption=E-Mail Example rule in JSON Rules]
-\end{lstlisting}
-
-
-\subsection{Kinetics Rule Language (KRL)}
 \index{KRL}
 A most recent (2011) open-source development is the Kinetic Rules Engine together with the Kinetics Rule Language~\cite{bookTheLiveWeb}.
 It is built for the purpose of adding reactivity to the cloud.
@@ -253,20 +177,7 @@ The language is based on declarative syntax, enriched with imparative elements.
 But it is a tedious task to get into a whole new language and their caveats.
 \emph{authorization?}
 
-\begin{lstlisting}[frame=single,float=h,label=lstkre,language=KRE,caption=E-Mail Example rule in KRL]
-	rule store_mail {
-		select when mail newmail
-		sender re#sender@mail.com#
-		subject re#*# setting(subj)
-		http:post("http://www.webapi.com/newcontent")
-		with params = {
-			"text": subj
-		}
-	}
-\end{lstlisting}
 
-
-\subsection{(Reaction) RuleML}
 \index{RuleML}
 The basis of \emph{RuleML}~\cite{2006-Boley-RuleML.pdf} is datalog, a language in the intersection of SQL and Prolog.
 In 2012 the \emph{Reaction RuleML}~\cite{2012-Paschke_etal-ReactionRuleML.pdf} language incorporated several different types of rules into the RuleML syntax, to establish a uniform syntax and interchangability of rules.
@@ -274,35 +185,6 @@ In 2012 the \emph{Reaction RuleML}~\cite{2012-Paschke_etal-ReactionRuleML.pdf} l
 
 
 R2ML allows usage for RuleML together with many other dialects. Really!?
-
-\begin{Verbatim}[frame=single,fontsize=\footnotesize,commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1,xleftmargin
-=.3in]
-  \PY{n+nt}{\PYZlt{}Rule} \PY{n+na}{style=}\PY{l+s}{\PYZdq{}active\PYZdq{}}\PY{n+nt}{\PYZgt{}}
-    \PY{n+nt}{\PYZlt{}on}\PY{n+nt}{\PYZgt{}}
-      \PY{n+nt}{\PYZlt{}Event}\PY{n+nt}{\PYZgt{}}
-        \PY{n+nt}{\PYZlt{}Atom}\PY{n+nt}{\PYZgt{}}
-          \PY{n+nt}{\PYZlt{}Rel} \PY{n+na}{per=}\PY{l+s}{\PYZdq{}value\PYZdq{}}\PY{n+nt}{\PYZgt{}}mail\PY{n+nt}{\PYZlt{}/Rel\PYZgt{}}
-          \PY{n+nt}{\PYZlt{}Var}\PY{n+nt}{\PYZgt{}}sender\PY{n+nt}{\PYZlt{}/Var\PYZgt{}}
-          \PY{n+nt}{\PYZlt{}Var}\PY{n+nt}{\PYZgt{}}subject\PY{n+nt}{\PYZlt{}/Var\PYZgt{}}
-        \PY{n+nt}{\PYZlt{}/Atom\PYZgt{}}
-      \PY{n+nt}{\PYZlt{}/Event\PYZgt{}}
-    \PY{n+nt}{\PYZlt{}/on\PYZgt{}}
-    \PY{n+nt}{\PYZlt{}if}\PY{n+nt}{\PYZgt{}}
-      \PY{n+nt}{\PYZlt{}Atom}\PY{n+nt}{\PYZgt{}}
-        \PY{n+nt}{\PYZlt{}op}\PY{n+nt}{\PYZgt{}}\PY{n+nt}{\PYZlt{}Rel}\PY{n+nt}{\PYZgt{}}equals\PY{n+nt}{\PYZlt{}/Rel\PYZgt{}}\PY{n+nt}{\PYZlt{}/op\PYZgt{}}
-        \PY{n+nt}{\PYZlt{}Var}\PY{n+nt}{\PYZgt{}}sender\PY{n+nt}{\PYZlt{}/Var\PYZgt{}}
-        \PY{n+nt}{\PYZlt{}Ind}\PY{n+nt}{\PYZgt{}}sender@mail.com\PY{n+nt}{\PYZlt{}/Ind\PYZgt{}}
-      \PY{n+nt}{\PYZlt{}/Atom\PYZgt{}}
-    \PY{n+nt}{\PYZlt{}/if\PYZgt{}}
-    \PY{n+nt}{\PYZlt{}do}\PY{n+nt}{\PYZgt{}}
-      \PY{n+nt}{\PYZlt{}Atom}\PY{n+nt}{\PYZgt{}}
-        \PY{n+nt}{\PYZlt{}oid}\PY{n+nt}{\PYZgt{}}\PY{n+nt}{\PYZlt{}Ind} \PY{n+na}{uri=}\PY{l+s}{\PYZdq{}http://webapi.com\PYZdq{}}\PY{n+nt}{/\PYZgt{}}\PY{n+nt}{\PYZlt{}/oid\PYZgt{}}
-        \PY{n+nt}{\PYZlt{}Rel}\PY{n+nt}{\PYZgt{}}newcontent\PY{n+nt}{\PYZlt{}/Rel\PYZgt{}}
-        \PY{n+nt}{\PYZlt{}Var}\PY{n+nt}{\PYZgt{}}subject\PY{n+nt}{\PYZlt{}/Var\PYZgt{}} 
-      \PY{n+nt}{\PYZlt{}/Atom\PYZgt{}}
-    \PY{n+nt}{\PYZlt{}/do\PYZgt{}}
-  \PY{n+nt}{\PYZlt{}/Rule\PYZgt{}}
-\end{Verbatim}
 
 % TODO RULE ENGINES!
 

@@ -10,6 +10,7 @@
 \usepackage{parskip}
 \usepackage{chngpage}
 \usepackage{lmodern}
+\usepackage{caption}
 % \usepackage{pdfpages}
 % \usepackage[nottoc]{tocbibind}
 \usepackage[toc,page,header]{appendix}
@@ -53,18 +54,18 @@
 \frontmatter
 	\input{includes/titlepage}
 	% \input{includes/acknowledgment}
-	{\tableofcontents}
+	\tableofcontents
 	\listoffigures
 	\listoftables
 	\lstlistoflistings
 
 \mainmatter
-	\input{includes/introduction}
-	\input{includes/related}
-	\input{includes/concept}
-	\input{includes/programming}
-	\input{includes/prototype}
-	\input{includes/discussion}
+	\input{includes/1introduction}
+	\input{includes/2related}
+	\input{includes/3concept}
+	\input{includes/4applicability}
+	\input{includes/5prototype}
+	\input{includes/6discussion}
 
 % Bibliography
 	\addcontentsline{toc}{chapter}{Bibliography}
@@ -74,6 +75,10 @@
 % Index
 	\addcontentsline{toc}{chapter}{Index}
 	\printindex
+
+	% Turn off listing of tables and figures since from here on they will be in the appendix
+	\captionsetup[figure]{list=no}
+	\captionsetup[table]{list=no}
 
 % Appendix
 	\begin{appendices}
@@ -85,9 +90,9 @@
 	\end{appendices}
 
 	\addtocontents{toc}{\setcounter{tocdepth}{1}}
-\backmatter
 
-	\include{includes/scientificintegrity}
-	% \addtocontents{toc}{\setcounter{tocdepth}{1}}
+% \backmatter
+% 	\include{includes/scientificintegrity}
+% 	\addtocontents{toc}{\setcounter{tocdepth}{1}}
 
 \end{document}

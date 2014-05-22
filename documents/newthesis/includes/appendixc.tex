@@ -1,5 +1,126 @@
 
 \chapter{Benchmarking}
 \section{Java}
-\section{JavaScript}
 
+\begin{lstlisting}[nolol,label=lst_bm_java,language=Java,caption=Closure Benchmarking: Java Code]
+/*
+ * BenchmarkingDeferred.java
+ */
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.HashMap;
+
+public class BenchmarkingDeferred {
+
+  private static Runtime runtime = Runtime.getRuntime();
+  private static final ScheduledExecutorService worker = 
+    Executors.newSingleThreadScheduledExecutor();
+
+  private static void deferFunctionCall( int numScopeVars, int delay, String scopeId ) {
+    HashMap<String, String> mapVars = new HashMap<String, String>();
+    for( int i = 0; i < numScopeVars; i++ ) {
+      mapVars.put( "id" + i, "12345678" ); // 8 bytes per stored scope variable
+    }
+    Object context = new TimeoutContext( "TimeoutFunction" );
+    Runnable task = new RunnableCallbackFunction( mapVars, context );
+    worker.schedule( task, delay, TimeUnit.SECONDS );
+  }
+
+  public static void main( String[] args ) {
+    long startTime, stopTime;
+    int numVars = 10, firstArg = 0;
+    firstArg = Integer.parseInt( args[0] );
+    numVars = Integer.parseInt( args[1] );
+    int j = 0, numFuncs = 1 << firstArg;
+
+    startTime = System.nanoTime();
+    while( j++ < numFuncs) {
+      deferFunctionCall( numVars, numFuncs * 10, numFuncs + "(" + j + ")" );
+    }
+    stopTime = System.nanoTime();
+
+    // [...] benchmark system out
+
+    worker.shutdownNow();
+  }
+}
+
+/*
+ * RunnableCallbackFunction.java
+ */
+import java.util.HashMap;
+
+/*
+ * The Callback function instance.
+ */
+public class RunnableCallbackFunction implements Runnable {
+  
+  // The hashhmap is used to store variables and their value as the scope
+  private HashMap<String, String> mapScope;
+  private Object context;
+
+  public RunnableCallbackFunction( HashMap<String, String> scope, Object context ) {
+    this.mapScope = scope;
+    this.context = context;
+  }
+
+  // If this is executing, we didn't wait long enough and the
+  // benchmark time is compromised
+  public void run() {
+    System.out.println( mapScope.toString() );
+  }
+
+}
+
+/*
+ * TimeoutContext.java
+ */
+public class TimeoutContext {
+  private long idleTimeout = 1;
+  private long idlePrev;
+  private long idleNext;
+  private long idleStart = 140000505;
+  private String onTimeout = null;
+  private boolean repeat = false;
+
+  public TimeoutContext( String cb ) {
+    this.onTimeout = cb;
+  }
+}
+
+\end{lstlisting}
+
+\section{JavaScript}
+\begin{lstlisting}[nolol,float=h,label=lst_bm_js,language=JavaScript,caption=Closure Benchmarking: JavaScript Code]
+/*
+The function deferral measurements in node.js
+*/
+
+var deferredFunction = function ( numScopeVars, delay, scopeId ) {
+  var scope = {};
+  for ( var i = 0; i < numScopeVars; i++ ) {
+    scope[ "id" + i ] = "12345678"; // 8 bytes per stored scope variable
+  }
+  setTimeout( function () {
+    // If this is executed we didn't wait long enough
+    console.log( JSON.stringify( scope, null, '  ' ) );
+  }, delay );
+}
+
+var numOfFunctions,
+    numOfScopeVars = process.argv[ 3 ];
+
+numOfFunctions = Math.pow( 2,  process.argv[ 2 ] );
+
+var time = process.hrtime();
+for (var i = 0; i < numOfFunctions; i++) {
+  deferredFunction( numOfScopeVars, 1000 * numOfFunctions, numOfFunctions + "(" + i + ")" );
+};
+var diff = process.hrtime( time );
+
+var mem = process.memoryUsage();
+// [...] benchmark system out
+process.exit( 0 );
+
+\end{lstlisting}
