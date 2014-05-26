@@ -2,6 +2,47 @@
 
 \index{Web Service}
 \index{Web API}
+
+
+\begin{figure}[!ht]
+	\centering
+  \includegraphics[width=0.9\textwidth]{figures/googleTrends_Rest-SOAP}
+	\caption{Google Trends: "soap api" vs. "rest api"}
+	\label{fig:googleTrends_Rest-SOAP}
+\end{figure}
+% Correlates with findings in http://www.slideshare.net/jmusser/open-apis-state-of-the-market-2011
+\begin{figure}[!ht]
+	\centering
+  \includegraphics[width=0.9\textwidth]{figures/slide-11-1024}
+	\caption{REST vs. SOAP: Simplicity wins again (John Musser, ProgrammableWeb, 2011)}
+	\label{fig:slide-11-1024}
+\end{figure}
+Several different resources [Figure \ref{fig:googleTrends_Rest-SOAP}][Figure \ref{fig:slide-11-1024} (John Musser, ProgrammableWeb, 2011)] draw the same picture, an increasing popularity of REST over SOAP by an order of magnitude and a exponential growth of the number of accessible Web API's.
+
+
+Web APIs are Web accessible endpoints for users to invoke.
+With the wide adoption of Service-oriented Architecture (SOA), we see an increasing number of Web accessible services and their compositions.\cite{conf/icws/HuangFT12}
+
+Twelve Theses on Reactive Rules for the Web\cite{10.1007-11896548_63}:
+This article investigates issues of relevance in designing high-level
+programming languages dedicated to reactivity on the Web. It presents
+twelve theses on features desirable for a language of reactive rules tuned
+to programming Web and Semantic Web applications.
+% MY NOTES: they argue with soap and expect it to stay. They expect web sites to inform each other about update requests. we are taking one step further and provide events to whomeever wants to receive them while being greedy about receiving events. give them to meeeeh my prciouzzz eventz!
+% 1. High-level reactive languges are needed, ECA rules well-suited to specify reactivity
+% 2. Reactive Web rules should be processed locally and act globally through event-based communication and access to persistent Web data
+% 3. Events are best exchanged directly between Web sites in a push manner
+% 4. Events are volatile data and should be kept distinct from persistent data.
+% 5. Recognizing composite events is essential for a reactive Web language. Composite events are conveniently specified by (event) queries. There are (at least) four complementary dimensions to event queries: data extraction, event composition, temporal conditions, and event accumulation --> Future Work (CEP), data extraction already implemented
+% 6. A data-driven, incremental evaluation of event queries is the approach of choice
+% 7. Data from persistent Web resources plays an essential role for Web reactivity. A reactive language thus should embed or build upon a Web query language.
+% 8. The Web is a dynamic, state-changing system. Reactions to state changes (events) through reactive rules are state-changing actions such as updates to persistent data. Reactive rules are needed where compound actions can be constructed from primitive actions.
+% 9. Development and maintenance of reactive rule programs can be considerably supported by structuring mechanisms such as: branching in rules, deductive rules for event queries and Web queries, procedural abstractions for actions, and grouping of rules. --> Future work, attach several conditions and their actions branches to one event instead of creating rules for each of them. EC^nA^n. (Though procedural abstractions for actions already implemented, defining complex actions to be reused by rules)
+% 10.Identity of data items is an issue for reactive languages due to their ability to react to changes of data objects on the Web. (we had surrogate identity though discarded the concept again... stupido)
+% 11. Meta-programming and meta-circularity, that is, the ability to use rules to exchange and evaluate (other) rules, are needed in some important cases. (quite artificial for our scenarios)
+% 12.Reactivity in the Web’s open and uncontrolled world requires language support for authentication, authorization, and accounting. (phew... let's let others go there)
+
+
 % Web Services – Opportunities and Challenges
 % NICOLETA DAVID, CLAUDIA-GEORGETA CARSTEA,
 % IOAN-GHEORGHE RATIU, LUCIAN PATRASCU, DANIELA DAMIAN
@@ -29,6 +70,36 @@
 % REST
 % TODO dienste services WebAPI belegen mit referenzen wo begriff wie gebraucht wird
 % Begriffe festnageln, definieren
+
+% \cite{journals/itpro/BarrosD06}:
+% The Rise of Web Service Ecosystems
+% An increasing number of organizations are turning to service-oriented architectures (SOAs) to consolidate and repurpose legacy applications and combine them with new applications.
+% A vendor-driven push for middleware based on the Web services standards stack is fueling this trend (Sanjiva Weerawarana and colleagues.
+% Web Services Platform Architecture: SOAP, WSDL, WS-Policy, WS-Addressing, WS-BPEL, WS-Reliable Messaging, and More, Prentice Hall, 2005).
+% This stack provides infrastructure for exposing application logic over the Web using the “software as a service” metaphor.
+
+
+
+% \cite{10.1109/ICSS.2013.16}:
+% The services and their correlations can be treated as a complex system with self-organize and continuous co-evolution properties, which is called service ecosystem.
+% In service ecosystems, dynamic factors are general and may affect the performance of the whole system by spreading through the correlations.
+% There is little systematic research on the effects of dynamic services while this topic plays a crucial role in the managing and controlling of service ecosystems.
+% The transformation from traditional industry model of software to SaaS (Software as a Service) greatly changes the academic and economic domain of software, which brings about the prevalent research trend of service science [1].
+% Web service is a typical kind of delivery method for SaaS, fueled by protocols and technologies (WSDL, REST, UDDI, BPEL, and SOAP etc.) [\cite{journals/itpro/BarrosD06}, 3]
+% As the users’ needs become more specific and complex than ever before, it is a must for services to interact with each other to exchange control data and information. 
+% There is little systematic research on the effects of dynamic services while this topic plays a crucial role in the managing and controlling of service ecosystems.
+% So in this paper, we designed a research framework for researching the dynamic factors in service ecosystems.
+% -> No measurements, would be interesting
+
+% \cite{10.1109/MIC.2008.92}
+% The Web is now programmable.
+% This fact has been facilitated and accelerated by Web data’s availability as structured XML feeds (such as RSS and Atom) and by the externalization of Web application interactions through application programming interfaces.
+% Indeed, most new Web sites and applications expose either data feeds or more advanced APIs, such as Representational State Transfer (REST) services or the Atom publishing protocol (AtomPub).
+% Currently, the primary manifestation of the programmable Web are mashups.
+% Mashups combine views, data, and logic from existing Web sites or applications to create novel applications that focus on situational and ephemeral problems.
+% Developers are now using various Web APIs to create a plethora
+
+
 Data and functionalities in the web were always accessible via web services, whatever this means.
 reengineering of services in the beginning
 with standardised REST API's we got to Web API, easy access and understandable
@@ -81,7 +152,7 @@ With no Google Maps API at that time, he needed time and skills to reverse engin
 A large number of such "static" mashups were and are still developped.
 They are static in the way that they aggregate a fixed (and mostly low) number, of either data or functionality resources, to provide an enhanced resource in a specialized domain.
 Of course Mashups can be mashed up again, to provide even more sophisticated functionality and data.
-Some latest example Mashups, taken from the ProgrammableWeb\cite{wwwProgrammableWeb} directory, are:
+Some latest example Mashups, taken from the ProgrammableWeb\cite{wwwProgrammableWeb} collection, are:
 
 \begin{itemize}
   \item Wifi and Plugs\cite{wwwWifiAndPlugs}: MapBox, Google Docs and Import.io API's used to display where Wi-Fi and plugs are available in London.
