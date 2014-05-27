@@ -1,29 +1,73 @@
+
 \chapter{Related Work}
+
+Research on behalf of the web, its development over the years and its possibilities attracts a great deal of attention.
+This is not surprising since modern business and life is already impossible without the internet.
+Great opportunities arise with it and we cover a part of the web service orchestration in it.
 
 \index{Web Service}
 \index{Web API}
+An important development within the web are the increasing number of available services.
+The term service in the web is not very precise and the web's short history has already seen a lot of different kinds.
+
+\index{RPC}
+One early concept of such services are Remote Procedure Calls (RPC)~\cite{Birrell:1984:IRP:2080.357392}, which found also application in grid computing~\cite{seymour2002overview}.
+RPC themselves weren't necessarily issued over the web, but often via inter-process communication.
+Through RPC a piece of code can be executed on another machine than the one which is calling the procedure.
+This opened doors into the field of distributed computation.
+RPC has been implemented in a lot of differrent programming languages and with different sorts of technologies, which resulted in incomptaiblity among each other.
+\index{XML}
+\index{XML-RPC}
+By abstracting RPC functionality with the Extensible Markup Language (XML)~\cite{bray1998extensible}, compatibility between services was easier to achieve and didn't prerequisite a certain architecture anymore.
+XML-RPC was held relatively simple and allowed for several input parameters while one value was returned.
+\index{SOAP}
+\index{WSDL}
+Together with additional functionality, XML-RPC turned into Simple Object Access Protocol (SOAP)~\cite{box2000simple}, accompanied by the Web Service Description Language (WSDL)~\cite{christensen2001web} which is used to describe the interfaces to SOAP services.
+Through this technology a potential client for the service can make a request to the WSDL file and retrieves all interface information he requires in order to issue a call to the actual service.
+SOAP is then basically just the marshalling 
+
+\index{CORBA}
+\index{IDL}
+Common Object Request Broker Architecture
+Interface Definition Language
+
+\index{REST}
 
 
+% Web Services – Opportunities and Challenges
+% NICOLETA DAVID, CLAUDIA-GEORGETA CARSTEA,
+% IOAN-GHEORGHE RATIU, LUCIAN PATRASCU, DANIELA DAMIAN
+%Web Services term refers to available programmatic interfaces that are used in the World Wide Web for application-to-application communication.~\cite{david2010web}
+
+
+With the wide adoption of Service-oriented Architecture (SOA), we see an increasing number of Web accessible services and their compositions.~\cite{conf/icws/HuangFT12}
 \begin{figure}[!ht]
 	\centering
-  \includegraphics[width=0.9\textwidth]{figures/googleTrends_Rest-SOAP}
-	\caption{Google Trends: "soap api" vs. "rest api"}
-	\label{fig:googleTrends_Rest-SOAP}
-\end{figure}
-% Correlates with findings in http://www.slideshare.net/jmusser/open-apis-state-of-the-market-2011
-\begin{figure}[!ht]
-	\centering
-  \includegraphics[width=0.9\textwidth]{figures/slide-11-1024}
+  \includegraphics[width=0.6\textwidth]{figures/slide-11-1024}
 	\caption{REST vs. SOAP: Simplicity wins again (John Musser, ProgrammableWeb, 2011)}
 	\label{fig:slide-11-1024}
 \end{figure}
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.6\textwidth]{figures/googleTrends_Rest-SOAP}
+  \caption{Google Trends: "soap api" vs. "rest api"}
+  \label{fig:googleTrends_Rest-SOAP}
+\end{figure}
+% Correlates with findings in http://www.slideshare.net/jmusser/open-apis-state-of-the-market-2011
 Several different resources [Figure \ref{fig:googleTrends_Rest-SOAP}][Figure \ref{fig:slide-11-1024} (John Musser, ProgrammableWeb, 2011)] draw the same picture, an increasing popularity of REST over SOAP by an order of magnitude and a exponential growth of the number of accessible Web API's.
+
+An interesting trend that could be observed was the growing popularity of REST over SOAP.~\cite{ploscar2012xml}
+
+\index{REST}
+\index{SOAP}\index{WSDL}
+\index{IDL}\index{CORBA}
+
 
 
 Web APIs are Web accessible endpoints for users to invoke.
-With the wide adoption of Service-oriented Architecture (SOA), we see an increasing number of Web accessible services and their compositions.\cite{conf/icws/HuangFT12}
 
-Twelve Theses on Reactive Rules for the Web\cite{10.1007-11896548_63}:
+Twelve Theses on Reactive Rules for the Web~\cite{10.1007-11896548_63}:
 This article investigates issues of relevance in designing high-level
 programming languages dedicated to reactivity on the Web. It presents
 twelve theses on features desirable for a language of reactive rules tuned
@@ -43,10 +87,6 @@ to programming Web and Semantic Web applications.
 % 12.Reactivity in the Web’s open and uncontrolled world requires language support for authentication, authorization, and accounting. (phew... let's let others go there)
 
 
-% Web Services – Opportunities and Challenges
-% NICOLETA DAVID, CLAUDIA-GEORGETA CARSTEA,
-% IOAN-GHEORGHE RATIU, LUCIAN PATRASCU, DANIELA DAMIAN
-%Web Services term refers to available programmatic interfaces that are used in the World Wide Web for application-to-application communication.
 
 % An approach to develop a layered architecture from software engineering, principles was proposed by Gerber et al. [23], referred to as the Comprehensive, Functional, Layered (CFL) architecture for the Semantic Web. C
  % - Gerber A., van der Merwe A. and Barnard A. Towards a Semantic Web Layered Architecture. In Proceedings of IASTED International Conference on Software Engineering, (SE2007), Innsbruck, Austria. IASTED 2007. ISBN 978-0-88986-641-6, pp. 353–362.
@@ -71,7 +111,7 @@ to programming Web and Semantic Web applications.
 % TODO dienste services WebAPI belegen mit referenzen wo begriff wie gebraucht wird
 % Begriffe festnageln, definieren
 
-% \cite{journals/itpro/BarrosD06}:
+% ~\cite{journals/itpro/BarrosD06}:
 % The Rise of Web Service Ecosystems
 % An increasing number of organizations are turning to service-oriented architectures (SOAs) to consolidate and repurpose legacy applications and combine them with new applications.
 % A vendor-driven push for middleware based on the Web services standards stack is fueling this trend (Sanjiva Weerawarana and colleagues.
@@ -80,18 +120,18 @@ to programming Web and Semantic Web applications.
 
 
 
-% \cite{10.1109/ICSS.2013.16}:
+% ~\cite{10.1109/ICSS.2013.16}:
 % The services and their correlations can be treated as a complex system with self-organize and continuous co-evolution properties, which is called service ecosystem.
 % In service ecosystems, dynamic factors are general and may affect the performance of the whole system by spreading through the correlations.
 % There is little systematic research on the effects of dynamic services while this topic plays a crucial role in the managing and controlling of service ecosystems.
 % The transformation from traditional industry model of software to SaaS (Software as a Service) greatly changes the academic and economic domain of software, which brings about the prevalent research trend of service science [1].
-% Web service is a typical kind of delivery method for SaaS, fueled by protocols and technologies (WSDL, REST, UDDI, BPEL, and SOAP etc.) [\cite{journals/itpro/BarrosD06}, 3]
+% Web service is a typical kind of delivery method for SaaS, fueled by protocols and technologies (WSDL, REST, UDDI, BPEL, and SOAP etc.) [~\cite{journals/itpro/BarrosD06}, 3]
 % As the users’ needs become more specific and complex than ever before, it is a must for services to interact with each other to exchange control data and information. 
 % There is little systematic research on the effects of dynamic services while this topic plays a crucial role in the managing and controlling of service ecosystems.
 % So in this paper, we designed a research framework for researching the dynamic factors in service ecosystems.
 % -> No measurements, would be interesting
 
-% \cite{10.1109/MIC.2008.92}
+% ~\cite{10.1109/MIC.2008.92}
 % The Web is now programmable.
 % This fact has been facilitated and accelerated by Web data’s availability as structured XML feeds (such as RSS and Atom) and by the externalization of Web application interactions through application programming interfaces.
 % Indeed, most new Web sites and applications expose either data feeds or more advanced APIs, such as Representational State Transfer (REST) services or the Atom publishing protocol (AtomPub).
@@ -145,19 +185,19 @@ Simple functions from different sources can be combined into more powerful ones,
 Web service mashups have been developped ever since services in the web started to exist and were accessible in a more or less convenient way.
 We introduce Paul Rademacher as an example for how recent the invention of web service mashups are.
 He's one of the first inventors of such a web service mashup.
-In the same year after Google Maps came up in 2005, he invented a site\cite{wwwRademacherOne,wwwRademacherTwo} that displayed Craigslist houses on a Google Map.
+In the same year after Google Maps came up in 2005, he invented a site~\cite{wwwRademacherOne,wwwRademacherTwo} that displayed Craigslist houses on a Google Map.
 With no Google Maps API at that time, he needed time and skills to reverse engineer Google Map's functionalities.
 
 
 A large number of such "static" mashups were and are still developped.
 They are static in the way that they aggregate a fixed (and mostly low) number, of either data or functionality resources, to provide an enhanced resource in a specialized domain.
 Of course Mashups can be mashed up again, to provide even more sophisticated functionality and data.
-Some latest example Mashups, taken from the ProgrammableWeb\cite{wwwProgrammableWeb} collection, are:
+Some latest example Mashups, taken from the ProgrammableWeb~\cite{wwwProgrammableWeb} collection, are:
 
 \begin{itemize}
-  \item Wifi and Plugs\cite{wwwWifiAndPlugs}: MapBox, Google Docs and Import.io API's used to display where Wi-Fi and plugs are available in London.
-  \item MapLight\cite{wwwMapLight}: GovTrack.us and OpenSecrets API's used to combine political results with financial contributions to show how capital contributions affect voting.
-  \item Shared Count\cite{wwwSharedCount}: Facebook, LinkedIn, Pinterest and Twitter API's used to display informations about how well spread a URL is on social media sites.
+  \item Wifi and Plugs~\cite{wwwWifiAndPlugs}: MapBox, Google Docs and Import.io API's used to display where Wi-Fi and plugs are available in London.
+  \item MapLight~\cite{wwwMapLight}: GovTrack.us and OpenSecrets API's used to combine political results with financial contributions to show how capital contributions affect voting.
+  \item Shared Count~\cite{wwwSharedCount}: Facebook, LinkedIn, Pinterest and Twitter API's used to display informations about how well spread a URL is on social media sites.
 \end{itemize}
 
 In the past few years, research and development for platforms to allow users to flexibly mashup Web APIs got attention.
@@ -199,7 +239,7 @@ Thus
 
 Several different rule languages have been developped for different purposes over the last years and they vary grately in their purpose.
 % terms of usability for ECA Rules together with Web API mashups.
-A compilation of research on different emerging rule-based languages and technologies \cite{2009-Paschke_Boley-RCER.pdf} gives an oveview over such efforts.
+A compilation of research on different emerging rule-based languages and technologies ~\cite{2009-Paschke_Boley-RCER.pdf} gives an oveview over such efforts.
 We examined different existing rule languages with respect to a certain use case to identify its applicability for reactivity in the web. % TODO find other word as applicability
 The use case is defined such that the rule needs to suffice the ECA paradigm:
 
@@ -216,24 +256,24 @@ The JSON representation of the given email event as depicted in the appendix. %i
 
 \index{RDF}
 \index{XML}
-An early ECA Rule Language for XML repositories\cite{Papamarkos03event-condition-actionrule} was postulated in 2003 and was picked up by many researches afterwards. It was designed to react on insert and delete events within XML repositories and as an action change XML documents.
+An early ECA Rule Language for XML repositories~\cite{Papamarkos03event-condition-actionrule} was postulated in 2003 and was picked up by many researches afterwards. It was designed to react on insert and delete events within XML repositories and as an action change XML documents.
 
 
 Now apart from implementing a rules engine, we would also need to add an XML document event manager which interpretes and pushes events into the XML file \emph{inbound\_queue.xml}. Then again this instance would interprete the ouptuts of the ECA engine, which would theoretically manifest in other XML documents, and produce meaningful actions on remote hosts. This wouldn't be an architecture which has its focus on the solution of our use case and, as a result, add complexity and create an unnecessary overhead.
 
 \index{Notation 3}
-To make the lengthy RDF definitions smaller and more readable, Notation 3\cite{wwwn3} was designed and announced in 2005. Through the implies operator(=\textgreater) an "event" can be connected to an "action", both expressed in RDF's subject, predicate, object notation, which makes the expression of ECA rules a complicated and not very intuitive task. A solution to our use case would look as follows:
+To make the lengthy RDF definitions smaller and more readable, Notation 3~\cite{wwwn3} was designed and announced in 2005. Through the implies operator(=\textgreater) an "event" can be connected to an "action", both expressed in RDF's subject, predicate, object notation, which makes the expression of ECA rules a complicated and not very intuitive task. A solution to our use case would look as follows:
 
 This language is used to express relations between entities and thus not really suitable for our use case, since we would require another interpreter to infer the actions. But concepts and ideas of the work that was done in these consortias could eventually still find influence into our solution.
 
 \index{XChange}\index{Xcerpt}
-The rule language XChange\cite{2005-Patranjan-TLE.pdf} was the outcome of the REWERSE (\cite{wwwRewerse}, Reasoning on the Web with Rules and Semantics) project, which was funded by the EU and Switzerland. Their work influenced a number of future research. The language was designed to add reactive behaviour to a "static" web which is represented through XML resources. Thus we have action logics to alter such resources through insertions and deletions. Since we aim to utilize web API's for our rule language we need a more generic approach which adds flexibility in term of the API provided. But the thorough research done with the language XChange holds valuable concepts, especially in terms of temporal evet composition. This could be a rule according to our use case:
+The rule language XChange~\cite{2005-Patranjan-TLE.pdf} was the outcome of the REWERSE (~\cite{wwwRewerse}, Reasoning on the Web with Rules and Semantics) project, which was funded by the EU and Switzerland. Their work influenced a number of future research. The language was designed to add reactive behaviour to a "static" web which is represented through XML resources. Thus we have action logics to alter such resources through insertions and deletions. Since we aim to utilize web API's for our rule language we need a more generic approach which adds flexibility in term of the API provided. But the thorough research done with the language XChange holds valuable concepts, especially in terms of temporal evet composition. This could be a rule according to our use case:
 
 
 But XChange is designed to access other resources in an action and thus provides powerful tools:
 
 \index{JSON Rules}
-In 2008 \emph{JSON Rules}~\cite{2008-Giurca_Pascalau-JSON_Rules.pdf} was introduced as a language to easily react on specific DOM tree compositions.
+In 2008 \emph{JSON Rules}~~\cite{2008-Giurca_Pascalau-JSON_Rules.pdf} was introduced as a language to easily react on specific DOM tree compositions.
 The usage of JavaScript allowed them to provide simple functions which could be called directly by the actions, thus abstracting functionality from the language.
 This key concept found influence into our language as it allows different layers of abstractions.
 Through this it is possible to provide generic functions for expert user as well as very limited functions with only few possibilities for parameterization to be used by unexperienced persons.
@@ -242,7 +282,7 @@ Also the temporal composition to complex events is not a subject of their work a
 
 
 \index{KRL}
-A most recent (2011) open-source development is the Kinetic Rules Engine together with the Kinetics Rule Language~\cite{bookTheLiveWeb}.
+A recent open-source development is the Kinetic Rules Engine together with the Kinetics Rule Language~~\cite{bookTheLiveWeb}.
 It is built for the purpose of adding reactivity to the cloud.
 The language is based on declarative syntax, enriched with imparative elements.
 But it is a tedious task to get into a whole new language and their caveats.
@@ -250,8 +290,8 @@ But it is a tedious task to get into a whole new language and their caveats.
 
 
 \index{RuleML}
-The basis of \emph{RuleML}~\cite{2006-Boley-RuleML.pdf} is datalog, a language in the intersection of SQL and Prolog.
-In 2012 the \emph{Reaction RuleML}~\cite{2012-Paschke_etal-ReactionRuleML.pdf} language incorporated several different types of rules into the RuleML syntax, to establish a uniform syntax and interchangability of rules.
+The basis of \emph{RuleML}~~\cite{2006-Boley-RuleML.pdf} is datalog, a language in the intersection of SQL and Prolog.
+In 2012 the \emph{Reaction RuleML}~~\cite{2012-Paschke_etal-ReactionRuleML.pdf} language incorporated several different types of rules into the RuleML syntax, to establish a uniform syntax and interchangability of rules.
 \emph{Reaction RuleML} is a valuable resource in terms of manifold research that has been done in the domain of rule languages, but the syntax is not user-friendly.
 
 
