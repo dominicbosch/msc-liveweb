@@ -4,35 +4,63 @@
 Research on behalf of the web, its development over the years and its possibilities attracts a great deal of attention.
 This is not surprising since modern business and life is already impossible without the internet.
 Great opportunities arise with it and we cover a part of the web service orchestration in it.
+\index{SOA}
+There 
+Service-oriented Architecture (SOA)~\cite{perrey2003service}
 
+\section{Services in the Web}
+\index{Services}
+What are services
+~\cite{peltz2003web}
 \index{Web Service}
 \index{Web API}
 An important development within the web are the increasing number of available services.
 The term service in the web is not very precise and the web's short history has already seen a lot of different kinds.
 
 \index{RPC}
-One early concept of such services are Remote Procedure Calls (RPC)~\cite{Birrell:1984:IRP:2080.357392}, which found also application in grid computing~\cite{seymour2002overview}.
-RPC themselves weren't necessarily issued over the web, but often via inter-process communication.
-Through RPC a piece of code can be executed on another machine than the one which is calling the procedure.
-This opened doors into the field of distributed computation.
-RPC has been implemented in a lot of differrent programming languages and with different sorts of technologies, which resulted in incomptaiblity among each other.
+A fairly early adoption of the service concept to computers were the Remote Procedure Calls (RPC)~\cite{Birrell:1984:IRP:2080.357392}.
+Through RPC a piece of code can be executed on a different machine, than the one which is calling the procedure.
+It is basically achieved via inter-process communication and doesn't necessarily require the web.
+Even more since when RPC was invented, the World-Wide Web~\cite{DBLP:journals/en/Berners-LeeCGP92} didn't even exist. 
+RPC also found its use in grid computing~\cite{seymour2002overview} and through this, opened doors into the field of distributed computation.
+The RPC paradigm isn't bound to certain technologies and thus, has been implemented in a lot of differrent programming languages.
+These implementations were tightly bound to the respective language that was used, which resulted largely in incomptaiblity among them.
 \index{XML}
 \index{XML-RPC}
-By abstracting RPC functionality with the Extensible Markup Language (XML)~\cite{bray1998extensible}, compatibility between services was easier to achieve and didn't prerequisite a certain architecture anymore.
-XML-RPC was held relatively simple and allowed for several input parameters while one value was returned.
+It became necessary to enhance RPC's in order to get cross platform compatibility.
+By abstracting RPC functionality with the Extensible Markup Language (XML)~\cite{bray1998extensible}, compatibility between services that used different technologies was easier to achieve.
+
 \index{SOAP}
 \index{WSDL}
-Together with additional functionality, XML-RPC turned into Simple Object Access Protocol (SOAP)~\cite{box2000simple}, accompanied by the Web Service Description Language (WSDL)~\cite{christensen2001web} which is used to describe the interfaces to SOAP services.
-Through this technology a potential client for the service can make a request to the WSDL file and retrieves all interface information he requires in order to issue a call to the actual service.
-SOAP is then basically just the marshalling 
+Since XML-RPC was held relatively simple but received a lot of attention, it was further enhanced.
+Together with additional functionality, XML-RPC turned into Simple Object Access Protocol (SOAP)~\cite{box2000simple}.
+SOAP is accompanied by the Web Service Description Language (WSDL)~\cite{christensen2001web} which is used to describe the interfaces to SOAP services.
+Through SOAP and WSDL a client for the service can issue a request for the WSDL information of the service and retrieves all interface specifications he requires in order to issue a call to the actual service.
+The service specifications are then incorporated into the existing application as if it is a local function call.
+The SOAP layer takes care of marshalling the request and unmarshalling the response.
 
 \index{CORBA}
+Another initiative that aimed for eased communication between different platform is the Common Object Request Broker Architecture (CORBA)~\cite{dec1991common}.
+As the name already suggest it is an object-oriented approach and it allows the exchange of whole objects.
+\index{ORB}
+CORBA relies on its communication layer, the Object Request Broker (ORB), which forms the basis of its architecture.
+The platform-specific ORB's provide the communication abstraction, which free the application from platform dependencies.
 \index{IDL}
-Common Object Request Broker Architecture
-Interface Definition Language
+Similar to SOAP's WSDL, CORBA has its Interface Definition Languange (IDL) to provide information about the objects to be offered and accessed.
+An object is instantiated by an application and the interface to this instance is offered through the ORB.
+Another application attached to the ORB can then access all public variables, data structures and functions of this object.
+This means not only remote access to variables and data structures, but also remote function invocation.
+CORBA requires the implementation of object-oriented mechanisms in programming languages which aren't object-oriented.
+This can be technically difficult and become an eventually tedious task.
+CORBA allows communication between applications written in different programming languages and which are running on the same physical computer, as well as the communication between different computers in the same network.
+With the Internet Inter-ORB Protocol (IIOP) it is also possible to connect ORB's over the web.
+Through this, the offered objects can become services in the web, thought they are shielded by the ORB.
+
+With the wide adoption of SOA, we see an increasing number of Web accessible services and their compositions.~\cite{conf/icws/HuangFT12}
 
 \index{REST}
 
+Naturally, as the web grows quickly in its offered services, people are looking for simple ways
 
 % Web Services – Opportunities and Challenges
 % NICOLETA DAVID, CLAUDIA-GEORGETA CARSTEA,
@@ -40,7 +68,6 @@ Interface Definition Language
 %Web Services term refers to available programmatic interfaces that are used in the World Wide Web for application-to-application communication.~\cite{david2010web}
 
 
-With the wide adoption of Service-oriented Architecture (SOA), we see an increasing number of Web accessible services and their compositions.~\cite{conf/icws/HuangFT12}
 \begin{figure}[!ht]
 	\centering
   \includegraphics[width=0.6\textwidth]{figures/slide-11-1024}
