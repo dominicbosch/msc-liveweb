@@ -1,26 +1,37 @@
 
 \chapter{Related Work}
 
-Research on behalf of the web, its development over the years and its possibilities attracts a great deal of attention.
+Research on behalf of the Web attracts a great deal of attention.
 This is not surprising since modern business and life is already impossible without the internet.
-Great opportunities arise with it and we cover a part of the web service orchestration in it.
+Great opportunities arise with it and we cover a part of the Web service orchestration in it.
 \index{SOA}
 There 
 Service-oriented Architecture (SOA)~\cite{perrey2003service}
-
+With the wide adoption of SOA, we see an increasing number of Web accessible services and their compositions.~\cite{conf/icws/HuangFT12}
+By the end of 2013 this number grew to 10'000 http://www.programmableweb.com/news/programmablewebs-directory-hits-10000-apis.-and-counting./analysis/2013/09/23
+At the 
 \section{Services in the Web}
 \index{Services}
 What are services
 ~\cite{peltz2003web}
 \index{Web Service}
 \index{Web API}
-An important development within the web are the increasing number of available services.
-The term service in the web is not very precise and the web's short history has already seen a lot of different kinds.
+An important development within the Web are the increasing number of available services.
+The term service in the Web is not very precise and the Web's short history has already seen a lot of different kinds.
+%Web Services term refers to available programmatic interfaces that are used in the World Wide Web for application-to-application communication.
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.7\textwidth]{figures/NumOfAPIs}
+  \caption{Number of registered APIs in the ProgrammableWeb directory by date}
+  \label{fig:NumOfAPIs}
+\end{figure}
+
 
 \index{RPC}
 A fairly early adoption of the service concept to computers were the Remote Procedure Calls (RPC)~\cite{Birrell:1984:IRP:2080.357392}.
 Through RPC a piece of code can be executed on a different machine, than the one which is calling the procedure.
-It is basically achieved via inter-process communication and doesn't necessarily require the web.
+It is basically achieved via inter-process communication and doesn't necessarily require the Web.
 Even more since when RPC was invented, the World-Wide Web~\cite{DBLP:journals/en/Berners-LeeCGP92} didn't even exist. 
 RPC also found its use in grid computing~\cite{seymour2002overview} and through this, opened doors into the field of distributed computation.
 The RPC paradigm isn't bound to certain technologies and thus, has been implemented in a lot of differrent programming languages.
@@ -53,34 +64,33 @@ This means not only remote access to variables and data structures, but also rem
 CORBA requires the implementation of object-oriented mechanisms in programming languages which aren't object-oriented.
 This can be technically difficult and become an eventually tedious task.
 CORBA allows communication between applications written in different programming languages and which are running on the same physical computer, as well as the communication between different computers in the same network.
-With the Internet Inter-ORB Protocol (IIOP) it is also possible to connect ORB's over the web.
-Through this, the offered objects can become services in the web, thought they are shielded by the ORB.
+With the Internet Inter-ORB Protocol (IIOP) it is also possible to connect ORB's over the Web.
+Through this, the offered objects can become services in the Web, thought they are shielded by the ORB.
 
-With the wide adoption of SOA, we see an increasing number of Web accessible services and their compositions.~\cite{conf/icws/HuangFT12}
 
 \index{REST}
 
-Naturally, as the web grows quickly in its offered services, people are looking for simple ways
-
-% Web Services – Opportunities and Challenges
-% NICOLETA DAVID, CLAUDIA-GEORGETA CARSTEA,
-% IOAN-GHEORGHE RATIU, LUCIAN PATRASCU, DANIELA DAMIAN
-%Web Services term refers to available programmatic interfaces that are used in the World Wide Web for application-to-application communication.~\cite{david2010web}
+Naturally, as the Web grows quickly in its offered services and also efforts to access them, trends lead toward simple ways to access services in the Web.
 
 
 \begin{figure}[!ht]
 	\centering
-  \includegraphics[width=0.6\textwidth]{figures/slide-11-1024}
-	\caption{REST vs. SOAP: Simplicity wins again (John Musser, ProgrammableWeb, 2011)}
-	\label{fig:slide-11-1024}
+  \begin{subfigure}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{figures/slide-11-1024}
+    \caption{REST vs. SOAP: Simplicity wins again\\(John Musser, ProgrammableWeb, 2011)}
+    \label{fig:slide-11-1024}
+  \end{subfigure}%
+  ~
+  \begin{subfigure}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{figures/googleTrends_Rest-SOAP}
+    \caption{Google Trends: "soap api" vs. "rest api"\\~}
+    \label{fig:googleTrends_Rest-SOAP}
+  \end{subfigure}%
+  \caption{REST vs. SOAP Comparison}
+  \label{fig:RESTvsSOAP}
+
 \end{figure}
 
-\begin{figure}[!ht]
-  \centering
-  \includegraphics[width=0.6\textwidth]{figures/googleTrends_Rest-SOAP}
-  \caption{Google Trends: "soap api" vs. "rest api"}
-  \label{fig:googleTrends_Rest-SOAP}
-\end{figure}
 % Correlates with findings in http://www.slideshare.net/jmusser/open-apis-state-of-the-market-2011
 Several different resources [Figure \ref{fig:googleTrends_Rest-SOAP}][Figure \ref{fig:slide-11-1024} (John Musser, ProgrammableWeb, 2011)] draw the same picture, an increasing popularity of REST over SOAP by an order of magnitude and a exponential growth of the number of accessible Web API's.
 
@@ -99,7 +109,7 @@ This article investigates issues of relevance in designing high-level
 programming languages dedicated to reactivity on the Web. It presents
 twelve theses on features desirable for a language of reactive rules tuned
 to programming Web and Semantic Web applications.
-% MY NOTES: they argue with soap and expect it to stay. They expect web sites to inform each other about update requests. we are taking one step further and provide events to whomeever wants to receive them while being greedy about receiving events. give them to meeeeh my prciouzzz eventz!
+% MY NOTES: they argue with soap and expect it to stay. They expect Web sites to inform each other about update requests. we are taking one step further and provide events to whomeever wants to receive them while being greedy about receiving events. give them to meeeeh my prciouzzz eventz!
 % 1. High-level reactive languges are needed, ECA rules well-suited to specify reactivity
 % 2. Reactive Web rules should be processed locally and act globally through event-based communication and access to persistent Web data
 % 3. Events are best exchanged directly between Web sites in a push manner
@@ -167,24 +177,24 @@ to programming Web and Semantic Web applications.
 % Developers are now using various Web APIs to create a plethora
 
 
-Data and functionalities in the web were always accessible via web services, whatever this means.
+Data and functionalities in the Web were always accessible via Web services, whatever this means.
 reengineering of services in the beginning
 with standardised REST API's we got to Web API, easy access and understandable
 
 
-The fast evolving web has brought up a trend towards easy to master interfaces to services, the so called Web APIs.
+The fast evolving Web has brought up a trend towards easy to master interfaces to services, the so called Web APIs.
 They do not only provide access to mere services but whole applications that allow access over Web APIs.
 These trending Web APIs benefit from a RESTful architecture which predominantly uses HTTP and thus relies on the most basic and powerful operations and the basis of the Web itself, the HTTP protocol. 
 
 % TODO Enough on Web API's?
 
-% quick (handling/mastering) accessible services and even whole web applications through so called Web APIs.
-% Web APIs provide powerful tools to govern data and functionality in the web independently of any user interface from the service provider.
+% quick (handling/mastering) accessible services and even whole Web applications through so called Web APIs.
+% Web APIs provide powerful tools to govern data and functionality in the Web independently of any user interface from the service provider.
 % The relatively
 % Allowing access to these services via API is increasingly popular and allows to mash up these services
 
 % Practically all services flood the user with events
-% The web should be event driven, that's why we need an engine that deals with events and makes the web reactive
+% The Web should be event driven, that's why we need an engine that deals with events and makes the Web reactive
 % There's still the challenge of filtering
 % What's important to whom
 % Plus the user needs to have tools to combine and add programmability to the combination,( such as conditions, selection of provided arguments and so on)
@@ -206,12 +216,12 @@ These trending Web APIs benefit from a RESTful architecture which predominantly 
 % TODO Categorize Related Work!
 
 \index{Mashups}
-Mashups combine information and functionality of more than one web service in a single place.
-The mashing up of such web services allows data to be enhanced with new informations, processing / refinement of the information, or even ways to interact with them, e.g. through Google Maps.
+Mashups combine information and functionality of more than one Web service in a single place.
+The mashing up of such Web services allows data to be enhanced with new informations, processing / refinement of the information, or even ways to interact with them, e.g. through Google Maps.
 Simple functions from different sources can be combined into more powerful ones, which influence data and services in a way their founders eventually didn't even think of.
-Web service mashups have been developped ever since services in the web started to exist and were accessible in a more or less convenient way.
-We introduce Paul Rademacher as an example for how recent the invention of web service mashups are.
-He's one of the first inventors of such a web service mashup.
+Web service mashups have been developped ever since services in the Web started to exist and were accessible in a more or less convenient way.
+We introduce Paul Rademacher as an example for how recent the invention of Web service mashups are.
+He's one of the first inventors of such a Web service mashup.
 In the same year after Google Maps came up in 2005, he invented a site~\cite{wwwRademacherOne,wwwRademacherTwo} that displayed Craigslist houses on a Google Map.
 With no Google Maps API at that time, he needed time and skills to reverse engineer Google Map's functionalities.
 
@@ -240,13 +250,13 @@ The user is then free to combine these event triggers and actions in the way it 
 % TODO REST paper, Craigslist artcile / Paper
 
 
-
+\section{Rule Engines \& Rule Languages}
 \index{Rule}
 \index{Engine}
 \index{Rule Language}
 
-It turns out that Web API mashing up is not able to bring reactivity to the web.
-They are merely aggregations of services that only provide data or functions but no write possibilities such as web applications provide.
+It turns out that Web API mashing up is not able to bring reactivity to the Web.
+They are merely aggregations of services that only provide data or functions but no write possibilities such as Web applications provide.
 % only limited functionalty
 % limited parametrization
 % often only read / new aggregation / no writes
@@ -267,7 +277,7 @@ Thus
 Several different rule languages have been developped for different purposes over the last years and they vary grately in their purpose.
 % terms of usability for ECA Rules together with Web API mashups.
 A compilation of research on different emerging rule-based languages and technologies ~\cite{2009-Paschke_Boley-RCER.pdf} gives an oveview over such efforts.
-We examined different existing rule languages with respect to a certain use case to identify its applicability for reactivity in the web. % TODO find other word as applicability
+We examined different existing rule languages with respect to a certain use case to identify its applicability for reactivity in the Web. % TODO find other word as applicability
 The use case is defined such that the rule needs to suffice the ECA paradigm:
 
 \begin{itemize}
@@ -294,7 +304,7 @@ To make the lengthy RDF definitions smaller and more readable, Notation 3~\cite{
 This language is used to express relations between entities and thus not really suitable for our use case, since we would require another interpreter to infer the actions. But concepts and ideas of the work that was done in these consortias could eventually still find influence into our solution.
 
 \index{XChange}\index{Xcerpt}
-The rule language XChange~\cite{2005-Patranjan-TLE.pdf} was the outcome of the REWERSE (~\cite{wwwRewerse}, Reasoning on the Web with Rules and Semantics) project, which was funded by the EU and Switzerland. Their work influenced a number of future research. The language was designed to add reactive behaviour to a "static" web which is represented through XML resources. Thus we have action logics to alter such resources through insertions and deletions. Since we aim to utilize web API's for our rule language we need a more generic approach which adds flexibility in term of the API provided. But the thorough research done with the language XChange holds valuable concepts, especially in terms of temporal evet composition. This could be a rule according to our use case:
+The rule language XChange~\cite{2005-Patranjan-TLE.pdf} was the outcome of the REWERSE (~\cite{wwwRewerse}, Reasoning on the Web with Rules and Semantics) project, which was funded by the EU and Switzerland. Their work influenced a number of future research. The language was designed to add reactive behaviour to a "static" Web which is represented through XML resources. Thus we have action logics to alter such resources through insertions and deletions. Since we aim to utilize Web API's for our rule language we need a more generic approach which adds flexibility in term of the API provided. But the thorough research done with the language XChange holds valuable concepts, especially in terms of temporal evet composition. This could be a rule according to our use case:
 
 
 But XChange is designed to access other resources in an action and thus provides powerful tools:
@@ -327,7 +337,7 @@ R2ML allows usage for RuleML together with many other dialects. Really!?
 % TODO RULE ENGINES!
 
 %\section{Conclusion}
-Most of the examined rule languages are designed for the interchangability of rules between different service providers. We do not attempt to jump into this domain but we rather pick up important concepts to manifest web API's as first class citizens of our rule language. This allows the ad-hoc design and implementation of reactive rules between existing web API's without the need for their cooperation in setting up their endpoint in a special way.
+Most of the examined rule languages are designed for the interchangability of rules between different service providers. We do not attempt to jump into this domain but we rather pick up important concepts to manifest Web API's as first class citizens of our rule language. This allows the ad-hoc design and implementation of reactive rules between existing Web API's without the need for their cooperation in setting up their endpoint in a special way.
 
 % TODO Rechtfertigung wieso nicht verwendet
 % Java EE und KRL nicht anwendbar

@@ -18,7 +18,7 @@
 % as seen by user,
 % as seen by developer
 
-The prototype system is the realisation of a reactive web system.
+The prototype system is the realisation of a reactive Web system.
 It was developped during the research for this thesis and acts as a platform for feasibility studies of certain use cases.
 
 % FIXME remove
@@ -35,8 +35,8 @@ It was developped during the research for this thesis and acts as a platform for
 
 % \section{Architecture}
 Prototype consists of a queue in which all incoming events are pushed, and an engine that picks the events from the end of the queue whenever it is idle.
-Since Prototype's core functionalty is the communication with resources in the web, the architecture bases on HTTP protocol in several parts.
-For example the events are meant to be retrieved completely via HTTP, the user interface is a webpage which posts requests to the system and most actions are also meant to be HTTP requests, or at least using them to gather information.
+Since Prototype's core functionalty is the communication with resources in the Web, the architecture bases on HTTP protocol in several parts.
+For example the events are meant to be retrieved completely via HTTP, the user interface is a Webpage which posts requests to the system and most actions are also meant to be HTTP requests, or at least using them to gather information.
 
 % \begin{figure}[!ht]
 % 	\centering
@@ -99,7 +99,7 @@ It is of utmost importance to find as much as possible ways to get data into a s
 % TODO figure: Wer hat welche rollen?
 % TODO figure: Event fluss in verschiedenen UCs
 % TODO figure: event anomalien (3-4 knoten)
-% TODO figure: Unterschied Push / Pull -> unter introduction bei webhooks?
+% TODO figure: Unterschied Push / Pull -> unter introduction bei Webhooks?
 
 % Callbacks / Webhooks semantical similarities but at different layers
 \section{Web Programming}
@@ -197,7 +197,23 @@ This implementation is necessary when the closure acts as a callback function fo
 
 \subsubsection{Benchmarking JavaScript vs. Java}
 refer to listings
-% TODO terminierungsproblem, testing, web server, timeout, stacked callbacks.
+% TODO terminierungsproblem, testing, Web server, timeout, stacked callbacks.
 %compilerbau?
 %loesungsansätze?
 
+
+% TODO why JS. JSON as first advantage (http://www.toptal.com/nodejs/why-the-hell-would-i-use-node-js)
+% advantage for network applications with several concurrent connections
+% not as client-server used as intented but as serverserver com since we also expect several connections simultanously under load.
+% But also, we adopt the non-blocking nature of JS that is used for node's optimal communication, in order to implement our enigne in a non blocking way, thus allowing to load code and fire callback function in modules whenever they are required!
+% http://ariya.ofilabs.com/2012/07/lazy-parsing-in-javascript-engines.html
+% Optimization of special case if ( before function {immediately-invoked function expression (IIFE)}, do rela parsing, else lazy parsing
+% Difference between context and scope. scope unique to each invocation, context is 'this', owner of currently executing code.
+% .call, .apply 
+% TODO we should use .bind for persistence.coffee's functions ....
+
+%In JavaScript, functions are first-class objects, i.e. they are objects and can be manipulated and passed around just like any other object. Specifically, they are Function objects. -> https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions_and_function_scope
+% Since each call provides potentially different arguments, a new closure is created for each call to outside. The memory can be freed only when the returned inside is no longer accessible
+
+% The definitive guide: This combination of a function object and a scope (a set of variable bindings) in which the function’s variables are resolved is called a closure in the computer science literature.4
+% This is an old term that refers to the fact that the function’s variables have bindings in the scope chain and that therefore the function is “closed over” its variables.
