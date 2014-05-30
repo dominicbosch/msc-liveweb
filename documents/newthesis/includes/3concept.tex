@@ -57,8 +57,27 @@ It would then need to react on a small subset of the \textrm{\textbf{ground-shak
 This relatively simple example discloses the complex nature of event-driven systems, but also their high flexibility and fine grained tuning possibilities.
 
 \section{The Web's Event \& Action Information Space}
-We have already shown in chapter "Related Work", that there are basically two different ways how services are offered in the Web, i.e. either functionality and data have to be requested, or data is pushed through a Webhook.
-This correlates with how the information space of the whole Web can be turned into events and actions.
+\index{Information Space}
+For a conceptual model, the information space in which the events are triggered and the actions are invoked, needs to be identified.
+During our research we encountered many different event or action providing subsets of the Web that can be incorporated into our model:
+\begin{itemize}
+  \item \textrm{World-Wide Web}
+  \item \textrm{Services in the Web}
+  \item \textrm{Web of Things}
+\end{itemize}
+We have already shown in chapter "Related Work", that there are basically two different ways how the Web's information space is accessible, i.e. either functionality and data have to be requested, or data is pushed through Webhooks.
+All of the above listed information space subsets require at least one of these two access methodologies.
+And through these access methodoligies are we able to turn the information space of the Web into events and actions.
+\index{World-Wide Web}
+The \textrm{World-Wide Web}~\cite{DBLP:journals/en/Berners-LeeCGP92}, as envisioned by Tim Berners-Lee, is an information universe of interlinked documents, that a user can browse through.
+In our model, we can pull events directly from the World-Wide Web.
+For example, most documents in the World-Wide Web are subject to changes and such changes can be translated into events.
+
+\index{Services}
+We gave an introduction into \textrm{Services in the Web} in chapter "Related Work"
+
+\index{Web of Things}
+
 Either there is an event producer which proactively pushes events into the Web, or a service is offered whose responses can be turned into events.
 These events and actions can have a solely virtual nature or, in the case of data from the "Web of Things", also a physical nature.
 A virtual nature can be anything from a static webpage to offered services, such as a detected change on a webpage can become an event as well as a service answer is interpreted as such for example a new mail arriving.
@@ -72,11 +91,6 @@ A physical nature for events could for example be measurements from a rain detec
   \label{fig:InformationSpace}
 \end{figure}
 There are different categories of events and also different ways how they can get into the Web:
-\begin{itemize}
-  \item Measurements
-  \item WebApp events
-  \item ...
-\end{itemize}
 
 We have seen in the related work chapter that there is a growing number of Web APIs which become accessible.
 

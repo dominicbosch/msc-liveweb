@@ -71,6 +71,8 @@ Through this, the offered objects can become services in the Web, thought they a
 \index{REST}
 
 Naturally, as the Web grows quickly in its offered services and also efforts to access them, trends lead toward simple ways to access services in the Web.
+During our research it turned out that SOAP's overhead compared to REST diminishes its popularity on behalf of the latter one.
+But still since SOAP services are request responders they have their place in our model, both as event trigger and action invoker.
 
 
 \begin{figure}[!ht]
@@ -324,7 +326,7 @@ It is built for the purpose of adding reactivity to the cloud.
 The language is based on declarative syntax, enriched with imparative elements.
 But it is a tedious task to get into a whole new language and their caveats.
 \emph{authorization?}
-
+% The KRE suits the demand for a certain coupling between the users browser and the remote rules engine to provide a powerful system. On the other hand the rules engine is not (yet) well documented, not lightweighted and forged in Perl, a programming language that wasn't encountered during the research for related work on rule based systems.
 
 \index{RuleML}
 The basis of \emph{RuleML}~~\cite{2006-Boley-RuleML.pdf} is datalog, a language in the intersection of SQL and Prolog.
