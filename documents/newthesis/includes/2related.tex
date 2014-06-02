@@ -79,19 +79,19 @@ But still since SOAP services are request responders they have their place in ou
 
 \begin{figure}[!ht]
 	\centering
-  \begin{subfigure}[b]{0.5\textwidth}
-    \includegraphics[width=\textwidth]{figures/slide-11-1024}
+  % \begin{subfigure}[b]{0.5\textwidth}
+    \includegraphics[width=0.7\textwidth]{figures/slide-11-1024}
     \caption{REST vs. SOAP: Simplicity wins again\\(John Musser, ProgrammableWeb, 2011)}
     \label{fig:slide-11-1024}
-  \end{subfigure}%
-  ~
-  \begin{subfigure}[b]{0.5\textwidth}
-    \includegraphics[width=\textwidth]{figures/googleTrends_Rest-SOAP}
-    \caption{Google Trends: "soap api" vs. "rest api"\\~}
-    \label{fig:googleTrends_Rest-SOAP}
-  \end{subfigure}%
-  \caption{REST vs. SOAP Comparison}
-  \label{fig:RESTvsSOAP}
+  % \end{subfigure}%
+  % ~
+  % \begin{subfigure}[b]{0.5\textwidth}
+  %   \includegraphics[width=\textwidth]{figures/googleTrends_Rest-SOAP}
+  %   \caption{Google Trends: "soap api" vs. "rest api"\\~}
+  %   \label{fig:googleTrends_Rest-SOAP}
+  % \end{subfigure}%
+  % \caption{REST vs. SOAP Comparison}
+  % \label{fig:RESTvsSOAP}
 
 \end{figure}
 
@@ -277,18 +277,24 @@ Thus
 % \index{ECA}
 
 %TODO Table with categorization of Rule languages
+% show rule engines, alsoo CEP, describe event composition through templates and why we don't do it
 
 Several different rule languages have been developped for different purposes over the last years and they vary grately in their purpose.
 % terms of usability for ECA Rules together with Web API mashups.
 A compilation of research on different emerging rule-based languages and technologies ~\cite{2009-Paschke_Boley-RCER.pdf} gives an oveview over such efforts.
 We examined different existing rule languages with respect to a certain use case to identify its applicability for reactivity in the Web. % TODO find other word as applicability
 The use case is defined such that the rule needs to suffice the ECA paradigm:
-
+In Appendix \ref{lst:JSONEvent}
+In Appendix \ref{lst:myrdf}
 \begin{itemize}
   \item Event: Receipt of an Email
   \item Condition: Check for a certain sender
   \item Action: Store it remotely via a Web API
 \end{itemize}
+Definition of events\cite{Adaikkalavan2007}
+CEP or Composite event detection by means of using event templates\cite{Zhou2005}
+
+
 
 We defined an email event which the rule languages need to be able to process.
 The JSON representation of the given email event as depicted in the appendix. %is shown in Listing~\ref{lstemail}.
@@ -302,7 +308,7 @@ An early ECA Rule Language for XML repositories~\cite{Papamarkos03event-conditio
 
 Now apart from implementing a rules engine, we would also need to add an XML document event manager which interpretes and pushes events into the XML file \emph{inbound\_queue.xml}. Then again this instance would interprete the ouptuts of the ECA engine, which would theoretically manifest in other XML documents, and produce meaningful actions on remote hosts. This wouldn't be an architecture which has its focus on the solution of our use case and, as a result, add complexity and create an unnecessary overhead.
 
-\index{Notation 3}
+\index{Notation3}
 To make the lengthy RDF definitions smaller and more readable, Notation 3~\cite{wwwn3} was designed and announced in 2005. Through the implies operator(=\textgreater) an "event" can be connected to an "action", both expressed in RDF's subject, predicate, object notation, which makes the expression of ECA rules a complicated and not very intuitive task. A solution to our use case would look as follows:
 
 This language is used to express relations between entities and thus not really suitable for our use case, since we would require another interpreter to infer the actions. But concepts and ideas of the work that was done in these consortias could eventually still find influence into our solution.
@@ -348,3 +354,6 @@ Most of the examined rule languages are designed for the interchangability of ru
 
 
 % TODO performance artikel / paper ueber node.js
+
+
+

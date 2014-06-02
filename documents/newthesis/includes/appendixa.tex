@@ -2,6 +2,7 @@
 \chapter{Rule Languages}
 
 \section{Example JSON Event for Rule Languages}
+\label{lst:JSONEvent}
 % \begin{minipage}{\linewidth}
 \begin{Verbatim}[frame=single,fontsize=\footnotesize,commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1,xleftmargin
 =.3in]
@@ -18,8 +19,9 @@
 
 
 \section{E-Mail Example Rule expressed in RDF}
+\label{lst:MailRDF}
 % \begin{minipage}{\linewidth}
-\begin{lstlisting}[nolol,float=h,label=lstrdf,language=RDF]
+\begin{lstlisting}[nolol,float=h,language=RDF]
   ON INSERT document("inbound_queue.xml")/mails/mail
   IF $delta/sender[.="sender@mail.com"]
   DO DELETE document("inbound_queue.xml")/mails/mail;
@@ -31,8 +33,9 @@
 
 
 \section{E-Mail Example Rule expressed in Notation 3}
+\label{lst:MailN3}
 % \begin{minipage}{\linewidth}
-\begin{lstlisting}[nolol,float=h,label=lstn3,language=N3]
+\begin{lstlisting}[nolol,float=h,language=N3]
   { ?x :event "email". ?x :sender "sender@mail.com" }
     => { :webapi :newcontent ?x }
 \end{lstlisting}
@@ -40,8 +43,9 @@
 
 
 \section{E-Mail Example Rule expressed in XChange/Xcerpt}
+\label{lst:MailXChange}
 % \begin{minipage}{\linewidth}
-\begin{lstlisting}[nolol,float=h!,label=lstxchange1,language=XChange]
+\begin{lstlisting}[nolol,float=h!,language=XChange]
   TRANSACTION
     in {
       resource { "http://www.webapi.com"},
@@ -62,8 +66,9 @@
 
 
 \section{XChange/Xcerpt Remote Resource Access}
+\label{lst:XChangeRemote}
 % \begin{minipage}{\linewidth}
-\begin{lstlisting}[nolol,float=h!,label=lstxchange2,language=XChange]
+\begin{lstlisting}[nolol,float=h!,language=XChange]
   TRANSACTION
     [...]
   ON
@@ -83,6 +88,7 @@
 
 
 \section{E-Mail Example Rule expressed in JSON Rules}
+\label{lst:MailJSONRules}
 % \begin{minipage}{\linewidth}
 \begin{Verbatim}[frame=single,fontsize=\footnotesize,commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1,xleftmargin
 =.3in]
@@ -116,6 +122,7 @@
 
 
 \section{E-Mail Example Rule expressed in Kinetics Rule Language (KRL)}
+\label{lst:MailKRL}
 % \begin{minipage}{\linewidth}
 \begin{lstlisting}[nolol,float=h,label=lstkre,language=KRE,caption=E-Mail Example rule in KRL]
   rule store_mail {
@@ -132,6 +139,7 @@
 
 
 \section{E-Mail Example Rule expressed in (Reaction) RuleML}
+\label{lst:MailRuleML}
 % \begin{minipage}{\linewidth}
 \begin{Verbatim}[frame=single,fontsize=\footnotesize,commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1,xleftmargin
 =.3in]
@@ -165,8 +173,10 @@
 
 
 \section{Prototype Rule transformed into JSON}
+\label{lst:PrototypeRuleInJSONw}
 % \begin{minipage}{\linewidth}
-\begin{Verbatim}[fontsize=\small,commandchars=\\\{\}]
+\begin{Verbatim}[frame=single,fontsize=\footnotesize,commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1,xleftmargin
+=.3in]
 \PY{p}{\PYZob{}}
   \PY{n+nt}{\PYZdq{}event\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}mail\PYZdq{}}\PY{p}{,}
   \PY{n+nt}{\PYZdq{}conditions\PYZdq{}}\PY{p}{:} \PY{p}{[}
