@@ -1,20 +1,19 @@
 
 \chapter{Related Work}
 
-% TODO From read-only to read-write to programmable
-
 Research on behalf of the Web attracts a great deal of attention.
 This is not surprising since modern business and life is already impossible without the internet.
 Great opportunities arise with it and we cover a part of the Web service orchestration in it.
 \index{SOA}
 There 
-Service-oriented Architecture (SOA)~\cite{perrey2003service}
+Service-oriented Architecture (\textrm{SOA})~\cite{perrey2003service}
 With the wide adoption of SOA, we see an increasing number of Web accessible services and their compositions.~\cite{conf/icws/HuangFT12}
 By the end of 2013 this number grew to 10'000 http://www.programmableweb.com/news/programmablewebs-directory-hits-10000-apis.-and-counting./analysis/2013/09/23
 At the 
 \section{Services in the Web}
 \index{Services}
 What are services
+Other recent research~\cite{conf/icws/HuangFT12} has shown that the number of accessible Web APIs follows power law distribution and thus provides an ever growing source of data and functionality.
 ~\cite{peltz2003web}
 \index{Web Service}
 \index{Web API}
@@ -31,78 +30,67 @@ The term service in the Web is not very precise and the Web's short history has 
 
 
 \index{RPC}
-A fairly early adoption of the service concept to computers were the Remote Procedure Calls (RPC)~\cite{Birrell:1984:IRP:2080.357392}.
-Through RPC a piece of code can be executed on a different machine, than the one which is calling the procedure.
+A fairly early adoption of the service concept to computers were the Remote Procedure Calls (\textrm{RPC})~\cite{Birrell:1984:IRP:2080.357392}.
+Through \textrm{RPC} a piece of code can be executed on a different machine, than the one which is calling the procedure.
 It is basically achieved via inter-process communication and doesn't necessarily require the Web.
-Even more since when RPC was invented, the World-Wide Web~\cite{DBLP:journals/en/Berners-LeeCGP92} didn't even exist. 
-RPC also found its use in grid computing~\cite{seymour2002overview} and through this, opened doors into the field of distributed computation.
-The RPC paradigm isn't bound to certain technologies and thus, has been implemented in a lot of differrent programming languages.
+Even more since when \textrm{RPC} was invented, the \textrm{World-Wide Web}~\cite{DBLP:journals/en/Berners-LeeCGP92} didn't even exist. 
+\textrm{RPC} also found its use in grid computing~\cite{seymour2002overview} and through this, opened doors into the field of distributed computation.
+The \textrm{RPC} paradigm isn't bound to certain technologies and thus, has been implemented in a lot of differrent programming languages.
 These implementations were tightly bound to the respective language that was used, which resulted largely in incomptaiblity among them.
 \index{XML}
 \index{XML-RPC}
-It became necessary to enhance RPC's in order to get cross platform compatibility.
-By abstracting RPC functionality with the Extensible Markup Language (XML)~\cite{bray1998extensible}, compatibility between services that used different technologies was easier to achieve.
+It became necessary to enhance \textrm{RPC}'s in order to get cross platform compatibility.
+By abstracting \textrm{RPC} functionality with the Extensible Markup Language (\textrm{XML})~\cite{bray1998extensible}, compatibility between services that used different technologies was easier to achieve.
 
 \index{SOAP}
 \index{WSDL}
-Since XML-RPC was held relatively simple but received a lot of attention, it was further enhanced.
-Together with additional functionality, XML-RPC turned into Simple Object Access Protocol (SOAP)~\cite{box2000simple}.
-SOAP is accompanied by the Web Service Description Language (WSDL)~\cite{christensen2001web} which is used to describe the interfaces to SOAP services.
-Through SOAP and WSDL a client for the service can issue a request for the WSDL information of the service and retrieves all interface specifications he requires in order to issue a call to the actual service.
+Since \textrm{XML-RPC} was held relatively simple but received a lot of attention, it was further enhanced.
+Together with additional functionality, XML-RPC turned into Simple Object Access Protocol (\textrm{SOAP})~\cite{box2000simple}.
+\textrm{SOAP} is accompanied by the Web Service Description Language (\textrm{WSDL})~\cite{christensen2001web} which is used to describe the interfaces to SOAP services.
+Through \textrm{SOAP} and \textrm{WSDL} a client for the service can issue a request for the \textrm{WSDL} information of the service and retrieves all interface specifications he requires in order to issue a call to the actual service.
 The service specifications are then incorporated into the existing application as if it is a local function call.
-The SOAP layer takes care of marshalling the request and unmarshalling the response.
+The \textrm{SOAP} layer takes care of marshalling the request and unmarshalling the response.
 
 \index{CORBA}
-Another initiative that aimed for eased communication between different platform is the Common Object Request Broker Architecture (CORBA)~\cite{dec1991common}.
+Another initiative that aimed for eased communication between different platform is the Common Object Request Broker Architecture (\textrm{CORBA})~\cite{dec1991common}.
 As the name already suggest it is an object-oriented approach and it allows the exchange of whole objects.
 \index{ORB}
-CORBA relies on its communication layer, the Object Request Broker (ORB), which forms the basis of its architecture.
-The platform-specific ORB's provide the communication abstraction, which free the application from platform dependencies.
+\textrm{CORBA} relies on its communication layer, the Object Request Broker (\textrm{ORB}), which forms the basis of its architecture.
+The platform-specific \textrm{ORB}'s provide the communication abstraction, which free the application from platform dependencies.
 \index{IDL}
-Similar to SOAP's WSDL, CORBA has its Interface Definition Languange (IDL) to provide information about the objects to be offered and accessed.
-An object is instantiated by an application and the interface to this instance is offered through the ORB.
-Another application attached to the ORB can then access all public variables, data structures and functions of this object.
+Similar to \textrm{SOAP}'s \textrm{WSDL}, \textrm{CORBA} has its Interface Definition Languange (\textrm{IDL}) to provide information about the objects to be offered and accessed.
+An object is instantiated by an application and the interface to this instance is offered through the \textrm{ORB}.
+Another application attached to the \textrm{ORB} can then access all public variables, data structures and functions of this object.
 This means not only remote access to variables and data structures, but also remote function invocation.
-CORBA requires the implementation of object-oriented mechanisms in programming languages which aren't object-oriented.
+\textrm{CORBA} requires the implementation of object-oriented mechanisms in programming languages which aren't object-oriented.
 This can be technically difficult and become an eventually tedious task.
-CORBA allows communication between applications written in different programming languages and which are running on the same physical computer, as well as the communication between different computers in the same network.
-With the Internet Inter-ORB Protocol (IIOP) it is also possible to connect ORB's over the Web.
-Through this, the offered objects can become services in the Web, thought they are shielded by the ORB.
+\textrm{CORBA} allows communication between applications written in different programming languages and which are running on the same physical computer, as well as the communication between different computers in the same network.
+With the Internet Inter-ORB Protocol (\textrm{IIOP}) it is also possible to connect \textrm{ORB}'s over the Web.
+Through this, the offered objects can become services in the Web, thought they are shielded by the \textrm{ORB}.
+% -> Common Object Request Broker Architecture, Distributed Component Object Model, Unix Remote Procedure Call, and Java Remote Method Invocation. Each of those technologies failed to gain significant market share or enough momentum to succeed.
+% CORBA , RMI
 
 
 \index{REST}
 
+% TODO REST paper, Craigslist artcile / Paper
 Naturally, as the Web grows quickly in its offered services and also efforts to access them, trends lead toward simple ways to access services in the Web.
-During our research it turned out that SOAP's overhead compared to REST diminishes its popularity on behalf of the latter one.
+During our research it turned out that \textrm{SOAP}'s overhead compared to \textrm{REST} diminishes its popularity on behalf of the latter one.
 But still since SOAP services are request responders they have their place in our model, both as event trigger and action invoker.
-
+\textrm{Web of Things}~\cite{Guinard2011WoT} has REST interfaces
 
 \begin{figure}[!ht]
 	\centering
-  % \begin{subfigure}[b]{0.5\textwidth}
-    \includegraphics[width=0.7\textwidth]{figures/slide-11-1024}
-    \caption{REST vs. SOAP: Simplicity wins again\\(John Musser, ProgrammableWeb, 2011)}
-    \label{fig:slide-11-1024}
-  % \end{subfigure}%
-  % ~
-  % \begin{subfigure}[b]{0.5\textwidth}
-  %   \includegraphics[width=\textwidth]{figures/googleTrends_Rest-SOAP}
-  %   \caption{Google Trends: "soap api" vs. "rest api"\\~}
-  %   \label{fig:googleTrends_Rest-SOAP}
-  % \end{subfigure}%
-  % \caption{REST vs. SOAP Comparison}
-  % \label{fig:RESTvsSOAP}
-
+  \includegraphics[width=0.7\textwidth]{figures/slide-11-1024}
+  \caption{REST vs. SOAP: Simplicity wins again\\(John Musser, ProgrammableWeb, 2011)}
+  \label{fig:slide-11-1024}
 \end{figure}
 
 % Correlates with findings in http://www.slideshare.net/jmusser/open-apis-state-of-the-market-2011
-Several different resources [Figure \ref{fig:googleTrends_Rest-SOAP}][Figure \ref{fig:slide-11-1024} (John Musser, ProgrammableWeb, 2011)] draw the same picture, an increasing popularity of REST over SOAP by an order of magnitude and a exponential growth of the number of accessible Web API's.
+Several different resources [Figure \ref{fig:slide-11-1024} (John Musser, ProgrammableWeb, 2011)] draw the same picture, an increasing popularity of REST over SOAP by an order of magnitude and a exponential growth of the number of accessible Web API's.
 
 An interesting trend that could be observed was the growing popularity of REST over SOAP.~\cite{ploscar2012xml}
 
-\index{REST}
-\index{SOAP}\index{WSDL}
-\index{IDL}\index{CORBA}
 
 
 
@@ -138,19 +126,9 @@ to programming Web and Semantic Web applications.
 % My guess is that Node is encouraging good programmer practices in terms of scalability, and Java less so. In other words, programmers probably have to work less hard to avoid bad scalability bottlenecks in Node than in Java.
 
 
-% XML SOAP WSDL UDDI RDF OWL
-% microformats: xhtml rss
-
 % http://www.w3.org/TR/ws-gloss/: A Web service is a software system designed to support interoperable machine-to-machine interaction over a network.
 % http://www.informationweek.com/from-edi-to-xml-and-uddi-a-brief-history-of-web-services/d/d-id/1012008?
-% -> Common Object Request Broker Architecture, Distributed Component Object Model, Unix Remote Procedure Call, and Java Remote Method Invocation. Each of those technologies failed to gain significant market share or enough momentum to succeed.
-% CORBA , RMI
-% XML officially became a standard in February 1998, when the World Wide Web Consortium announced that XML 1.0 had reached draft recommendation status: suitable for deployment in applications.
-% SOAP won over WDDX (Web Distributed Data Exchange)
-% SOAP 1.0, its specification for a standardized message-passing protocol based on XML.
-% REST
-% TODO dienste services WebAPI belegen mit referenzen wo begriff wie gebraucht wird
-% Begriffe festnageln, definieren
+% TODO dienste services WebAPI belegen mit referenzen wo begriff wie gebraucht wird, Begriffe festnageln, definieren
 
 % ~\cite{journals/itpro/BarrosD06}:
 % The Rise of Web Service Ecosystems
@@ -172,6 +150,7 @@ to programming Web and Semantic Web applications.
 % So in this paper, we designed a research framework for researching the dynamic factors in service ecosystems.
 % -> No measurements, would be interesting
 
+% TODO From read-only to read-write to programmable
 % ~\cite{10.1109/MIC.2008.92}
 % The Web is now programmable.
 % This fact has been facilitated and accelerated by Web data’s availability as structured XML feeds (such as RSS and Atom) and by the externalization of Web application interactions through application programming interfaces.
@@ -187,7 +166,7 @@ with standardised REST API's we got to Web API, easy access and understandable
 
 
 The fast evolving Web has brought up a trend towards easy to master interfaces to services, the so called Web APIs.
-They do not only provide access to mere services but whole applications that allow access over Web APIs.
+They do not only provide access to simple functionality but whole applications that allow access over Web APIs.
 These trending Web APIs benefit from a RESTful architecture which predominantly uses HTTP and thus relies on the most basic and powerful operations and the basis of the Web itself, the HTTP protocol. 
 
 % TODO Enough on Web API's?
@@ -217,32 +196,41 @@ These trending Web APIs benefit from a RESTful architecture which predominantly 
 % % TODO Webhooks
 % \index{Webhooks}
 
+% % TODO Reactivity!! allgemein
+% \index{Reactivity}
+
+% % TODO Programmability of the Web
+% \index{Programmability}
+%  -> in general, both should go into related work?
+
 % TODO Categorize Related Work!
 
 \index{Mashups}
 Mashups combine information and functionality of more than one Web service in a single place.
-The mashing up of such Web services allows data to be enhanced with new informations, processing / refinement of the information, or even ways to interact with them, e.g. through Google Maps.
+The mashing up of such Web services allows data to be enhanced with new informations, processing/refinement of the information, or even ways to interact with them, e.g. through Google Maps.
 Simple functions from different sources can be combined into more powerful ones, which influence data and services in a way their founders eventually didn't even think of.
 Web service mashups have been developped ever since services in the Web started to exist and were accessible in a more or less convenient way.
 We introduce Paul Rademacher as an example for how recent the invention of Web service mashups are.
 He's one of the first inventors of such a Web service mashup.
-In the same year after Google Maps came up in 2005, he invented a site~\cite{wwwRademacherOne,wwwRademacherTwo} that displayed Craigslist houses on a Google Map.
+In the same year after Google Maps came up in 2005, he invented a site that displayed Craigslist houses on a Google Map.
 With no Google Maps API at that time, he needed time and skills to reverse engineer Google Map's functionalities.
 
+% often only read / new aggregation / no writes
+% TODO find mashup that does writes in a system! (not existing right?)
 
 A large number of such "static" mashups were and are still developped.
 They are static in the way that they aggregate a fixed (and mostly low) number, of either data or functionality resources, to provide an enhanced resource in a specialized domain.
 Of course Mashups can be mashed up again, to provide even more sophisticated functionality and data.
-Some latest example Mashups, taken from the ProgrammableWeb~\cite{wwwProgrammableWeb} collection, are:
+Some latest example Mashups, taken from the ProgrammableWeb collection, are:
 
 \begin{itemize}
-  \item Wifi and Plugs~\cite{wwwWifiAndPlugs}: MapBox, Google Docs and Import.io API's used to display where Wi-Fi and plugs are available in London.
-  \item MapLight~\cite{wwwMapLight}: GovTrack.us and OpenSecrets API's used to combine political results with financial contributions to show how capital contributions affect voting.
-  \item Shared Count~\cite{wwwSharedCount}: Facebook, LinkedIn, Pinterest and Twitter API's used to display informations about how well spread a URL is on social media sites.
+  \item Wifi and Plugs: MapBox, Google Docs and Import.io API's used to display where Wi-Fi and plugs are available in London.
+  \item MapLight: GovTrack.us and OpenSecrets API's used to combine political results with financial contributions to show how capital contributions affect voting.
+  \item Shared Count: Facebook, LinkedIn, Pinterest and Twitter API's used to display informations about how well spread a URL is on social media sites.
 \end{itemize}
 
 In the past few years, research and development for platforms to allow users to flexibly mashup Web APIs got attention.
-% Web API mashups
+% Web App mashups
 With IFTTT and Zapier, two platforms have evolved out of this process.
 Users that register on those platforms are provided with a multitude of Web API functions that act as event triggers and such that are used to execute actions.
 The user is then free to combine these event triggers and actions in the way it suits best, creating helpful Web API mashups on their own.
@@ -251,7 +239,6 @@ The user is then free to combine these event triggers and actions in the way it 
 % you need events
 % you need rules / rule language
 
-% TODO REST paper, Craigslist artcile / Paper
 
 
 \section{Rule Engines \& Rule Languages}
@@ -259,12 +246,9 @@ The user is then free to combine these event triggers and actions in the way it 
 \index{Engine}
 \index{Rule Language}
 
-It turns out that Web API mashing up is not able to bring reactivity to the Web.
-They are merely aggregations of services that only provide data or functions but no write possibilities such as Web applications provide.
-% only limited functionalty
-% limited parametrization
-% often only read / new aggregation / no writes
-% TODO find mashup that does writes in a system! (not existing right?)
+It turns out that Web App mashing up is not able to bring reactivity to the Web.
+They are merely aggregations of services, which only provide data or functions but no write possibilities such as Web applications provide.
+% only subset of accesible functionalty/parametrization is provided
 
 Thus 
 

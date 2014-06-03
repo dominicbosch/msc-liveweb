@@ -1,54 +1,54 @@
 
 \chapter{Introduction}
 
-% Retain manageable interactions between cloud applications
-%reactive rules together with cloud applications have the potential to overcome limitations 
-%Current approaches concentrate on data flow rather than on event flow. which is mere data copy and spreading than reactivity
-% Large systems such as \emph{RuleResponder} weave stubs or proxies of existing service into a message oriented middleware (MoM). We envision the web itself is used as the middleware. Through this a lightweighted and performant event-based architecture can be realized, which allows the orchestration of existing web and cloud applications.
-
-% Since the vision of on- and offline rules can't be covered with a single server application, the utilization of a fast, flexible and widely used technology such as JavaScript to tackle this challenge seems to be favorable future work. JavaScript was mainly invented for browsers and is spread all over the web by now. Additionally, applications such as \emph{node.js}~\cite{wwwnodejs}, bring JavaScript to the server-side and tear down the communication efforts between cloud applications through JSON messages which are directly understood by modern browsers and cloud applications.
-% Preferably a lightweighted rules engine would be used to run the user-generated mashups. T
-
-
-The Web is an ever growing entity, in all aspects that it covers.
-It surrounds a rapidly growing number of human beings in their daily life and starts to flood them with functionality and information.
-One example of this information flood is the one hundred hours of video material that is uploaded to \textrm{YouTube\cite{wwwYoutube}} every single minute.
-An increasing number of bigger computing centers, but also ever smaller devices provide more data and functionality, both in quantity and complexity.
-Also, a growing fraction of these devices have access to the Web, which means they are potential data and functionality resources.
-A white paper\cite{citeulike:12243016} estimates that 200 million devices were connected to the internet in the year 2000.
-They also estimate that this number raised up to approximately 10 billion connected devices in 2013.
-Further more, they expect this number to grow up to 50 billion connected devices by the year 2020.
-This alone shows how strong growth of potentially data and functionalty delivering devices is growing currently and in the near future.
-Other recent research\cite{conf/icws/HuangFT12}\cite{wwwProgrammableWebResearch} has shown that the number of accessible Web APIs follows power law distribution and thus provides an ever growing source of data and functionality.
-The ever smaller devices that make up the "Internet of Things"\cite{Weber2010} today, are also capable of spreading the ubiquitous access to the Web, e.g. through mobile devices.
+The Web is an ever growing institution\textit{(entity)}, in all aspects that it covers.
+The number of information and functionality providers for the Web is growing in the whole spectrum from bigger computing centers down to smaller devices.
+Computing centers, growing in size and quantity, allow for massive amounts of data to be stored and accessed, but they also enable the construction and accessibility of more complex functionalities.
+Ever smaller devices provide informations and functionalities to the Web, through their quickly increasing number.
+Many of them are even providing access to the Web itself and thus leverage the effect of the growing Web.
+For example mobile phones can act as a hotspot to grant Web access to others through \textrm{WiFi}.
 \index{Web of Things}
-\textrm{Web of Things}~\cite{Guinard2011WoT}
- % and their push notifications, users get flooded with informations and, in turn, also produce increasingly more information.
+All the smart \textrm{Things} with access to the Web start to form the \textrm{Web of Things}~\cite{Guinard2011WoT}.
+This can be every\textrm{Thing} from a temperature sensor to all electronical devices within a house.
+These \textrm{Things} do not only provide sensor data but they can also be easily controlled through the Web.
 
-The human being requires tools to get the right information in the right situation at the right place and also to automate tasks
-user-centric reactions to allow a personalization of the information flood
-Governing the Web's information flood is getting more difficult and even fairly impossible for human beings with the tools given.
+Confronted with this rapid growth of the Web, an increasing number of human beings is exposed to it in their daily life and they get literally flooded with data and possibilities to govern them.
+Even though they have access to all these services in the Web, they often lack the knowledge, necessary time or right approach to weild them.
+Users need ways to get appropriate informations, in the right moment, automatically and in a condensed matter that suits them best.
+They have to be able to automate tedious tasks, e.g. detecting relevant changes in information resources and react on behalf of such changes.
+% More concrete example?
+This requires the identification of and filtering for user-specific information, appropriate timing, assembly and preprocessing of different information resources and finally the forwarding of outcomes to services in the web. 
+
+Users don't want to be bound to a specific platform, but want to use the best service the Web has to offer them for their work.
+Some services in the web might have means to spread their data to other pre-defined services, but they are often mere copy/paste task.
+Therefore users end up mashing up informations or functionalities from different locations within the Web periodically by hand.
+This leads to redundantly executed procedures with only little parametrization.
+It is also likely that the completion of such a task suffers from a latency due to the deferred detection of the initialization or the user just not being able to execute the work at that time.
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.7\textwidth]{figures/UsersWeildServicesInTheWeb}
+  \caption{Users mashup the Web's Information and Data}
+  \label{fig:UsersWeildServicesInTheWeb}
+\end{figure}
+
+A big part of the informations, that become available to the users, are short-lived informations corresponding to certain state changes, and therefore can be modeled as events.
 
 
-It becomes important to the individual to be able to filter out personally important bits and pieces.
-Basic filters are often available but they do not allow smart filtering in any way.
-Also, apart from smart filtering of information, people should have the possibility to aggregate important information in their desired place and in a way it's most useful for themselves.
-Such an aggregation implies access to services that consume data and produce an output, be it a data answer or storage.
-This means the user should get access to data and functionality services in a way that she can combine the possibilities in a suitable way to generated the most valuable output for her.
 Even if the Web service access gets simpler these days, the average user is not able to weild them.
 The challenge to provide users with ways to handle these already simpler accessible services, called Web API's has received a notable amount of attention over the last few years.
 
-% % TODO Reactivity!! allgemein
-% \index{Reactivity}
+We claim the whole Web as our information space in order to impose reactivity to it.
+% We envision an event-driven conceptual model that allows to impose reactivity on the Web.
+% Through such a model the Web should become programmable
+% user-centric reactions to allow a personalization of the information flood
 
-% % TODO Programmability of the Web
-% \index{Programmability}
-%  -> in general, both should go into related work?
 
-% TODO Information Space\cite{conf/trec/Newby96}
-% Information space is a set of concepts and relations among them held by an information system.
-% Information space is produced by a set of known procedures, and is changed through intentional
-% manipulation of its content.
+% Retain manageable interactions between cloud applications
+% reactive rules together with cloud applications have the potential to overcome limitations 
+% Current approaches concentrate on data flow rather than on event flow. which is mere data copy and spreading than reactivity
+% Large systems such as \emph{RuleResponder} weave stubs or proxies of existing service into a message oriented middleware (MoM). We envision the web itself is used as the middleware. Through this a lightweighted and performant event-based architecture can be realized, which allows the orchestration of existing web and cloud applications.
+
 
 It is a promising research field that leads towards reactivity in the Web through programmability.
 Currently somebody that want's to program the Web, requires deep knowledge of the required services and their functionality.
