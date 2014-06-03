@@ -52,12 +52,9 @@
 
 \frontmatter
 	\input{includes/titlepage}
-	% \input{includes/acknowledgment}
+	\input{includes/abstract}
+	\input{includes/acknowledgment}
 	\tableofcontents
-	\listoffigures
-	% FIXME CHECK WHETHER TABLES OR LISTINGS ARE IN THE DOCUMENT
-	% \listoftables
-	% \lstlistoflistings
 
 \mainmatter
 	\input{includes/1introduction}
@@ -71,6 +68,12 @@
 	\addcontentsline{toc}{chapter}{Bibliography}
 	\bibliography{thesisbib}
 	\bibliographystyle{thesisbst}
+
+% Lists
+	\listoffigures
+	% FIXME CHECK WHETHER TABLES OR LISTINGS ARE IN THE DOCUMENT
+	% \listoftables
+	% \lstlistoflistings
 
 % Index
 	\addcontentsline{toc}{chapter}{Index}
