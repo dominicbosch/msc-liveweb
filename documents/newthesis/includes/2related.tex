@@ -1,39 +1,56 @@
 
 \chapter{Related Work}
 
-Research on behalf of the Web attracts a great deal of attention.
-This is not surprising since modern business and life is already impossible without the internet.
-Great opportunities arise with it and we cover a part of the Web service orchestration in it.
+Research on behalf of the Web attracts a great deal of attention, even more since modern life is already impossible without it.
+Just imagine how you will get food without money because the credit card reader can't establish a connection to the bank.
+If you still got some cash you'll have to save it, since banks will not work anymore when the Web is gone.
+\index{World-Wide Web}
+Ever since the term \textrm{World-Wide Web}~\cite{DBLP:journals/en/Berners-LeeCGP92} started to exist there has always been a trend towards services~\cite{peltz2003web} which are offered via the Web.
 \index{SOA}
-There 
-Service-oriented Architecture (\textrm{SOA})~\cite{perrey2003service}
-With the wide adoption of SOA, we see an increasing number of Web accessible services and their compositions.~\cite{conf/icws/HuangFT12}
-By the end of 2013 this number grew to 10'000 http://www.programmableweb.com/news/programmablewebs-directory-hits-10000-apis.-and-counting./analysis/2013/09/23
-At the 
-\section{Services in the Web}
+The encapsulation of functionality into services in order to offer them to other applications is called service-oriented architecture (\textrm{SOA})~\cite{perrey2003service}.
 \index{Services}
-What are services
-Other recent research~\cite{conf/icws/HuangFT12} has shown that the number of accessible Web APIs follows power law distribution and thus provides an ever growing source of data and functionality.
-~\cite{peltz2003web}
-\index{Web Service}
-\index{Web API}
-An important development within the Web are the increasing number of available services.
-The term service in the Web is not very precise and the Web's short history has already seen a lot of different kinds.
-%Web Services term refers to available programmatic interfaces that are used in the World Wide Web for application-to-application communication.
+Adopting \textrm{SOA} internally to an application means splitting the application into smaller pieces, which then communiacte via services among each other.
+This does not only provide robustness, it also allows the reuse of functionality.
+Moreover these services can be offered to other applications and also to the Web, thus allowing users the access to certain functionalty or even the whole application.
+All nodes in the Web are standalone entities, which offer services of some sort, be it a webpage, measurements, functionality or whatsoever can be offered through the Web.
+This nature of the Web makes itself a service-oriented architecture and everything these entities offer are \textrm{Services in the Web}.
+It is for its advantages that \textrm{SOA} has received a great deal of attention and has been widely adopted, also throughout the Web.
+This lead to a rapidly increasing number of Web accessible services and their compositions.
+An empirical study~\cite{conf/icws/HuangFT12} on a directory they call the \textit{"[...] most active Web APIs and mashups collection"} and data taken from that resource (depicted in Figure \ref{fig:NumOfAPIs}) seem to draw the same picture.
 
 \begin{figure}[!ht]
   \centering
-  \includegraphics[width=0.7\textwidth]{figures/NumOfAPIs}
+  \includegraphics[width=0.6\textwidth]{figures/NumOfAPIs}
   \caption{Number of registered APIs in the ProgrammableWeb directory by date}
   \label{fig:NumOfAPIs}
 \end{figure}
+
+A considerable amount of literature~\cite{2007_AlferesR3}~\cite{2005-Bry_etal-XChange.pdf}~\cite{10.1007-11896548_63}~\cite{Elliott:2009:PFR:1596638.1596643}~\cite{2009-Paschke_Boley-RCER.pdf}~\cite{2012-Paschke_etal-ReactionRuleML.pdf} has been published on reactivity.
+These studies underline that rectivity can be imposed through Event-Conditon-Action (\textrm{ECA}) rules.
+Such rules consist of three parts:
+\begin{itemize}
+  \item Event:
+  \item Condition:
+  \item Action:
+\end{itemize}
+
+In this chapter we will give a quick overview over the different approaches to the offering of services, in order to draw a picture about what \textrm{Services in the Web} are.
+We will then present existing rule languages and engines that exploit ECA paradigm.
+
+\section{Services in the Web}
+\index{Web Service}
+\index{Web API}
+As we have already pointed out, an important development within the Web are the increasing number of available services.
+The term service in the Web is not very precise and the Web's short history has already seen a lot of different kinds.
+%Web Services term refers to available programmatic interfaces that are used in the World Wide Web for application-to-application communication.
+
 
 
 \index{RPC}
 A fairly early adoption of the service concept to computers were the Remote Procedure Calls (\textrm{RPC})~\cite{Birrell:1984:IRP:2080.357392}.
 Through \textrm{RPC} a piece of code can be executed on a different machine, than the one which is calling the procedure.
 It is basically achieved via inter-process communication and doesn't necessarily require the Web.
-Even more since when \textrm{RPC} was invented, the \textrm{World-Wide Web}~\cite{DBLP:journals/en/Berners-LeeCGP92} didn't even exist. 
+Even more since when \textrm{RPC} was invented, the \textrm{World-Wide Web} wasn't even postulated by Tim Berners-Lee. 
 \textrm{RPC} also found its use in grid computing~\cite{seymour2002overview} and through this, opened doors into the field of distributed computation.
 The \textrm{RPC} paradigm isn't bound to certain technologies and thus, has been implemented in a lot of differrent programming languages.
 These implementations were tightly bound to the respective language that was used, which resulted largely in incomptaiblity among them.
@@ -90,7 +107,7 @@ But still since SOAP services are request responders they have their place in ou
 Several different resources [Figure \ref{fig:slide-11-1024} (John Musser, ProgrammableWeb, 2011)] draw the same picture, an increasing popularity of REST over SOAP by an order of magnitude and a exponential growth of the number of accessible Web API's.
 
 An interesting trend that could be observed was the growing popularity of REST over SOAP.~\cite{ploscar2012xml}
-
+Quicker to implement soap if existing aids are installed, because they aid
 
 
 
@@ -128,7 +145,7 @@ to programming Web and Semantic Web applications.
 
 % http://www.w3.org/TR/ws-gloss/: A Web service is a software system designed to support interoperable machine-to-machine interaction over a network.
 % http://www.informationweek.com/from-edi-to-xml-and-uddi-a-brief-history-of-web-services/d/d-id/1012008?
-% TODO dienste services WebAPI belegen mit referenzen wo begriff wie gebraucht wird, Begriffe festnageln, definieren
+% TODO dienste services Web API belegen mit referenzen wo begriff wie gebraucht wird, Begriffe festnageln, definieren
 
 % ~\cite{journals/itpro/BarrosD06}:
 % The Rise of Web Service Ecosystems
@@ -239,7 +256,23 @@ The user is then free to combine these event triggers and actions in the way it 
 % you need events
 % you need rules / rule language
 
+\section{Event-Condition-Action Paradigm and Complex Event Processing}
+\index{ECA}
+\cite{robins2010complex}
+% Why not ECAP? because post condition can't be fired zuverlaessig in highly asynchronous systems
+% An Event Driven Architecture (EDA) is a software architecture paradigm promoting the production, detection, consumption of, and reaction to events
 
+
+% TODO
+% To allow user-defined Web API mashups, a rule language is required which is capable to express ECA Rules. 
+
+
+% TODO
+% ECA
+% \index{ECA}
+%% CEP bases on event-driven architecture
+% From this viewpoint, CEP can be regarded as a service that receives and matches lower-level events and generates higher-level events, 
+% if we implement event templating with properties such as described in 
 
 \section{Rule Engines \& Rule Languages}
 \index{Rule}
@@ -250,15 +283,6 @@ It turns out that Web App mashing up is not able to bring reactivity to the Web.
 They are merely aggregations of services, which only provide data or functions but no write possibilities such as Web applications provide.
 % only subset of accesible functionalty/parametrization is provided
 
-Thus 
-
-% TODO
-% To allow user-defined Web API mashups, a rule language is required which is capable to express ECA Rules. 
-
-
-% TODO
-% ECA
-% \index{ECA}
 
 %TODO Table with categorization of Rule languages
 % show rule engines, alsoo CEP, describe event composition through templates and why we don't do it
@@ -276,7 +300,7 @@ In Appendix \ref{lst:myrdf}
   \item Action: Store it remotely via a Web API
 \end{itemize}
 Definition of events\cite{Adaikkalavan2007}
-CEP or Composite event detection by means of using event templates\cite{Zhou2005}
+
 
 
 
@@ -293,7 +317,7 @@ An early ECA Rule Language for XML repositories~\cite{Papamarkos03event-conditio
 Now apart from implementing a rules engine, we would also need to add an XML document event manager which interpretes and pushes events into the XML file \emph{inbound\_queue.xml}. Then again this instance would interprete the ouptuts of the ECA engine, which would theoretically manifest in other XML documents, and produce meaningful actions on remote hosts. This wouldn't be an architecture which has its focus on the solution of our use case and, as a result, add complexity and create an unnecessary overhead.
 
 \index{Notation3}
-To make the lengthy RDF definitions smaller and more readable, Notation 3~\cite{wwwn3} was designed and announced in 2005. Through the implies operator(=\textgreater) an "event" can be connected to an "action", both expressed in RDF's subject, predicate, object notation, which makes the expression of ECA rules a complicated and not very intuitive task. A solution to our use case would look as follows:
+To make the lengthy RDF definitions smaller and more readable, Notation 3~\cite{berners2006notation} was designed and announced in 2005. Through the implies operator(=\textgreater) an "event" can be connected to an "action", both expressed in RDF's subject, predicate, object notation, which makes the expression of ECA rules a complicated and not very intuitive task. A solution to our use case would look as follows:
 
 This language is used to express relations between entities and thus not really suitable for our use case, since we would require another interpreter to infer the actions. But concepts and ideas of the work that was done in these consortias could eventually still find influence into our solution.
 
