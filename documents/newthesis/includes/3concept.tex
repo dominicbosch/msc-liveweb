@@ -50,6 +50,8 @@ It would then need to react on a small subset of the \textrm{\textbf{ground-shak
 This relatively simple example discloses the complex nature of event-driven systems, but also their high flexibility and fine grained tuning possibilities.
 
 \section{The Web's Event \& Action Information Space}
+% Event cloud
+% we generate also events again to be pushed over webhooks, and also loopback events
 % TODO TABELLE Ort/Kultur(fussball/Apple, weltweit)/Saisonal(kalender)/Internet (ortlos, github)
 % an event is a change in state and cn be anything
 % In physics, and in particular relativity, an event indicates a physical situation or occurrence, located at a specific point in space and time
@@ -172,3 +174,19 @@ a lot possible, but dangerous.
 \PY{k}{if} \PY{n}{sender}\PY{o}{=}\PY{l+s+ss}{\PYZdq{}sender@mail.com\PYZdq{}}
 \PY{k}{do} \PY{n}{webapi}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{newcontent}\PY{p}{(}\PY{n}{subject}\PY{p}{)}
 \end{Verbatim}
+
+% TODO Define language with regular expression 
+% Programming language syntax is usually defined using a combination of regular expressions (for lexical structure) and Backus–Naur Form (for grammatical structure). Below is a simple grammar, based on Lisp:
+% expression ::= atom | list
+% atom       ::= number | symbol
+% number     ::= [+-]?['0'-'9']+
+% symbol     ::= ['A'-'Z''a'-'z'].*
+% list       ::= '(' expression* ')'
+\begin{lstlisting}[language=OwnRule,caption=Conceptual ECA Rule Language Syntax]
+expression  ::= 'on ' event ' if ' conditions ' do ' actions
+event       ::= symbol.*(' -> ' symbol.*)
+conditions  ::= 
+actions     ::= symbol*('('selector*')')
+symbol      ::= [A-Za-z0-9_-]+
+selector    ::= [#\{(symbol*?)\}]
+\end{lstlisting}
