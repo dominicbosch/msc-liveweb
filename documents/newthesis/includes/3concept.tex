@@ -80,17 +80,17 @@ This relatively simple example discloses the complex nature of event-driven syst
 For a conceptual model, the information space in which the events are triggered and the actions are invoked, needs to be identified.
 During our research we encountered many different event or action providing subsets of the Web that can be incorporated into our model:
 \begin{itemize}
-  \item \textrm{World-Wide Web}
+  \item \textrm{World Wide Web}
   \item \textrm{Web of Things}
   \item Services in the Web
 \end{itemize}
 We have already shown in chapter "Related Work", that there are basically two different ways how the Web's information space is accessible, i.e. either functionality and data have to be requested, or data is pushed through Webhooks.
 All of the above listed information space subsets require at least one of these two access methodologies.
 And through these access methodoligies are we able to turn the information space of the Web into events and actions.
-\index{World-Wide Web}
-The \textrm{World-Wide Web}~\cite{DBLP:journals/en/Berners-LeeCGP92}, as envisioned by Tim Berners-Lee, is an information universe of interlinked documents, that a user can browse through.
-In our model, we can pull events directly from the World-Wide Web.
-For example, most documents in the World-Wide Web are subject to changes and such changes can be translated into events.
+\index{World Wide Web}
+The \textrm{World Wide Web}~\cite{DBLP:journals/en/Berners-LeeCGP92}, as envisioned by Tim Berners-Lee, is an information universe of interlinked documents, that a user can browse through.
+In our model, we can pull events directly from the World Wide Web.
+For example, most documents in the World Wide Web are subject to changes and such changes can be translated into events.
 
 \index{Services}
 We gave an introduction into \textrm{Services in the Web} in chapter "Related Work"
@@ -132,10 +132,32 @@ Actions
 % Model / Schema
 % Zeit / Verteiltheit
 
+% In our reasearch we focused mainly on server-sided \textrm{Web APIs}, even though we also generated events from the browser and pushed them into our prototype system and let
+% But still since SOAP services are request responders they have their place in our model, both as event trigger and action invoker.
+% We do not limit ourselves to protocols or architectures of services in the Web, but aim to access all of them in order to exploit the Web's full power.
+
+
 % RL <-> ECA
 % TODO figure: ECA Schema
 % TODO Figure: ECA in the distributed environemnt
 % TODO figure: Rules (unions / objects / Rueckkoppelungen )
+
+
+% % TODO Event Trigger
+% \index{Event}
+% \index{Event Trigger}
+
+% % TODO Actions
+% \index{Actions}
+
+% % TODO engine
+% \index{Engine}
+
+% Practically all services flood the user with events
+% The Web should be event driven, that's why we need an engine that deals with events and makes the Web reactive
+% There's still the challenge of filtering
+% What's important to whom
+% Plus the user needs to have tools to combine and add programmability to the combination,( such as conditions, selection of provided arguments and so on)
 
 % \section{Event Condition Action (ECA) Model in the Web}
 In the last section we showed how mashups create additional value for the Web by combining several Web API's.
@@ -160,33 +182,33 @@ Such systems are merely event sinks which add fairly any value to the Web, excep
 
 
 
-% Regelimplementierungssprache
-\subsection{Conceptual Rule Language}
-Describe conceptual rule language
-ON (existing categories)
-IF (condition boundaries)
-DO (call to existing action modules with parameters)
+% % Regelimplementierungssprache
+% \subsection{Conceptual Rule Language}
+% Describe conceptual rule language
+% ON (existing categories)
+% IF (condition boundaries)
+% DO (call to existing action modules with parameters)
 
-a lot possible, but dangerous.
+% a lot possible, but dangerous.
 
-\begin{Verbatim}[fontsize=\small,commandchars=\\\{\}]
-\PY{k}{on} \PY{n}{mail}
-\PY{k}{if} \PY{n}{sender}\PY{o}{=}\PY{l+s+ss}{\PYZdq{}sender@mail.com\PYZdq{}}
-\PY{k}{do} \PY{n}{webapi}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{newcontent}\PY{p}{(}\PY{n}{subject}\PY{p}{)}
-\end{Verbatim}
+% \begin{Verbatim}[fontsize=\small,commandchars=\\\{\}]
+% \PY{k}{on} \PY{n}{mail}
+% \PY{k}{if} \PY{n}{sender}\PY{o}{=}\PY{l+s+ss}{\PYZdq{}sender@mail.com\PYZdq{}}
+% \PY{k}{do} \PY{n}{webapi}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{newcontent}\PY{p}{(}\PY{n}{subject}\PY{p}{)}
+% \end{Verbatim}
 
-% TODO Define language with regular expression 
-% Programming language syntax is usually defined using a combination of regular expressions (for lexical structure) and Backus–Naur Form (for grammatical structure). Below is a simple grammar, based on Lisp:
-% expression ::= atom | list
-% atom       ::= number | symbol
-% number     ::= [+-]?['0'-'9']+
-% symbol     ::= ['A'-'Z''a'-'z'].*
-% list       ::= '(' expression* ')'
-\begin{lstlisting}[language=OwnRule,caption=Conceptual ECA Rule Language Syntax]
-expression  ::= 'on ' event ' if ' conditions ' do ' actions
-event       ::= symbol.*(' -> ' symbol.*)
-conditions  ::= 
-actions     ::= symbol*('('selector*')')
-symbol      ::= [A-Za-z0-9_-]+
-selector    ::= [#\{(symbol*?)\}]
-\end{lstlisting}
+% % TODO Define language with regular expression 
+% % Programming language syntax is usually defined using a combination of regular expressions (for lexical structure) and Backus–Naur Form (for grammatical structure). Below is a simple grammar, based on Lisp:
+% % expression ::= atom | list
+% % atom       ::= number | symbol
+% % number     ::= [+-]?['0'-'9']+
+% % symbol     ::= ['A'-'Z''a'-'z'].*
+% % list       ::= '(' expression* ')'
+% \begin{lstlisting}[language=OwnRule,caption=Conceptual ECA Rule Language Syntax]
+% expression  ::= 'on ' event ' if ' conditions ' do ' actions
+% event       ::= symbol.*(' -> ' symbol.*)
+% conditions  ::= 
+% actions     ::= symbol*('('selector*')')
+% symbol      ::= [A-Za-z0-9_-]+
+% selector    ::= [#\{(symbol*?)\}]
+% \end{lstlisting}

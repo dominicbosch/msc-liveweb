@@ -1,23 +1,26 @@
 
 \chapter{Related Work}
 
-In this chapter we will give a quick overview over different services offered in the Web, to point out what services in the Web all can be.
+In this chapter we will give a brief overview over different services offered in the Web, to point out what services in the Web all can be.
 We then introduce the Event-Condition-Action (\textrm{ECA}) paradigm, an event-driven approach to impose reactivity.
 And finally we point out existing rule languages and engines that exploit the \textrm{ECA} paradigm.
+
+
 
 \section{Services in the Web}
 \index{Web Service}
 \index{Services}
-\index{World-Wide Web}
+\index{World Wide Web}
 
 The term service in the context of the Web is ambiguous and there have been a lot of different approaches to offer services within the Web.
+For example the term \textrm{Web Services} often refers to interfaces that are used in the \textrm{World Wide Web} for communication between applications.
 We will point out some main research areas on service-orientation within the Web.
 
-Remote execution of programs on other computers has always been a strong research area. And with the coinage of the term \textrm{World-Wide Web}~\cite{DBLP:journals/en/Berners-LeeCGP92}, there were also trends towards services offered through the Web; computers waiting in the Web for a request in order to execute some application logic and return an answer.
+Remote execution of programs on other computers has always been a strong research area. And with the coinage of the term \textrm{World Wide Web}~\cite{DBLP:journals/en/Berners-LeeCGP92}, there were also trends towards services offered through the Web; computers waiting in the Web for a request in order to execute some application logic and return an answer.
 \index{SOA}
 The encapsulation of functionality into services~\cite{peltz2003web} in order to offer them to other applications is called service-oriented architecture (\textrm{SOA})~\cite{perrey2003service}.
 Adopting \textrm{SOA} internally to an application means splitting the application into smaller pieces, which then communiacte via these services among each other.
-This does not only provide robustness, it also allows the reuse of functionality.
+This does not only provide robustness, it also allows the reuse of functionality through services.
 Moreover these services can be offered to other applications and also to the Web, thus allowing others to access certain functionalty or even the whole application.
 All nodes in the Web are stand-alone entities, which offer services of some sort, be it a webpage, data, instant measurements or functionality.
 This makes the Web itself a service-oriented architecture and all these services are naturally services in the Web.
@@ -32,11 +35,13 @@ An empirical study~\cite{conf/icws/HuangFT12} on a directory, which they call th
   \label{fig:NumOfAPIs}
 \end{figure}
 
+
+\subsection{Requesting Services in the Web}
 \index{RPC}
 An early adoption of the service concept to computers were the Remote Procedure Calls (\textrm{RPC})~\cite{Birrell:1984:IRP:2080.357392}.
 Through \textrm{RPC} a piece of code can be executed on a different machine, than the one which is calling the procedure.
 It is basically achieved via inter-process communication and doesn't necessarily require the Web.
-Even more since when \textrm{RPC} was invented, the \textrm{World-Wide Web} wasn't even postulated by Tim Berners-Lee. 
+Even more since when \textrm{RPC} was invented, the \textrm{World Wide Web} wasn't even postulated by Tim Berners-Lee. 
 \textrm{RPC} also found its use in grid computing~\cite{seymour2002overview} and through this, opened doors into the field of distributed computation.
 The \textrm{RPC} paradigm isn't bound to certain technologies and thus, has been implemented in a lot of differrent programming languages.
 These implementations were tightly bound to the respective language that was used, which resulted largely in incomptaiblity among them.
@@ -52,7 +57,7 @@ Together with additional proposedy functionality, XML-RPC heavily influenced Sim
 \textrm{SOAP} is accompanied by the Web Service Description Language (\textrm{WSDL})~\cite{christensen2001web} which is used to describe the interfaces to SOAP services.
 Through \textrm{SOAP} and \textrm{WSDL} a client for the service can issue a request for the \textrm{WSDL} information of the service and retrieves all interface specifications he requires in order to issue a call to the actual service.
 The service specifications are then incorporated into the existing application as if it is a local function call.
-\textrm{SOAP} has found its applicability in business applications~\cite{journals/itpro/BarrosD06} and was enhanced with a lot of industrial standards, also called the "WS-*" specifications, because they all start with "WS-", e.g. WS-Addressing, WS-Policy or WS-Security.
+\textrm{SOAP} has found its applicability in business applications~\cite{journals/itpro/BarrosD06} and was enhanced with a lot of industrial standards, also called the "WS-*" specifications, e.g. WS-Addressing, WS-Policy or WS-Security.
 
 \index{CORBA}
 Another initiative that aimed for eased communication between different platform is the Common Object Request Broker Architecture (\textrm{CORBA})~\cite{dec1991common}.
@@ -84,150 +89,95 @@ Simple access to services without communication overhead and required negotiatio
 There is for example the upcoming concept of the \textrm{Web of Things}~\cite{Guinard2011WoT}, which aims to incorporate smart things (e.g. tagged things, sensor measurements, device controllers, etc.) into the Web through \textrm{REST} interfaces.
 \textrm{REST} brings advantages into the context of smart things connected to the Web, because incompatible standards and protocols were used by different manufacturers of such things.
 
+
+\subsection{Composing Services in the Web}
+% \section{Weakening the Relevance of the Client-Server Model}
+% \textit{Dropping the Client-Server Model}\\
+% \textit{The Interweavement of Client and Server}\\
+Webpages emerged into dynamic sites on the web through the upcoming of scripting languages to control the browser and the webpage itself.
+With all their infrastructure in the background on the server they became literally applications.
 \index{Web Application}
-% FIXME continue here
-% Web APIs provide powerful tools to govern data and functionality in the Web independently of any user interface from the service provider.
-% The relatively
-% Allowing access to these services via API is increasingly popular and allows to mash up these services
-
-It is because there are complex applications sitting behind these services, which can be accessed over the \textrm{APIs}.
+These Web applications (\textrm{Web Apps}) went even more responsive with the advent of asynchronous calls from the browser to the server, which allows to load data into the current webpage while the user is interacting with it.
+\index{API}
 \index{Web API}
-Services in the Web are often referred to as \textrm{Web APIs}; Web application programming interfaces.
-But this term not only includes server-side interfaces but also the ones on the client-side, e.g. the browser.
-The term \textrm{Web API} is also often used in context of \textrm{RESTful} Web services, but an application behind such an \textrm{API} does not necessarily require to adhere to the \textrm{REST} architecture.
-\index{JSON}
-With the success of JavaScript in web applications, JavaScript Object Notification (\textrm{JSON}) as an alternative to \textrm{XML} has become popular for Web communication.
-This is mainly because of its human-readable format and often very simple parsing into data structures of existing programming languages.
-There is a notable trend for \textrm{RESTful} Web services that offer \textrm{JSON} communication.
-They benefit from easy to understand interfaces and human-readable communication, which eases integration into other applications and makes the Web programmable.
-Figure \ref{fig:slide-11-1024} shows how the previously mentioned Web service directory experiences this trend as there are almost five times more services registered that allow \textrm{JSON} compared to \textrm{SOAP}.
-\begin{figure}[!ht]
-  \centering
-  \includegraphics[width=0.6\textwidth]{figures/slide-11-1024}
-  \caption{REST vs. SOAP: Simplicity wins again\\(John Musser, ProgrammableWeb, 2011)}
-  \label{fig:slide-11-1024}
-\end{figure}
+Those asynchronous calls are requests to services, which act as the application programming interface \textrm{API} to the \textrm{Web App} (\textrm{Web APIs}) which sits on the server.
+As a side-note, the term \textrm{Web API} not only comprises server-side interfaces but also client-sided ones (e.g. the browser), after all they are also interfaces to the Web.
+For server-side \textrm{Web APIs} this means that these services can be accessed from other entities in the Web than just browsers, which eases application to application communication.
+Basically a \textrm{Web App} can be controlled without the user interface, which is often delivered by the provider of the application.
+Imagine not going to the Google webpage anymore to make a search and crawling through the results, but you have your own application doing it for you and processing the results instantly.
+There is a trend of \textrm{Web App} providers to publish their \textrm{Web API} in order to grant easy access to it.
+This lead to an increase of the number of \textrm{Web App Mashups} in the past few years.
 
-
-% Practically all services flood the user with events
-% The Web should be event driven, that's why we need an engine that deals with events and makes the Web reactive
-% There's still the challenge of filtering
-% What's important to whom
-% Plus the user needs to have tools to combine and add programmability to the combination,( such as conditions, selection of provided arguments and so on)
-
-% % TODO Event Trigger
-% \index{Event}
-% \index{Event Trigger}
-
-% % TODO Actions
-% \index{Actions}
-
-% % TODO engine
-% \index{Engine}
-
-
-% % TODO Webhooks
-% \index{Webhooks}
-
-% % TODO Reactivity!! allgemein
-% \index{Reactivity}
-
-% % TODO Programmability of the Web
-% \index{Programmability}
-%  -> in general, both should go into related work?
-
-% TODO Categorize Related Work!
-
-\index{Mashups}
-Mashups combine information and functionality of more than one Web service in a single place.
-The mashing up of such Web services allows data to be enhanced with new informations, processing/refinement of the information, or even ways to interact with them, e.g. through Google Maps.
-Simple functions from different sources can be combined into more powerful ones, which influence data and services in a way their founders eventually didn't even think of.
-Web service mashups have been developped ever since services in the Web started to exist and were accessible in a more or less convenient way.
-We introduce Paul Rademacher as an example for how recent the invention of Web service mashups are.
-He's one of the first inventors of such a Web service mashup.
-In the same year after Google Maps came up in 2005, he invented a site that displayed Craigslist houses on a Google Map.
-With no Google Maps API at that time, he needed time and skills to reverse engineer Google Map's functionalities.
-
-% often only read / new aggregation / no writes
-% TODO find mashup that does writes in a system! (not existing right?)
-
-A large number of such "static" mashups were and are still developped.
-They are static in the way that they aggregate a fixed (and mostly low) number, of either data or functionality resources, to provide an enhanced resource in a specialized domain.
-Of course Mashups can be mashed up again, to provide even more sophisticated functionality and data.
-Some latest example Mashups, taken from the ProgrammableWeb collection, are:
+\index{Mashup}
+\textrm{Mashups} combine data and functionality of more than one service in the Web in a new site.
+Simple services from different sources can be combined into more powerful ones, which can in turn again be composed and so on.
+These service compositions assemble data and services in a novel way which provides a new perspective.
+Ever since services were accessible in a more or less convenient way, \textrm{Mashups} have been developped as well.
+On of the first Web service \textrm{Mashups}~\cite{wwwHosuingMaps}, was invented in the same year after Google Maps came up in 2005.
+It was a webpage that displayed CraigsList's rental houses on a Google Map.
+At that time no \textrm{Web API} was available that provided easy access to these two services, but there was an advantage to be seen from everybody being able to create a \textrm{Mashup} through publicly available services.
+Such \textrm{Mashups} are often a read-only fixed wiring of different services that provide a new view on specific data.
+Some recent \textrm{Mashup} examples, taken from the \textrm{ProgrammableWeb}~\cite{wwwProgrammableWeb} collection, are:
 
 \begin{itemize}
-  \item Wifi and Plugs: MapBox, Google Docs and Import.io API's used to display where Wi-Fi and plugs are available in London.
-  \item MapLight: GovTrack.us and OpenSecrets API's used to combine political results with financial contributions to show how capital contributions affect voting.
-  \item Shared Count: Facebook, LinkedIn, Pinterest and Twitter API's used to display informations about how well spread a URL is on social media sites.
+  \item \textrm{Wifi and Plugs}: MapBox, Google Docs and Import.io API's used to display where Wi-Fi and plugs are available in London.
+  \item \textrm{MapLight}: GovTrack.us and OpenSecrets API's used to combine political results with financial contributions to show how capital contributions to influence politics affect voting.
+  \item \textrm{Shared Count}: Facebook, LinkedIn, Pinterest and Twitter API's used to display informations about how well spread a URL is on social media sites.
 \end{itemize}
 
-In the past few years, research and development for platforms to allow users to flexibly mashup Web APIs got attention.
-% Web App mashups
-With IFTTT and Zapier, two platforms have evolved out of this process.
-Users that register on those platforms are provided with a multitude of Web API functions that act as event triggers and such that are used to execute actions.
-The user is then free to combine these event triggers and actions in the way it suits best, creating helpful Web API mashups on their own.
+But there are also efforts in research~\cite{10.1007/978-3-642-22233-7_11}\cite{4278815}\cite{Rizzotti:2010:UST:1772690.1772861}\cite{Stolee20131289} for flexible \textrm{Mashups}, where users are capable of choosing what and how to link in order to enhance Web resources according to their needs.
+These flexible \textrm{Mashup} applications often provide methods to access user-specific functionality within \textrm{Web Apps}, which makes them even more user-centered and customizable.
 
-% Since this is a quite new field the why and how is hidden from the research.
-% you need events
-% you need rules / rule language
 
-%Web Services term refers to available programmatic interfaces that are used in the World Wide Web for application-to-application communication.
-We do not limit ourselves to protocols or architectures of services in the Web, but aim to access all of them in order to exploit the Web's full power.
+\subsection{Subscribing to Services in the Web}
+There is another type of service in the Web which is quite the opposite to the afore mentioned approches in terms of the data flow.
+\index{Webhooks}
+\textrm{Webhooks} are a method that enables the asynchronous delivery of data whenever it gets available, compared to the need of actively requesting a service to deliver it.
+They are unifrom resource identifiers (\textrm{URI}), which point to a service in the Web, which accepts the data delivered to it.
+% ~\cite{Eugster:2003:MFP:857076.857078}
+Within the publish/subscribe pardigm, such asynchronous delivery of data is referred to as events, since that's what the appearance of new data is.
+\textrm{Webhooks} are callbacks that can be placed by a \textrm{Web App} provider or a user at a remote location, informing the data prolifering site about their interest in the data.
+Both parties are services in the Web, since the \textrm{Webhook} providers accept the data delivered to their \textrm{URI} and the \textrm{Webhook} receipients offer to send the data.
 
-% But still since SOAP services are request responders they have their place in our model, both as event trigger and action invoker.
-% As the users’ needs become more specific and complex than ever before, it is a must for services to interact with each other to exchange control data and information. 
+
+\subsection{Towards Simple Access and Communication}
+\index{JSON}
+With JavaScript's success as browser scripting language and recently also as server-side programming language, JavaScript Object Notification (\textrm{JSON}) as an alternative to \textrm{XML} has become popular for data representation throughout the Web.
+It is also because of its human-readable format and often simple parsing into data structures of existing programming languages.
+There is a notable trend towards \textrm{RESTful} services in the Web that offer \textrm{JSON} communication.
+\index{Web Programmability}
+They benefit from simple but powerful interfaces and easy to debug human-readable communication, which eases integration into other applications, along with the reduced communication volume.
+Together with client- and server-side \textrm{Web APIs} the Web becomes ever more programmable.
+% Figure \ref{fig:slide-11-1024} shows how the previously mentioned \textrm{ProgrammableWeb} directory experiences this trend as there were almost five times more \textrm{RESTful} services registered compared to \textrm{SOAP} services.
+% An interesting point in this figure is that they label it \textrm{REST}, but this wouldn't exclude any of the other protocols, because the architecture behind them could also adhere to \textrm{REST}.
+% We assume
+% \begin{figure}[!ht]
+%   \centering
+%   \includegraphics[width=0.6\textwidth]{figures/slide-11-1024}
+%   \caption{REST vs. SOAP: Simplicity wins again\\(John Musser, ProgrammableWeb, 2011)}
+%   \label{fig:slide-11-1024}
+% \end{figure}
+
 
 \section{Reactivity through Event-Condition-Action Rules}
 \index{ECA}
-A considerable amount of literature~\cite{alferes2006event}~\cite{2007_AlferesR3}~\cite{2005-Bry_etal-XChange.pdf}~\cite{10.1007-11896548_63}~\cite{Elliott:2009:PFR:1596638.1596643}~\cite{2009-Paschke_Boley-RCER.pdf}~\cite{2012-Paschke_etal-ReactionRuleML.pdf} has been published on reactivity.
+We have shown research in different areas that lead towards a programmable Web.
+As a result of this research, it is getting easier to compose and orchestrate services in the Web, but it still requires a lot of expertise or the suffering of limitations.
+A considerable amount of literature~\cite{2007_AlferesR3}(!IMPORTANT!)\cite{2005-Bry_etal-XChange.pdf}\cite{10.1007-11896548_63}\cite{2012-Paschke_etal-ReactionRuleML.pdf} has been published on reactivity.
 These studies underline that Event-Conditon-Action (\textrm{ECA}) rules are a powerful way to impose reactivity.
+the concepts f an eca rule lnguage have been well studied. 
 Such rules consist of three parts:
 \begin{itemize}
   \item Event:
   \item Condition:
   \item Action:
 \end{itemize}
+ [2][3][11][12][23]
+All research funneled into RuleML
 
-\cite{robins2010complex}
-% Why not ECAP? because post condition can't be fired zuverlaessig in highly asynchronous systems
-% An Event Driven Architecture (EDA) is a software architecture paradigm promoting the production, detection, consumption of, and reaction to events
-
-
-Twelve Theses on Reactive Rules for the Web~\cite{10.1007-11896548_63}:
-This article investigates issues of relevance in designing high-level
-programming languages dedicated to reactivity on the Web. It presents
-twelve theses on features desirable for a language of reactive rules tuned
-to programming Web and Semantic Web applications.
-% MY NOTES: they argue with soap and expect it to stay. They expect Web sites to inform each other about update requests. we are taking one step further and provide events to whomeever wants to receive them while being greedy about receiving events. give them to meeeeh my prciouzzz eventz!
-% 1. High-level reactive languges are needed, ECA rules well-suited to specify reactivity
-% 2. Reactive Web rules should be processed locally and act globally through event-based communication and access to persistent Web data
-% 3. Events are best exchanged directly between Web sites in a push manner
-% 4. Events are volatile data and should be kept distinct from persistent data.
-% 5. Recognizing composite events is essential for a reactive Web language. Composite events are conveniently specified by (event) queries. There are (at least) four complementary dimensions to event queries: data extraction, event composition, temporal conditions, and event accumulation --> Future Work (CEP), data extraction already implemented
-% 6. A data-driven, incremental evaluation of event queries is the approach of choice
-% 7. Data from persistent Web resources plays an essential role for Web reactivity. A reactive language thus should embed or build upon a Web query language.
-% 8. The Web is a dynamic, state-changing system. Reactions to state changes (events) through reactive rules are state-changing actions such as updates to persistent data. Reactive rules are needed where compound actions can be constructed from primitive actions.
-% 9. Development and maintenance of reactive rule programs can be considerably supported by structuring mechanisms such as: branching in rules, deductive rules for event queries and Web queries, procedural abstractions for actions, and grouping of rules. --> Future work, attach several conditions and their actions branches to one event instead of creating rules for each of them. EC^nA^n. (Though procedural abstractions for actions already implemented, defining complex actions to be reused by rules)
-% 10.Identity of data items is an issue for reactive languages due to their ability to react to changes of data objects on the Web. (we had surrogate identity though discarded the concept again... stupido)
-% 11. Meta-programming and meta-circularity, that is, the ability to use rules to exchange and evaluate (other) rules, are needed in some important cases. (quite artificial for our scenarios)
-% 12.Reactivity in the Web’s open and uncontrolled world requires language support for authentication, authorization, and accounting. (phew... let's let others go there)
-
-
-% TODO
-% To allow user-defined Web API mashups, a rule language is required which is capable to express ECA Rules. 
-
-
-% TODO
-% ECA
-% \index{ECA}
-%% CEP bases on event-driven architecture
-% From this viewpoint, CEP can be regarded as a service that receives and matches lower-level events and generates higher-level events, 
-% if we implement event templating with properties such as described in 
 
 \section{Rule Engines \& Rule Languages}
-\index{Rule}
-\index{Engine}
+\index{Rule Engine}
 \index{Rule Language}
 
 It turns out that Web App mashing up is not able to bring reactivity to the Web.
@@ -240,7 +190,6 @@ They are merely aggregations of services, which only provide data or functions b
 
 Several different rule languages have been developped for different purposes over the last years and they vary grately in their purpose.
 % terms of usability for ECA Rules together with Web API mashups.
-A compilation of research on different emerging rule-based languages and technologies ~\cite{2009-Paschke_Boley-RCER.pdf} gives an oveview over such efforts.
 We examined different existing rule languages with respect to a certain use case to identify its applicability for reactivity in the Web. % TODO find other word as applicability
 The use case is defined such that the rule needs to suffice the ECA paradigm:
 In Appendix \ref{lst:JSONEvent}
@@ -341,3 +290,5 @@ Most of the examined rule languages are designed for the interchangability of ru
 % TODO performance artikel / paper ueber node.js
 
 % FIXME argue why no rule language was used
+
+% TODO Categorize Related Work!
