@@ -8,11 +8,10 @@ And finally we point out existing rule languages and engines that exploit the \t
 
 
 \section{Services in the Web}
+The term service in the context of the Web is ambiguous and there have been a lot of different approaches to offer services within the Web.
 \index{Web Service}
 \index{Services}
 \index{World Wide Web}
-
-The term service in the context of the Web is ambiguous and there have been a lot of different approaches to offer services within the Web.
 For example the term \textrm{Web Services} often refers to interfaces that are used in the \textrm{World Wide Web} for communication between applications.
 We will point out some main research areas on service-orientation within the Web.
 
@@ -76,6 +75,7 @@ This can be technically difficult and become an eventually tedious task.
 With the Internet Inter-\textrm{ORB} Protocol (\textrm{IIOP}) it is also possible to connect \textrm{ORB}'s over the Web.
 Through this, the offered objects can become services in the Web, but they are shielded by the \textrm{ORB}.
 
+\subsection{Services in the Web become Web Resources}
 \index{REST}
 All the afore mentioned approaches require a specific protocol and are therefore incompatible with each other.
 For this reason and its simplicity, an architectural style has gained popularity which frees application from this constraint: Representational State Transfer (\textrm{REST})~\cite{fielding2000architectural}.
@@ -85,7 +85,10 @@ Therefore all informations required for a single interaction need to be provided
 This allows for the definition of simple and well-defined interfaces, since responses are not bound to a certain session state. 
 \index{REST}
 Services within the Web that adhere to the \textrm{REST} architecture are called \textrm{RESTful} Web services.
-Simple access to services without communication overhead and required negotiation before using it, increased \textrm{REST}'s popularity and spread it into more application fields.
+\index{URI}
+\index{Web Resources}
+\textrm{RESTful} Web services provide access to their data and functionality through grouped \textrm{Web Resources}, which can be identified vie Uniform Resource Identifiers (\textrm{URI}).
+Simple access to services in the Web without communication overhead and required negotiation before using it, increased \textrm{REST}'s popularity and spread it into more application fields.
 There is for example the upcoming concept of the \textrm{Web of Things}~\cite{Guinard2011WoT}, which aims to incorporate smart things (e.g. tagged things, sensor measurements, device controllers, etc.) into the Web through \textrm{REST} interfaces.
 \textrm{REST} brings advantages into the context of smart things connected to the Web, because incompatible standards and protocols were used by different manufacturers of such things.
 
@@ -125,8 +128,8 @@ Some recent \textrm{Mashup} examples, taken from the \textrm{ProgrammableWeb}~\c
   \item \textrm{Shared Count}: Facebook, LinkedIn, Pinterest and Twitter API's used to display informations about how well spread a URL is on social media sites.
 \end{itemize}
 
-But there are also efforts in research~\cite{10.1007/978-3-642-22233-7_11}\cite{4278815}\cite{Rizzotti:2010:UST:1772690.1772861}\cite{Stolee20131289} for flexible \textrm{Mashups}, where users are capable of choosing what and how to link in order to enhance Web resources according to their needs.
-These flexible \textrm{Mashup} applications often provide methods to access user-specific functionality within \textrm{Web Apps}, which makes them even more user-centered and customizable.
+But also a number of studies ~\cite{10.1007/978-3-642-22233-7_11}\cite{4278815}\cite{Rizzotti:2010:UST:1772690.1772861}\cite{Stolee20131289} made efforts towards personalized \textrm{Mashups}, where users are capable of choosing what and how to link in order to enhance Web resources according to their needs.
+These flexible \textrm{Mashup} applications often provide methods to access user-specific functionality within remote \textrm{Web Apps}, which makes them even more user-centered and customizable.
 
 
 \subsection{Subscribing to Services in the Web}
@@ -148,80 +151,98 @@ There is a notable trend towards \textrm{RESTful} services in the Web that offer
 \index{Web Programmability}
 They benefit from simple but powerful interfaces and easy to debug human-readable communication, which eases integration into other applications, along with the reduced communication volume.
 Together with client- and server-side \textrm{Web APIs} the Web becomes ever more programmable.
-% Figure \ref{fig:slide-11-1024} shows how the previously mentioned \textrm{ProgrammableWeb} directory experiences this trend as there were almost five times more \textrm{RESTful} services registered compared to \textrm{SOAP} services.
-% An interesting point in this figure is that they label it \textrm{REST}, but this wouldn't exclude any of the other protocols, because the architecture behind them could also adhere to \textrm{REST}.
-% We assume
-% \begin{figure}[!ht]
-%   \centering
-%   \includegraphics[width=0.6\textwidth]{figures/slide-11-1024}
-%   \caption{REST vs. SOAP: Simplicity wins again\\(John Musser, ProgrammableWeb, 2011)}
-%   \label{fig:slide-11-1024}
-% \end{figure}
+
 
 
 \section{Reactivity through Event-Condition-Action Rules}
 \index{ECA}
-We have shown research in different areas that lead towards a programmable Web.
-As a result of this research, it is getting easier to compose and orchestrate services in the Web, but it still requires a lot of expertise or the suffering of limitations.
-A considerable amount of literature~\cite{2007_AlferesR3}(!IMPORTANT!)\cite{2005-Bry_etal-XChange.pdf}\cite{10.1007-11896548_63}\cite{2012-Paschke_etal-ReactionRuleML.pdf} has been published on reactivity.
-These studies underline that Event-Conditon-Action (\textrm{ECA}) rules are a powerful way to impose reactivity.
-the concepts f an eca rule lnguage have been well studied. 
-Such rules consist of three parts:
+In this chapter we have so far shown research in different areas that lead towards a programmable Web.
+As a result of this research, it is getting easier to compose and orchestrate services in the Web, but reactivity needs to be programmed specifically by experts with the current state of services in the Web.
+Several studies~\cite{2007_AlferesR3}\cite{2005-Bry_etal-XChange.pdf}\cite{10.1007-11896548_63}\cite{papamarkos2004rdftl}\cite{2012-Paschke_etal-ReactionRuleML.pdf} have been made on reactivity.
+These studies suggest Event-Conditon-Action (\textrm{ECA}) rules as a convenient way to impose reactivity to a system.
+\index{EDA}
+As the name already suggests it bases on an event-driven architecture (\textrm{EDA}) and \textrm{ECA} rules consist of three parts:
 \begin{itemize}
-  \item Event:
-  \item Condition:
-  \item Action:
+  \item Event: An event identifier, that enables detection of a triggered event
+  \item Condition: Either Web queries or expressions to determine whether a rule should trigger the action
+  \item Action: A set of instructions that complete the reactive behaviour
 \end{itemize}
- [2][3][11][12][23]
-All research funneled into RuleML
+
+As a result of the above mentioned research, several different rule languages have been developped for different domains.
+We will give a brief overview over the research which is closely related to our research domain, reactivity in the Web.
 
 
-\section{Rule Engines \& Rule Languages}
+\subsection{Rule Engines \& Rule Languages}
 \index{Rule Engine}
 \index{Rule Language}
-
-It turns out that Web App mashing up is not able to bring reactivity to the Web.
-They are merely aggregations of services, which only provide data or functions but no write possibilities such as Web applications provide.
-% only subset of accesible functionalty/parametrization is provided
-
-
-%TODO Table with categorization of Rule languages
-% show rule engines, alsoo CEP, describe event composition through templates and why we don't do it
-
-Several different rule languages have been developped for different purposes over the last years and they vary grately in their purpose.
-% terms of usability for ECA Rules together with Web API mashups.
-We examined different existing rule languages with respect to a certain use case to identify its applicability for reactivity in the Web. % TODO find other word as applicability
-The use case is defined such that the rule needs to suffice the ECA paradigm:
-In Appendix \ref{lst:JSONEvent}
-In Appendix \ref{lst:myrdf}
+During our research we studied the different rule engines with respect to a certain use case, in order to determine their applicability for our studies.
+The use case's ECA rule is:
 \begin{itemize}
   \item Event: Receipt of an Email
   \item Condition: Check for a certain sender
   \item Action: Store it remotely via a Web API
 \end{itemize}
+The example event expressed in JSON can be found in Appendix \ref{lst:JSONEvent}.
+
+
 Definition of events\cite{Adaikkalavan2007}
 
 
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{ | *{4}{l|} }
+    \hline
+    \textbf{Language} & \textbf{Event Type} & \textbf{Architecture} & \textbf{Actions} \\ \hline
+    \textbf{RDFTL} & RDF Repositories & Distributed & (Local) RDF Repository \\ \hline
+    \textbf{JSON Rules} & DOM Events & Centralized & Browser \\ \hline
+    \textbf{XChange} & Web Resources & Disitributed & Local Web Resource \\ \hline
+    \textbf{RuleML} & Web Resources & Disitributed & Local Web Resource \\ \hline
+    \textbf{KRL} & Web Resources & Centralized & Local \& Remote Web Resource \\ \hline
+  \end{tabular}
+  \caption{Existing Rule Languages}
+  \label{tab:rulelanguages}
+\end{table}
 
+
+% \begin{table}[ht]
+%   \centering
+%   \begin{tabular}{ | l | c | r | }
+%     \hline
+%     \textbf{Engine} & \textbf{Event Type} & \textbf{JSON Rules} \\ \hline
+%     \textbf{JSON Rules} & DOM Events & 9 \\ \hline
+%     \textbf{XChange} & Web Resources & 9 \\ \hline
+%     \textbf{RuleML} & Web Resources & 9 \\ \hline
+%   \end{tabular}
+%   \caption{Existing Rule Engines}
+%   \label{tab:ruleengines}
+% \end{table}
+
+Xchange geavily influenced our work
 
 We defined an email event which the rule languages need to be able to process.
 The JSON representation of the given email event as depicted in the appendix. %is shown in Listing~\ref{lstemail}.
 
 % FIXME Leave out what was not inspiring!
 
-\index{RDF}
-\index{XML}
-An early ECA Rule Language for XML repositories~\cite{Papamarkos03event-condition-actionrule} was postulated in 2003 and was picked up by many researches afterwards. It was designed to react on insert and delete events within XML repositories and as an action change XML documents.
-
+\index{RDFTL}
+An early ECA Rule Language for XML repositories
+\textrm{RDFTL}~\cite{papamarkos2004rdftl} was postulated in 2003 and was picked up by many researches afterwards. It was designed to react on insert and delete events within RDF repositories and as an action change XML documents.
+RDF desirable but who THE FUCK uses it
 
 Now apart from implementing a rules engine, we would also need to add an XML document event manager which interpretes and pushes events into the XML file \emph{inbound\_queue.xml}. Then again this instance would interprete the ouptuts of the ECA engine, which would theoretically manifest in other XML documents, and produce meaningful actions on remote hosts. This wouldn't be an architecture which has its focus on the solution of our use case and, as a result, add complexity and create an unnecessary overhead.
 
-\index{Notation3}
-To make the lengthy RDF definitions smaller and more readable, Notation 3~\cite{berners2006notation} was designed and announced in 2005. Through the implies operator(=\textgreater) an "event" can be connected to an "action", both expressed in RDF's subject, predicate, object notation, which makes the expression of ECA rules a complicated and not very intuitive task. A solution to our use case would look as follows:
-
-This language is used to express relations between entities and thus not really suitable for our use case, since we would require another interpreter to infer the actions. But concepts and ideas of the work that was done in these consortias could eventually still find influence into our solution.
-
 \index{XChange}\index{Xcerpt}
+% Web-specific capabilities, such as propagation of changes on the Web (change) and event-based communication between Web sites (exchange).
+% peer-to-peer communication model
+% push/pull strategy
+% robustness
+% ditrbuted systems
+% hypotetical data
+% since the web is far from having a unique architecture. meaning xchange would need to sit in each site for event comm aight?
+% depends on remote locations understanding XChange
+% XChange has nice event composition properties
+% Xchange only consists of events no actions (actions are taken by remote systems through events received%)
+
 The rule language XChange~\cite{2005-Patranjan-TLE.pdf} was the outcome of the REWERSE (~\cite{wwwRewerse}, Reasoning on the Web with Rules and Semantics) project, which was funded by the EU and Switzerland. Their work influenced a number of future research. The language was designed to add reactive behaviour to a "static" Web which is represented through XML resources. Thus we have action logics to alter such resources through insertions and deletions. Since we aim to utilize Web API's for our rule language we need a more generic approach which adds flexibility in term of the API provided. But the thorough research done with the language XChange holds valuable concepts, especially in terms of temporal evet composition. This could be a rule according to our use case:
 
 
@@ -265,6 +286,7 @@ Object-Oriented jDrew (\emph{OO jDrew}~\cite{2005-Ball_etal-OOjDrew.pdf,wwwoojdr
 
 \subsubsection{Prova}
 \emph{Prova}~\cite{wwwprova} is an expressive rule language and engine, both written in Java, with a main orientation to ECA rules. It uses backward-reasoning logic to formalize decisions in terms of derivation. Forward-directed messaging of reaction rules supports distributed event and action processing. It allows dynamic access to external data sources and is used by the authors of \cite{2013_Zhao-Paschke_EDSWE.pdf,2007-Paschke_etal-RuleResponder.pdf} for the \emph{RuleResponder's} proof of concept for transformations between different rule languages over \emph{RuleML}. \emph{Prova} seems to be discontinued since early 2013. 
+BASED on PROLOG
 
 \subsubsection{Kinetic}
 The Kinetic Rules Engine (KRE) is a platform presented in \cite{bookTheLiveWeb}. It is realized in Perl and uses its very own rule language, the Kinetic Rules Language (KRL). It is laid out to support CEP as well as a tight coupling with the user's browser through plugins or libraries loaded via the webpage. It allows the access to remote resources and the processing of such data before passing it along to internal storage or again external resources, such as cloud applications. A live system~\cite{wwwkynetx} is available for testing and if desired also for productive use. Creating an own instance is quite a challenge due to it's numerous libraries. KRL needs quite some efforts to get used to and can't be entrusted to inexperienced users, thus a layer on top of this system would have to be implemented for our purposes.
@@ -292,3 +314,10 @@ Most of the examined rule languages are designed for the interchangability of ru
 % FIXME argue why no rule language was used
 
 % TODO Categorize Related Work!
+ % With REST no metadata, RDF whatever, thus no semantics, thus on the go, thus we need flexibility
+ % conditions as web queries can be solved through event composition
+
+ % Often rule engines lack support for web resource access
+% FIXME USE WEB RESOURCE RATHER THAN SERVICES IN THE WEB
+% All research funneled into RuleML
+% show rule engines, alsoo CEP, describe event composition through templates and why we don't do it
