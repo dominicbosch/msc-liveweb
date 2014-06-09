@@ -18,7 +18,7 @@
 % \end{minipage}
 
 
-\section{E-Mail Example Rule expressed in RDF}
+\section{E-Mail Example Rule expressed in RDFTL}
 \label{lst:MailRDF}
 % \begin{minipage}{\linewidth}
 \begin{lstlisting}[nolol,float=h,language=RDF]
@@ -31,15 +31,6 @@
 \end{lstlisting}
 % \end{minipage}
 
-
-\section{E-Mail Example Rule expressed in Notation 3}
-\label{lst:MailN3}
-% \begin{minipage}{\linewidth}
-\begin{lstlisting}[nolol,float=h,language=N3]
-  { ?x :event "email". ?x :sender "sender@mail.com" }
-    => { :webapi :newcontent ?x }
-\end{lstlisting}
-% \end{minipage}
 
 
 \section{E-Mail Example Rule expressed in XChange/Xcerpt}
@@ -65,24 +56,12 @@
 % \end{minipage}
 
 
-\section{XChange/Xcerpt Remote Resource Access}
-\label{lst:XChangeRemote}
+\section{E-Mail Example Rule expressed in Notation 3}
+\label{lst:MailN3}
 % \begin{minipage}{\linewidth}
-\begin{lstlisting}[nolol,float=h!,language=XChange]
-  TRANSACTION
-    [...]
-  ON
-    [...]
-  FROM
-    in {
-      resource { "http://www.weather.com"},
-      temperatures {{
-        var T -> temperature {{
-          datetime { "2013-10-20-08:00:00AM" }
-        }}
-      }}
-    }
-  END
+\begin{lstlisting}[nolol,float=h,language=N3]
+  { ?x :event "email". ?x :sender "sender@mail.com" }
+    => { :webapi :newcontent ?x }
 \end{lstlisting}
 % \end{minipage}
 

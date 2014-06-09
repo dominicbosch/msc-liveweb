@@ -18,9 +18,9 @@ We will point out some main research areas on service-orientation within the Web
 Remote execution of programs on other computers has always been a strong research area. And with the coinage of the term \textrm{World Wide Web}~\cite{DBLP:journals/en/Berners-LeeCGP92}, there were also trends towards services offered through the Web; computers waiting in the Web for a request in order to execute some application logic and return an answer.
 \index{SOA}
 The encapsulation of functionality into services~\cite{peltz2003web} in order to offer them to other applications is called service-oriented architecture (\textrm{SOA})~\cite{perrey2003service}.
-Adopting \textrm{SOA} internally to an application means splitting the application into smaller pieces, which then communiacte via these services among each other.
+Adopting \textrm{SOA} internally to an application means splitting the application into smaller pieces, which then communicate via these services among each other.
 This does not only provide robustness, it also allows the reuse of functionality through services.
-Moreover these services can be offered to other applications and also to the Web, thus allowing others to access certain functionalty or even the whole application.
+Moreover these services can be offered to other applications and also to the Web, thus allowing others to access certain functionality or even the whole application.
 All nodes in the Web are stand-alone entities, which offer services of some sort, be it a webpage, data, instant measurements or functionality.
 This makes the Web itself a service-oriented architecture and all these services are naturally services in the Web.
 It is for its advantages that \textrm{SOA} has received a great deal of attention and has been widely adopted, mostly throughout the Web.
@@ -42,8 +42,8 @@ Through \textrm{RPC} a piece of code can be executed on a different machine, tha
 It is basically achieved via inter-process communication and doesn't necessarily require the Web.
 Even more since when \textrm{RPC} was invented, the \textrm{World Wide Web} wasn't even postulated by Tim Berners-Lee. 
 \textrm{RPC} also found its use in grid computing~\cite{seymour2002overview} and through this, opened doors into the field of distributed computation.
-The \textrm{RPC} paradigm isn't bound to certain technologies and thus, has been implemented in a lot of differrent programming languages.
-These implementations were tightly bound to the respective language that was used, which resulted largely in incomptaiblity among them.
+The \textrm{RPC} paradigm isn't bound to certain technologies and thus, has been implemented in a lot of different programming languages.
+These implementations were tightly bound to the respective language that was used, which resulted largely in incompatiblity among them.
 \index{XML}
 \index{XML-RPC}
 It became necessary to enhance \textrm{RPC}'s in order to get cross platform compatibility.
@@ -52,7 +52,7 @@ By abstracting \textrm{RPC} functionality with the Extensible Markup Language (\
 \index{SOAP}
 \index{WSDL}
 Since \textrm{XML-RPC} was held relatively simple but received a lot of attention, it was further enhanced.
-Together with additional proposedy functionality, XML-RPC heavily influenced Simple Object Access Protocol (\textrm{SOAP})~\cite{box2000simple}.
+Together with additional proposed functionality, XML-RPC heavily influenced Simple Object Access Protocol (\textrm{SOAP})~\cite{box2000simple}.
 \textrm{SOAP} is accompanied by the Web Service Description Language (\textrm{WSDL})~\cite{christensen2001web} which is used to describe the interfaces to SOAP services.
 Through \textrm{SOAP} and \textrm{WSDL} a client for the service can issue a request for the \textrm{WSDL} information of the service and retrieves all interface specifications he requires in order to issue a call to the actual service.
 The service specifications are then incorporated into the existing application as if it is a local function call.
@@ -65,7 +65,7 @@ As the name already suggest it is an object-oriented approach and it allows the 
 \textrm{CORBA} relies on its communication layer, the Object Request Broker (\textrm{ORB}), which forms the basis of its architecture.
 The platform-specific \textrm{ORB}'s provide the communication abstraction, which free the application from platform dependencies.
 \index{IDL}
-Similar to \textrm{SOAP}'s \textrm{WSDL}, \textrm{CORBA} has its Interface Definition Languange (\textrm{IDL}) to provide information about the objects to be offered and accessed.
+Similar to \textrm{SOAP}'s \textrm{WSDL}, \textrm{CORBA} has its Interface Definition Language (\textrm{IDL}) to provide information about the objects to be offered and accessed.
 An object is instantiated by an application and the interface to this instance is offered through the \textrm{ORB}.
 Another application attached to the \textrm{ORB} can then access all public variables, data structures and functions of this object.
 This means not only remote access to variables and data structures, but also remote function invocation.
@@ -74,6 +74,7 @@ This can be technically difficult and become an eventually tedious task.
 \textrm{CORBA} allows communication between applications written in different programming languages and which are running on the same physical computer, as well as the communication between different computers in the same network.
 With the Internet Inter-\textrm{ORB} Protocol (\textrm{IIOP}) it is also possible to connect \textrm{ORB}'s over the Web.
 Through this, the offered objects can become services in the Web, but they are shielded by the \textrm{ORB}.
+
 
 \subsection{Services in the Web become Web Resources}
 \index{REST}
@@ -115,7 +116,7 @@ This lead to an increase of the number of \textrm{Web App Mashups} in the past f
 \textrm{Mashups} combine data and functionality of more than one service in the Web in a new site.
 Simple services from different sources can be combined into more powerful ones, which can in turn again be composed and so on.
 These service compositions assemble data and services in a novel way which provides a new perspective.
-Ever since services were accessible in a more or less convenient way, \textrm{Mashups} have been developped as well.
+Ever since services were accessible in a more or less convenient way, \textrm{Mashups} have been developed as well.
 On of the first Web service \textrm{Mashups}~\cite{wwwHosuingMaps}, was invented in the same year after Google Maps came up in 2005.
 It was a webpage that displayed CraigsList's rental houses on a Google Map.
 At that time no \textrm{Web API} was available that provided easy access to these two services, but there was an advantage to be seen from everybody being able to create a \textrm{Mashup} through publicly available services.
@@ -136,11 +137,11 @@ These flexible \textrm{Mashup} applications often provide methods to access user
 There is another type of service in the Web which is quite the opposite to the afore mentioned approches in terms of the data flow.
 \index{Webhooks}
 \textrm{Webhooks} are a method that enables the asynchronous delivery of data whenever it gets available, compared to the need of actively requesting a service to deliver it.
-They are unifrom resource identifiers (\textrm{URI}), which point to a service in the Web, which accepts the data delivered to it.
+They are uniform resource identifiers (\textrm{URI}), which point to a service in the Web, which accepts the data delivered to it.
 % ~\cite{Eugster:2003:MFP:857076.857078}
-Within the publish/subscribe pardigm, such asynchronous delivery of data is referred to as events, since that's what the appearance of new data is.
-\textrm{Webhooks} are callbacks that can be placed by a \textrm{Web App} provider or a user at a remote location, informing the data prolifering site about their interest in the data.
-Both parties are services in the Web, since the \textrm{Webhook} providers accept the data delivered to their \textrm{URI} and the \textrm{Webhook} receipients offer to send the data.
+Within the publish/subscribe paradigm, such asynchronous delivery of data is referred to as events, since that's what the appearance of new data is.
+\textrm{Webhooks} are callbacks that can be placed by a \textrm{Web App} provider or a user at a remote location, informing the data proliferating site about their interest in the data.
+Both parties are services in the Web, since the \textrm{Webhook} providers accept the data delivered to their \textrm{URI} and the \textrm{Webhook} recipients offer to send the data.
 
 
 \subsection{Towards Simple Access and Communication}
@@ -157,167 +158,139 @@ Together with client- and server-side \textrm{Web APIs} the Web becomes ever mor
 \section{Reactivity through Event-Condition-Action Rules}
 \index{ECA}
 In this chapter we have so far shown research in different areas that lead towards a programmable Web.
-As a result of this research, it is getting easier to compose and orchestrate services in the Web, but reactivity needs to be programmed specifically by experts with the current state of services in the Web.
+As a result of this research, it is getting easier to compose and orchestrate services in the Web, but reactivity needs to be programmed specifically by experts and general approaches are only available in specific domains.
 Several studies~\cite{2007_AlferesR3}\cite{2005-Bry_etal-XChange.pdf}\cite{10.1007-11896548_63}\cite{papamarkos2004rdftl}\cite{2012-Paschke_etal-ReactionRuleML.pdf} have been made on reactivity.
-These studies suggest Event-Conditon-Action (\textrm{ECA}) rules as a convenient way to impose reactivity to a system.
+They point out Event-Conditon-Action (\textrm{ECA}) rules as a convenient way to impose reactivity on a system.
 \index{EDA}
 As the name already suggests it bases on an event-driven architecture (\textrm{EDA}) and \textrm{ECA} rules consist of three parts:
 \begin{itemize}
   \item Event: An event identifier, that enables detection of a triggered event
-  \item Condition: Either Web queries or expressions to determine whether a rule should trigger the action
+  \item Condition: Expressions to be evaluated to determine whether an action is triggered
   \item Action: A set of instructions that complete the reactive behaviour
 \end{itemize}
 
-As a result of the above mentioned research, several different rule languages have been developped for different domains.
-We will give a brief overview over the research which is closely related to our research domain, reactivity in the Web.
-
-
-\subsection{Rule Engines \& Rule Languages}
-\index{Rule Engine}
-\index{Rule Language}
-During our research we studied the different rule engines with respect to a certain use case, in order to determine their applicability for our studies.
+Several different rule languages have been developed for different domains.
+We will give a brief overview over the research done that relates to our goal, reactivity in the Web.
+During our research, apart from identifying the key properties of different rule languages, we analyzed them with respect to a certain use case, in order to determine their applicability for our research goal.
 The use case's ECA rule is:
 \begin{itemize}
-  \item Event: Receipt of an Email
+  \item Event: Receipt of an Email% \footnote{Refer to Appendix \ref{lst:JSONEvent} for the event expressed in JSON.}
   \item Condition: Check for a certain sender
   \item Action: Store it remotely via a Web API
 \end{itemize}
-The example event expressed in JSON can be found in Appendix \ref{lst:JSONEvent}.
+We also tried to get access to existing rule engines for each rule language, since we aim to build our model as well as our own reference implementation on top of existing work.
 
 
-Definition of events\cite{Adaikkalavan2007}
-
-
-\begin{table}[ht]
-  \centering
-  \begin{tabular}{ | *{4}{l|} }
-    \hline
-    \textbf{Language} & \textbf{Event Type} & \textbf{Architecture} & \textbf{Actions} \\ \hline
-    \textbf{RDFTL} & RDF Repositories & Distributed & (Local) RDF Repository \\ \hline
-    \textbf{JSON Rules} & DOM Events & Centralized & Browser \\ \hline
-    \textbf{XChange} & Web Resources & Disitributed & Local Web Resource \\ \hline
-    \textbf{RuleML} & Web Resources & Disitributed & Local Web Resource \\ \hline
-    \textbf{KRL} & Web Resources & Centralized & Local \& Remote Web Resource \\ \hline
-  \end{tabular}
-  \caption{Existing Rule Languages}
-  \label{tab:rulelanguages}
-\end{table}
-
-
-% \begin{table}[ht]
-%   \centering
-%   \begin{tabular}{ | l | c | r | }
-%     \hline
-%     \textbf{Engine} & \textbf{Event Type} & \textbf{JSON Rules} \\ \hline
-%     \textbf{JSON Rules} & DOM Events & 9 \\ \hline
-%     \textbf{XChange} & Web Resources & 9 \\ \hline
-%     \textbf{RuleML} & Web Resources & 9 \\ \hline
-%   \end{tabular}
-%   \caption{Existing Rule Engines}
-%   \label{tab:ruleengines}
-% \end{table}
-
-Xchange geavily influenced our work
-
-We defined an email event which the rule languages need to be able to process.
-The JSON representation of the given email event as depicted in the appendix. %is shown in Listing~\ref{lstemail}.
-
-% FIXME Leave out what was not inspiring!
-
+\subsection{Rule Languages \& Rule Engines}
+\index{Rule Engine}
+\index{Rule Language}
+\index{RDF}
 \index{RDFTL}
-An early ECA Rule Language for XML repositories
-\textrm{RDFTL}~\cite{papamarkos2004rdftl} was postulated in 2003 and was picked up by many researches afterwards. It was designed to react on insert and delete events within RDF repositories and as an action change XML documents.
-RDF desirable but who THE FUCK uses it
+The Resource Description Framework (\textrm{RDF}) is a collection of specifications to model informations in the \textrm{Semantic Web}~\cite{berners2001semantic}.
+Papamarkos et al. (2004) published an \textrm{ECA} language for \textrm{RDF}: \textrm{RDF Triggering Language} (\textrm{RDFTL}).
+It was designed to react on insert and delete events within \textrm{RDF} repositories and for an action notify users and propagate the changes through related resources.%\footnote{Refer to Appendix \ref{lst:MailRDF} for a \textrm{RDFTL} rule conforming our use case}.
+\textrm{RDFTL} bases on \textrm{RDF} resources which need to run engines.
+These engines retrieve events, detect changes and communicate them as events to other engines and actions are executed on local repositories.
+Through distributed engines, \textrm{RDF} resources can be made reactive.
+We envision an engine that orchestrates the Web, rather than relying on other Web sites to incorporate our model.
+But still their research provides important insights on reactivity through \textrm{ECA} rules.
 
-Now apart from implementing a rules engine, we would also need to add an XML document event manager which interpretes and pushes events into the XML file \emph{inbound\_queue.xml}. Then again this instance would interprete the ouptuts of the ECA engine, which would theoretically manifest in other XML documents, and produce meaningful actions on remote hosts. This wouldn't be an architecture which has its focus on the solution of our use case and, as a result, add complexity and create an unnecessary overhead.
-
-\index{XChange}\index{Xcerpt}
-% Web-specific capabilities, such as propagation of changes on the Web (change) and event-based communication between Web sites (exchange).
-% peer-to-peer communication model
-% push/pull strategy
-% robustness
-% ditrbuted systems
-% hypotetical data
-% since the web is far from having a unique architecture. meaning xchange would need to sit in each site for event comm aight?
-% depends on remote locations understanding XChange
-% XChange has nice event composition properties
-% Xchange only consists of events no actions (actions are taken by remote systems through events received%)
-
-The rule language XChange~\cite{2005-Patranjan-TLE.pdf} was the outcome of the REWERSE (~\cite{wwwRewerse}, Reasoning on the Web with Rules and Semantics) project, which was funded by the EU and Switzerland. Their work influenced a number of future research. The language was designed to add reactive behaviour to a "static" Web which is represented through XML resources. Thus we have action logics to alter such resources through insertions and deletions. Since we aim to utilize Web API's for our rule language we need a more generic approach which adds flexibility in term of the API provided. But the thorough research done with the language XChange holds valuable concepts, especially in terms of temporal evet composition. This could be a rule according to our use case:
-
-
-But XChange is designed to access other resources in an action and thus provides powerful tools:
+\index{XChange}
+The rule language \textrm{XChange}~\cite{2005-Patranjan-TLE.pdf} emerged from the \textrm{Reasoning on the Web with Rules and Semantics} (\textrm{REWERSE}) project~\cite{wwwRewerse}, which took place from 2004 to 2008. 
+It was designed to track changes in dynamic web resources and add reactive behaviour in a way that such changes influence other dynamic resources.
+\textrm{XChange} incorporates the vision of distributed, event exchanging, rule engines.
+Those rule engines execute actions on local data or issue new events.
+The local-only actions oppose our vision to orchestrate heterogenous Web resources through reactive behaviour.
+Eventually a dedicated \textrm{XChange} rule engine could be realized, which is enhanced to translate \textrm{XChange} actions into communication with remote Web resources.
+The use case applicability study was promising but access to a reference implementation of an engine, in order to enhance it with our vision, could not be gained. %\footnote{Refer to Appendix \ref{lst:MailXChange} for what an adoption of \textrm{XChange} to our vision would look}
+Still the thorough research done with the language \textrm{XChange} holds valuable concepts, especially in terms of temporal event composition.
 
 \index{JSON Rules}
-In 2008 \emph{JSON Rules}~\cite{2008-Giurca_Pascalau-JSON_Rules.pdf} was introduced as a language to easily react on specific DOM tree compositions.
-The usage of JavaScript allowed them to provide simple functions which could be called directly by the actions, thus abstracting functionality from the language.
-This key concept found influence into our language as it allows different layers of abstractions.
-Through this it is possible to provide generic functions for expert user as well as very limited functions with only few possibilities for parameterization to be used by unexperienced persons.
-A drawback of this language is its binding to DOM tree events, where we would want to react on any events happening in the world.
-Also the temporal composition to complex events is not a subject of their work and needs further attention.
-
-
-\index{KRL}
-A recent open-source development is the Kinetic Rules Engine together with the Kinetics Rule Language~~\cite{bookTheLiveWeb}.
-It is built for the purpose of adding reactivity to the cloud.
-The language is based on declarative syntax, enriched with imparative elements.
-But it is a tedious task to get into a whole new language and their caveats.
-\emph{authorization?}
-% The KRE suits the demand for a certain coupling between the users browser and the remote rules engine to provide a powerful system. On the other hand the rules engine is not (yet) well documented, not lightweighted and forged in Perl, a programming language that wasn't encountered during the research for related work on rule based systems.
+\index{DOM}
+\textrm{JSON Rules}~\cite{2008-Giurca_Pascalau-JSON_Rules.pdf} was introduced 2008 as a language to react on specific \textrm{Document Object Model} (\textrm{DOM}) tree states of a webpage and as reactive behaviour control the browser and also \textrm{DOM} again.
+The incorporation of script function calls into the action part of the language allows the abstraction of eventually complex action behaviour.
+This feature influenced our concept as it allows for different levels of complexity to be offered as the reactive system is growing.
+\textrm{JSON Rules} is bound to \textrm{DOM} tree events and actions, where we aim to react on any events happening in Web Resources and also execute actions on them.
 
 \index{RuleML}
-The basis of \emph{RuleML}~~\cite{2006-Boley-RuleML.pdf} is datalog, a language in the intersection of SQL and Prolog.
-In 2012 the \emph{Reaction RuleML}~~\cite{2012-Paschke_etal-ReactionRuleML.pdf} language incorporated several different types of rules into the RuleML syntax, to establish a uniform syntax and interchangability of rules.
-\emph{Reaction RuleML} is a valuable resource in terms of manifold research that has been done in the domain of rule languages, but the syntax is not user-friendly.
+The \textrm{Rule Markup Language} (\textrm{RuleML})~\cite{2006-Boley-RuleML.pdf} is a language written in \textrm{XML} and aims to standardize many different types of rules.
+\index{Reaction RuleML}
+\textrm{Reaction RuleML}~\cite{2012-Paschke_etal-ReactionRuleML.pdf} is an enhancement of the existing standard by reactive rules.
+\index{CEP}\index{KR}\index{ECA}\index{CA}\index{EA}
+\textrm{Reaction RuleML} includes:
+\begin{itemize}
+  \item Distributed Complex Event Processing (\textrm{CEP})
+  \item Knowledge Representation (\textrm{KR}) calculi
+  \item Event-Condition-Action (\textrm{ECA}) rules
+  \item Production (\textrm{CA}) rules
+  \item Trigger (\textrm{EA}) rules
+\end{itemize}
+\textrm{Reaction RuleML} represents a thorough research to incorporate as much rule types as possible into one standard.
+Together with the expression in \textrm{XML} it doesn't score with readability, but provides a way to define a multitude of rule types and the interchangbility between different sites in the Web.
+Since our vision does not require interchangable rules, we chose an internal JSON representation for our rules to have human-readability, simple parsing and efficient storage.
+A system that relies on \textrm{RuleML} is \textrm{Rule Responder}~\cite{2007-Paschke_etal-RuleResponder.pdf}.
+\textrm{Rule Responder} connects different types of heterogenous rule engines together over the \textrm{Mule} open-source \textrm{Enterprise Service Bus} (\textrm{ESB}) which acts as a communication middleware to exchange rules expressed in \textrm{RuleML}.
+
+\index{KRL}
+\index{KRE}
+A recent research oucome (Windley, 2011) was the \textrm{Kinetics Rule Language} (\textrm{KRL})~\cite{bookTheLiveWeb} together with the \textrm{Kinetic Rules Engine} (\textrm{KRE}).
+It was invented to impose reactivity to the Web and incorporates many different event origins and action resources.
+The language is based on declarative syntax, enriched with imparative elements.
+A handy feature are the ways to activate webpages, which bridges the gap between the user's browser and the centralized \textrm{KRE}.
+Either a user can install a browser plugin which will communicate with the \textrm{KRE}, or a webpage provider can include a library in order to get events from accesses to the webpage.
+Through this events can be raised from the browser and actions can execute in it.
+The \textrm{KRL} fits very well into our concept and only a few reasons kept us from realising our reference implementation on top of the \textrm{KRE}, such as:
+\begin{itemize}
+  \item complexity required to maintain states with a declarative syntax 
+  \item system footprint of the \textrm{KRE}
+  \item \textrm{Perl}, a procedural programming language, as base of the \textrm{KRE}
+\end{itemize}
+The concept of the \textrm{KRL} is promising in terms of orchestrating the Web trhough reactivity.
+But we decided to implement a lightweighted reference system, using an event-driven programming language that is laid out for an event-driven architecture. 
+ % (KRL) is an event-condition-action rule language with an embedded complex event expression language. TODO REALLY?
+% Only laid out for single actions? single events? no event composition? time comparison between different events?
+
+Table \ref{tab:rulelanguages} gives an overview of the key properties of existing rule languages and their key properties for our research:
+\begin{itemize}
+  \item \textrm{Event Origin}: Resources type from where the events originate.
+  \item \textrm{Distributed}: Whether the language is laid out to run on a centralized or distributed architecture. All examined rule languages that support distributed architectures can as well run on a centralized architecture.
+  \item \textrm{Action Resource}: Resource type on which actions are executed.
+  \item \textrm{Accessible Engine}: Determines whether a reference implementation of an engine was accessible.
+  \item \textrm{Applicability to our concept}: Names the main difference to our envisioned concept.
+\end{itemize}
+Rule languages that support a distributed architecture require engines to be distributed on sites that should be reactive.
+This is not service-oriented and does not regard the Web's heterogenous nature and the need to access such services.
+
+\afterpage{%
+% \begin{table}[ht]
+  \clearpage%
+  \begin{landscape}%
+    \centering
+    \begin{tabular}{ | p{2.5cm} | p{3cm} | p{2cm} | p{4cm} | p{3.5cm} | p{5cm} | }
+    % \begin{tabular}{ | *{5}{p{2.5cm}|} }
+    % \begin{tabular}{ | *{5}{l|} }
+      \hline
+      \rowcolor{LightSteelBlue}
+      \textbf{Language} & \textbf{Event Origin} & \textbf{Distributed} & \textbf{Action Resource} & \textbf{Accessible Engine} & \textbf{Applicability\newline  to our concept} \\ \hline
+      \textbf{RDFTL} & RDF Repository\newline Changes & Yes & (Local) RDF Repository & - & Only Web sites with engines\newline are reactive \\ \hline
+      \textbf{XChange} & Web Resources & Yes & Local Resources & - & Actions in remote\newline Web Resources missing \\ \hline
+      \textbf{JSON Rules} & DOM Events & No & Browser / DOM & - & Only Browser / DOM Events \\ \hline
+      \textbf{RuleML} & Web Resources & Yes & Local Resource & (OO) jDrew, Prova,\newline Rule Responder & Complex Syntax \\ \hline
+      \textbf{KRL} & Web Resources & No & Local \& Remote Web\newline Resources & KRE & User-specific \textrm{Web App}\newline functionality missing \\ \hline % FIXME Really user-specific missing?
+    \end{tabular}
+    \captionof{table}{Key Properties of existing Rule Languages with respect to our Concept}\label{tab:rulelanguages}%
+  \end{landscape}
+  \clearpage%
+% \end{table}
+}
+
+Other examined Rule Engines were the \textrm{Object-Oriented Java Deductive Reasoning Engine for the Web} (\textrm{OO jDrew}), \textrm{Prova}, and \textrm{Drools Fusion}.
+They are all implemented in \textrm{Java} and have their own rules syntax which is more or less closely related to \textrm{Java}, with inline \textrm{Java} code.
+Some of them have a heavy system footprint because they base on existing frameworks, such as \textrm{Drools Fusion} which requires a Java graphical user interface or communication middlewares.
+Our decision not to use any of these existing approaches for a reference implementation was, because all of them only provide limited support for our concept or have a heavy system footprint, caused by the communication layer such as the {JBoss ESB}.
+We envision a scalable event-driven system from its deepest roots that allows the orchestration of heterogenous Web reources.
+These resources are already available and accessible and we do not need to alter them in order to impose reactivity to the Web.
+Such a system does not require a messaging middleware because the Web itself is the communication channel to receive events and execute actions.
 
 
-R2ML allows usage for RuleML together with many other dialects. Really!?
-
-% TODO RULE ENGINES!
-% Large systems such as \emph{RuleResponder} weave stubs or proxies of existing service into a message oriented middleware (MoM).
-% We envision the web itself is used as the middleware.
-% Through this a lightweighted and performant event-based architecture can be realized, which allows the afore mentioned event-driven orchestration of services of the Web.
-
-
-\subsection{Rules Engines}
-\subsubsection{(OO) jDrew}
-Java Deductive Reasoning Engine for the Web (\emph{jDrew}~\cite{wwwjdrew}) is a reasoning engine written in Java for definite clause reasoning. jDrew can be embedded into larger systems through its APIs.
-Object-Oriented jDrew (\emph{OO jDrew}~\cite{2005-Ball_etal-OOjDrew.pdf,wwwoojdrew}) is a Java based rule engine, it serves as a reference implementation of \emph{RuleML}. This project seems not to be very actively developed.
-
-\subsubsection{Prova}
-\emph{Prova}~\cite{wwwprova} is an expressive rule language and engine, both written in Java, with a main orientation to ECA rules. It uses backward-reasoning logic to formalize decisions in terms of derivation. Forward-directed messaging of reaction rules supports distributed event and action processing. It allows dynamic access to external data sources and is used by the authors of \cite{2013_Zhao-Paschke_EDSWE.pdf,2007-Paschke_etal-RuleResponder.pdf} for the \emph{RuleResponder's} proof of concept for transformations between different rule languages over \emph{RuleML}. \emph{Prova} seems to be discontinued since early 2013. 
-BASED on PROLOG
-
-\subsubsection{Kinetic}
-The Kinetic Rules Engine (KRE) is a platform presented in \cite{bookTheLiveWeb}. It is realized in Perl and uses its very own rule language, the Kinetic Rules Language (KRL). It is laid out to support CEP as well as a tight coupling with the user's browser through plugins or libraries loaded via the webpage. It allows the access to remote resources and the processing of such data before passing it along to internal storage or again external resources, such as cloud applications. A live system~\cite{wwwkynetx} is available for testing and if desired also for productive use. Creating an own instance is quite a challenge due to it's numerous libraries. KRL needs quite some efforts to get used to and can't be entrusted to inexperienced users, thus a layer on top of this system would have to be implemented for our purposes.
-
-\subsubsection{Drools Fusion}
-\emph{Drools Fusion}~\cite{wwwdrools} is part of the jBoss open source community and allows the application of CEP and development in an eclipse-based IDE. Recently \emph{Drools 5} introduced the Business Logic integration Platform which provides a platform for Rules, Workflow and Event Processing. \emph{Drools Fusion} has its own rule language, \emph{Drools Rule Language (DRL)} This system has quite a heavy foot print, but active development is promising for a certain future stability.
-
-\subsubsection{Rule Responder}
-\emph{Rule Responder}~\cite{2007-Paschke_etal-RuleResponder.pdf} is a project to extend the Semantic Web towards a Pragmatic Web infrastructure for collaborative human-computer networks, which they call an architecture of a Pragmatic Agent Web (PAW). It supports the formation of virtual groupings and allows semi-automated agents with their individual contexts, decisions and actions. The authors postulate agents empowered with automatic rule-driven data transformation, decision derivation from existing knowledge and reaction according to changed situations or occurred events. The work done in this project concentrates on a layer on top of a rule engine and language, and thus allows for a combination of arbitrary rule-based systems via their framework. This is achieved through the usage of general message oriented communication interfaces and a platform-independent rule interchange format (\emph{RuleML}).
-
-The authors of Rule Responder built their reference system on top of the Mule open-source Enterprise Service Bus (ESB) which acts as a communication middleware. The decision to use Mule was made because it goes beyond the typical definition of an ESB by providing a distributable object broker to manage all sorts of service components. Each agent runs its own arbitrary rule engine. For demonstration purposes \emph{Prova} and \emph{OO jDrew} were used to demonstrate the rule interchange between different rule engines.
-
-As research continued in terms of reaction rules and \textit{Rule Responder}, the authors of \cite{2013_Zhao-Paschke_EDSWE.pdf} showed the adoption of event paradigms to support scientific workflow execution. In their work they point out the limitations of ECA frameworks when adapted to their use case. For highly distributed and loosely coupled scientific workflows, complicated conditional procedures and rules, which can also have local scopes, are required. This shows us their work is going towards large distributed systems with a highly developed rule language that subsumes research from several fields.
-
-
-%\section{Conclusion}
-Most of the examined rule languages are designed for the interchangability of rules between different service providers. We do not attempt to jump into this domain but we rather pick up important concepts to manifest Web API's as first class citizens of our rule language. This allows the ad-hoc design and implementation of reactive rules between existing Web API's without the need for their cooperation in setting up their endpoint in a special way.
-
-% TODO Rechtfertigung wieso nicht verwendet
-% Java EE und KRL nicht anwendbar
-
-
-% TODO performance artikel / paper ueber node.js
-
-% FIXME argue why no rule language was used
-
-% TODO Categorize Related Work!
- % With REST no metadata, RDF whatever, thus no semantics, thus on the go, thus we need flexibility
- % conditions as web queries can be solved through event composition
-
- % Often rule engines lack support for web resource access
 % FIXME USE WEB RESOURCE RATHER THAN SERVICES IN THE WEB
-% All research funneled into RuleML
-% show rule engines, alsoo CEP, describe event composition through templates and why we don't do it
