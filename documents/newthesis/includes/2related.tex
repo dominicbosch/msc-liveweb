@@ -2,29 +2,23 @@
 \chapter{Related Work}
 
 In this chapter we will give a brief overview over different services offered in the Web, to point out what services in the Web all can be.
-We then introduce the Event-Condition-Action (\textrm{ECA}) paradigm, an event-driven approach to impose reactivity.
-And finally we point out existing rule languages and engines that exploit the \textrm{ECA} paradigm.
-
-
+We then introduce the \textrm{\acrlong{eca}} (\textrm{\acrshort{eca}}) paradigm, an event-driven approach to impose reactivity.
+And finally we point out existing rule languages and engines that exploit the \textrm{\acrshort{eca}} paradigm.
 
 \section{Services in the Web}
 The term service in the context of the Web is ambiguous and there have been a lot of different approaches to offer services within the Web.
-\index{Web Service}
-\index{Services}
-\index{World Wide Web}
-For example the term \textrm{Web Services} often refers to interfaces that are used in the \textrm{World Wide Web} for communication between applications.
+For example the term \textrm{\gls{webservice}} often refers to interfaces that are used in the \textrm{\gls{www}} for communication between applications.
 We will point out some main research areas on service-orientation within the Web.
 
 Remote execution of programs on other computers has always been a strong research area. And with the coinage of the term \textrm{World Wide Web}~\cite{DBLP:journals/en/Berners-LeeCGP92}, there were also trends towards services offered through the Web; computers waiting in the Web for a request in order to execute some application logic and return an answer.
-\index{SOA}
-The encapsulation of functionality into services~\cite{peltz2003web} in order to offer them to other applications is called service-oriented architecture (\textrm{SOA})~\cite{perrey2003service}.
-Adopting \textrm{SOA} internally to an application means splitting the application into smaller pieces, which then communicate via these services among each other.
+The encapsulation of functionality into services~\cite{peltz2003web} in order to offer them to other applications is called service-oriented architecture (\textrm{\acrshort{soa}})~\cite{perrey2003service}.
+Adopting \textrm{\acrshort{soa}} internally to an application means splitting the application into smaller pieces, which then communicate via these services among each other.
 This does not only provide robustness, it also allows the reuse of functionality through services.
 Moreover these services can be offered to other applications and also to the Web, thus allowing others to access certain functionality or even the whole application.
 All nodes in the Web are stand-alone entities, which offer services of some sort, be it a webpage, data, instant measurements or functionality.
 This makes the Web itself a service-oriented architecture and all these services are naturally services in the Web.
-It is for its advantages that \textrm{SOA} has received a great deal of attention and has been widely adopted, mostly throughout the Web.
-This lead to an increasing number of Web accessible services and their compositions, the so called \textrm{Mashups}.
+It is for its advantages that \textrm{\acrshort{soa}} has received a great deal of attention and has been widely adopted, mostly throughout the Web.
+This lead to an increasing number of Web accessible services and their compositions, the so called \textrm{\gls{mashup}s}.
 An empirical study~\cite{conf/icws/HuangFT12} on a directory, which they call the \textit{"[...] most active Web APIs and mashups collection"}, and data taken from this resource (depicted in Figure \ref{fig:NumOfAPIs}) seem to underline a growing popularity, at least in terms of publishing services through this directory.
 
 \begin{figure}[!ht]
@@ -36,27 +30,22 @@ An empirical study~\cite{conf/icws/HuangFT12} on a directory, which they call th
 
 
 \subsection{Requesting Services in the Web}
-\index{RPC}
-An early adoption of the service concept to computers were the Remote Procedure Calls (\textrm{RPC})~\cite{Birrell:1984:IRP:2080.357392}.
-Through \textrm{RPC} a piece of code can be executed on a different machine, than the one which is calling the procedure.
+An early adoption of the service concept to computers were the \textrm{\acrlong{rpc}}s (\acrshort{rpc})~\cite{Birrell:1984:IRP:2080.357392}.
+Through \textrm{\acrshort{rpc}} a piece of code can be executed on a different machine, than the one which is calling the procedure.
 It is basically achieved via inter-process communication and doesn't necessarily require the Web.
-Even more since when \textrm{RPC} was invented, the \textrm{World Wide Web} wasn't even postulated by Tim Berners-Lee. 
-\textrm{RPC} also found its use in grid computing~\cite{seymour2002overview} and through this, opened doors into the field of distributed computation.
-The \textrm{RPC} paradigm isn't bound to certain technologies and thus, has been implemented in a lot of different programming languages.
-These implementations were tightly bound to the respective language that was used, which resulted largely in incompatiblity among them.
-\index{XML}
-\index{XML-RPC}
-It became necessary to enhance \textrm{RPC}'s in order to get cross platform compatibility.
-By abstracting \textrm{RPC} functionality with the Extensible Markup Language (\textrm{XML})~\cite{bray1998extensible}, compatibility between services that used different technologies was easier to achieve.
+Even more since when \textrm{\acrshort{rpc}} was invented, the \textrm{World Wide Web} wasn't even postulated by Tim Berners-Lee. 
+\textrm{\acrshort{rpc}} also found its use in grid computing~\cite{seymour2002overview} and through this, opened doors into the field of distributed computation.
+The \textrm{\acrshort{rpc}} paradigm isn't bound to certain technologies and thus, has been implemented in a lot of different programming languages.
+These implementations were tightly bound to the respective language that was used, which resulted in incompatibility among them.
+It became necessary to enhance \textrm{\acrshort{rpc}}'s in order to get cross platform compatibility.
+The abstraction of \textrm{\acrshort{rpc}} through the \textrm{\acrlong{xml}} (\textrm{\acrshort{xml}})~\cite{bray1998extensible}, which is called \textrm{\acrshort{xmlrpc}}, compatibility between services that used different technologies was easier to achieve.
 
-\index{SOAP}
-\index{WSDL}
-Since \textrm{XML-RPC} was held relatively simple but received a lot of attention, it was further enhanced.
-Together with additional proposed functionality, XML-RPC heavily influenced Simple Object Access Protocol (\textrm{SOAP})~\cite{box2000simple}.
-\textrm{SOAP} is accompanied by the Web Service Description Language (\textrm{WSDL})~\cite{christensen2001web} which is used to describe the interfaces to SOAP services.
-Through \textrm{SOAP} and \textrm{WSDL} a client for the service can issue a request for the \textrm{WSDL} information of the service and retrieves all interface specifications he requires in order to issue a call to the actual service.
+Since \textrm{\acrshort{xmlrpc}} was held relatively simple but received a lot of attention, it was further enhanced.
+Together with additional proposed functionality, \textrm{\acrshort{xmlrpc}} heavily influenced \textrm{\acrlong{soap}} (\textrm{\acrshort{soap}})~\cite{box2000simple}.
+\textrm{\acrshort{soap}} is accompanied by the \acrlong{wsdl} (\textrm{\acrshort{wsdl}})~\cite{christensen2001web} which is used to describe the interfaces to \acrshort{soap} services.
+Through \textrm{\acrshort{soap}} and \textrm{\acrshort{wsdl}} a client for the service can issue a request for the \textrm{\acrshort{wsdl}} information of the service and retrieves all interface specifications he requires in order to issue a call to the actual service.
 The service specifications are then incorporated into the existing application as if it is a local function call.
-\textrm{SOAP} has found its applicability in business applications~\cite{journals/itpro/BarrosD06} and was enhanced with a lot of industrial standards, also called the "WS-*" specifications, e.g. WS-Addressing, WS-Policy or WS-Security.
+\textrm{\acrshort{soap}} has found its applicability in business applications~\cite{journals/itpro/BarrosD06} and was enhanced with a lot of industrial standards, also called the "WS-*" specifications, e.g. WS-Addressing, WS-Policy or WS-Security.
 
 \index{CORBA}
 Another initiative that aimed for eased communication between different platform is the Common Object Request Broker Architecture (\textrm{CORBA})~\cite{dec1991common}.
@@ -65,7 +54,7 @@ As the name already suggest it is an object-oriented approach and it allows the 
 \textrm{CORBA} relies on its communication layer, the Object Request Broker (\textrm{ORB}), which forms the basis of its architecture.
 The platform-specific \textrm{ORB}'s provide the communication abstraction, which free the application from platform dependencies.
 \index{IDL}
-Similar to \textrm{SOAP}'s \textrm{WSDL}, \textrm{CORBA} has its Interface Definition Language (\textrm{IDL}) to provide information about the objects to be offered and accessed.
+Similar to \textrm{\acrshort{soap}}'s \textrm{\acrshort{wsdl}}, \textrm{CORBA} has its Interface Definition Language (\textrm{IDL}) to provide information about the objects to be offered and accessed.
 An object is instantiated by an application and the interface to this instance is offered through the \textrm{ORB}.
 Another application attached to the \textrm{ORB} can then access all public variables, data structures and functions of this object.
 This means not only remote access to variables and data structures, but also remote function invocation.
@@ -134,7 +123,7 @@ These flexible \textrm{Mashup} applications often provide methods to access user
 
 
 \subsection{Subscribing to Services in the Web}
-There is another type of service in the Web which is quite the opposite to the afore mentioned approches in terms of the data flow.
+There is another type of service in the Web which is quite the opposite to the afore mentioned approaches in terms of the data flow.
 \index{Webhooks}
 \textrm{Webhooks} are a method that enables the asynchronous delivery of data whenever it gets available, compared to the need of actively requesting a service to deliver it.
 They are uniform resource identifiers (\textrm{URI}), which point to a service in the Web, which accepts the data delivered to it.
@@ -188,7 +177,7 @@ We also tried to get access to existing rule engines for each rule language, sin
 \index{RDFTL}
 The Resource Description Framework (\textrm{RDF}) is a collection of specifications to model informations in the \textrm{Semantic Web}~\cite{berners2001semantic}.
 Papamarkos et al. (2004) published an \textrm{ECA} language for \textrm{RDF}: \textrm{RDF Triggering Language} (\textrm{RDFTL}).
-It was designed to react on insert and delete events within \textrm{RDF} repositories and for an action notify users and propagate the changes through related resources.%\footnote{Refer to Appendix \ref{lst:MailRDF} for a \textrm{RDFTL} rule conforming our use case}.
+It was designed to react on insert and delete events within \textrm{RDF} repositories and for an action notify users and propagate the changes through related resources. %\footnote{Refer to Appendix \ref{lst:MailRDF} for a \textrm{RDFTL} rule conforming our use case}.
 \textrm{RDFTL} bases on \textrm{RDF} resources which need to run engines.
 These engines retrieve events, detect changes and communicate them as events to other engines and actions are executed on local repositories.
 Through distributed engines, \textrm{RDF} resources can be made reactive.
@@ -200,7 +189,7 @@ The rule language \textrm{XChange}~\cite{2005-Patranjan-TLE.pdf} emerged from th
 It was designed to track changes in dynamic web resources and add reactive behaviour in a way that such changes influence other dynamic resources.
 \textrm{XChange} incorporates the vision of distributed, event exchanging, rule engines.
 Those rule engines execute actions on local data or issue new events.
-The local-only actions oppose our vision to orchestrate heterogenous Web resources through reactive behaviour.
+The local-only actions oppose our vision to orchestrate heterogeneous Web resources through reactive behaviour.
 Eventually a dedicated \textrm{XChange} rule engine could be realized, which is enhanced to translate \textrm{XChange} actions into communication with remote Web resources.
 The use case applicability study was promising but access to a reference implementation of an engine, in order to enhance it with our vision, could not be gained. %\footnote{Refer to Appendix \ref{lst:MailXChange} for what an adoption of \textrm{XChange} to our vision would look}
 Still the thorough research done with the language \textrm{XChange} holds valuable concepts, especially in terms of temporal event composition.
@@ -226,27 +215,27 @@ The \textrm{Rule Markup Language} (\textrm{RuleML})~\cite{2006-Boley-RuleML.pdf}
   \item Trigger (\textrm{EA}) rules
 \end{itemize}
 \textrm{Reaction RuleML} represents a thorough research to incorporate as much rule types as possible into one standard.
-Together with the expression in \textrm{XML} it doesn't score with readability, but provides a way to define a multitude of rule types and the interchangbility between different sites in the Web.
-Since our vision does not require interchangable rules, we chose an internal JSON representation for our rules to have human-readability, simple parsing and efficient storage.
+Together with the expression in \textrm{XML} it doesn't score with readability, but provides a way to define a multitude of rule types and the interchangeability between different sites in the Web.
+Since our vision does not require interchangeable rules, we chose an internal JSON representation for our rules to have human-readability, simple parsing and efficient storage.
 A system that relies on \textrm{RuleML} is \textrm{Rule Responder}~\cite{2007-Paschke_etal-RuleResponder.pdf}.
-\textrm{Rule Responder} connects different types of heterogenous rule engines together over the \textrm{Mule} open-source \textrm{Enterprise Service Bus} (\textrm{ESB}) which acts as a communication middleware to exchange rules expressed in \textrm{RuleML}.
+\textrm{Rule Responder} connects different types of heterogeneous rule engines together over the \textrm{Mule} open-source \textrm{Enterprise Service Bus} (\textrm{ESB}) which acts as a communication middleware to exchange rules expressed in \textrm{RuleML}.
 
 \index{KRL}
 \index{KRE}
-A recent research oucome (Windley, 2011) was the \textrm{Kinetics Rule Language} (\textrm{KRL})~\cite{bookTheLiveWeb} together with the \textrm{Kinetic Rules Engine} (\textrm{KRE}).
+A recent research outcome (Windley, 2011) was the \textrm{Kinetics Rule Language} (\textrm{KRL})~\cite{bookTheLiveWeb} together with the \textrm{Kinetic Rules Engine} (\textrm{KRE}).
 It was invented to impose reactivity to the Web and incorporates many different event origins and action resources.
-The language is based on declarative syntax, enriched with imparative elements.
+The language is based on declarative syntax, enriched with imperative elements.
 A handy feature are the ways to activate webpages, which bridges the gap between the user's browser and the centralized \textrm{KRE}.
 Either a user can install a browser plugin which will communicate with the \textrm{KRE}, or a webpage provider can include a library in order to get events from accesses to the webpage.
 Through this events can be raised from the browser and actions can execute in it.
-The \textrm{KRL} fits very well into our concept and only a few reasons kept us from realising our reference implementation on top of the \textrm{KRE}, such as:
+The \textrm{KRL} fits very well into our concept and only a few reasons kept us from realzing our reference implementation on top of the \textrm{KRE}, such as:
 \begin{itemize}
   \item complexity required to maintain states with a declarative syntax 
   \item system footprint of the \textrm{KRE}
   \item \textrm{Perl}, a procedural programming language, as base of the \textrm{KRE}
 \end{itemize}
-The concept of the \textrm{KRL} is promising in terms of orchestrating the Web trhough reactivity.
-But we decided to implement a lightweighted reference system, using an event-driven programming language that is laid out for an event-driven architecture. 
+The concept of the \textrm{KRL} is promising in terms of orchestrating the Web through reactivity.
+But we decided to implement a light weighted reference system, using an event-driven programming language that is laid out for an event-driven architecture. 
  % (KRL) is an event-condition-action rule language with an embedded complex event expression language. TODO REALLY?
 % Only laid out for single actions? single events? no event composition? time comparison between different events?
 
@@ -259,7 +248,7 @@ Table \ref{tab:rulelanguages} gives an overview of the key properties of existin
   \item \textrm{Applicability to our concept}: Names the main difference to our envisioned concept.
 \end{itemize}
 Rule languages that support a distributed architecture require engines to be distributed on sites that should be reactive.
-This is not service-oriented and does not regard the Web's heterogenous nature and the need to access such services.
+This is not service-oriented and does not regard the Web's heterogeneous nature and the need to access such services.
 
 \afterpage{%
 % \begin{table}[ht]
@@ -288,7 +277,7 @@ Other examined Rule Engines were the \textrm{Object-Oriented Java Deductive Reas
 They are all implemented in \textrm{Java} and have their own rules syntax which is more or less closely related to \textrm{Java}, with inline \textrm{Java} code.
 Some of them have a heavy system footprint because they base on existing frameworks, such as \textrm{Drools Fusion} which requires a Java graphical user interface or communication middlewares.
 Our decision not to use any of these existing approaches for a reference implementation was, because all of them only provide limited support for our concept or have a heavy system footprint, caused by the communication layer such as the {JBoss ESB}.
-We envision a scalable event-driven system from its deepest roots that allows the orchestration of heterogenous Web reources.
+We envision a scalable event-driven system from its deepest roots that allows the orchestration of heterogeneous Web resources.
 These resources are already available and accessible and we do not need to alter them in order to impose reactivity to the Web.
 Such a system does not require a messaging middleware because the Web itself is the communication channel to receive events and execute actions.
 

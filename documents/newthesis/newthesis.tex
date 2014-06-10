@@ -2,7 +2,7 @@
 \usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
 \usepackage[a4paper, portrait, margin=1.1in]{geometry}
 \usepackage{url}
-\usepackage{makeidx}
+% \usepackage{makeidx}
 \usepackage{listings}
 \usepackage{graphicx}
 \usepackage{fancyhdr}
@@ -17,13 +17,12 @@
 \usepackage{capt-of}
 \usepackage[utf8]{inputenc}
 \usepackage[toc,page,header]{appendix}
-% \usepackage[usenames,dvipsnames]{color}
+\usepackage[toc,acronym,ucmark]{glossaries}
 
 \usepackage[none]{hyphenat} % FIXME REMOVE FOR FINAL DOCUMENT	
 
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 \renewcommand{\familydefault}{\sfdefault}
-
 \renewcommand{\arraystretch}{1.5} % Stretch spacing between table rows
 
 \input{includes/codehighlighting}
@@ -33,7 +32,7 @@
 \setcounter{tocdepth}{1}
 
 % Prepare the word index
-\makeindex
+% \makeindex
 
 % Prepare header and footer
 \pagestyle{fancy}
@@ -43,6 +42,7 @@
 \rfoot{\thepage}
 \renewcommand{\headrulewidth}{0.3pt}
 \renewcommand{\footrulewidth}{0.3pt}
+
 
 % Apply page style also to chapter's first page
 \makeatletter
@@ -56,9 +56,14 @@
 \setlength{\parindent}{15pt}
 % \setlength{\parskip}{.5\baselineskip}%
 
+\renewcommand*\glossarypreamble{\thispagestyle{fancy}}
+\makeglossaries
+\input{includes/glossary}
+
 \begin{document}
 
 \frontmatter
+
 	\input{includes/titlepage}
 	\input{includes/abstract}
 	\input{includes/acknowledgment}
@@ -79,13 +84,12 @@
 
 % Lists
 	\listoffigures
-	% FIXME CHECK WHETHER TABLES OR LISTINGS ARE IN THE DOCUMENT
 	\listoftables
-	% \lstlistoflistings
+	\lstlistoflistings
 
 % Index
-	\addcontentsline{toc}{chapter}{Index}
-	\printindex
+	% \addcontentsline{toc}{chapter}{Index}
+	% \printindex
 
 	% Turn off listing of tables and figures since from here on they will be in the appendix
 	\captionsetup[figure]{list=no}
@@ -97,13 +101,11 @@
 	\input{includes/appendixa}
 	\input{includes/appendixb}
 	\input{includes/appendixc}
-	
+	\printglossaries
 	\end{appendices}
-
 	\addtocontents{toc}{\setcounter{tocdepth}{1}}
 
 \backmatter
 	\include{includes/scientificintegrity}
-% 	\addtocontents{toc}{\setcounter{tocdepth}{1}}
 
 \end{document}

@@ -1,17 +1,28 @@
-\chapter{Applicability}
+\chapter{Use Cases for a Reactive Rule System}
 % informal description of target / story -> show that it makes sense
 % Use Cases, not concrete
 We have introduced a conceptual model for reactive information systems and its services.
 In this chapter we will show how this model applies to certain use cases.
 
+\section{Reacting on changes in the World-Wide Web}
+A huge amount of information is accessible through the World-Wide Web.
+Many documents within it are dynamic in the way that they change over time.
+Some might change in an interval of a few minutes (e.g. news), while others change much slower such as konwledge bases.
+To detect such changes a site in the Web needs to keep track of the document history and trigger events if there is a change.
+A lot of research has been mad
+For a general approach such a site would require a query language for web resources that is able to detect changes.
+% TODO figure
+
+
 \section{Augment existing Web Applications}
 \index{CMS}
 Web applications, such as webmails, social networks or content management systems (\textrm{CMS}) are widely spread and used by a large number of internet users.
-But often users ord developer miss some features or interoperability with other web applications, which would result in augmented functionality and also in less work.
+But often users or developers miss some features or interoperability with other web applications, which would result in augmented functionality and also in less work.
 Features of that kind could also include data and functionality from other sites on the web.
 This would require web applications to mashup together and to grab data or invoke functionality on each other.
 Many kinds of augmentations will not be implemented by the web applications themselves because they are very specific to a small number of their users.
 With a reactive information system, users and developers could realize such features on their own.
+
 
 \subsection{Enrich \textrm{CMS} Posts with Additional Information}
 Every new post to a content management system can be modeled as an event.
@@ -25,12 +36,13 @@ Whenever there are tags included within the post, the reactive system will enric
   \label{fig:ProBinderAnnotations}
 \end{figure}
 
+
 \subsection{Workflow Automation}
 Within such web applications, users often have very specific workflows.
-And because workflows always start with an event, they are predestinated to be automated by a reactive information system.
+And because workflows always start with an event, they are predestined to be automated by a reactive information system.
 As an example for workflow automation, course and student exercise submission administration can be taken care of by a reactive information system.
 Whenever a new semester starts, the reactive system will detect this through one of its rules and command an action dispatcher to set up infrastructures for courses.
-This can also include grabbing course data from an official web page and including it into the infrastrucutre, thus eliminating the need for manual data copy tasks.
+This can also include grabbing course data from an official web page and including it into the infrastructure, thus eliminating the need for manual data copy tasks.
 \begin{figure}[!ht]
   \centering
   \includegraphics{figures/ProBinderCourseSetup}
@@ -60,11 +72,13 @@ As soon as the deadline passed, the system will revoke write-rights to the exerc
   \label{fig:ProBinderExerciseNotification}
 \end{figure}
 
+
+
 \section{Service Functionality and Availability Checking}
 Services offered through the Web aren't monitored or tested by users or developers from other sites.
-If they rely on correct functionality or availabilty they need a way to assert this.
+If they rely on correct functionality or availability they need a way to assert this.
 It is also possible that an owner of such a service doesn't have the tools to monitor his own services
-Whenever such a service isn't workin correctly anymore or stops responding, these users or developers need to be able to react on this before it is too late.
+Whenever such a service isn't working correctly anymore or stops responding, these users or developers need to be able to react on this before it is too late.
 With a reactive rule in place that evaluates Service Testing results, measurements can be taken early.
 One action to such a failing service test could be an automatic switching of the utilized service within an action dispatcher, so that from then on it uses one which still works correctly.
 \begin{figure}[!ht]
@@ -73,6 +87,8 @@ One action to such a failing service test could be an automatic switching of the
   \caption{Test proper Service Functionality and Availability}
   \label{fig:ProBinderServiceTesting}
 \end{figure}
+
+
 
 \index{Web of Things}
 \section{Exploiting the Web of Things}
@@ -93,13 +109,13 @@ Even better would be if it would have the power to kick in an additional emergen
 \end{figure}
 
 Another scenario gets more realistic with the increasing number of homes that are connected to the Web.
-A home or appartment owner has his light controls attached to the Web.
+A home or apartment owner has his light controls attached to the Web.
 The first thing a reactive system could do, is that it detects holidays in the owner's agenda and automatically sets the light control to somewhat reasonable random during his absence.
 This would make suspicious characters, which are eventually interested in his wealth, think that he's still at home.
 In combination with another \textrm{Thing} that is connected to the Web and always accompanies people, the cell phone, an even more interesting application scenario can be thought of.
 The phone would push location information about the owner into the system.
 Whenever the owner gets close to his house, the reactive system could turn on the light in the entry area, pull up some nice music.
-On a wednesday evening it could also inform the delivery service that they can deliver the owner's preferred dish now, because the owner is doing this always on a wednesday evening.
+On a Wednesday evening it could also inform the delivery service that they can deliver the owner's preferred dish now, because the owner is doing this always on a Wednesday evening.
 % holiday tips (Weather better somewhere else) if calendar empty
 
 % Kalender eintrag fahrt in den süden, informaieren über offene pässe

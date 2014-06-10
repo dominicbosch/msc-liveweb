@@ -1,8 +1,41 @@
 
-\chapter{Prototype System}
-% Describe rule engine. start from real engine over graphic engine why do we call ours engine
 
-% Since the vision of on- and offline rules can't be covered with a single server application, the utilization of a fast, flexible and widely used technology such as JavaScript to tackle this challenge seems to be favorable future work. JavaScript was mainly invented for browsers and is spread all over the web by now. Additionally, applications such as \emph{node.js}, bring JavaScript to the server-side and tear down the communication efforts between cloud applications through JSON messages which are directly understood by modern browsers and cloud applications.
+\chapter{Prototype System}
+The prototype system is the realisation of our conceptual model for reactive Information Systems and their services.
+During our research we identified asynchronous communication and event-driven architecture (\textrm{EDA}) as necessary key properties for a reference implementation of our conceptual model.
+Therefore we decided to rely on the recent adoption of JavaScript to application development, which is made possible through \textrm{Node.js}.
+We believe in the future success of \textrm{JavaScript} for application development because the key concepts of asynchronous communication and non-blocking I/O are important properties for todays large scale applications.
+Another advantage of this technology is the human-readable \textrm{JavaScript Object Notation} (\textrm{JSON}) for data exchange.
+\textrm{JSON} builds only on two data structures:
+\begin{itemize}
+	\item object: An unordered collection of name/value pairs, which can be thought of as a hash map, dictionary or struct.
+	\item array: An ordered list of values, which can be thought of as an array, vector or list.
+\end{itemize}
+A value can be an object or an array, but also a unicode string, a number, boolean or null.
+This allows for any arbitrary depth and chaining of the supported data representations.
+Since all data within JavaScript programming code is already in JSON format, it can easily be marshalled into one string and communicated to other applications without overhead.
+Since \textrm{JSON} can be implemented in virtually every programming language, it received a lot of attention and is supported by many modern Web resources.
+
+The prototype consists of a queue which receives all incoming events, and an engine that picks the events from the end of the queue whenever it is idle.
+The engine checks the event against its stored ECA rules and fires the actions whenever a rule applies to an event.
+When a new rule is stored, the engine instantiates the action modules that are required in case an event arrives at the system which triggers the actions.
+The Web is a heterogeneous resource with many different types of systems and services, thus we can't rely on them for providing events to the webhooks of our system.
+Thus we also implement the so called "event triggers" a way to pull events into our system through.
+All they do is checking Web resources for changes and push events into the system whenever they detect one.
+\begin{figure}[!ht]
+	\centering
+  \includegraphics[width=0.9\textwidth]{figures/Architecture_wET}
+	\caption{Prototype Process diagram}
+	\label{fig:Architecture_wET}
+\end{figure}
+
+
+\section{Event Trigger}
+
+% Event Gathering is the E in ECA and without one of these letters such a system would not run.
+% It is of utmost importance to find as much as possible ways to get data into a system.
+
+
 % Preferably a lightweighted rules engine would be used to run the user-generated mashups. T
 
 % NOTES / TODOs:
@@ -14,59 +47,16 @@
 % Why JS, why wasnt it used before? is it used now?
 % Terminierungsproblem (compiler bau), loesungsansaetze
 
-% Required use cases since their application was promised before in the thesis:
-% smart filtering
-% aggregation of information in whatever location user wants
-% 
 
 % as seen by user,
 % as seen by developer
 
-The prototype system is the realisation of a reactive Web system.
-It was developped during the research for this thesis and acts as a platform for feasibility studies of certain use cases.
-
-% describe internal loop
-
-% FIXME remove
-% \begin{table}[ht]
-%   \centering
-% 	\begin{tabular}{ l c r }
-% 	  1 & 2 & 3 \\
-% 	  4 & 5 & 6 \\
-% 	  7 & 8 & 9 \\
-% 	\end{tabular}
-%   \caption{This table shows some data}
-%   \label{tab:myfirsttable}
-% \end{table}
 
 % \section{Architecture}
-Prototype consists of a queue in which all incoming events are pushed, and an engine that picks the events from the end of the queue whenever it is idle.
-Since Prototype's core functionalty is the communication with resources in the Web, the architecture bases on HTTP protocol in several parts.
-For example the events are meant to be retrieved completely via HTTP, the user interface is a Webpage which posts requests to the system and most actions are also meant to be HTTP requests, or at least using them to gather information.
-
-% \begin{figure}[!ht]
-% 	\centering
-%   \includegraphics[width=0.8\textwidth]{figures/Architecture_woET}
-% 	\caption{Prototype Architecture}
-% 	\label{fig:Architecture_woEP}
-% \end{figure}
-
-\begin{figure}[!ht]
-	\centering
-  \includegraphics[width=0.9\textwidth]{figures/Architecture_wET}
-	\caption{Prototype Process diagram}
-	\label{fig:Architecture_wET}
-\end{figure}
-
-
-\section{Event Trigger}
-
-Event Gathering is the E in ECA and without one of these letters such a system would not run.
-It is of utmost importance to find as much as possible ways to get data into a system.
-
 
 
 \subsection{Polling}
+
 
 \subsection{Webhooks}
 
@@ -85,6 +75,9 @@ It is of utmost importance to find as much as possible ways to get data into a s
 
 \section{ECA Rules in the Engine}
 % TODO Conditions
+
+% describe internal loop
+% Describe rule engine. start from real engine over graphic engine why do we call ours engine
 
 % vague Rule language limited through user acounts to not harm the system
 % Describe possible attacks
@@ -121,9 +114,14 @@ Eventually, these shutdowns weren't detected immediately by the people that admi
 As a very quick fix to inform certain administrators about the shutdown of their server, we started pinging these servers and pushed the results int
 
 
+% TODO concrete use case examples
+\subsection{Example Use Cases}
+
+
 
 \section{Web Programming}
 % TODO find term in papers (full stack )
+
 
 \subsection{Node.js}
 % Why JS, why wasn't it used up to now? is it used now?
@@ -139,9 +137,7 @@ As a very quick fix to inform certain administrators about the shutdown of their
 
 % Umgang mit der Zukunft
 % Callback
-\subsection{Callback Functions}
-
-\subsection{Asynchronous Closures}
+\subsection{Callback Functions \& Asynchronous Closures}
 % JAva futures? objekte für resultate sammeln
 
 % NOTES / TODOs:
@@ -167,7 +163,6 @@ While the application waits for the completion of the I/O operation, some remain
 	\label{fig:Closures_Synchronous}
 \end{figure}
 
-
 Asynchronous code execution, as shown in Figure~\ref{fig:Closures_Asynchronous}, allows non-blocking and thus scalable applications.
 Non-blocking operations are a remedy for optimzed resource allocation and open up ways to overcome previously described unnecessary resource bindings.
 Processing any kind of latency-driven I/O operation asynchronously ( e.g. filesystem access and socket communication ) exploits resources that would otherwise be bound while waiting for completion.
@@ -179,16 +174,18 @@ Such operations are processed and completed whenever required resources are avai
 	\label{fig:Closures_Asynchronous}
 \end{figure}
 
-
 Often other operations depend on the completion of asynchronous operations, hence their execution needs to be deferred.
 This necessary code execution deferral is achieved through the use of callback functions, denoted \texttt{fCB} in Figure~\ref{fig:Closures_Asynchronous}.
 Any code placed in a callback function, which is assigned to an asynchronous operation, is only executed after the respective asynchronous operation completed.
 This allows stacking of functions and operations upon each other which automatically results in a flexible and event-driven application.
 
-
-Now we take closures into this asynchronous context, as defined in ECMAScript\cite{EcmaScript}, which is the base for widely-spread script languages like JavaScript, JScript and ActionScript.
+So far we didn't regard the context for such asynchronous functions.
+If a function has access to the enclosing context where it was invoked in, it is called a closure.
+Closures play an important role in ECMAScript\cite{EcmaScript}, which is the base for widely-spread script languages like JavaScript, JScript and ActionScript.
 Closures in ECMAScript\cite{EcmaScript} are defined such as they have access to the context of the function they were created in.
 This is shown in Figure~\ref{fig:Closures_Closure-1} where \texttt{c} from \texttt{fA}'s context is accessible from within \texttt{fB}, assuming that \texttt{fB} was created in \texttt{fA} and not only invoked from there.
+Closures make it necessary for the context of the outer function to survive past its execution so no references are broken.
+This is depicted through the "extended context lifetime" in Figure~\ref{fig:Closures_Closure-1}.
 Using asynchronous closures it becomes evident, that the context in the invoking function can change while the closure is still computing and eventually referencing the outer context, thus causing race conditions.
 This will be most obvious in a loop that immediately invokes \texttt{fB} several times, as shown in Figure~\ref{fig:Closures_Closure-2}.
 In such a setup \texttt{c} will have different values in the same part of different invocations of \texttt{fB}.
@@ -215,15 +212,30 @@ This implementation is necessary when the closure acts as a callback function fo
 \begin{figure}[!ht]
 	\centering
   \includegraphics{figures/Closures_Closure-3}
-	\caption{Closure context shielding}
+	\caption{Closure Context Shielding}
 	\label{fig:Closures_Closure-3}
 \end{figure}
+
+An example of how closure contexts can be shielded is shown in the Listing \ref{lst_closure}.
+\begin{lstlisting}[float=h,label=lst_closure,language=JavaScript,caption=JavaScript Context Shielding]
+var fB = function( c ) { // Declare a function...
+	var fC =  function( a ) { // ( <-- function to return )
+		console.log( c );
+	};
+	return fC;
+};
+for( var c = 0; c < 100; c++ ) {
+	// ... before you assign it to an event happening in the future:
+	var fC = fB( c );
+	setTimeout( fC, 3000); // will be executed after the loop ended
+}
+\end{lstlisting}
 
 % TODO try async closures in other programming languages
 
 
-\subsubsection{Benchmarking JavaScript vs. Java}
-refer to listings
+% \subsubsection{Benchmarking JavaScript vs. Java}
+% refer to listings
 % TODO terminierungsproblem, testing, Web server, timeout, stacked callbacks.
 %compilerbau?
 %loesungsansätze?
@@ -246,11 +258,11 @@ refer to listings
 % This is an old term that refers to the fact that the function’s variables have bindings in the scope chain and that therefore the function is “closed over” its variables.
 
 
-Twelve Theses on Reactive Rules for the Web~\cite{10.1007-11896548_63}:
-This article investigates issues of relevance in designing high-level
-programming languages dedicated to reactivity on the Web. It presents
-twelve theses on features desirable for a language of reactive rules tuned
-to programming Web and Semantic Web applications.
+% Twelve Theses on Reactive Rules for the Web~\cite{10.1007-11896548_63}:
+% This article investigates issues of relevance in designing high-level
+% programming languages dedicated to reactivity on the Web. It presents
+% twelve theses on features desirable for a language of reactive rules tuned
+% to programming Web and Semantic Web applications.
 % MY NOTES: they argue with soap and expect it to stay. They expect Web sites to inform each other about update requests. we are taking one step further and provide events to whomeever wants to receive them while being greedy about receiving events. give them to meeeeh my prciouzzz eventz!
 % 1. High-level reactive languges are needed, ECA rules well-suited to specify reactivity
 % 2. Reactive Web rules should be processed locally and act globally through event-based communication and access to persistent Web data
@@ -264,7 +276,6 @@ to programming Web and Semantic Web applications.
 % 10.Identity of data items is an issue for reactive languages due to their ability to react to changes of data objects on the Web. (we had surrogate identity though discarded the concept again... stupido)
 % 11. Meta-programming and meta-circularity, that is, the ability to use rules to exchange and evaluate (other) rules, are needed in some important cases. (quite artificial for our scenarios)
 % 12.Reactivity in the Web’s open and uncontrolled world requires language support for authentication, authorization, and accounting. (phew... let's let others go there)
-
 
 
 
