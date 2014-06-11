@@ -3,10 +3,18 @@
 \glsgroupheading{E}\relax \glsresetentrylist %
 \glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{3}}}\glsgroupskip
+\glsgroupheading{I}\relax \glsresetentrylist %
+\glossaryentryfield{iaas}{\glsnamefont{IaaS}}{Infrastructure as a service}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{3}}}\glsgroupskip
+\glsgroupheading{P}\relax \glsresetentrylist %
+\glossaryentryfield{paas}{\glsnamefont{PaaS}}{Platform as a service}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{3}}}\glsgroupskip
 \glsgroupheading{R}\relax \glsresetentrylist %
 \glossaryentryfield{rpc}{\glsnamefont{RPC}}{Remote Procedure Call}{\relax }{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{4}}}\glsgroupskip
 \glsgroupheading{S}\relax \glsresetentrylist %
+\glossaryentryfield{saas}{\glsnamefont{SaaS}}{Software as a service}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{3}}}%
 \glossaryentryfield{soa}{\glsnamefont{SOA}}{Service-Oriented Architecture}{\relax }{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{3}}}%
 \glossaryentryfield{soap}{\glsnamefont{SOAP}}{Simple Object Access Protocol}{\relax }{\glossaryentrynumbers{\relax 

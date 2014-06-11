@@ -6,7 +6,7 @@
 \glsgroupheading{W}\relax \glsresetentrylist %
 \glossaryentryfield{webofthings}{\glsnamefont{Web of Things}}{TODO}{\relax }{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{1}}}%
-\glossaryentryfield{webservice}{\glsnamefont{Web Service}}{TODO}{\relax }{\glossaryentrynumbers{\relax 
+\glossaryentryfield{webservice}{\glsnamefont{Web Service}}{Interface for communication between applications over a network}{\relax }{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{3}}}%
 \glossaryentryfield{www}{\glsnamefont{World Wide Web}}{TODO}{\relax }{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{3}}}%

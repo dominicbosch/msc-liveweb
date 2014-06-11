@@ -2,15 +2,15 @@
 \chapter{Related Work}
 
 In this chapter we will give a brief overview over different services offered in the Web, to point out what services in the Web all can be.
-We then introduce the \textrm{\acrlong{eca}} (\textrm{\acrshort{eca}}) paradigm, an event-driven approach to impose reactivity.
+We then introduce the \textrm{\acrlong{eca}(\acrshort{eca})} paradigm, an event-driven approach to impose reactivity.
 And finally we point out existing rule languages and engines that exploit the \textrm{\acrshort{eca}} paradigm.
 
 \section{Services in the Web}
-The term service in the context of the Web is ambiguous and there have been a lot of different approaches to offer services within the Web.
-For example the term \textrm{\gls{webservice}} often refers to interfaces that are used in the \textrm{\gls{www}} for communication between applications.
-We will point out some main research areas on service-orientation within the Web.
+The term service in the context of the Web is ambiguous and there have been a lot of different approaches to offer services within the Web, some of the latest used in cloud computing being \textrm{\acrlong{paas} (\acrshort{paas})}, \textrm{\acrlong{saas} (\acrshort{saas})} and \textrm{\acrlong{iaas} (\acrshort{iaas})}.
+The term \textrm{\gls{webservice}} is widely understood as interfaces for communication between applications over a network, but has seen many specific adoptions.
+We will point out some main research areas on service-orientation within the Web and give an idea of what kind of services in the Web we intend to orchestrate with our conceptual model.
 
-Remote execution of programs on other computers has always been a strong research area. And with the coinage of the term \textrm{World Wide Web}~\cite{DBLP:journals/en/Berners-LeeCGP92}, there were also trends towards services offered through the Web; computers waiting in the Web for a request in order to execute some application logic and return an answer.
+Remote execution of programs on other computers has always been a strong research area. And with the coinage of the term \textrm{\gls{www}}~\cite{DBLP:journals/en/Berners-LeeCGP92}, there were also trends towards services offered through the Web; computers waiting in the Web for a request in order to execute some application logic and return an answer.
 The encapsulation of functionality into services~\cite{peltz2003web} in order to offer them to other applications is called service-oriented architecture (\textrm{\acrshort{soa}})~\cite{perrey2003service}.
 Adopting \textrm{\acrshort{soa}} internally to an application means splitting the application into smaller pieces, which then communicate via these services among each other.
 This does not only provide robustness, it also allows the reuse of functionality through services.
