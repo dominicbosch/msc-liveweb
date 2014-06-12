@@ -1,11 +1,11 @@
 
 \chapter{Related Work}
 
-In this chapter we will give a brief overview over different services offered in the Web, to point out what services in the Web all can be.
+In this chapter we will give a brief overview over resources offered through the Web, which are of interest to us.
 We then introduce the \textrm{\acrlong{eca}(\acrshort{eca})} paradigm, an event-driven approach to impose reactivity.
 And finally we point out existing rule languages and engines that exploit the \textrm{\acrshort{eca}} paradigm.
 
-\section{Services on the Web}
+\section{Data and Functionality Resources on the Web}
 The term service in the context of the Web is ambiguous and there have been a lot of different approaches to offer services within the Web, some of the latest used in cloud computing being \textrm{\acrlong{paas} (\acrshort{paas})}, \textrm{\acrlong{saas} (\acrshort{saas})} and \textrm{\acrlong{iaas} (\acrshort{iaas})}.
 The term \textrm{\gls{webservice}} is widely understood as interfaces for communication between applications over a network, but has seen many specific adoptions.
 We will point out some main research areas on service-orientation within the Web and give an idea of what kind of services in the Web we intend to orchestrate with our conceptual model.
@@ -162,7 +162,7 @@ Together with client- and server-side \textrm{Web APIs} the Web becomes ever mor
 In this chapter we have so far shown research in different areas that lead towards a programmable Web.
 As a result of this research, it is getting easier to compose and orchestrate services in the Web, but reactivity needs to be programmed specifically by experts and general approaches are only available in specific domains.
 Several studies~\cite{2007_AlferesR3}\cite{2005-Bry_etal-XChange.pdf}\cite{10.1007-11896548_63}\cite{papamarkos2004rdftl}\cite{2012-Paschke_etal-ReactionRuleML.pdf} have been made on reactivity.
-They point out Event-Conditon-Action (\textrm{ECA}) rules as a convenient way to impose reactivity on a system.
+They point out Event-Conditon-Action (\textrm{ECA}) rules as the most adequate way to impose reactivity on a system.
 \index{EDA}
 As the name already suggests it bases on an event-driven architecture (\textrm{EDA}) and \textrm{ECA} rules consist of three parts:
 \begin{itemize}
@@ -218,20 +218,20 @@ This feature influenced our concept as it allows for different levels of complex
 The \textrm{Rule Markup Language} (\textrm{RuleML})~\cite{2006-Boley-RuleML.pdf} is a language written in \textrm{XML} and aims to standardize many different types of rules.
 \index{Reaction RuleML}
 \textrm{Reaction RuleML}~\cite{2012-Paschke_etal-ReactionRuleML.pdf} is an enhancement of the existing standard by reactive rules.
-\index{CEP}\index{KR}\index{ECA}\index{CA}\index{EA}
-\textrm{Reaction RuleML} includes:
+\textrm{Reaction RuleML} subsumes:
 \begin{itemize}
-  \item Distributed Complex Event Processing (\textrm{CEP})
-  \item Knowledge Representation (\textrm{KR}) calculi
-  \item Event-Condition-Action (\textrm{ECA}) rules
+  \item \textrm{\acrlong{cep} (\acrshort{cep})}
+  \item \textrm{\acrlong{kr} (\acrshort{kr})} calculi
+  \item \textrm{\acrlong{eca} (\acrshort{eca})} rules
   \item Production (\textrm{CA}) rules
   \item Trigger (\textrm{EA}) rules
 \end{itemize}
-\textrm{Reaction RuleML} represents a thorough research to incorporate as much rule types as possible into one standard.
-Together with the expression in \textrm{XML} it doesn't score with readability, but provides a way to define a multitude of rule types and the interchangeability between different sites in the Web.
+\textrm{Reaction RuleML} represents thorough research for a language to describe virtually any type of reactivity.
+Together with the expression in \textrm{XML} it doesn't score with readability, but provides a way to define a multitude of rule types and the interchangeability of them between different sites in the Web.
 Since our vision does not require interchangeable rules, we chose an internal JSON representation for our rules to have human-readability, simple parsing and efficient storage.
 A system that relies on \textrm{RuleML} is \textrm{Rule Responder}~\cite{2007-Paschke_etal-RuleResponder.pdf}.
 \textrm{Rule Responder} connects different types of heterogeneous rule engines together over the \textrm{Mule} open-source \textrm{Enterprise Service Bus} (\textrm{ESB}) which acts as a communication middleware to exchange rules expressed in \textrm{RuleML}.
+
 
 \index{KRL}
 \index{KRE}
@@ -293,6 +293,16 @@ Our decision not to use any of these existing approaches for a reference impleme
 We envision a scalable event-driven system from its deepest roots that allows the orchestration of heterogeneous Web resources.
 These resources are already available and accessible and we do not need to alter them in order to impose reactivity to the Web.
 Such a system does not require a messaging middleware because the Web itself is the communication channel to receive events and execute actions.
+
+
+\subsection{Event Pattern Detection}
+An important research area in event-driven architectures is the event composition, or \textrm{\acrlong{cep} (\acrshort{cep})}.
+It is the research for methods to get events into relations and also to identify patterns within different streams of data or events.
+\textrm{\acrshort{cep}} turns events recursively into higher-order events and receives a great deal of attention~\cite{akdere2008plan}\cite{anicic2010arlfcepar}\cite{Gehani92compositeevent}\cite{2006Muehl}\cite{2004_1265833}\cite{Rafatirad:2009:ECO:1631024.1631038}.
+It allows new ways to process large amounts of data and react on detected patterns in nearly real-time.
+We envision a clear distinction between a \textrm{\acrshort{cep}} inference engine and an \textrm{\acrshort{eca}} rules engine.
+The \textrm{\acrshort{cep}} inference engine composes events into higher-order events, while the \textrm{\acrshort{eca}} rules engine dispatches actions according to predefined rules.
+
 
 
 % FIXME USE WEB RESOURCE RATHER THAN SERVICES IN THE WEB
