@@ -2,3 +2,4 @@
 \glossaryentry{Web Service?\glossaryentryfield{webservice}{\glsnamefont{Web Service}}{Interface for communication between applications over a network}{\relax }|setentrycounter[]{page}\glsnumberformat}{3}
 \glossaryentry{World Wide Web?\glossaryentryfield{www}{\glsnamefont{World Wide Web}}{TODO}{\relax }|setentrycounter[]{page}\glsnumberformat}{3}
 \glossaryentry{Mashup?\glossaryentryfield{mashup}{\glsnamefont{Mashup}}{TODO}{\relax }|setentrycounter[]{page}\glsnumberformat}{3}
+\glossaryentry{Web Resource?\glossaryentryfield{webresource}{\glsnamefont{Web Resource}}{A Web Resource is anything in the Web which can be identified. Resources and their semantic properties are described through RDF in the Semantic Web}{\relax }|setentrycounter[]{page}\glsnumberformat}{11}

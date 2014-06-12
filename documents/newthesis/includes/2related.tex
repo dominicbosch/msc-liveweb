@@ -5,7 +5,7 @@ In this chapter we will give a brief overview over different services offered in
 We then introduce the \textrm{\acrlong{eca}(\acrshort{eca})} paradigm, an event-driven approach to impose reactivity.
 And finally we point out existing rule languages and engines that exploit the \textrm{\acrshort{eca}} paradigm.
 
-\section{Services in the Web}
+\section{Services on the Web}
 The term service in the context of the Web is ambiguous and there have been a lot of different approaches to offer services within the Web, some of the latest used in cloud computing being \textrm{\acrlong{paas} (\acrshort{paas})}, \textrm{\acrlong{saas} (\acrshort{saas})} and \textrm{\acrlong{iaas} (\acrshort{iaas})}.
 The term \textrm{\gls{webservice}} is widely understood as interfaces for communication between applications over a network, but has seen many specific adoptions.
 We will point out some main research areas on service-orientation within the Web and give an idea of what kind of services in the Web we intend to orchestrate with our conceptual model.
@@ -64,7 +64,7 @@ This can be technically difficult and become an eventually tedious task.
 With the Internet Inter-\textrm{ORB} Protocol (\textrm{IIOP}) it is also possible to connect \textrm{ORB}'s over the Web.
 Through this, the offered objects can become services in the Web, but they are shielded by the \textrm{ORB}.
 
-
+% FIXME really??
 \subsection{Services in the Web become Web Resources}
 \index{REST}
 All the afore mentioned approaches require a specific protocol and are therefore incompatible with each other.
@@ -79,8 +79,16 @@ Services within the Web that adhere to the \textrm{REST} architecture are called
 \index{Web Resources}
 \textrm{RESTful} Web services provide access to their data and functionality through grouped \textrm{Web Resources}, which can be identified vie Uniform Resource Identifiers (\textrm{URI}).
 Simple access to services in the Web without communication overhead and required negotiation before using it, increased \textrm{REST}'s popularity and spread it into more application fields.
-There is for example the upcoming concept of the \textrm{Web of Things}~\cite{Guinard2011WoT}, which aims to incorporate smart things (e.g. tagged things, sensor measurements, device controllers, etc.) into the Web through \textrm{REST} interfaces.
+There is for example the upcoming concept of the \textrm{Web of Things}~\cite{5678452}, which aims to incorporate smart things (e.g. tagged things, sensor measurements, device controllers, etc.) into the Web through \textrm{REST} interfaces.
 \textrm{REST} brings advantages into the context of smart things connected to the Web, because incompatible standards and protocols were used by different manufacturers of such things.
+
+% URI masinter2005uniform
+% FIXME introduce Web resources \cite{masinter2005uniform}
+% According to the NEtwork Working Groups URI RFC a resource is "the term "resource" is used in a general sense for whatever might be identified by a URI. Familiar examples include an electronic document, an image, a source of information with a consistent purpose (e.g., "today's weather report for Los  Angeles"), a service (e.g., an HTTP-to-SMS gateway), and a collection of other resources."
+% We position the Web of Things as a refinement of the Internet of Things by integrating smart things not only into the Internet (the network), but into the Web (the application layer)
+% The essence of REST is to focus on creating loosely coupled services on the Web so that they can be easily reused [7]
+% C. Pautasso and E. Wilde, “Why is the Web Loosely Coupled? A Multi-Faceted Metric for Service Design,” in Proc. of the 18th International World Wide Web Conference (WWW’09), Madrid, Spain, 2009, pp. 911–920.
+
 
 
 \subsection{Composing Services in the Web}
@@ -122,8 +130,11 @@ But also a number of studies ~\cite{10.1007/978-3-642-22233-7_11}\cite{4278815}\
 These flexible \textrm{Mashup} applications often provide methods to access user-specific functionality within remote \textrm{Web Apps}, which makes them even more user-centered and customizable.
 
 
-\subsection{Subscribing to Services in the Web}
+\subsection{Subscribing to Web Resources}
+% FIXME TODO this needs to be fixed together with the whole chapter!
 There is another type of service in the Web which is quite the opposite to the afore mentioned approaches in terms of the data flow.
+It is the concept of push notifications on updates and it is an active research area.
+There are some manifestations of this model for browser-server communication, such as \textrm{Comet}~\cite{5631249} or \textrm{Server-Sent Events}\footnote{http://dev.w3.org/html5/eventsource/}.
 \index{Webhooks}
 \textrm{Webhooks} are a method that enables the asynchronous delivery of data whenever it gets available, compared to the need of actively requesting a service to deliver it.
 They are uniform resource identifiers (\textrm{URI}), which point to a service in the Web, which accepts the data delivered to it.
@@ -131,6 +142,8 @@ They are uniform resource identifiers (\textrm{URI}), which point to a service i
 Within the publish/subscribe paradigm, such asynchronous delivery of data is referred to as events, since that's what the appearance of new data is.
 \textrm{Webhooks} are callbacks that can be placed by a \textrm{Web App} provider or a user at a remote location, informing the data proliferating site about their interest in the data.
 Both parties are services in the Web, since the \textrm{Webhook} providers accept the data delivered to their \textrm{URI} and the \textrm{Webhook} recipients offer to send the data.
+\textrm{PubSubHubbub}\footnote{http://code.google.com/p/pubsubhubbub/} an open server-to-server publish/subscribe protocol that uses webhooks for servers to address their interest in updates from other servers.
+Only through such push notifications a reactive system can truly be reactive in the sense of event-drivenness.
 
 
 \subsection{Towards Simple Access and Communication}

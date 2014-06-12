@@ -6,6 +6,8 @@
 \glsgroupheading{W}\relax \glsresetentrylist %
 \glossaryentryfield{webofthings}{\glsnamefont{Web of Things}}{TODO}{\relax }{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{1}}}%
+\glossaryentryfield{webresource}{\glsnamefont{Web Resource}}{A Web Resource is anything in the Web which can be identified. Resources and their semantic properties are described through RDF in the Semantic Web}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{11}}}%
 \glossaryentryfield{webservice}{\glsnamefont{Web Service}}{Interface for communication between applications over a network}{\relax }{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{3}}}%
 \glossaryentryfield{www}{\glsnamefont{World Wide Web}}{TODO}{\relax }{\glossaryentrynumbers{\relax 

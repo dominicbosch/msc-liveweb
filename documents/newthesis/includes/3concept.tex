@@ -13,43 +13,16 @@
 % why are we now suddenly responsive? we loosened up certain things
 % point out where events happen, triggered and received
 
-In the previous chapter we have shown that services in the Web and reactivity through programmability have received a great deal of attention.
-Our goal is to combine both research fields in order to impose reactivity to the Web, by orchestrating its information space. 
+In the previous chapter we have shown that the evolution of \textrm{\glspl{webresource}} and reactivity have received a great deal of attention.
+Our goal is to combine both research fields in order to impose reactivity to our information space, the Internet. 
 
-\section{From Real Events to Events in the Web \& their Composition}
+\section{From Real Events to Events in the Web}
 Real events are bound to a spatial location and a point on the time axis.
 An earthquake for example always has an epicentre and an occurrence time.
-Different points on earth's surface would feel the earthquake, which originates from the same epicentre, at a different point in time with a different intensity.
-A Web event model of an earthquake would consist of a large number of identical \textrm{\textbf{ground-shake}} events that occur at different points in time and places.
-Therefore they would hold different spatial location informations and intensities.
-These events can be thought of as emitted into the Web by a seismometer sitting at the corresponding location.
-\begin{figure}[!ht]
-  \centering
-  \includegraphics[width=0.6\textwidth]{figures/Earthquake}
-  \caption{Web Event Model of an Earthquake}
-  \label{fig:Earthquake}
-\end{figure}
 Within the Web, events lose their tight coupling to locations and retain only a time component.
 The event instances keep this information as descriptive metadata.
-A reactive system such as we envision it, could detect these \textrm{\textbf{ground-shake}} events and react on behalf of each one of them.
-Because of the Web's latency these events do most certainly not arrive at systems within the Web in the original order, in which they were triggered.
-They also do most likely not arrive in the exact same order for all systems.
-This leaves us with time as the only important factor left, to distinguish events from each other in the first place.
-To get an earthquake event out of all these ground shaking informations floating through the Web, somebody would need a reactive system that detects these events and assembles them into one earthquake event, together with a computed epicentre and magnitude.
-Such a system (we call it \textrm{\textbf{earthquake-tracker}}) would own an earthquake model that allows it to decide whether a \textrm{\textbf{ground-shake}} event belongs to one physical earthquake or to another one, depending on its spatial location information and the intensity at that point in time.
-It could then emit a more complex \textrm{\textbf{earthquake}} event (with epicentre and magnitude) that allows other systems to interpret this physical event and react on behalf of it.
 
-Let's take another system that reacts on a physical earthquake.
-It is now left with a multitude of different options on how to react.
-It could only react on the \textrm{\textbf{earthquake}} event which is coming from the system above (\textrm{\textbf{earthquake-tracker}}) that applies its earthquake model to the incoming \textrm{\textbf{ground-shake}} events.
-But how long will it take for this system to deploy its \textrm{\textbf{earthquake}} event?
-Eventually it waits for one round-trip of a seismic wave around the world, which takes approximately half an hour.
-What if it waits two or three round-trip times in order to collect more accurate data?
-And what if our new system wants to react as fast as possible in order to warn people all around the world.
-It would then need to react on a small subset of the \textrm{\textbf{ground-shake}} events in order to quickly identify a real earthquake and take measurements, e.g. immediately send out text messages to people, or to deploy yet another ( this time \textrm{\textbf{earthquake-alert}}) event into the Web's information space.
-This relatively simple example discloses the complex nature of event-driven systems, but also their high flexibility and fine grained tuning possibilities.
-
-\section{The Web's Event \& Action Information Space}
+\section{The Web's Event \& Action Space}
 % Event cloud
 % we generate also events again to be pushed over webhooks, and also loopback events
 % TODO TABELLE Ort/Kultur(fussball/Apple, weltweit)/Saisonal(kalender)/Internet (ortlos, github)
@@ -211,4 +184,43 @@ Such systems are merely event sinks which add fairly any value to the Web, excep
 % actions     ::= symbol*('('selector*')')
 % symbol      ::= [A-Za-z0-9_-]+
 % selector    ::= [#\{(symbol*?)\}]
-% \end{lstlisting}
+% \end{lstlisting
+
+\section{Rule Language for Reactive Information Systems}
+Because of the heterogenous nature of the Web actions need to be abstracted
+as long as we do not limit ourselves e.g for RESTful access to services
+
+
+\section{Event Composition for Complex Event Processing}
+Real events are bound to a spatial location and a point on the time axis.
+An earthquake for example always has an epicentre and an occurrence time.
+Different points on earth's surface would feel the earthquake, which originates from the same epicentre, at a different point in time with a different intensity.
+A Web event model of an earthquake would consist of a large number of identical \textrm{\textbf{ground-shake}} events that occur at different points in time and places.
+Therefore they would hold different spatial location informations and intensities.
+These events can be thought of as emitted into the Web by a seismometer sitting at the corresponding location.
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.6\textwidth]{figures/Earthquake}
+  \caption{Web Event Model of an Earthquake}
+  \label{fig:Earthquake}
+\end{figure}
+Within the Web, events lose their tight coupling to locations and retain only a time component.
+The event instances keep this information as descriptive metadata.
+A reactive system such as we envision it, could detect these \textrm{\textbf{ground-shake}} events and react on behalf of each one of them.
+Because of the Web's latency these events do most certainly not arrive at systems within the Web in the original order, in which they were triggered.
+They also do most likely not arrive in the exact same order for all systems.
+This leaves us with time as the only important factor left, to distinguish events from each other in the first place.
+To get an earthquake event out of all these ground shaking informations floating through the Web, somebody would need a reactive system that detects these events and assembles them into one earthquake event, together with a computed epicentre and magnitude.
+Such a system (we call it \textrm{\textbf{earthquake-tracker}}) would own an earthquake model that allows it to decide whether a \textrm{\textbf{ground-shake}} event belongs to one physical earthquake or to another one, depending on its spatial location information and the intensity at that point in time.
+It could then emit a more complex \textrm{\textbf{earthquake}} event (with epicentre and magnitude) that allows other systems to interpret this physical event and react on behalf of it.
+
+Let's take another system that reacts on a physical earthquake.
+It is now left with a multitude of different options on how to react.
+It could only react on the \textrm{\textbf{earthquake}} event which is coming from the system above (\textrm{\textbf{earthquake-tracker}}) that applies its earthquake model to the incoming \textrm{\textbf{ground-shake}} events.
+But how long will it take for this system to deploy its \textrm{\textbf{earthquake}} event?
+Eventually it waits for one round-trip of a seismic wave around the world, which takes approximately half an hour.
+What if it waits two or three round-trip times in order to collect more accurate data?
+And what if our new system wants to react as fast as possible in order to warn people all around the world.
+It would then need to react on a small subset of the \textrm{\textbf{ground-shake}} events in order to quickly identify a real earthquake and take measurements, e.g. immediately send out text messages to people, or to deploy yet another ( this time \textrm{\textbf{earthquake-alert}}) event into the Web's information space.
+This relatively simple example discloses the complex nature of event-driven systems, but also their high flexibility and fine grained tuning possibilities.
+
