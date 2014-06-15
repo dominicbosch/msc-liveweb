@@ -1,25 +1,32 @@
 
 \chapter{Related Work}
 
-In this chapter we will give a brief overview over resources offered through the Web, which are of interest to us.
+In this chapter we will give a brief overview over a certain kind of \textrm{\gls{webresource}} collections, the \textrm{\glspl{webservice}}, which are of particular interest to our vision.
 We then introduce the \textrm{\acrlong{eca}(\acrshort{eca})} paradigm, an event-driven approach to impose reactivity.
 And finally we point out existing rule languages and engines that exploit the \textrm{\acrshort{eca}} paradigm.
 
-\section{Data and Functionality Resources on the Web}
-The term service in the context of the Web is ambiguous and there have been a lot of different approaches to offer services within the Web, some of the latest used in cloud computing being \textrm{\acrlong{paas} (\acrshort{paas})}, \textrm{\acrlong{saas} (\acrshort{saas})} and \textrm{\acrlong{iaas} (\acrshort{iaas})}.
-The term \textrm{\gls{webservice}} is widely understood as interfaces for communication between applications over a network, but has seen many specific adoptions.
-We will point out some main research areas on service-orientation within the Web and give an idea of what kind of services in the Web we intend to orchestrate with our conceptual model.
 
-Remote execution of programs on other computers has always been a strong research area. And with the coinage of the term \textrm{\gls{www}}~\cite{DBLP:journals/en/Berners-LeeCGP92}, there were also trends towards services offered through the Web; computers waiting in the Web for a request in order to execute some application logic and return an answer.
-The encapsulation of functionality into services~\cite{peltz2003web} in order to offer them to other applications is called service-oriented architecture (\textrm{\acrshort{soa}})~\cite{perrey2003service}.
-Adopting \textrm{\acrshort{soa}} internally to an application means splitting the application into smaller pieces, which then communicate via these services among each other.
-This does not only provide robustness, it also allows the reuse of functionality through services.
-Moreover these services can be offered to other applications and also to the Web, thus allowing others to access certain functionality or even the whole application.
-All nodes in the Web are stand-alone entities, which offer services of some sort, be it a webpage, data, instant measurements or functionality.
-This makes the Web itself a service-oriented architecture and all these services are naturally services in the Web.
-It is for its advantages that \textrm{\acrshort{soa}} has received a great deal of attention and has been widely adopted, mostly throughout the Web.
-This lead to an increasing number of Web accessible services and their compositions, the so called \textrm{\gls{mashup}s}.
-An empirical study~\cite{conf/icws/HuangFT12} on a directory, which they call the \textit{"[...] most active Web APIs and mashups collection"}, and data taken from this resource (depicted in Figure \ref{fig:NumOfAPIs}) seem to underline a growing popularity, at least in terms of publishing services through this directory.
+
+\section{Data and Functionality Providers on the Web}
+Data and Functionality Providers on the Web are in general referred to as \textrm{\gls{webservice}}.
+But the term service in the context of the Web is somewhat ambiguous and there have been a lot of completely different approaches to offer services within the Web, some of the latest used in cloud computing are \textrm{\acrlong{paas} (\acrshort{paas})}, \textrm{\acrlong{saas} (\acrshort{saas})} and \textrm{\acrlong{iaas} (\acrshort{iaas})}.
+The term \textrm{\gls{webService}} (capitalized word \textrm{Service}) commonly stands for \textrm{\gls{webservice}} based on \textrm{\acrlong{soap} (\acrshort{soap})} communication\cite{journals/itpro/BarrosD06}, which has been adopted and developed extensively by the industry.
+With the advent of the \textrm{\acrlong{rest} (\acrshort{rest})} architectural paradigm, the understanding of the term service in the Web has undergone a slight generalization so that \textrm{\gls{webservice}} (lower-case word \textrm{service}) is not anymore bound to a certain protocol, but describes services as interfaces for communication between applications over a network\cite{richardson2008restful}.
+We will point out some main research areas on service-orientation within the Web and point out how they make the Web programmable.
+
+Remote execution of programs on other computers has always been a strong research area, ever since computer started to exist.
+After the coinage of the term \textrm{\gls{www}}\cite{DBLP:journals/en/Berners-LeeCGP92}, the Web has become a synonym for Berners-Lee's vision of a global information universe.
+The trend towards remote program execution offered through the Web followed immediately; computers waiting in the Web for a request in order to execute some application logic and return an answer.
+Familiar to this concept is the encapsulation of functionality into services\cite{peltz2003web} in order to offer them to other applications, which is called \textrm{\acrlong{soa} (\acrshort{soa})}\cite{perrey2003service}.
+Applying \textrm{\acrshort{soa}} to an existing application means splitting it into smaller loosely-coupled pieces (services), which then communicate with each other.
+This does not only provide robustness, it also allows the reuse of functionality.
+Moreover these services can be offered to other applications and also to the Web, thus allowing others to access certain functionality or even the whole application behind the services.
+All nodes in the Web are stand-alone entities, which offer services of some sort, be it a webpage, pure data, instant measurements or functionality of some sort.
+This makes the Web itself a \textrm{\acrlong{soa}} and all these services are naturally \textrm{\glspl{webservice}}.
+It is because ofs its advantages that \textrm{\acrshort{soa}} has received a great deal of attention and has been widely adopted throughout the Web.
+This lead to an increasing number of Web accessible services and their compositions, the so called \textrm{\glspl{mashup}}.
+An empirical study\cite{conf/icws/HuangFT12} on a directory, which the researchers of the paper call the \textit{"[...] most active \gls{webapi}s and mashups collection"}, and statistical data taken from this directory (depicted in Figure \ref{fig:NumOfAPIs}) seem to underline a growing popularity, at least in terms of published services within this directory.
+A server-side \textrm{\gls{webapi}} is a service interface to an application, meant for application to application communication.
 
 \begin{figure}[!ht]
   \centering
@@ -29,142 +36,116 @@ An empirical study~\cite{conf/icws/HuangFT12} on a directory, which they call th
 \end{figure}
 
 
-\subsection{Requesting Services in the Web}
-An early adoption of the service concept to computers were the \textrm{\acrlong{rpc}}s (\acrshort{rpc})~\cite{Birrell:1984:IRP:2080.357392}.
-Through \textrm{\acrshort{rpc}} a piece of code can be executed on a different machine, than the one which is calling the procedure.
-It is basically achieved via inter-process communication and doesn't necessarily require the Web.
-Even more since when \textrm{\acrshort{rpc}} was invented, the \textrm{World Wide Web} wasn't even postulated by Tim Berners-Lee. 
-\textrm{\acrshort{rpc}} also found its use in grid computing~\cite{seymour2002overview} and through this, opened doors into the field of distributed computation.
+\subsection{Accessing services on the Web}
+An early adoption of the service concept to computers were the \textrm{\acrlong{rpc}s (\acrshort{rpc})}\cite{Birrell:1984:IRP:2080.357392}.
+Through \textrm{\acrshort{rpc}} a piece of code can be executed on a different machine, other than the one which is calling the procedure.
+It is basically an inter-process communication and doesn't necessarily require the Web nor distributed cmputers.
+Also because of when \textrm{\acrshort{rpc}} was invented, the term \textrm{\gls{www}} didn't even exist. 
+\textrm{\acrshort{rpc}} also found its use in grid computing\cite{seymour2002overview} and through this, opened doors into the field of distributed computation.
 The \textrm{\acrshort{rpc}} paradigm isn't bound to certain technologies and thus, has been implemented in a lot of different programming languages.
 These implementations were tightly bound to the respective language that was used, which resulted in incompatibility among them.
 It became necessary to enhance \textrm{\acrshort{rpc}}'s in order to get cross platform compatibility.
-The abstraction of \textrm{\acrshort{rpc}} through the \textrm{\acrlong{xml}} (\textrm{\acrshort{xml}})~\cite{bray1998extensible}, which is called \textrm{\acrshort{xmlrpc}}, compatibility between services that used different technologies was easier to achieve.
+The abstraction of \textrm{\acrshort{rpc}} through the \textrm{\acrlong{xml}} (\textrm{\acrshort{xml}})\cite{bray1998extensible}, which is called \textrm{\acrshort{xmlrpc}}, made it easier to achieve compatibility between services that used different technologies.
 
 Since \textrm{\acrshort{xmlrpc}} was held relatively simple but received a lot of attention, it was further enhanced.
-Together with additional proposed functionality, \textrm{\acrshort{xmlrpc}} heavily influenced \textrm{\acrlong{soap}} (\textrm{\acrshort{soap}})~\cite{box2000simple}.
-\textrm{\acrshort{soap}} is accompanied by the \acrlong{wsdl} (\textrm{\acrshort{wsdl}})~\cite{christensen2001web} which is used to describe the interfaces to \acrshort{soap} services.
+Together with additional proposed functionality, \textrm{\acrshort{xmlrpc}} was the base for \textrm{\acrlong{soap}} (\textrm{\acrshort{soap}})\cite{box2000simple}.
+\textrm{\acrshort{soap}} is accompanied by the \textrm{\acrlong{wsdl} (\acrshort{wsdl})}\cite{christensen2001web} which is used to describe the interfaces to \acrshort{soap} services, the \textrm{\glspl{webService}}.
 Through \textrm{\acrshort{soap}} and \textrm{\acrshort{wsdl}} a client for the service can issue a request for the \textrm{\acrshort{wsdl}} information of the service and retrieves all interface specifications he requires in order to issue a call to the actual service.
 The service specifications are then incorporated into the existing application as if it is a local function call.
-\textrm{\acrshort{soap}} has found its applicability in business applications~\cite{journals/itpro/BarrosD06} and was enhanced with a lot of industrial standards, also called the "WS-*" specifications, e.g. WS-Addressing, WS-Policy or WS-Security.
+\textrm{\acrshort{soap}} has found its applicability in business applications\cite{journals/itpro/BarrosD06} and was enhanced with a lot of industrial standards, also called the "WS-*" specifications, e.g. WS-Addressing, WS-Policy or WS-Security.
 
-\index{CORBA}
-Another initiative that aimed for eased communication between different platform is the Common Object Request Broker Architecture (\textrm{CORBA})~\cite{dec1991common}.
+Another initiative that aimed for eased communication between different platform is the \textrm{\acrlong{corba} (\acrshort{corba})}\cite{dec1991common}.
 As the name already suggest it is an object-oriented approach and it allows the exchange of whole objects.
-\index{ORB}
-\textrm{CORBA} relies on its communication layer, the Object Request Broker (\textrm{ORB}), which forms the basis of its architecture.
-The platform-specific \textrm{ORB}'s provide the communication abstraction, which free the application from platform dependencies.
-\index{IDL}
-Similar to \textrm{\acrshort{soap}}'s \textrm{\acrshort{wsdl}}, \textrm{CORBA} has its Interface Definition Language (\textrm{IDL}) to provide information about the objects to be offered and accessed.
-An object is instantiated by an application and the interface to this instance is offered through the \textrm{ORB}.
-Another application attached to the \textrm{ORB} can then access all public variables, data structures and functions of this object.
-This means not only remote access to variables and data structures, but also remote function invocation.
-\textrm{CORBA} requires the implementation of object-oriented mechanisms in programming languages which aren't object-oriented.
+\textrm{\acrshort{corba}} relies on its communication layer, the \textrm{\acrlong{orb} (\acrshort{orb})}, which forms the basis of its architecture.
+The platform-specific \textrm{\acrshort{orb}}s provide the communication abstraction, which free the application from platform dependencies.
+Similar to \textrm{\acrshort{soap}}'s \textrm{\acrshort{wsdl}}, \textrm{\acrshort{corba}} has its \textrm{\acrlong{idl} (\acrshort{idl})} to provide information about the objects to be offered and accessed.
+An object is instantiated by an application and the interface to this instance is offered through the \textrm{\acrshort{orb}}.
+Another application attached to the \textrm{\acrshort{orb}} can then access all public variables, data structures and functions of this object.
+This means not only remote access to variables and data structures, but also remote function invocation as seen in \acrshort{rpc}s.
+\textrm{\acrshort{corba}} requires the implementation of object-oriented mechanisms in programming languages which aren't object-oriented.
 This can be technically difficult and become an eventually tedious task.
-\textrm{CORBA} allows communication between applications written in different programming languages and which are running on the same physical computer, as well as the communication between different computers in the same network.
-With the Internet Inter-\textrm{ORB} Protocol (\textrm{IIOP}) it is also possible to connect \textrm{ORB}'s over the Web.
-Through this, the offered objects can become services in the Web, but they are shielded by the \textrm{ORB}.
+\textrm{\acrshort{corba}} allows communication between applications written in different programming languages and which are running on the same physical computer, as well as the communication between different computers in the same network.
+With the \textrm{\acrlong{iiop} (\acrshort{iiop})} it is also possible to connect \textrm{\acrshort{orb}}'s over the Web.
+Through this, the offered objects can become services in the Web, but they are shielded by the \textrm{\acrshort{orb}}.
 
-% FIXME really??
-\subsection{Services in the Web become Web Resources}
-\index{REST}
+
+\subsection{Services on the Web become \glspl{webresource}}
 All the afore mentioned approaches require a specific protocol and are therefore incompatible with each other.
-For this reason and its simplicity, an architectural style has gained popularity which frees application from this constraint: Representational State Transfer (\textrm{REST})~\cite{fielding2000architectural}.
-\textrm{REST} concentrates on the roles of components and on constraints upon interactions between them.
+For this reason and its simplicity, an architectural style has gained popularity which frees application from this constraint: \textrm{\acrlong{rest} (\acrshort{rest})}\cite{fielding2000architectural}.
+\textrm{\acrshort{rest}} concentrates on the roles of components and on constraints upon interactions between them.
 An important architectural constraint is that all communication is stateless, which means for a client-server communication, no state is stored on the server.
 Therefore all informations required for a single interaction need to be provided within one request.
 This allows for the definition of simple and well-defined interfaces, since responses are not bound to a certain session state. 
-\index{REST}
-Services within the Web that adhere to the \textrm{REST} architecture are called \textrm{RESTful} Web services.
-\index{URI}
-\index{Web Resources}
-\textrm{RESTful} Web services provide access to their data and functionality through grouped \textrm{Web Resources}, which can be identified vie Uniform Resource Identifiers (\textrm{URI}).
-Simple access to services in the Web without communication overhead and required negotiation before using it, increased \textrm{REST}'s popularity and spread it into more application fields.
-There is for example the upcoming concept of the \textrm{Web of Things}~\cite{5678452}, which aims to incorporate smart things (e.g. tagged things, sensor measurements, device controllers, etc.) into the Web through \textrm{REST} interfaces.
-\textrm{REST} brings advantages into the context of smart things connected to the Web, because incompatible standards and protocols were used by different manufacturers of such things.
-
-% URI masinter2005uniform
-% FIXME introduce Web resources \cite{masinter2005uniform}
-% According to the NEtwork Working Groups URI RFC a resource is "the term "resource" is used in a general sense for whatever might be identified by a URI. Familiar examples include an electronic document, an image, a source of information with a consistent purpose (e.g., "today's weather report for Los  Angeles"), a service (e.g., an HTTP-to-SMS gateway), and a collection of other resources."
-% We position the Web of Things as a refinement of the Internet of Things by integrating smart things not only into the Internet (the network), but into the Web (the application layer)
-% The essence of REST is to focus on creating loosely coupled services on the Web so that they can be easily reused [7]
-% C. Pautasso and E. Wilde, “Why is the Web Loosely Coupled? A Multi-Faceted Metric for Service Design,” in Proc. of the 18th International World Wide Web Conference (WWW’09), Madrid, Spain, 2009, pp. 911–920.
-
+Services within the Web that adhere to the \textrm{\acrshort{rest}} architecture are called \textrm{\acrshort{rest}ful \glspl{webservice}}.
+\textrm{\acrshort{rest}ful \glspl{webservice}} provide access to their data and functionality through grouped \textrm{\glspl{webresource}}, which can be identified via \textrm{\acrlong{uri} (\acrshort{uri})}\cite{masinter2005uniform}.
+In the \textrm{\gls{semanticweb}}\cite{berners2001semantic}, a \gls{webresource} is anything in the Web that can be identified, addressed and handled.
+This started with documents and went over objects to abstract concepts, such as operators of equations.
+Simple access to \textrm{\glspl{webservice}} without communication overhead and negotiation before using it, increased \textrm{\acrshort{rest}}'s popularity and spread it into more application fields.
+There is for example the upcoming concept of the \textrm{Web of Things}\cite{5678452}, which aims to incorporate smart things (e.g. tagged things, sensor measurements, device controllers, etc.) into the Web through \textrm{\acrshort{rest}} interfaces.
+\textrm{\acrshort{rest}} brings advantages into the context of smart things connected to the Web, because incompatible standards and protocols were used by different manufacturers of such things and often their nature is already compatible with the \textrm{\acrshort{rest}} architectural constraints.
 
 
 \subsection{Composing Services in the Web}
-% \section{Weakening the Relevance of the Client-Server Model}
-% \textit{Dropping the Client-Server Model}\\
-% \textit{The Interweavement of Client and Server}\\
 Webpages emerged into dynamic sites on the web through the upcoming of scripting languages to control the browser and the webpage itself.
-With all their infrastructure in the background on the server they became literally applications.
-\index{Web Application}
-These Web applications (\textrm{Web Apps}) went even more responsive with the advent of asynchronous calls from the browser to the server, which allows to load data into the current webpage while the user is interacting with it.
-\index{API}
-\index{Web API}
-Those asynchronous calls are requests to services, which act as the application programming interface \textrm{API} to the \textrm{Web App} (\textrm{Web APIs}) which sits on the server.
-As a side-note, the term \textrm{Web API} not only comprises server-side interfaces but also client-sided ones (e.g. the browser), after all they are also interfaces to the Web.
-For server-side \textrm{Web APIs} this means that these services can be accessed from other entities in the Web than just browsers, which eases application to application communication.
-Basically a \textrm{Web App} can be controlled without the user interface, which is often delivered by the provider of the application.
-Imagine not going to the Google webpage anymore to make a search and crawling through the results, but you have your own application doing it for you and processing the results instantly.
-There is a trend of \textrm{Web App} providers to publish their \textrm{Web API} in order to grant easy access to it.
-This lead to an increase of the number of \textrm{Web App Mashups} in the past few years.
+With all their server-sided infrastructure in the background they became literally applications, with more or less functionality and persistance on a server.
+These \textrm{Web Applications (Web Apps)} became even more responsive with the advent of asynchronous calls from the browser to the server, which allows to load data into the current webpage while the user is interacting with it.
+Those asynchronous calls are requests to services, which act as the application programming interface to the \textrm{Web App} (\textrm{\gls{webapi}}) which sits on the server.
+As a side-note, the term \textrm{\gls{webapi}} not only comprises server-side interfaces but also client-sided ones (e.g. the browser), after all they are also interfaces to the Web.
+For server-side \textrm{\gls{webapi}s} this means that these services can be accessed from other entities in the Web than just browsers, which eases application to application communication.
+Often the model behind a \textrm{Web App} can be controlled without the \textrm{Web App} itself, depending on how fat the server-side and how thin the client-side is.
+Imagine not going to the Google webpage anymore to make a search and manually crawling through the results, but you have your own application doing it for you and processing the results instantly.
+There is a trend of \textrm{Web App} providers to publish their \textrm{\gls{webapi}} in order to grant easy access to it.
+This lead to an increasing number of \textrm{Web App \glspl{mashup}} in the past few years.
 
-\index{Mashup}
-\textrm{Mashups} combine data and functionality of more than one service in the Web in a new site.
-Simple services from different sources can be combined into more powerful ones, which can in turn again be composed and so on.
+\textrm{\glspl{mashup}} combine data and functionality of more than one service in the Web in a new site.
+Simple services from different sources can be combined into more powerful ones, which can in turn again be composed, and so on.
 These service compositions assemble data and services in a novel way which provides a new perspective.
-Ever since services were accessible in a more or less convenient way, \textrm{Mashups} have been developed as well.
-On of the first Web service \textrm{Mashups}~\cite{wwwHosuingMaps}, was invented in the same year after Google Maps came up in 2005.
+Ever since services were accessible in a more or less convenient way, \textrm{\glspl{mashup}} have been developed as well.
+One of the first \textrm{\gls{webservice} \glspl{mashup}}\cite{wwwHosuingMaps}, was invented in the same year after Google Maps came up in 2005.
 It was a webpage that displayed CraigsList's rental houses on a Google Map.
-At that time no \textrm{Web API} was available that provided easy access to these two services, but there was an advantage to be seen from everybody being able to create a \textrm{Mashup} through publicly available services.
-Such \textrm{Mashups} are often a read-only fixed wiring of different services that provide a new view on specific data.
-Some recent \textrm{Mashup} examples, taken from the \textrm{ProgrammableWeb}~\cite{wwwProgrammableWeb} collection, are:
+At that time no \textrm{\gls{webapi}} was available that provided easy access to these two services.
+But there was an added value to be observed from anybody being able to create a \textrm{\gls{mashup}} through publicly available services, because this leads to new ideas and an increase of popularity in all incorporated \textrm{\glspl{webservice}}.
+Such \textrm{\glspl{mashup}} are often a read-only fixed wiring of different services that provide a new view on specific data.
+Some recent \textrm{\gls{mashup}} examples are:
 
 \begin{itemize}
   \item \textrm{Wifi and Plugs}: MapBox, Google Docs and Import.io API's used to display where Wi-Fi and plugs are available in London.
-  \item \textrm{MapLight}: GovTrack.us and OpenSecrets API's used to combine political results with financial contributions to show how capital contributions to influence politics affect voting.
+  \item \textrm{MapLight}: GovTrack.us and OpenSecrets API's used to combine political results with financial contributions, in order to show how capital contributions to certain campaigns influence voting.
   \item \textrm{Shared Count}: Facebook, LinkedIn, Pinterest and Twitter API's used to display informations about how well spread a URL is on social media sites.
 \end{itemize}
 
-But also a number of studies ~\cite{10.1007/978-3-642-22233-7_11}\cite{4278815}\cite{Rizzotti:2010:UST:1772690.1772861}\cite{Stolee20131289} made efforts towards personalized \textrm{Mashups}, where users are capable of choosing what and how to link in order to enhance Web resources according to their needs.
-These flexible \textrm{Mashup} applications often provide methods to access user-specific functionality within remote \textrm{Web Apps}, which makes them even more user-centered and customizable.
+But also a number of studies\cite{10.1007/978-3-642-22233-7_11}\cite{4278815}\cite{Rizzotti:2010:UST:1772690.1772861}\cite{Stolee20131289} made efforts towards personalized \textrm{\glspl{mashup}}, where users are capable of choosing what and how to link in order to enhance \textrm{\glspl{webresource}} according to their needs.
+These flexible \textrm{\gls{mashup}} applications often provide methods to access user-specific functionality within third-party \textrm{Web Apps}, which makes them even more user-centered and customizable.
 
 
-\subsection{Subscribing to Web Resources}
-% FIXME TODO this needs to be fixed together with the whole chapter!
-There is another type of service in the Web which is quite the opposite to the afore mentioned approaches in terms of the data flow.
-It is the concept of push notifications on updates and it is an active research area.
-There are some manifestations of this model for browser-server communication, such as \textrm{Comet}~\cite{5631249} or \textrm{Server-Sent Events}\footnote{http://dev.w3.org/html5/eventsource/}.
-\index{Webhooks}
-\textrm{Webhooks} are a method that enables the asynchronous delivery of data whenever it gets available, compared to the need of actively requesting a service to deliver it.
-They are uniform resource identifiers (\textrm{URI}), which point to a service in the Web, which accepts the data delivered to it.
-% ~\cite{Eugster:2003:MFP:857076.857078}
-Within the publish/subscribe paradigm, such asynchronous delivery of data is referred to as events, since that's what the appearance of new data is.
-\textrm{Webhooks} are callbacks that can be placed by a \textrm{Web App} provider or a user at a remote location, informing the data proliferating site about their interest in the data.
-Both parties are services in the Web, since the \textrm{Webhook} providers accept the data delivered to their \textrm{URI} and the \textrm{Webhook} recipients offer to send the data.
-\textrm{PubSubHubbub}\footnote{http://code.google.com/p/pubsubhubbub/} an open server-to-server publish/subscribe protocol that uses webhooks for servers to address their interest in updates from other servers.
-Only through such push notifications a reactive system can truly be reactive in the sense of event-drivenness.
+\subsection{Subscribing to \glspl{webresource}}
+There is another type of service in the Web which is about the opposite of the afore mentioned approaches in terms of the data flow.
+It is the concept of push notifications on state changes and it is a recent and active research area.
+There are some manifestations of this model for browser-server communication, such as \textrm{Comet}\cite{5631249} or \textrm{Server-Sent Events}\footnote{http://dev.w3.org/html5/eventsource/}.
+\textrm{\glspl{webhook}} are a method that introduces the asynchronous delivery of data whenever it gets available, compared to the need of actively requesting a service to deliver it.
+\textrm{\glspl{webhook}} are \textrm{\acrshort{uri}s}, which point to a service in the Web, that accepts the data delivered to it.
+Within the publish/subscribe paradigm\cite{Eugster:2003:MFP:857076.857078}, such asynchronous delivery of data is referred to as events, since that's what the appearance of new data is.
+\textrm{\glspl{webhook}} are callbacks that can be placed by a \textrm{\gls{webservice}} provider at a remote \textrm{\gls{webapi}}, informing this distinct event delivering service about the interest in the promised events.
+Both parties are services in the Web, since the \textrm{\gls{webhook}} providers accept the data delivered to their \textrm{\acrshort{uri}} and the \textrm{\gls{webhook}} receiver offer to send the data.
+\textrm{PubSubHubbub}\footnote{http://code.google.com/p/pubsubhubbub/} is an open server-to-server publish/subscribe protocol that uses \textrm{\glspl{webhook}} for servers to address their interest in updates from other servers.
+Only through such push notifications a reactive system can be instantly reactive through real-time event detection.
 
 
 \subsection{Towards Simple Access and Communication}
-\index{JSON}
-With JavaScript's success as browser scripting language and recently also as server-side programming language, JavaScript Object Notification (\textrm{JSON}) as an alternative to \textrm{XML} has become popular for data representation throughout the Web.
+With JavaScript's success as browser scripting language and recently also as server-side programming language, \textrm{\acrlong{json} (\acrshort{json})} as an alternative to \textrm{\acrshort{xml}} has become popular for data representation throughout the Web.
 It is also because of its human-readable format and often simple parsing into data structures of existing programming languages.
-There is a notable trend towards \textrm{RESTful} services in the Web that offer \textrm{JSON} communication.
-\index{Web Programmability}
+There is a notable trend towards \textrm{\acrshort{rest}ful} services in the Web that offer \textrm{\acrshort{json}} communication.
 They benefit from simple but powerful interfaces and easy to debug human-readable communication, which eases integration into other applications, along with the reduced communication volume.
-Together with client- and server-side \textrm{Web APIs} the Web becomes ever more programmable.
+Together with client- and server-side \textrm{\gls{webapi}s} the Web becomes ever more programmable.
 
 
 
-\section{Reactivity through Event-Condition-Action Rules}
-\index{ECA}
+\section{Reactivity through \acrlong{eca} Rules}
 In this chapter we have so far shown research in different areas that lead towards a programmable Web.
 As a result of this research, it is getting easier to compose and orchestrate services in the Web, but reactivity needs to be programmed specifically by experts and general approaches are only available in specific domains.
-Several studies~\cite{2007_AlferesR3}\cite{2005-Bry_etal-XChange.pdf}\cite{10.1007-11896548_63}\cite{papamarkos2004rdftl}\cite{2012-Paschke_etal-ReactionRuleML.pdf} have been made on reactivity.
-They point out Event-Conditon-Action (\textrm{ECA}) rules as the most adequate way to impose reactivity on a system.
-\index{EDA}
-As the name already suggests it bases on an event-driven architecture (\textrm{EDA}) and \textrm{ECA} rules consist of three parts:
+Several studies\cite{2007_AlferesR3}\cite{2005-Bry_etal-XChange.pdf}\cite{10.1007-11896548_63}\cite{papamarkos2004rdftl}\cite{2012-Paschke_etal-ReactionRuleML.pdf} have been made on reactivity.
+They point out \textrm{\acrlong{eca} (\acrshort{eca})} rules as the most adequate way to impose reactivity on a system.
+As the name already suggests it bases on an \textrm{\acrlong{eda} (\acrshort{eda})} and \textrm{\acrshort{eca}} rules consist of three parts:
 \begin{itemize}
   \item Event: An event identifier, that enables detection of a triggered event
   \item Condition: Expressions to be evaluated to determine whether an action is triggered
@@ -174,51 +155,42 @@ As the name already suggests it bases on an event-driven architecture (\textrm{E
 Several different rule languages have been developed for different domains.
 We will give a brief overview over the research done that relates to our goal, reactivity in the Web.
 During our research, apart from identifying the key properties of different rule languages, we analyzed them with respect to a certain use case, in order to determine their applicability for our research goal.
-The use case's ECA rule is:
+The use case's \textrm{\acrshort{eca}} rule is:
 \begin{itemize}
-  \item Event: Receipt of an Email% \footnote{Refer to Appendix \ref{lst:JSONEvent} for the event expressed in JSON.}
+  \item Event: Receipt of an Email
   \item Condition: Check for a certain sender
-  \item Action: Store it remotely via a Web API
+  \item Action: Store it remotely via a \gls{webapi}
 \end{itemize}
 We also tried to get access to existing rule engines for each rule language, since we aim to build our model as well as our own reference implementation on top of existing work.
 
 
 \subsection{Rule Languages \& Rule Engines}
-\index{Rule Engine}
-\index{Rule Language}
-\index{RDF}
-\index{RDFTL}
-The Resource Description Framework (\textrm{RDF}) is a collection of specifications to model informations in the \textrm{Semantic Web}~\cite{berners2001semantic}.
-Papamarkos et al. (2004) published an \textrm{ECA} language for \textrm{RDF}: \textrm{RDF Triggering Language} (\textrm{RDFTL}).
-It was designed to react on insert and delete events within \textrm{RDF} repositories and for an action notify users and propagate the changes through related resources. %\footnote{Refer to Appendix \ref{lst:MailRDF} for a \textrm{RDFTL} rule conforming our use case}.
-\textrm{RDFTL} bases on \textrm{RDF} resources which need to run engines.
+The \textrm{\acrlong{rdf} (\acrshort{rdf})} is a collection of specifications to model informations in the \textrm{\gls{semanticweb}}.
+Papamarkos et al. (2004) published an \textrm{\acrshort{eca}} language for \textrm{\acrshort{rdf}}: \textrm{\acrlong{rdftl} (\acrshort{rdftl})}.
+It was designed to react on insert and delete events within \textrm{\acrshort{rdf}} repositories and for an action notify users and propagate the changes through related resources. %\footnote{Refer to Appendix \ref{lst:MailRDF} for a \textrm{\acrshort{rdftl}} rule conforming our use case}.
+\textrm{\acrshort{rdftl}} bases on \textrm{\acrshort{rdf}} resources which need to run engines in order to react on the rules.
 These engines retrieve events, detect changes and communicate them as events to other engines and actions are executed on local repositories.
-Through distributed engines, \textrm{RDF} resources can be made reactive.
+Through distributed engines, \textrm{\acrshort{rdf}} resources can be made reactive.
 We envision an engine that orchestrates the Web, rather than relying on other Web sites to incorporate our model.
-But still their research provides important insights on reactivity through \textrm{ECA} rules.
+But still their research provides important insights on reactivity through \textrm{\acrshort{eca}} rules.
 
-\index{XChange}
-The rule language \textrm{XChange}~\cite{2005-Patranjan-TLE.pdf} emerged from the \textrm{Reasoning on the Web with Rules and Semantics} (\textrm{REWERSE}) project~\cite{wwwRewerse}, which took place from 2004 to 2008. 
-It was designed to track changes in dynamic web resources and add reactive behaviour in a way that such changes influence other dynamic resources.
-\textrm{XChange} incorporates the vision of distributed, event exchanging, rule engines.
+The rule language \textrm{XChange}\cite{2005-Patranjan-TLE.pdf} emerged from the \textrm{\acrlong{rewerse} (\acrshort{rewerse})} project\cite{wwwRewerse}, which took place from 2004 to 2008. 
+It was designed to track changes in dynamic \glspl{webresource} and add reactive behaviour in a way that such changes influence other dynamic resources.
+\textrm{XChange} incorporates the vision of distributed, event exchanging rule engines.
 Those rule engines execute actions on local data or issue new events.
-The local-only actions oppose our vision to orchestrate heterogeneous Web resources through reactive behaviour.
-Eventually a dedicated \textrm{XChange} rule engine could be realized, which is enhanced to translate \textrm{XChange} actions into communication with remote Web resources.
+The local-only actions oppose our vision to orchestrate heterogeneous \glspl{webresource} through reactive behaviour, so does the \textrm{\acrshort{rdftl}}.
+Eventually a dedicated \textrm{XChange} rule engine could be realized, which is enhanced to translate \textrm{XChange} actions into communication with remote \glspl{webresource}.
 The use case applicability study was promising but access to a reference implementation of an engine, in order to enhance it with our vision, could not be gained. %\footnote{Refer to Appendix \ref{lst:MailXChange} for what an adoption of \textrm{XChange} to our vision would look}
 Still the thorough research done with the language \textrm{XChange} holds valuable concepts, especially in terms of temporal event composition.
 
-\index{JSON Rules}
-\index{DOM}
-\textrm{JSON Rules}~\cite{2008-Giurca_Pascalau-JSON_Rules.pdf} was introduced 2008 as a language to react on specific \textrm{Document Object Model} (\textrm{DOM}) tree states of a webpage and as reactive behaviour control the browser and also \textrm{DOM} again.
+\textrm{\acrshort{json} Rules}\cite{2008-Giurca_Pascalau-JSON_Rules.pdf} was introduced 2008 as a language to react on specific \textrm{\acrlong{dom} (\acrshort{dom})} tree states of a webpage and as reactive behaviour control the browser and also \textrm{\acrshort{dom}} again.
 The incorporation of script function calls into the action part of the language allows the abstraction of eventually complex action behaviour.
 This feature influenced our concept as it allows for different levels of complexity to be offered as the reactive system is growing.
-\textrm{JSON Rules} is bound to \textrm{DOM} tree events and actions, where we aim to react on any events happening in Web Resources and also execute actions on them.
+\textrm{\acrshort{json} Rules} is bound to \textrm{\acrshort{dom}} tree events and actions, where we aim to react on any events happening in \glspl{webresource} and also execute actions on them.
 
-\index{RuleML}
-The \textrm{Rule Markup Language} (\textrm{RuleML})~\cite{2006-Boley-RuleML.pdf} is a language written in \textrm{XML} and aims to standardize many different types of rules.
-\index{Reaction RuleML}
-\textrm{Reaction RuleML}~\cite{2012-Paschke_etal-ReactionRuleML.pdf} is an enhancement of the existing standard by reactive rules.
-\textrm{Reaction RuleML} subsumes:
+The \textrm{\acrlong{ruleml} (\acrshort{ruleml})}\cite{2006-Boley-RuleML.pdf} is a language written in \textrm{\acrshort{xml}} and aims to standardize many different types of rules.
+\textrm{Reaction \acrshort{ruleml}}\cite{2012-Paschke_etal-ReactionRuleML.pdf} is an enhancement of the existing standard by reactive rules.
+\textrm{Reaction \acrshort{ruleml}} subsumes:
 \begin{itemize}
   \item \textrm{\acrlong{cep} (\acrshort{cep})}
   \item \textrm{\acrlong{kr} (\acrshort{kr})} calculi
@@ -226,30 +198,28 @@ The \textrm{Rule Markup Language} (\textrm{RuleML})~\cite{2006-Boley-RuleML.pdf}
   \item Production (\textrm{CA}) rules
   \item Trigger (\textrm{EA}) rules
 \end{itemize}
-\textrm{Reaction RuleML} represents thorough research for a language to describe virtually any type of reactivity.
-Together with the expression in \textrm{XML} it doesn't score with readability, but provides a way to define a multitude of rule types and the interchangeability of them between different sites in the Web.
-Since our vision does not require interchangeable rules, we chose an internal JSON representation for our rules to have human-readability, simple parsing and efficient storage.
-A system that relies on \textrm{RuleML} is \textrm{Rule Responder}~\cite{2007-Paschke_etal-RuleResponder.pdf}.
-\textrm{Rule Responder} connects different types of heterogeneous rule engines together over the \textrm{Mule} open-source \textrm{Enterprise Service Bus} (\textrm{ESB}) which acts as a communication middleware to exchange rules expressed in \textrm{RuleML}.
+\textrm{Reaction \acrshort{ruleml}} represents thorough research for a language to describe virtually any type of reactivity.
+Together with the expression in \textrm{\acrshort{xml}} it doesn't score with readability, but provides a way to define a multitude of rule types and the interchangeability of them between different sites in the Web.
+Since our vision does not require interchangeable rules, we chose an internal \textrm{\acrshort{json}} representation, inspired by \textrm{\acrshort{json} Rules}, for our rules to have certain properties, such as human-readability, simple parsing and efficient storage.
+A notable system that relies on \textrm{\acrshort{ruleml}} is \textrm{Rule Responder}\cite{2007-Paschke_etal-RuleResponder.pdf}.
+\textrm{Rule Responder} connects different types of heterogeneous rule engines together over the \textrm{Mule} open-source \textrm{\acrlong{esb} (\acrshort{esb})} which acts as a communication middleware to exchange rules expressed in \textrm{\acrshort{ruleml}}.
 
-
-\index{KRL}
-\index{KRE}
-A recent research outcome (Windley, 2011) was the \textrm{Kinetics Rule Language} (\textrm{KRL})~\cite{bookTheLiveWeb} together with the \textrm{Kinetic Rules Engine} (\textrm{KRE}).
+A recent research outcome (Windley, 2011) is the \textrm{\acrlong{krl} (\acrshort{krl})}\cite{bookTheLiveWeb} together with the \textrm{\acrlong{kre} (\acrshort{kre})}.
 It was invented to impose reactivity to the Web and incorporates many different event origins and action resources.
 The language is based on declarative syntax, enriched with imperative elements.
-A handy feature are the ways to activate webpages, which bridges the gap between the user's browser and the centralized \textrm{KRE}.
-Either a user can install a browser plugin which will communicate with the \textrm{KRE}, or a webpage provider can include a library in order to get events from accesses to the webpage.
-Through this events can be raised from the browser and actions can execute in it.
-The \textrm{KRL} fits very well into our concept and only a few reasons kept us from realzing our reference implementation on top of the \textrm{KRE}, such as:
+A handy feature are the ways to activate webpages, which bridges the gap between the user's browser and the centralized \textrm{\acrshort{kre}}.
+Either a user can install a browser plugin which will communicate with the \textrm{\acrshort{kre}}, or a webpage provider can include a library in order to get events from accesses to the webpage.
+Through this, events can be raised from the browser and actions can also execute in it.
+The \textrm{\acrshort{krl}} fits very well into our concept and only a few reasons kept us from realzing our reference implementation on top of the \textrm{\acrshort{kre}}, such as:
 \begin{itemize}
   \item complexity required to maintain states with a declarative syntax 
-  \item system footprint of the \textrm{KRE}
-  \item \textrm{Perl}, a procedural programming language, as base of the \textrm{KRE}
+  \item system footprint of the \textrm{\acrshort{kre}}
+  \item \textrm{Perl}, a procedural programming language, as base of the \textrm{\acrshort{kre}}
 \end{itemize}
-The concept of the \textrm{KRL} is promising in terms of orchestrating the Web through reactivity.
-But we decided to implement a light weighted reference system, using an event-driven programming language that is laid out for an event-driven architecture. 
- % (KRL) is an event-condition-action rule language with an embedded complex event expression language. TODO REALLY?
+The concept of the \textrm{\acrshort{krl}} is promising in terms of orchestrating the Web through reactivity.
+But we decided to implement a light weighted reference system, using an event-driven programming language that is laid out for an event-driven architecture.
+Another important key property of our envisioned conceptual model, which diverges from the \textrm{\acrshort{kre}} architcture, is the abstraction of state maintenance into action dispatching modules.
+ % (\acrshort{krl}) is an event-condition-action rule language with an embedded complex event expression language. TODO REALLY?
 % Only laid out for single actions? single events? no event composition? time comparison between different events?
 
 Table \ref{tab:rulelanguages} gives an overview of the key properties of existing rule languages and their key properties for our research:
@@ -260,8 +230,8 @@ Table \ref{tab:rulelanguages} gives an overview of the key properties of existin
   \item \textrm{Accessible Engine}: Determines whether a reference implementation of an engine was accessible.
   \item \textrm{Applicability to our concept}: Names the main difference to our envisioned concept.
 \end{itemize}
-Rule languages that support a distributed architecture require engines to be distributed on sites that should be reactive.
-This is not service-oriented and does not regard the Web's heterogeneous nature and the need to access such services.
+Rule languages that support a distributed architecture require engines to be distributed on sites that are thought to be reactive.
+This is not service-oriented concerning third-party services and does not regard the Web's heterogeneous nature and the need to access such services.
 
 \afterpage{%
 % \begin{table}[ht]
@@ -274,13 +244,13 @@ This is not service-oriented and does not regard the Web's heterogeneous nature 
       \hline
       \rowcolor{LightSteelBlue}
       \textbf{Language} & \textbf{Event Origin} & \textbf{Distributed} & \textbf{Action Resource} & \textbf{Accessible Engine} & \textbf{Applicability\newline  to our concept} \\ \hline
-      \textbf{RDFTL} & RDF Repository\newline Changes & Yes & (Local) RDF Repository & - & Only Web sites with engines\newline are reactive \\ \hline
-      \textbf{XChange} & Web Resources & Yes & Local Resources & - & Actions in remote\newline Web Resources missing \\ \hline
-      \textbf{JSON Rules} & DOM Events & No & Browser / DOM & - & Only Browser / DOM Events \\ \hline
-      \textbf{RuleML} & Web Resources & Yes & Local Resource & (OO) jDrew, Prova,\newline Rule Responder & Complex Syntax \\ \hline
-      \textbf{KRL} & Web Resources & No & Local \& Remote Web\newline Resources & KRE & User-specific \textrm{Web App}\newline functionality missing \\ \hline % FIXME Really user-specific missing?
+      \textbf{\acrshort{rdftl}} & \acrshort{rdf} Repository\newline Changes & Yes & (Local) \acrshort{rdf} Repository & - & Only Web sites with engines\newline are reactive \\ \hline
+      \textbf{XChange} & \glspl{webresource} & Yes & Local Resources & - & Actions in remote\newline \glspl{webresource} missing \\ \hline
+      \textbf{\acrshort{json} Rules} & \acrshort{dom} Events & No & Browser / \acrshort{dom} & - & Only Browser / \acrshort{dom} Events \\ \hline
+      \textbf{\acrshort{ruleml}} & \glspl{webresource} & Yes & Local Resource & (OO) jDrew, Prova,\newline Rule Responder & Complex Syntax \\ \hline
+      \textbf{\acrshort{krl}} & \glspl{webresource} & No & Local \& Remote Web\newline Resources & \acrshort{kre} & User-specific \textrm{Web App}\newline functionality missing \\ \hline % FIXME Really user-specific missing?
     \end{tabular}
-    \captionof{table}{Key Properties of existing Rule Languages with respect to our Concept}\label{tab:rulelanguages}%
+    \captionof{table}{Key Properties of existing Rule Languages with respect to our Conceptual Model}\label{tab:rulelanguages}%
   \end{landscape}
   \clearpage%
 % \end{table}
@@ -288,21 +258,18 @@ This is not service-oriented and does not regard the Web's heterogeneous nature 
 
 Other examined Rule Engines were the \textrm{Object-Oriented Java Deductive Reasoning Engine for the Web} (\textrm{OO jDrew}), \textrm{Prova}, and \textrm{Drools Fusion}.
 They are all implemented in \textrm{Java} and have their own rules syntax which is more or less closely related to \textrm{Java}, with inline \textrm{Java} code.
-Some of them have a heavy system footprint because they base on existing frameworks, such as \textrm{Drools Fusion} which requires a Java graphical user interface or communication middlewares.
-Our decision not to use any of these existing approaches for a reference implementation was, because all of them only provide limited support for our concept or have a heavy system footprint, caused by the communication layer such as the {JBoss ESB}.
-We envision a scalable event-driven system from its deepest roots that allows the orchestration of heterogeneous Web resources.
+Some of them have a heavy system footprint because they base on communication middlewares or existing frameworks, such as \textrm{Drools Fusion} which requires a Java graphical user interface.
+Our decision not to use any of these existing approaches for a reference implementation was, because all of the examined research only provides limited support for our concept or has a heavy system footprint, caused by the communication layer such as the \textrm{JBoss \acrshort{esb}}.
+We envision a scalable system, which is event-driven from the application layer, and allows the orchestration of heterogeneous \glspl{webresource}.
 These resources are already available and accessible and we do not need to alter them in order to impose reactivity to the Web.
-Such a system does not require a messaging middleware because the Web itself is the communication channel to receive events and execute actions.
+Such a system does not require a messaging middleware because the Web itself acts as the communication channel to receive events and dispatch actions.
 
 
 \subsection{Event Pattern Detection}
-An important research area in event-driven architectures is the event composition, or \textrm{\acrlong{cep} (\acrshort{cep})}.
+An important research area in \acrlong{eda}s is the event composition, or \textrm{\acrlong{cep} (\acrshort{cep})}.
 It is the research for methods to get events into relations and also to identify patterns within different streams of data or events.
-\textrm{\acrshort{cep}} turns events recursively into higher-order events and receives a great deal of attention~\cite{akdere2008plan}\cite{anicic2010arlfcepar}\cite{Gehani92compositeevent}\cite{2006Muehl}\cite{2004_1265833}\cite{Rafatirad:2009:ECO:1631024.1631038}.
+\textrm{\acrshort{cep}} turns events recursively into higher-order events and receives a great deal of attention\cite{akdere2008plan}\cite{anicic2010arlfcepar}\cite{Gehani92compositeevent}\cite{2006Muehl}\cite{2004_1265833}\cite{Rafatirad:2009:ECO:1631024.1631038}.
 It allows new ways to process large amounts of data and react on detected patterns in nearly real-time.
 We envision a clear distinction between a \textrm{\acrshort{cep}} inference engine and an \textrm{\acrshort{eca}} rules engine.
 The \textrm{\acrshort{cep}} inference engine composes events into higher-order events, while the \textrm{\acrshort{eca}} rules engine dispatches actions according to predefined rules.
 
-
-
-% FIXME USE WEB RESOURCE RATHER THAN SERVICES IN THE WEB

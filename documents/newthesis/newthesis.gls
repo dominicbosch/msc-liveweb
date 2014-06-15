@@ -1,16 +1,32 @@
 \glossarysection[\glossarytoctitle]{\glossarytitle}\glossarypreamble
 \begin{theglossary}\glossaryheader
 \glsgroupheading{M}\relax \glsresetentrylist %
-\glossaryentryfield{mashup}{\glsnamefont{Mashup}}{TODO}{\relax }{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{3}}}\glsgroupskip
+\glossaryentryfield{mashup}{\glsnamefont{Mashup}}{\textrm {Web Applications} that weave two or more different \textrm {Web APIs} together to provide a new view on data}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{4}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{6}}}\glsgroupskip
+\glsgroupheading{S}\relax \glsresetentrylist %
+\glossaryentryfield{semanticweb}{\glsnamefont{Semantic Web}}{Tim Berners-Lee's vision of the machine-readable Web through standard data formats and semantic metadata descriptions on top of the resources via \textrm {RDF} which turn the Web into a structured data collection}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{1}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{5}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{8}}}\glsgroupskip
 \glsgroupheading{W}\relax \glsresetentrylist %
-\glossaryentryfield{webofthings}{\glsnamefont{Web of Things}}{TODO}{\relax }{\glossaryentrynumbers{\relax 
+\glossaryentryfield{webapi}{\glsnamefont{Web API}}{An application Programming Interface to either a \textrm {Web service} or the browser, meant for application to application communication}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{4\delimR 7}}}%
+\glossaryentryfield{webofthings}{\glsnamefont{Web of Things}}{An evolution of the \textrm {Internet of Things}, which describes the integration of smart things (e.g. sensors, embedded devices or digitally enhanced objects) into the \textrm {Internet}. \textrm {Web of Things} is the adoption of the \textrm {REST} architectural style to the smart things in order to enable uniform access to these loosley coupled entities}{\relax }{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{1}}}%
-\glossaryentryfield{webresource}{\glsnamefont{Web Resource}}{A Web Resource is anything in the Web which can be identified. Resources and their semantic properties are described through RDF in the Semantic Web}{\relax }{\glossaryentrynumbers{\relax 
+\glossaryentryfield{webresource}{\glsnamefont{Web Resource}}{Anything in the Web which can be identified, addressed and handled. Identification and addressing is often done over \textrm {URIs}. Resources and their semantic properties are described using \textrm {RDF} in the \textrm {Semantic Web}}{\relax }{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{iii}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{11\delimN 12}}}%
-\glossaryentryfield{webservice}{\glsnamefont{Web Service}}{Interface for communication between applications over a network}{\relax }{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{3}}}%
-\glossaryentryfield{www}{\glsnamefont{World Wide Web}}{TODO}{\relax }{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{3}}}%
+		\setentrycounter[]{page}\glsnumberformat{1\delimR 3}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{5\delimN 6}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{8\delimR 10}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{12\delimN 13}}}%
+\glossaryentryfield{webService}{\glsnamefont{Web Service}}{A collection of \textrm {SOAP} related \textrm {Web service} (note the lower-case word \textrm {service}) standards which are widley adopted and developed in the industry. Also called \textrm {"WS-*" Web Services} or the \textrm {Big Web Services}}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{3\delimN 4}}}%
+\glossaryentryfield{webservice}{\glsnamefont{Web service}}{An interface for communication between applications over a network. They can provide access to and control over \textrm {Web Resources}. \textrm {Web services} are also called \textrm {services on the Web} or just \textrm {services}}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{3}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{5\delimN 6}}}%
+\glossaryentryfield{webhook}{\glsnamefont{Webhook}}{A server-side \textrm {Web API} which accepts a \textrm {URI} that is used as a callback to drop events to another non-familiar server}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{6\delimN 7}}}%
+\glossaryentryfield{www}{\glsnamefont{World Wide Web}}{Tim Berners-Lee's vision of interlinked hypertext documents which are accessed over the Internet via browser and allow the navigation through a global information universe}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{3\delimN 4}}}%
 \end{theglossary}\glossarypostamble
