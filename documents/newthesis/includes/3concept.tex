@@ -13,13 +13,42 @@
 % why are we now suddenly responsive? we loosened up certain things
 % point out where events happen, triggered and received
 
-In the previous chapter we have shown that reactivity and the evolution of \textrm{\glspl{webresource}} as data and functionality providers have received a great deal of attention.
-Our goal is to combine both research fields in order to impose reactivity to our information space, the \textrm{\glspl{webresource}}. 
+The challenges and opportunities arising with the growth of the Web in terms of volume and complexity inspired our research towards the reactive Web.
+Therefore our starting point were the studies of related work in the context of reactivity on the Web, event composition and programmability of the Web.
+In the last chapter, we pointed out that they received a lot of attention and provide powerful tools to orchestrate the rapidly growing Web.
+By combining existing research in these fields we developped a conceptual model, which allows to impose smart reactivity to any information space.
+Even though our initial information space was thought to be \textrm{\glspl{webresource}}, we believe in the applicability of our model to any information system whose information space can be accessed and altered over interfaces, i.e. services.
+Thus we introduce our conceptual model for reactive information systems and their services in this chapter.
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.7\textwidth]{figures/IS_InformationSpace}
+  \caption{Reactivity imposed on Information Systems and their Information Space over Services}
+  \label{fig:IS_InformationSpace}
+\end{figure}
+
+Data changes on an information system can be detected and imposed from the outside, if proper interfaces exist.
+We model the detection of data changes as events, and the imposing of such changes as actions.
+ can be modeled as events to be detected but also as actions that are executed on the information system.
+Therefore by introducing an event-based model that detects such events and reacts to them by executing actions 
+As shown in Figure \ref{fig:IS_InformationSpace}
+. Data changes are detected as events and they are also the consequence of actions executed over services.
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.9\textwidth]{figures/Standard-Model-Template}
+  \caption{Conceptual Model for Reactive Information Systems and their Services}
+  \label{fig:Standard-Model-Template}
+\end{figure}
 
 \section{From Real Events to Events in the Web \& their Composition}
 Real events are bound to a spatial location and a point on the time axis.
-An earthquake for example always has an epicentre and an occurrence time.
 
+Wherever an information system is not capable to provide events over services, we can use all the accessible data and detect changes in it, and as a result model them as events in order to feed them into our model.
+
+
+Complex event detection rules \cite{akdere2008plan}\cite{2004_1265833}
+riate actions.
+The \textrm{\acrshort{cep}} inference engine composes events into higher-order events, while the \textrm{\acrshort{eca}} rules engine dispatches actions according to predefined rules.
 % CEP
 %CEP has received a lot of attention
 
@@ -31,13 +60,13 @@ An earthquake for example always has an epicentre and an occurrence time.
 
 
  % conditions as web queries can be solved through event composition
+% TODO Condition evaluation on other resources? i.e. make a request to a remote site and evaluate it? -> also achievable through composite events
 % show rule engines, alsoo CEP, describe event composition through templates and why we don't do it
 
 % A future improvement of this could be to adopt Complex Event Processing (CEP).
 % This would mean that several events could be stored in a rule and be evaluated in terms of time constraints.
 % Through this more complex events can be created as a result of several atomic events which would lead into semantically more complex events.
 
-% TODO Condition evaluation on other resources? i.e. make a request to a remote site and evaluate it? -> also achievable through composite events
 
 % \index{CEP}
 % \index{Composite Events}
@@ -46,35 +75,35 @@ An earthquake for example always has an epicentre and an occurrence time.
 
 
 
-Different points on earth's surface would feel the earthquake, which originates from the same epicentre, at a different point in time with a different intensity.
-A Web event model of an earthquake would consist of a large number of identical \textrm{\textbf{ground-shake}} events that occur at different points in time and places.
-Therefore they would hold different spatial location informations and intensities.
-These events can be thought of as emitted into the Web by a seismometer sitting at the corresponding location.
-\begin{figure}[!ht]
-  \centering
-  \includegraphics[width=0.6\textwidth]{figures/Earthquake}
-  \caption{Web Event Model of an Earthquake}
-  \label{fig:Earthquake}
-\end{figure}
-Within the Web, events lose their tight coupling to locations and retain only a time component.
-The event instances keep this information as descriptive metadata.
-A reactive system such as we envision it, could detect these \textrm{\textbf{ground-shake}} events and react on behalf of each one of them.
-Because of the Web's latency these events do most certainly not arrive at systems within the Web in the original order, in which they were triggered.
-They also do most likely not arrive in the exact same order for all systems.
-This leaves us with time as the only important factor left, to distinguish events from each other in the first place.
-To get an earthquake event out of all these ground shaking informations floating through the Web, somebody would need a reactive system that detects these events and assembles them into one earthquake event, together with a computed epicentre and magnitude.
-Such a system (we call it \textrm{\textbf{earthquake-tracker}}) would own an earthquake model that allows it to decide whether a \textrm{\textbf{ground-shake}} event belongs to one physical earthquake or to another one, depending on its spatial location information and the intensity at that point in time.
-It could then emit a more complex \textrm{\textbf{earthquake}} event (with epicentre and magnitude) that allows other systems to interpret this physical event and react on behalf of it.
+% Different points on earth's surface would feel the earthquake, which originates from the same epicentre, at a different point in time with a different intensity.
+% A Web event model of an earthquake would consist of a large number of identical \textrm{\textbf{ground-shake}} events that occur at different points in time and places.
+% Therefore they would hold different spatial location informations and intensities.
+% These events can be thought of as emitted into the Web by a seismometer sitting at the corresponding location.
+% \begin{figure}[!ht]
+%   \centering
+%   \includegraphics[width=0.6\textwidth]{figures/Earthquake}
+%   \caption{Web Event Model of an Earthquake}
+%   \label{fig:Earthquake}
+% \end{figure}
+% Within the Web, events lose their tight coupling to locations and retain only a time component.
+% The event instances keep this information as descriptive metadata.
+% A reactive system such as we envision it, could detect these \textrm{\textbf{ground-shake}} events and react on behalf of each one of them.
+% Because of the Web's latency these events do most certainly not arrive at systems within the Web in the original order, in which they were triggered.
+% They also do most likely not arrive in the exact same order for all systems.
+% This leaves us with time as the only important factor left, to distinguish events from each other in the first place.
+% To get an earthquake event out of all these ground shaking informations floating through the Web, somebody would need a reactive system that detects these events and assembles them into one earthquake event, together with a computed epicentre and magnitude.
+% Such a system (we call it \textrm{\textbf{earthquake-tracker}}) would own an earthquake model that allows it to decide whether a \textrm{\textbf{ground-shake}} event belongs to one physical earthquake or to another one, depending on its spatial location information and the intensity at that point in time.
+% It could then emit a more complex \textrm{\textbf{earthquake}} event (with epicentre and magnitude) that allows other systems to interpret this physical event and react on behalf of it.
 
-Let's take another system that reacts on a physical earthquake.
-It is now left with a multitude of different options on how to react.
-It could only react on the \textrm{\textbf{earthquake}} event which is coming from the system above (\textrm{\textbf{earthquake-tracker}}) that applies its earthquake model to the incoming \textrm{\textbf{ground-shake}} events.
-But how long will it take for this system to deploy its \textrm{\textbf{earthquake}} event?
-Eventually it waits for one round-trip of a seismic wave around the world, which takes approximately half an hour.
-What if it waits two or three round-trip times in order to collect more accurate data?
-And what if our new system wants to react as fast as possible in order to warn people all around the world.
-It would then need to react on a small subset of the \textrm{\textbf{ground-shake}} events in order to quickly identify a real earthquake and take measurements, e.g. immediately send out text messages to people, or to deploy yet another ( this time \textrm{\textbf{earthquake-alert}}) event into the Web's information space.
-This relatively simple example discloses the complex nature of event-driven systems, but also their high flexibility and fine grained tuning possibilities.
+% Let's take another system that reacts on a physical earthquake.
+% It is now left with a multitude of different options on how to react.
+% It could only react on the \textrm{\textbf{earthquake}} event which is coming from the system above (\textrm{\textbf{earthquake-tracker}}) that applies its earthquake model to the incoming \textrm{\textbf{ground-shake}} events.
+% But how long will it take for this system to deploy its \textrm{\textbf{earthquake}} event?
+% Eventually it waits for one round-trip of a seismic wave around the world, which takes approximately half an hour.
+% What if it waits two or three round-trip times in order to collect more accurate data?
+% And what if our new system wants to react as fast as possible in order to warn people all around the world.
+% It would then need to react on a small subset of the \textrm{\textbf{ground-shake}} events in order to quickly identify a real earthquake and take measurements, e.g. immediately send out text messages to people, or to deploy yet another ( this time \textrm{\textbf{earthquake-alert}}) event into the Web's information space.
+% This relatively simple example discloses the complex nature of event-driven systems, but also their high flexibility and fine grained tuning possibilities.
 
 
 
@@ -131,12 +160,18 @@ These events and actions can have a solely virtual nature or, in the case of dat
 A virtual nature can be anything from a static webpage to offered services, such as a detected change on a webpage can become an event as well as a service answer is interpreted as such for example a new mail arriving.
 A physical nature for events could for example be measurements from a rain detector, an action could be a window shutting automatically.
 
-\begin{figure}[!ht]
-  \centering
-  \includegraphics[width=0.8\textwidth]{figures/InformationSpace}
-  \caption{The Internet as Information Space}
-  \label{fig:InformationSpace}
-\end{figure}
+% \begin{figure}[!ht]
+%   \centering
+%   \includegraphics[width=0.8\textwidth]{figures/InformationSpace}
+%   \caption{The Internet as Information Space}
+%   \label{fig:InformationSpace}
+% \end{figure}
+% \begin{figure}[!ht]
+%   \centering
+%   \includegraphics[width=0.8\textwidth]{figures/InformationSpace_Merge}
+%   \caption{The Internet as Information Space}
+%   \label{fig:InformationSpace_Merge}
+% \end{figure}
 There are different categories of events and also different ways how they can get into the Web:
 
 % We have seen in the related work chapter that there is a growing number of Web APIs which become accessible.
@@ -215,13 +250,6 @@ This does only add reactivity to these systems and not to the Web per se.
 
 Such systems are merely event sinks which add fairly any value to the Web, except for the individual users and the system itself.
 
-% FIXME add Event Trigger to conceptual model
-\begin{figure}[!ht]
-  \centering
-  \includegraphics[width=0.9\textwidth]{figures/Standard-Model-Template}
-  \caption{Conceptual Model for Reactive Information Systems and their Services}
-  \label{fig:Standard-Model-Template}
-\end{figure}
 
 
 

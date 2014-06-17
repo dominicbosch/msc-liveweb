@@ -18,8 +18,7 @@
 		\setentrycounter[]{page}\glsnumberformat{iii}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{1\delimR 3}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{5\delimN 6}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{8\delimR 10}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{12\delimN 13}}}%
+		\setentrycounter[]{page}\glsnumberformat{8\delimR 13}}}%
 \glossaryentryfield{webService}{\glsnamefont{Web Service}}{A collection of \textrm {SOAP} related \textrm {Web service} (note the lower-case word \textrm {service}) standards which are widley adopted and developed in the industry. Also called \textrm {"WS-*" Web Services} or the \textrm {Big Web Services}}{\relax }{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{3\delimN 4}}}%
 \glossaryentryfield{webservice}{\glsnamefont{Web service}}{An interface for communication between applications over a network. They can provide access to and control over \textrm {Web Resources}. \textrm {Web services} are also called \textrm {services on the Web} or just \textrm {services}}{\relax }{\glossaryentrynumbers{\relax 
