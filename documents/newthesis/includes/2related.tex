@@ -268,9 +268,9 @@ Such a system does not require a messaging middleware because the Web itself act
 \subsection{Event Pattern Detection}
 An important research area in \textrm{\acrlong{eda}s} is in the field of \textrm{\acrlong{cep} (\acrshort{cep})}\cite{anicic2010arlfcepar} and deals with event composition, also called \textrm{\acrlong{ced} (\acrshort{ced})}\cite{akdere2008plan}\cite{2004_1265833}.
 It is the research for methods to detect predefined event relations and also temporal patterns, over different streams of data or events.
-This topic has already received a lot of attention in the context of active databases\cite{Gehani92compositeevent}\cite{Zimmer99onthe} and was picked up again in the context of \textrm{\acrlong{eda}s}.
+This topic has already received a lot of attention in the context of active databases\cite{Adaikkalavan2007}\cite{Gehani92compositeevent}\cite{Zimmer99onthe} and was picked up again in the context of \textrm{\acrlong{eda}s}.
 With \textrm{\acrshort{ced}} atomic and composite events are successively aggregated into higher-order events.
 The event-driven architecture allows the processing of large amounts of data and trigger detections in nearly real-time.
-In our conceptual model we envision a \textrm{\acrshort{ced}} engine that allows users to install rules, which detect complex event patterns.
-These complex events can then be detected by the \textrm{\acrshort{eca}} rules engine to dispatch appropriate actions to \textrm{\glspl{webresource}}.
+In our conceptual model we envision a \textrm{\acrshort{ced}} engine that requires \textrm{\acrshort{ced}} in order to detect complex event patterns and assembles higher-order events.
+These complex events can then be detected by the \textrm{\acrshort{eca}} rules engine to dispatch appropriate actions.
 

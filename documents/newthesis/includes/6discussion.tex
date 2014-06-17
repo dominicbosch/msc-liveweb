@@ -4,8 +4,7 @@
 % Why is our system required, compare to servlets in terms of dynamic loading? user specific
 % in the future what about somebody discovering our system as worthy to push events to? -> needs detection of new events
 % We are taking a step further and allow not only the chaining up of several remote ECA engines, but also the invocation of actions on any arbitrary Web accessible service.
-
-% NOTES / TODOs:
+s
 %
 % Temperature warning, using import.io
 %http://khanlou.com/2014/03/model-view-whatever/
@@ -13,15 +12,18 @@
 % Transactions for business. find use case.and explain how we would loose events.
 
 
-% TODO Use Case ( examples concrete )
 % TODO Future Work
-
-% NOTES / TODOs:
 %
+% CEP:
+
 % We have seen that the ECA approach is already a powerful one to make the Web reactive.
 % CEP will result in an approach where events are not just processed when they are entering the system and evaluated against rules, but these events would need to be stored for quite a long time.
 % Also the rules will not all be checked for each event but they are subject to a scheduler.
 % It can be decided when and how often a rule is evaluated and all events will be checked at these point in times, whether they are candidates for firing the rule.
+% A future improvement of this could be to adopt Complex Event Processing (CEP).
+% This would mean that several events could be stored in a rule and be evaluated in terms of time constraints.
+% Through this more complex events can be created as a result of several atomic events which would lead into semantically more complex events.
+
 
 % TODO pathologische beispiele
 % Endless loops -> child_process to be killed when not responding. what about async callbacks?
