@@ -29,8 +29,15 @@ All they do is checking Web resources for changes and push events into the syste
 	\label{fig:Architecture_wET}
 \end{figure}
 
+% There's still the challenge of filtering
+% What's important to whom
+% Plus the user needs to have tools to combine and add programmability to the combination,( such as conditions, selection of provided arguments and so on)
 
 \section{Event Trigger}
+
+% TODO Classify events in \textrm{\gls{infospace}}, information events: temperature, new mail, blabliblu
+% TODO Classify Actions in \textrm{\gls{infospace}}
+
 
 % Event Gathering is the E in ECA and without one of these letters such a system would not run.
 % It is of utmost importance to find as much as possible ways to get data into a system.
@@ -70,6 +77,10 @@ All they do is checking Web resources for changes and push events into the syste
 \section{Action Dispatcher}
 % Actions are functions that need to be predefined as in JSON Rules
 % Through this it is possible to provide generic functions for expert user as well as very limited functions with only few possibilities for parameterization to be used by unexperienced persons.
+% In our reasearch we focused mainly on server-sided \textrm{Web APIs}, even though we also generated events from the browser and pushed them into our prototype system and let
+% But still since SOAP services are request responders they have their place in our model, both as event trigger and action invoker.
+% We do not limit ourselves to protocols or architectures of services in the Web, but aim to access all of them in order to exploit the Web's full power.
+
 
 % Not only from events
 % import.io
