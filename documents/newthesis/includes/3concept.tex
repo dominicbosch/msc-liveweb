@@ -124,36 +124,22 @@ Since we have all the parts to access \textrm{\glspl{infosystem}} over their ser
 We have shown in the last chapter that \textrm{\acrshort{eca}} rules consist of three parts; an event to be recognized, conditions to be evaluated on the event and actions to be executed if an event triggers the rule through valid conditions.
 We have also seen that virtual events have an implicit parameter which is the event name, thus this is the one that is referred to in the event part of a rule.
 If an event name, of an event entering the \textrm{Rule Engine}, is detected in a predefined rule, the engine compares the event against the conditions of that rule and if all conditions are met, dispatches the actions defined within the rule.
-We introduced \textrm{\acrshort{xml}} and \textrm{\acrshort{json}} as common ways to communicate data between services in the Web.
-Both data formats represent a tree structure of the transmitted data and this also what we expect for the explicit parameters in the events that go through our model.
-We also assume that \textrm{Action Dispatcher} modules can be accessed through common function invocation syntax ( \texttt{actionFunction(param1, param2[, ...])} ) in order to dispatch a certain action to an \textrm{\gls{infosystem}}.
-Through this we are able to define a rule language that uses tree node selectors in order to select explicit event parameters, which are then used to verify conditions and forwarded to \textrm{Action Dispatcher} modules as function parameters.
+
 
 \subsection{Rule Language for Reactive Information Systems}
+We introduced \textrm{\acrshort{xml}} and \textrm{\acrshort{json}} as common ways to communicate data between services in the Web.
+Both data formats represent a tree structure of the transmitted data and a tree structure is also what we expect for the explicit parameters in the events that will be evaluated against rules.
+We also assume that \textrm{Action Dispatcher} modules can be accessed through common function invocation syntax ( i.e. \texttt{actionFunction(param1, param2[, ...])} ) in order to dispatch an action to an \textrm{\gls{infosystem}}.
+Through this we are able to define a rule language that uses tree node selectors in order to select explicit event parameters, which can then be verified against conditions and forwarded to \textrm{Action Dispatcher} modules as function parameters.
+Listing \ref{lst:exampleRulePhrase} shows an example phrase of our envisioned rule language where the retrieval of a new mail will be checked for soccer news and, if confirmed, the mail body will be forwarded to an interested person.
 
-% TODO conditions with examples
-% TODO Imposing Acitons
-% since we model changes in the data of an information space as events and actions, depending on wheter it is a read or wrtie action, we can impose reactivity to information systems.
-
-
-
-% RL <-> ECA
-% TODO figure: ECA Schema
-% TODO Figure: ECA in the distributed environemnt
-% TODO figure: Rules (unions / objects / Rueckkoppelungen )
-% TODO engine
-
+\begin{lstlisting}[language=OwnRule,label={lst:exampleRulePhrase},caption=Example Phrase in Reactive Rule Language]
+ON mailevent
+IF #{ .subject } instr "Soccer News"
+DO mail->send( "soccerfan@host.com", "News about soccer!", #{ .body } )
+\end{lstlisting}
 
 
-
-Because of the heterogenous nature of the Web actions need to be abstracted
-as long as we do not limit ourselves e.g for RESTful access to services
-
-
-
-% % Regelimplementierungssprache
-% \subsection{Conceptual Rule Language}
-% Describe conceptual rule language
 % ON (existing categories)
 % IF (condition boundaries)
 % DO (call to existing action modules with parameters)
@@ -190,6 +176,29 @@ as long as we do not limit ourselves e.g for RESTful access to services
 %   \item Event Enrichment
 %   \item WebApp Actions
 % \end{itemize}
+
+
+% TODO conditions with examples
+% TODO Imposing Acitons
+% since we model changes in the data of an information space as events and actions, depending on wheter it is a read or wrtie action, we can impose reactivity to information systems.
+
+
+
+% RL <-> ECA
+% TODO figure: ECA Schema
+% TODO Figure: ECA in the distributed environemnt
+% TODO figure: Rules (unions / objects / Rueckkoppelungen )
+% TODO engine
+
+
+
+
+% Because of the heterogenous nature of the Web actions need to be abstracted
+% as long as we do not limit ourselves e.g for RESTful access to services
+
+
+
+% Describe conceptual rule language
 
 
 
