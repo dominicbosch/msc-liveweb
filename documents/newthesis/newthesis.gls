@@ -2,9 +2,11 @@
 \begin{theglossary}\glossaryheader
 \glsgroupheading{I}\relax \glsresetentrylist %
 \glossaryentryfield{infospace}{\glsnamefont{Information Space}}{\textit {"[...] is a set of concepts and relations among them held by an \textrm {Information System}. \textrm {Information Space} is produced by a set of known procedures, and is changed through intentional manipulation of its content"}\cite {newby1996metric}}{\relax }{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{12\delimR 14}}}%
+		\setentrycounter[]{page}\glsnumberformat{i}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{12\delimR 15}}}%
 \glossaryentryfield{infosystem}{\glsnamefont{Information System}}{is a network of software and hardware components that support collection, filtering, storing, processing and distribution of data}{\relax }{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{12\delimR 15}}}\glsgroupskip
+		\setentrycounter[]{page}\glsnumberformat{i}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{12\delimR 16}}}\glsgroupskip
 \glsgroupheading{M}\relax \glsresetentrylist %
 \glossaryentryfield{mashup}{\glsnamefont{Mashup}}{\textrm {Web Applications} that weave two or more different \textrm {Web APIs} together to provide a new perspective on data}{\relax }{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{4}\delimN 
@@ -19,7 +21,8 @@
 		\setentrycounter[]{page}\glsnumberformat{4\delimR 7}}}%
 \glossaryentryfield{webofthings}{\glsnamefont{Web of Things}}{An evolution of the \textrm {Internet of Things}, which describes the integration of smart things (e.g. sensors, embedded devices or digitally enhanced objects) into the \textrm {Internet}. \textrm {Web of Things} is the adoption of the \textrm {REST} architectural style to the smart things in order to enable uniform access to these loosley coupled entities}{\relax }{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{1}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{13}}}%
+		\setentrycounter[]{page}\glsnumberformat{13}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{15}}}%
 \glossaryentryfield{webresource}{\glsnamefont{Web Resource}}{Anything in the Web which can be identified, addressed and handled. Identification and addressing is often done over \textrm {URIs}. Resources and their semantic properties are described using \textrm {RDF} in the \textrm {Semantic Web}}{\relax }{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{1\delimR 3}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{5\delimN 6}\delimN 

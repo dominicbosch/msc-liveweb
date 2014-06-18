@@ -16,7 +16,7 @@ The challenges and opportunities arising with the growth of the Web in terms of 
 Therefore our starting point were the studies of related work in the context of reactivity on the Web, event composition and programmability of the Web.
 In the last chapter, we pointed out how they received a lot of attention and provide powerful tools to orchestrate the rapidly growing Web.
 By combining existing research in these fields we developped a conceptual model, which allows to impose smart reactivity to any \textrm{\gls{infospace}}.
-Even though our initial set of \textrm{\glspl{infospace}} was thought to consist of \textrm{\glspl{webresource}}, we believe in the applicability of our model to any \textrm{\gls{infosystem}} whose \textrm{\gls{infospace}} can be accessed and altered over interfaces, i.e. services.
+Even though our initial set of \textrm{\glspl{infospace}} was thought to consist of \textrm{\glspl{webresource}}, our model is applicable to any \textrm{\gls{infosystem}} whose \textrm{\gls{infospace}} can be accessed and altered over interfaces, i.e. services.
 Thus we introduce our conceptual model for reactive \textrm{\glspl{infosystem}} and their services in this chapter.
 
 \begin{figure}[!ht]
@@ -31,25 +31,25 @@ Through this we are able to introduce an event-based model that is capable to de
 A more precise distinction of the important modules for such a reactivity imposing entity is displayed in Figure \ref{fig:Standard-Model-Template}, and we will introduce each module in this chapter.
 \begin{figure}[!ht]
   \centering
-  \includegraphics[width=0.9\textwidth]{figures/Standard-Model-Template}
+  \includegraphics[width=0.7\textwidth]{figures/Standard-Model-Template}
   \caption{Conceptual Model for Reactive Information Systems and their Services}
   \label{fig:Standard-Model-Template}
 \end{figure}
 
 
 
-\section{From Physical Events to Digital Events}
+\section{From Physical Events to Virtual Events}
 We introduced the \textrm{\gls{webofthings}} in the last chapter, where smart devices gain access to the Web.
 It is based on the \textrm{Internet of Things} which mostly dealt with the incorporation of sensor networks into the Internet on the network level.
-Such sensors bring the physical world directly into the digital world.
-This transfer pictures an important difference between physical and digital events.
+Such sensors bring the physical world directly into the virtual world.
+This transfer pictures an important difference between physical and virtual events.
 In physics, and in particular relativity, an event indicates a physical situation or occurrence, located at a specific point in space and time.
-While physical events correspond to a physical situation which is located at a specific point in space and time, digital events primarily consist of implicit parameters, i.e. a name and occurrence time.
-These digital events can be anywhere within \textrm{\glspl{infosystem}} at any point in time and thus their actual location differs most certainly from its occurrence location.
-But digital events also have explicit parameters which correspond to all available information about the event.
-As soon as events are transfered into the digital world the afore mentioned location information turns into explicit parameters.
-Therefore wherever a digital event is, it has a name, an occurence time and most likely some explicit parameters attached to it.
-If the digital event is of a physical nature, it has a physical location, if it is of a digital nature it is likely associated with a digital origin.
+While physical events correspond to a physical situation which is located at a specific point in space and time, virtual events primarily consist of implicit parameters, i.e. a name and occurrence time.
+These virtual events can be anywhere within \textrm{\glspl{infosystem}} at any point in time and thus their actual location differs most certainly from its occurrence location.
+But virtual events also have explicit parameters which correspond to all available information about the event.
+As soon as events are transfered into the virtual world the afore mentioned location information turns into explicit parameters.
+Therefore wherever a virtual event is, it has a name, an occurence time and most likely some explicit parameters attached to it.
+If the virtual event is of a physical nature, it has a physical location, if it is of a virtual nature it is likely associated with a virtual origin.
 Since in our model events are changes in data, they can be virtually anything, e.g. measurements, changes on a static webpage, changes of the object behind a \textrm{\gls{webservice}} or also a login attempt.
 % TODO TABELLE Ort/Kultur(fussball/Apple, weltweit)/Saisonal(kalender)/Internet (ortlos, github)
 % ceremony
@@ -103,47 +103,49 @@ Such an event composing service systems works loosely coupled an could be realiz
 
 
 
-\section{Impose Reactivity to the Web Information Space}
+\section{Imposing Reactivity to Information Spaces}
+In the last chapter we gave an introduction into reactivity and the \textrm{\acrshort{eca}} paradigm as an approach to achieve it.
+So far we have introduced the first part of our model which provides the foundation of an \textrm{\acrlong{eda}}.
+What we now need is a module that translates events into actions on \textrm{\glspl{infosystem}}.
+Almost all existing \textrm{\acrshort{eca}} system's actions write on the local \textrm{\gls{infospace}} which opposes our vision of the orchestration of different \textrm{\glspl{infosystem}} in order to impose reactivity on top or between them.
+For that reason we introduce the \textrm{Action Dispatcher} modules which are located right behind the \textrm{Rule Engine} in terms of the data flow and complete the reactivity flow between heterogeneous \textrm{\glspl{infosystem}}.
+\textrm{Action Dispatcher} modules are an important part of our model because they allow flexible coupling with \textrm{\gls{infosystem}} services, much like the \textrm{Event Trigger} modules do.
+\textrm{Event Trigger} and \textrm{Action Dispatcher} modules are communication abstractions to services of \textrm{\glspl{infosystem}}, that allow us to deal with their heterogenity in terms of communication.
+The \textrm{\gls{infospace}} of an \textrm{\gls{infosystem}} is not limited to internal data, but can also refer to a coupling with other devices and the sensing and controlling of it.
+Thinking of the \textrm{\gls{webofthings}} this can also include an \textrm{Action Dispatcher} that has access to an \textrm{\gls{infosystem}} which controlls devices and thus is capable of turning down the heating in a house, as shown in Figure \ref{fig:InformationSystemWoT}.
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.6\textwidth]{figures/InformationSystemWoT}
+  \caption{Conceptual Model for Reactive Information Systems and their Services}
+  \label{fig:InformationSystemWoT}
+\end{figure}
 
- % conditions as web queries can be solved through event composition, aight?
-% TODO Condition evaluation on other resources? i.e. make a request to a remote site and evaluate it? -> also achievable through composite events
-% show rule engines, alsoo CEP, describe event composition through templates and why we don't do it
+Since we have all the parts to access \textrm{\glspl{infosystem}} over their services, we are now able to define a \textrm{Rule Engine} that orchestrates them in a reactive way.
+We have shown in the last chapter that \textrm{\acrshort{eca}} rules consist of three parts; an event to be recognized, conditions to be evaluated on the event and actions to be executed if an event triggers the rule through valid conditions.
+We have also seen that virtual events have an implicit parameter which is the event name, thus this is the one that is referred to in the event part of a rule.
+If an event name, of an event entering the \textrm{Rule Engine}, is detected in a predefined rule, the engine compares the event against the conditions of that rule and if all conditions are met, dispatches the actions defined within the rule.
+We introduced \textrm{\acrshort{xml}} and \textrm{\acrshort{json}} as common ways to communicate data between services in the Web.
+Both data formats represent a tree structure of the transmitted data and this also what we expect for the explicit parameters in the events that go through our model.
+We also assume that \textrm{Action Dispatcher} modules can be accessed through common function invocation syntax ( \texttt{actionFunction(param1, param2[, ...])} ) in order to dispatch a certain action to an \textrm{\gls{infosystem}}.
+Through this we are able to define a rule language that uses tree node selectors in order to select explicit event parameters, which are then used to verify conditions and forwarded to \textrm{Action Dispatcher} modules as function parameters.
 
-
-% TODO Imposing Acitons
-% since we model changes in the data of an information space as events and actions, depending on wheter it is a read or wrtie action, we can impose reactivity to information systems.
-% Eventually theres a device included in that information system which allows us to control it, e.g. the heating of a house or a cooling device for a server.
+\subsection{Rule Language for Reactive Information Systems}
 
 % TODO conditions with examples
+% TODO Imposing Acitons
+% since we model changes in the data of an information space as events and actions, depending on wheter it is a read or wrtie action, we can impose reactivity to information systems.
+
 
 
 % RL <-> ECA
 % TODO figure: ECA Schema
 % TODO Figure: ECA in the distributed environemnt
 % TODO figure: Rules (unions / objects / Rueckkoppelungen )
+% TODO engine
 
 
 
 
-% % TODO Actions
-% \index{Actions}
-
-% % TODO engine
-% \index{Engine}
-
-
-% \section{Event Condition Action (ECA) Model in the Web}
-In the last section we showed how mashups create additional value for the Web by combining several Web API's.
-But it turned out, that such mashups are closed systems, which often only allow little degree of parametrization.
-To get past such limitations and define a conceptual model for reactive Web systems, it is necessary to define a 
-
-Almost all existing \textrm{\acrshort{eca}} systems act on local data which opposes our vision of orchestrating \textrm{\glspl{infosystem}}.
-This does only add reactivity to these systems and not to the Web per se.
-Such systems are merely event sinks which add fairly any value to the Web, except for the individual users and the system itself.
-
-
-
-\subsection{Rule Language for Reactive Information Systems}
 Because of the heterogenous nature of the Web actions need to be abstracted
 as long as we do not limit ourselves e.g for RESTful access to services
 
