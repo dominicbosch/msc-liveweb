@@ -1,6 +1,13 @@
 
 
 \chapter{Prototype System}
+We have so far introduced our conceptual model for reactive \textrm{\glspl{infosystem}} and their Services and some example use cases to point out what would be possible with our model.
+In this chapter we present our proof of concept prototype system, which has a focus on the Web as its \textrm{\glspl{infospace}}.
+We will then introduce our \textrm{\acrshort{eca}} rule language, which gives all the necessary power over our prototype system and which can be directly translated into the internal rules representation.
+
+
+
+\section{Architecture}
 The prototype system is the adoption of our conceptual model for reactive \textrm{\glspl{infosystem}} and their services to the Web.
 The Web consists of many \textrm{\glspl{infosystem}} and because of its \textrm{\acrlong{soa}} it can be seen as one large \textrm{\gls{infosystem}}, therefore we can impose reactivity on the Web.
 Since communication over services in the Web is often latency driven, we came to the conclusion that asynchronous communication and therefore scalability should be attributes our prototype system has to support natively.
@@ -8,23 +15,17 @@ Another aspect to be regarded for the architectural decision was how the rules a
 We introduced \textrm{\acrshort{xml}} and \textrm{\acrshort{json}} as common ways to communicate data between services on the Web.
 Both formats represent data in a tree structure, and this is also what we decided to assume for the explicit parameters in the events that will enter our prototype.
 Together with the requirement of native support for an \textrm{\acrlong{eda} (\acrshort{eda})} our decision was to build upon the recent adoption of \textrm{JavaScript} to application development through \textrm{Node.js}\footnote{http://nodejs.org/} and its human-readable \textrm{\acrshort{json}} communication format.
+% Why JS, why wasnt it used before? is it used now?
 
-The prototype system consists of several modules, shown in Figure \ref{fig:Architecture}:
+The prototype system consists of several modules, shown in Figure \ref{fig:Architecture}, which we are going to introduce within this section:
 \begin{itemize}
 	\item \textbf{\textrm{Poller}:} Loads \textrm{Event Trigger} modules and forwards events coming from them to the \textrm{Event Queue}. \textrm{Event Trigger} modules poll for changes in the Web and transform them into events. 
 	\item \textbf{\textrm{Webhook Listener}:} Listens on active \textrm{Webhooks} for events and forwards them to the \textrm{Event Queue}.
 	\item \textbf{\textrm{Event Queue}:} Buffers events for the case of an overly busy \textrm{Rule Engine}. 
 	\item \textbf{\textrm{Rules Engine}:} Picks an event from the \textrm{Event Queue} whenever there is one and it is idle. 
-	\item \textbf{\textrm{User Request Handler}:} The user interface modules to administrate \textrm{Event Trigger}, \textrm{Webhooks}, \textrm{Rules} and \textrm{Action Dispatchers}. A special case is the \textrm{Rules Administration} because it notifies the \textrm{Poller} and \textrm{Rules Engine} about new or updated Rules, which then in turn load required \textrm{Event Trigger} or \textrm{Action Dispatcher} modules.
+	\item \textbf{\textrm{User Request Handler}:} The user interface modules to administrate \textrm{Event Trigger}, \textrm{Webhooks}, \textrm{Rules} and \textrm{Action Dispatchers}.
 \end{itemize}
 
-
-a queue which receives all incoming events, and an engine that picks the events from the end of the queue whenever it is idle.
-The engine checks the event against its stored ECA rules and fires the actions whenever a rule applies to an event.
-When a new rule is stored, the engine instantiates the action modules that are required in case an event arrives at the system which triggers the actions.
-The Web is a heterogeneous resource with many different types of systems and services, thus we can't rely on them for providing events to the webhooks of our system.
-Thus we also implement the so called "event triggers" a way to pull events into our system through.
-All they do is checking Web resources for changes and push events into the system whenever they detect one.
 \begin{figure}[!ht]
 	\centering
   \includegraphics[width=\textwidth]{figures/Architecture_Final}
@@ -34,7 +35,7 @@ All they do is checking Web resources for changes and push events into the syste
 
 
 
-\section{Data Structure for Events}
+\subsection{Data Structure for Event Parameters}
 Events in our prototype system are internally represented as tree structures in \textrm{\acrshort{json}} format, which builds on only two data structures:
 \begin{itemize}
 	\item Objects: Unordered collections of name/value pairs, which can also be implemented as a hash map, dictionary or struct in other languages.
@@ -48,80 +49,94 @@ Since all native data structures within \textrm{JavaScript} programming code are
 
 
 
-% There's still the challenge of filtering
-% What's important to whom
-% Plus the user needs to have tools to combine and add programmability to the combination,( such as conditions, selection of provided arguments and so on)
-
-% In the last section we showed how mashups create additional value for the Web by combining several Web API's.
-% But it turned out, that such mashups are closed systems, which often only allow little degree of parametrization.
-
-\section{Event Trigger}
-
-% TODO Classify events in \textrm{\gls{infospace}}, information events: temperature, new mail, blabliblu
-% TODO Classify Actions in \textrm{\gls{infospace}}
-
-
-% Event Gathering is the E in ECA and without one of these letters such a system would not run.
-% It is of utmost importance to find as much as possible ways to get data into a system.
-
-
-% Preferably a lightweighted rules engine would be used to run the user-generated mashups. T
-
-% NOTES / TODOs:
-%
-% Architecture scheme, implementation
-% callback functions, hot plugin
-% js-select selectors
-% List of condition operators
-% Why JS, why wasnt it used before? is it used now?
-% Terminierungsproblem (compiler bau), loesungsansaetze
+\subsection{Dynamic Code Loading for Event Trigger and Action Dispatcher}
+During our research we have seen many different \textrm{\glspl{webservice}} with thoroughly different requirements in terms of communication.
+The easiest category among them were the \textrm{\glspl{webapi}} with their \textrm{\acrshort{rest}}ful services.
+And still, in many cases it is only possible to access data which does not refer to an event.
+To detect a change in data over time we need to be able to store an earlier request and get the difference to the current request, which could then be transformed into a meaningful event.
+The derivation of a meaningful event from data can be a complex task which requires certain operations, which underlines the need for powerful \textrm{Event Trigger} modules.
+The complexity is even bigger for \textrm{Action Dispatcher} modules which alter data and require more complex communication to \textrm{\glspl{webservice}}.
+For those reasons we made the decision to keep these modules flexible in terms of communication and also to leave it open to expert users to encapsulate complicated logic into them for inexperienced users.
+Therefore we modeled the \textrm{Event Trigger} and \textrm{Action Dispatcher} to be \textrm{JavaScript} code modules that are created by expert users during runtime and loaded whenever a rule is activated, which needs them.
+These modules run in a sandbox and got only access to certain \textrm{JavaScript} libraries, which are provided by the owner of the system.
+Apart from those libraries there are two other important functions offered in both type of modules:
+\begin{itemize}
+	\item \textrm{log}: Will store log entries on a per rule base, wherever the instruction is met during execution of a module. The log can be seen by the user who created the rule, which includes that module.
+	\item \textrm{pushEvent}: This is the most important part for \textrm{Event Trigger} modules, since events are only through this function pushed into the prototype system. For \textrm{Action Dispatcher} modules this gives the sometimes useful option for loopback events.
+\end{itemize}
 
 
-% as seen by user,
-% as seen by developer
+
+\subsection{Retrieving Events}
+In the last chapters, we always put emphasis on the two different ways how events can be retrieved from \textrm{\glspl{infosystem}}, i.e. actively pulling events, or passively retrieving them.
+Even though some \textrm{\glspl{infosystem}} offer the access to services that offer data that corresponds to events and can instantly be forwarded into the system, we have seen that there is need for the derivation of events from changes in data on the Web, therefore we need the \textrm{Event Trigger} modules.
+But still, our vision is that of an optimal real-time reactive Web which means that all possible events are offered by all \textrm{\glspl{infosystem}}.
+An interested remote entity could then just announce interest in a certain kind of events over a \textrm{Webhook} and retrieves them in real-time.
+For that reason we laid out our architecture for such \textrm{Webhooks}, but still offer the \textrm{Event Trigger} modules to poll for events in the semi-static \textrm{\gls{www}}.
 
 
-% \section{Architecture}
+\subsubsection{Polling for Event Triggers}
+As we have pointed out before, \textrm{Event Trigger} modules are \textrm{JavaScript} code modules with access to a set of predefined libraries, which offer the flexibility of \textrm{JavaScript} programming.
+The \textrm{Poller} loads those \textrm{Event Trigger} modules whenever they are required as part of a rule.
+The user of the \textrm{Event Trigger} can choose a starting point and an interval for the polling to take place.
+An example \textrm{\gls{webservice}} which offers polling for events is the \textrm{Email Yak}\footnote{http://www.emailyak.com/} \textrm{\gls{webapi}}, which responds with new emails when requested.
+The code required to request the new mails from this service and forward them into the prototype system is quite short and shown in Listing \ref{lst:emailyak}, but for other examples it can get more complex.
+For better readability the code is written in \textrm{CoffeeScript}\footnote{http://coffeescript.org/}.
+Only expert users are expected to store such a piece of code in our prototype, which enables inexperienced users to simply choose the \texttt{"EmailYal -> newMail"} \textrm{Event Trigger} for their rule.  
+A great opportunity to access data from webpages via a \textrm{\gls{webapi}} is \textrm{Import.io}\footnote{https://import.io/}.
+By browsing through the Web with their browser it is possible to select certain parts from a webpage and store them in a mask.
+Data is instantly extracted from the webpage, using the stored mask, when sending aequest to their \textrm{\gls{webapi}} with the given mask id and the \textrm{\acrshort{uri}}.
+This is a great tool for expert users to predefine desired data on webpages and then produce events whenever there is a change in that data.
+
+\begin{lstlisting}[float=h,label=lst:emailyak,language=CoffeeScript,caption=Event Trigger code to poll Email Yak RESTful Web service for new Mails; written in CoffeeScript]
+url = "https://api.emailyak.com/v1/#{params.apikey}/json/get/new/email/"
+exports.newMail = () ->
+	needle.get url, ( err, resp, body ) ->
+		if not err and resp.statusCode is 200
+				pushEvent mail for mail in body.Emails
+\end{lstlisting}
 
 
-\subsection{Polling}
+
+\subsubsection{Webhooks}
+As powerful as \textrm{Webhooks} are in bringing us real-time notifications, as simple they are to use.
+In our prototype users can easily create as many new \textrm{Webhooks} as they choose to.
+The only requirement is, that they are associated to an event name by the user.
+A new \textrm{Webhook} will be created in the \textrm{Webhook Listener}, which from then on accepts events posted to it, and the \textrm{Webhook \acrshort{uri}} is displayed to the user.
+Any \textrm{\gls{webresource}} that supports the concept of \textrm{Webhooks} (e.g. \textrm{GitHub}\footnote{https://github.com/}) has a place to register the \textrm{Webhook} \textrm{\acrshort{uri}}.
+Whenever a remote \textrm{\gls{webresource}} pushes an event to the \textrm{Webhook}, the user-defined event name is assigned as the implicit parameter of a freshly created internal event, while the whole incoming event body is added as explicit parameters to it.
+Afterwards it is forwarded to the \textrm{Event Queue}.
 
 
-\subsection{Webhooks}
+
+
+\subsection{Action Dispatcher}
 % we generate also events again to be pushed over webhooks, and also loopback events
-
-
-
-
-
-
-
-\section{Action Dispatcher}
 % Actions are functions that need to be predefined as in JSON Rules
 % Through this it is possible to provide generic functions for expert user as well as very limited functions with only few possibilities for parameterization to be used by unexperienced persons.
 % In our reasearch we focused mainly on server-sided \textrm{Web APIs}, even though we also generated events from the browser and pushed them into our prototype system and let
 % But still since SOAP services are request responders they have their place in our model, both as event trigger and action invoker.
 % We do not limit ourselves to protocols or architectures of services in the Web, but aim to access all of them in order to exploit the Web's full power.
+% event forwarding
 
 
-% Not only from events
-% import.io
-
-\section{ECA Rules in the Engine}
+\subsection{ECA Rules in the Rule Engine}
 % TODO Conditions
+ A special case is the \textrm{Rules Administration} because it notifies the \textrm{Poller} and \textrm{Rules Engine} about new or updated Rules, which then in turn load required \textrm{Event Trigger} or \textrm{Action Dispatcher} modules.
 
+% js-select selectors
+% List of condition operators
+
+The engine checks the event against its stored ECA rules and fires the actions whenever a rule applies to an event.
+When a new rule is stored, the engine instantiates the action modules that are required in case an event arrives at the system which triggers the actions.
 % describe internal loop
 % Describe rule engine. start from real engine over graphic engine why do we call ours engine
-
 % vague Rule language limited through user acounts to not harm the system
 % Describe possible attacks
 % is descriptive, adaptive, flexible
-
 % Explain rules, transferrability to language?
-
 % dynamic code modules to shield system from user modules
-
-%explain modules and their properties / user associations
+% explain modules and their properties / user associations
 
 
 
@@ -132,27 +147,12 @@ Since all native data structures within \textrm{JavaScript} programming code are
 
 % TODO figure: Wer hat welche rollen?
 % TODO figure: Event fluss in verschiedenen UCs
-% TODO figure: event anomalien (3-4 knoten)
-% TODO figure: Unterschied Push / Pull -> unter introduction bei Webhooks?
-
-% Callbacks / Webhooks semantical similarities but at different layers
 
 
 
-
-
-During our research we found a troublesome server room that shows how the \textrm{Web of Things} can be exposed through our model.
-This server room suffered from a defective cooling system which lead to a drastical increase of temperature in certain circumstances.
-As a consequence certain server automatically shut themselves down as safety measurements.
-Eventually, these shutdowns weren't detected immediately by the people that administered these servers, therefore unnecessary downtimes were the result.
-As a very quick fix to inform certain administrators about the shutdown of their server, we started pinging these servers and pushed the results int
-
-
-
-
+\section{Rule Language for Prototype System} % TODO really PS?
 We have also seen that virtual events have an implicit parameter which is the event name, thus this is the one that is referred to in the event part of a rule.
 If an event name, of an event entering the \textrm{Rule Engine}, is detected in a predefined rule, the engine compares the event against the conditions of that rule and if all conditions are met, dispatches the actions defined within the rule.
-\subsection{Rule Language for Reactive Information Systems}
 We also assume that \textrm{Action Dispatcher} modules can be accessed through common function invocation syntax ( i.e. \texttt{actionFunction(param1, param2[, ...])} ) in order to dispatch an action to an \textrm{\gls{infosystem}}.
 Through this we are able to define a rule language that uses tree node selectors in order to select explicit event parameters, which can then be verified against conditions and forwarded to \textrm{Action Dispatcher} modules as function parameters.
 Listing \ref{lst:exampleRulePhrase} shows an example phrase of our envisioned rule language where the retrieval of a new mail will be checked for soccer news and, if confirmed, the mail body will be forwarded to an interested person.
@@ -193,38 +193,30 @@ DO mail->send( "soccerfan@host.com", "News about soccer!", #{ .body } )
 % \end{lstlisting
 
 
-% TODO Action Dispatcher
-% Actions
-% \begin{itemize}
-%   \item Event Redirection
-%   \item Event Enrichment
-%   \item WebApp Actions
-% \end{itemize}
-
-
-% TODO conditions with examples
-% TODO Imposing Acitons
-% since we model changes in the data of an information space as events and actions, depending on wheter it is a read or wrtie action, we can impose reactivity to information systems.
-
-
-
-% RL <-> ECA
-% TODO figure: ECA Schema
-% TODO Figure: ECA in the distributed environemnt
-% TODO figure: Rules (unions / objects / Rueckkoppelungen )
-% TODO engine
 
 
 
 
-% Because of the heterogenous nature of the Web actions need to be abstracted
-% as long as we do not limit ourselves e.g for RESTful access to services
-% Describe conceptual rule language
 
 
 
+\section{Example Use Cases}
 % TODO concrete use case examples
-\subsection{Example Use Cases}
+% as seen by user,
+% TODO figure: Rules (unions / objects / Rueckkoppelungen )
+
+% Diff comparison of URL
+
+
+During our research we found a troublesome server room that shows how the \textrm{Web of Things} can be exposed through our model.
+This server room suffered from a defective cooling system which lead to a drastical increase of temperature in certain circumstances.
+As a consequence certain server automatically shut themselves down as safety measurements.
+Eventually, these shutdowns weren't detected immediately by the people that administered these servers, therefore unnecessary downtimes were the result.
+As a very quick fix to inform certain administrators about the shutdown of their server, we started pinging these servers and pushed the results int
+
+
+
+
 
 % {
 %     "dominic": {
@@ -253,21 +245,11 @@ DO mail->send( "soccerfan@host.com", "News about soccer!", #{ .body } )
 
 % TODO Take from preparation
 
-% TODO figure: Callback; Result ensurance (ergebnissichherung) wird direkt mit funktion mitgeschickt
-
 % Umgang mit der Zukunft
 % Callback
 \subsection{Callback Functions \& Asynchronous Closures}
 % JAva futures? objekte für resultate sammeln
-
-% NOTES / TODOs:
-%
-% Variable bindings
-% Closures (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures)$
 % Closures are functions that refer to independent (free) variables. 
-% In other words, the function defined in the closure 'remembers' the environment in which it was created in.
-
-% write about arallel as well?
 
 Often, optimization approaches and programming language concepts require special attention to avoid common pitfalls.
 When closures are used as asynchronous functions, developers need to be very careful not to end up with race conditions.
@@ -297,6 +279,7 @@ Such operations are processed and completed whenever required resources are avai
 Often other operations depend on the completion of asynchronous operations, hence their execution needs to be deferred.
 This necessary code execution deferral is achieved through the use of callback functions, denoted \texttt{fCB} in Figure~\ref{fig:Closures_Asynchronous}.
 Any code placed in a callback function, which is assigned to an asynchronous operation, is only executed after the respective asynchronous operation completed.
+% TODO figure: Callback; Result ensurance (ergebnissichherung) wird direkt mit funktion mitgeschickt
 This allows stacking of functions and operations upon each other which automatically results in a flexible and event-driven application.
 
 So far we didn't regard the context for such asynchronous functions.
@@ -305,7 +288,7 @@ Closures play an important role in ECMAScript\cite{EcmaScript}, which is the bas
 Closures in ECMAScript\cite{EcmaScript} are defined such as they have access to the context of the function they were created in.
 This is shown in Figure~\ref{fig:Closures_Closure-1} where \texttt{c} from \texttt{fA}'s context is accessible from within \texttt{fB}, assuming that \texttt{fB} was created in \texttt{fA} and not only invoked from there.
 Closures make it necessary for the context of the outer function to survive past its execution so no references are broken.
-This is depicted through the "extended context lifetime" in Figure~\ref{fig:Closures_Closure-1}.
+This is labeled "extended context lifetime" in Figure~\ref{fig:Closures_Closure-1}.
 Using asynchronous closures it becomes evident, that the context in the invoking function can change while the closure is still computing and eventually referencing the outer context, thus causing race conditions.
 This will be most obvious in a loop that immediately invokes \texttt{fB} several times, as shown in Figure~\ref{fig:Closures_Closure-2}.
 In such a setup \texttt{c} will have different values in the same part of different invocations of \texttt{fB}.
@@ -379,25 +362,6 @@ for( var c = 0; c < 100; c++ ) {
 % The definitive guide: This combination of a function object and a scope (a set of variable bindings) in which the function’s variables are resolved is called a closure in the computer science literature.4
 % This is an old term that refers to the fact that the function’s variables have bindings in the scope chain and that therefore the function is “closed over” its variables.
 
-
-% Twelve Theses on Reactive Rules for the Web~\cite{10.1007-11896548_63}:
-% This article investigates issues of relevance in designing high-level
-% programming languages dedicated to reactivity on the Web. It presents
-% twelve theses on features desirable for a language of reactive rules tuned
-% to programming Web and Semantic Web applications.
-% MY NOTES: they argue with soap and expect it to stay. They expect Web sites to inform each other about update requests. we are taking one step further and provide events to whomeever wants to receive them while being greedy about receiving events. give them to meeeeh my prciouzzz eventz!
-% 1. High-level reactive languges are needed, ECA rules well-suited to specify reactivity
-% 2. Reactive Web rules should be processed locally and act globally through event-based communication and access to persistent Web data
-% 3. Events are best exchanged directly between Web sites in a push manner
-% 4. Events are volatile data and should be kept distinct from persistent data.
-% 5. Recognizing composite events is essential for a reactive Web language. Composite events are conveniently specified by (event) queries. There are (at least) four complementary dimensions to event queries: data extraction, event composition, temporal conditions, and event accumulation --> Future Work (CEP), data extraction already implemented
-% 6. A data-driven, incremental evaluation of event queries is the approach of choice
-% 7. Data from persistent Web resources plays an essential role for Web reactivity. A reactive language thus should embed or build upon a Web query language.
-% 8. The Web is a dynamic, state-changing system. Reactions to state changes (events) through reactive rules are state-changing actions such as updates to persistent data. Reactive rules are needed where compound actions can be constructed from primitive actions.
-% 9. Development and maintenance of reactive rule programs can be considerably supported by structuring mechanisms such as: branching in rules, deductive rules for event queries and Web queries, procedural abstractions for actions, and grouping of rules. --> Future work, attach several conditions and their actions branches to one event instead of creating rules for each of them. EC^nA^n. (Though procedural abstractions for actions already implemented, defining complex actions to be reused by rules)
-% 10.Identity of data items is an issue for reactive languages due to their ability to react to changes of data objects on the Web. (we had surrogate identity though discarded the concept again... stupido)
-% 11. Meta-programming and meta-circularity, that is, the ability to use rules to exchange and evaluate (other) rules, are needed in some important cases. (quite artificial for our scenarios)
-% 12.Reactivity in the Web’s open and uncontrolled world requires language support for authentication, authorization, and accounting. (phew... let's let others go there)
 
 
 

@@ -19,6 +19,28 @@
 %
 % CEP:
 
+% Twelve Theses on Reactive Rules for the Web~\cite{10.1007-11896548_63}:
+% This article investigates issues of relevance in designing high-level
+% programming languages dedicated to reactivity on the Web. It presents
+% twelve theses on features desirable for a language of reactive rules tuned
+% to programming Web and Semantic Web applications.
+% MY NOTES: they argue with soap and expect it to stay. They expect Web sites to inform each other about update requests. we are taking one step further and provide events to whomeever wants to receive them while being greedy about receiving events. give them to meeeeh my prciouzzz eventz!
+% 1. High-level reactive languges are needed, ECA rules well-suited to specify reactivity
+% 2. Reactive Web rules should be processed locally and act globally through event-based communication and access to persistent Web data
+% 3. Events are best exchanged directly between Web sites in a push manner
+% 4. Events are volatile data and should be kept distinct from persistent data.
+% 5. Recognizing composite events is essential for a reactive Web language. Composite events are conveniently specified by (event) queries. There are (at least) four complementary dimensions to event queries: data extraction, event composition, temporal conditions, and event accumulation --> Future Work (CEP), data extraction already implemented
+% 6. A data-driven, incremental evaluation of event queries is the approach of choice
+% 7. Data from persistent Web resources plays an essential role for Web reactivity. A reactive language thus should embed or build upon a Web query language.
+% 8. The Web is a dynamic, state-changing system. Reactions to state changes (events) through reactive rules are state-changing actions such as updates to persistent data. Reactive rules are needed where compound actions can be constructed from primitive actions.
+% 9. Development and maintenance of reactive rule programs can be considerably supported by structuring mechanisms such as: branching in rules, deductive rules for event queries and Web queries, procedural abstractions for actions, and grouping of rules. --> Future work, attach several conditions and their actions branches to one event instead of creating rules for each of them. EC^nA^n. (Though procedural abstractions for actions already implemented, defining complex actions to be reused by rules)
+% 10.Identity of data items is an issue for reactive languages due to their ability to react to changes of data objects on the Web. (we had surrogate identity though discarded the concept again... stupido)
+% 11. Meta-programming and meta-circularity, that is, the ability to use rules to exchange and evaluate (other) rules, are needed in some important cases. (quite artificial for our scenarios)
+% 12.Reactivity in the Web’s open and uncontrolled world requires language support for authentication, authorization, and accounting. (phew... let's let others go there)
+
+
+
+
 % We have seen that the ECA approach is already a powerful one to make the Web reactive.
 % CEP will result in an approach where events are not just processed when they are entering the system and evaluated against rules, but these events would need to be stored for quite a long time.
 % Also the rules will not all be checked for each event but they are subject to a scheduler.
@@ -33,6 +55,7 @@
 
 % Scheduler
 
+% as long as we do not limit ourselves e.g for RESTful access to services we can't get it into a webquery language aight?
 
 % RDFTL: The condition part is a query which de-
 % termines if the information system is in a particular state, in which case the rule fires.
