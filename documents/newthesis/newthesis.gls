@@ -3,10 +3,12 @@
 \glsgroupheading{I}\relax \glsresetentrylist %
 \glossaryentryfield{infospace}{\glsnamefont{Information Space}}{\textit {"[...] is a set of concepts and relations among them held by an \textrm {Information System}. \textrm {Information Space} is produced by a set of known procedures, and is changed through intentional manipulation of its content"}\cite {newby1996metric}}{\relax }{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{i}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{12\delimR 15}}}%
+		\setentrycounter[]{page}\glsnumberformat{12\delimR 16}}}%
 \glossaryentryfield{infosystem}{\glsnamefont{Information System}}{is a network of software and hardware components that support collection, filtering, storing, processing and distribution of data}{\relax }{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{i}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{12\delimR 16}}}\glsgroupskip
+		\setentrycounter[]{page}\glsnumberformat{12\delimR 16}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{21}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{23}}}\glsgroupskip
 \glsgroupheading{M}\relax \glsresetentrylist %
 \glossaryentryfield{mashup}{\glsnamefont{Mashup}}{\textrm {Web Applications} that weave two or more different \textrm {Web APIs} together to provide a new perspective on data}{\relax }{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{4}\delimN 
@@ -28,7 +30,8 @@
 		\setentrycounter[]{page}\glsnumberformat{5\delimN 6}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{8}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{10\delimR 12}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{14}}}%
+		\setentrycounter[]{page}\glsnumberformat{14}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{23}}}%
 \glossaryentryfield{webService}{\glsnamefont{Web Service}}{A collection of \textrm {SOAP} related \textrm {Web service} (note the lower-case word \textrm {service}) standards which are widley adopted and developed in the industry. Also called \textrm {"WS-*" Web Services} or the \textrm {Big Web Services}}{\relax }{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{3\delimN 4}}}%
 \glossaryentryfield{webservice}{\glsnamefont{Web service}}{An interface for communication between applications over a network. They can provide access to and control over \textrm {Web Resources}. \textrm {Web services} are also called \textrm {services on the Web} or just \textrm {services}}{\relax }{\glossaryentrynumbers{\relax 
@@ -39,6 +42,8 @@
 		\setentrycounter[]{page}\glsnumberformat{6\delimN 7}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{14}}}%
 \glossaryentryfield{www}{\glsnamefont{World Wide Web}}{Tim Berners-Lee's vision of interlinked hypertext documents which are accessed over the Internet via browser and allow the navigation through a global information universe}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{iii}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{3\delimN 4}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{14}}}%
+		\setentrycounter[]{page}\glsnumberformat{14}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{16}}}%
 \end{theglossary}\glossarypostamble

@@ -8,6 +8,9 @@
 		\setentrycounter[]{page}\glsnumberformat{8}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{11}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{14}}}%
+\glossaryentryfield{cms}{\glsnamefont{CMS}}{Content Management System}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{16\delimN 17}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{31}}}%
 \glossaryentryfield{corba}{\glsnamefont{CORBA}}{Common Object Request Broker Architecture}{\relax }{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{4\delimN 5}}}\glsgroupskip
 \glsgroupheading{D}\relax \glsresetentrylist %
@@ -24,7 +27,8 @@
 \glossaryentryfield{eda}{\glsnamefont{EDA}}{Event-Driven Architecture}{\relax }{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{7}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{11}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{15}}}%
+		\setentrycounter[]{page}\glsnumberformat{14}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{21}}}%
 \glossaryentryfield{esb}{\glsnamefont{ESB}}{Enterprise Service Bus}{\relax }{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{9}}}\glsgroupskip
 \glsgroupheading{I}\relax \glsresetentrylist %
@@ -38,7 +42,7 @@
 \glossaryentryfield{json}{\glsnamefont{JSON}}{JavaScript Object Notification}{\relax }{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{7\delimN 8}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{10}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{16}}}\glsgroupskip
+		\setentrycounter[]{page}\glsnumberformat{21\delimR 23}}}\glsgroupskip
 \glsgroupheading{K}\relax \glsresetentrylist %
 \glossaryentryfield{kr}{\glsnamefont{KR}}{Knowledge Representation}{\relax }{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{8}}}%
@@ -73,7 +77,8 @@
 \glossaryentryfield{saas}{\glsnamefont{SaaS}}{Software as a service}{\relax }{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{3}}}%
 \glossaryentryfield{soa}{\glsnamefont{SOA}}{Service-Oriented Architecture}{\relax }{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{3}}}%
+		\setentrycounter[]{page}\glsnumberformat{3}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{21}}}%
 \glossaryentryfield{soap}{\glsnamefont{SOAP}}{Simple Object Access Protocol}{\relax }{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{3\delimR 5}}}\glsgroupskip
 \glsgroupheading{U}\relax \glsresetentrylist %
@@ -86,7 +91,7 @@
 \glossaryentryfield{xml}{\glsnamefont{XML}}{Extensible Markup Language}{\relax }{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{4}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{7\delimN 8}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{16}}}%
+		\setentrycounter[]{page}\glsnumberformat{21}}}%
 \glossaryentryfield{xmlrpc}{\glsnamefont{XML-RPC}}{\textrm {XML} - Remote Procedure Call}{\relax }{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{4}}}%
 \end{theglossary}\glossarypostamble

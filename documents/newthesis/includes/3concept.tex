@@ -21,7 +21,7 @@ Thus we introduce our conceptual model for reactive \textrm{\glspl{infosystem}} 
 
 \begin{figure}[!ht]
   \centering
-  \includegraphics[width=0.8\textwidth]{figures/IS_InformationSpace}
+  \includegraphics[width=0.7\textwidth]{figures/IS_InformationSpace}
   \caption{Reactivity imposed on Information Systems and their Information Space over Services}
   \label{fig:IS_InformationSpace}
 \end{figure}
@@ -120,85 +120,8 @@ Thinking of the \textrm{\gls{webofthings}} this can also include an \textrm{Acti
   \label{fig:InformationSystemWoT}
 \end{figure}
 
-Since we have all the parts to access \textrm{\glspl{infosystem}} over their services, we are now able to define a \textrm{Rule Engine} that orchestrates them in a reactive way.
+So far we defined all the modules to access \textrm{\glspl{infosystem}} over their services, now we are able to define a \textrm{Rule Engine} that orchestrates them in a reactive way.
 We have shown in the last chapter that \textrm{\acrshort{eca}} rules consist of three parts; an event to be recognized, conditions to be evaluated on the event and actions to be executed if an event triggers the rule through valid conditions.
-We have also seen that virtual events have an implicit parameter which is the event name, thus this is the one that is referred to in the event part of a rule.
-If an event name, of an event entering the \textrm{Rule Engine}, is detected in a predefined rule, the engine compares the event against the conditions of that rule and if all conditions are met, dispatches the actions defined within the rule.
-
-
-\subsection{Rule Language for Reactive Information Systems}
-We introduced \textrm{\acrshort{xml}} and \textrm{\acrshort{json}} as common ways to communicate data between services in the Web.
-Both data formats represent a tree structure of the transmitted data and a tree structure is also what we expect for the explicit parameters in the events that will be evaluated against rules.
-We also assume that \textrm{Action Dispatcher} modules can be accessed through common function invocation syntax ( i.e. \texttt{actionFunction(param1, param2[, ...])} ) in order to dispatch an action to an \textrm{\gls{infosystem}}.
-Through this we are able to define a rule language that uses tree node selectors in order to select explicit event parameters, which can then be verified against conditions and forwarded to \textrm{Action Dispatcher} modules as function parameters.
-Listing \ref{lst:exampleRulePhrase} shows an example phrase of our envisioned rule language where the retrieval of a new mail will be checked for soccer news and, if confirmed, the mail body will be forwarded to an interested person.
-
-\begin{lstlisting}[language=OwnRule,label={lst:exampleRulePhrase},caption=Example Phrase in Reactive Rule Language]
-ON mailevent
-IF #{ .subject } instr "Soccer News"
-DO mail->send( "soccerfan@host.com", "News about soccer!", #{ .body } )
-\end{lstlisting}
-
-
-% ON (existing categories)
-% IF (condition boundaries)
-% DO (call to existing action modules with parameters)
-
-% a lot possible, but dangerous.
-
-% \begin{Verbatim}[fontsize=\small,commandchars=\\\{\}]
-% \PY{k}{on} \PY{n}{mail}
-% \PY{k}{if} \PY{n}{sender}\PY{o}{=}\PY{l+s+ss}{\PYZdq{}sender@mail.com\PYZdq{}}
-% \PY{k}{do} \PY{n}{webapi}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{newcontent}\PY{p}{(}\PY{n}{subject}\PY{p}{)}
-% \end{Verbatim}
-
-% % TODO Define language with regular expression 
-% % Programming language syntax is usually defined using a combination of regular expressions (for lexical structure) and Backus–Naur Form (for grammatical structure). Below is a simple grammar, based on Lisp:
-% % expression ::= atom | list
-% % atom       ::= number | symbol
-% % number     ::= [+-]?['0'-'9']+
-% % symbol     ::= ['A'-'Z''a'-'z'].*
-% % list       ::= '(' expression* ')'
-% \begin{lstlisting}[language=OwnRule,caption=Conceptual ECA Rule Language Syntax]
-% expression  ::= 'on ' event ' if ' conditions ' do ' actions
-% event       ::= symbol.*(' -> ' symbol.*)
-% conditions  ::= 
-% actions     ::= symbol*('('selector*')')
-% symbol      ::= [A-Za-z0-9_-]+
-% selector    ::= [#\{(symbol*?)\}]
-% \end{lstlisting
-
-
-% TODO Action Dispatcher
-% Actions
-% \begin{itemize}
-%   \item Event Redirection
-%   \item Event Enrichment
-%   \item WebApp Actions
-% \end{itemize}
-
-
-% TODO conditions with examples
-% TODO Imposing Acitons
-% since we model changes in the data of an information space as events and actions, depending on wheter it is a read or wrtie action, we can impose reactivity to information systems.
-
-
-
-% RL <-> ECA
-% TODO figure: ECA Schema
-% TODO Figure: ECA in the distributed environemnt
-% TODO figure: Rules (unions / objects / Rueckkoppelungen )
-% TODO engine
-
-
-
-
-% Because of the heterogenous nature of the Web actions need to be abstracted
-% as long as we do not limit ourselves e.g for RESTful access to services
-
-
-
-% Describe conceptual rule language
 
 
 

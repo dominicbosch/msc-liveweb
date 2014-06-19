@@ -1,38 +1,37 @@
+
+
 \chapter{Use Cases for Reactive Information Systems}
-% informal description of target / story -> show that it makes sense
-% Use Cases, not concrete
-We have introduced a conceptual model for reactive information systems and its services.
-In this chapter we will show how this model applies to certain use cases.
+We have so far introduced a conceptual model for reactive information systems and their services.
+Through our model we are able to react on events happening in \textrm{\glspl{infosystem}} and dispatch changes to it or any other accessible \textrm{\glspl{infosystem}}.
+In this chapter we will give examples of how use cases can be realized through our model.
 
-\section{Reacting on changes in the World-Wide Web}
-A huge amount of information is accessible through the World-Wide Web.
-Many documents within it are dynamic in the way that they change over time.
-Some might change in an interval of a few minutes (e.g. news), while others change much slower such as konwledge bases.
+\section{Reacting on changes in the \gls{www}}
+Many documents of the \textrm{\gls{www}} are dynamic in the way that they change over time.
+Some might change in an interval of a few minutes (e.g. news), while others change much slower, such as knowledge sites.
 To detect such changes a site in the Web needs to keep track of the document history and trigger events if there is a change.
-A lot of research has been mad
-For a general approach such a site would require a query language for web resources that is able to detect changes.
-% TODO figure
+In our model this would be realized by an \textrm{Event Trigger} which monitors a certain set of \textrm{\glspl{infospace}} and triggers events as soon as differences are detected.
+A user will then set up a rule that checks if the changes are related to a certain category of interest, such as sports or a certain observed site and how big those changes are.
+If for example a Wikipedia article changed in more than 20\% of its content this will be a reason for a moderator to look at it and should be entered as a task in the next free slot of his calendar.
 
 
-\section{Augment existing Web Applications}
-\index{CMS}
-Web applications, such as webmails, social networks or content management systems (\textrm{CMS}) are widely spread and used by a large number of internet users.
-But often users or developers miss some features or interoperability with other web applications, which would result in augmented functionality and also in less work.
+\section{Enhance existing Web Applications}
+Web applications, such as webmails, social networks or \textrm{\acrlong{cms} (\acrshort{cms})} are widely spread and used by a large number of internet users.
+But often users or developers miss some features or interoperability with other web applications, which would result in enhanced functionality and also in less work.
 Features of that kind could also include data and functionality from other sites on the web.
 This would require web applications to mashup together and to grab data or invoke functionality on each other.
-Many kinds of augmentations will not be implemented by the web applications themselves because they are very specific to a small number of their users.
+A lot of enhancements will not be implemented by the web applications themselves because they are very specific to a small number of their users.
 With a reactive information system, users and developers could realize such features on their own.
 
 
-\subsection{Enrich \textrm{CMS} Posts with Additional Information}
+\subsection{Enrich \textrm{\acrshort{cms}} Posts with Additional Information}
 Every new post to a content management system can be modeled as an event.
 In the case that a user would like to enrich such a system with founded knowledge from a remote resource, reactivity in the Web can be used to enrich it.
-Augmenting an existing \textrm{CMS} can be realized by a rule that evaluates new posts and checks whether knowledge tags are included in the post.
+Enhancing an existing \textrm{\acrshort{cms}} can be realized by a rule that evaluates new posts and checks whether knowledge tags are included in the post.
 Whenever there are tags included within the post, the reactive system will enrich the post with additional knowledge to these tags from a remote service of the user's choice.
 \begin{figure}[!ht]
   \centering
   \includegraphics{figures/ProBinderAnnotations}
-  \caption{Enrich CMS Post with Remote Knowledge Data}
+  \caption{Enrich \acrshort{cms} Post with Remote Knowledge Data}
   \label{fig:ProBinderAnnotations}
 \end{figure}
 
@@ -122,4 +121,8 @@ On a Wednesday evening it could also inform the delivery service that they can d
 
 % Regionalisierte news (news ratings)
 
-% TODO! Diff vergleich von ressource
+
+\section{Multi-Sourced Bad Weather Prediction}
+There are a lot of different weather services existing in the Web.
+One has to check several of them in order to get an idea on how likely it is that it will be raining on the journey to work and back.
+By composing a higher-order event from several weather update events, a user could store a rule which alarms him early in the morning if more than 50\% of the weather forecasts expect rain on the way to or back from work.

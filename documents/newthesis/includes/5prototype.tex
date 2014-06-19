@@ -1,22 +1,25 @@
 
 
 \chapter{Prototype System}
-The prototype system is the realisation of our conceptual model for reactive Information Systems and their services.
-During our research we identified asynchronous communication and event-driven architecture (\textrm{EDA}) as necessary key properties for a reference implementation of our conceptual model.
-Therefore we decided to rely on the recent adoption of JavaScript to application development, which is made possible through \textrm{Node.js}.
-We believe in the future success of \textrm{JavaScript} for application development because the key concepts of asynchronous communication and non-blocking I/O are important properties for todays large scale applications.
-Another advantage of this technology is the human-readable \textrm{JavaScript Object Notation} (\textrm{JSON}) for data exchange.
-\textrm{JSON} builds only on two data structures:
-\begin{itemize}
-	\item Object: An unordered collection of name/value pairs, which can also be implemented as a hash map, dictionary or struct.
-	\item Array: An ordered list of values, which can also be implemented as a record, vector or list.
-\end{itemize}
-A value can be an object or an array, but also a unicode string, a number, boolean or null.
-This allows for any arbitrary depth and chaining of the supported data representations.
-Since all data within JavaScript programming code is already in JSON format, it can easily be marshalled into one string and communicated to other applications without overhead.
-Since \textrm{JSON} can be implemented in virtually every programming language, it received a lot of attention and is supported by many modern Web resources.
+The prototype system is the adoption of our conceptual model for reactive \textrm{\glspl{infosystem}} and their services to the Web.
+The Web consists of many \textrm{\glspl{infosystem}} and because of its \textrm{\acrlong{soa}} it can be seen as one large \textrm{\gls{infosystem}}, therefore we can impose reactivity on the Web.
+Since communication over services in the Web is often latency driven, we came to the conclusion that asynchronous communication and therefore scalability should be attributes our prototype system has to support natively.
+Another aspect to be regarded for the architectural decision was how the rules are going to be represented internally.
+We introduced \textrm{\acrshort{xml}} and \textrm{\acrshort{json}} as common ways to communicate data between services on the Web.
+Both formats represent data in a tree structure, and this is also what we decided to assume for the explicit parameters in the events that will enter our prototype.
+Together with the requirement of native support for an \textrm{\acrlong{eda} (\acrshort{eda})} our decision was to build upon the recent adoption of \textrm{JavaScript} to application development through \textrm{Node.js}\footnote{http://nodejs.org/} and its human-readable \textrm{\acrshort{json}} communication format.
 
-The prototype consists of a queue which receives all incoming events, and an engine that picks the events from the end of the queue whenever it is idle.
+The prototype system consists of several modules, shown in Figure \ref{fig:Architecture}:
+\begin{itemize}
+	\item \textbf{\textrm{Poller}:} Loads \textrm{Event Trigger} modules and forwards events coming from them to the \textrm{Event Queue}. \textrm{Event Trigger} modules poll for changes in the Web and transform them into events. 
+	\item \textbf{\textrm{Webhook Listener}:} Listens on active \textrm{Webhooks} for events and forwards them to the \textrm{Event Queue}.
+	\item \textbf{\textrm{Event Queue}:} Buffers events for the case of an overly busy \textrm{Rule Engine}. 
+	\item \textbf{\textrm{Rules Engine}:} Picks an event from the \textrm{Event Queue} whenever there is one and it is idle. 
+	\item \textbf{\textrm{User Request Handler}:} The user interface modules to administrate \textrm{Event Trigger}, \textrm{Webhooks}, \textrm{Rules} and \textrm{Action Dispatchers}. A special case is the \textrm{Rules Administration} because it notifies the \textrm{Poller} and \textrm{Rules Engine} about new or updated Rules, which then in turn load required \textrm{Event Trigger} or \textrm{Action Dispatcher} modules.
+\end{itemize}
+
+
+a queue which receives all incoming events, and an engine that picks the events from the end of the queue whenever it is idle.
 The engine checks the event against its stored ECA rules and fires the actions whenever a rule applies to an event.
 When a new rule is stored, the engine instantiates the action modules that are required in case an event arrives at the system which triggers the actions.
 The Web is a heterogeneous resource with many different types of systems and services, thus we can't rely on them for providing events to the webhooks of our system.
@@ -24,10 +27,26 @@ Thus we also implement the so called "event triggers" a way to pull events into 
 All they do is checking Web resources for changes and push events into the system whenever they detect one.
 \begin{figure}[!ht]
 	\centering
-  \includegraphics[width=0.9\textwidth]{figures/Architecture_wET}
-	\caption{Prototype Process diagram}
-	\label{fig:Architecture_wET}
+  \includegraphics[width=\textwidth]{figures/Architecture_Final}
+	\caption{Prototype System Architecture}
+	\label{fig:Architecture}
 \end{figure}
+
+
+
+\section{Data Structure for Events}
+Events in our prototype system are internally represented as tree structures in \textrm{\acrshort{json}} format, which builds on only two data structures:
+\begin{itemize}
+	\item Objects: Unordered collections of name/value pairs, which can also be implemented as a hash map, dictionary or struct in other languages.
+	\item Arrays: Ordered lists of values, which can also be implemented as a record, vector or list in other languages.
+\end{itemize}
+A value can be an object or an array, but also a unicode string, a number, boolean or null.
+This allows for any arbitrary depth and chaining of the supported data representations.
+It is a handy feature when we assume a tree structure for events in our prototype system since the selection of nodes in tree structures has been well studied and useful libraries exist.
+Since all native data structures within \textrm{JavaScript} programming code are already in \textrm{\acrshort{json}} format, it can easily be marshalled into one string and communicated to other applications without overhead.
+\textrm{\acrshort{json}} can be implemented in virtually every programming language, therefore received a lot of attention and is supported by many \textrm{\glspl{webresource}} for communication.
+
+
 
 % There's still the challenge of filtering
 % What's important to whom
@@ -127,6 +146,81 @@ This server room suffered from a defective cooling system which lead to a drasti
 As a consequence certain server automatically shut themselves down as safety measurements.
 Eventually, these shutdowns weren't detected immediately by the people that administered these servers, therefore unnecessary downtimes were the result.
 As a very quick fix to inform certain administrators about the shutdown of their server, we started pinging these servers and pushed the results int
+
+
+
+
+We have also seen that virtual events have an implicit parameter which is the event name, thus this is the one that is referred to in the event part of a rule.
+If an event name, of an event entering the \textrm{Rule Engine}, is detected in a predefined rule, the engine compares the event against the conditions of that rule and if all conditions are met, dispatches the actions defined within the rule.
+\subsection{Rule Language for Reactive Information Systems}
+We also assume that \textrm{Action Dispatcher} modules can be accessed through common function invocation syntax ( i.e. \texttt{actionFunction(param1, param2[, ...])} ) in order to dispatch an action to an \textrm{\gls{infosystem}}.
+Through this we are able to define a rule language that uses tree node selectors in order to select explicit event parameters, which can then be verified against conditions and forwarded to \textrm{Action Dispatcher} modules as function parameters.
+Listing \ref{lst:exampleRulePhrase} shows an example phrase of our envisioned rule language where the retrieval of a new mail will be checked for soccer news and, if confirmed, the mail body will be forwarded to an interested person.
+
+\begin{lstlisting}[language=OwnRule,label={lst:exampleRulePhrase},caption=Example Phrase in Reactive Rule Language]
+ON mailevent
+IF #{ .subject } instr "Soccer News"
+DO mail->send( "soccerfan@host.com", "News about soccer!", #{ .body } )
+\end{lstlisting}
+
+
+% ON (existing categories)
+% IF (condition boundaries)
+% DO (call to existing action modules with parameters)
+
+% a lot possible, but dangerous.
+
+% \begin{Verbatim}[fontsize=\small,commandchars=\\\{\}]
+% \PY{k}{on} \PY{n}{mail}
+% \PY{k}{if} \PY{n}{sender}\PY{o}{=}\PY{l+s+ss}{\PYZdq{}sender@mail.com\PYZdq{}}
+% \PY{k}{do} \PY{n}{webapi}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{newcontent}\PY{p}{(}\PY{n}{subject}\PY{p}{)}
+% \end{Verbatim}
+
+% % TODO Define language with regular expression 
+% % Programming language syntax is usually defined using a combination of regular expressions (for lexical structure) and Backus–Naur Form (for grammatical structure). Below is a simple grammar, based on Lisp:
+% % expression ::= atom | list
+% % atom       ::= number | symbol
+% % number     ::= [+-]?['0'-'9']+
+% % symbol     ::= ['A'-'Z''a'-'z'].*
+% % list       ::= '(' expression* ')'
+% \begin{lstlisting}[language=OwnRule,caption=Conceptual ECA Rule Language Syntax]
+% expression  ::= 'on ' event ' if ' conditions ' do ' actions
+% event       ::= symbol.*(' -> ' symbol.*)
+% conditions  ::= 
+% actions     ::= symbol*('('selector*')')
+% symbol      ::= [A-Za-z0-9_-]+
+% selector    ::= [#\{(symbol*?)\}]
+% \end{lstlisting
+
+
+% TODO Action Dispatcher
+% Actions
+% \begin{itemize}
+%   \item Event Redirection
+%   \item Event Enrichment
+%   \item WebApp Actions
+% \end{itemize}
+
+
+% TODO conditions with examples
+% TODO Imposing Acitons
+% since we model changes in the data of an information space as events and actions, depending on wheter it is a read or wrtie action, we can impose reactivity to information systems.
+
+
+
+% RL <-> ECA
+% TODO figure: ECA Schema
+% TODO Figure: ECA in the distributed environemnt
+% TODO figure: Rules (unions / objects / Rueckkoppelungen )
+% TODO engine
+
+
+
+
+% Because of the heterogenous nature of the Web actions need to be abstracted
+% as long as we do not limit ourselves e.g for RESTful access to services
+% Describe conceptual rule language
+
 
 
 % TODO concrete use case examples
