@@ -18,7 +18,7 @@
 \usepackage[toc,page,header]{appendix}
 \usepackage[toc,acronym,ucmark]{glossaries}
 
-\usepackage[none]{hyphenat} % FIXME REMOVE FOR FINAL DOCUMENT	
+% \usepackage[none]{hyphenat} % FIXME REMOVE FOR FINAL DOCUMENT	
 
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 \renewcommand{\familydefault}{\sfdefault}
@@ -68,6 +68,13 @@
 	\input{includes/acknowledgment}
 	\tableofcontents
 
+% Lists
+	\listoffigures
+	\listoftables
+	\lstlistoflistings
+	\printglossaries
+
+
 \mainmatter
 	\input{includes/1introduction}
 	\input{includes/2related}
@@ -81,10 +88,8 @@
 	\bibliography{thesisbib}
 	\bibliographystyle{thesisbst}
 
-% Lists
-	\listoffigures
-	\listoftables
-	\lstlistoflistings
+% Appendix
+	\begin{appendices}
 
 % Index
 	% \addcontentsline{toc}{chapter}{Index}
@@ -94,13 +99,10 @@
 	\captionsetup[figure]{list=no}
 	% \captionsetup[table]{list=no}
 
-% Appendix
-	\begin{appendices}
 	\addtocontents{toc}{\setcounter{tocdepth}{-1}}
 	\input{includes/appendixa}
 	\input{includes/appendixb}
 	\input{includes/appendixc}
-	\printglossaries
 	\end{appendices}
 	\addtocontents{toc}{\setcounter{tocdepth}{1}}
 

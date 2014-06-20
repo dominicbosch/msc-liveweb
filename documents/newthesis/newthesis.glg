@@ -1,7 +1,7 @@
 This is makeindex, version 2.15 [TeX Live 2012] (kpathsea + Thai support).
 Scanning style file ./newthesis.ist...........................done (27 attributes redefined, 0 ignored).
-Scanning input file newthesis.glo....done (136 entries accepted, 0 rejected).
-Sorting entries....done (1025 comparisons).
-Generating output file newthesis.gls....done (54 lines written, 0 warnings).
+Scanning input file newthesis.glo....done (142 entries accepted, 0 rejected).
+Sorting entries....done (1150 comparisons).
+Generating output file newthesis.gls....done (56 lines written, 0 warnings).
 Output written in newthesis.gls.
 Transcript written in newthesis.glg.

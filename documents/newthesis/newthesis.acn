@@ -1,4 +1,6 @@
 \glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{iii}
+\glossaryentry{CMS?\glossaryentryfield{cms}{\glsnamefont{CMS}}{Content Management System}{\relax }|setentrycounter[]{page}\glsnumberformat}{iv}
+\glossaryentry{JSON?\glossaryentryfield{json}{\glsnamefont{JSON}}{JavaScript Object Notification}{\relax }|setentrycounter[]{page}\glsnumberformat}{vi}
 \glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{3}
 \glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{3}
 \glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{3}
@@ -179,10 +181,20 @@
 \glossaryentry{EDA?\glossaryentryfield{eda}{\glsnamefont{EDA}}{Event-Driven Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{21}
 \glossaryentry{JSON?\glossaryentryfield{json}{\glsnamefont{JSON}}{JavaScript Object Notification}{\relax }|setentrycounter[]{page}\glsnumberformat}{21}
 \glossaryentry{JSON?\glossaryentryfield{json}{\glsnamefont{JSON}}{JavaScript Object Notification}{\relax }|setentrycounter[]{page}\glsnumberformat}{22}
-\glossaryentry{JSON?\glossaryentryfield{json}{\glsnamefont{JSON}}{JavaScript Object Notification}{\relax }|setentrycounter[]{page}\glsnumberformat}{22}
+\glossaryentry{JSON?\glossaryentryfield{json}{\glsnamefont{JSON}}{JavaScript Object Notification}{\relax }|setentrycounter[]{page}\glsnumberformat}{23}
 \glossaryentry{JSON?\glossaryentryfield{json}{\glsnamefont{JSON}}{JavaScript Object Notification}{\relax }|setentrycounter[]{page}\glsnumberformat}{23}
 \glossaryentry{REST?\glossaryentryfield{rest}{\glsnamefont{REST}}{Representational State Transfer}{\relax }|setentrycounter[]{page}\glsnumberformat}{23}
+\glossaryentry{REST?\glossaryentryfield{rest}{\glsnamefont{REST}}{Representational State Transfer}{\relax }|setentrycounter[]{page}\glsnumberformat}{23}
+\glossaryentry{SOAP?\glossaryentryfield{soap}{\glsnamefont{SOAP}}{Simple Object Access Protocol}{\relax }|setentrycounter[]{page}\glsnumberformat}{23}
 \glossaryentry{URI?\glossaryentryfield{uri}{\glsnamefont{URI}}{Uniform Resource Identifiers}{\relax }|setentrycounter[]{page}\glsnumberformat}{24}
-\glossaryentry{URI?\glossaryentryfield{uri}{\glsnamefont{URI}}{Uniform Resource Identifiers}{\relax }|setentrycounter[]{page}\glsnumberformat}{24}
-\glossaryentry{URI?\glossaryentryfield{uri}{\glsnamefont{URI}}{Uniform Resource Identifiers}{\relax }|setentrycounter[]{page}\glsnumberformat}{24}
-\glossaryentry{CMS?\glossaryentryfield{cms}{\glsnamefont{CMS}}{Content Management System}{\relax }|setentrycounter[]{page}\glsnumberformat}{33}
+\glossaryentry{URI?\glossaryentryfield{uri}{\glsnamefont{URI}}{Uniform Resource Identifiers}{\relax }|setentrycounter[]{page}\glsnumberformat}{25}
+\glossaryentry{URI?\glossaryentryfield{uri}{\glsnamefont{URI}}{Uniform Resource Identifiers}{\relax }|setentrycounter[]{page}\glsnumberformat}{25}
+\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{25}
+\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{25}
+\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{25}
+\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{25}
+\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{25}
+\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{25}
+\glossaryentry{JSON?\glossaryentryfield{json}{\glsnamefont{JSON}}{JavaScript Object Notification}{\relax }|setentrycounter[]{page}\glsnumberformat}{26}
+\glossaryentry{JSON?\glossaryentryfield{json}{\glsnamefont{JSON}}{JavaScript Object Notification}{\relax }|setentrycounter[]{page}\glsnumberformat}{27}
+\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{27}

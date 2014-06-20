@@ -105,14 +105,20 @@
 \section*{}
 
 \begin{Verbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PY{p}{\PYZob{}}
-	\PY{n+nt}{\PYZdq{}eventname\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}email\PYZdq{}}\PY{p}{,}
-	\PY{n+nt}{\PYZdq{}body\PYZdq{}}\PY{p}{:} \PY{p}{\PYZob{}}
-			\PY{n+nt}{\PYZdq{}sender\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}sender@mail.com\PYZdq{}}\PY{p}{,}
-			\PY{n+nt}{\PYZdq{}subject\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}Important subject!\PYZdq{}}\PY{p}{,}
-			\PY{n+nt}{\PYZdq{}textbody\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}Hi User,\PYZbs{}n\PYZbs{}nThis is a lengthy mail body\PYZdq{}}
+	\PY{p}{\PYZob{}}
+		\PY{n+nt}{\PYZdq{}id\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}Coffee Break\PYZdq{}}\PY{p}{,}
+		\PY{n+nt}{\PYZdq{}eventname\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}uptimestatistics\PYZdq{}}\PY{p}{,}
+		\PY{n+nt}{\PYZdq{}conditions\PYZdq{}}\PY{p}{:} \PY{p}{[}
+			\PY{p}{\PYZob{}}
+				\PY{n+nt}{\PYZdq{}selector\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}.currentlyon\PYZdq{}}\PY{p}{,}
+				\PY{n+nt}{\PYZdq{}operator\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}\PYZgt{}\PYZdq{}}\PY{p}{,}
+				\PY{n+nt}{\PYZdq{}compare\PYZdq{}}\PY{p}{:}\PY{l+m+mi}{42}
+			\PY{p}{\PYZcb{}}
+		\PY{p}{]}\PY{p}{,}
+		\PY{n+nt}{\PYZdq{}actions\PYZdq{}}\PY{p}{:}\PY{p}{[}
+			\PY{l+s+s2}{\PYZdq{}EMailYak \PYZhy{}\PYZgt{} sendMail( \PYZbs{}\PYZdq{}account@mail.com\PYZbs{}\PYZdq{}, \PYZbs{}\PYZdq{}Coffee Break!\PYZbs{}\PYZdq{}, \PYZbs{}\PYZdq{}[ \PYZsh{}\PYZob{} .currentlyon \PYZcb{} are here, let\PYZsq{}s grab a coffee! ]\PYZbs{}\PYZdq{} )\PYZdq{}}
+		\PY{p}{]}
 	\PY{p}{\PYZcb{}}
-\PY{p}{\PYZcb{}}
 \end{Verbatim}
 
 \end{document}
