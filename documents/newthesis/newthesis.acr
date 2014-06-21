@@ -19,6 +19,7 @@
 		\setentrycounter[]{page}\glsnumberformat{10}}}\glsgroupskip
 \glsgroupheading{E}\relax \glsresetentrylist %
 \glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{i}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{iii}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{3}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{7\delimR 9}\delimN 
@@ -53,7 +54,7 @@
 		\setentrycounter[]{page}\glsnumberformat{8}}}%
 \glossaryentryfield{kre}{\glsnamefont{KRE}}{Kinetic Rules Engine}{\relax }{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{9\delimN 10}}}%
-\glossaryentryfield{krl}{\glsnamefont{KRL}}{Kinetics Rule Language}{\relax }{\glossaryentrynumbers{\relax 
+\glossaryentryfield{krl}{\glsnamefont{KRL}}{Kinetic Rule Language}{\relax }{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{9\delimN 10}}}\glsgroupskip
 \glsgroupheading{O}\relax \glsresetentrylist %
 \glossaryentryfield{orb}{\glsnamefont{ORB}}{Object Request Broker}{\relax }{\glossaryentrynumbers{\relax 

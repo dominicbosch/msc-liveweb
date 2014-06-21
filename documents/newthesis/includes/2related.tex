@@ -40,7 +40,7 @@ A server-side \textrm{\gls{webapi}} is a service interface to an application, me
 \subsection{Accessing services on the Web}
 An early adoption of the service concept to computers were the \textrm{\acrlong{rpc}s (\acrshort{rpc})}\cite{Birrell:1984:IRP:2080.357392}.
 Through \textrm{\acrshort{rpc}} a piece of code can be executed on a different machine, other than the one which is calling the procedure.
-It is basically an inter-process communication and doesn't necessarily require the Web nor distributed cmputers.
+It is basically an inter-process communication and doesn't necessarily require the Web nor distributed computers.
 Also because of when \textrm{\acrshort{rpc}} was invented, the term \textrm{\gls{www}} didn't even exist. 
 \textrm{\acrshort{rpc}} also found its use in grid computing\cite{seymour2002overview} and through this, opened doors into the field of distributed computation.
 The \textrm{\acrshort{rpc}} paradigm isn't bound to certain technologies and thus, has been implemented in a lot of different programming languages.
@@ -70,7 +70,7 @@ With the \textrm{\acrlong{iiop} (\acrshort{iiop})} it is also possible to connec
 Through this, the offered objects can become services in the Web, but they are shielded by the \textrm{\acrshort{orb}}.
 
 
-\subsection{Services on the Web become \glspl{webresource}}
+\subsection{Services on the Web become \glspl{webresource}} % TODO really??
 All the afore mentioned approaches require a specific protocol and are therefore incompatible with each other.
 For this reason and its simplicity, an architectural style has gained popularity which frees application from this constraint: \textrm{\acrlong{rest} (\acrshort{rest})}\cite{fielding2000architectural}.
 \textrm{\acrshort{rest}} concentrates on the roles of components and on constraints upon interactions between them.
@@ -88,7 +88,7 @@ There is for example the upcoming concept of the \textrm{Web of Things}\cite{567
 
 \subsection{Composing Services in the Web}
 Webpages emerged into dynamic sites on the web through the upcoming of scripting languages to control the browser and the webpage itself.
-With all their server-sided infrastructure in the background they became literally applications, with more or less functionality and persistance on a server.
+With all their server-sided infrastructure in the background they became literally applications, with more or less functionality and persistence on a server.
 These \textrm{Web Applications (Web Apps)} became even more responsive with the advent of asynchronous calls from the browser to the server, which allows to load data into the current webpage while the user is interacting with it.
 Those asynchronous calls are requests to services, which act as the application programming interface to the \textrm{Web App} (\textrm{\gls{webapi}}) which sits on the server.
 As a side-note, the term \textrm{\gls{webapi}} not only comprises server-side interfaces but also client-sided ones (e.g. the browser), after all they are also interfaces to the Web.
@@ -211,7 +211,7 @@ The language is based on declarative syntax, enriched with imperative elements.
 A handy feature are the ways to activate webpages, which bridges the gap between the user's browser and the centralized \textrm{\acrshort{kre}}.
 Either a user can install a browser plugin which will communicate with the \textrm{\acrshort{kre}}, or a webpage provider can include a library in order to get events from accesses to the webpage.
 Through this, events can be raised from the browser and actions can also execute in it.
-The \textrm{\acrshort{krl}} fits very well into our concept and only a few reasons kept us from realzing our reference implementation on top of the \textrm{\acrshort{kre}}, such as:
+The \textrm{\acrshort{krl}} fits very well into our concept and only a few reasons kept us from realizing our reference implementation on top of the \textrm{\acrshort{kre}}, such as:
 \begin{itemize}
   \item complexity required to maintain states with a declarative syntax 
   \item system footprint of the \textrm{\acrshort{kre}}
@@ -219,7 +219,7 @@ The \textrm{\acrshort{krl}} fits very well into our concept and only a few reaso
 \end{itemize}
 The concept of the \textrm{\acrshort{krl}} is promising in terms of orchestrating the Web through reactivity.
 But we decided to implement a light weighted reference system, using an event-driven programming language that is laid out for an event-driven architecture.
-Another important key property of our envisioned conceptual model, which diverges from the \textrm{\acrshort{kre}} architcture, is the abstraction of state maintenance into action dispatching modules.
+Another important key property of our envisioned conceptual model, which diverges from the \textrm{\acrshort{kre}} architecture, is the abstraction of state maintenance into action dispatching modules.
  % (\acrshort{krl}) is an event-condition-action rule language with an embedded complex event expression language. TODO REALLY?
 % Only laid out for single actions? single events? no event composition? time comparison between different events?
 

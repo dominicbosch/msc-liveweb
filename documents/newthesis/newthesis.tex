@@ -18,7 +18,7 @@
 \usepackage[toc,page,header]{appendix}
 \usepackage[toc,acronym,ucmark]{glossaries}
 
-% \usepackage[none]{hyphenat} % FIXME REMOVE FOR FINAL DOCUMENT	
+\usepackage[none]{hyphenat} % FIXME REMOVE FOR FINAL DOCUMENT	
 
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 \renewcommand{\familydefault}{\sfdefault}
@@ -67,7 +67,7 @@
 	\input{includes/abstract}
 	\input{includes/acknowledgment}
 	\tableofcontents
-
+% TODO lists in the TOC?
 % Lists
 	\listoffigures
 	\listoftables
@@ -100,8 +100,8 @@
 	% \captionsetup[table]{list=no}
 
 	\addtocontents{toc}{\setcounter{tocdepth}{-1}}
-	\input{includes/appendixa}
-	\input{includes/appendixb}
+	% \input{includes/appendixa}
+	% \input{includes/appendixb}
 	\input{includes/appendixc}
 	\end{appendices}
 	\addtocontents{toc}{\setcounter{tocdepth}{1}}

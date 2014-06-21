@@ -48,7 +48,7 @@ Events in our prototype system are internally represented as tree structures in 
 A value can be an object or an array, but also a unicode string, a number, boolean or null.
 This allows for any arbitrary depth and chaining of the supported data representations.
 It is a handy feature when we assume a tree structure for events in our prototype system since the selection of nodes in tree structures has been well studied and useful libraries exist.
-Since all native data structures within \textrm{JavaScript} programming code are already in \textrm{\acrshort{json}} format, it can easily be marshalled into one string and communicated to other applications without overhead.
+Since all native data structures within \textrm{JavaScript} programming code are already in \textrm{\acrshort{json}} format, it can easily be marshaled into one string and communicated to other applications without overhead.
 \textrm{\acrshort{json}} can be implemented in virtually every programming language, therefore received a lot of attention and is supported by many \textrm{\glspl{webresource}} for communication.
 
 
@@ -109,7 +109,7 @@ exports.newMail = () ->
 
 
 \subsubsection{Webhooks}
-As powerful as \textrm{Webhooks} are in providding real-time notifications from remote \textrm{\glspl{webresource}}, as simple they are to use.
+As powerful as \textrm{Webhooks} are in providing real-time notifications from remote \textrm{\glspl{webresource}}, as simple they are to use.
 In our prototype, users can create as many new \textrm{Webhooks} as they choose to.
 They only need to provide an event name which will be associated to the \textrm{Webhooks}.
 A new \textrm{Webhook} is created in the \textrm{Webhook Listener}, which from then on accepts events posted to it, and the \textrm{Webhook \acrshort{uri}} is displayed to the user.
@@ -136,14 +136,14 @@ The \textrm{Rules Administration} within the \textrm{User Request Handler} notif
 For each event in the \textrm{Event Queue}, the engine checks it against its stored \textrm{\acrshort{eca}} rules and dispatches actions whenever the event conforms to the rule's condition part.
 The three parts of an \textrm{\acrshort{eca}} rule have the following requirements in our prototype system:
 \begin{itemize}
-	\item Event name: Any arbitrary unicode string, can refer to the name of an \textrm{Event Trigger} or a \textrm{Webhook}, but also to a custom loopback event.
+	\item Event name: Any arbitrary Unicode string, can refer to the name of an \textrm{Event Trigger} or a \textrm{Webhook}, but also to a custom loopback event.
 	\item Conditions: Zero or more instructions to be evaluated against an event. Requires a selector for a node in the tree structure of the event, a comparison operator ($<$, $<=$, $>$, $>=$, $==$, $!=$ or $instr$) and a value.
 	\item Action Dispatchers: A list of \textrm{Action Dispatchers} to be invoked if all conditions of the given event evaluate to true. We assume that invocations can be expressed using common function invocation syntax ( i.e. \texttt{actionFunction(param1, param2[, ...])} ) in order to dispatch an action.
 \end{itemize}
 A valid rule in the internal \textrm{\acrshort{json}} representation is shown in Listing \ref{lst:rulejson}, where we used the predefined \textrm{EmailYak Action Dispatcher} to send a mail to an interested person whenever news about soccer are detected.
 
 \subsubsection{Parameter Selectors for Events}
-Tree node selectors for event parameters are used in conditions to select a paremeter which is evaluated.
+Tree node selectors for event parameters are used in conditions to select a parameter which is evaluated.
 The selectors can also be used to pass event parameters as arguments to the \textrm{Action Dispatchers}.
 Event tree node selectors for \textrm{Action Dispatcher} arguments are defined by wrapping them into curly brackets and prepended with a hash: \texttt{"\#\{ [selector] \}"}.
 Since an existing \textrm{JavaScript} library\footnote{https://github.com/harthur/js-select} is used to find event parameters with selectors, the following selectors are available\footnote{Explanations taken from http://jsonselect.org/, which is used by js-select}:
@@ -219,20 +219,28 @@ word        ::= [A-Za-z0-9_-]+
 
 
 
-
-
-
-
-\section{Example Use Cases}
+\section{Prototype Use Case Implementations}
 % TODO concrete use case examples
 % as seen by user,
 % TODO figure: Rules (unions / objects / Rueckkoppelungen )
 
 % Diff comparison of URL
+\subsection{Webpage Diff}
 
+
+
+\subsection{Enhance Existing Web App}
+
+
+
+\subsection{Real-time Reactive Messenger}
+
+
+
+\subsection{Server Room Overheating}
 
 During our research we found a troublesome server room that shows how the \textrm{Web of Things} can be exposed through our model.
-This server room suffered from a defective cooling system which lead to a drastical increase of temperature in certain circumstances.
+This server room suffered from a defective cooling system which lead to a drastic increase of temperature in certain circumstances.
 As a consequence certain server automatically shut themselves down as safety measurements.
 Eventually, these shutdowns weren't detected immediately by the people that administered these servers, therefore unnecessary downtimes were the result.
 As a very quick fix to inform certain administrators about the shutdown of their server, we started pinging these servers and pushed the results int
@@ -361,7 +369,7 @@ While the application waits for the completion of the I/O operation, some remain
 \end{figure}
 
 Asynchronous code execution, as shown in Figure~\ref{fig:Closures_Asynchronous}, allows non-blocking and thus scalable applications.
-Non-blocking operations are a remedy for optimzed resource allocation and open up ways to overcome previously described unnecessary resource bindings.
+Non-blocking operations are a remedy for optimized resource allocation and open up ways to overcome previously described unnecessary resource bindings.
 Processing any kind of latency-driven I/O operation asynchronously ( e.g. filesystem access and socket communication ) exploits resources that would otherwise be bound while waiting for completion.
 Such operations are processed and completed whenever required resources are available.
 \begin{figure}[!ht]

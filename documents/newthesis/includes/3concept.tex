@@ -15,7 +15,7 @@
 The challenges and opportunities arising with the growth of the Web in terms of volume and complexity inspired our research towards the reactive Web.
 Therefore our starting point were the studies of related work in the context of reactivity on the Web, event composition and programmability of the Web.
 In the last chapter, we pointed out how they received a lot of attention and provide powerful tools to orchestrate the rapidly growing Web.
-By combining existing research in these fields we developped a conceptual model, which allows to impose smart reactivity to any \textrm{\gls{infospace}}.
+By combining existing research in these fields we developed a conceptual model, which allows to impose smart reactivity to any \textrm{\gls{infospace}}.
 Even though our initial set of \textrm{\glspl{infospace}} was thought to consist of \textrm{\glspl{webresource}}, our model is applicable to any \textrm{\gls{infosystem}} whose \textrm{\gls{infospace}} can be accessed and altered over interfaces, i.e. services.
 Thus we introduce our conceptual model for reactive \textrm{\glspl{infosystem}} and their services in this chapter.
 
@@ -48,7 +48,7 @@ While physical events correspond to a physical situation which is located at a s
 These virtual events can be anywhere within \textrm{\glspl{infosystem}} at any point in time and thus their actual location differs most certainly from its occurrence location.
 But virtual events also have explicit parameters which correspond to all available information about the event.
 As soon as events are transfered into the virtual world the afore mentioned location information turns into explicit parameters.
-Therefore wherever a virtual event is, it has a name, an occurence time and most likely some explicit parameters attached to it.
+Therefore wherever a virtual event is, it has a name, an occurrence time and most likely some explicit parameters attached to it.
 If the virtual event is of a physical nature, it has a physical location, if it is of a virtual nature it is likely associated with a virtual origin.
 Since in our model events are changes in data, they can be virtually anything, e.g. measurements, changes on a static webpage, changes of the object behind a \textrm{\gls{webservice}} or also a login attempt.
 % TODO TABELLE Ort/Kultur(fussball/Apple, weltweit)/Saisonal(kalender)/Internet (ortlos, github)
@@ -93,7 +93,7 @@ It queues all events and forwards them to the \textrm{Event Composition} module 
 
 \section{Event Pattern Detection}
 Traditional \textrm{\acrshort{eca}} systems only react on single events, but this might often not be enough to detect meaningful situations.
-Events are initially primitive that occurr at a point in time (e.g. a press down mouse button event).
+Events are initially primitive that occur at a point in time (e.g. a press down mouse button event).
 When they are composed (e.g. the latter event with a release mouse button event), they turn into a composite event which is more complex and has a duration.
 This is why there is a trend towards the detection of complex event patterns, as we have pointed out in the last chapter.
 \textrm{\acrshort{cep}} could be incorporated into the rules of the \textrm{Rule Engine}, which then reacts on event patterns, but this opposes our vision of a successively growing complexity of composite events that are defined on top of each other and fed back into the \textrm{Event Listener}.
@@ -110,9 +110,9 @@ What we now need is a module that translates events into actions on \textrm{\gls
 Almost all existing \textrm{\acrshort{eca}} system's actions write on the local \textrm{\gls{infospace}} which opposes our vision of the orchestration of different \textrm{\glspl{infosystem}} in order to impose reactivity on top or between them.
 For that reason we introduce the \textrm{Action Dispatcher} modules which are located right behind the \textrm{Rule Engine} in terms of the data flow and complete the reactivity flow between heterogeneous \textrm{\glspl{infosystem}}.
 \textrm{Action Dispatcher} modules are an important part of our model because they allow flexible coupling with \textrm{\gls{infosystem}} services, much like the \textrm{Event Trigger} modules do.
-\textrm{Event Trigger} and \textrm{Action Dispatcher} modules are communication abstractions to services of \textrm{\glspl{infosystem}}, that allow us to deal with their heterogenity in terms of communication.
+\textrm{Event Trigger} and \textrm{Action Dispatcher} modules are communication abstractions to services of \textrm{\glspl{infosystem}}, that allow us to deal with their heterogeneity in terms of communication.
 The \textrm{\gls{infospace}} of an \textrm{\gls{infosystem}} is not limited to internal data, but can also refer to a coupling with other devices and the sensing and controlling of it.
-Thinking of the \textrm{\gls{webofthings}} this can also include an \textrm{Action Dispatcher} that has access to an \textrm{\gls{infosystem}} which controlls devices and thus is capable of turning down the heating in a house, as shown in Figure \ref{fig:InformationSystemWoT}.
+Thinking of the \textrm{\gls{webofthings}} this can also include an \textrm{Action Dispatcher} that has access to an \textrm{\gls{infosystem}} which controls devices and thus is capable of turning down the heating in a house, as shown in Figure \ref{fig:InformationSystemWoT}.
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=0.6\textwidth]{figures/InformationSystemWoT}
