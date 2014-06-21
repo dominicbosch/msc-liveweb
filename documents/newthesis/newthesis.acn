@@ -15,12 +15,12 @@
 \glossaryentry{SOAP?\glossaryentryfield{soap}{\glsnamefont{SOAP}}{Simple Object Access Protocol}{\relax }|setentrycounter[]{page}\glsnumberformat}{3}
 \glossaryentry{REST?\glossaryentryfield{rest}{\glsnamefont{REST}}{Representational State Transfer}{\relax }|setentrycounter[]{page}\glsnumberformat}{3}
 \glossaryentry{REST?\glossaryentryfield{rest}{\glsnamefont{REST}}{Representational State Transfer}{\relax }|setentrycounter[]{page}\glsnumberformat}{3}
+\glossaryentry{SOAP?\glossaryentryfield{soap}{\glsnamefont{SOAP}}{Simple Object Access Protocol}{\relax }|setentrycounter[]{page}\glsnumberformat}{3}
 \glossaryentry{SOA?\glossaryentryfield{soa}{\glsnamefont{SOA}}{Service-Oriented Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{3}
 \glossaryentry{SOA?\glossaryentryfield{soa}{\glsnamefont{SOA}}{Service-Oriented Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{3}
 \glossaryentry{SOA?\glossaryentryfield{soa}{\glsnamefont{SOA}}{Service-Oriented Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{3}
-\glossaryentry{SOA?\glossaryentryfield{soa}{\glsnamefont{SOA}}{Service-Oriented Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{3}
-\glossaryentry{SOA?\glossaryentryfield{soa}{\glsnamefont{SOA}}{Service-Oriented Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{3}
-\glossaryentry{RPC?\glossaryentryfield{rpc}{\glsnamefont{RPC}}{Remote Procedure Call}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
+\glossaryentry{SOA?\glossaryentryfield{soa}{\glsnamefont{SOA}}{Service-Oriented Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
+\glossaryentry{SOA?\glossaryentryfield{soa}{\glsnamefont{SOA}}{Service-Oriented Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
 \glossaryentry{RPC?\glossaryentryfield{rpc}{\glsnamefont{RPC}}{Remote Procedure Call}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
 \glossaryentry{RPC?\glossaryentryfield{rpc}{\glsnamefont{RPC}}{Remote Procedure Call}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
 \glossaryentry{RPC?\glossaryentryfield{rpc}{\glsnamefont{RPC}}{Remote Procedure Call}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
@@ -43,11 +43,11 @@
 \glossaryentry{WSDL?\glossaryentryfield{wsdl}{\glsnamefont{WSDL}}{Web Service Description Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
 \glossaryentry{WSDL?\glossaryentryfield{wsdl}{\glsnamefont{WSDL}}{Web Service Description Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
 \glossaryentry{SOAP?\glossaryentryfield{soap}{\glsnamefont{SOAP}}{Simple Object Access Protocol}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
-\glossaryentry{CORBA?\glossaryentryfield{corba}{\glsnamefont{CORBA}}{Common Object Request Broker Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
-\glossaryentry{CORBA?\glossaryentryfield{corba}{\glsnamefont{CORBA}}{Common Object Request Broker Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
-\glossaryentry{CORBA?\glossaryentryfield{corba}{\glsnamefont{CORBA}}{Common Object Request Broker Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
-\glossaryentry{ORB?\glossaryentryfield{orb}{\glsnamefont{ORB}}{Object Request Broker}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
-\glossaryentry{ORB?\glossaryentryfield{orb}{\glsnamefont{ORB}}{Object Request Broker}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
+\glossaryentry{CORBA?\glossaryentryfield{corba}{\glsnamefont{CORBA}}{Common Object Request Broker Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{CORBA?\glossaryentryfield{corba}{\glsnamefont{CORBA}}{Common Object Request Broker Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{CORBA?\glossaryentryfield{corba}{\glsnamefont{CORBA}}{Common Object Request Broker Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{ORB?\glossaryentryfield{orb}{\glsnamefont{ORB}}{Object Request Broker}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{ORB?\glossaryentryfield{orb}{\glsnamefont{ORB}}{Object Request Broker}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
 \glossaryentry{ORB?\glossaryentryfield{orb}{\glsnamefont{ORB}}{Object Request Broker}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
 \glossaryentry{SOAP?\glossaryentryfield{soap}{\glsnamefont{SOAP}}{Simple Object Access Protocol}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
 \glossaryentry{WSDL?\glossaryentryfield{wsdl}{\glsnamefont{WSDL}}{Web Service Description Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
@@ -58,7 +58,6 @@
 \glossaryentry{ORB?\glossaryentryfield{orb}{\glsnamefont{ORB}}{Object Request Broker}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
 \glossaryentry{RPC?\glossaryentryfield{rpc}{\glsnamefont{RPC}}{Remote Procedure Call}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
 \glossaryentry{CORBA?\glossaryentryfield{corba}{\glsnamefont{CORBA}}{Common Object Request Broker Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
-\glossaryentry{CORBA?\glossaryentryfield{corba}{\glsnamefont{CORBA}}{Common Object Request Broker Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
 \glossaryentry{IIOP?\glossaryentryfield{iiop}{\glsnamefont{IIOP}}{Internet Inter-\textrm {ORB} Protocol}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
 \glossaryentry{IIOP?\glossaryentryfield{iiop}{\glsnamefont{IIOP}}{Internet Inter-\textrm {ORB} Protocol}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
 \glossaryentry{ORB?\glossaryentryfield{orb}{\glsnamefont{ORB}}{Object Request Broker}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
@@ -73,9 +72,12 @@
 \glossaryentry{URI?\glossaryentryfield{uri}{\glsnamefont{URI}}{Uniform Resource Identifiers}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
 \glossaryentry{REST?\glossaryentryfield{rest}{\glsnamefont{REST}}{Representational State Transfer}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
 \glossaryentry{REST?\glossaryentryfield{rest}{\glsnamefont{REST}}{Representational State Transfer}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{HTTP?\glossaryentryfield{http}{\glsnamefont{HTTP}}{Hypertext Transfer Protocol}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{HTTP?\glossaryentryfield{http}{\glsnamefont{HTTP}}{Hypertext Transfer Protocol}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
 \glossaryentry{REST?\glossaryentryfield{rest}{\glsnamefont{REST}}{Representational State Transfer}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
 \glossaryentry{REST?\glossaryentryfield{rest}{\glsnamefont{REST}}{Representational State Transfer}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
-\glossaryentry{URI?\glossaryentryfield{uri}{\glsnamefont{URI}}{Uniform Resource Identifiers}{\relax }|setentrycounter[]{page}\glsnumberformat}{6}
+\glossaryentry{REST?\glossaryentryfield{rest}{\glsnamefont{REST}}{Representational State Transfer}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{URI?\glossaryentryfield{uri}{\glsnamefont{URI}}{Uniform Resource Identifiers}{\relax }|setentrycounter[]{page}\glsnumberformat}{7}
 \glossaryentry{URI?\glossaryentryfield{uri}{\glsnamefont{URI}}{Uniform Resource Identifiers}{\relax }|setentrycounter[]{page}\glsnumberformat}{7}
 \glossaryentry{JSON?\glossaryentryfield{json}{\glsnamefont{JSON}}{JavaScript Object Notification}{\relax }|setentrycounter[]{page}\glsnumberformat}{7}
 \glossaryentry{JSON?\glossaryentryfield{json}{\glsnamefont{JSON}}{JavaScript Object Notification}{\relax }|setentrycounter[]{page}\glsnumberformat}{7}
@@ -88,7 +90,6 @@
 \glossaryentry{EDA?\glossaryentryfield{eda}{\glsnamefont{EDA}}{Event-Driven Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{7}
 \glossaryentry{EDA?\glossaryentryfield{eda}{\glsnamefont{EDA}}{Event-Driven Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{7}
 \glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{7}
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{7}
 \glossaryentry{RDF?\glossaryentryfield{rdf}{\glsnamefont{RDF}}{Resource Description Framework}{\relax }|setentrycounter[]{page}\glsnumberformat}{8}
 \glossaryentry{RDF?\glossaryentryfield{rdf}{\glsnamefont{RDF}}{Resource Description Framework}{\relax }|setentrycounter[]{page}\glsnumberformat}{8}
 \glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{8}
@@ -122,12 +123,13 @@
 \glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{8}
 \glossaryentry{RuleML?\glossaryentryfield{ruleml}{\glsnamefont{RuleML}}{Rule Markup Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{8}
 \glossaryentry{XML?\glossaryentryfield{xml}{\glsnamefont{XML}}{Extensible Markup Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{8}
-\glossaryentry{JSON?\glossaryentryfield{json}{\glsnamefont{JSON}}{JavaScript Object Notification}{\relax }|setentrycounter[]{page}\glsnumberformat}{8}
-\glossaryentry{JSON?\glossaryentryfield{json}{\glsnamefont{JSON}}{JavaScript Object Notification}{\relax }|setentrycounter[]{page}\glsnumberformat}{8}
-\glossaryentry{RuleML?\glossaryentryfield{ruleml}{\glsnamefont{RuleML}}{Rule Markup Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{8}
+\glossaryentry{JSON?\glossaryentryfield{json}{\glsnamefont{JSON}}{JavaScript Object Notification}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{JSON?\glossaryentryfield{json}{\glsnamefont{JSON}}{JavaScript Object Notification}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{RuleML?\glossaryentryfield{ruleml}{\glsnamefont{RuleML}}{Rule Markup Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
 \glossaryentry{ESB?\glossaryentryfield{esb}{\glsnamefont{ESB}}{Enterprise Service Bus}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
 \glossaryentry{ESB?\glossaryentryfield{esb}{\glsnamefont{ESB}}{Enterprise Service Bus}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
 \glossaryentry{RuleML?\glossaryentryfield{ruleml}{\glsnamefont{RuleML}}{Rule Markup Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{CORBA?\glossaryentryfield{corba}{\glsnamefont{CORBA}}{Common Object Request Broker Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
 \glossaryentry{KRL?\glossaryentryfield{krl}{\glsnamefont{KRL}}{Kinetic Rule Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
 \glossaryentry{KRL?\glossaryentryfield{krl}{\glsnamefont{KRL}}{Kinetic Rule Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
 \glossaryentry{KRE?\glossaryentryfield{kre}{\glsnamefont{KRE}}{Kinetic Rules Engine}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
@@ -139,10 +141,10 @@
 \glossaryentry{KRE?\glossaryentryfield{kre}{\glsnamefont{KRE}}{Kinetic Rules Engine}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
 \glossaryentry{KRE?\glossaryentryfield{kre}{\glsnamefont{KRE}}{Kinetic Rules Engine}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
 \glossaryentry{KRL?\glossaryentryfield{krl}{\glsnamefont{KRL}}{Kinetic Rule Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{EDA?\glossaryentryfield{eda}{\glsnamefont{EDA}}{Event-Driven Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
 \glossaryentry{KRE?\glossaryentryfield{kre}{\glsnamefont{KRE}}{Kinetic Rules Engine}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
 \glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
 \glossaryentry{KRL?\glossaryentryfield{krl}{\glsnamefont{KRL}}{Kinetic Rule Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{ESB?\glossaryentryfield{esb}{\glsnamefont{ESB}}{Enterprise Service Bus}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
 \glossaryentry{RDFTL?\glossaryentryfield{rdftl}{\glsnamefont{RDFTL}}{\textrm {RDF} Triggering Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
 \glossaryentry{RDF?\glossaryentryfield{rdf}{\glsnamefont{RDF}}{Resource Description Framework}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
 \glossaryentry{RDF?\glossaryentryfield{rdf}{\glsnamefont{RDF}}{Resource Description Framework}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
@@ -153,6 +155,7 @@
 \glossaryentry{RuleML?\glossaryentryfield{ruleml}{\glsnamefont{RuleML}}{Rule Markup Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
 \glossaryentry{KRL?\glossaryentryfield{krl}{\glsnamefont{KRL}}{Kinetic Rule Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
 \glossaryentry{KRE?\glossaryentryfield{kre}{\glsnamefont{KRE}}{Kinetic Rules Engine}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
+\glossaryentry{ESB?\glossaryentryfield{esb}{\glsnamefont{ESB}}{Enterprise Service Bus}{\relax }|setentrycounter[]{page}\glsnumberformat}{11}
 \glossaryentry{EDA?\glossaryentryfield{eda}{\glsnamefont{EDA}}{Event-Driven Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{11}
 \glossaryentry{CEP?\glossaryentryfield{cep}{\glsnamefont{CEP}}{Complex Event Processing}{\relax }|setentrycounter[]{page}\glsnumberformat}{11}
 \glossaryentry{CEP?\glossaryentryfield{cep}{\glsnamefont{CEP}}{Complex Event Processing}{\relax }|setentrycounter[]{page}\glsnumberformat}{11}
@@ -165,12 +168,14 @@
 \glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{14}
 \glossaryentry{CEP?\glossaryentryfield{cep}{\glsnamefont{CEP}}{Complex Event Processing}{\relax }|setentrycounter[]{page}\glsnumberformat}{14}
 \glossaryentry{CED?\glossaryentryfield{ced}{\glsnamefont{CED}}{Complex Event Detection}{\relax }|setentrycounter[]{page}\glsnumberformat}{14}
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{14}
-\glossaryentry{EDA?\glossaryentryfield{eda}{\glsnamefont{EDA}}{Event-Driven Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{14}
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{14}
+\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{15}
+\glossaryentry{EDA?\glossaryentryfield{eda}{\glsnamefont{EDA}}{Event-Driven Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{15}
+\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{15}
 \glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{15}
 \glossaryentry{CMS?\glossaryentryfield{cms}{\glsnamefont{CMS}}{Content Management System}{\relax }|setentrycounter[]{page}\glsnumberformat}{16}
 \glossaryentry{CMS?\glossaryentryfield{cms}{\glsnamefont{CMS}}{Content Management System}{\relax }|setentrycounter[]{page}\glsnumberformat}{16}
+\glossaryentry{CMS?\glossaryentryfield{cms}{\glsnamefont{CMS}}{Content Management System}{\relax }|setentrycounter[]{page}\glsnumberformat}{17}
+\glossaryentry{CMS?\glossaryentryfield{cms}{\glsnamefont{CMS}}{Content Management System}{\relax }|setentrycounter[]{page}\glsnumberformat}{17}
 \glossaryentry{CMS?\glossaryentryfield{cms}{\glsnamefont{CMS}}{Content Management System}{\relax }|setentrycounter[]{page}\glsnumberformat}{17}
 \glossaryentry{CMS?\glossaryentryfield{cms}{\glsnamefont{CMS}}{Content Management System}{\relax }|setentrycounter[]{page}\glsnumberformat}{17}
 \glossaryentry{CMS?\glossaryentryfield{cms}{\glsnamefont{CMS}}{Content Management System}{\relax }|setentrycounter[]{page}\glsnumberformat}{17}

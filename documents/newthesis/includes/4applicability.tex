@@ -3,65 +3,70 @@
 \chapter{Use Cases for Reactive Information Systems}
 We have so far introduced a conceptual model for reactive information systems and their services.
 Through our model we are able to react on events happening in \textrm{\glspl{infosystem}} and dispatch changes to it or any other accessible \textrm{\glspl{infosystem}}.
-In this chapter we will give examples of how use cases can be realized through our model.
+In this chapter we will give examples of what use cases can be realized through our model.
 
 \section{Reacting on changes in the \gls{www}}
 Many documents of the \textrm{\gls{www}} are dynamic in the way that they change over time.
 Some might change in an interval of a few minutes (e.g. news), while others change much slower, such as knowledge sites.
-To detect such changes a site in the Web needs to keep track of the document history and trigger events if there is a change.
+To detect such changes an \textrm{\gls{infosystem}} in the Web needs to keep track of the document history and trigger events if there is a change.
 In our model this would be realized by an \textrm{Event Trigger} which monitors a certain set of \textrm{\glspl{infospace}} and triggers events as soon as differences are detected.
 A user will then set up a rule that checks if the changes are related to a certain category of interest, such as sports or a certain observed site and how big those changes are.
 If for example a Wikipedia article changed in more than 20\% of its content this will be a reason for a moderator to look at it and should be entered as a task in the next free slot of his calendar.
-
+% TODO refer to figure
 
 \section{Enhance existing Web Applications}
 Web applications, such as webmails, social networks or \textrm{\acrlong{cms} (\acrshort{cms})} are widely spread and used by a large number of Internet users.
 But often users or developers miss some features or interoperability with other web applications, which would result in enhanced functionality and also in less work.
-Features of that kind could also include data and functionality from other sites on the web.
-This would require web applications to \textrm{\gls{mashup}} together and to grab data or invoke functionality on each other.
-A lot of enhancements will not be implemented by the web applications themselves because they are very specific to a small number of their users.
-With a reactive information system, users and developers could realize such features on their own.
+Features of that kind could also include data and functionality from other \textrm{\gls{webresource}} on the web.
+This would require \textrm{\glspl{webapplication}} to communicate together and to grab data or impose functionality upon each other.
+A lot of enhancements will not be implemented by the \textrm{\glspl{webapplication}} themselves because they are very specific to a small number of their users.
+% TODO webapplication is in the browser, aight? what do you mena?
+With a reactive \textrm{\glspl{infosystem}}, users and developers could realize such features on their own.
+% TODO refer to figure
 
 
 \subsection{Enrich \textrm{\acrshort{cms}} Posts with Additional Information}
-Every new post to a content management system can be modeled as an event.
-In the case that a user would like to enrich such a system with founded knowledge from a remote resource, reactivity in the Web can be used to enrich it.
+Every new post to a \textrm{\acrlong{cms}} can be modeled as an event.
+In the case that a user would like to enrich such a \textrm{\acrshort{cms}} with knowledge from a remote resource, reactivity in the Web can be used to do it.
 Enhancing an existing \textrm{\acrshort{cms}} can be realized by a rule that evaluates new posts and checks whether knowledge tags are included in the post.
-Whenever there are tags included within the post, the reactive system will enrich the post with additional knowledge to these tags from a remote service of the user's choice.
+Whenever there are tags included within the post, the reactive entity will enrich the post with additional knowledge to these tags from a remote \textrm{\gls{webresource}} of the user's choice.
 \begin{figure}[!ht]
   \centering
   \includegraphics{figures/ProBinderAnnotations}
   \caption{Enrich \acrshort{cms} Post with Remote Knowledge Data}
   \label{fig:ProBinderAnnotations}
 \end{figure}
+% TODO refer to figure
 
 
 \subsection{Workflow Automation}
-Within such web applications, users often have very specific workflows.
-And because workflows always start with an event, they are predestined to be automated by a reactive information system.
-As an example for workflow automation, course and student exercise submission administration can be taken care of by a reactive information system.
-Whenever a new semester starts, the reactive system will detect this through one of its rules and command an action dispatcher to set up infrastructures for courses.
-This can also include grabbing course data from an official web page and including it into the infrastructure, thus eliminating the need for manual data copy tasks.
+Within such \textrm{\glspl{webapplication}}, users often have very specific workflows.
+And because workflows always start with an event, they are predestined to be automated by a reactive entity.
+As an example for workflow automation, course and student exercise submission administration can be taken care of by a reactive entity.
+Whenever a new semester starts, the reactive entity will detect this through one of its rules and command an action dispatcher to set up infrastructures for courses.
+This can also include grabbing course data from an official webpage and including it into the infrastructure, thus eliminating the need for manual data copy tasks.
 \begin{figure}[!ht]
   \centering
   \includegraphics{figures/ProBinderCourseSetup}
   \caption{Create course resources at semester start}
   \label{fig:ProBinderCourseSetup}
 \end{figure}
+% TODO refer to figure
 
 After setting up the semester courses, the reactive system is ready to process new student registrations for these courses.
-It automatically associates students into the afore mentioned infrastructure and sets up additional infrastructure such as an exercise submission container.
+It automatically associates students into the afore mentioned infrastructures and sets up additional infrastructure such as an exercise submission container.
 Whenever a course tutor submits a new exercise to the course resource, the system will detect this and spread this information to the students, together with a deadline.
-The students are expected to submit their exercise solutions before the deadline to the exercise submission container that was created reactively for them.
+The students are expected to submit their exercise solutions before the deadline, to the exercise submission container, which was created reactively for them.
 \begin{figure}[!ht]
   \centering
   \includegraphics{figures/ProBinderStudentRegisters}
   \caption{Create course resource for registered student}
   \label{fig:ProBinderStudentRegisters}
 \end{figure}
+% TODO refer to figure
 
-A certain amount of time before the deadline, e.g. one day, the reactive system will detect the deadline and process events that depict the current exercise submission status per student.
-If the system detects a student who hasn't uploaded her exercises yet, it will notify her about the deadline.
+A certain amount of time before the deadline, e.g. one day, the reactive entity will detect the deadline and process events that depict the current exercise submission status per student.
+If the system detects students who haven't uploaded their exercises yet, it will notify them about the deadline.
 This is an additional service that gives students the chance to react on a missed exercise submission deadline.
 As soon as the deadline passed, the system will revoke write-rights to the exercise submission container and therefore disallow submissions which are too late.
 \begin{figure}[!ht]
@@ -70,6 +75,7 @@ As soon as the deadline passed, the system will revoke write-rights to the exerc
   \caption{Notify student before exercise due date}
   \label{fig:ProBinderExerciseNotification}
 \end{figure}
+% TODO refer to figure
 
 
 
@@ -86,6 +92,7 @@ One action to such a failing service test could be an automatic switching of the
   \caption{Test proper Service Functionality and Availability}
   \label{fig:ProBinderServiceTesting}
 \end{figure}
+% TODO refer to figure
 
 
 
@@ -106,6 +113,7 @@ Even better would be if it would have the power to kick in an additional emergen
   \caption{Measurements on Server Failure}
   \label{fig:WoT_Server}
 \end{figure}
+% TODO refer to figure
 
 Another scenario gets more realistic with the increasing number of homes that are connected to the Web.
 A home or apartment owner has his light controls attached to the Web.
@@ -126,3 +134,4 @@ On a Wednesday evening it could also inform the delivery service that they can d
 There are a lot of different weather services existing in the Web.
 One has to check several of them in order to get an idea on how likely it is that it will be raining on the journey to work and back.
 By composing a higher-order event from several weather update events, a user could store a rule which alarms him early in the morning if more than 50\% of the weather forecasts expect rain on the way to or back from work.
+% TODO refer to figure

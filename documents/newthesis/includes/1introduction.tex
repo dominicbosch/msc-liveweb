@@ -26,27 +26,25 @@ Since the need of users to orchestrate different services has gotten a lot of at
 For example it is common for social network applications to push user-specific notifications to other social networks, e.g. singing in at a place in \textrm{Foursquare} can also be posted directly to the \textrm{Facebook} timeline.
 Because of existing limitations, such as customizability or action imposing on \textrm{\gls{infosystem}} of their choice, users still end up mixing data and functionality from different \textrm{\glspl{webresource}} by hand, which often means to execute similar tasks repeatedly by hand.
 Moreover the manual reaction on changes is deferred because the changes are not detected in real-time by the user or because the user is not able to react in a timely fashion.
-Also if a certain workflow could be split up into several automated sub tasks, it is likely that some parts could be reused for other workflows or even by other people to get similar work done. % TODO Really?
 
 Since data and functionality already exist in the Web, the users are theoretically enabled to automate their work to some extent by orchestrating those \textrm{\glspl{webresource}}.
 Even though the access to resources gets simpler, the average user is still not capable to fully exploit the Web's full potential.
-Another challenge is, that often a lot of effort has to be made, in understanding how the specific resource works, before it can be fully exploited.
-There is a lot of research that goes towards an easy to orchestrate the Web, but they are either often complicated to wield themselves, mere data copy tasks or static resource compositions.
-Our goal is to enable user-defined resource composition, and still exploiting their full potential by not limiting the set of their functionality.
+Another challenge is, that often a lot of effort has to be made, in understanding how the specific service works, before it can be fully exploited.
+There is a lot of research that goes towards an easy to orchestrate the Web, but they are either often complicated to wield themselves, mere data copy tasks or static \textrm{\gls{webresource}} compositions.
+Our goal is to enable user-defined resource orchestrations, and still exploiting their full potential by not limiting the set of their functionality and thus going towards a reactive Web.
 
-A big part of the data, that becomes available to the users, is short-lived data that corresponds to state changes, and which can be modeled as events.
-In this thesis we introduce an event-driven conceptual model that uses the programmability of the Web and imposes reactivity to it.
-We claim the whole Web as our information space, in which we listen for triggered events and in which we execute actions as a result wherever possible.
-Such a user-specific reactivity allows a personalization of the Web and a tool to govern its data flood by automating tedious tasks.
-It allows users to orchestrate the Web and to tailor reactivity to their needs.
+A big part of the data, that becomes available to the users, is short-lived data that corresponds to state changes, which are changes in the \textrm{\glspl{infospace}} and can be modeled as events for detection or actions for imposition.
+In this thesis we introduce an event-driven conceptual model that uses the programmability of \textrm{\glspl{infosystem}} and their services in order to impose reactivity between them.
+By regarding the whole Web as an \textrm{\gls{infospace}}, in which we listen for triggered events and on which we impose actions as a result of user-defined rules, we are able to model a real-time reactive Web.
+Such a personalized reactivity allows the orchestration of the Web and a tool to govern its data flood by automating tedious tasks.
 Current \textrm{\gls{webresource}} orchestrations concentrate on data flow rather than on event flow, which are mere copy/paste tasks of data than smart reactivity.
-This makes us believe that our event-based conceptual model can overcome certain shortcomings of the existing approaches and provides a step towards the reactive Web.
+This makes us believe that our event-based conceptual model can overcome certain shortcomings of the existing approaches and provides a step towards the real-time reactive Web.
 
 
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=0.7\textwidth]{figures/UsersWeildServicesInTheWeb}
-  \caption{Users orchestrate the Web's Data and Functionality}
+  \caption{Users orchestrate the Web's Data and Functionality (... TODO prettify!)}
   \label{fig:UsersWeildServicesInTheWeb}
 \end{figure}
 % \textit{\small{MAKE NEW ONE! Figure with user orchestrating Web Resources}}
@@ -56,4 +54,3 @@ This makes us believe that our event-based conceptual model can overcome certain
 
 % \textit{\small{TODO: use the word task or workflow?}}
 
-% Filtering of information?
