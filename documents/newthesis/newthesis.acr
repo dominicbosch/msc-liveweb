@@ -7,7 +7,8 @@
 \glossaryentryfield{cep}{\glsnamefont{CEP}}{Complex Event Processing}{\relax }{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{8}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{11}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{14}}}%
+		\setentrycounter[]{page}\glsnumberformat{14}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{33}}}%
 \glossaryentryfield{cms}{\glsnamefont{CMS}}{Content Management System}{\relax }{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{iv}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{16\delimN 17}}}%
@@ -28,8 +29,10 @@
 		\setentrycounter[]{page}\glsnumberformat{14\delimN 15}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{21}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{25}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{27}}}%
+		\setentrycounter[]{page}\glsnumberformat{27}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{33}}}%
 \glossaryentryfield{eda}{\glsnamefont{EDA}}{Event-Driven Architecture}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{i}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{7}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{9}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{11}\delimN 
@@ -39,8 +42,11 @@
 		\setentrycounter[]{page}\glsnumberformat{9}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{11}}}\glsgroupskip
 \glsgroupheading{H}\relax \glsresetentrylist %
+\glossaryentryfield{html}{\glsnamefont{HTML}}{Hypertext Markup Language}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{32}}}%
 \glossaryentryfield{http}{\glsnamefont{HTTP}}{Hypertext Transfer Protocol}{\relax }{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{5}}}\glsgroupskip
+		\setentrycounter[]{page}\glsnumberformat{5}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{33}}}\glsgroupskip
 \glsgroupheading{I}\relax \glsresetentrylist %
 \glossaryentryfield{iaas}{\glsnamefont{IaaS}}{Infrastructure as a service}{\relax }{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{3}}}%
@@ -70,7 +76,8 @@
 \glsgroupheading{R}\relax \glsresetentrylist %
 \glossaryentryfield{rdf}{\glsnamefont{RDF}}{Resource Description Framework}{\relax }{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{8}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{10}}}%
+		\setentrycounter[]{page}\glsnumberformat{10}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{33}}}%
 \glossaryentryfield{rdftl}{\glsnamefont{RDFTL}}{\textrm {RDF} Triggering Language}{\relax }{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{8}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{10}}}%
@@ -78,7 +85,8 @@
 		\setentrycounter[]{page}\glsnumberformat{3}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{5}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{7}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{23}}}%
+		\setentrycounter[]{page}\glsnumberformat{23}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{32\delimN 33}}}%
 \glossaryentryfield{rewerse}{\glsnamefont{REWERSE}}{Reasoning on the Web with Rules and Semantics}{\relax }{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{8}}}%
 \glossaryentryfield{rpc}{\glsnamefont{RPC}}{Remote Procedure Call}{\relax }{\glossaryentrynumbers{\relax 

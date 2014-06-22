@@ -1,16 +1,14 @@
 \chapter*{Abstract}
-% The research focus (i.e. statement of the problem(s)/research issue(s) addressed);
-% The research methods used (experimental research, case studies, questionnaires, etc.);
-% The results/findings of the research; and
-% The main conclusions and recommendations
 The Web is a rapidly growing information universe, consisting of \textrm{\glspl{infosystem}} that provide access over heterogeneous services.
-% TODO intro to Web?
-The majority of those \textrm{\glspl{infosystem}} are dynamic and changes in their \textrm{\gls{infospace}} can be regarded as events, that can be detected.
-But such changes can also be looked at as actions, when imposed onto the \textrm{\gls{infospace}}.
+The majority of those \textrm{\glspl{infosystem}} are dynamic and changes in their \textrm{\gls{infospace}} can be regarded as events, when aiming to detect them.
+Moreover, such changes are also actions, when imposed onto the \textrm{\gls{infospace}}.
 If appropriate services exist to access such an \textrm{\gls{infosystem}} for read and write operations, we are able to orchestrate it.
-By adopting the \textrm{\acrlong{eca}} paradigm to \textrm{\gls{infospace}}, we are able to introduce an event-based conceptual model, which allows the detection of events and the dispatching of actions according to predefined rules, thus imposing reactivity on top of \textrm{\glspl{infosystem}}.
-This model is not limited to the Web, but can include any in a way accessible \textrm{\glspl{infosystem}}.
-In our work we introduce a prototype system which uses the Web's programmability to impose reactivity on top of it.
-Through our prototype it is possible to orchestrate \textrm{\glspl{webresource}} based on an event-driven architecture, a method which pushes towards the vision of real-time reactive \textrm{\glspl{infosystem}}.
-% TODO introduce WEbhooks
-% TODO tell about examples
+By adopting the \textrm{\acrlong{eca} (\acrshort{eca})} paradigm to \textrm{\glspl{infosystem}}, we are able to introduce an event-based conceptual model, which allows the detection of events and the dispatching of actions according to predefined rules, thus imposing reactivity on top of or between \textrm{\glspl{infosystem}}.
+Current approaches that use the \textrm{\acrshort{eca}} paradigm focus on action imposition on local storage, while we aim to impose actions on the hetereogeneous services of existing \textrm{\glspl{infosystem}}.
+This model is not limited to the Web, but can include any in a way accessible \textrm{\glspl{infosystem}} over its services.
+
+In our work we introduce a prototype system, which uses the Web's programmability to impose reactivity on top of it.
+We also underline the importance of the, currently little, support of \textrm{\glspl{webservice}} for event callback addresses, the so called \textrm{\glspl{webhook}}.
+They are the only way for real-time event delivery to remote systems and free them from expensive polling for changes.
+Through our prototype it is possible to orchestrate \textrm{\glspl{webservice}} based on an \textrm{\acrlong{eda} (\acrshort{eda})}, a method which pushes towards the vision of real-time reactive \textrm{\glspl{infosystem}}.
+We list some example use cases for our conceptual model, as well as use cases that have been implemented in our prototype system.

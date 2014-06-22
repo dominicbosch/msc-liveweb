@@ -76,11 +76,9 @@ The optimal case for an event-driven system which requires events from a remote 
 But our research has shown that such \textrm{\glspl{infosystem}} are often passive and rarely provide ways for external systems to announce interest in changes of their data.
 For example in the context of \textrm{\glspl{webresource}}, many of them provide access to their data over services, but do not actively communicate changes to interested parties.
 This is where the upcoming concept of \textrm{\glspl{webhook}} comes into play.
-Only through them we are able to provide real-time reactivity without risking huge costs of continuously polling for changes over all \textrm{\glspl{infospace}}.
-%TODO future work?
-We envision a future where the whole Web is event-driven and events are directed to any \textrm{\gls{infosystem}}, which is interested in them.
-This would be the optimal case for effective real-time notifications and thus reactivity on the Web.
-Since this in general not the case yet, we need to incorporate polling for changes into our model, in order to cope for the widely spread passiveness of \textrm{\glspl{infosystem}}.
+Because of effectivity, it is essential for \textrm{\glspl{infosystem}} to push event notifications to external systems, instead of letting them poll for events.
+Only through such pushed events it is possible to have real-time reactivity without high costs of continuously polling for changes over all \textrm{\glspl{infospace}}.
+We also need to take passive \textrm{\glspl{infosystem}} into account which do not push events to external systems, therefore we need to incorporate polling for changes into our model.
 Wherever an \textrm{\gls{infosystem}} is not capable to provide events to external \textrm{\glspl{infosystem}}, we can still read all the accessible data and detect changes in it, model them as events and feed them into our model.
 In our model the polling for changes is incorporated in the \textrm{Event Trigger} modules.
 Those are flexible modules that have the proper tools to access any \textrm{\gls{infosystem}} service and therefore its \textrm{\gls{infospace}} and are capable of identifying changes in the data.

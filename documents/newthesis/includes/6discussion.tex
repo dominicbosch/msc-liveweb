@@ -1,79 +1,54 @@
 
 \chapter{Conclusions \& Future Work}
-% what reached, how to go on?
-% Why is our system required, compare to servlets in terms of dynamic loading? user specific
-% in the future what about somebody discovering our system as worthy to push events to? -> needs detection of new events
-% We are taking a step further and allow not only the chaining up of several remote ECA engines, but also the invocation of actions on any arbitrary Web accessible service.
 
-% In the future we could limit access to information systems to REST URI's and thus incorporate such calls into the language.
-% but still we would need to be able to add logic, thus programming modules
+The practical use case examples for our lightweighted prototype system showed the diversity of examples that can be run in it.
+As soon as there are services that allow the access to an \textrm{\glspl{infosystem}}, we are able to orchestrate them, which is a promising insight.
+But even though the Web gets ever more programmable it is still a tedious task for many \textrm{\glspl{webservice}} to get into communication.
+Moreover it is a time consuming task to find the proper functionality in \textrm{\glspl{webapi}}, or certain functionality needs to be chained in order to get either to meaningful events or actions, or last but not least some functionality is just not accessible.
+\textrm{\acrshort{rest}}ful \textrm{\glspl{webservice}} are a good example for lacking meaningful functionality, since they do not provide complex functionality but more or less read, write, update and delete logic for \textrm{\glspl{webresource}}.
+For those reasons, we believe it was a good decision to encapsulate sometimes complex logic into the \textrm{Event Trigger} and \textrm{Action Dispatcher} modules.
+Through this, also users that do not have a background in computer science are more likely able to forge their customzied reactive Web.
 
-%
-% Temperature warning, using import.io
-%http://khanlou.com/2014/03/model-view-whatever/
-% Transactions in businesses, find use case. how would we lose events?
-% Transactions for business. find use case.and explain how we would loose events.
+Many of the notional use case examples in chapter 4 have been implemented in the prototype system, but have brought important insight where it did not work instantly.
+We found that it is difficult to detect changes on any arbitrary webpage in a useful way.
+Our first attempt was to use a diff comparison utility, of which the result was hard to process because of the \textrm{\acrshort{html}} tags.
+Another approach was to create an object tree from the \textrm{\acrshort{html}} document and calculate the difference between the last recorded object, which was more promising to detect changes all over a webpage.
+The simplest approach was to use \textrm{Import.io} to define a part of a webpage to be observed and then detect changes only on this predefined part of the webpage over the \textrm{Import.io} \textrm{\gls{webapi}}.
+We believe that there is a lot of value in detecting changes on static \textrm{\glspl{webresource}} in a proper way.
+Future research could mold webpage change detection into some sort of an \textrm{Event Trigger} or even into a novel rule language that uses Web queries in the event part.
+We were able to realize the enhancement of an existing \textrm{\gls{webapplication}} in large parts since proper \textrm{\glspl{webapi}} provide powerful tools to weild them.
 
+An interesting insight was, that sometimes users whish for activity at a certain point in time instead of event-driven reactivity, which means that the reaction on time events seems to be desirable for users.
+This could be handled in two ways through our model, either an \textrm{Event Trigger} is created which pushes an event at the exact point in time into the system, or an external \textrm{\gls{infosystem}} is pushing continuously primitive time events into our model over a \textrm{\gls{webhook}}.
+The first option seems to be a bit of an overkill but means lesser event load for the model.
+The latter option means a certain load depending on how small the event intervals are, but it reflects more the reality where we are used to time events in an interval of one second.
+Through continous time events it is also easily possible for all users to setup rules for their desired point in time without having to select and parameterize an \textrm{Event Trigger} beforehand.
 
-% TODO Future Work
-%
-% CEP:
+Our experiences with the prototype system show us that the conceptual model is suitable to impose real-time reactivity on existing \textrm{\glspl{infosystem}}.
+We were successful in capturing events from \textrm{\glspl{infosystem}}, be it by actively pulling them over a service or passively getting it delivered over a \textrm{\gls{webhook}}.
+A somewhat surprising finding was how few \textrm{\glspl{webapi}} support \textrm{\glspl{webhook}} for real-time notifications to  external \textrm{\glspl{infosystem}}.
+We envision a future where the whole Web is event-driven and events are directed to any \textrm{\gls{infosystem}}, which is interested in them.
+This would be the optimal case for effective real-time notifications and thus reactivity on the Web.
+If the \textrm{\glspl{webapi}} remain passive without support for \textrm{\glspl{webhook}}, this will cause unnecessary computation and communication cost because of the polling that needs to be done.
 
-% Twelve Theses on Reactive Rules for the Web~\cite{10.1007-11896548_63}:
-% This article investigates issues of relevance in designing high-level
-% programming languages dedicated to reactivity on the Web. It presents
-% twelve theses on features desirable for a language of reactive rules tuned
-% to programming Web and Semantic Web applications.
-% MY NOTES: they argue with soap and expect it to stay. They expect Web sites to inform each other about update requests. we are taking one step further and provide events to whomeever wants to receive them while being greedy about receiving events. give them to meeeeh my prciouzzz eventz!
-% 1. High-level reactive languges are needed, ECA rules well-suited to specify reactivity
-% 2. Reactive Web rules should be processed locally and act globally through event-based communication and access to persistent Web data
-% 3. Events are best exchanged directly between Web sites in a push manner
-% 4. Events are volatile data and should be kept distinct from persistent data.
-% 5. Recognizing composite events is essential for a reactive Web language. Composite events are conveniently specified by (event) queries. There are (at least) four complementary dimensions to event queries: data extraction, event composition, temporal conditions, and event accumulation --> Future Work (CEP), data extraction already implemented
-% 6. A data-driven, incremental evaluation of event queries is the approach of choice
-% 7. Data from persistent Web resources plays an essential role for Web reactivity. A reactive language thus should embed or build upon a Web query language.
-% 8. The Web is a dynamic, state-changing system. Reactions to state changes (events) through reactive rules are state-changing actions such as updates to persistent data. Reactive rules are needed where compound actions can be constructed from primitive actions.
-% 9. Development and maintenance of reactive rule programs can be considerably supported by structuring mechanisms such as: branching in rules, deductive rules for event queries and Web queries, procedural abstractions for actions, and grouping of rules. --> Future work, attach several conditions and their actions branches to one event instead of creating rules for each of them. EC^nA^n. (Though procedural abstractions for actions already implemented, defining complex actions to be reused by rules)
-% 10.Identity of data items is an issue for reactive languages due to their ability to react to changes of data objects on the Web. (we had surrogate identity though discarded the concept again... stupido)
-% 11. Meta-programming and meta-circularity, that is, the ability to use rules to exchange and evaluate (other) rules, are needed in some important cases. (quite artificial for our scenarios)
-% 12.Reactivity in the Web’s open and uncontrolled world requires language support for authentication, authorization, and accounting. (phew... let's let others go there)
+A field which turned out to be beyond the scope of this thesis, but was intended to be part of the prototype as well, was the field of \textrm{\acrshort{cep}}.
+Temporal composition of events should be taken care of in future research in this field since it allows to identify situations out of primitive events.
+And it also allows to define semantically ever more complex situations out of existing ones.
+With a growing number of events and their compositions, that are flowing through such a system, it would be useful to have an event relation describing framework on top of them, much like \textrm{\acrshort{rdf}} for \textrm{\glspl{webresource}}.
+Also with a growing popularity of a reactivity imposing entity in the \textrm{Web}, other systems will start to deliver events into that entity, which requires detection of new events and information of users about them.
 
+We believe that the \textrm{\gls{webofthings}} is a very promising field for such a reactivity imposing entity, but we were not able to study it in depth due to the lacking accessability of such things.
+By reducing the interaction in term of event detection and action imposition to \textrm{\acrshort{rest}ful}, such as it is used for the \textrm{\gls{webofthings}}, it might be possible to incorporate the create, read, update and delete interactions with \textrm{\glspl{webservice}} into the rule language.
+This would allow for an abstraction away from the \textrm{Event Trigger} and \textrm{Action Dispatcher} modules.
+It would add stability and a generalization in a way that rules would become more complex to be implemented, but no more expert users are required to implement the code modules.
+By using the read operation of the \textrm{\acrshort{rest}ful} \textrm{\acrshort{http}} for webpages, it could be possible to define the detection of changes on them.
+Since it can be complex to derive an event and express an action with just one call to a service, it might be necessary to allow Web query chaining.
+Such Web queries could then also be used in the condition section of a rule.
 
-
-
-% We have seen that the ECA approach is already a powerful one to make the Web reactive.
-% CEP will result in an approach where events are not just processed when they are entering the system and evaluated against rules, but these events would need to be stored for quite a long time.
-% Also the rules will not all be checked for each event but they are subject to a scheduler.
-% It can be decided when and how often a rule is evaluated and all events will be checked at these point in times, whether they are candidates for firing the rule.
-% A future improvement of this could be to adopt Complex Event Processing (CEP).
-% This would mean that several events could be stored in a rule and be evaluated in terms of time constraints.
-% Through this more complex events can be created as a result of several atomic events which would lead into semantically more complex events.
-
-
-% TODO pathologische beispiele
-% Endless loops -> child_process to be killed when not responding. what about async callbacks?
-
-% Scheduler
-
-% as long as we do not limit ourselves e.g for RESTful access to services we can't get it into a webquery language aight?
+We have seen that the \textrm{\acrshort{eca}} paradigm is very well suitable to impose reactivity to \textrm{\glspl{infosystem}} and even in an intuitive way for the user to create rules.
+The more challenging thing was to identify meaningful events that can be added to a rule by the user.
+We have seen that it is common for existing \textrm{\acrshort{eca}} approaches to impose actions on local data rather than on remote \textrm{\glspl{infosystem}} over their services.
+We defined a conceptual model that does not need any \textrm{\glspl{infosystem}} to understand events but orchestrates it flexibly over its existing services.
 
 
 
-% RDFTL: The condition part is a query which de-
-% termines if the information system is in a particular state, in which case the rule fires.
-
-% TODO Condition evaluation on other resources? i.e. make a request to a remote site and evaluate it? -> also achievable through composite events
-% Conditions evaluators could also be modules that are used to check certain states of information systems.
-% Since we already have a lot of flexibility through our Event Triggers or Action Dispatchers this makes for us only sense for a future approach where CEP rules consist of accesses to REST interfaces, thus rule definitions get compiled into certain behaviour. such as web queries
-% TODO Condition evaluation on other resources? i.e. make a request to a remote site and evaluate it? -> also achievable through composite events
-% show rule engines, alsoo CEP, describe event composition through templates and why we don't do it
-
-% automatic detection of new events within the system and information about them to the user
-% the system needs to learn about events
-
-% If we go to the semantic web we could incorporate RDF queries in order to allow smart event distinction
-
-% web resurce (URI) can be data but also well defined service through REST. incorporating web resources into model 
-% ince we're using URIs we could also set RDF logics on top of our event identification
-
-% TODO forgot any important paper from the preparation report?

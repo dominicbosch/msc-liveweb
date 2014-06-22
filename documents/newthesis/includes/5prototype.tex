@@ -270,21 +270,11 @@ As a very quick fix to inform certain administrators about the shutdown of their
 \end{figure}
 
 \section{Web Application Development}
-% TODO find term in papers (full stack )
-
-
-\subsection{Node.js}
 % Why JS, why wasn't it used up to now? is it used now?
 
-% http://benchmarksgame.alioth.debian.org/u64/benchmark.php?test=all&lang=java&lang2=v8&data=u64 seem to back our findings
-% https://www.paypal-engineering.com/2013/11/22/node-js-at-paypal/ as well
-% https://vividcortex.com/blog/2013/12/09/analysis-of-paypals-node-vs-java-benchmarks/ interpretes above results:
 % My guess is that Node is encouraging good programmer practices in terms of scalability, and Java less so. In other words, programmers probably have to work less hard to avoid bad scalability bottlenecks in Node than in Java.
 
-% ode.js is a powerful tool to build cloud applications, which use the in-
-% ternet as a communication layer. Because of node.js’s modularity and the
-% package manager, slim instances can be run. Its main purpose is to be
-% used as a webserver. By incorporating JavaScript’s asynchronous design
+% By incorporating JavaScript’s asynchronous design
 % of callback functions into their architecture, locking situations are basically
 % omitted. Thus it is a highly-scalable, asynchronous, event-driven architec-
 % ture which found its acceptance in the open-source comunity as well as for
@@ -294,57 +284,7 @@ As a very quick fix to inform certain administrators about the shutdown of their
 % everybody working with the user-defined module uses the same external
 % modules and the respective versions. Also project repositories do not need
 % to store the dependent libraries through this mechanism, thus saving space
-% and traffic. A name and a version are mandatory for a node.js module.
-% Knowing the name, e.g. diff, one can look up the latest version in the npm
-% repository by issuing following command:
-% $ npm show diff version
-% npm http GET https://registry.npmjs.org/diff
-% npm http 200 https://registry.npmjs.org/diff
-% 1.0.5
-% Now this dependency, together with the version one would like to use,
-% can be inserted into the own project description file as shown below. For
-% our small use case proof of concept project we only had to define the project
-% description file called package.json in the root folder of the project:
-% {
-% "name": "msc-apps",
-% "author": "Dominic Bosch",
-% "description": "Node.js examples",
-% "version": "0.0.1",
-% "private": true,
-% "repository": {
-% "type" : "git",
-% "url" : "https://github.com/dominicbosch/msc-liveweb.git"
-% },
-% "dependencies": {
-% "express": "3.3.4",
-% "diff": "1.0.5",
-% "needle": "0.5.6",
-% "socket.io": "0.9.16"
-% }
-% }
-% Everybody who downloads this project needs to download the dependen-
-% cies before using the module. This is done by running following command
-% in the root directory of the project:
-% $ npm install
-% If any dependencies change in the future the same command can be run
-% again to update the local project. A simple Hello World example of node.js
-% looks like this:
-% var http = require(’http’);
-% var server = http.createServer(function (request, response) {
-% response.writeHead(200, {"Content-Type": "text/plain"});
-% response.end("Hello World\n");
-% });
-% server.listen(8000);
-% After executing this by typing (if the above code was stored in a file
-% called index.js):
-% $ node index.js
-% the webserver is accessible on port 8000 (by typing localhost:8000 in the
-% browser bar), and responds with ”Hello World”. The code of the ECA rules
-% engine implementation in node.js can be found in the appendix.
-
-
-
-
+full stack development 
 
 
 
