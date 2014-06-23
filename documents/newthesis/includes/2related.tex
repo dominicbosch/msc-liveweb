@@ -1,15 +1,16 @@
 
 \chapter{Related Work}
 
-In this chapter we will give a brief overview over \textrm{\glspl{webresource}} and their associated \textrm{\glspl{webservice}} as the main drivers for interoperability between \textrm{\glspl{infosystem}}.
+In this chapter we will give a brief overview over \textrm{\glspl{infosystem}} in the Web and their associated \textrm{\glspl{webservice}} as the main drivers for interoperability between \textrm{\glspl{infosystem}}.
 We then introduce the \textrm{\acrlong{eca}(\acrshort{eca})} paradigm, an event-driven approach to impose reactivity.
 And finally we analyze existing rule languages and engines that exploit the \textrm{\acrshort{eca}} paradigm.
 
 
-% TODO introduce information system and information space
 
 \section{Data and Functionality Providers on the Web}
-\textrm{\glspl{infosystem}} and their services on the Web are in general referred to as \textrm{\glspl{webresource}} and their associated \textrm{\glspl{webservice}}.
+\textrm{\glspl{infosystem}} on the Web and their services are also called \textrm{Web \glspl{infosystem}} and their \textrm{\glspl{webservice}}.
+\textrm{Web \glspl{infosystem}} often provide access to internal resources through their services, such as documents or objects, which can be identified and addressed and thus fall into the category of \textrm{\glspl{webresource}}.
+The internal set of resources and their relations form the \textrm{\gls{webresource}}'s \textrm{\gls{infospace}}\cite{newby1996metric}.
 The term service in the context of the Web is somewhat ambiguous and there have been a lot of completely different approaches to offer services on the Web, some of the latest used in cloud computing are \textrm{\acrlong{paas} (\acrshort{paas})}, \textrm{\acrlong{saas} (\acrshort{saas})} and \textrm{\acrlong{iaas} (\acrshort{iaas})}.
 The term \textrm{\gls{webService}} (capitalized word \textrm{Service}) commonly stands for \textrm{\gls{webservice}} based on \textrm{\acrlong{soap} (\acrshort{soap})} communication\cite{journals/itpro/BarrosD06}, which has been adopted and developed extensively by both research and the industry and is often referred to "WS-*" \textrm{\glspl{webService}}.
 With the advent of the \textrm{\acrlong{rest} (\acrshort{rest})} architectural paradigm, the understanding of the term service in the Web has undergone a slight generalization so that the term \textrm{\gls{webservice}} (lower-case word \textrm{service}) is not anymore bound to \textrm{\acrshort{soap}}, but describes services as interfaces for communication between applications over a network\cite{richardson2008restful}.
@@ -278,7 +279,3 @@ With \textrm{\acrshort{ced}} atomic and composite events are successively aggreg
 The event-driven architecture of reference systems allows the processing of large amounts of data and assemble compositions in real-time.
 In our conceptual model we envision a \textrm{\acrshort{ced}} engine that detects complex event patterns and assembles them into higher-order events.
 These complex events can then be detected by the \textrm{\acrshort{eca}} rules engine to dispatch appropriate actions.
-
-
-
-% TODO application or infosystem

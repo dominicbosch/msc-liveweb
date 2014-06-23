@@ -19,15 +19,15 @@ Together with the requirement of native support for an \textrm{\acrlong{eda} (\a
 The prototype system consists of several modules, shown in Figure \ref{fig:Architecture}, which we are going to introduce within this section:
 \begin{itemize}
 	\item \textbf{\textrm{Poller}:} Loads \textrm{Event Trigger} modules and forwards events coming from them to the \textrm{Event Queue}. \textrm{Event Trigger} modules poll for changes in the Web and transform them into events. 
-	\item \textbf{\textrm{Webhook Listener}:} Listens on active \textrm{Webhooks} for events and forwards them to the \textrm{Event Queue}.
+	\item \textbf{\textrm{Webhook Listener}:} Listens on active \textrm{\gls{webhook}} for events and forwards them to the \textrm{Event Queue}.
 	\item \textbf{\textrm{Event Queue}:} Buffers events for the case of an overly busy \textrm{Rule Engine}. 
 	\item \textbf{\textrm{Rules Engine}:} Picks an event from the \textrm{Event Queue} whenever there is one and it is idle. 
-	\item \textbf{\textrm{User Request Handler}:} The user interface modules to administrate \textrm{Event Triggers}, \textrm{Webhooks}, \textrm{Rules} and \textrm{Action Dispatchers}.
+	\item \textbf{\textrm{User Request Handler}:} The user interface modules to administrate \textrm{Event Triggers}, \textrm{\gls{webhook}}, \textrm{Rules} and \textrm{Action Dispatchers}.
 \end{itemize}
 
-When started, the prototype system loads persisted \textrm{Webhooks} and begins to listen for new events on them.
+When started, the prototype system loads persisted \textrm{\gls{webhook}} and begins to listen for new events on them.
 The \textrm{Rule Engine} then loads all persisted rules and for each rule it loads the required \textrm{Action Dispatchers} and notifies the \textrm{Poller} about the new rule, which then in turn loads an \textrm{Event Trigger} if required.
-The prototype is now up and running and accepts administration requests for \textrm{Event Triggers}, \textrm{Webhooks}, \textrm{Rules} and \textrm{Action Dispatchers}.
+The prototype is now up and running and accepts administration requests for \textrm{Event Triggers}, \textrm{\gls{webhook}}, \textrm{Rules} and \textrm{Action Dispatchers}.
 Whenever a rule is created or updated, the \textrm{Poller} and \textrm{Rule Engine} load required \textrm{Event Triggers} or \textrm{Action Dispatchers}.
 
 \begin{figure}[!ht]
@@ -67,11 +67,16 @@ Through this it is possible to communicate with \textrm{\acrshort{rest}}ful \tex
 Apart from those libraries there are two other important functions offered in both type of modules:
 \begin{itemize}
 	\item \textrm{log}: Will store log entries on a per rule base, wherever the instruction is met during execution of a module. The log can be seen by the user who chose the module to be part of a rule.
-	\item \textrm{pushEvent}: This is the most important part for \textrm{Event Trigger} modules, since events are only through this function pushed into the prototype system. For \textrm{Action Dispatcher} modules this provides the possibility for loopback events.
-\end{itemize}float=h,
-By using the power of \textrm{JavaScript} and some of its libraries, it is possible to access a large part of the existing \textrm{\glspl{webresource}} and transform changes in their \textrm{\glspl{infospace}} into events and also to impose changes onto them as part of actions.
+	\item \textrm{pushEvent}: This is the important part for \textrm{Event Trigger} modules, since events are only through this function pushed into the prototype system. For \textrm{Action Dispatcher} modules this provides the possibility for loopback events.
+\end{itemize}
+Only functions which are attached to the \texttt{exports} property of the module are later accessible from the outside and can be selected as \textrm{Event Trigger} or \textrm{Action Dispatcher}.
+The function arguments of, from outside visible, functions are identified by the according \textrm{User Request Handler} module and the user will be requested to provide values for all of them in order to activate the \textrm{Event Trigger} or \textrm{Action Dispatcher}.
+For \textrm{Action Dispatchers} it is also possible to use event property selectors as arguments and thus allows the passing of event data to the \textrm{Action Dispatchers}.
+Through the \texttt{pushEvent} function in the global scope of the modules, events can be pushed into the prototype system.
+
+By using the expressiveness of \textrm{JavaScript} and some of its libraries, it is possible to access a large part of the existing \textrm{\glspl{infosystem}} and transform changes in their \textrm{\glspl{infospace}} into events and also to impose changes onto them as part of actions.
 The power that can be expressed in those code modules needs to be controlled, and can't be granted to anybody, thus we shield it through user access control, thus only allowing trusted users to write \textrm{Event Trigger} and \textrm{Action Dispatcher} code.
-% TODO automatic detection of required arguments 
+
 
 
 \subsection{Retrieving Events}
@@ -79,7 +84,7 @@ In the last chapters, we always put emphasis on the two different ways how event
 Even though some \textrm{\glspl{infosystem}} offer the access to services that offer data that corresponds to events and can instantly be forwarded into the system, we have seen that there is need for the derivation of events from changes in data on the Web, therefore we need the \textrm{Event Trigger} modules.
 But still, our vision is that of an optimal real-time reactive Web which means that all possible events are offered by all \textrm{\glspl{infosystem}}.
 An interested remote entity could then just announce interest in a certain kind of events over a \textrm{Webhook} and retrieves them in real-time.
-For that reason we laid out our architecture for such \textrm{Webhooks}, but still offer the \textrm{Event Trigger} modules to poll for events in the semi-static \textrm{\gls{www}}.
+For that reason we laid out our architecture for such \textrm{\gls{webhook}}, but still offer the \textrm{Event Trigger} modules to poll for events in the semi-static \textrm{\gls{www}}.
 During prototype testing we focused mainly on server-sided \textrm{Web APIs}, but we also generated events from the browser and pushed them to our prototype system.
 This was achieved with a library included in a sample webpage that pushed events to a \textrm{Webhook} of our prototype.
 Since modern browsers support geo locating, we decided to let the client browser push the the current position of the device to the \textrm{Webhook}.
@@ -93,7 +98,7 @@ The user of the \textrm{Event Trigger} can choose a starting point and an interv
 An example \textrm{\gls{webservice}} which offers polling for events is the \textrm{Email Yak}\footnote{http://www.emailyak.com/} \textrm{\gls{webapi}}, which responds with new emails when requested.
 The code required to request the new mails from this service and forward them into the prototype system is quite short and shown in Listing \ref{lst:emailyak}, but for other examples it can get more complex.
 For better readability the code is written in \textrm{CoffeeScript}\footnote{http://coffeescript.org/}.
-Only expert users are expected to store such a piece of code float=h,in our prototype, which enables inexperienced users to simply choose the \texttt{"EmailYal -> newMail"} \textrm{Event Trigger} for their rule.  
+Only expert users are expected to store such a piece of code in our prototype, which enables inexperienced users to simply choose the \texttt{"EmailYal -> newMail"} \textrm{Event Trigger} for their rule.  
 A great opportunity to access data from webpages via a \textrm{\gls{webapi}} is \textrm{Import.io}\footnote{https://import.io/}.
 By browsing through the Web with their browser it is possible to select certain parts from a webpage and store them in a mask.
 Data is instantly extracted from the webpage, using the stored mask, when sending a request to their \textrm{\gls{webapi}} with the given mask id and the \textrm{\acrshort{uri}}.
@@ -108,12 +113,12 @@ exports.newMail = () ->
 
 
 
-\subsubsection{Webhooks}
-As powerful as \textrm{Webhooks} are in providing real-time notifications from remote \textrm{\glspl{webresource}}, as simple they are to use.
-In our prototype, users can create as many new \textrm{Webhooks} as they choose to.
-They only need to provide an event name which will be associated to the \textrm{Webhooks}.
+\subsubsection{\gls{webhook}}
+As powerful as \textrm{\gls{webhook}} are in providing real-time notifications from remote \textrm{\glspl{webresource}}, as simple they are to use.
+In our prototype, users can create as many new \textrm{\gls{webhook}} as they choose to.
+They only need to provide an event name which will be associated to the \textrm{\gls{webhook}}.
 A new \textrm{Webhook} is created in the \textrm{Webhook Listener}, which from then on accepts events posted to it, and the \textrm{Webhook \acrshort{uri}} is displayed to the user.
-Any \textrm{\gls{webresource}} that supports the concept of \textrm{Webhooks} (e.g. \textrm{GitHub}\footnote{https://developer.github.com/webhooks/}) has a place to register the \textrm{Webhook} \textrm{\acrshort{uri}}.
+Any \textrm{\gls{webresource}} that supports the concept of \textrm{\gls{webhook}} (e.g. \textrm{GitHub}\footnote{https://developer.github.com/\gls{webhook}/}) has a place to register the \textrm{Webhook} \textrm{\acrshort{uri}}.
 Whenever a remote \textrm{\gls{webresource}} pushes an event to the \textrm{Webhook}, the user-defined event name is assigned as the implicit parameter of a freshly created internal event, while the whole incoming event body is added as explicit parameters to it.
 Afterwards it is forwarded to the \textrm{Event Queue}.
 
@@ -124,7 +129,26 @@ Afterwards it is forwarded to the \textrm{Event Queue}.
 They need to be created before they can be used in a rule.
 In our prototype system, \textrm{Action Dispatchers} use a library for \textrm{HTTP} communication which allows them to address a wide range of \textrm{\glspl{webresource}}.
 \textrm{Action Dispatchers} can also push events back into the \textrm{Event Queue} which can be used to chain certain rules together.
-Since \textrm{Webhhooks} are such an important institution in our vision we also implemented an \textrm{Action Dispatcher} that pushes events to other \textrm{Webhooks}.
+Since \textrm{\glspl{webhook}} are an important part of our vision we also implemented an \textrm{Action Dispatcher} that delivers events to external \textrm{\gls{webhook}}.
+\textrm{Action Dispatchers} need to have functions attached to their \texttt{exports} property so that they are visible from the outside and can be selected as actions, such as the \texttt{newContent} function in the example Listing \ref{lst:actionProBinder}.
+\begin{lstlisting}[float=h,label=lst:actionProBinder,language=CoffeeScript,caption=Action Dispatcher code to store a new content on the ProBinder RESTful Web service; written in CoffeeScript]
+urlService = 'https://probinder.com/service/'
+
+requestService = ( args ) ->
+  url = urlService + args.service + '/' + args.method
+  needle.post url, args.data
+
+exports.newContent = ( companyId, contextId, content ) ->
+  requestService
+    service: 'content'
+    method: 'save'
+    data:
+      companyId: companyId
+      context: contextId
+      text: content
+\end{lstlisting}
+
+
 
 
 
@@ -199,7 +223,7 @@ IF ".categories" instr "soccer"
 DO EmailYak->sendMail("fan@soccer.com","News about soccer!","#{ .body }")
 \end{lstlisting}
 
-\begin{lstlisting}[language=OwnRule,caption=Extended Backus-Naur Form of Prototype Rule Language Syntax]
+\begin{lstlisting}[float=h,language=OwnRule,caption=Extended Backus-Naur Form of Prototype Rule Language Syntax]
 expression  ::= "ON " event " IF " conditions " DO " actions
 event       ::= word* ("->" word+)?
 conditions  ::= condition (" AND " condition)*
@@ -246,7 +270,7 @@ Eventually, these shutdowns weren't detected immediately by the people that admi
 As a very quick fix to inform certain administrators about the shutdown of their server, we started pinging these servers and pushed the results int
 
 
-% Real-time reactive Web over Webhooks -> instant messaging
+% Real-time reactive Web over \gls{webhook} -> instant messaging
 
 
 % {
@@ -284,7 +308,9 @@ As a very quick fix to inform certain administrators about the shutdown of their
 % everybody working with the user-defined module uses the same external
 % modules and the respective versions. Also project repositories do not need
 % to store the dependent libraries through this mechanism, thus saving space
-full stack development 
+
+
+% full stack development 
 
 
 

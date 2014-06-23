@@ -1,0 +1,6 @@
+Abstract
+The Web is a rapidly growing information universe, consisting of information systems that provide access over heterogeneous services.
+A large portion of those information systems are dynamic in the way that their information spaces change over time.
+The thesis describes and discusses a reactivity imposing model, which adopts the Event-Condition-Action (ECA) paradigm and lets users define ECA rules.
+An event-driven system will be introduced, that uses the Web's programmability to orchestrate Web services in order to impose real-time reactivity on top of it.
+To exemplify the vision towards real-time reactive information systems, use cases from the prototype system will be shown.

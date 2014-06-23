@@ -125,8 +125,8 @@
 \glossaryentry{KR?\glossaryentryfield{kr}{\glsnamefont{KR}}{Knowledge Representation}{\relax }|setentrycounter[]{page}\glsnumberformat}{8}
 \glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{8}
 \glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{8}
-\glossaryentry{RuleML?\glossaryentryfield{ruleml}{\glsnamefont{RuleML}}{Rule Markup Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{8}
-\glossaryentry{XML?\glossaryentryfield{xml}{\glsnamefont{XML}}{Extensible Markup Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{8}
+\glossaryentry{RuleML?\glossaryentryfield{ruleml}{\glsnamefont{RuleML}}{Rule Markup Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{XML?\glossaryentryfield{xml}{\glsnamefont{XML}}{Extensible Markup Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
 \glossaryentry{JSON?\glossaryentryfield{json}{\glsnamefont{JSON}}{JavaScript Object Notification}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
 \glossaryentry{JSON?\glossaryentryfield{json}{\glsnamefont{JSON}}{JavaScript Object Notification}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
 \glossaryentry{RuleML?\glossaryentryfield{ruleml}{\glsnamefont{RuleML}}{Rule Markup Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
@@ -147,28 +147,28 @@
 \glossaryentry{KRL?\glossaryentryfield{krl}{\glsnamefont{KRL}}{Kinetic Rule Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
 \glossaryentry{EDA?\glossaryentryfield{eda}{\glsnamefont{EDA}}{Event-Driven Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
 \glossaryentry{KRE?\glossaryentryfield{kre}{\glsnamefont{KRE}}{Kinetic Rules Engine}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{KRL?\glossaryentryfield{krl}{\glsnamefont{KRL}}{Kinetic Rule Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{RDFTL?\glossaryentryfield{rdftl}{\glsnamefont{RDFTL}}{\textrm {RDF} Triggering Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
-\glossaryentry{RDF?\glossaryentryfield{rdf}{\glsnamefont{RDF}}{Resource Description Framework}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
-\glossaryentry{RDF?\glossaryentryfield{rdf}{\glsnamefont{RDF}}{Resource Description Framework}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
-\glossaryentry{JSON?\glossaryentryfield{json}{\glsnamefont{JSON}}{JavaScript Object Notification}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
-\glossaryentry{DOM?\glossaryentryfield{dom}{\glsnamefont{DOM}}{Document Object Model}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
-\glossaryentry{DOM?\glossaryentryfield{dom}{\glsnamefont{DOM}}{Document Object Model}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
-\glossaryentry{DOM?\glossaryentryfield{dom}{\glsnamefont{DOM}}{Document Object Model}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
-\glossaryentry{RuleML?\glossaryentryfield{ruleml}{\glsnamefont{RuleML}}{Rule Markup Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
+\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
 \glossaryentry{KRL?\glossaryentryfield{krl}{\glsnamefont{KRL}}{Kinetic Rule Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
-\glossaryentry{KRE?\glossaryentryfield{kre}{\glsnamefont{KRE}}{Kinetic Rules Engine}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
-\glossaryentry{ESB?\glossaryentryfield{esb}{\glsnamefont{ESB}}{Enterprise Service Bus}{\relax }|setentrycounter[]{page}\glsnumberformat}{11}
-\glossaryentry{EDA?\glossaryentryfield{eda}{\glsnamefont{EDA}}{Event-Driven Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{11}
-\glossaryentry{CEP?\glossaryentryfield{cep}{\glsnamefont{CEP}}{Complex Event Processing}{\relax }|setentrycounter[]{page}\glsnumberformat}{11}
-\glossaryentry{CEP?\glossaryentryfield{cep}{\glsnamefont{CEP}}{Complex Event Processing}{\relax }|setentrycounter[]{page}\glsnumberformat}{11}
-\glossaryentry{CED?\glossaryentryfield{ced}{\glsnamefont{CED}}{Complex Event Detection}{\relax }|setentrycounter[]{page}\glsnumberformat}{11}
-\glossaryentry{CED?\glossaryentryfield{ced}{\glsnamefont{CED}}{Complex Event Detection}{\relax }|setentrycounter[]{page}\glsnumberformat}{11}
-\glossaryentry{EDA?\glossaryentryfield{eda}{\glsnamefont{EDA}}{Event-Driven Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{11}
-\glossaryentry{CED?\glossaryentryfield{ced}{\glsnamefont{CED}}{Complex Event Detection}{\relax }|setentrycounter[]{page}\glsnumberformat}{11}
-\glossaryentry{CED?\glossaryentryfield{ced}{\glsnamefont{CED}}{Complex Event Detection}{\relax }|setentrycounter[]{page}\glsnumberformat}{11}
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{11}
+\glossaryentry{ESB?\glossaryentryfield{esb}{\glsnamefont{ESB}}{Enterprise Service Bus}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
+\glossaryentry{EDA?\glossaryentryfield{eda}{\glsnamefont{EDA}}{Event-Driven Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
+\glossaryentry{CEP?\glossaryentryfield{cep}{\glsnamefont{CEP}}{Complex Event Processing}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
+\glossaryentry{CEP?\glossaryentryfield{cep}{\glsnamefont{CEP}}{Complex Event Processing}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
+\glossaryentry{CED?\glossaryentryfield{ced}{\glsnamefont{CED}}{Complex Event Detection}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
+\glossaryentry{CED?\glossaryentryfield{ced}{\glsnamefont{CED}}{Complex Event Detection}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
+\glossaryentry{EDA?\glossaryentryfield{eda}{\glsnamefont{EDA}}{Event-Driven Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
+\glossaryentry{CED?\glossaryentryfield{ced}{\glsnamefont{CED}}{Complex Event Detection}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
+\glossaryentry{CED?\glossaryentryfield{ced}{\glsnamefont{CED}}{Complex Event Detection}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
+\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
+\glossaryentry{RDFTL?\glossaryentryfield{rdftl}{\glsnamefont{RDFTL}}{\textrm {RDF} Triggering Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{11}
+\glossaryentry{RDF?\glossaryentryfield{rdf}{\glsnamefont{RDF}}{Resource Description Framework}{\relax }|setentrycounter[]{page}\glsnumberformat}{11}
+\glossaryentry{RDF?\glossaryentryfield{rdf}{\glsnamefont{RDF}}{Resource Description Framework}{\relax }|setentrycounter[]{page}\glsnumberformat}{11}
+\glossaryentry{JSON?\glossaryentryfield{json}{\glsnamefont{JSON}}{JavaScript Object Notification}{\relax }|setentrycounter[]{page}\glsnumberformat}{11}
+\glossaryentry{DOM?\glossaryentryfield{dom}{\glsnamefont{DOM}}{Document Object Model}{\relax }|setentrycounter[]{page}\glsnumberformat}{11}
+\glossaryentry{DOM?\glossaryentryfield{dom}{\glsnamefont{DOM}}{Document Object Model}{\relax }|setentrycounter[]{page}\glsnumberformat}{11}
+\glossaryentry{DOM?\glossaryentryfield{dom}{\glsnamefont{DOM}}{Document Object Model}{\relax }|setentrycounter[]{page}\glsnumberformat}{11}
+\glossaryentry{RuleML?\glossaryentryfield{ruleml}{\glsnamefont{RuleML}}{Rule Markup Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{11}
+\glossaryentry{KRL?\glossaryentryfield{krl}{\glsnamefont{KRL}}{Kinetic Rule Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{11}
+\glossaryentry{KRE?\glossaryentryfield{kre}{\glsnamefont{KRE}}{Kinetic Rules Engine}{\relax }|setentrycounter[]{page}\glsnumberformat}{11}
 \glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{14}
 \glossaryentry{CEP?\glossaryentryfield{cep}{\glsnamefont{CEP}}{Complex Event Processing}{\relax }|setentrycounter[]{page}\glsnumberformat}{14}
 \glossaryentry{CED?\glossaryentryfield{ced}{\glsnamefont{CED}}{Complex Event Detection}{\relax }|setentrycounter[]{page}\glsnumberformat}{14}
