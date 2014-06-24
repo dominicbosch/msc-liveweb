@@ -35,7 +35,7 @@ Our goal is to enable user-defined resource orchestrations, and still exploiting
 
 A big part of the data, that becomes available to the users, is short-lived data that corresponds to state changes, which are changes in the \textrm{\glspl{infospace}} and can be modeled as events for detection or actions for imposition.
 In this thesis we introduce an event-driven conceptual model that uses the programmability of \textrm{\glspl{infosystem}} and their services in order to impose reactivity between them.
-By regarding the whole Web as an \textrm{\gls{infospace}}, in which we listen for triggered events and on which we impose actions as a result of user-defined rules, we are able to model a real-time reactive Web.
+By regarding the whole Web as an \textrm{\gls{infospace}}, in which we listen for triggered events and on which we impose actions as a result of user-defined rules, we are able to model a real-time reactive Web, as shown in Figure \ref{fig:UsersWeildServicesInTheWeb}.
 Such a personalized reactivity allows the orchestration of the Web and a tool to govern its data flood by automating tedious tasks.
 Current \textrm{\gls{webresource}} orchestrations concentrate on data flow rather than on event flow, which are mere copy/paste tasks of data than smart reactivity.
 This makes us believe that our event-based conceptual model can overcome certain shortcomings of the existing approaches and provides a step towards the real-time reactive Web.
@@ -43,13 +43,10 @@ This makes us believe that our event-based conceptual model can overcome certain
 
 \begin{figure}[!ht]
   \centering
-  \includegraphics[width=0.7\textwidth]{figures/UsersWeildServicesInTheWeb}
-  \caption{Users orchestrate the Web's Data and Functionality (... TODO prettify!)}
+  \includegraphics[width=0.8\textwidth]{figures/ReactivityOnTheWeb}
+  \caption{Users exploit the Web's Programmability through a Reactive Entity in the Web}
   \label{fig:UsersWeildServicesInTheWeb}
 \end{figure}
-% \textit{\small{MAKE NEW ONE! Figure with user orchestrating Web Resources}}
-% \textit{\small{ewwww ugly figure....\\
-% TODO show more concrete example with aha effect, light bulb. maybe parallel or serial events that turn into a result}}
 
 
 % \textit{\small{TODO: use the word task or workflow?}}
