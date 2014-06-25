@@ -1,282 +1,75 @@
 
-\chapter{Rule Languages}
-
-\section{Example JSON Event for Rule Languages}
-\label{lst:JSONEvent}
-% \begin{minipage}{\linewidth}
-\begin{Verbatim}[frame=single,fontsize=\footnotesize,commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1,xleftmargin
-=.3in]
-\PY{p}{\PYZob{}}
-  \PY{n+nt}{\PYZdq{}eventname\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}email\PYZdq{}}\PY{p}{,}
-  \PY{n+nt}{\PYZdq{}body\PYZdq{}}\PY{p}{:} \PY{p}{\PYZob{}}
-    \PY{n+nt}{\PYZdq{}sender\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}sender@mail.com\PYZdq{}}\PY{p}{,}
-    \PY{n+nt}{\PYZdq{}subject\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}Important subject!\PYZdq{}}\PY{p}{,}
-    \PY{n+nt}{\PYZdq{}textbody\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}Hi User,\PYZbs{}n\PYZbs{}nThis is a lengthy mail body\PYZdq{}}
-  \PY{p}{\PYZcb{}}
-\PY{p}{\PYZcb{}}
-\end{Verbatim}
-% \end{minipage}
+\chapter{Use Case Code}
 
 
-\section{E-Mail Example Rule expressed in RDFTL}
-\label{lst:MailRDF}
-% \begin{minipage}{\linewidth}
-\begin{lstlisting}[nolol,float=h,language=RDF]
-  ON INSERT document("inbound_queue.xml")/mails/mail
-  IF $delta/sender[.="sender@mail.com"]
-  DO DELETE document("inbound_queue.xml")/mails/mail;
-    LET $api = resource("www.webapi.com") IN
-    INSERT ($api, newcontent,
-      <content>New mail: {$delta/subject}</content>)
+\section{Application to Ping IPs and push Result to Remote Server}
+
+\begin{lstlisting}[nolol,language=CoffeeScript,label={lst:eventproducer}]
+fs = require 'fs'
+ping = require 'net-ping'
+needle = require 'needle'
+    
+remoteUrl = "http://ec2-54-196-2-15.compute-1.amazonaws.com"
+fPushEvent = ( evt ) ->
+  needle.post remoteUrl + '/measurements', JSON.stringify( evt )
+
+try
+  histData = fs.readFileSync 'histoappend.json', 'utf8'
+catch err
+  console.error "Error reading historical data file"
+  process.exit()
+
+session = ping.createSession retries: 2
+oSum = {}
+if histData
+  arrPings = histData.split "\n"
+  try
+    for strObj, i in arrPings
+      if strObj isnt ''
+        oTmp = JSON.parse strObj  
+        oSum[ oTmp.timestamp ] = 
+          sum: oTmp.sum
+    if oTmp
+      fPushEvent
+        currentlyon: oSum[ oTmp.timestamp ].sum
+        pingtimes: oSum   
+
+  catch err
+    console.log 'Error parsing histo data'
+    console.log err
+
+i = -1
+ips = []
+pingTime = (new Date()).toISOString()
+fPollHosts = () ->
+  i++
+  session.pingHost "131.152.85.#{ i }", ( err, target, sent, rcvd ) ->
+    if not err
+      ips.push target
+      
+  if i is 255
+    i = -1
+    console.log "#{ (new Date()).toISOString() } | All ping requests returned (#{ips.length} answered), pushing event into the system and starting again at 0"
+    
+    oSum[ pingTime ] = sum: ips.length
+    fPushEvent JSON.stringify
+      currentlyon: ips.length
+      pingtimes: oSum
+
+    oPing = 
+      timestamp: pingTime
+      ips: ips
+      sum: ips.length
+
+    fs.appendFile 'histoappend.json', JSON.stringify( oPing ) + "\n", 'utf8'
+    pingTime = (new Date()).toISOString()
+    ips = []
+
+
+  setTimeout fPollHosts, 7000
+
+
+fPollHosts()
+
+
 \end{lstlisting}
-% \end{minipage}
-
-
-
-\section{E-Mail Example Rule expressed in XChange/Xcerpt}
-\label{lst:MailXChange}
-% \begin{minipage}{\linewidth}
-\begin{lstlisting}[nolol,float=h!,language=XChange]
-  TRANSACTION
-    in {
-      resource { "http://www.webapi.com"},
-      newcontents {{
-        insert newcontent { var Mail }
-      }}
-    }
-  ON
-    xchange:event {{
-      xchange:sender { "http://mailserver.com" },
-      var Mail -> email {{
-        sender { "sender@mail.com" }
-      }}
-    }}
-  END
-\end{lstlisting}
-% \end{minipage}
-
-
-\section{E-Mail Example Rule expressed in Notation 3}
-\label{lst:MailN3}
-% \begin{minipage}{\linewidth}
-\begin{lstlisting}[nolol,float=h,language=N3]
-  { ?x :event "email". ?x :sender "sender@mail.com" }
-    => { :webapi :newcontent ?x }
-\end{lstlisting}
-% \end{minipage}
-
-
-\section{E-Mail Example Rule expressed in JSON Rules}
-\label{lst:MailJSONRules}
-% \begin{minipage}{\linewidth}
-\begin{Verbatim}[frame=single,fontsize=\footnotesize,commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1,xleftmargin
-=.3in]
-\PY{p}{\PYZob{}}
-    \PY{n+nt}{\PYZdq{}id\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{0}\PY{p}{,}
-    \PY{n+nt}{\PYZdq{}conditions\PYZdq{}}\PY{p}{:} \PY{p}{[}
-        \PY{p}{\PYZob{}}
-            \PY{n+nt}{\PYZdq{}type\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}email\PYZdq{}}\PY{p}{,}
-            \PY{n+nt}{\PYZdq{}constraints\PYZdq{}}\PY{p}{:} \PY{p}{[}
-                \PY{p}{\PYZob{}}
-                    \PY{n+nt}{\PYZdq{}propertyName\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}sender\PYZdq{}}\PY{p}{,}
-                    \PY{n+nt}{\PYZdq{}operator\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}EQ\PYZdq{}}\PY{p}{,}
-                    \PY{n+nt}{\PYZdq{}restriction\PYZdq{}}\PY{p}{:} \PY{p}{\PYZob{}}
-                        \PY{n+nt}{\PYZdq{}type\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}String\PYZdq{}}\PY{p}{,}
-                        \PY{n+nt}{\PYZdq{}value\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}sender@mail.com\PYZdq{}}
-                    \PY{p}{\PYZcb{}}
-                \PY{p}{\PYZcb{}}\PY{p}{,}
-                \PY{p}{\PYZob{}}
-                    \PY{n+nt}{\PYZdq{}bind\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}\PYZdl{}S\PYZdq{}}\PY{p}{,}
-                    \PY{n+nt}{\PYZdq{}propertyName\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}subject\PYZdq{}}
-                \PY{p}{\PYZcb{}}
-            \PY{p}{]}
-        \PY{p}{\PYZcb{}}
-    \PY{p}{]}\PY{p}{,}
-    \PY{n+nt}{\PYZdq{}actions\PYZdq{}}\PY{p}{:} \PY{p}{[}
-        \PY{l+s+s2}{\PYZdq{}webapi(\PYZsq{}addcontent\PYZsq{}, \PYZdl{}S)\PYZdq{}}
-    \PY{p}{]}
-\PY{p}{\PYZcb{}}
-\end{Verbatim}
-% \end{minipage}
-
-
-\section{E-Mail Example Rule expressed in Kinetics Rule Language (KRL)}
-\label{lst:MailKRL}
-% \begin{minipage}{\linewidth}
-\begin{lstlisting}[nolol,float=h,label=lstkre,language=KRE,caption=E-Mail Example rule in KRL]
-  rule store_mail {
-    select when mail newmail
-    sender re#sender@mail.com#
-    subject re#*# setting(subj)
-    http:post("http://www.webapi.com/newcontent")
-    with params = {
-      "text": subj
-    }
-  }
-\end{lstlisting}
-% \end{minipage}
-
-
-\section{E-Mail Example Rule expressed in (Reaction) RuleML}
-\label{lst:MailRuleML}
-% \begin{minipage}{\linewidth}
-\begin{Verbatim}[frame=single,fontsize=\footnotesize,commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1,xleftmargin
-=.3in]
-  \PY{n+nt}{\PYZlt{}Rule} \PY{n+na}{style=}\PY{l+s}{\PYZdq{}active\PYZdq{}}\PY{n+nt}{\PYZgt{}}
-    \PY{n+nt}{\PYZlt{}on}\PY{n+nt}{\PYZgt{}}
-      \PY{n+nt}{\PYZlt{}Event}\PY{n+nt}{\PYZgt{}}
-        \PY{n+nt}{\PYZlt{}Atom}\PY{n+nt}{\PYZgt{}}
-          \PY{n+nt}{\PYZlt{}Rel} \PY{n+na}{per=}\PY{l+s}{\PYZdq{}value\PYZdq{}}\PY{n+nt}{\PYZgt{}}mail\PY{n+nt}{\PYZlt{}/Rel\PYZgt{}}
-          \PY{n+nt}{\PYZlt{}Var}\PY{n+nt}{\PYZgt{}}sender\PY{n+nt}{\PYZlt{}/Var\PYZgt{}}
-          \PY{n+nt}{\PYZlt{}Var}\PY{n+nt}{\PYZgt{}}subject\PY{n+nt}{\PYZlt{}/Var\PYZgt{}}
-        \PY{n+nt}{\PYZlt{}/Atom\PYZgt{}}
-      \PY{n+nt}{\PYZlt{}/Event\PYZgt{}}
-    \PY{n+nt}{\PYZlt{}/on\PYZgt{}}
-    \PY{n+nt}{\PYZlt{}if}\PY{n+nt}{\PYZgt{}}
-      \PY{n+nt}{\PYZlt{}Atom}\PY{n+nt}{\PYZgt{}}
-        \PY{n+nt}{\PYZlt{}op}\PY{n+nt}{\PYZgt{}}\PY{n+nt}{\PYZlt{}Rel}\PY{n+nt}{\PYZgt{}}equals\PY{n+nt}{\PYZlt{}/Rel\PYZgt{}}\PY{n+nt}{\PYZlt{}/op\PYZgt{}}
-        \PY{n+nt}{\PYZlt{}Var}\PY{n+nt}{\PYZgt{}}sender\PY{n+nt}{\PYZlt{}/Var\PYZgt{}}
-        \PY{n+nt}{\PYZlt{}Ind}\PY{n+nt}{\PYZgt{}}sender@mail.com\PY{n+nt}{\PYZlt{}/Ind\PYZgt{}}
-      \PY{n+nt}{\PYZlt{}/Atom\PYZgt{}}
-    \PY{n+nt}{\PYZlt{}/if\PYZgt{}}
-    \PY{n+nt}{\PYZlt{}do}\PY{n+nt}{\PYZgt{}}
-      \PY{n+nt}{\PYZlt{}Atom}\PY{n+nt}{\PYZgt{}}
-        \PY{n+nt}{\PYZlt{}oid}\PY{n+nt}{\PYZgt{}}\PY{n+nt}{\PYZlt{}Ind} \PY{n+na}{uri=}\PY{l+s}{\PYZdq{}http://webapi.com\PYZdq{}}\PY{n+nt}{/\PYZgt{}}\PY{n+nt}{\PYZlt{}/oid\PYZgt{}}
-        \PY{n+nt}{\PYZlt{}Rel}\PY{n+nt}{\PYZgt{}}newcontent\PY{n+nt}{\PYZlt{}/Rel\PYZgt{}}
-        \PY{n+nt}{\PYZlt{}Var}\PY{n+nt}{\PYZgt{}}subject\PY{n+nt}{\PYZlt{}/Var\PYZgt{}} 
-      \PY{n+nt}{\PYZlt{}/Atom\PYZgt{}}
-    \PY{n+nt}{\PYZlt{}/do\PYZgt{}}
-  \PY{n+nt}{\PYZlt{}/Rule\PYZgt{}}
-\end{Verbatim}
-% \end{minipage}
-
-
-\section{Prototype Rule transformed into JSON}
-\label{lst:PrototypeRuleInJSONw}
-% \begin{minipage}{\linewidth}
-\begin{Verbatim}[frame=single,fontsize=\footnotesize,commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1,xleftmargin
-=.3in]
-\PY{p}{\PYZob{}}
-  \PY{n+nt}{\PYZdq{}event\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}mail\PYZdq{}}\PY{p}{,}
-  \PY{n+nt}{\PYZdq{}conditions\PYZdq{}}\PY{p}{:} \PY{p}{[}
-    \PY{p}{\PYZob{}} \PY{n+nt}{\PYZdq{}sender\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}sender@mail.com\PYZdq{} }\PY{p}{\PYZcb{}}\PY{p}{,}
-  \PY{p}{]}\PY{p}{,}
-  \PY{n+nt}{\PYZdq{}actions\PYZdq{}}\PY{p}{:} \PY{p}{[}
-    \PY{p}{\PYZob{}}
-      \PY{n+nt}{\PYZdq{}api\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}webapi\PYZdq{}}\PY{p}{,}
-      \PY{n+nt}{\PYZdq{}method\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}newcontent\PYZdq{}}\PY{p}{,}
-      \PY{n+nt}{\PYZdq{}arguments\PYZdq{}}\PY{p}{:} \PY{p}{\PYZob{}}
-        \PY{n+nt}{\PYZdq{}text\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}\PYZdl{}X.subject\PYZdq{}}
-      \PY{p}{\PYZcb{}}
-    \PY{p}{\PYZcb{}}
-  \PY{p}{]}
-\PY{p}{\PYZcb{}}
-\end{Verbatim}
-% \end{minipage}
-
-% \begin{Verbatim}[commandchars=\\\{\}]
-% \PY{n+nt}{on} \PY{n}{weather}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{tempRaisesAbove}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}
-% \PY{n+nt}{do} \PY{n}{probinder}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{addContent}\PY{p}{(}\PY{n}{temp}\PY{p}{)}
-% \end{Verbatim}
-
-% \begin{Verbatim}[commandchars=\\\{\}]
-% \PY{n+nt}{on} \PY{n}{emailyak}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{newMail}
-% \PY{n+nt}{if} \PY{n}{FromAddress}\PY{o}{=}\PY{l+s+ss}{\PYZdq{}}\PY{l+s+ss}{dominic.bosch.db@gmail.com}\PY{l+s+ss}{\PYZdq{}}
-% \PY{n+nt}{do} \PY{n}{probinder}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{newContent}\PY{p}{(}\PY{n}{TextBody}\PY{p}{)}
-% \end{Verbatim}
-
-% \begin{Verbatim}[commandchars=\\\{\}]
-% \PY{n+nt}{on} \PY{n}{probinder}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{unreadContent}
-% \PY{n+nt}{if} \PY{n}{serviceId}\PY{o}{=}\PY{l+m+mi}{32}
-% \PY{n+nt}{do} \PY{n}{probinder}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{markread}\PY{p}{(}\PY{n}{id}\PY{p}{)}\PY{p}{,}
-%    \PY{n}{probinder}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{createContent}\PY{p}{(}\PY{n}{id}\PY{p}{,} \PY{n}{title}\PY{p}{,} \PY{n}{tab_name}\PY{p}{)}
-% \end{Verbatim}
-
-% \newpage
-
-% \begin{Verbatim}[commandchars=\\\{\}]
-% \PY{k+kd}{function} \PY{n+nx}{call}\PY{p}{(}\PY{n+nx}{args}\PY{p}{)} \PY{p}{\PYZob{}}
-%   \PY{n+nx}{require}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}needle\PYZsq{}}\PY{p}{)}\PY{p}{.}\PY{n+nx}{post}\PY{p}{(}
-%     \PY{l+s+s1}{\PYZsq{}https://probinder.com/service/\PYZsq{}} 
-%       \PY{o}{+} \PY{n+nx}{args}\PY{p}{.}\PY{n+nx}{service} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}/\PYZsq{}} \PY{o}{+} \PY{n+nx}{args}\PY{p}{.}\PY{n+nx}{method}\PY{p}{,}
-%     \PY{n+nx}{args}\PY{p}{.}\PY{n+nx}{data}\PY{p}{,}
-%     \PY{n+nx}{args}\PY{p}{.}\PY{n+nx}{credentials}
-%   \PY{p}{)}\PY{p}{;}
-% \PY{p}{\PYZcb{}}\PY{p}{;}
-% \end{Verbatim}
-
-
-% \begin{Verbatim}[commandchars=\\\{\}]
-% \PY{k+kd}{function} \PY{n+nx}{newContent}\PY{p}{(}\PY{n+nx}{txt}\PY{p}{)}\PY{p}{\PYZob{}}
-%   \PY{n+nx}{call}\PY{p}{(}\PY{p}{\PYZob{}}
-%     \PY{n+nx}{service}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}27\PYZsq{}}\PY{p}{,}
-%     \PY{n+nx}{method}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}save\PYZsq{}}\PY{p}{,}
-%     \PY{n+nx}{data}\PY{o}{:} \PY{p}{\PYZob{}}
-%       \PY{n+nx}{companyId}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}961\PYZsq{}}\PY{p}{,}
-%       \PY{n+nx}{context}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}17930\PYZsq{}}\PY{p}{,}
-%       \PY{n+nx}{text}\PY{o}{:} \PY{n+nx}{txt}
-%     \PY{p}{\PYZcb{}}
-%   \PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{;}
-% \PY{p}{\PYZcb{}}
-% \end{Verbatim}
-
-% \begin{Verbatim}[commandchars=\\\{\}]
-% \PY{k}{on} \PY{n}{mail}
-% \PY{k}{do} \PY{n}{probinder}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{createContent}\PY{p}{(}\PY{n}{subject}\PY{p}{)}
-% \end{Verbatim}
-
-
-% \begin{Verbatim}[commandchars=\\\{\}]
-% \PY{k}{on} \PY{n}{mail}
-% \PY{k}{do} \PY{n}{probinder}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{call}\PY{p}{(}\PY{l+s+ss}{\PYZdq{}27\PYZdq{}}\PY{p}{,}\PY{l+s+ss}{\PYZdq{}save\PYZdq{}}\PY{p}{,}
-%      \PY{p}{[}\PY{l+s+ss}{\PYZdq{}961\PYZdq{}}\PY{p}{,} \PY{l+s+ss}{\PYZdq{}17930\PYZdq{}}\PY{p}{,} \PY{n}{subject}\PY{p}{]}
-%    \PY{p}{)}
-% \end{Verbatim}
-
-
-% \begin{Verbatim}[commandchars=\\\{\}]
-% \PY{k}{on} \PY{n}{probinder}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{unread}
-% \PY{k}{if} \PY{n}{serviceId}\PY{o}{=}\PY{l+m+mi}{32}
-% \PY{k}{do} \PY{n}{probinder}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{setRead}\PY{p}{(}\PY{p}{id}\PY{p}{)}\PY{p}{,}
-%    \PY{n}{probinder}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{l+s+s2}{makeFileEntry}\PY{p}{(}\PY{n}{service}\PY{p}{,} \PY{p}{id}\PY{p}{)}
-% \end{Verbatim}
-
-% \newpage
-
-
-% \begin{Verbatim}[commandchars=\\\{\}]
-%     \PY{n+nt}{\PYZdq{}event\PYZdq{}}\PY{err}{:} \PY{l+s+s2}{\PYZdq{}emailyak\PYZhy{}\PYZgt{}newMail\PYZdq{}}\PY{err}{,}
-%     \PY{n+nt}{\PYZdq{}condition\PYZdq{}}\PY{err}{:} \PY{p}{\PYZob{}} \PY{n+nt}{\PYZdq{}FromAddress\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}dominic.bosch.db@gmail.com\PYZdq{}}\PY{p}{\PYZcb{}}\PY{err}{,}
-%     \PY{n+nt}{\PYZdq{}actions\PYZdq{}}\PY{err}{:} \PY{p}{[}
-%       \PY{p}{\PYZob{}}
-%         \PY{n+nt}{\PYZdq{}module\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}probinder\PYZhy{}\PYZgt{}newContent\PYZdq{}}\PY{p}{,}
-%         \PY{n+nt}{\PYZdq{}arguments\PYZdq{}}\PY{p}{:} \PY{p}{\PYZob{}}
-%           \PY{n+nt}{\PYZdq{}content\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}Received from EmailYak: \PYZdl{}X.TextBody\PYZdq{}}
-%         \PY{p}{\PYZcb{}}
-%       \PY{p}{\PYZcb{}}
-%     \PY{p}{]}
-% \end{Verbatim}
-
-% \begin{Verbatim}[commandchars=\\\{\}]
-% \PY{k+kd}{function} \PY{n+nx}{newMail}\PY{p}{(}\PY{n+nx}{callback}\PY{p}{)} \PY{p}{\PYZob{}}
-%   \PY{n+nx}{needle}\PY{p}{.}\PY{n+nx}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}https://api.emailyak.com/v1/\PYZsq{}}\PY{o}{+}\PY{n+nx}{key}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}/json/get/new/email/\PYZsq{}}\PY{p}{,}
-%     \PY{k+kd}{function} \PY{p}{(}\PY{n+nx}{error}\PY{p}{,} \PY{n+nx}{response}\PY{p}{,} \PY{n+nx}{body}\PY{p}{)}\PY{p}{\PYZob{}}
-%         \PY{k+kd}{var} \PY{n+nx}{mails} \PY{o}{=} \PY{n+nx}{JSON}\PY{p}{.}\PY{n+nx}{parse}\PY{p}{(}\PY{n+nx}{body}\PY{p}{)}\PY{p}{.}\PY{n+nx}{Emails}\PY{p}{;}
-%         \PY{k}{for}\PY{p}{(}\PY{k+kd}{var} \PY{n+nx}{i} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{;} \PY{n+nx}{i} \PY{o}{\PYZlt{}} \PY{n+nx}{mails}\PY{p}{.}\PY{n+nx}{length}\PY{p}{;} \PY{n+nx}{i}\PY{o}{++}\PY{p}{)} \PY{n+nx}{callback}\PY{p}{(}\PY{n+nx}{mails}\PY{p}{[}\PY{n+nx}{i}\PY{p}{]}\PY{p}{)}\PY{p}{;}
-%     \PY{p}{\PYZcb{}}
-%   \PY{p}{)}\PY{p}{;}
-% \PY{p}{\PYZcb{}}
-% \end{Verbatim}
-
-% \begin{Verbatim}[commandchars=\\\{\}]
-% \PY{p}{\PYZob{}}
-  
-%   \PY{n+nt}{\PYZdq{}event\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}emailyak\PYZhy{}\PYZgt{}newMail\PYZdq{}}\PY{p}{,}
-%   \PY{n+nt}{\PYZdq{}ToAddressList\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}test@mscliveweb.simpleyak.com\PYZdq{}}\PY{p}{,}
-%   \PY{n+nt}{\PYZdq{}FromAddress\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}dominic.bosch.db@gmail.com\PYZdq{}}\PY{p}{,}
-%   \PY{n+nt}{\PYZdq{}TextBody\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}Lengthy body [...]\PYZdq{}}\PY{p}{,}
-%   \PY{n+nt}{\PYZdq{}Subject\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}Fwd: test subject\PYZdq{}}\PY{p}{,}
-%   \PY{err}{[}\PY{err}{.}\PY{err}{.}\PY{err}{.}\PY{err}{]}
-
-% \PY{p}{\PYZcb{}}
-% \end{Verbatim}

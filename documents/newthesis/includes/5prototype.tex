@@ -150,8 +150,6 @@ exports.newContent = ( companyId, contextId, content ) ->
 
 
 
-
-
 \subsection{\acrshort{eca} Rules in the Rule Engine}
 While a car engine converts potential energy into mechanical work, our \textrm{Rule Engine} converts events into changes in \textrm{\glspl{infosystem}}.
 We have introduced \textrm{\acrshort{eca}} rules as sufficient approach to impose reactivity on systems and adopted the \textrm{\acrshort{eca}} paradigm for our conceptual model.
@@ -205,17 +203,18 @@ Since an existing \textrm{JavaScript} library\footnote{https://github.com/harthu
   \PY{p}{]}
 \PY{p}{\PYZcb{}}
 \end{Verbatim}
+\vspace{-0.7cm}
 \begin{lstlisting}[float=h,frame=no,label=lst:rulejson,caption=Rule Example expressed in \textrm{\acrshort{json}}]
 \end{lstlisting}
 
 \section{A Rule Language for the Prototype System}
 So far, we introduced the internal representation of the \textrm{\acrshort{eca}} rule language used in our prototype system.
 For human readability and more intuitive writing, they can be transformed into a phrase representation, through which Listing \ref{lst:rulejson} would be written as shown in Listing \ref{lst:exampleRulePhrase}.
-% is descriptive, adaptive, flexible
-% dynamic code modules to shield system from user modules
-% explain modules and their properties / user associations
-% a lot possible, but dangerous.
+Our language is descriptive and flexible in terms of the \textrm{Event Trigger} and \textrm{Action Dispatcher} modules.
+Another important flexible factor is the mapping of event properties to the \textrm{Action Dispatchers}.
+To write a rule it requires a priori information from the \textrm{Event Trigger} and \textrm{Action Dispatcher} modules, but we believe this can be offered intuitively to the user through today's \textrm{\glspl{webapplication}}.
 Listing \ref{lst:exampleRulePhrase} shows an example phrase of our envisioned rule language where the retrieval of a new mail will be checked for soccer news and, if confirmed, the mail body will be forwarded to an interested person.
+The Extended Backus-Naur Form for the prototype rule language syntax is shown in Listing \ref{lst:backusnaur}.
 
 \begin{lstlisting}[float=h,language=OwnRule,label={lst:exampleRulePhrase},caption=Example Phrase in Prototype Rule Language]
 ON news
@@ -223,7 +222,7 @@ IF ".categories" instr "soccer"
 DO EmailYak->sendMail("fan@soccer.com","News about soccer!","#{ .body }")
 \end{lstlisting}
 
-\begin{lstlisting}[float=h,language=OwnRule,caption=Extended Backus-Naur Form of Prototype Rule Language Syntax]
+\begin{lstlisting}[float=h,language=OwnRule,label={lst:backusnaur},caption={Extended Backus-Naur Form of Prototype Rule Language Syntax}]
 expression  ::= "ON " event " IF " conditions " DO " actions
 event       ::= word* ("->" word+)?
 conditions  ::= condition (" AND " condition)*
@@ -241,15 +240,55 @@ word        ::= [A-Za-z0-9_-]+
 
 
 
-
-
 \section{Prototype Use Case Implementations}
-% TODO concrete use case examples
-% as seen by user,
-% TODO figure: Rules (unions / objects / Rueckkoppelungen )
+In the previous chapter we listed use cases for our conceptual model.
+In this chapter we introduce use cases that were implemented in our prototype system in order to impose reactivity on the \textrm{\gls{web}}.
 
-% Diff comparison of URL
+
+\subsection{Detecting responding Computers}
+In our department building, one office is located on the other side of the floor and the elevator is right in the middle of it.
+This resulted in one person frequently missing the coffee break, because everybody was always in a lively discussion towards the elevator and forgot about him.
+Thus he sat up a network scanner that pinged the department's \textrm{Internet Protocol (IP)} range in the morning and pushed the results as events into the system.
+Through this he was able to set up a rule that, if more than 42 pings were returned, the system automatically deployed an email invitation to the group, suggesting a coffee break.
+The network scanner (code in Appendix \ref{lst:eventproducer}) was implemented as external \textrm{\gls{infosystem}} which pushed the ping results as event over a \textrm{\gls{webhook}}.
+The rule is shown in Listing \ref{lst:ruleCoffeeBreak} and the corresponding simplified \textrm{Action Dispatcher} is shown in Listing \ref{lst:adEmailYak}.
+
+\begin{Verbatim}[samepage=true,frame=single,fontsize=\footnotesize,commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1,xleftmargin
+=.3in]
+\PY{p}{\PYZob{}}
+  \PY{n+nt}{\PYZdq{}eventname\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}uptimestatistics\PYZdq{}}\PY{p}{,}
+  \PY{n+nt}{\PYZdq{}conditions\PYZdq{}}\PY{p}{:} \PY{p}{[}
+    \PY{p}{\PYZob{}}
+      \PY{n+nt}{\PYZdq{}selector\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}.currentlyon\PYZdq{}}\PY{p}{,}
+      \PY{n+nt}{\PYZdq{}operator\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}\PYZgt{}\PYZdq{}}\PY{p}{,}
+      \PY{n+nt}{\PYZdq{}compare\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{42}
+    \PY{p}{\PYZcb{}}
+  \PY{p}{]}\PY{p}{,}
+  \PY{n+nt}{\PYZdq{}actions\PYZdq{}}\PY{p}{:} \PY{p}{[}
+    \PY{l+s+s2}{\PYZdq{}EMailYak \PYZhy{}\PYZgt{} sendMail(\PYZbs{}\PYZdq{}eca\PYZhy{}engine@mscliveweb.simpleyak.com\PYZbs{}\PYZdq{},[usermaillist],}
+\PY{l+s+s2}{      \PYZbs{}\PYZdq{}Coffee Break!\PYZbs{}\PYZdq{},\PYZbs{}\PYZdq{}Let\PYZsq{}s go for a coffee at 10!\PYZbs{}\PYZdq{})\PYZdq{}}
+  \PY{p}{]}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+\vspace{-0.7cm}
+\begin{lstlisting}[float=h,language=OwnRule,caption={Rule; Coffee Break Invitation},label={lst:ruleCoffeeBreak},frame=no]
+\end{lstlisting}
+
+\begin{lstlisting}[float=h,language=CoffeeScript,caption={Action Dispatcher; EMailYak, in CoffeeScript},label={lst:adEmailYak}]
+url = 'https://api.emailyak.com/v1/'+params.apikey+'/json/send/email/'
+
+exports.sendMail = ( sender, receipient, subject, content ) ->
+	data =
+		FromAddress: sender
+		ToAddress: receipient
+		Subject: subject
+		TextBody: content
+	needle.post url, data, json: true
+\end{lstlisting}
+
+
 \subsection{Webpage Diff}
+
 
 
 
@@ -257,17 +296,18 @@ word        ::= [A-Za-z0-9_-]+
 
 
 
+
 \subsection{Real-time Reactive Messenger}
 
 
 
-\subsection{Server Room Overheating}
 
-During our research we found a troublesome server room that shows how the \textrm{Web of Things} can be exposed through our model.
-This server room suffered from a defective cooling system which lead to a drastic increase of temperature in certain circumstances.
-As a consequence certain server automatically shut themselves down as safety measurements.
-Eventually, these shutdowns weren't detected immediately by the people that administered these servers, therefore unnecessary downtimes were the result.
-As a very quick fix to inform certain administrators about the shutdown of their server, we started pinging these servers and pushed the results int
+
+% During our research we found a troublesome server room that made us develop a rule towards exposition of the \textrm{\gls{webofthings}}.
+% This server room suffered from a defective cooling system which lead to a drastic increase of temperature in certain circumstances.
+% As a consequence certain server automatically shut themselves down as safety measurements.
+% In order to support the administrator we sat up 
+% As a very quick fix to inform certain administrators about the shutdown of their server, we started pinging these servers and pushed the results int
 
 \subsection{Page Rank of Webpage changes}
 
@@ -313,6 +353,23 @@ As a very quick fix to inform certain administrators about the shutdown of their
 
 
 % full stack development 
+
+
+% TODO why JS. JSON as first advantage (http://www.toptal.com/nodejs/why-the-hell-would-i-use-node-js)
+% advantage for network applications with several concurrent connections
+% not as client-server used as intented but as serverserver com since we also expect several connections simultanously under load.
+% But also, we adopt the non-blocking nature of JS that is used for node's optimal communication, in order to implement our enigne in a non blocking way, thus allowing to load code and fire callback function in modules whenever they are required!
+% http://ariya.ofilabs.com/2012/07/lazy-parsing-in-javascript-engines.html
+% Optimization of special case if ( before function {immediately-invoked function expression (IIFE)}, do rela parsing, else lazy parsing
+% Difference between context and scope. scope unique to each invocation, context is 'this', owner of currently executing code.
+% .call, .apply 
+% TODO we should use .bind for persistence.coffee's functions ....
+
+%In JavaScript, functions are first-class objects, i.e. they are objects and can be manipulated and passed around just like any other object. Specifically, they are Function objects. -> https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions_and_function_scope
+% Since each call provides potentially different arguments, a new closure is created for each call to outside. The memory can be freed only when the returned inside is no longer accessible
+
+% The definitive guide: This combination of a function object and a scope (a set of variable bindings) in which the function’s variables are resolved is called a closure in the computer science literature.4
+% This is an old term that refers to the fact that the function’s variables have bindings in the scope chain and that therefore the function is “closed over” its variables.
 
 
 
@@ -406,26 +463,5 @@ for( var c = 0; c < 100; c++ ) {
 	setTimeout( fC, 3000); // will be executed after the loop ended
 }
 \end{lstlisting}
-
-% \subsubsection{Benchmarking JavaScript vs. Java}
-
-
-% TODO why JS. JSON as first advantage (http://www.toptal.com/nodejs/why-the-hell-would-i-use-node-js)
-% advantage for network applications with several concurrent connections
-% not as client-server used as intented but as serverserver com since we also expect several connections simultanously under load.
-% But also, we adopt the non-blocking nature of JS that is used for node's optimal communication, in order to implement our enigne in a non blocking way, thus allowing to load code and fire callback function in modules whenever they are required!
-% http://ariya.ofilabs.com/2012/07/lazy-parsing-in-javascript-engines.html
-% Optimization of special case if ( before function {immediately-invoked function expression (IIFE)}, do rela parsing, else lazy parsing
-% Difference between context and scope. scope unique to each invocation, context is 'this', owner of currently executing code.
-% .call, .apply 
-% TODO we should use .bind for persistence.coffee's functions ....
-
-%In JavaScript, functions are first-class objects, i.e. they are objects and can be manipulated and passed around just like any other object. Specifically, they are Function objects. -> https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions_and_function_scope
-% Since each call provides potentially different arguments, a new closure is created for each call to outside. The memory can be freed only when the returned inside is no longer accessible
-
-% The definitive guide: This combination of a function object and a scope (a set of variable bindings) in which the function’s variables are resolved is called a closure in the computer science literature.4
-% This is an old term that refers to the fact that the function’s variables have bindings in the scope chain and that therefore the function is “closed over” its variables.
-
-
 
 
