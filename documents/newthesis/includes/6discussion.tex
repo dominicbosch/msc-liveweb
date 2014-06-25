@@ -8,6 +8,8 @@ Moreover it is a time consuming task to find the proper functionality in \textrm
 \textrm{\acrshort{rest}}ful \textrm{\glspl{webservice}} are a good example for lacking meaningful functionality, since they do not provide complex functionality but more or less read, write, update and delete logic for \textrm{\glspl{webresource}}.
 For those reasons, we believe it was a good decision to encapsulate sometimes complex logic into the \textrm{Event Trigger} and \textrm{Action Dispatcher} modules.
 Through this, also users that do not have a background in computer science are more likely able to forge their customzied reactive Web.
+% TODO lacking support for events makes it a tedious task to gather them
+
 
 Many of the notional use case examples in chapter 4 have been implemented in the prototype system, but have brought important insight where it did not work instantly.
 We found that it is difficult to detect changes on any arbitrary webpage in a useful way.
@@ -49,6 +51,4 @@ We have seen that the \textrm{\acrshort{eca}} paradigm is very well suitable to 
 The more challenging thing was to identify meaningful events that can be added to a rule by the user.
 We have seen that it is common for existing \textrm{\acrshort{eca}} approaches to impose actions on local data rather than on remote \textrm{\glspl{infosystem}} over their services.
 We defined a conceptual model that does not need any \textrm{\glspl{infosystem}} to understand events but orchestrates it flexibly over its existing services.
-
-
 
