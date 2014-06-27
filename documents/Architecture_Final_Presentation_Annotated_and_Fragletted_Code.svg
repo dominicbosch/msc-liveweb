@@ -1,0 +1,420 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1100px" height="862px" version="1.1" style="position: absolute; width: 1110px; height: 861px; z-index: 4; left: -28px; top: -23px;">
+    <defs>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="0%" id="mx-gradient-ff8000-1-ffccbb-1-e-0">
+            <stop offset="0%" style="stop-color:#FF8000">
+            </stop>
+            <stop offset="100%" style="stop-color:#FFCCBB">
+            </stop>
+        </linearGradient>
+        <linearGradient x1="0%" y1="0%" x2="0%" y2="100%" id="mx-gradient-ffffff-1-d7d7e7-1-s-0">
+            <stop offset="0%" style="stop-color:#ffffff">
+            </stop>
+            <stop offset="100%" style="stop-color:#D7D7E7">
+            </stop>
+        </linearGradient>
+        <linearGradient x1="0%" y1="100%" x2="0%" y2="0%" id="mx-gradient-ffffff-1-d4e1f5-1-s-0">
+            <stop offset="0%" style="stop-color:#D4E1F5">
+            </stop>
+            <stop offset="100%" style="stop-color:#FFFFFF">
+            </stop>
+        </linearGradient>
+    </defs>
+    <g transform="translate(0.5,0.5) scale(0.9)">
+        <!-- Web -->
+        <!-- Cloud white outline -->
+        <path d="M 496 37 C 427 37 410 69 465 75 C 410 89 472 120 517 107 C 548 133 652 133 686 107 C 755 107 755 82 712 69 C 755 43 686 18 626 31 C 583 11 514 11 496 37 Z" fill="none" stroke="#ffffff" stroke-width="8" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <path d="M 496 37 C 427 37 410 69 465 75 C 410 89 472 120 517 107 C 548 133 652 133 686 107 C 755 107 755 82 712 69 C 755 43 686 18 626 31 C 583 11 514 11 496 37 Z" fill="url(#mx-gradient-ffffff-1-d4e1f5-1-s-0)" stroke="#7ea6e0" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <g fill="#7EA6E0" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="36px">
+            <text x="582" y="85">Web</text>
+        </g>
+        
+        
+        <!-- Architecture with Event Queue and Event Triggers -->
+        <!-- Background of whole architecture -->
+        <rect class="fragment visible" data-fragment-index="0" x="5" y="174" width="1090" height="539" rx="81" ry="81" fill="#ffffff" stroke="#666666" stroke-width="4" pointer-events="none">
+        </rect>
+        <!-- White outline of whole architecture -->
+        <rect class="fragment visible" data-fragment-index="0" x="5" y="173" width="1090" height="542" rx="81" ry="81" fill="none" stroke="#ffffff" stroke-width="8" pointer-events="none">
+        </rect>
+        <!-- Web to Poller arrow -->
+        <path class="fragment visible" data-fragment-index="0" d="M 504 56 Q 315 69 268 97 Q 220 125 220 203" fill="none" stroke="#ff8000" stroke-width="4" stroke-miterlimit="10" stroke-dasharray="12 12" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="0" d="M 220 211 L 215 201 L 220 203 L 225 201 Z" fill="#ff8000" stroke="#ff8000" stroke-width="4" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <!-- Poller to Event Queue Arrow stroke -->
+        <path class="fragment visible" data-fragment-index="0" d="M 258 265 L 258 300 L 525 300" fill="none" stroke="#ff8000" stroke-width="4" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <!-- Poller to Event Queue Arrow head -->
+        <path class="fragment visible" data-fragment-index="0" d="M 532 300 L 522 305 L 525 300 L 522 295 Z" fill="#ff8000" stroke="#ff8000" stroke-width="4" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <!-- Event Queue Outline -->
+        <path class="fragment visible" data-fragment-index="0" d="M 547 275 L 636 275 C 642 275 647 286 647 300 C 647 314 642 325 636 325 L 547 325 C 541 325 537 314 537 300 C 537 286 541 275 547 275 Z" fill="url(#mx-gradient-ff8000-1-ffccbb-1-e-0)" stroke="#ffffff" stroke-width="2" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <!-- Event Queue Background -->
+        <path class="fragment visible" data-fragment-index="0" d="M 636 275 C 631 275 626 286 626 300 C 626 314 631 325 636 325" fill="none" stroke="#ffffff" stroke-width="2" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <!-- Poller background -->
+        <rect class="fragment visible" data-fragment-index="0" x="145" y="215" width="150" height="50" rx="8" ry="8" fill="url(#mx-gradient-ffffff-1-d7d7e7-1-s-0)" stroke="#4d4d4d" stroke-width="3" pointer-events="none">
+        </rect>
+        <g class="fragment visible" data-fragment-index="0" fill="#FF8000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="14px">
+            <text x="284" y="133">Actively</text>
+            <text x="284" y="150">Detect Events</text>
+        </g>
+        <g class="fragment visible" data-fragment-index="0" fill="#FF8000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="14px">
+            <text x="494" y="288">Enqueue</text>
+            <text x="494" y="322">Events</text>
+        </g>
+        <g class="fragment visible" data-fragment-index="0" fill="#FFFFFF" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="18px">
+            <text x="581" y="296">Event</text>
+            <text x="581" y="318">Queue</text>
+        </g>
+        <g class="fragment visible" data-fragment-index="0" fill="#4D4D4D" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="18px">
+            <text x="220" y="247">Poller</text>
+        </g>
+        <!-- ET to Poller line -->
+        <path class="fragment visible" data-fragment-index="0" d="M 183 279 L 183 455" fill="none" stroke="#7ea6e0" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <!-- ET to Poller arrow head -->
+        <path class="fragment visible" data-fragment-index="0" d="M 183 268 L 188 279 L 177 279 Z" fill="#7ea6e0" stroke="#7ea6e0" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <g class="fragment visible" data-fragment-index="0" fill="#7EA6E0" font-family="Helvetica" font-weight="bold" text-anchor="end" font-size="14px">
+            <text x="174" y="380">Load Event Triggers</text>
+            <text x="174" y="397">for new / updated Rules</text>
+        </g>
+        <!-- DB -->
+        <path class="fragment visible" data-fragment-index="0" d="M 133 471 C 133 450 233 450 233 471 L 233 519 C 233 540 133 540 133 519 Z" fill="#ffffff" stroke="#7ea6e0" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <!-- DB center stroke -->
+        <path class="fragment visible" data-fragment-index="0" d="M 133 471 C 133 487 233 487 233 471" fill="none" stroke="#7ea6e0" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <g class="fragment visible" data-fragment-index="0" fill="#7EA6E0" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="18px">
+            <text x="183" y="502">Event</text>
+            <text x="183" y="524">Triggers</text>
+        </g>
+        
+        
+        <!-- Webhooks -->
+        <g class="fragment visible" data-fragment-index="1" fill="#FF8000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="14px">
+            <text x="476" y="132">Passively</text>
+            <text x="476" y="149">Retrieve Events</text>
+        </g>
+        <!-- Web to Webhook arrow -->
+        <path class="fragment visible" data-fragment-index="1" d="M 504 81 Q 455 85 433 110 Q 410 135 411 203" fill="none" stroke="#ff8000" stroke-width="4" stroke-miterlimit="10" stroke-dasharray="12 12" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="1" d="M 411 211 L 406 201 L 411 203 L 416 200 Z" fill="#ff8000" stroke="#ff8000" stroke-width="4" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <!-- Webhook Listener background -->
+        <rect class="fragment visible" data-fragment-index="1" x="335" y="215" width="150" height="50" rx="8" ry="8" fill="url(#mx-gradient-ffffff-1-d7d7e7-1-s-0)" stroke="#4d4d4d" stroke-width="3" pointer-events="none">
+        </rect>
+        <!-- Webhook DB to Listener arrow -->
+        <path class="fragment visible" data-fragment-index="1" d="M 373 279 L 373 455" fill="none" stroke="#ea6b66" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="1" d="M 373 268 L 379 279 L 368 279 Z" fill="#ea6b66" stroke="#ea6b66" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <!-- Webhook DB -->
+        <path class="fragment visible" data-fragment-index="1" d="M 323 471 C 323 450 423 450 423 471 L 423 519 C 423 540 323 540 323 519 Z" fill="#ffffff" stroke="#ea6b66" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <!-- Webhook DB bottom stroke -->
+        <path class="fragment visible" data-fragment-index="1" d="M 323 471 C 323 487 423 487 423 471" fill="none" stroke="#ea6b66" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        <g class="fragment visible" data-fragment-index="1" fill="#4D4D4D" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="18px">
+            <text x="411" y="236">Webhook</text>
+            <text x="411" y="258">Listener</text>
+        </g>
+        <g class="fragment visible" data-fragment-index="1" fill="#EA6B66" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="18px">
+            <text x="373" y="513">Webhooks</text>
+        </g>
+        <g class="fragment visible" data-fragment-index="1" fill="#EA6B66" font-family="Helvetica" font-weight="bold" text-anchor="end" font-size="14px">
+            <text x="364" y="383">Load Webhooks</text>
+            <text x="364" y="400">on Startup</text>
+        </g>
+        <!-- Webhook to Event Queue -->
+        <path class="fragment visible" data-fragment-index="1" d="M 411 265 L 411 300 L 525 300" fill="none" stroke="#ff8000" stroke-width="4" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        <!-- Rules Engine --> 
+        <!-- Event Queue to Engine arrow -->
+        <path class="fragment visible" data-fragment-index="2" d="M 647 300 L 711 300" fill="none" stroke="#ff8000" stroke-width="4" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="2" d="M 719 300 L 709 305 L 711 300 L 709 295 Z" fill="#ff8000" stroke="#ff8000" stroke-width="4" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <!-- Rules DB to engine arrow -->
+        <path class="fragment visible" data-fragment-index="2" d="M 798 455 L 798 395 L 798 395 L 798 339" fill="none" stroke="#a680b8" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="2" d="M 798 328 L 804 339 L 793 339 Z" fill="#a680b8" stroke="#a680b8" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <!-- Rule DB -->
+        <path class="fragment visible" data-fragment-index="2" d="M 753 471 C 753 450 843 450 843 471 L 843 519 C 843 540 753 540 753 519 Z" fill="#ffffff" stroke="#a680b8" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <!-- Rules DB bottom stroke -->
+        <path class="fragment visible" data-fragment-index="2" d="M 753 471 C 753 487 843 487 843 471" fill="none" stroke="#a680b8" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <!-- AD DB Background -->
+        <path class="fragment visible" data-fragment-index="2" d="M 890 471 C 890 450 1010 450 1010 471 L 1010 519 C 1010 540 890 540 890 519 Z" fill="#ffffff" stroke="#518a2b" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <!-- AD DB central stroke -->
+        <path class="fragment visible" data-fragment-index="2" d="M 890 471 C 890 487 1010 487 1010 471" fill="none" stroke="#518a2b" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <!-- AD DB to Engine arrow -->
+        <path class="fragment visible" data-fragment-index="2" d="M 950 455 L 950 395 L 836 395 L 836 339" fill="none" stroke="#518a2b" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="2" d="M 836 328 L 841 339 L 830 339 Z" fill="#518a2b" stroke="#518a2b" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <!-- Rules Engine Background -->
+        <rect class="fragment visible" data-fragment-index="2" x="723" y="275" width="150" height="50" rx="8" ry="8" fill="url(#mx-gradient-ffffff-1-d7d7e7-1-s-0)" stroke="#4d4d4d" stroke-width="3" pointer-events="none">
+        </rect>
+        <!-- Engine to Web arrow -->
+        <path class="fragment visible" data-fragment-index="2" d="M 873 300 Q 955 285 950 177 Q 945 69 672 69" fill="none" stroke="#ff8000" stroke-width="4" stroke-miterlimit="10" stroke-dasharray="12 12" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="2" d="M 665 69 L 675 64 L 672 69 L 675 74 Z" fill="#ff8000" stroke="#ff8000" stroke-width="4" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <g class="fragment visible" data-fragment-index="2" fill="#A680B8" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="18px">
+            <text x="798" y="513">Rules</text>
+        </g>
+        <g class="fragment visible" data-fragment-index="2" fill="#4D4D4D" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="18px">
+            <text x="798" y="307">Rules Engine</text>
+        </g>
+        <g class="fragment visible" data-fragment-index="2" fill="#518A2B" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="18px">
+            <text x="949" y="502">Action</text>
+            <text x="949" y="524">Dispatchers</text>
+        </g>
+        <g class="fragment visible" data-fragment-index="2" fill="#FF8000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="14px">
+            <text x="884" y="133">Dispatch</text>
+            <text x="884" y="150">Actions</text>
+        </g>
+        <g class="fragment visible" data-fragment-index="2" fill="#FF8000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="14px">
+            <text x="680" y="289">Dequeue</text>
+            <text x="680" y="323">Events</text>
+        </g>
+        <g class="fragment visible" data-fragment-index="2" fill="#518A2B" font-family="Helvetica" font-weight="bold" font-size="14px">
+            <text x="849" y="367">Load Action Dispatchers</text>
+            <text x="849" y="384">for new / updated Rules</text>
+        </g>
+        <g class="fragment visible" data-fragment-index="2" fill="#A680B8" font-family="Helvetica" font-weight="bold" font-size="14px">
+            <text x="807" y="427">Load Rules</text>
+            <text x="807" y="444">on Startup</text>
+        </g>
+        
+        
+        <!-- User Request Handler & ET Admin -->
+        <!-- User Request Handler Background -->
+        <rect class="fragment visible" data-fragment-index="3" x="96" y="604" width="949" height="70" rx="11" ry="11" fill="#ffffff" stroke="#999999" stroke-width="3" stroke-dasharray="9 9" pointer-events="none">
+        </rect>
+        <g class="fragment visible" data-fragment-index="3" fill="#666666" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="18px">
+            <text x="582" y="636">User Request</text>
+            <text x="582" y="658">Handler</text>
+        </g>
+        <!-- ET admin upper arrow stroke -->
+        <path class="fragment visible" data-fragment-index="3" d="M 183 549 L 183 599" fill="none" stroke="#7ea6e0" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <!-- ET admin upper arrow uper head -->
+        <path class="fragment visible" data-fragment-index="3" d="M 183 538 L 189 549 L 178 549 Z" fill="#7ea6e0" stroke="#7ea6e0" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <!-- ET admin upper arrow lower head -->
+        <path class="fragment visible" data-fragment-index="3" d="M 183 610 L 178 599 L 189 599 Z" fill="#7ea6e0" stroke="#7ea6e0" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <!-- ET admin lower arrow stroke -->
+        <path class="fragment visible" data-fragment-index="3" d="M 183 759 L 183 677" fill="none" stroke="#7ea6e0" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <!-- ET admin lower arrow upper head-->
+        <path class="fragment visible" data-fragment-index="3" d="M 183 770 L 178 759 L 189 759 Z" fill="#7ea6e0" stroke="#7ea6e0" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <!-- ET admin lower arrow lower head -->
+        <path class="fragment visible" data-fragment-index="3" d="M 183 666 L 189 677 L 178 677 Z" fill="#7ea6e0" stroke="#7ea6e0" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <!-- ET User head -->
+        <ellipse class="fragment visible" data-fragment-index="3" cx="183" cy="781" rx="7.5" ry="7.5" fill="#ffffff" stroke="#ffffff" stroke-width="3" pointer-events="none">
+        </ellipse>
+        <!-- ET user body -->
+        <path class="fragment visible" data-fragment-index="3" d="M 183 788 L 183 813 M 183 793 L 168 793 M 183 793 L 198 793 M 183 813 L 168 833 M 183 813 L 198 833" fill="none" stroke="#ffffff" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <!-- ET Expert -->
+        <g class="fragment visible" data-fragment-index="3" fill="#FFFFFF" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="18px">
+            <text x="183" y="857">Expert</text>
+        </g>
+        <!-- ET admin background -->
+        <rect class="fragment visible" data-fragment-index="3" x="108" y="614" width="150" height="50" rx="8" ry="8" fill="url(#mx-gradient-ffffff-1-d7d7e7-1-s-0)" stroke="#4d4d4d" stroke-width="3" pointer-events="none">
+        </rect>
+        <g class="fragment visible" data-fragment-index="3" fill="#4D4D4D" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="18px">
+            <text x="183" y="634">Event Trigger</text>
+            <text x="183" y="656">Administration</text>
+        </g>
+        <!-- ET admin label background -->
+        <rect class="fragment visible" data-fragment-index="3" x="82" y="721" width="100" height="35" fill="#ffffff" stroke="none" pointer-events="none">
+        </rect>
+        <g class="fragment visible" data-fragment-index="3" fill="#7EA6E0" font-family="Helvetica" font-weight="bold" text-anchor="end" font-size="14px">
+            <text x="174" y="732">Create / edit</text>
+            <text x="174" y="749">Event Triggers</text>
+        </g>
+        <g class="fragment visible" data-fragment-index="3" fill="#7EA6E0" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="14px">
+            <text x="139" y="575">Store / load</text>
+        </g>
+        
+        
+        
+        <!-- Webhook Admin -->
+        <!-- Webhook Admin background -->
+        <rect class="fragment visible" data-fragment-index="4" x="335" y="615" width="150" height="50" rx="8" ry="8" fill="url(#mx-gradient-ffffff-1-d7d7e7-1-s-0)" stroke="#4d4d4d" stroke-width="3" pointer-events="none">
+        </rect>
+        <!-- Webhook admin label -->
+        <rect class="fragment visible" data-fragment-index="4" x="315" y="719" width="87" height="35" fill="#ffffff" stroke="none" pointer-events="none">
+        </rect>
+        <g class="fragment visible" data-fragment-index="4" fill="#4D4D4D" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="18px">
+            <text x="411" y="636">Webhook</text>
+            <text x="411" y="658">Administration</text>
+        </g>
+        <g class="fragment visible" data-fragment-index="4" fill="#EA6B66" font-family="Helvetica" font-weight="bold" text-anchor="end" font-size="14px">
+            <text x="400" y="733">Create / edit</text>
+            <text x="400" y="750">Webhooks</text>
+        </g>
+        <g class="fragment visible" data-fragment-index="4" fill="#EA6B66" font-family="Helvetica" font-weight="bold" font-size="14px">
+            <text x="456" y="459">Create new</text>
+            <text x="456" y="476">Webhooks</text>
+        </g>
+        <!-- webhook user -->
+        <ellipse class="fragment visible" data-fragment-index="4" cx="410" cy="779" rx="7.5" ry="7.5" fill="#ffffff" stroke="#ffffff" stroke-width="3" pointer-events="none">
+        </ellipse>
+        <path class="fragment visible" data-fragment-index="4" d="M 410 786 L 410 811 M 410 791 L 395 791 M 410 791 L 425 791 M 410 811 L 395 831 M 410 811 L 425 831" fill="none" stroke="#ffffff" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <g class="fragment visible" data-fragment-index="4" fill="#FFFFFF" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="18px">
+            <text x="410" y="855">User</text>
+        </g>
+        <!-- webhook admin to DB -->
+        <path class="fragment visible" data-fragment-index="4" d="M 373 549 L 373 601" fill="none" stroke="#ea6b66" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="4" d="M 373 538 L 379 549 L 368 549 Z" fill="#ea6b66" stroke="#ea6b66" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="4" d="M 373 612 L 368 601 L 379 601 Z" fill="#ea6b66" stroke="#ea6b66" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <g class="fragment visible" data-fragment-index="4" fill="#EA6B66" font-family="Helvetica" font-weight="bold" text-anchor="end" font-size="14px">
+            <text x="366" y="577">Store / load</text>
+        </g>
+        <!-- webhook User to Admin arrow -->
+        <path class="fragment visible" data-fragment-index="4" d="M 411 679 L 410 757" fill="none" stroke="#ea6b66" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="4" d="M 411 668 L 416 679 L 405 679 Z" fill="#ea6b66" stroke="#ea6b66" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="4" d="M 410 768 L 405 757 L 416 757 Z" fill="#ea6b66" stroke="#ea6b66" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <!-- Webhook admin to Listener arrow -->
+        <path class="fragment visible" data-fragment-index="4" d="M 449 279 L 449 615" fill="none" stroke="#ea6b66" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="4" d="M 449 268 L 454 279 L 443 279 Z" fill="#ea6b66" stroke="#ea6b66" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        
+        
+        <!-- Rules Admin -->
+        <!-- Rules Admin background -->
+        <rect class="fragment visible" data-fragment-index="5" x="685" y="614" width="150" height="50" rx="8" ry="8" fill="url(#mx-gradient-ffffff-1-d7d7e7-1-s-0)" stroke="#4d4d4d" stroke-width="3" pointer-events="none">
+        </rect>
+        <!-- lower arrow stroke -->
+        <path class="fragment visible" data-fragment-index="5" d="M 760 759 L 760 678" fill="none" stroke="#a680b8" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <!-- lower arrow lower head -->
+        <path class="fragment visible" data-fragment-index="5" d="M 760 770 L 755 759 L 766 759 Z" fill="#a680b8" stroke="#a680b8" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <!-- lower arrow upper head -->
+        <path class="fragment visible" data-fragment-index="5" d="M 760 667 L 766 678 L 755 678 Z" fill="#a680b8" stroke="#a680b8" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <!-- User head -->
+        <ellipse class="fragment visible" data-fragment-index="5" cx="760" cy="781" rx="7.5" ry="7.5" fill="#ffffff" stroke="#ffffff" stroke-width="3" pointer-events="none">
+        </ellipse>
+        <!-- User body -->
+        <path class="fragment visible" data-fragment-index="5" d="M 760 788 L 760 813 M 760 793 L 745 793 M 760 793 L 775 793 M 760 813 L 745 833 M 760 813 L 775 833" fill="none" stroke="#ffffff" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <g class="fragment visible" data-fragment-index="5" fill="#FFFFFF" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="18px">
+            <text x="760" y="857">User</text>
+        </g>
+        <!-- rule admin label background -->
+        <rect class="fragment visible" data-fragment-index="5" x="766" y="721" width="89" height="33" fill="#ffffff" stroke="none" pointer-events="none">
+        </rect>
+        <g class="fragment visible" data-fragment-index="5" fill="#A680B8" font-family="Helvetica" font-weight="bold" font-size="14px">
+            <text x="768" y="734">Create / edit</text>
+            <text x="768" y="751">Rules</text>
+        </g>
+        <g class="fragment visible" data-fragment-index="5" fill="#A680B8" font-family="Helvetica" font-weight="bold" text-anchor="end" font-size="14px">
+            <text x="710" y="375">New / updated  Rule</text>
+            <text x="710" y="392">notification</text>
+        </g>
+        <g class="fragment visible" data-fragment-index="5" fill="#4D4D4D" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="18px">
+            <text x="760" y="635">Rules</text>
+            <text x="760" y="657">Administration</text>
+        </g>
+        <!-- ET to Rule Admin arrow stroke -->
+        <path class="fragment visible" data-fragment-index="5" d="M 723 614 L 723 355 L 220 355 L 220 279" fill="none" stroke="#a680b8" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <!-- ET to Rule Admin arrow head -->
+        <path class="fragment visible" data-fragment-index="5" d="M 220 268 L 226 279 L 215 279 Z" fill="#a680b8" stroke="#a680b8" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <!-- Rule Admin to Rule Engine arrow -->
+        <path class="fragment visible" data-fragment-index="5" d="M 723 614 L 723 355 L 761 355 L 761 339" fill="none" stroke="#a680b8" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="5" d="M 761 328 L 766 339 L 755 339 Z" fill="#a680b8" stroke="#a680b8" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="5" d="M 760 600 L 760 565 L 798 565 L 798 549" fill="none" stroke="#a680b8" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <!-- Rule Admin to Rules DB arrow -->
+        <path class="fragment visible" data-fragment-index="5" d="M 760 611 L 755 600 L 766 600 Z" fill="#a680b8" stroke="#a680b8" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="5" d="M 798 538 L 804 549 L 793 549 Z" fill="#a680b8" stroke="#a680b8" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <g class="fragment visible" data-fragment-index="5" fill="#A680B8" font-family="Helvetica" font-weight="bold" font-size="14px">
+            <text x="767" y="585">Store / load</text>
+        </g>
+        
+        
+        <!-- AD Admin -->
+        <!-- Label background -->
+        <rect class="fragment visible" data-fragment-index="6" x="951" y="722" width="125" height="33" fill="#ffffff" stroke="none" pointer-events="none">
+        </rect>
+        <g class="fragment visible" data-fragment-index="6" fill="#518A2B" font-family="Helvetica" font-weight="bold" font-size="14px">
+            <text x="953" y="735">Create / edit</text>
+            <text x="953" y="752">Action Dispatchers</text>
+        </g>
+        <!-- AD Admin -->
+        <rect class="fragment visible" data-fragment-index="6" x="865" y="615" width="170" height="48" rx="7" ry="7" fill="url(#mx-gradient-ffffff-1-d7d7e7-1-s-0)" stroke="#4d4d4d" stroke-width="3" pointer-events="none">
+        </rect>
+        <g class="fragment visible" data-fragment-index="6" fill="#4D4D4D" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="18px">
+            <text x="950" y="635">Action Dispatcher</text>
+            <text x="950" y="657">Administration</text>
+        </g>
+        <!-- AD User head -->
+        <ellipse class="fragment visible" data-fragment-index="6" cx="950" cy="781" rx="7.5" ry="7.5" fill="#ffffff" stroke="#ffffff" stroke-width="3" pointer-events="none">
+        </ellipse>
+        <!-- AD User body -->
+        <path class="fragment visible" data-fragment-index="6" d="M 950 788 L 950 813 M 950 793 L 935 793 M 950 793 L 965 793 M 950 813 L 935 833 M 950 813 L 965 833" fill="none" stroke="#ffffff" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <!-- Action Dispatcher Expert -->
+        <g class="fragment visible" data-fragment-index="6" fill="#FFFFFF" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="18px">
+            <text x="950" y="857">Expert</text>
+        </g>
+        <!-- AD admin lower arrow -->
+        <path class="fragment visible" data-fragment-index="6" d="M 950 759 L 950 678" fill="none" stroke="#518a2b" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="6" d="M 950 770 L 945 759 L 956 759 Z" fill="#518a2b" stroke="#518a2b" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="6" d="M 950 667 L 956 678 L 945 678 Z" fill="#518a2b" stroke="#518a2b" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <!-- AD admin to DB arrow -->
+        <path class="fragment visible" data-fragment-index="6" d="M 950 600 L 950 549" fill="none" stroke="#518a2b" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="6" d="M 950 611 L 945 600 L 956 600 Z" fill="#518a2b" stroke="#518a2b" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="6" d="M 950 538 L 956 549 L 945 549 Z" fill="#518a2b" stroke="#518a2b" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <g class="fragment visible" data-fragment-index="6" fill="#518A2B" font-family="Helvetica" font-weight="bold" font-size="14px">
+            <text x="959" y="585">Store / load</text>
+        </g>
+        
+    </g>
+</svg>
+
+
+
+
+
+

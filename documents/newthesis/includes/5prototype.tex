@@ -2,7 +2,7 @@
 
 \chapter{Prototype System}
 We have so far introduced our conceptual model for reactive \textrm{\glspl{infosystem}} and their Services and some example use cases to point out what would be possible with our model.
-In this chapter we present our proof of concept prototype system, which has a focus on the Web as its \textrm{\glspl{infospace}}.
+In this chapter we present our proof of concept prototype system, which has a focus on the Web as its \textrm{\gls{infospace}}.
 We will then introduce our \textrm{\acrshort{eca}} rule language, which gives all the necessary power over our prototype system and which can be directly translated into the internal rules representation.
 
 
@@ -19,14 +19,14 @@ Together with the requirement of native support for an \textrm{\acrlong{eda} (\a
 The prototype system consists of several modules, shown in Figure \ref{fig:Architecture}, which we are going to introduce within this section:
 \begin{itemize}
 	\item \textbf{\textrm{Poller}:} Loads \textrm{Event Trigger} modules and forwards events coming from them to the \textrm{Event Queue}. \textrm{Event Trigger} modules poll for changes in the Web and transform them into events. 
-	\item \textbf{\textrm{Webhook Listener}:} Listens on active \textrm{\gls{webhook}} for events and forwards them to the \textrm{Event Queue}.
+	\item \textbf{\textrm{\gls{webhook} Listener}:} Listens on active \textrm{\gls{webhook}} for events and forwards them to the \textrm{Event Queue}.
 	\item \textbf{\textrm{Event Queue}:} Buffers events for the case of an overly busy \textrm{Rule Engine}. 
 	\item \textbf{\textrm{Rules Engine}:} Picks an event from the \textrm{Event Queue} whenever there is one and it is idle. 
 	\item \textbf{\textrm{User Request Handler}:} The user interface modules to administrate \textrm{Event Triggers}, \textrm{\gls{webhook}}, \textrm{Rules} and \textrm{Action Dispatchers}.
 \end{itemize}
 
 When started, the prototype system loads persisted \textrm{\gls{webhook}} and begins to listen for new events on them.
-The \textrm{Rule Engine} then loads all persisted rules and for each rule it loads the required \textrm{Action Dispatchers} and notifies the \textrm{Poller} about the new rule, which then in turn loads an \textrm{Event Trigger} if required.
+The \textrm{Rule Engine} then loads all persisted rules and for each rule it loads the required \textrm{Action Dispatchers} and notifies the \textrm{Poller} about the new rule, which in turn loads an \textrm{Event Trigger} if required.
 The prototype is now up and running and accepts administration requests for \textrm{Event Triggers}, \textrm{\gls{webhook}}, \textrm{Rules} and \textrm{Action Dispatchers}.
 Whenever a rule is created or updated, the \textrm{Poller} and \textrm{Rule Engine} load required \textrm{Event Triggers} or \textrm{Action Dispatchers}.
 
@@ -40,15 +40,17 @@ Whenever a rule is created or updated, the \textrm{Poller} and \textrm{Rule Engi
 
 
 \subsection{Data Structure for Event Parameters}
-Events in our prototype system are internally represented as tree structures in \textrm{\acrshort{json}} format, which builds on only two data structures:
+Events in our prototype system are internally represented as tree structures in \textrm{\acrshort{json}} format.
+The \textrm{\acrshort{json}} format builds on two data structures:
 \begin{itemize}
 	\item Objects: Unordered collections of name/value pairs wrapped in curly brackets \texttt{\{ \}}, which can also be implemented as a hash map, dictionary or struct in other languages.
 	\item Arrays: Ordered lists of values wrapped in brackets \texttt{[ ]}, which can also be implemented as a record, vector or list in other languages.
 \end{itemize}
-A value can be an object or an array, but also a unicode string, a number, boolean or null.
+A value can be an object or an array, but also a unicode string, a number, a boolean value or null.
 This allows for any arbitrary depth and chaining of the supported data representations.
 It is a handy feature when we assume a tree structure for events in our prototype system since the selection of nodes in tree structures has been well studied and useful libraries exist.
-Since all native data structures within \textrm{JavaScript} programming code are already in \textrm{\acrshort{json}} format, it can easily be marshaled into one string and communicated to other applications without overhead.
+\textrm{\acrshort{json}} formatted datastructures can easily be marshaled into one string and communicated to other applications without overhead
+Also, they are natively supported within \textrm{JavaScript} programming code. 
 \textrm{\acrshort{json}} can be implemented in virtually every programming language, therefore received a lot of attention and is supported by many \textrm{\glspl{webresource}} for communication.
 
 
@@ -60,14 +62,18 @@ And still, in many cases it is only possible to access data which does not refer
 To detect a change in data over time we need to be able to store an earlier request and get the difference to the current request, which could then be transformed into a meaningful event.
 The derivation of a meaningful event from data can be a complex task which requires certain operations, which underlines the need for powerful \textrm{Event Trigger} modules.
 The complexity is even bigger for \textrm{Action Dispatcher} modules which alter data and require more complex communication to \textrm{\glspl{webservice}}.
-For those reasons we made the decision to keep these modules flexible in terms of communication and also to leave it open to expert users to encapsulate complicated logic into them for inexperienced users.
-Therefore we modeled the \textrm{Event Trigger} and \textrm{Action Dispatcher} to be \textrm{JavaScript} code modules that are created by expert users during runtime and loaded whenever a rule is activated, which needs them.
+For those reasons we made the decision to keep these modules flexible in terms of communication.
+We also wanted to leave it open to expert users to encapsulate complicated logic into them for inexperienced users.
+We modeled the \textrm{Event Trigger} and \textrm{Action Dispatcher} to be \textrm{JavaScript} code modules, which are created by expert users during runtime.
+They are also loaded during runtime whenever an activated rule needs them.
 These modules run in a sandbox and got only access to certain \textrm{JavaScript} libraries, which are provided by the owner of the system.
 Through this it is possible to communicate with \textrm{\acrshort{rest}}ful \textrm{\glspl{webservice}} as well as with \textrm{\acrshort{soap}} \textrm{\glspl{webService}} or any other service that can be addressed through \textrm{JavaScript} libraries. 
 Apart from those libraries there are two other important functions offered in both type of modules:
 \begin{itemize}
-	\item \textrm{log}: Will store log entries on a per rule base, wherever the instruction is met during execution of a module. The log can be seen by the user who chose the module to be part of a rule.
-	\item \textrm{pushEvent}: This is the important part for \textrm{Event Trigger} modules, since events are only through this function pushed into the prototype system. For \textrm{Action Dispatcher} modules this provides the possibility for loopback events.
+	\item \textrm{log}: Will store log entries on a per rule base, wherever the instruction is met during execution of a module.
+	The log can be seen by the user who chose the module to be part of a rule.
+	\item \textrm{pushEvent}: This funciton is an important part of \textrm{Event Trigger} modules.
+	It is responsible to push events into the prototype system. For \textrm{Action Dispatcher} modules this provides the possibility for loopback events.
 \end{itemize}
 Only functions which are attached to the \texttt{exports} property of the module are later accessible from the outside and can be selected as \textrm{Event Trigger} or \textrm{Action Dispatcher}.
 The function arguments of, from outside visible, functions are identified by the according \textrm{User Request Handler} module and the user will be requested to provide values for all of them in order to activate the \textrm{Event Trigger} or \textrm{Action Dispatcher}.
@@ -75,32 +81,34 @@ For \textrm{Action Dispatchers} it is also possible to use event property select
 Through the \texttt{pushEvent} function in the global scope of the modules, events can be pushed into the prototype system.
 
 By using the expressiveness of \textrm{JavaScript} and some of its libraries, it is possible to access a large part of the existing \textrm{\glspl{infosystem}} and transform changes in their \textrm{\glspl{infospace}} into events and also to impose changes onto them as part of actions.
-The power that can be expressed in those code modules needs to be controlled, and can't be granted to anybody, thus we shield it through user access control, thus only allowing trusted users to write \textrm{Event Trigger} and \textrm{Action Dispatcher} code.
+The power that can be expressed in those code modules needs to be controlled, and ca not be granted to anybody, thus we shield it through user access control, thus only allowing trusted users to write \textrm{Event Trigger} and \textrm{Action Dispatcher} code.
 
 
 
 \subsection{Retrieving Events}
-In the last chapters, we always put emphasis on the two different ways how events can be retrieved from \textrm{\glspl{infosystem}}, i.e. actively pulling events, or passively retrieving them.
-Even though some \textrm{\glspl{infosystem}} offer the access to services that offer data that corresponds to events and can instantly be forwarded into the system, we have seen that there is need for the derivation of events from changes in data on the Web, therefore we need the \textrm{Event Trigger} modules.
+In the last chapters, we put emphasis on the two different ways how events can be retrieved from \textrm{\glspl{infosystem}}, i.e. actively pulling events, or passively retrieving them.
+Some \textrm{\glspl{infosystem}} offer access to data that corresponds to events and can instantly be forwarded into the system.
+But we have seen that there is need for the derivation of events from changes in data on the Web, therefore we need the \textrm{Event Trigger} modules.
 But still, our vision is that of an optimal real-time reactive Web which means that all possible events are offered by all \textrm{\glspl{infosystem}}.
-An interested remote entity could then just announce interest in a certain kind of events over a \textrm{Webhook} and retrieves them in real-time.
-For that reason we laid out our architecture for such \textrm{\gls{webhook}}, but still offer the \textrm{Event Trigger} modules to poll for events in the semi-static \textrm{\gls{www}}.
+An interested remote entity could announce interest in a certain kind of events over a \textrm{\gls{webhook}} and would retrieve them in real-time.
+For that reason we laid out our architecture for \textrm{\glspl{webhook}}, but still offer the \textrm{Event Trigger} modules to poll for events in the semi-static \textrm{\gls{www}}.
 During prototype testing we focused mainly on server-sided \textrm{Web APIs}, but we also generated events from the browser and pushed them to our prototype system.
-This was achieved with a library included in a sample webpage that pushed events to a \textrm{Webhook} of our prototype.
-Since modern browsers support geo locating, we decided to let the client browser push the the current position of the device to the \textrm{Webhook}.
+This was achieved with a library included in a sample webpage that pushed events to a \textrm{\gls{webhook}} of our prototype.
+Since modern browsers support geo locating, we decided to let the client browser push the current position of the device to the \textrm{\gls{webhook}}.
 
 
 
 \subsubsection{Polling with Event Triggers}
-As we have pointed out before, \textrm{Event Trigger} modules are \textrm{JavaScript} code modules with access to a set of predefined libraries, which offer the flexibility of \textrm{JavaScript} programming.
-The \textrm{Poller} loads those \textrm{Event Trigger} modules whenever they are required as part of a rule.
+As we have pointed out before, \textrm{Event Trigger} modules are dynamic code modules with access to a set of predefined libraries.
+The \textrm{Poller} loads \textrm{Event Trigger} modules whenever they are required in an active rule.
 The user of the \textrm{Event Trigger} can choose a starting point and an interval for the polling to take place.
 An example \textrm{\gls{webservice}} which offers polling for events is the \textrm{Email Yak}\footnote{http://www.emailyak.com/} \textrm{\gls{webapi}}, which responds with new emails when requested.
-The code required to request the new mails from this service and forward them into the prototype system is quite short and shown in Listing \ref{lst:emailyak}, but for other examples it can get more complex.
+The code required to request the new mails from this service and forward them into the prototype system is quite short and shown in Listing \ref{lst:emailyak}.
+For other services it can quickly get more complex, depending on how complicated a meaningful change detection is.
 For better readability the code is written in \textrm{CoffeeScript}\footnote{http://coffeescript.org/}.
-Only expert users are expected to store such a piece of code in our prototype, which enables inexperienced users to simply choose the \texttt{"EmailYal -> newMail"} \textrm{Event Trigger} for their rule.  
+Only expert users are expected to store such a piece of code in our prototype, which enables inexperienced users to simply choose the \texttt{"EmailYak -> newMail"} \textrm{Event Trigger} for their rule.  
 A great opportunity to access data from webpages via a \textrm{\gls{webapi}} is \textrm{Import.io}\footnote{https://import.io/}.
-By browsing through the Web with their browser it is possible to select certain parts from a webpage and store them in a mask.
+By browsing through the Web with the \textrm{Import.io} browser, it is possible to select certain parts from a webpage and store the selection as a mask.
 Data is instantly extracted from the webpage, using the stored mask, when sending a request to their \textrm{\gls{webapi}} with the given mask id and the \textrm{\acrshort{uri}}.
 This is a great tool for expert users to predefine desired data on webpages and then produce events out of an \textrm{Event Trigger} whenever there is a change in that data.
 \begin{lstlisting}[float=h,label=lst:emailyak,language=CoffeeScript,caption=Event Trigger code to poll Email Yak RESTful Web service for new Mails; written in CoffeeScript]
@@ -114,19 +122,20 @@ exports.newMail = () ->
 
 
 \subsubsection{\gls{webhook}}
-As powerful as \textrm{\gls{webhook}} are in providing real-time notifications from remote \textrm{\glspl{webresource}}, as simple they are to use.
-In our prototype, users can create as many new \textrm{\gls{webhook}} as they choose to.
+As powerful as their ability to provide real-time notifications from remote \textrm{\glspl{webresource}} is, as simple are \textrm{\glspl{webhook}} to use.
+In our prototype, users can create as many new \textrm{\gls{webhook}} as they like.
 They only need to provide an event name which will be associated to the \textrm{\gls{webhook}}.
-A new \textrm{Webhook} is created in the \textrm{Webhook Listener}, which from then on accepts events posted to it, and the \textrm{Webhook \acrshort{uri}} is displayed to the user.
-Any \textrm{\gls{webresource}} that supports the concept of \textrm{\gls{webhook}} (e.g. \textrm{GitHub}\footnote{https://developer.github.com/\gls{webhook}/}) has a place to register the \textrm{Webhook} \textrm{\acrshort{uri}}.
-Whenever a remote \textrm{\gls{webresource}} pushes an event to the \textrm{Webhook}, the user-defined event name is assigned as the implicit parameter of a freshly created internal event, while the whole incoming event body is added as explicit parameters to it.
-Afterwards it is forwarded to the \textrm{Event Queue}.
+A new \textrm{\gls{webhook}} is created in the \textrm{\gls{webhook} Listener}, which from then on accepts events posted to it.
+The \textrm{\gls{webhook} \acrshort{uri}} is always accessible to the user and can be placed at any desired \textrm{\gls{webhook}} in order to receive events from it.
+Any \textrm{\gls{webresource}} that supports the concept of \textrm{\gls{webhook}} (e.g. \textrm{GitHub}\footnote{https://developer.github.com/\gls{webhook}/}) has a place to register the \textrm{\gls{webhook}} \textrm{\acrshort{uri}}.
+Whenever a remote \textrm{\gls{webresource}} pushes an event to the \textrm{\gls{webhook}}, the user-defined event name is assigned as the implicit parameter of a freshly created internal event.
+The whole incoming event body is added as explicit parameters to the internal event, which is forwarded to the \textrm{Event Queue}.
 
 
 
 \subsection{Dispatching Actions}
 \textrm{Action Dispatchers} are \textrm{JavaScript} code modules that can be created during runtime and loaded by the engine whenever a new rule requires them, much as the \textrm{Event Trigger} modules are loaded by the \textrm{Poller}.
-They need to be created before they can be used in a rule.
+Before actions can be used in a rule, an expert has to create them.
 In our prototype system, \textrm{Action Dispatchers} use a library for \textrm{HTTP} communication which allows them to address a wide range of \textrm{\glspl{webresource}}.
 \textrm{Action Dispatchers} can also push events back into the \textrm{Event Queue} which can be used to chain certain rules together.
 Since \textrm{\glspl{webhook}} are an important part of our vision we also implemented an \textrm{Action Dispatcher} that delivers events to external \textrm{\gls{webhook}}.
@@ -158,7 +167,7 @@ The \textrm{Rules Administration} within the \textrm{User Request Handler} notif
 For each event in the \textrm{Event Queue}, the engine checks it against its stored \textrm{\acrshort{eca}} rules and dispatches actions whenever the event conforms to the rule's condition part.
 The three parts of an \textrm{\acrshort{eca}} rule have the following requirements in our prototype system:
 \begin{itemize}
-	\item Event name: Any arbitrary Unicode string, can refer to the name of an \textrm{Event Trigger} or a \textrm{Webhook}, but also to a custom loopback event.
+	\item Event name: Any arbitrary Unicode string, can refer to the name of an \textrm{Event Trigger} or a \textrm{\gls{webhook}}, but also to a custom loopback event.
 	\item Conditions: Zero or more instructions to be evaluated against an event. Requires a selector for a node in the tree structure of the event, a comparison operator ($<$, $<=$, $>$, $>=$, $==$, $!=$ or $instr$) and a value.
 	\item Action Dispatchers: A list of \textrm{Action Dispatchers} to be invoked if all conditions of the given event evaluate to true. We assume that invocations can be expressed using common function invocation syntax ( i.e. \texttt{actionFunction(param1, param2[, ...])} ) in order to dispatch an action.
 \end{itemize}
@@ -294,8 +303,19 @@ exports.sendMail = ( sender, receipient, subject, content ) ->
 
 \subsection{Enhance Existing Web App}
 
+\begin{lstlisting}[float=h,language=OwnRule,label={lst:RulePhraseAnnotate},caption=Rule Phrase for ProBinder Annotations]
+ON ProBinder->unreadContent
+IF "#{ .context .id }" == 18749
+DO ProBinder->annotateTagEntries("#{ .id }"),
+	 ProBinder->setRead("#{ .id }")
+\end{lstlisting}
 
 
+% on ProBinder->unreadContent
+% if "#{ .context .id }" == 18749
+% do "ProBinder -> annotateTagEntries(\"#{ .id }\")",
+% 	 "ProBinder -> setRead(\"#{ .id }\")"
+   
 
 \subsection{Real-time Reactive Messenger}
 
@@ -336,7 +356,7 @@ exports.sendMail = ( sender, receipient, subject, content ) ->
 \end{figure}
 
 \section{Web Application Development}
-% Why JS, why wasn't it used up to now? is it used now?
+% Why JS, why was not it used up to now? is it used now?
 
 % My guess is that Node is encouraging good programmer practices in terms of scalability, and Java less so. In other words, programmers probably have to work less hard to avoid bad scalability bottlenecks in Node than in Java.
 
@@ -410,7 +430,7 @@ Any code placed in a callback function, which is assigned to an asynchronous ope
 % TODO figure: Callback; Result ensurance (ergebnissichherung) wird direkt mit funktion mitgeschickt
 This allows stacking of functions and operations upon each other which automatically results in a flexible and event-driven application.
 
-So far we didn't regard the context for such asynchronous functions.
+So far we did not regard the context for such asynchronous functions.
 If a function has access to the enclosing context where it was invoked in, it is called a closure.
 Closures play an important role in \textrm{ECMAScript}\cite{EcmaScript}, which is the base for widely-spread script languages like JavaScript, JScript and ActionScript.
 Closures in \textrm{ECMAScript} are defined such as they have access to the context of the function they were created in.
@@ -437,7 +457,7 @@ In such a setup \texttt{c} will have different values in the same part of differ
 Those event-driven context overwrites can be taken care of by shielding the closure from context changes, as shown in Figure~\ref{fig:Closures_Closure-3}.
 To shield the closure form context changes, closure \texttt{fB} needs to create another closure \texttt{fC} and return it to \texttt{fA}.
 The argument passed to \texttt{fB} is the context ( \texttt{c} in Figure~\ref{fig:Closures_Closure-3} ) that might change but requires to be persistent for one invocation.
-\texttt{fC} has now \texttt{c} as a fixed context, which can't be overwritten anymore.
+\texttt{fC} has now \texttt{c} as a fixed context, which ca not be overwritten anymore.
 Now the only thing left is \texttt{fC} needs to be invoked and it will retain the original context.
 This implementation is necessary when the closure acts as a callback function for asynchronous operations, to preserve the original context in case it is required within the callback function.
 \begin{figure}[!ht]

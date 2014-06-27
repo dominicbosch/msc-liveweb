@@ -10,7 +10,7 @@ Many documents of the \textrm{\gls{www}} are dynamic in the way that they change
 Some might change in an interval of a few minutes (e.g. news), while others change much slower, such as knowledge sites.
 To detect such changes an \textrm{\gls{infosystem}} in the \textrm{\gls{web}} needs to keep track of the document history and trigger events if there is a change.
 In our model this would be realized by an \textrm{Event Trigger} which monitors a certain set of \textrm{\glspl{infospace}} and triggers events as soon as differences are detected.
-A user will then set up a rule that checks if the changes are related to a certain category of interest, such as sports or a certain observed site and how big those changes are.
+A user will then set up a rule that checks if the changes are related to a certain category of interest, such as sports or a certain observed site, and how big those changes are.
 If for example a Wikipedia article changed in more than 10\% of its content this will be a reason for a moderator to look at it and should be entered as a task in the next free slot of his calendar, as shown in Figure \ref{fig:DetectChangesInTheWeb}.
 \begin{figure}[!ht]
   \centering
@@ -23,7 +23,7 @@ If for example a Wikipedia article changed in more than 10\% of its content this
 
 \section{Enhance existing \glspl{webapplication}}
 Web applications, such as webmails, social networks or \textrm{\acrlong{cms} (\acrshort{cms})} are widely spread and used by a large number of Internet users.
-But often users or developers miss some features or interoperability with other web applications, which would result in enhanced functionality and also in less work.
+Users or developers often miss some features or interoperability with other web applications, which would result in enhanced functionality and also in less work.
 Features of that kind could also include data and functionality from other \textrm{\gls{webresource}} on the web.
 This would require \textrm{\glspl{webapplication}} to communicate together and to grab data or impose functionality upon each other.
 A lot of enhancements will not be implemented by the \textrm{\glspl{webapplication}} themselves because they are very specific to a small number of their users.
@@ -70,7 +70,7 @@ The students are expected to submit their exercise solutions before the deadline
 \end{figure}
 
 A certain amount of time before the deadline, e.g. one day, the reactive entity will detect the deadline and process events that depict the current exercise submission status per student.
-If the system detects students who haven't uploaded their exercises yet, it will notify them about the deadline, which is shown in Figure \ref{fig:ProBinderExerciseNotification}.
+If the system detects students who have not uploaded their exercises yet, it will notify them about the deadline, which is shown in Figure \ref{fig:ProBinderExerciseNotification}.
 This is an additional service that gives students the chance to react on a missed exercise submission deadline.
 As soon as the deadline passed, the system will revoke write-rights to the exercise submission container and therefore disallow submissions which are too late.
 \begin{figure}[!ht]
@@ -83,10 +83,10 @@ As soon as the deadline passed, the system will revoke write-rights to the exerc
 
 
 \section{Service Functionality and Availability Checking}
-Services offered through the \textrm{\gls{web}} aren't monitored or tested by users or developers from other sites.
+Services offered through the \textrm{\gls{web}} are not monitored or tested by users or developers from other sites.
 If they rely on correct functionality or availability they need a way to assert this.
-It is also possible that an owner of such a service doesn't have the tools to monitor his own services
-Whenever such a service isn't working correctly anymore or stops responding, these users or developers need to be able to react on this before it is too late.
+It is also possible that an owner of such a service does not have the tools to monitor his own services.
+Whenever such a service is not working correctly anymore or stops responding, these users or developers need to be able to react contemporary on this.
 With a reactive rule in place that evaluates Service Testing results, countermeasurements can be taken early.
 One action to such a failing service test could be an automatic switching of the utilized service within an action dispatcher, so that from then on it uses one which still works correctly, as shown in Figure \ref{fig:ProBinderServiceTesting}.
 \begin{figure}[!ht]
@@ -101,13 +101,13 @@ One action to such a failing service test could be an automatic switching of the
 \section{Exploiting the \gls{webofthings}}
 A model for reactive information systems becomes especially interesting in the context of the \textrm{\gls{webofthings}}. 
 Through the small connected devices, a lot of sensor data become accessible via the \textrm{\gls{web}} and can be used as events to trigger actions.
-These actions could also be part of the \textrm{\gls{webofthings}}, if there are \textrm{Things} that offer services.
+These actions could also be part of the \textrm{\gls{webofthings}}, if there are such things, that offer services.
 One example of a reactive rule, that has parts in the \textrm{\gls{webofthings}}, is that of a server room which has a defective cooling.
 The increasing temperature eventually causes the servers to shutdown or even fail.
 Servers in this room should push current state information into a reactive system.
 The reactive system can then take countermeasures if it detects a certain pattern that will lead to an overheating of all systems.
 It could inform certain (not so important) servers to gracefully shutdown and additionally inform administrators, who otherwise might miss the shutdown, as shown in Figure \ref{fig:WoT_Server}.
-Even better would be if it would have the power to kick in an additional emergency cooling system to prevent the shutdown of any of the servers.
+It would be even better, if such a system would have the power to enable an additional emergency cooling system to prevent the shutdown of any of the servers.
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=0.8\textwidth]{figures/WoT_Server}
@@ -119,7 +119,7 @@ Another scenario gets more realistic with the increasing number of homes that ar
 A home or apartment owner has her light controls attached to the Web.
 The first thing a reactive system could do, is that it detects holidays in the owner's agenda and automatically sets the light control to somewhat reasonable random during her absence.
 This would make suspicious characters, which are eventually interested in her wealth, think that he's still at home.
-In combination with another \textrm{Thing} that is connected to the \textrm{\gls{web}} and always accompanies people, the cell phone, an even more interesting application scenario can be thought of.
+In combination with another thing, that is connected to the \textrm{\gls{web}} and always accompanies people, the cell phone, an even more interesting application scenario can be thought of.
 The phone would push location information about the owner into the system.
 Whenever the owner gets close to her house, the reactive system could turn on the light in the entry area and play some music.
 On a Wednesday evening it could also inform the delivery service that they can deliver the owner's preferred menu when she is home, because the owner is doing this always on a Wednesday evening.

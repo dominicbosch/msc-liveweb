@@ -1,13 +1,15 @@
 \chapter*{Abstract}
-The Web is a rapidly growing information universe, consisting of \textrm{\glspl{infosystem}} that provide access over heterogeneous services.
-The majority of those \textrm{\glspl{infosystem}} are dynamic and changes in their \textrm{\gls{infospace}} can be regarded as events, when aiming to detect them.
-Moreover, such changes are also actions, when imposed onto the \textrm{\gls{infospace}}.
+The \textrm{\gls{web}} is a rapidly growing information universe, consisting of \textrm{\glspl{infosystem}} that provide access to heterogeneous services.
+A large part of those \textrm{\glspl{infosystem}} are dynamic.
+Changes in their \textrm{\gls{infospace}} trigger events, which can be detected.
+Moreover, such changes can also be imposed onto the \textrm{\gls{infospace}} over the appropriate services.
 If appropriate services exist to access such an \textrm{\gls{infosystem}} for read and write operations, we are able to orchestrate it.
-By adopting the \textrm{\acrlong{eca} (\acrshort{eca})} paradigm to \textrm{\glspl{infosystem}}, we are able to introduce an event-based conceptual model, which allows the detection of events and the dispatching of actions according to predefined rules, thus imposing reactivity on top of or between \textrm{\glspl{infosystem}}.
+By adopting the \textrm{\acrlong{eca} (\acrshort{eca})} paradigm to \textrm{\glspl{infosystem}}, we are able to introduce an event-based conceptual model.
+This model allows the detection of events and the dispatching of actions according to predefined rules, thus imposing reactivity on top of or between \textrm{\glspl{infosystem}}.
 Current approaches that use the \textrm{\acrshort{eca}} paradigm focus on action imposition on local storage, while we aim to impose actions on the hetereogeneous services of existing \textrm{\glspl{infosystem}}.
-This model is not limited to the Web, but can include any in a way accessible \textrm{\glspl{infosystem}} over its services.
+This model is not limited to the \textrm{\gls{web}}, but can include any accessible \textrm{\glspl{infosystem}}.
 
-In our work we introduce a prototype system, which uses the Web's programmability to impose reactivity on top of it.
+In our work we introduce a prototype system, which uses the \textrm{\gls{web}}'s programmability to impose reactivity on top of it.
 We also underline the importance of the, currently little, support of \textrm{\glspl{webservice}} for event callback addresses, the so called \textrm{\glspl{webhook}}.
 They are the only way for real-time event delivery to remote systems and free them from expensive polling for changes.
 Through our prototype it is possible to orchestrate \textrm{\glspl{webservice}} based on an \textrm{\acrlong{eda} (\acrshort{eda})}, a method which pushes towards the vision of real-time reactive \textrm{\glspl{infosystem}}.

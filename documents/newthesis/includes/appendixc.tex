@@ -65,7 +65,7 @@ public class RunnableCallbackFunction implements Runnable {
     this.context = context;
   }
 
-  // If this is executing, we didn't wait long enough and the
+  // If this is executing, we did not wait long enough and the
   // benchmark time is compromised
   public void run() {
     System.out.println( mapScope.toString() );
@@ -103,7 +103,7 @@ var deferredFunction = function ( numScopeVars, delay, scopeId ) {
     scope[ "id" + i ] = "12345678"; // 8 bytes per stored scope variable
   }
   setTimeout( function () {
-    // If this is executed we didn't wait long enough
+    // If this is executed we did not wait long enough
     console.log( JSON.stringify( scope, null, '  ' ) );
   }, delay );
 }

@@ -1,0 +1,67 @@
+Presentation Notes
+
+TODO:
+Add rule and code for reactivity example
+add code and rule for team work example
+
+
+# Title Slide
+I welcome you to the presentation of my master thesis, which is called "Towards Reactive Information Systems and their services"
+
+
+# Agenda
+First, I'm going to explain how to react to changes on the Web
+Then I will give an insight into a use case example
+And last but not least, I will introduce my prototype system
+
+
+# Slide 1 - Cloud with Events
+What can changes in the Web be?
+ - Friend Requests, Invitations, Notifications about related people
+ - New Mail, New Post in a Content Management System
+ - Thunderstorm Alerts
+ - New Multimedia content
+ - and many more, basically every change in data is an event, so we're talking about a whole lot of events here
+
+
+# Slide 2 - Goal
+So what do we want to do with these changes?
+-> bullet list
+
+
+# Slide 3 - Reactivity Example
+How could a reaction to a change look like?
+<> Since I built this presentation with latest Web technologies, I was able to add a short live demo directly into the slides.
+<> I am going to turn on my cell phone since it is part of this demo.
+Let's assume you are on your way to attend to a meeting at a certain place.
+You are on your bicycle and you hear all the new mails over your cell phone coming in during your ride.
+So now, if somebody changes the meeting place, you probably get another mail 'pling' for the meeting place change, but you're not caring about that.
+But with the reactive Web, you would have setup instant meeting location change alerts.
+And then if somebody changes the meeting place...
+<Click>
+You know something really requires your attention, you stop, you read and you will find your way to the right place without detour.
+
+
+# Slide 4
+What kind of typical changes are there in the Web?
+-> bullet list
+
+
+# Slide 5 - ECA Paradigm
+How is it possible to get such a reactiveness into the Web?
+That's where the ECA - Paradigm cmes into play
+
+
+# Slide 6 - Distributed User-Defined Reactivity
+So what I was aiming for in my thesis was a user being able to create such ECA rules in a system in order to get reactivity between the different information systems in the Web.
+A lot of these services are already accessible from the outside, which is the basis for my approach.
+It was not in my intention to force certain constraints on other information systems in order for them to participate in the reactivity lifecycles
+By accessing them over their offered services it is possible to orchestrate many heterogeneous ones.
+
+
+
+
+
+
+
+
