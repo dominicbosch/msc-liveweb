@@ -1,0 +1,1234 @@
+<div class="slides">
+    <section data-id="506a0e4fb13a858c560627a2c6bf1946" class="">
+        <h2>
+    <br>
+</h2>
+<p>
+<span style="font-size: 72px;">Towards Reactive</span>
+</p>
+<br>
+<p>
+<span style="font-size: 72px;">Information Systems</span>
+</p>
+<br>
+<p>
+<span style="font-size: 72px;">and their Services</span>
+</p>
+
+
+<p>
+<br>
+<br>
+</p>
+
+
+
+<div>
+<br>
+</div>
+<p>Dominic Bosch</p>
+<div>June 30, 2014</div>
+
+
+
+</section>
+        <section class="" data-id="59d3755a223fe3a4b362546ad8cc18ae">
+            <div class="absolute-element" style="position: absolute; width: 541px; height: 330px; z-index: 4; left: 207px; top: 153px;">
+                <h1>Agenda</h1>
+<font style="font-size: 50px;">
+<div>
+<ul>
+<li>Reacting to Changes<br>
+</li>
+<li class="fragment" data-fragment-index="0">Use Case Example</li>
+<li class="fragment" data-fragment-index="1">Architecture Overview</li>
+</ul>
+</div>
+</font>
+</div>
+<div style="position: absolute; width: 72px; height: 53.6578px; z-index: 4; left: -65px; top: 690px; max-height: none; max-width: none;" class="absolute-element">1</div>
+
+
+
+</section>
+                <section class="" data-id="a0d44e203c96e1b454b28241d4763439">
+                    <h2>Reactivity Example</h2>
+
+<div style="position: absolute; width: 72px; height: 53.6578px; z-index: 6; left: -65px; top: 690px; max-height: none; max-width: none;" class="absolute-element">2</div>
+
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/495412/7510.meeting_request.png" class="absolute-element" style="position: absolute; max-height: none; max-width: none; width: 113px; height: 149px; z-index: 7; left: 32px; top: 148px;">
+
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/495415/map.png" style="max-height: none; max-width: none; position: absolute; width: 459px; height: 443px; z-index: 4; left: 216px; top: 224px;" class="absolute-element fragment" data-fragment-index="0">
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/495418/stuecki.png" class="absolute-element fragment" style="position: absolute; max-height: none; max-width: none; z-index: 10; left: 552px; top: 128px;" data-fragment-index="1">
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/495486/bluedot.png" class="absolute-element fragment" style="position: absolute; max-height: none; max-width: none; width: 33px; height: 33px; z-index: 4; left: 488px; top: 251px;" data-fragment-index="1">
+
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/495434/bicycle.png" class="absolute-element fragment" style="position: absolute; z-index: 10; left: 348px; top: 520px;" data-fragment-index="2">
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/495416/blue.png" class="absolute-element fragment" style="position: absolute; max-height: none; max-width: none; width: 177px; height: 288px; z-index: 9; left: 339px; top: 266px;" data-fragment-index="2">
+
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/495424/email.png" class="absolute-element fragment" style="position: absolute; z-index: 10; left: 308px; top: 479px;" data-fragment-index="3">
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/495424/email.png" class="absolute-element fragment" style="position: absolute; z-index: 10; left: 338px; top: 459px;" data-fragment-index="4">
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/495424/email.png" class="absolute-element fragment" style="position: absolute; z-index: 10; left: 368px; top: 449px;" data-fragment-index="5">
+
+<div class="absolute-element fragment" style="position: absolute; z-index: 10; left: 23px; top: 334px;" data-fragment-index="6">
+<a href="http://ec2-54-81-128-55.compute-1.amazonaws.com/redirect.html" target="_blank">
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/495440/kabarmeeting.png">
+</a>
+</div>
+
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/495414/kabar.png" class="absolute-element fragment" style="position: absolute; max-height: none; max-width: none; width: 207px; height: 162px; z-index: 8; left: 458px; top: 543px;" data-fragment-index="7">
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/495485/greendot.png" class="absolute-element fragment" style="position: absolute; max-height: none; max-width: none; width: 33px; height: 33px; z-index: 4; left: 444px; top: 522px;" data-fragment-index="7">
+
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/495424/email.png" class="absolute-element fragment" style="position: absolute; z-index: 10; left: 398px; top: 450px;" data-fragment-index="8">
+
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/495489/alert.png" class="absolute-element fragment" style="position: absolute; max-height: none; max-width: none; width: 67px; height: 72px; z-index: 4; left: 442px; top: 452px;" data-fragment-index="9">
+
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/495417/green.png" class="absolute-element fragment" style="position: absolute; max-height: none; max-width: none; width: 27px; height: 62px; z-index: 10; left: 442px; top: 482px;" data-fragment-index="10">
+
+
+
+</section>
+                    <section class="" data-id="e3d95ad8b533ee7b436e916dd52a1cff">
+<h2>Changes in the Web</h2>
+
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/493252/ReactivityOnTheWeb_Plain.png" style="max-height: none; max-width: none; position: absolute; width: 1005px; height: 626px; z-index: 4; left: -42px; top: 72px;" class="absolute-element">
+
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/495580/new-website-comparison_1.png" class="absolute-element" style="position: absolute; max-height: none; max-width: none; width: 157px; height: 198px; z-index: 4; left: 135px; top: 195px;">
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/495581/new-website-comparison_2.png" class="absolute-element fragment" style="position: absolute; max-height: none; max-width: none; width: 158px; height: 201px; z-index: 4; left: 203px; top: 213px;" data-fragment-index="0">
+
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/491591/FacebookEvents.png" style="width: 447px; height: 59px; max-height: none; max-width: none; position: absolute; z-index: 8; left: 370px; top: 174px;" class="absolute-element fragment" data-fragment-index="1">
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/491592/ProBinderNewContent.png" style="width: 51.9518px; height: 55.7419px; max-height: none; max-width: none; position: absolute; z-index: 7; left: 740px; top: 310px;" class="absolute-element fragment" data-fragment-index="2">
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/491589/GmailNewMail.png" style="width: 61.5259px; height: 59.6846px; max-height: none; max-width: none; position: absolute; z-index: 6; left: 666px; top: 309px;" class="absolute-element fragment" data-fragment-index="2">
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/491600/WeatherAlert.png" class="absolute-element fragment" style="position: absolute; max-height: none; max-width: none; width: 740.751px; height: 97.6002px; z-index: 9; left: 41px; top: 447px;" data-fragment-index="3">
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/493263/youtubeUpload.png" class="absolute-element fragment" style="position: absolute; max-height: none; max-width: none; width: 170.331px; height: 132.452px; z-index: 4; left: 441px; top: 545px;" data-fragment-index="4">
+
+<div style="position: absolute; width: 72px; height: 53.6578px; z-index: 4; left: -65px; top: 690px; max-height: none; max-width: none;" class="absolute-element">3</div>
+
+
+
+
+
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/495617/rafm.png" class="absolute-element fragment" style="position: absolute; max-height: none; max-width: none; z-index: 4; left: 808px; top: 397px;" data-fragment-index="5">
+
+
+
+
+</section>
+                    <section class="" data-id="0d55277574491d02c6b63e17b9187b92">
+                        <div class="absolute-element" style="position: absolute; width: 953px; height: 381px; z-index: 4; left: -4px; top: 131px;">
+<h2>Towards Reactive Information Systems</h2>
+<font style="font-size: 45px;">
+<div>
+<ul>
+    <li>
+        <span style="text-align: center;">We want to detect changes</span>
+    </li>
+    <li class="fragment" data-fragment-index="0">
+        <span style="text-align: center;">... decide whether they are relevant</span>
+    </li>
+    <li class="fragment" data-fragment-index="1">
+        <span style="text-align: center;">... and react in meaningful way</span>&nbsp; &nbsp; &nbsp;</li>
+<li class="fragment" data-fragment-index="2">
+    <span style="text-align: center;">... automatically!</span>
+</li>
+</ul>
+</div>
+</font>
+</div>
+
+
+<div style="position: absolute; width: 72px; height: 53.6578px; z-index: 4; left: -65px; top: 690px; max-height: none; max-width: none;" class="absolute-element">5</div>
+
+
+
+
+
+</section>
+                        <section class="" data-id="b56d810fe9cac73c0720316889c2853f">
+                            <h2>Make use of ECA - Paradigm</h2>
+<!--
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/491856/ECA_Event.png" class="absolute-element fragment visible" style="position: absolute; max-height: none; max-width: none; width: 324.322px; height: 353.724px; z-index: 6; left: 55px; top: 141px;" data-fragment-index="0">
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/491855/ECA_Conditions.png" class="absolute-element fragment visible" style="position: absolute; max-height: none; max-width: none; width: 124.843px; height: 350.957px; z-index: 5; left: 392px; top: 136px;" data-fragment-index="1">
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/491854/ECA_Actions.png" class="absolute-element fragment visible" style="position: absolute; max-height: none; max-width: none; width: 320.576px; height: 255.944px; z-index: 8; left: 534px; top: 188px;" data-fragment-index="2">
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/492542/ECA_Bracket.png" class="absolute-element fragment visible" style="position: absolute; max-height: none; max-width: none; width: 897px; height: 123px; z-index: 4; left: 8px; top: 442px;" data-fragment-index="3">
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/492543/ECA_Rule.png" class="absolute-element fragment visible" style="position: absolute; max-height: none; max-width: none; width: 372px; height: 75px; z-index: 4; left: 25px; top: 570px;" data-fragment-index="4">
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/492537/ECA_Reactivity.png" class="absolute-element fragment visible" style="position: absolute; max-height: none; max-width: none; width: 461px; height: 96px; z-index: 4; left: 407px; top: 569px;" data-fragment-index="5">
+-->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" style="position: absolute; z-index: 4; left: 59px; top: 120px; width: 851px; height: 599px; max-height: none; max-width: none;">
+<defs>
+</defs>
+<g transform="translate(0.5,0.5) scale(0.85)">
+    <path class="fragment visible" data-fragment-index="0" d="M 142 176 L 142 66 L 225 121 L 308 66 L 308 176 L 385 226 L 308 277 L 308 386 L 225 331 L 142 386 L 142 277 L 65 226 Z" fill="#ffffff" stroke="#FFAA44" stroke-width="8" stroke-miterlimit="10" transform="rotate(180,225,226)" pointer-events="none">
+    </path>
+    <path class="fragment visible" data-fragment-index="0" d="M 135 175 L 135 66 L 226 120 L 318 66 L 318 175 L 402 226 L 318 277 L 318 386 L 226 331 L 135 386 L 135 277 L 50 226 Z" fill="#ffffff" stroke="#FFAA44" stroke-width="8" stroke-miterlimit="10" transform="rotate(90,226,226)" pointer-events="none">
+    </path>
+    <g class="fragment visible" data-fragment-index="0" fill="#FFAA44" font-family="Helvetica" text-anchor="middle" font-size="72px">
+        <text x="225" y="250">Event</text>
+    </g>
+    
+    <rect class="fragment visible" data-fragment-index="1" x="418" y="37" width="121" height="380" fill="#ffffff" stroke="#666666" stroke-width="8" pointer-events="none">
+    </rect>
+    <g class="fragment visible" data-fragment-index="1" fill="#666666" font-family="Helvetica" text-anchor="middle" font-size="72px" transform="rotate(-90,469,226)">
+        <text x="469" y="260">Condition</text>
+    </g>
+    
+    <path class="fragment visible" data-fragment-index="2" d="M 567 169 L 778 169 L 778 93 L 916 226 L 778 358 L 778 283 L 567 283 Z" fill="#ffffff" stroke="#4d9900" stroke-width="8" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <g class="fragment visible" data-fragment-index="2" fill="#4D9900" font-family="Helvetica" text-anchor="middle" font-size="72px">
+        <text x="721" y="250">Action</text>
+    </g>
+    
+    <rect class="fragment visible" data-fragment-index="3" x="28" y="5" width="910" height="541" rx="81" ry="81" fill="none" stroke="#ffffff" stroke-width="4" pointer-events="none">
+    </rect>
+    <g class="fragment visible" data-fragment-index="3" fill="#FFFFFF" font-family="Helvetica" text-anchor="middle" font-size="72px">
+        <text x="501" y="530">ECA - Rule</text>
+    </g>
+    
+    <g class="fragment visible" data-fragment-index="4" fill="#FFFFFF" font-family="Helvetica" text-anchor="middle" font-size="72px">
+        <text x="570" y="656">Reactivity</text>
+    </g>
+    <path class="fragment visible" data-fragment-index="4" d="M 268 616 L 326 616 L 326 596 L 365 631 L 326 666 L 326 646 L 268 646 Z" fill="#ffffff" stroke="#ffffff" stroke-width="4" stroke-miterlimit="10" pointer-events="none">
+    </path>
+</g>
+</svg>
+
+
+<div style="position: absolute; width: 72px; height: 53.6578px; z-index: 4; left: -65px; top: 690px; max-height: none; max-width: none;" class="absolute-element">6</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</section>
+                            <section class="stack" data-id="147c9cf93e6bbbaf189d52bc37370ccc">
+                                <section class="" data-id="c3ec9f7f3689a73d0b3c7da6fda4b799">
+<h3>
+<font style="font-size: 55px;">Distributed User-Defined Reactivity
+</font>
+</h3>
+<div>
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/488007/ReactivityOnTheWeb.png">
+<br>
+</div>
+
+
+
+<div style="position: absolute; width: 72px; height: 53.6578px; z-index: 4; left: -65px; top: 690px; max-height: none; max-width: none;" class="absolute-element">7</div>
+
+
+
+
+</section>
+                                <section class="" data-id="fce80fe58253673a9c8369280bec022f">
+                                    <div class="absolute-element" style="position: absolute; width: 557px; height: 46px; z-index: 11; left: 500px; top: -31px;">
+<font style="font-size: 24px;" color="#eeee22">Prototype System</font>
+</div>
+<h3>Distributed User-Defined Reactivity</h3>
+<div>
+    <ul>
+        <li class="visible" data-fragment-index="0">Orchestrate distributed services</li>
+        <li class="visible" data-fragment-index="1">Exploit programmability of the Web<br> to get desired Reactivity &nbsp;</li>
+        <li class="visible" data-fragment-index="2">Automation of User Tasks</li>
+        <li class="visible" data-fragment-index="3">Most Information Systems are passive<br>in terms of event distribution</li>
+        <li class="visible" data-fragment-index="4">Expensive Polling for Changes needed instead</li>
+        <li class="visible" data-fragment-index="5">Little support for real-time Event notifications: Webhooks</li>
+    </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+</section>
+                                </section>
+                                <section class="" data-id="fe4a6636d4210cbc3dccf441f04758d0">
+<h2>Possible Use Cases</h2>
+<h2>for reactive Systems</h2>
+<div style="position: absolute; width: 72px; height: 53.6578px; z-index: 4; left: -65px; top: 690px; max-height: none; max-width: none;" class="absolute-element">8</div>
+
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" style="position: absolute; width: 902px; height: 552px; z-index: 4; left: 17px; top: 200px; max-height: none; max-width: none;">
+<defs>
+</defs>
+<g transform="translate(0.5,0.5) scale(1.3)">
+
+    <rect class="fragment visible" data-fragment-index="0" x="2" y="72" width="50" height="160" fill="#ffffff" stroke="#000000" stroke-width="2" pointer-events="none">
+    </rect>
+    <g class="fragment visible" data-fragment-index="0" fill="#000000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="24px" transform="rotate(-90,27,152)">
+        <text x="27" y="162">Short-term</text>
+    </g>
+    
+    <rect class="fragment visible" data-fragment-index="0" x="2" y="252" width="50" height="160" fill="#ffffff" stroke="#000000" stroke-width="2" pointer-events="none">
+    </rect>
+    <g class="fragment visible" data-fragment-index="0" fill="#000000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="24px" transform="rotate(-90,27,332)">
+        <text x="27" y="342">Long-term</text>
+    </g>
+    
+    <rect class="fragment visible" data-fragment-index="1" x="72" y="2" width="290" height="50" fill="#ffffff" stroke="#000000" stroke-width="2" pointer-events="none">
+    </rect>
+    <g class="fragment visible" data-fragment-index="1" fill="#000000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="24px">
+        <text x="217" y="37">Local</text>
+    </g>
+    <rect class="fragment visible" data-fragment-index="1" x="72" y="72" width="290" height="160" fill="#ffffff" stroke="#000000" stroke-width="2" pointer-events="none">
+    </rect>
+    <g class="fragment visible" data-fragment-index="1" fill="#000000" font-family="Helvetica" font-size="24px">
+        <text x="84" y="133">- Weather Alert / Forecast</text>
+        <text x="84" y="162">- Traffic Prediction</text>
+        <text x="84" y="191">- News</text>
+    </g>
+    <rect class="fragment visible" data-fragment-index="1" x="72" y="252" width="290" height="160" fill="#ffffff" stroke="#000000" stroke-width="2" pointer-events="none">
+    </rect>
+    <g class="fragment visible" data-fragment-index="1" fill="#000000" font-family="Helvetica" font-size="24px">
+        <text x="84" y="328">- Energy Consumption</text>
+        <text x="84" y="357">- Mobile Bandwith</text>
+    </g>
+    
+    <rect class="fragment visible" data-fragment-index="2" x="382" y="2" width="290" height="50" fill="#ffffff" stroke="#000000" stroke-width="2" pointer-events="none">
+    </rect>
+    <g class="fragment visible" data-fragment-index="2" fill="#000000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="24px">
+        <text x="527" y="37">Global</text>
+    </g>
+    
+    <rect class="fragment visible" data-fragment-index="2" x="382" y="72" width="290" height="160" fill="#ffffff" stroke="#000000" stroke-width="2" pointer-events="none">
+    </rect>
+    <g class="fragment visible" data-fragment-index="2" fill="#000000" font-family="Helvetica" font-size="24px">
+        <text x="394" y="133">- Stock Market</text>
+        <text x="394" y="162">- Webpage Update</text>
+        <text x="394" y="191">- Collaborative Work</text>
+    </g>
+    <rect class="fragment visible" data-fragment-index="2" x="382" y="252" width="290" height="160" fill="#ffffff" stroke="#000000" stroke-width="2" pointer-events="none">
+    </rect>
+    <g class="fragment visible" data-fragment-index="2" fill="#000000" font-family="Helvetica" font-size="24px">
+        <text x="394" y="328">- System Availability</text>
+        <text x="394" y="357">- Web Service Testing</text>
+    </g>
+    <rect class="fragment visible" data-fragment-index="3" x="402" y="167" width="210" height="30" rx="5" ry="5" fill="none" stroke="#ffaa44" stroke-width="3" pointer-events="none">
+    </rect>
+</g>
+</svg>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</section>
+                                <section class="stack" data-id="3943b1998eac2b5e878d1e8f378a874e">
+                                    <section class="" data-id="e67ab12f7d4b85d576adf23458258b2f">
+<h2>Team Work Annotation</h2>
+
+<div class="absolute-element fragment" style="text-align: left; position: absolute; width: 249.994px; height: 46px; z-index: 4; left: 69px; top: 494px; max-height: none; max-width: none;" data-fragment-index="0">Rule:</div>
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/493472/RulePhraseAnnotations_1.png" class="absolute-element fragment" style="position: absolute; max-height: none; max-width: none; width: 830px; height: 47px; z-index: 6; left: 41px; top: 538px;" data-fragment-index="0">
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/493474/RulePhraseAnnotations_2.png" class="absolute-element fragment" style="position: absolute; max-height: none; max-width: none; width: 830px; height: 43px; z-index: 7; left: 41px; top: 577px;" data-fragment-index="1">
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/493475/RulePhraseAnnotations_3.png" class="absolute-element fragment" style="position: absolute; max-height: none; max-width: none; width: 830px; height: 86px; z-index: 8; left: 41px; top: 612px;" data-fragment-index="2">
+
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="581px" height="222px" version="1.1" style="position: absolute; width: 877px; height: 354.541px; z-index: 4; left: 38px; top: 118px; max-height: none; max-width: none;">
+<defs>
+</defs>
+<g transform="translate(0.5,0.5) scale(1.5)">
+    <rect x="187" y="3" width="160" height="50" rx="8" ry="8" fill="#ffffff" stroke="#7ea6e0" stroke-width="3" pointer-events="none">
+    </rect>
+    <g fill="#7EA6E0" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="24px">
+        <text x="266" y="38">CMS</text>
+    </g>
+    
+    <g class="fragment visible" data-fragment-index="0" fill="#FFAA44" font-family="Helvetica" text-anchor="middle" font-size="18px">
+        <text x="64" y="23">detect new post</text>
+    </g>
+    <path class="fragment visible" data-fragment-index="0" d="M 190 25 Q 54 29 47 92 Q 39 155 83 155" fill="none" stroke="#FFAA44" stroke-width="2" stroke-miterlimit="10" stroke-dasharray="6 6" pointer-events="none">
+    </path>
+    <path class="fragment visible" data-fragment-index="0" d="M 89 155 L 81 159 L 83 155 L 81 151 Z" fill="#FFAA44" stroke="#FFAA44" stroke-width="2" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    
+    <rect class="fragment visible" data-fragment-index="1" x="233" y="92" width="50" height="120" fill="#ffffff" stroke="#666666" stroke-width="3" pointer-events="none">
+    </rect>
+    
+    <g class="fragment visible" data-fragment-index="2" fill="#FFAA44" font-family="Helvetica" text-anchor="end" font-size="18px">
+        <text x="577" y="179">enrich post with</text>
+        <text x="577" y="201">additional information</text>
+    </g>
+    <path class="fragment visible" data-fragment-index="2" d="M 439 154 Q 489 154 484 91 Q 479 28 355 28" fill="none" stroke="#FFAA44" stroke-width="2" stroke-miterlimit="10" stroke-dasharray="6 6" pointer-events="none">
+    </path>
+    <path class="fragment visible" data-fragment-index="2" d="M 349 28 L 357 24 L 355 28 L 357 32 Z" fill="#FFAA44" stroke="#FFAA44" stroke-width="2" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    
+    <path class="fragment visible" data-fragment-index="0" d="M 123 139 L 123 105 L 157 122 L 192 105 L 192 139 L 224 155 L 192 171 L 192 206 L 157 188 L 123 206 L 123 171 L 91 155 Z" fill="#ffffff" stroke="#FFAA44" stroke-width="3" stroke-miterlimit="10" transform="rotate(180,157,155)" pointer-events="none">
+    </path>
+    <path class="fragment visible" data-fragment-index="0" d="M 126 136 L 126 101 L 157 118 L 188 101 L 188 136 L 217 152 L 188 168 L 188 202 L 157 185 L 126 202 L 126 168 L 97 152 Z" fill="#ffffff" stroke="#FFAA44" stroke-width="3" stroke-miterlimit="10" transform="rotate(90,157,152)" pointer-events="none">
+    </path>
+    <g class="fragment visible" data-fragment-index="0" fill="#FFAA44" font-family="Helvetica" text-anchor="middle" font-size="24px">
+        <text x="157" y="162">Event</text>
+    </g>
+    <g class="fragment visible" data-fragment-index="1" fill="#666666" font-family="Helvetica" text-anchor="middle" font-size="24px" transform="rotate(-90,255,152)">
+        <text x="255" y="162">Condition</text>
+    </g>
+    <path class="fragment visible" data-fragment-index="2" d="M 309 136 L 388 136 L 388 112 L 439 154 L 388 196 L 388 172 L 309 172 Z" fill="#ffffff" stroke="#4d9900" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <g class="fragment visible" data-fragment-index="2" fill="#4D9900" font-family="Helvetica" text-anchor="middle" font-size="24px">
+        <text x="366" y="161">Action</text>
+    </g>
+</g>
+</svg>
+
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="354px" height="264px" version="1.1" style="position: absolute; width: 375px; height: 263px; z-index: 4; left: 766px; top: 39px;">
+<defs>
+</defs>
+<g class="fragment visible" data-fragment-index="1" transform="translate(0.5,0.5)">
+    <ellipse cx="162" cy="27" rx="40" ry="25" fill="#ffffff" stroke="#000000" stroke-width="2" pointer-events="none">
+    </ellipse>
+    <g transform="translate(124,16)">
+        <text x="38" y="20" fill="#000000" text-anchor="middle" font-size="18px" font-family="Helvetica">Event</text>
+    </g>
+    <ellipse cx="42" cy="137" rx="40" ry="25" fill="#ffffff" stroke="#000000" stroke-width="2" pointer-events="none">
+    </ellipse>
+    <g transform="translate(4,126)">
+           <text x="38" y="20" fill="#000000" text-anchor="middle" font-size="18px" font-family="Helvetica">ID</text>
+    </g>
+    <ellipse cx="142" cy="137" rx="40" ry="25" fill="#ffffff" stroke="#000000" stroke-width="2" pointer-events="none">
+    </ellipse>
+    <g transform="translate(104,126)">
+           <text x="38" y="20" fill="#000000" text-anchor="middle" font-size="18px" font-family="Helvetica">Text</text>
+    </g>
+    <ellipse cx="242" cy="137" rx="40" ry="25" fill="#ffffff" stroke="#000000" stroke-width="2" pointer-events="none">
+    </ellipse>
+    <g transform="translate(204,126)">
+        <text x="38" y="20" fill="#000000" text-anchor="middle" font-size="18px" font-family="Helvetica">Context</text>
+    </g>
+    <ellipse cx="172" cy="237" rx="40" ry="25" fill="#ffffff" stroke="#000000" stroke-width="2" pointer-events="none">
+    </ellipse>
+    <g transform="translate(134,226)">
+           <text x="38" y="20" fill="#000000" text-anchor="middle" font-size="18px" font-family="Helvetica">ID</text>
+    </g>
+    <path d="M 134 45 L 42 112" fill="none" stroke="#000000" stroke-miterlimit="10" stroke-width="2" pointer-events="none">
+    </path>
+    <path d="M 162 52 L 142 112" fill="none" stroke="#000000" stroke-miterlimit="10" stroke-width="2" pointer-events="none">
+    </path>
+    <path d="M 190 45 L 242 112" fill="none" stroke="#000000" stroke-miterlimit="10" stroke-width="2" pointer-events="none">
+    </path>
+    <path d="M 214 155 L 172 212" fill="none" stroke="#000000" stroke-miterlimit="10" stroke-width="2" pointer-events="none">
+    </path>
+    <ellipse cx="312" cy="237" rx="40" ry="25" fill="#ffffff" stroke="#000000" stroke-width="2" pointer-events="none">
+    </ellipse>
+    <g transform="translate(274,226)">
+       <text x="38" y="20" fill="#000000" text-anchor="middle" font-size="18px" font-family="Helvetica">Name</text>
+    </g>
+    <path d="M 270 155 L 312 212" fill="none" stroke="#000000" stroke-miterlimit="10" stroke-width="2" pointer-events="none">
+    </path>
+</g>
+</svg>
+
+
+<div style="position: absolute; width: 72px; height: 53.6578px; z-index: 4; left: -65px; top: 690px; max-height: none; max-width: none;" class="absolute-element">9</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</section>
+                                    <section class="" data-id="f6b1c026ef6ee07561252fe3541149d1">
+                                        <h2>Rule phrase and object</h2>
+                                    </section>
+                                </section>
+                                <section class="" data-id="afdd8e00ca56c3dac00ce58c3a9a1d46">
+                                    <div style="position: absolute; width: 72px; height: 53.6578px; z-index: 4; left: -65px; top: 690px; max-height: none; max-width: none;" class="absolute-element">10</div>
+
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/495591/UC_Binder_Annotations2.png" style="width: 848px; height: 818px; max-height: none; max-width: none; position: absolute; z-index: 4; left: 30px; top: -49px;" class="absolute-element">
+                                </section>
+                                <section class="" data-id="b4b7e15c717dbcc5a220fac0f6c19c4f">
+<div style="position: absolute; width: 72px; height: 53.6578px; z-index: 4; left: -65px; top: 690px; max-height: none; max-width: none;" class="absolute-element">11</div>
+
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1100px" height="862px" version="1.1" style="position: absolute; width: 1110px; height: 861px; z-index: 4; left: -28px; top: -23px;">
+    <defs>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="0%" id="mx-gradient-FFAA44-1-ffccbb-1-e-0">
+            <stop offset="0%" style="stop-color: rgb(255, 128, 0);">
+            </stop>
+            <stop offset="100%" style="stop-color: rgb(255, 204, 187);">
+            </stop>
+        </linearGradient>
+        <linearGradient x1="0%" y1="0%" x2="0%" y2="100%" id="mx-gradient-ffffff-1-d7d7e7-1-s-0">
+            <stop offset="0%" style="stop-color: rgb(255, 255, 255);">
+            </stop>
+            <stop offset="100%" style="stop-color: rgb(215, 215, 231);">
+            </stop>
+        </linearGradient>
+        <linearGradient x1="0%" y1="100%" x2="0%" y2="0%" id="mx-gradient-ffffff-1-d4e1f5-1-s-0">
+            <stop offset="0%" style="stop-color: rgb(212, 225, 245);">
+            </stop>
+            <stop offset="100%" style="stop-color: rgb(255, 255, 255);">
+            </stop>
+        </linearGradient>
+    </defs>
+    <g transform="translate(0.5,0.5) scale(0.9)">
+        
+        
+        <path d="M 496 37 C 427 37 410 69 465 75 C 410 89 472 120 517 107 C 548 133 652 133 686 107 C 755 107 755 82 712 69 C 755 43 686 18 626 31 C 583 11 514 11 496 37 Z" fill="none" stroke="#ffffff" stroke-width="8" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <path d="M 496 37 C 427 37 410 69 465 75 C 410 89 472 120 517 107 C 548 133 652 133 686 107 C 755 107 755 82 712 69 C 755 43 686 18 626 31 C 583 11 514 11 496 37 Z" fill="url(#mx-gradient-ffffff-1-d4e1f5-1-s-0)" stroke="#7ea6e0" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <g fill="#7EA6E0" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="36px">
+            <text x="582" y="85">Web</text>
+        </g>
+        
+        
+        
+        
+        <rect class="fragment visible" data-fragment-index="0" x="5" y="173" width="1090" height="542" rx="81" ry="81" fill="none" stroke="#ffffff" stroke-width="8" pointer-events="none">
+        </rect>
+        <rect class="fragment visible" data-fragment-index="0" x="5" y="174" width="1090" height="539" rx="81" ry="81" fill="#ffffff" stroke="#666666" stroke-width="4" pointer-events="none">
+        </rect>
+        
+        
+        <path class="fragment visible" data-fragment-index="0" d="M 504 56 Q 315 69 268 97 Q 220 125 220 203" fill="none" stroke="#FFAA44" stroke-width="4" stroke-miterlimit="10" stroke-dasharray="12 12" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="0" d="M 220 211 L 215 201 L 220 203 L 225 201 Z" fill="#FFAA44" stroke="#FFAA44" stroke-width="4" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        <path class="fragment visible" data-fragment-index="0" d="M 258 265 L 258 300 L 525 300" fill="none" stroke="#FFAA44" stroke-width="4" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        <path class="fragment visible" data-fragment-index="0" d="M 532 300 L 522 305 L 525 300 L 522 295 Z" fill="#FFAA44" stroke="#FFAA44" stroke-width="4" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        <path class="fragment visible" data-fragment-index="0" d="M 547 275 L 636 275 C 642 275 647 286 647 300 C 647 314 642 325 636 325 L 547 325 C 541 325 537 314 537 300 C 537 286 541 275 547 275 Z" fill="url(#mx-gradient-FFAA44-1-ffccbb-1-e-0)" stroke="#ffffff" stroke-width="2" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        <path class="fragment visible" data-fragment-index="0" d="M 636 275 C 631 275 626 286 626 300 C 626 314 631 325 636 325" fill="none" stroke="#ffffff" stroke-width="2" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        <rect class="fragment visible" data-fragment-index="0" x="145" y="215" width="150" height="50" rx="8" ry="8" fill="url(#mx-gradient-ffffff-1-d7d7e7-1-s-0)" stroke="#4d4d4d" stroke-width="3" pointer-events="none">
+        </rect>
+        <g class="fragment visible" data-fragment-index="0" fill="#FFAA44" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="14px">
+            <text x="284" y="133">Actively</text>
+            <text x="284" y="150">Detect Events</text>
+        </g>
+        <g class="fragment visible" data-fragment-index="0" fill="#FFAA44" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="14px">
+            <text x="494" y="288">Enqueue</text>
+            <text x="494" y="322">Events</text>
+        </g>
+        <g class="fragment visible" data-fragment-index="0" fill="#FFFFFF" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="18px">
+            <text x="581" y="296">Event</text>
+            <text x="581" y="318">Queue</text>
+        </g>
+        <g class="fragment visible" data-fragment-index="0" fill="#4D4D4D" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="18px">
+            <text x="220" y="247">Poller</text>
+        </g>
+        
+        <path class="fragment visible" data-fragment-index="0" d="M 183 279 L 183 455" fill="none" stroke="#7ea6e0" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        <path class="fragment visible" data-fragment-index="0" d="M 183 268 L 188 279 L 177 279 Z" fill="#7ea6e0" stroke="#7ea6e0" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <g class="fragment visible" data-fragment-index="0" fill="#7EA6E0" font-family="Helvetica" font-weight="bold" text-anchor="end" font-size="14px">
+            <text x="174" y="380">Load Event Triggers</text>
+            <text x="174" y="397">for new / updated Rules</text>
+        </g>
+        
+        <path class="fragment visible" data-fragment-index="0" d="M 133 471 C 133 450 233 450 233 471 L 233 519 C 233 540 133 540 133 519 Z" fill="#ffffff" stroke="#7ea6e0" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        <path class="fragment visible" data-fragment-index="0" d="M 133 471 C 133 487 233 487 233 471" fill="none" stroke="#7ea6e0" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <g class="fragment visible" data-fragment-index="0" fill="#7EA6E0" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="18px">
+            <text x="183" y="502">Event</text>
+            <text x="183" y="524">Triggers</text>
+        </g>
+        
+        
+        
+        <g class="fragment visible" data-fragment-index="1" fill="#FFAA44" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="14px">
+            <text x="476" y="132">Passively</text>
+            <text x="476" y="149">Retrieve Events</text>
+        </g>
+        
+        <path class="fragment visible" data-fragment-index="1" d="M 504 81 Q 455 85 433 110 Q 410 135 411 203" fill="none" stroke="#FFAA44" stroke-width="4" stroke-miterlimit="10" stroke-dasharray="12 12" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="1" d="M 411 211 L 406 201 L 411 203 L 416 200 Z" fill="#FFAA44" stroke="#FFAA44" stroke-width="4" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        <rect class="fragment visible" data-fragment-index="1" x="335" y="215" width="150" height="50" rx="8" ry="8" fill="url(#mx-gradient-ffffff-1-d7d7e7-1-s-0)" stroke="#4d4d4d" stroke-width="3" pointer-events="none">
+        </rect>
+        
+        <path class="fragment visible" data-fragment-index="1" d="M 373 279 L 373 455" fill="none" stroke="#ea6b66" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="1" d="M 373 268 L 379 279 L 368 279 Z" fill="#ea6b66" stroke="#ea6b66" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        <path class="fragment visible" data-fragment-index="1" d="M 323 471 C 323 450 423 450 423 471 L 423 519 C 423 540 323 540 323 519 Z" fill="#ffffff" stroke="#ea6b66" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        <path class="fragment visible" data-fragment-index="1" d="M 323 471 C 323 487 423 487 423 471" fill="none" stroke="#ea6b66" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        <g class="fragment visible" data-fragment-index="1" fill="#4D4D4D" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="18px">
+            <text x="411" y="236">Webhook</text>
+            <text x="411" y="258">Listener</text>
+        </g>
+        <g class="fragment visible" data-fragment-index="1" fill="#EA6B66" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="18px">
+            <text x="373" y="513">Webhooks</text>
+        </g>
+        <g class="fragment visible" data-fragment-index="1" fill="#EA6B66" font-family="Helvetica" font-weight="bold" text-anchor="end" font-size="14px">
+            <text x="364" y="383">Load Webhooks</text>
+            <text x="364" y="400">on Startup</text>
+        </g>
+        
+        <path class="fragment visible" data-fragment-index="1" d="M 411 265 L 411 300 L 525 300" fill="none" stroke="#FFAA44" stroke-width="4" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+         
+        
+        <path class="fragment visible" data-fragment-index="2" d="M 647 300 L 711 300" fill="none" stroke="#FFAA44" stroke-width="4" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="2" d="M 719 300 L 709 305 L 711 300 L 709 295 Z" fill="#FFAA44" stroke="#FFAA44" stroke-width="4" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        <path class="fragment visible" data-fragment-index="2" d="M 798 455 L 798 395 L 798 395 L 798 339" fill="none" stroke="#a680b8" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="2" d="M 798 328 L 804 339 L 793 339 Z" fill="#a680b8" stroke="#a680b8" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        <path class="fragment visible" data-fragment-index="2" d="M 753 471 C 753 450 843 450 843 471 L 843 519 C 843 540 753 540 753 519 Z" fill="#ffffff" stroke="#a680b8" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        <path class="fragment visible" data-fragment-index="2" d="M 753 471 C 753 487 843 487 843 471" fill="none" stroke="#a680b8" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        <path class="fragment visible" data-fragment-index="2" d="M 890 471 C 890 450 1010 450 1010 471 L 1010 519 C 1010 540 890 540 890 519 Z" fill="#ffffff" stroke="#518a2b" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        <path class="fragment visible" data-fragment-index="2" d="M 890 471 C 890 487 1010 487 1010 471" fill="none" stroke="#518a2b" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        <path class="fragment visible" data-fragment-index="2" d="M 950 455 L 950 395 L 836 395 L 836 339" fill="none" stroke="#518a2b" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="2" d="M 836 328 L 841 339 L 830 339 Z" fill="#518a2b" stroke="#518a2b" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        <rect class="fragment visible" data-fragment-index="2" x="723" y="275" width="150" height="50" rx="8" ry="8" fill="url(#mx-gradient-ffffff-1-d7d7e7-1-s-0)" stroke="#4d4d4d" stroke-width="3" pointer-events="none">
+        </rect>
+        
+        <path class="fragment visible" data-fragment-index="2" d="M 873 300 Q 955 285 950 177 Q 945 69 672 69" fill="none" stroke="#FFAA44" stroke-width="4" stroke-miterlimit="10" stroke-dasharray="12 12" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="2" d="M 665 69 L 675 64 L 672 69 L 675 74 Z" fill="#FFAA44" stroke="#FFAA44" stroke-width="4" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <g class="fragment visible" data-fragment-index="2" fill="#A680B8" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="18px">
+            <text x="798" y="513">Rules</text>
+        </g>
+        <g class="fragment visible" data-fragment-index="2" fill="#4D4D4D" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="18px">
+            <text x="798" y="307">Rules Engine</text>
+        </g>
+        <g class="fragment visible" data-fragment-index="2" fill="#518A2B" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="18px">
+            <text x="949" y="502">Action</text>
+            <text x="949" y="524">Dispatchers</text>
+        </g>
+        <g class="fragment visible" data-fragment-index="2" fill="#FFAA44" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="14px">
+            <text x="884" y="133">Dispatch</text>
+            <text x="884" y="150">Actions</text>
+        </g>
+        <g class="fragment visible" data-fragment-index="2" fill="#FFAA44" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="14px">
+            <text x="680" y="289">Dequeue</text>
+            <text x="680" y="323">Events</text>
+        </g>
+        <g class="fragment visible" data-fragment-index="2" fill="#518A2B" font-family="Helvetica" font-weight="bold" font-size="14px">
+            <text x="849" y="367">Load Action Dispatchers</text>
+            <text x="849" y="384">for new / updated Rules</text>
+        </g>
+        <g class="fragment visible" data-fragment-index="2" fill="#A680B8" font-family="Helvetica" font-weight="bold" font-size="14px">
+            <text x="807" y="427">Load Rules</text>
+            <text x="807" y="444">on Startup</text>
+        </g>
+        
+        
+        
+        
+        <rect class="fragment visible" data-fragment-index="3" x="96" y="604" width="949" height="70" rx="11" ry="11" fill="#ffffff" stroke="#999999" stroke-width="3" stroke-dasharray="9 9" pointer-events="none">
+        </rect>
+        <g class="fragment visible" data-fragment-index="3" fill="#666666" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="18px">
+            <text x="582" y="636">User Request</text>
+            <text x="582" y="658">Handler</text>
+        </g>
+        
+        <path class="fragment visible" data-fragment-index="3" d="M 183 549 L 183 599" fill="none" stroke="#7ea6e0" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        <path class="fragment visible" data-fragment-index="3" d="M 183 538 L 189 549 L 178 549 Z" fill="#7ea6e0" stroke="#7ea6e0" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        <path class="fragment visible" data-fragment-index="3" d="M 183 610 L 178 599 L 189 599 Z" fill="#7ea6e0" stroke="#7ea6e0" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        <path class="fragment visible" data-fragment-index="3" d="M 183 759 L 183 677" fill="none" stroke="#7ea6e0" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        <path class="fragment visible" data-fragment-index="3" d="M 183 770 L 178 759 L 189 759 Z" fill="#7ea6e0" stroke="#7ea6e0" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        <path class="fragment visible" data-fragment-index="3" d="M 183 666 L 189 677 L 178 677 Z" fill="#7ea6e0" stroke="#7ea6e0" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        <ellipse class="fragment visible" data-fragment-index="3" cx="183" cy="781" rx="7.5" ry="7.5" fill="#ffffff" stroke="#ffffff" stroke-width="3" pointer-events="none">
+        </ellipse>
+        
+        <path class="fragment visible" data-fragment-index="3" d="M 183 788 L 183 813 M 183 793 L 168 793 M 183 793 L 198 793 M 183 813 L 168 833 M 183 813 L 198 833" fill="none" stroke="#ffffff" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        <g class="fragment visible" data-fragment-index="3" fill="#FFFFFF" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="18px">
+            <text x="183" y="857">Expert</text>
+        </g>
+        
+        <rect class="fragment visible" data-fragment-index="3" x="108" y="614" width="150" height="50" rx="8" ry="8" fill="url(#mx-gradient-ffffff-1-d7d7e7-1-s-0)" stroke="#4d4d4d" stroke-width="3" pointer-events="none">
+        </rect>
+        <g class="fragment visible" data-fragment-index="3" fill="#4D4D4D" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="18px">
+            <text x="183" y="634">Event Trigger</text>
+            <text x="183" y="656">Administration</text>
+        </g>
+        
+        <rect class="fragment visible" data-fragment-index="3" x="79" y="718" width="103" height="36" fill="#ffffff" stroke="none" pointer-events="none">
+        </rect>
+        <g class="fragment visible" data-fragment-index="3" fill="#7EA6E0" font-family="Helvetica" font-weight="bold" text-anchor="end" font-size="14px">
+            <text x="174" y="732">Create / edit</text>
+            <text x="174" y="749">Event Triggers</text>
+        </g>
+        <g class="fragment visible" data-fragment-index="3" fill="#7EA6E0" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="14px">
+            <text x="139" y="575">Store / load</text>
+        </g>
+        
+        
+        
+        
+        
+        <rect class="fragment visible" data-fragment-index="4" x="335" y="615" width="150" height="50" rx="8" ry="8" fill="url(#mx-gradient-ffffff-1-d7d7e7-1-s-0)" stroke="#4d4d4d" stroke-width="3" pointer-events="none">
+        </rect>
+        
+        <rect class="fragment visible" data-fragment-index="4" x="315" y="718" width="87" height="36" fill="#ffffff" stroke="none" pointer-events="none">
+        </rect>
+        <g class="fragment visible" data-fragment-index="4" fill="#4D4D4D" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="18px">
+            <text x="411" y="636">Webhook</text>
+            <text x="411" y="658">Administration</text>
+        </g>
+        <g class="fragment visible" data-fragment-index="4" fill="#EA6B66" font-family="Helvetica" font-weight="bold" text-anchor="end" font-size="14px">
+            <text x="400" y="733">Create / edit</text>
+            <text x="400" y="750">Webhooks</text>
+        </g>
+        <g class="fragment visible" data-fragment-index="4" fill="#EA6B66" font-family="Helvetica" font-weight="bold" font-size="14px">
+            <text x="456" y="459">Create new</text>
+            <text x="456" y="476">Webhooks</text>
+        </g>
+        
+        <ellipse class="fragment visible" data-fragment-index="4" cx="410" cy="779" rx="7.5" ry="7.5" fill="#ffffff" stroke="#ffffff" stroke-width="3" pointer-events="none">
+        </ellipse>
+        <path class="fragment visible" data-fragment-index="4" d="M 410 786 L 410 811 M 410 791 L 395 791 M 410 791 L 425 791 M 410 811 L 395 831 M 410 811 L 425 831" fill="none" stroke="#ffffff" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <g class="fragment visible" data-fragment-index="4" fill="#FFFFFF" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="18px">
+            <text x="410" y="855">User</text>
+        </g>
+        
+        <path class="fragment visible" data-fragment-index="4" d="M 373 549 L 373 601" fill="none" stroke="#ea6b66" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="4" d="M 373 538 L 379 549 L 368 549 Z" fill="#ea6b66" stroke="#ea6b66" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="4" d="M 373 612 L 368 601 L 379 601 Z" fill="#ea6b66" stroke="#ea6b66" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <g class="fragment visible" data-fragment-index="4" fill="#EA6B66" font-family="Helvetica" font-weight="bold" text-anchor="end" font-size="14px">
+            <text x="366" y="577">Store / load</text>
+        </g>
+        
+        <path class="fragment visible" data-fragment-index="4" d="M 411 679 L 410 757" fill="none" stroke="#ea6b66" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="4" d="M 411 668 L 416 679 L 405 679 Z" fill="#ea6b66" stroke="#ea6b66" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="4" d="M 410 768 L 405 757 L 416 757 Z" fill="#ea6b66" stroke="#ea6b66" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        <path class="fragment visible" data-fragment-index="4" d="M 449 279 L 449 615" fill="none" stroke="#ea6b66" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="4" d="M 449 268 L 454 279 L 443 279 Z" fill="#ea6b66" stroke="#ea6b66" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        
+        
+        
+        
+        <rect class="fragment visible" data-fragment-index="5" x="685" y="614" width="150" height="50" rx="8" ry="8" fill="url(#mx-gradient-ffffff-1-d7d7e7-1-s-0)" stroke="#4d4d4d" stroke-width="3" pointer-events="none">
+        </rect>
+        
+        <path class="fragment visible" data-fragment-index="5" d="M 760 759 L 760 678" fill="none" stroke="#a680b8" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        <path class="fragment visible" data-fragment-index="5" d="M 760 770 L 755 759 L 766 759 Z" fill="#a680b8" stroke="#a680b8" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        <path class="fragment visible" data-fragment-index="5" d="M 760 667 L 766 678 L 755 678 Z" fill="#a680b8" stroke="#a680b8" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        <ellipse class="fragment visible" data-fragment-index="5" cx="760" cy="781" rx="7.5" ry="7.5" fill="#ffffff" stroke="#ffffff" stroke-width="3" pointer-events="none">
+        </ellipse>
+        
+        <path class="fragment visible" data-fragment-index="5" d="M 760 788 L 760 813 M 760 793 L 745 793 M 760 793 L 775 793 M 760 813 L 745 833 M 760 813 L 775 833" fill="none" stroke="#ffffff" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <g class="fragment visible" data-fragment-index="5" fill="#FFFFFF" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="18px">
+            <text x="760" y="857">User</text>
+        </g>
+        
+        <rect class="fragment visible" data-fragment-index="5" x="766" y="718" width="89" height="36" fill="#ffffff" stroke="none" pointer-events="none">
+        </rect>
+        <g class="fragment visible" data-fragment-index="5" fill="#A680B8" font-family="Helvetica" font-weight="bold" font-size="14px">
+            <text x="768" y="734">Create / edit</text>
+            <text x="768" y="751">Rules</text>
+        </g>
+        <g class="fragment visible" data-fragment-index="5" fill="#A680B8" font-family="Helvetica" font-weight="bold" text-anchor="end" font-size="14px">
+            <text x="710" y="375">New / updated  Rule</text>
+            <text x="710" y="392">notification</text>
+        </g>
+        <g class="fragment visible" data-fragment-index="5" fill="#4D4D4D" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="18px">
+            <text x="760" y="635">Rules</text>
+            <text x="760" y="657">Administration</text>
+        </g>
+        
+        <path class="fragment visible" data-fragment-index="5" d="M 723 614 L 723 355 L 220 355 L 220 279" fill="none" stroke="#a680b8" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        <path class="fragment visible" data-fragment-index="5" d="M 220 268 L 226 279 L 215 279 Z" fill="#a680b8" stroke="#a680b8" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        <path class="fragment visible" data-fragment-index="5" d="M 723 614 L 723 355 L 761 355 L 761 339" fill="none" stroke="#a680b8" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="5" d="M 761 328 L 766 339 L 755 339 Z" fill="#a680b8" stroke="#a680b8" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="5" d="M 760 600 L 760 565 L 798 565 L 798 549" fill="none" stroke="#a680b8" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        <path class="fragment visible" data-fragment-index="5" d="M 760 611 L 755 600 L 766 600 Z" fill="#a680b8" stroke="#a680b8" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="5" d="M 798 538 L 804 549 L 793 549 Z" fill="#a680b8" stroke="#a680b8" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <g class="fragment visible" data-fragment-index="5" fill="#A680B8" font-family="Helvetica" font-weight="bold" font-size="14px">
+            <text x="767" y="585">Store / load</text>
+        </g>
+        
+        
+        
+        
+        <rect class="fragment visible" data-fragment-index="6" x="951" y="718" width="125" height="36" fill="#ffffff" stroke="none" pointer-events="none">
+        </rect>
+        <g class="fragment visible" data-fragment-index="6" fill="#518A2B" font-family="Helvetica" font-weight="bold" font-size="14px">
+            <text x="953" y="735">Create / edit</text>
+            <text x="953" y="752">Action Dispatchers</text>
+        </g>
+        
+        <rect class="fragment visible" data-fragment-index="6" x="865" y="615" width="170" height="48" rx="7" ry="7" fill="url(#mx-gradient-ffffff-1-d7d7e7-1-s-0)" stroke="#4d4d4d" stroke-width="3" pointer-events="none">
+        </rect>
+        <g class="fragment visible" data-fragment-index="6" fill="#4D4D4D" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="18px">
+            <text x="950" y="635">Action Dispatcher</text>
+            <text x="950" y="657">Administration</text>
+        </g>
+        
+        <ellipse class="fragment visible" data-fragment-index="6" cx="950" cy="781" rx="7.5" ry="7.5" fill="#ffffff" stroke="#ffffff" stroke-width="3" pointer-events="none">
+        </ellipse>
+        
+        <path class="fragment visible" data-fragment-index="6" d="M 950 788 L 950 813 M 950 793 L 935 793 M 950 793 L 965 793 M 950 813 L 935 833 M 950 813 L 965 833" fill="none" stroke="#ffffff" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        <g class="fragment visible" data-fragment-index="6" fill="#FFFFFF" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="18px">
+            <text x="950" y="857">Expert</text>
+        </g>
+        
+        <path class="fragment visible" data-fragment-index="6" d="M 950 759 L 950 678" fill="none" stroke="#518a2b" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="6" d="M 950 770 L 945 759 L 956 759 Z" fill="#518a2b" stroke="#518a2b" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="6" d="M 950 667 L 956 678 L 945 678 Z" fill="#518a2b" stroke="#518a2b" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        
+        <path class="fragment visible" data-fragment-index="6" d="M 950 600 L 950 549" fill="none" stroke="#518a2b" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="6" d="M 950 611 L 945 600 L 956 600 Z" fill="#518a2b" stroke="#518a2b" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <path class="fragment visible" data-fragment-index="6" d="M 950 538 L 956 549 L 945 549 Z" fill="#518a2b" stroke="#518a2b" stroke-width="3" stroke-miterlimit="10" pointer-events="none">
+        </path>
+        <g class="fragment visible" data-fragment-index="6" fill="#518A2B" font-family="Helvetica" font-weight="bold" font-size="14px">
+            <text x="959" y="585">Store / load</text>
+        </g>
+        
+    </g>
+</svg>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</section>
+                                <section class="" data-id="409004edabd0d40bb9bbbc8fd362bf83">
+                                    <div class="absolute-element" style="position: absolute; width: 953px; height: 383px; z-index: 4; left: -4px; top: 164px;">
+<h2>Used Technologies and Paradigms</h2>
+<div>
+    <ul>
+        <li>Written in CoffeeScript for Node.js</li>
+        <li class="fragment" data-fragment-index="0">Event-driven programming</li>
+<li class="fragment" data-fragment-index="1">Binding to external Services</li>
+        <li class="fragment" data-fragment-index="2">Dynamic Code loading at Run-Time</li>
+<li class="fragment" data-fragment-index="3">Redis DB for context of events</li>
+    </ul>
+</div>
+
+</div>
+
+<div style="position: absolute; width: 72px; height: 53.6578px; z-index: 4; left: -65px; top: 690px; max-height: none; max-width: none;" class="absolute-element">12</div>
+
+
+
+
+
+</section>
+                                    <section class="" data-id="6702903e939ba2a49bb1e2704b6b955c">
+<h2>Parallel Event Processing</h2>
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/489683/ConcurrentEvents.png" style="max-height: none; max-width: none;">
+
+
+
+
+<div style="position: absolute; width: 72px; height: 53.6578px; z-index: 4; left: -65px; top: 690px; max-height: none; max-width: none;" class="absolute-element">13</div>
+
+
+
+</section>
+                                    <section class="" data-id="732d85b4eb1903e091b689cee46e3b3b">
+                                        <h3>Parallel Events in the Code</h3>&nbsp;<div style="position: absolute; width: 72px; height: 53.6578px; z-index: 4; left: -65px; top: 690px; max-height: none; max-width: none;" class="absolute-element">14</div>
+
+
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" style="position: absolute; z-index: 4; left: 249px; top: 83px;">
+<defs>
+</defs>
+<g transform="translate(0.5,0.5) scale(1.6)">
+    <rect x="143" y="13" width="20" height="80" fill="#ffffff" stroke="#ffffff" stroke-width="2" stroke-dasharray="6 6" pointer-events="none">
+    </rect>
+    <path d="M 223 113 L 223 3" fill="none" stroke="#FFAA44" stroke-width="2" stroke-miterlimit="10" stroke-dasharray="6 6" pointer-events="none">
+    </path>
+    <path d="M 13 13 L 69 13" fill="none" stroke="#ffffff" stroke-width="2" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <path d="M 81 13 L 69 19 L 69 7 Z" fill="#ffffff" stroke="#ffffff" stroke-width="2" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <rect x="83" y="13" width="20" height="20" fill="#ffffff" stroke="#ffffff" stroke-width="2" pointer-events="none">
+    </rect>
+    <path d="M 93 23 L 259 41" fill="none" stroke="#999999" stroke-width="2" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <path d="M 271 43 L 258 47 L 260 35 Z" fill="#999999" stroke="#999999" stroke-width="2" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <path d="M 273 53 L 177 70" fill="none" stroke="#999999" stroke-width="2" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <path d="M 165 73 L 176 65 L 178 76 Z" fill="#999999" stroke="#999999" stroke-width="2" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <rect x="273" y="43" width="20" height="10" fill="#999999" stroke="#999999" stroke-width="2" pointer-events="none">
+    </rect>
+    <path d="M 103 12 L 139 12" fill="none" stroke="#ffffff" stroke-width="2" stroke-miterlimit="10" stroke-dasharray="6 6" pointer-events="none">
+    </path>
+    <path d="M 134 16 L 141 12 L 134 9" fill="none" stroke="#ffffff" stroke-width="2" stroke-miterlimit="10" pointer-events="none">
+    </path>
+    <rect x="144" y="73" width="19" height="19" fill="#000000" stroke="none" pointer-events="none">
+    </rect>
+</g>
+</svg>
+
+
+
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/495643/code.png" style="width: 1055px; height: 485px; max-height: none; max-width: none; position: absolute; z-index: 4; left: -78px; top: 262px;" class="absolute-element">
+
+
+
+
+
+
+
+
+
+
+
+
+
+</section>
+                                        <section class="" data-id="b9681ad41871d592dfef0923dcf4a165">
+                                            <h2>Summary</h2>
+<div>
+<ul>
+<li class="fragment" data-fragment-index="0">I explained the importance of reactivity<p>
+<br>
+</p>
+</li>
+<li class="fragment" data-fragment-index="1">I made a live demo and explained a running use case
+<font style="font-size: 35px;">
+<p>
+<br>
+<br>
+<br>
+</p>
+</font>
+</li>
+<li class="fragment" data-fragment-index="2">I introduced my prototype, written from scratch with Node.js, Redis and CoffeeScript
+<font style="font-size: 35px;">
+<p>
+<br>
+<br>
+<br>
+</p>
+</font>
+</li>
+<li class="fragment" data-fragment-index="3">Everything on Github:<br>https://github.com/dominicbosch/webapi-eca</li>
+</ul>
+</div>
+
+
+
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/495702/ecasmall.png" class="absolute-element fragment" style="position: absolute; max-height: none; max-width: none; width: 188px; height: 142px; z-index: 4; left: 676px; top: 43px;" data-fragment-index="0">
+<!--
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/492602/ECA-Explanation_Small.png" class="absolute-element fragment visible" style="position: absolute; max-height: none; max-width: none; width: 207px; height: 138px; z-index: 4; left: 672px; top: 46px;" data-fragment-index="0">
+-->
+<!-- <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/492609/UseCase_-_Tatarataa_-_Reduced_-_white_-_small.png" class="absolute-element fragment visible" style="position: absolute; max-height: none; max-width: none; width: 306px; height: 120px; z-index: 4; left: 92px; top: 243px;" data-fragment-index="1">
+-->
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/492617/Architecture_Final_Presentation_small.png" class="fragment absolute-element" style="position: absolute; max-height: none; max-width: none; width: 256px; height: 201px; z-index: 4; left: 754px; top: 408px;" data-fragment-index="2">
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/492647/UC_Binder_Annotations1_small.png" class="absolute-element fragment" style="position: absolute; max-height: none; max-width: none; width: 317px; height: 122px; z-index: 4; left: 490px; top: 241px;" data-fragment-index="1">
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/493741/GitHub-Mark.png" style="width: 166px; height: 163px; max-height: none; max-width: none; position: absolute; z-index: 4; left: 378px; top: 499px;" class="absolute-element fragment" data-fragment-index="3">
+
+
+
+<div style="position: absolute; width: 72px; height: 53.6578px; z-index: 4; left: -65px; top: 690px; max-height: none; max-width: none;" class="absolute-element">15</div>
+
+
+
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/495693/livedemosmall.png" class="absolute-element fragment" style="position: absolute; max-height: none; max-width: none; width: 206px; height: 165px; z-index: 4; left: 150px; top: 231px;" data-fragment-index="1">
+</section>
+                                            <section class="" data-id="200371b310c5d2745a48a6ec0b52a054">
+                                                <h2>
+                                                    <br>
+                                                </h2>
+<h2>
+                                                <br>
+                                            </h2>
+<h2>
+                                            <br>
+                                            </h2>
+<h2>Thank you!</h2>
+                                        </section>
+                                        <section class="stack" data-id="13410d3a9b74626d2b130cafb0c5e825">
+                                            <section class="" data-id="626e4ce7d9d5ebc0427e9001fe984289">
+                                                <h2 class="absolute-element" style="position: absolute; width: 162px; height: 65px; z-index: 4; left: 398px; top: 308px;">Links</h2>
+                                            </section>
+                                            <section class="" data-id="6be97f6066852e75e52735a89ce48911">&nbsp;<h2 class="absolute-element" style="position: absolute; z-index: 4; left: 236px; top: 301px;">
+<ul>
+    <li>
+<a href="http://ec2-54-81-128-55.compute-1.amazonaws.com/forge?page=forge_rule" target="_blank">Prototype System</a>
+</li>
+    <li>
+<a href="https://github.com/dominicbosch/webapi-eca" target="_blank">Github</a>
+</li>
+</ul>
+</h2>
+
+
+
+
+
+
+</section>
+                                            <section class="" data-id="4886d12d749fcecb122fd81ca66ab46b">
+                                                <h2>Services in the Web</h2>
+<p>
+</p>
+<ul>
+    <li>Web - Server</li>
+    <li class="visible" data-fragment-index="0">
+<a href="http://www.informatik.unibas.ch" target="_blank">Web - Site/Page</a>
+</li>
+    <ul>
+<li class="visible" data-fragment-index="1">
+    <a href="http://demo.horde.org" target="_blank">Web - Application</a>
+</li>
+<li class="visible" data-fragment-index="2">
+<a href="https://mail.google.com" target="_blank">Single Page Application</a>
+</li>
+    <li class="visible" data-fragment-index="4">
+        <a href="http://maplight.org/us-congress/bill/111-hr-1319/421542/total-contributions" target="_blank">Mashup</a>
+    </li>
+</ul>
+    <li class="visible" data-fragment-index="3">
+        <a href="http://www.geonames.org/export/wikipedia-webservice.html" target="_blank">Web - Service</a>
+    </li>
+    <li class="visible" data-fragment-index="5">
+        <a href="https://probinder.com/api" target="_blank">Web - API</a>
+    </li>
+    <li class="visible" data-fragment-index="6">
+        <a href="https://zapier.com/app/dashboard" target="_blank">Web - Application Automation</a>
+</li>
+<li class="visible" data-fragment-index="7">
+<a href="https://github.com/dominicbosch/webapi-eca/settings/hooks" target="_blank">Webhook
+</a>
+</li>
+
+</ul>
+
+
+
+</section>
+                                            </section>
+                                            <section class="stack" data-id="4b658a1f53726ad04337e36197195df3">
+                                                <section class="" data-id="ecf850ff489569541f9edc61788355ca">
+                                                    <h2 class="absolute-element" style="position: absolute; z-index: 4; left: 356px; top: 277px;">More<br>Examples</h2>
+</section>
+                                                    <section class="" data-id="0447e5845a814f7aadd7bae2646a42db">
+                                                        <h2>
+<span style="font-size: 47.43px;">Measurements</span>
+                                                        <br>
+</h2>
+<div class="fragment" data-fragment-index="0">
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/413947/CoffeeBreak.png">
+</div>
+<div class="fragment absolute-element" data-fragment-index="1" style="position: absolute; width: 950px; height: 236.943px; z-index: 4; left: 72px; top: 177px; max-height: none; max-width: none;">
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/417051/uptime.png" style="width: 802.525px; height: 336.269px; max-height: none; max-width: none;">
+</div>
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/495405/histogram_2.png" class="absolute-element fragment" style="position: absolute; max-height: none; max-width: none; width: 1032px; height: 280px; z-index: 4; left: -51px; top: 384px;" data-fragment-index="2">
+                                                    </section>
+                                                    <section class="" data-id="0d6d4c8b7065b2983b120da8485dc3b3">
+                                                        <h3>
+    <span>ProBinder: Summarize Information Flood<span style="text-align: left;">&nbsp;</span>
+
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/413759/UC_PB_Summary.png" style="max-height: none; max-width: none; width: 842.7px; height: 589.394px;">
+</span>
+</h3>
+
+</section>
+                                                        <section class="" data-id="c46503833766fd6508482e6350d36b9f">
+                                                            <h3>ProBinder: Due Date Notifications</h3>
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/415875/ProBinder-DueDate.png">
+
+
+</section>
+                                                            <section class="" data-id="59995991d5e41031bc21fbfb04ad3b65">
+                                                                <h3>
+    <span>ProBinder: Setup Binders for Students</span>
+</h3>
+<h3>
+<span>
+    <span style="text-align: left;">&nbsp;</span>
+</span>
+</h3>
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/414049/ProBinder-StudentSetup.png" style="width: 739.747px; height: 348.789px; max-height: none; max-width: none;">
+
+</section>
+                                                                <section class="" data-id="bcd24169e822c66694e0272d02de7f7d">
+<h3>Funnel &amp; Broadcast</h3>
+
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/414132/Messenger.png">
+
+</section>
+                                                                <section class="" data-id="d13806a39765b507ac6482371294b260">
+<h3>Customize Web Applications</h3>
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/413709/proBinder.png">
+
+
+
+</section>
+                                                                <section class="" data-id="d23385065b2e34fc51a7a5f258fc4027">
+                                                                    <h3>Web Service Testing</h3>
+<div>
+                                                                    <br>
+                                                                </div>
+<div>
+                                                                <br>
+                                                            </div>
+<div>
+<br>
+</div>
+<br>
+                                                            <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/413906/WebAPI-Testing.png">
+                                                        </section>
+                                                    </section>
+                                                    <section class="stack" data-id="c8d89d1a9f1a8d5d5c05c1291a3f0b36">
+                                                        <section class="" data-id="a0953c6a6f34133f5eac3b93c8e1fd65">
+                                                            <h2 class="absolute-element" style="position: absolute; width: 191px; height: 64px; z-index: 4; left: 391px; top: 297px;">Model</h2>
+                                                        </section>
+                                                        <section class="" data-id="f3d45b4209d640d7e812a2503d4bcf8c">
+<h3>Conceptual Model for Reactive Information Systems</h3>
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/487896/Standard-Model-Template.png">
+
+
+</section>
+                                                    </section>
+                                                    <section class="stack" data-id="4a5205f4c2bd3d3eea8b0f773ac68bd5">
+                                                        <section class="" data-id="34af4930b1455128a63ed1abdd1baba1">
+                                                            <h2 class="absolute-element" style="position: absolute; width: 278px; height: 64px; z-index: 4; left: 362px; top: 301px;">Import.io</h2>
+                                                        </section>
+                                                        <section class="" data-id="21b1d8a69e147ff1dffa212232cab363">
+                                                            <h3>import.io</h3>
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/416729/downloadimport.io.gif" style="width: 1027px; height: 585px; max-height: none; max-width: none; position: absolute; z-index: 4; left: -57px; top: 83px;" class="absolute-element">
+
+</section>
+                                                        </section>
+                                                        <section class="stack" data-id="4ec0a01c582f91ac55707b5d43556a12">
+                                                            <section class="" data-id="1f192b73e7103a5e8aef9ca4f51ace30">
+                                                                <h2 class="absolute-element" style="position: absolute; width: 485px; height: 64px; z-index: 4; left: 245px; top: 278px;">Google I/O 2014</h2>
+                                                            </section>
+                                                            <section class="" data-id="087dfd196da103eab296d30c7abf4f4c">
+                                                                <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/dominicbosch/images/495215/googleIO.png">
+</section>
+                                                            </section>
+                                                        </div>

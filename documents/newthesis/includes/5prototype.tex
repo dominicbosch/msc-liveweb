@@ -13,7 +13,8 @@ The Web consists of many \textrm{\glspl{infosystem}} and because of its \textrm{
 Since communication over services in the Web is often latency driven, we came to the conclusion that asynchronous communication and therefore scalability should be attributes our prototype system has to support natively.
 Another aspect to be regarded for the architectural decision was how the rules are going to be represented internally.
 We introduced \textrm{\acrshort{xml}} and \textrm{\acrshort{json}} as common ways to communicate data between services on the Web.
-Both formats represent data in a tree structure, and this is also what we decided to assume for the explicit parameters in the events that will enter our prototype.
+Both formats describe data in tree structures.
+Tree structures are also what we assume for the explicit parameters in the events, which will enter our prototype.
 Together with the requirement of native support for an \textrm{\acrlong{eda} (\acrshort{eda})} our decision was to build upon the recent adoption of \textrm{JavaScript} to application development through \textrm{Node.js}\footnote{http://nodejs.org/} and its human-readable \textrm{\acrshort{json}} communication format.
 
 The prototype system consists of several modules, shown in Figure \ref{fig:Architecture}, which we are going to introduce within this section:
