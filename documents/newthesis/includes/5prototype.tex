@@ -213,7 +213,7 @@ Since an existing \textrm{JavaScript} library\footnote{https://github.com/harthu
 \PY{p}{\PYZcb{}}
 \end{Verbatim}
 \vspace{-0.7cm}
-\begin{lstlisting}[float=h,frame=no,label=lst:rulejson,caption=Rule Example expressed in \textrm{\acrshort{json}}]
+\begin{lstlisting}[float=h,frame=no,label=lst:rulejson,caption=Rule Example expressed in \textrm{\acrshort{json}} Format]
 \end{lstlisting}
 
 \section{A Rule Language for the Prototype System}
@@ -250,40 +250,32 @@ word        ::= [A-Za-z0-9_-]+
 
 
 \section{Prototype Use Case Implementations}
-In the previous chapter we listed use cases for our conceptual model.
-In this chapter we introduce use cases that were implemented in our prototype system in order to impose reactivity on the \textrm{\gls{web}}.
+In the previous chapter we introduced possible reactivity examples, which have been inspired by our conceptual model.
+In this section we introduce use cases that were implemented in our prototype system in order to impose reactivity on the \textrm{\gls{web}}.
 
 
 \subsection{Detecting responding Computers}
-In our department building, one office is located on the other side of the floor and the elevator is right in the middle of it.
-This resulted in one person frequently missing the coffee break, because everybody was always in a lively discussion towards the elevator and forgot about him.
-Thus he sat up a network scanner that pinged the department's \textrm{Internet Protocol (IP)} range in the morning and pushed the results as events into the system.
-Through this he was able to set up a rule that, if more than 42 pings were returned, the system automatically deployed an email invitation to the group, suggesting a coffee break.
-The network scanner (code in Appendix \ref{lst:eventproducer}) was implemented as external \textrm{\gls{infosystem}} which pushed the ping results as event over a \textrm{\gls{webhook}}.
-The rule is shown in Listing \ref{lst:ruleCoffeeBreak} and the corresponding simplified \textrm{Action Dispatcher} is shown in Listing \ref{lst:adEmailYak}.
+In our department, the offices are spread over the whole floor, with other departmens between them.
+This makes the coffee break coordination not a simple task.
+Thus a network scanner has been set up, which ping the department's \textrm{Internet Protocol (IP)} range in the morning and pushes the results as events into the prototype system.
+A rule checks if more than 42 pings are returned, which means there are enough people for a coffee break.
+There are not more than seven persons in that group, but there are about 35 servers running in this IP range as well.
+If it is the case, the \textrm{Action Dispatcher} deploys an email invitation to the group, suggesting a coffee break, as shown in Figure \ref{fig:gmail}.
+The network scanner (code in Appendix \ref{eventproducer}) was implemented as external \textrm{\gls{infosystem}} which pushes the ping results as event to a \textrm{\gls{webhook} URL}.
+The rule phrase is shown in Listing \ref{lst:RulePhrasecoffee} and the corresponding rule object in \textrm{\acrshort{json}} format, can be found in Appendix \ref{ruleCoffeeBreak}.
+The simplified \textrm{Action Dispatcher} is shown in Listing \ref{lst:adEmailYak}.
+In this particular use case we were able to show how rules are kept simple through the use of an \textrm{Action Dispatcher}.
+Apart from inviting people to a coffee break, we were also able to gather interesting informations on computer uptimes when running the \textrm{Event Poller} continuously, as shown in Figure \ref{fig:histogram_2}.
+This visualization of the accumulated event data inspires the thinking for new reactivity, for example into the direction of long term composite events, through which it could be possible to reduce energy consumption.
 
-\begin{Verbatim}[samepage=true,frame=single,fontsize=\footnotesize,commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1,xleftmargin
-=.3in]
-\PY{p}{\PYZob{}}
-  \PY{n+nt}{\PYZdq{}eventname\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}uptimestatistics\PYZdq{}}\PY{p}{,}
-  \PY{n+nt}{\PYZdq{}conditions\PYZdq{}}\PY{p}{:} \PY{p}{[}
-    \PY{p}{\PYZob{}}
-      \PY{n+nt}{\PYZdq{}selector\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}.currentlyon\PYZdq{}}\PY{p}{,}
-      \PY{n+nt}{\PYZdq{}operator\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}\PYZgt{}\PYZdq{}}\PY{p}{,}
-      \PY{n+nt}{\PYZdq{}compare\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{42}
-    \PY{p}{\PYZcb{}}
-  \PY{p}{]}\PY{p}{,}
-  \PY{n+nt}{\PYZdq{}actions\PYZdq{}}\PY{p}{:} \PY{p}{[}
-    \PY{l+s+s2}{\PYZdq{}EMailYak \PYZhy{}\PYZgt{} sendMail(\PYZbs{}\PYZdq{}eca\PYZhy{}engine@mscliveweb.simpleyak.com\PYZbs{}\PYZdq{},[usermaillist],}
-\PY{l+s+s2}{      \PYZbs{}\PYZdq{}Coffee Break!\PYZbs{}\PYZdq{},\PYZbs{}\PYZdq{}Let\PYZsq{}s go for a coffee at 10!\PYZbs{}\PYZdq{})\PYZdq{}}
-  \PY{p}{]}
-\PY{p}{\PYZcb{}}
-\end{Verbatim}
-\vspace{-0.7cm}
-\begin{lstlisting}[float=h,language=OwnRule,caption={Rule; Coffee Break Invitation},label={lst:ruleCoffeeBreak},frame=no]
+
+\begin{lstlisting}[float=h,language=OwnRule,label={lst:RulePhrasecoffee},caption=Rule Phrase for Coffee Break Invitation]
+ON uptimestatistics
+IF "#{ .currentlyon }" > 42
+DO EmailYak->sendMail("eca-engine@mscliveweb.simpleyak.com", [email addresses], "Coffee Break!" , "Let's go for a coffee")
 \end{lstlisting}
 
-\begin{lstlisting}[float=h,language=CoffeeScript,caption={Action Dispatcher; EMailYak, in CoffeeScript},label={lst:adEmailYak}]
+\begin{lstlisting}[float=h,language=CoffeeScript,caption={Action Dispatcher; EmailYak, in CoffeeScript},label={lst:adEmailYak}]
 url = 'https://api.emailyak.com/v1/'+params.apikey+'/json/send/email/'
 
 exports.sendMail = ( sender, receipient, subject, content ) ->
@@ -295,13 +287,35 @@ exports.sendMail = ( sender, receipient, subject, content ) ->
 	needle.post url, data, json: true
 \end{lstlisting}
 
+\begin{figure}[!ht]
+	\centering
+  \includegraphics[width=\textwidth]{figures/gmail}
+	\caption{Reactive Rule informs about the Presence of Team Members}
+	\label{fig:gmail}
+\end{figure}
 
-\subsection{Webpage Diff}
+\begin{figure}[!ht]
+	\centering
+  \includegraphics[width=\textwidth]{figures/histogram_2}
+	\caption{Group internal Computer Uptime Statistics}
+	\label{fig:histogram_2}
+\end{figure}
 
 
-
-
-\subsection{Enhance Existing Web App}
+\subsection{Enhance Existing Web Application}
+Several use cases have been implemented on top of the collaborative platform \textrm{ProBinder}.
+The one we introduce here, deals with the annotation of new content.
+Whenever users create new contents on the platform, they can tag them.
+Each user gets an unread flag for new contents.
+Since \textrm{ProBinder} provides a rich \textrm{\gls{webapi}}, it is straight forward to access all the user's unread content.
+We created a rule in our prototype which detects new unread content, on behalf of a certain user, through an \textrm{Event Trigger}.
+The condition part of the rule checks whether the unread content is in a tab which we want to annotate.
+The \textrm{Action Dispatcher} of the rule checks all tags for existing knowledge entries on \textrm{Wikipedia} and adds a short summary as a comment to the fresh content entry.
+The rule phrase of the described use case is shown in Listing \ref{lst:RulePhraseAnnotate} and the corresponding JSON rule object in Appendix \ref{ruleAnnotation}.
+The \textrm{ProBinder Event Trigger} and \textrm{Action Dispatcher} modules can be found in Appendix \ref{pbeventpoller} and \ref{pbactiondispatcher} respectively.
+The outcome of a sample annotation is shown in Figure \ref{fig:UC_Binder_Annotations}.
+Another version of the rule was implemented using a bot account where no condition was set.
+Wherever the bot was invited to it started to annotate tagged entries, which is quite a handy feature and users only need to invite that bot account to their resource in order to get reactivity.
 
 \begin{lstlisting}[float=h,language=OwnRule,label={lst:RulePhraseAnnotate},caption=Rule Phrase for ProBinder Annotations]
 ON ProBinder->unreadContent
@@ -310,44 +324,6 @@ DO ProBinder->annotateTagEntries("#{ .id }"),
 	 ProBinder->setRead("#{ .id }")
 \end{lstlisting}
 
-
-% on ProBinder->unreadContent
-% if "#{ .context .id }" == 18749
-% do "ProBinder -> annotateTagEntries(\"#{ .id }\")",
-% 	 "ProBinder -> setRead(\"#{ .id }\")"
-   
-
-\subsection{Real-time Reactive Messenger}
-
-
-
-
-
-% During our research we found a troublesome server room that made us develop a rule towards exposition of the \textrm{\gls{webofthings}}.
-% This server room suffered from a defective cooling system which lead to a drastic increase of temperature in certain circumstances.
-% As a consequence certain server automatically shut themselves down as safety measurements.
-% In order to support the administrator we sat up 
-% As a very quick fix to inform certain administrators about the shutdown of their server, we started pinging these servers and pushed the results int
-
-\subsection{Page Rank of Webpage changes}
-
-
-% Real-time reactive Web over \gls{webhook} -> instant messaging
-
-
-% {
-%     "dominic": {
-%         "SOAP test": "{\"id\":\"SOAP test\",\"eventtype\":\"Custom Event\",\"eventname\":\"button-click\",\"conditions\":[],\"actions\":[\"SOAP -> convertCelsiusToFahrenheit\"]}",
-%         "Presentation to Pushover": "{\"id\":\"Presentation to Pushover\",\"eventtype\":\"Custom Event\",\"eventname\":\"pushover\",\"conditions\":[],\"actions\":[\"Pushover -> broadcast\"]}",
-%         "ProBinder Service Test: FAIL": "{\"id\":\"ProBinder Service Test: FAIL\",\"eventtype\":\"Custom Event\",\"eventname\":\"ProBinderServiceTest\",\"conditions\":[{\"selector\":\".success\",\"type\":\"bool\",\"operator\":\"==\",\"compare\":false}],\"actions\":[\"Pushover -> broadcast\",\"EMailYak -> sendMail\"]}",
-%         "ProBinder Service Test": "{\"id\":\"ProBinder Service Test\",\"eventtype\":\"Event Poller\",\"eventname\":\"ProBinder Service Test -> testProBinder\",\"eventstart\":\"2014-05-20T13:00:00.000Z\",\"eventinterval\":120,\"conditions\":[],\"actions\":[\"System -> pushEvent\"],\"timestamp\":\"2014-05-20T11:51:46.307Z\"}",
-%         "'button-click' Rule": "{\"id\":\"'button-click' Rule\",\"eventtype\":\"Custom Event\",\"eventname\":\"button-click\",\"conditions\":[],\"actions\":[\"Pushover -> broadcast\"]}",
-%         "ProBinder annotate tags": "{\"id\":\"ProBinder annotate tags\",\"eventtype\":\"Event Poller\",\"eventname\":\"ProBinder -> unreadContent\",\"eventstart\":\"2014-05-20T19:11:00.000Z\",\"eventinterval\":1,\"conditions\":[],\"actions\":[\"ProBinder -> annotateTagEntries\",\"ProBinder -> setRead\"],\"timestamp\":\"2014-05-20T19:10:10.951Z\"}",
-%         "Coffee Break": "{\"id\":\"Coffee Break\",\"eventtype\":\"Custom Event\",\"eventname\":\"uptimestatistics\",\"conditions\":[{\"selector\":\".currentlyon\",\"type\":\"value\",\"operator\":\">\",\"compare\":42}],\"actions\":[\"EMailYak -> sendMail\"]}",
-%         "ProBinder Service Test: Logging": "{\"id\":\"ProBinder Service Test: Logging\",\"eventtype\":\"Custom Event\",\"eventname\":\"ProBinderServiceTest\",\"conditions\":[],\"actions\":[\"ProBinder -> newContent\"]}"
-%     }
-% }
-
 \begin{figure}[!ht]
 	\centering
   \includegraphics[width=\textwidth]{figures/UC_Binder_Annotations}
@@ -355,54 +331,43 @@ DO ProBinder->annotateTagEntries("#{ .id }"),
 	\label{fig:UC_Binder_Annotations}
 \end{figure}
 
+
+
+\subsection{Remote System and Service Testing}
+It is important for a provider of a \textrm{\glspl{webservice}} to know whether the service is still running.
+In addition, a \textrm{\glspl{webservice}} provider has to ensure that the service is also running correctly.
+With our prototype system we are able to create a simple \textrm{Event Trigger} that queries the services, for example in a unit test like manner.
+Thus through our prototyp system it is possible to effectively to check such services for availability and consistency without the need for an expensive product.
+Whenever one of the test fails, an instant notification is sent to the \textrm{\glspl{webservice}} provider so he can react instantly.
+The unit testing \textrm{Event Poller} (code in Appendix \ref{apipoller}) is checking for some functions to work properly and emits an event with a success property.
+The condition of the rule, shown in Listing \ref{lst:Ruleapi}, only pushes a notification to the mobile device if the testing failed.
+A log is always stored in a binder (Figure \ref{fig:PBServiceTesting}) to check when the tests ran, which was set to a daily basis for this rule.
+\begin{lstlisting}[float=h,language=OwnRule,label={lst:Ruleapi},caption=Rule Phrase for ProBinder WebAPI Testing]
+ON APITester->testProBinder
+IF "#{ .success }" == false
+DO Pushover->broadcast("#{ .summary }")
+\end{lstlisting}
+
+\begin{figure}[!ht]
+	\centering
+  \includegraphics[width=\textwidth]{figures/PBServiceTesting}
+	\caption{ProBinder Service Testing Log}
+	\label{fig:PBServiceTesting}
+\end{figure}
+
+
 \section{Web Application Development}
-% Why JS, why was not it used up to now? is it used now?
-
-% My guess is that Node is encouraging good programmer practices in terms of scalability, and Java less so. In other words, programmers probably have to work less hard to avoid bad scalability bottlenecks in Node than in Java.
-
-% By incorporating JavaScript’s asynchronous design
-% of callback functions into their architecture, locking situations are basically
-% omitted. Thus it is a highly-scalable, asynchronous, event-driven architec-
-% ture which found its acceptance in the open-source comunity as well as for
-% enterprises.
-% The package manager npm can be used to maintain dependencies of a
-% custom node.js module to other modules. This helpful feature ensures that
-% everybody working with the user-defined module uses the same external
-% modules and the respective versions. Also project repositories do not need
-% to store the dependent libraries through this mechanism, thus saving space
+Event-driven programming is as imporant as asynchronous calls to remote \textrm{\glspl{webservice}} in order to impose real-time reactivity on top and between \textrm{\glspl{infosystem}}.
+Another advantage which we have not mentioned yet was that this decision allowed us to focus on only one programming language for both the back- and the front-end of our prototype system.
+The front-end is the administration for rules, \textrm{\glspl{webhook}}, \textrm{Event Trigger} and \textrm{Action Dispatchers}.
+It is a \textrm{\gls{webapplication}} which loads all required data through asynchronous calls to the prototype system's \textrm{\gls{webservice}} while the user is interacting with the webpage.
+A concept, which caught our attention during the development process, is the concept of closures.
+Closures are the necessary concept that provides a context for each returning asynchronous call, even if it would have been garbage collected already.
 
 
-% full stack development 
-
-
-% TODO why JS. JSON as first advantage (http://www.toptal.com/nodejs/why-the-hell-would-i-use-node-js)
-% advantage for network applications with several concurrent connections
-% not as client-server used as intented but as serverserver com since we also expect several connections simultanously under load.
-% But also, we adopt the non-blocking nature of JS that is used for node's optimal communication, in order to implement our enigne in a non blocking way, thus allowing to load code and fire callback function in modules whenever they are required!
-% http://ariya.ofilabs.com/2012/07/lazy-parsing-in-javascript-engines.html
-% Optimization of special case if ( before function {immediately-invoked function expression (IIFE)}, do rela parsing, else lazy parsing
-% Difference between context and scope. scope unique to each invocation, context is 'this', owner of currently executing code.
-% .call, .apply 
-% TODO we should use .bind for persistence.coffee's functions ....
-
-%In JavaScript, functions are first-class objects, i.e. they are objects and can be manipulated and passed around just like any other object. Specifically, they are Function objects. -> https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions_and_function_scope
-% Since each call provides potentially different arguments, a new closure is created for each call to outside. The memory can be freed only when the returned inside is no longer accessible
-
-% The definitive guide: This combination of a function object and a scope (a set of variable bindings) in which the function’s variables are resolved is called a closure in the computer science literature.4
-% This is an old term that refers to the fact that the function’s variables have bindings in the scope chain and that therefore the function is “closed over” its variables.
-
-
-
-% Umgang mit der Zukunft
-% Callback
 \subsection{Callback Functions \& Asynchronous Closures}
-% JAva futures? objekte für resultate sammeln
-% Closures are functions that refer to independent (free) variables. 
-
 Often, optimization approaches and programming language concepts require special attention to avoid common pitfalls.
 When closures are used as asynchronous functions, developers need to be very careful not to end up with race conditions.
-
-
 Looking at an example of sequential code execution in Figure~\ref{fig:Closures_Synchronous}, we see that function execution of \texttt{fA} is halted until function \texttt{fB} is finished.
 If \texttt{fB} happens to be a latency-driven I/O operation the completion of \texttt{fA} could be deferred for a relatively long time.
 While the application waits for the completion of the I/O operation, some remaining operations in \texttt{fA} could eventually already be executed without causing any race conditions.
@@ -427,7 +392,6 @@ Such operations are processed and completed whenever required resources are avai
 Often other operations depend on the completion of asynchronous operations, hence their execution needs to be deferred.
 This necessary code execution deferral is achieved through the use of callback functions, denoted \texttt{fCB} in Figure~\ref{fig:Closures_Asynchronous}.
 Any code placed in a callback function, which is assigned to an asynchronous operation, is only executed after the respective asynchronous operation completed.
-% TODO figure: Callback; Result ensurance (ergebnissichherung) wird direkt mit funktion mitgeschickt
 This allows stacking of functions and operations upon each other which automatically results in a flexible and event-driven application.
 
 So far we did not regard the context for such asynchronous functions.
@@ -466,8 +430,6 @@ This implementation is necessary when the closure acts as a callback function fo
 	\caption{Closure Context Shielding}
 	\label{fig:Closures_Closure-3}
 \end{figure}
-
-% TODO Figures need fA to be right aligned
 
 An example of how closure contexts can be shielded is shown in the Listing \ref{lst_closure}.
 \begin{lstlisting}[float=h,label=lst_closure,language=JavaScript,caption=JavaScript Closure Context Shielding]

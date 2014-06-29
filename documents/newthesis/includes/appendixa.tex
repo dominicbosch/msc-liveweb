@@ -2,74 +2,503 @@
 \chapter{Use Case Code}
 
 
-\section{Application to Ping IPs and push Result to Remote Server}
+\section{Node.js Code to ping IP Range and push the Result to a Remote Server\label{eventproducer}}
 
-\begin{lstlisting}[nolol,language=CoffeeScript,label={lst:eventproducer}]
-fs = require 'fs'
-ping = require 'net-ping'
-needle = require 'needle'
+\begin{Verbatim}[fontsize=\scriptsize,commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PY{c}{\PYZsh{} A node.js module to automatically ping an IP range and push the response result}
+\PY{c}{\PYZsh{} to a remote server}
+
+\PY{n}{fs} \PY{o}{=} \PY{n}{require} \PY{l+s}{\PYZdq{}}\PY{l+s}{fs}\PY{l+s}{\PYZdq{}}
+\PY{n}{ping} \PY{o}{=} \PY{n}{require} \PY{l+s}{\PYZdq{}}\PY{l+s}{net\PYZhy{}ping}\PY{l+s}{\PYZdq{}}
+\PY{n}{needle} \PY{o}{=} \PY{n}{require} \PY{l+s}{\PYZdq{}}\PY{l+s}{needle}\PY{l+s}{\PYZdq{}}
     
-remoteUrl = "http://ec2-54-196-2-15.compute-1.amazonaws.com"
-fPushEvent = ( evt ) ->
-  needle.post remoteUrl + '/measurements', JSON.stringify( evt )
+\PY{n}{remoteUrl} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{http://ec2\PYZhy{}54\PYZhy{}196\PYZhy{}2\PYZhy{}15.compute\PYZhy{}1.amazonaws.com}\PY{l+s}{\PYZdq{}}
+\PY{n}{fPushEvent} \PY{o}{=} \PY{p}{(} \PY{n}{evt} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{n}{needle}\PY{o}{.}\PY{n}{post} \PY{n}{remoteUrl} \PY{o}{+} \PY{l+s}{\PYZdq{}}\PY{l+s}{/measurements}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{JSON}\PY{o}{.}\PY{n}{stringify}\PY{p}{(} \PY{n}{evt} \PY{p}{)}\PY{p}{,} \PY{p}{(} \PY{n}{err}\PY{p}{,} \PY{n}{resp}\PY{p}{,} \PY{n}{body} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{k}{if} \PY{n}{err} \PY{o+ow}{or} \PY{n}{resp}\PY{o}{.}\PY{n}{statusCode} \PY{n}{isnt} \PY{l+m+mi}{200}
+      \PY{n}{console}\PY{o}{.}\PY{n}{log} \PY{l+s}{\PYZdq{}}\PY{l+s}{Error in pushing event!}\PY{l+s}{\PYZdq{}}
+      \PY{n}{console}\PY{o}{.}\PY{n}{log} \PY{n}{err}
+      \PY{n}{console}\PY{o}{.}\PY{n}{log} \PY{n}{resp}\PY{o}{.}\PY{n}{statusCode}
+    \PY{k}{else}
+      \PY{n}{console}\PY{o}{.}\PY{n}{log} \PY{l+s}{\PYZdq{}}\PY{l+s}{Successfully posted an event}\PY{l+s}{\PYZdq{}}
 
-try
-  histData = fs.readFileSync 'histoappend.json', 'utf8'
-catch err
-  console.error "Error reading historical data file"
-  process.exit()
+\PY{k}{try}
+  \PY{n}{histData} \PY{o}{=} \PY{n}{fs}\PY{o}{.}\PY{n}{readFileSync} \PY{l+s}{\PYZdq{}}\PY{l+s}{histoappend.json}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{utf8}\PY{l+s}{\PYZdq{}}
+\PY{n}{catch} \PY{n}{err}
+  \PY{n}{console}\PY{o}{.}\PY{n}{error} \PY{n}{err}
+  \PY{n}{console}\PY{o}{.}\PY{n}{error} \PY{l+s}{\PYZdq{}}\PY{l+s}{Error reading historical data file}\PY{l+s}{\PYZdq{}}
+  \PY{n}{process}\PY{o}{.}\PY{n}{exit}\PY{p}{(}\PY{p}{)}
 
-session = ping.createSession retries: 2
-oSum = {}
-if histData
-  arrPings = histData.split "\n"
-  try
-    for strObj, i in arrPings
-      if strObj isnt ''
-        oTmp = JSON.parse strObj  
-        oSum[ oTmp.timestamp ] = 
-          sum: oTmp.sum
-    if oTmp
-      fPushEvent
-        currentlyon: oSum[ oTmp.timestamp ].sum
-        pingtimes: oSum   
+\PY{n}{session} \PY{o}{=} \PY{n}{ping}\PY{o}{.}\PY{n}{createSession} \PY{n}{retries}\PY{p}{:} \PY{l+m+mi}{2}
+\PY{n}{oSum} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+\PY{k}{if} \PY{n}{histData}
+  \PY{n}{arrPings} \PY{o}{=} \PY{n}{histData}\PY{o}{.}\PY{n}{split} \PY{l+s}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}
+  \PY{k}{try}
+    \PY{k}{for} \PY{n}{strObj}\PY{p}{,} \PY{n}{i} \PY{o+ow}{in} \PY{n}{arrPings}
+      \PY{k}{if} \PY{n}{strObj} \PY{n}{isnt} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZdq{}}
+        \PY{n}{oTmp} \PY{o}{=} \PY{n}{JSON}\PY{o}{.}\PY{n}{parse} \PY{n}{strObj}  
+        \PY{n}{oSum}\PY{p}{[} \PY{n}{oTmp}\PY{o}{.}\PY{n}{timestamp} \PY{p}{]} \PY{o}{=} 
+          \PY{n+nb}{sum}\PY{p}{:} \PY{n}{oTmp}\PY{o}{.}\PY{n}{sum}
+    \PY{k}{if} \PY{n}{oTmp}
+      \PY{n}{fPushEvent}
+        \PY{n}{currentlyon}\PY{p}{:} \PY{n}{oSum}\PY{p}{[} \PY{n}{oTmp}\PY{o}{.}\PY{n}{timestamp} \PY{p}{]}\PY{o}{.}\PY{n}{sum}
+        \PY{n}{pingtimes}\PY{p}{:} \PY{n}{oSum}   
 
-  catch err
-    console.log 'Error parsing histo data'
-    console.log err
+  \PY{n}{catch} \PY{n}{err}
+    \PY{n}{console}\PY{o}{.}\PY{n}{log} \PY{l+s}{\PYZdq{}}\PY{l+s}{Error parsing histo data}\PY{l+s}{\PYZdq{}}
+    \PY{n}{console}\PY{o}{.}\PY{n}{log} \PY{n}{err}
 
-i = -1
-ips = []
-pingTime = (new Date()).toISOString()
-fPollHosts = () ->
-  i++
-  session.pingHost "131.152.85.#{ i }", ( err, target, sent, rcvd ) ->
-    if not err
-      ips.push target
+\PY{n}{i} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+\PY{n}{ips} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+\PY{n}{pingTime} \PY{o}{=} \PY{p}{(}\PY{n}{new} \PY{n}{Date}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{toISOString}\PY{p}{(}\PY{p}{)}
+\PY{n}{fPollHosts} \PY{o}{=} \PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{n}{session}\PY{o}{.}\PY{n}{pingHost} \PY{l+s}{\PYZdq{}}\PY{l+s}{192.168.1.\PYZsh{}\PYZob{} ++i \PYZcb{}}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{p}{(} \PY{n}{err}\PY{p}{,} \PY{n}{target}\PY{p}{,} \PY{n}{sent}\PY{p}{,} \PY{n}{rcvd} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{k}{if} \PY{o+ow}{not} \PY{n}{err}
+      \PY{n}{ips}\PY{o}{.}\PY{n}{push} \PY{n}{target}
       
-  if i is 255
-    i = -1
-    console.log "#{ (new Date()).toISOString() } | All ping requests returned (#{ips.length} answered), pushing event into the system and starting again at 0"
+  \PY{k}{if} \PY{n}{i} \PY{o+ow}{is} \PY{l+m+mi}{255}
+    \PY{n}{i} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+    \PY{n}{console}\PY{o}{.}\PY{n}{log} \PY{l+s}{\PYZdq{}\PYZdq{}\PYZdq{}}\PY{l+s}{\PYZsh{}\PYZob{} (new Date()).toISOString() \PYZcb{} | All ping requests returned (\PYZsh{}\PYZob{}ips.length\PYZcb{} answered),}
+\PY{l+s}{      pushing event into the system and starting again at 0}\PY{l+s}{\PYZdq{}\PYZdq{}\PYZdq{}}
     
-    oSum[ pingTime ] = sum: ips.length
-    fPushEvent JSON.stringify
-      currentlyon: ips.length
-      pingtimes: oSum
+    \PY{n}{oSum}\PY{p}{[} \PY{n}{pingTime} \PY{p}{]} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{:} \PY{n}{ips}\PY{o}{.}\PY{n}{length}
+    \PY{n}{fPushEvent} \PY{n}{JSON}\PY{o}{.}\PY{n}{stringify}
+      \PY{n}{currentlyon}\PY{p}{:} \PY{n}{ips}\PY{o}{.}\PY{n}{length}
+      \PY{n}{pingtimes}\PY{p}{:} \PY{n}{oSum}
 
-    oPing = 
-      timestamp: pingTime
-      ips: ips
-      sum: ips.length
+    \PY{n}{oPing} \PY{o}{=} 
+      \PY{n}{timestamp}\PY{p}{:} \PY{n}{pingTime}
+      \PY{n}{ips}\PY{p}{:} \PY{n}{ips}
+      \PY{n+nb}{sum}\PY{p}{:} \PY{n}{ips}\PY{o}{.}\PY{n}{length}
 
-    fs.appendFile 'histoappend.json', JSON.stringify( oPing ) + "\n", 'utf8'
-    pingTime = (new Date()).toISOString()
-    ips = []
+    \PY{n}{fs}\PY{o}{.}\PY{n}{appendFile} \PY{l+s}{\PYZdq{}}\PY{l+s}{histoappend.json}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{JSON}\PY{o}{.}\PY{n}{stringify}\PY{p}{(} \PY{n}{oPing} \PY{p}{)} \PY{o}{+} \PY{l+s}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{utf8}\PY{l+s}{\PYZdq{}}
+    \PY{n}{pingTime} \PY{o}{=} \PY{p}{(}\PY{n}{new} \PY{n}{Date}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{toISOString}\PY{p}{(}\PY{p}{)}
+    \PY{n}{ips} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+
+  \PY{n}{setTimeout} \PY{n}{fPollHosts}\PY{p}{,} \PY{l+m+mi}{7000}
+
+\PY{n}{fPollHosts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
 
 
-  setTimeout fPollHosts, 7000
 
 
-fPollHosts()
 
 
-\end{lstlisting}
+\clearpage
+\section{Coffee Break Invitation Rule object \label{ruleCoffeeBreak}}
+
+\begin{Verbatim}[samepage=true,frame=single,fontsize=\footnotesize,commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1,xleftmargin
+=.3in]
+\PY{p}{\PYZob{}}
+  \PY{n+nt}{\PYZdq{}eventname\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}uptimestatistics\PYZdq{}}\PY{p}{,}
+  \PY{n+nt}{\PYZdq{}conditions\PYZdq{}}\PY{p}{:} \PY{p}{[}
+    \PY{p}{\PYZob{}}
+      \PY{n+nt}{\PYZdq{}selector\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}.currentlyon\PYZdq{}}\PY{p}{,}
+      \PY{n+nt}{\PYZdq{}operator\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}\PYZgt{}\PYZdq{}}\PY{p}{,}
+      \PY{n+nt}{\PYZdq{}compare\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{42}
+    \PY{p}{\PYZcb{}}
+  \PY{p}{]}\PY{p}{,}
+  \PY{n+nt}{\PYZdq{}actions\PYZdq{}}\PY{p}{:} \PY{p}{[}
+    \PY{l+s+s2}{\PYZdq{}EMailYak \PYZhy{}\PYZgt{} sendMail(\PYZbs{}\PYZdq{}eca\PYZhy{}engine@mscliveweb.simpleyak.com\PYZbs{}\PYZdq{},[usermaillist],}
+\PY{l+s+s2}{      \PYZbs{}\PYZdq{}Coffee Break!\PYZbs{}\PYZdq{},\PYZbs{}\PYZdq{}Let\PYZsq{}s go for a coffee at 10!\PYZbs{}\PYZdq{})\PYZdq{}}
+  \PY{p}{]}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+
+\section{ProBinder Annotation Rule in JSON Format \label{ruleAnnotation}}
+\begin{Verbatim}[samepage=true,frame=single,fontsize=\footnotesize,commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1,xleftmargin
+=.3in]
+\PY{p}{\PYZob{}}
+  \PY{n+nt}{\PYZdq{}eventname\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}ProBinder \PYZhy{}\PYZgt{} unreadContent\PYZdq{}}\PY{p}{,}
+  \PY{n+nt}{\PYZdq{}conditions\PYZdq{}}\PY{p}{:} \PY{p}{[}
+    \PY{p}{\PYZob{}}
+    \PY{n+nt}{\PYZdq{}selector\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}.context .id\PYZdq{}}\PY{p}{,}
+    \PY{n+nt}{\PYZdq{}operator\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}==\PYZdq{}}\PY{p}{,}
+    \PY{n+nt}{\PYZdq{}compare\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{18749}
+    \PY{p}{\PYZcb{}}
+  \PY{p}{]}\PY{p}{,}
+  \PY{n+nt}{\PYZdq{}actions\PYZdq{}}\PY{p}{:} \PY{p}{[}
+    \PY{l+s+s2}{\PYZdq{}ProBinder \PYZhy{}\PYZgt{} annotateTagEntries(\PYZbs{}\PYZdq{}\PYZsh{}\PYZob{} .id \PYZcb{}\PYZbs{}\PYZdq{})\PYZdq{}} \PY{p}{,}
+    \PY{l+s+s2}{\PYZdq{}ProBinder \PYZhy{}\PYZgt{} setRead(\PYZbs{}\PYZdq{}\PYZsh{}\PYZob{} .id \PYZcb{}\PYZbs{}\PYZdq{})\PYZdq{}}
+  \PY{p}{]}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+
+
+
+\clearpage
+\section{ProBinder Event Trigger\label{pbeventpoller}}
+\begin{Verbatim}[fontsize=\scriptsize,commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{} }
+\PY{c}{\PYZsh{} ProBinder EVENT POLLER}
+\PY{c}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+
+\PY{c}{\PYZsh{} Global variables}
+\PY{c}{\PYZsh{} This module requires user\PYZhy{}specific parameters:}
+
+\PY{c}{\PYZsh{} \PYZhy{} username}
+\PY{c}{\PYZsh{} \PYZhy{} password}
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{n}{urlService} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{https://probinder.com/service/}\PY{l+s}{\PYZsq{}}
+\PY{n}{credentials} \PY{o}{=}
+  \PY{n}{username}\PY{p}{:} \PY{n}{params}\PY{o}{.}\PY{n}{username}
+  \PY{n}{password}\PY{p}{:} \PY{n}{params}\PY{o}{.}\PY{n}{password}
+
+\PY{c}{\PYZsh{}}
+\PY{c}{\PYZsh{} The standard callback can be used if callback is not provided, e.g. if}
+\PY{c}{\PYZsh{} the function is called from outside}
+\PY{c}{\PYZsh{}}
+\PY{n}{standardCallback} \PY{o}{=} \PY{p}{(} \PY{n}{funcName} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{p}{(} \PY{n}{err}\PY{p}{,} \PY{n}{resp}\PY{p}{,} \PY{n}{body} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{k}{if} \PY{n}{err}
+      \PY{n}{log} \PY{l+s}{\PYZdq{}}\PY{l+s}{ERROR: During function }\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsh{}\PYZob{} funcName \PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZdq{}}
+    \PY{k}{else}
+      \PY{k}{if} \PY{n}{resp}\PY{o}{.}\PY{n}{statusCode} \PY{o+ow}{is} \PY{l+m+mi}{200}
+        \PY{n}{log} \PY{l+s}{\PYZdq{}}\PY{l+s}{Function }\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsh{}\PYZob{} funcName \PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{ ran through without error}\PY{l+s}{\PYZdq{}}
+      \PY{k}{else}
+        \PY{n}{log} \PY{l+s}{\PYZdq{}}\PY{l+s}{ERROR: During function }\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsh{}\PYZob{} funcName \PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{: \PYZsh{}\PYZob{} body.error.message \PYZcb{}}\PY{l+s}{\PYZdq{}}
+
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{c}{\PYZsh{} Call the ProBinder service with the given parameters.}
+
+\PY{c}{\PYZsh{}  \PYZhy{} \PYZob{}Object\PYZcb{} args the required function arguments object}
+\PY{c}{\PYZsh{}  \PYZhy{} \PYZob{}Object\PYZcb{} [args.data] the data to be posted}
+\PY{c}{\PYZsh{}  \PYZhy{} \PYZob{}String\PYZcb{} args.service the required service identifier to be appended to the url}
+\PY{c}{\PYZsh{}  \PYZhy{} \PYZob{}String\PYZcb{} args.method the required method identifier to be appended to the url}
+\PY{c}{\PYZsh{}  \PYZhy{} \PYZob{}function\PYZcb{} [args.callback] the function to receive the request answer}
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{n}{callService} \PY{o}{=} \PY{p}{(} \PY{n}{args} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{k}{if} \PY{o+ow}{not} \PY{n}{args}\PY{o}{.}\PY{n}{service} \PY{o+ow}{or} \PY{o+ow}{not} \PY{n}{args}\PY{o}{.}\PY{n}{method}
+    \PY{n}{log} \PY{l+s}{\PYZsq{}}\PY{l+s}{ERROR in call function: Missing arguments!}\PY{l+s}{\PYZsq{}}
+  \PY{k}{else}
+    \PY{k}{if} \PY{o+ow}{not} \PY{n}{args}\PY{o}{.}\PY{n}{callback}
+      \PY{n}{args}\PY{o}{.}\PY{n}{callback} \PY{o}{=} \PY{n}{standardCallback} \PY{l+s}{\PYZsq{}}\PY{l+s}{call}\PY{l+s}{\PYZsq{}}
+    \PY{n}{url} \PY{o}{=} \PY{n}{urlService} \PY{o}{+} \PY{n}{args}\PY{o}{.}\PY{n}{service} \PY{o}{+} \PY{l+s}{\PYZsq{}}\PY{l+s}{/}\PY{l+s}{\PYZsq{}} \PY{o}{+} \PY{n}{args}\PY{o}{.}\PY{n}{method}
+    \PY{n}{needle}\PY{o}{.}\PY{n}{request} \PY{l+s}{\PYZsq{}}\PY{l+s}{post}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{url}\PY{p}{,} \PY{n}{args}\PY{o}{.}\PY{n}{data}\PY{p}{,} \PY{n}{credentials}\PY{p}{,} \PY{n}{args}\PY{o}{.}\PY{n}{callback}
+
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{c}{\PYZsh{} Calls the user\PYZsq{}s unread content service.}
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{n}{exports}\PY{o}{.}\PY{n}{unreadContentInfo} \PY{o}{=} \PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{n}{callService}
+    \PY{n}{service}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{36}\PY{l+s}{\PYZsq{}}
+    \PY{n}{method}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{unreadcontent}\PY{l+s}{\PYZsq{}}
+    \PY{n}{callback}\PY{p}{:} \PY{p}{(} \PY{n}{err}\PY{p}{,} \PY{n}{resp}\PY{p}{,} \PY{n}{body} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+      \PY{k}{if} \PY{o+ow}{not} \PY{n}{err} \PY{o+ow}{and} \PY{n}{resp}\PY{o}{.}\PY{n}{statusCode} \PY{o+ow}{is} \PY{l+m+mi}{200}
+        \PY{n}{pushEvent} \PY{n}{oEntry} \PY{k}{for} \PY{n}{oEntry} \PY{o+ow}{in} \PY{n}{body}
+      \PY{k}{else}
+        \PY{n}{log} \PY{l+s}{\PYZsq{}}\PY{l+s}{Error: }\PY{l+s}{\PYZsq{}} \PY{o}{+} \PY{n}{body}\PY{o}{.}\PY{n}{error}\PY{o}{.}\PY{n}{message}
+
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{c}{\PYZsh{} Fetches unread contents}
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{n}{exports}\PY{o}{.}\PY{n}{unreadContent} \PY{o}{=} \PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{n}{exports}\PY{o}{.}\PY{n}{unreadContentInfo} \PY{p}{(} \PY{n}{evt} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{n}{getContent}
+      \PY{n}{contentId}\PY{p}{:} \PY{n}{evt}\PY{o}{.}\PY{n}{id}
+      \PY{n}{contentServiceId}\PY{p}{:} \PY{n}{evt}\PY{o}{.}\PY{n}{serviceId}
+      \PY{n}{callback}\PY{p}{:} \PY{p}{(} \PY{n}{err}\PY{p}{,} \PY{n}{resp}\PY{p}{,} \PY{n}{body} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+        \PY{k}{if} \PY{o+ow}{not} \PY{n}{err} \PY{o+ow}{and} \PY{n}{resp}\PY{o}{.}\PY{n}{statusCode} \PY{o+ow}{is} \PY{l+m+mi}{200}
+          \PY{n}{pushEvent}
+            \PY{n+nb}{id}\PY{p}{:} \PY{n}{body}\PY{o}{.}\PY{n}{id}
+            \PY{n}{content}\PY{p}{:} \PY{n}{body}\PY{o}{.}\PY{n}{text}
+            \PY{n+nb}{object}\PY{p}{:} \PY{n}{body}
+        \PY{k}{else}
+          \PY{n}{log} \PY{l+s}{\PYZsq{}}\PY{l+s}{Error: }\PY{l+s}{\PYZsq{}} \PY{o}{+} \PY{n}{body}\PY{o}{.}\PY{n}{error}\PY{o}{.}\PY{n}{message}
+
+
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{c}{\PYZsh{} Calls the content get service with the content id and the service id provided. }
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{n}{getContent} \PY{o}{=} \PY{p}{(} \PY{n}{args} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{k}{if} \PY{o+ow}{not} \PY{n}{args}\PY{o}{.}\PY{n}{callback}
+    \PY{n}{args}\PY{o}{.}\PY{n}{callback} \PY{o}{=} \PY{n}{standardCallback} \PY{l+s}{\PYZsq{}}\PY{l+s}{getContent}\PY{l+s}{\PYZsq{}}
+  \PY{n}{callService}
+    \PY{n}{service}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{2}\PY{l+s}{\PYZsq{}}
+    \PY{n}{method}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{get}\PY{l+s}{\PYZsq{}}
+    \PY{n}{data}\PY{p}{:} 
+      \PY{n+nb}{id}\PY{p}{:} \PY{n}{args}\PY{o}{.}\PY{n}{contentId}
+      \PY{n}{service}\PY{p}{:} \PY{n}{args}\PY{o}{.}\PY{n}{contentServiceId}
+    \PY{n}{callback}\PY{p}{:} \PY{n}{args}\PY{o}{.}\PY{n}{callback}
+
+\PY{c}{\PYZsh{}   Returns an event of the form:}
+
+\PY{c}{\PYZsh{}     \PYZob{}}
+\PY{c}{\PYZsh{}         \PYZdq{}text\PYZdq{}: \PYZdq{}test subject\PYZdq{},}
+\PY{c}{\PYZsh{}         \PYZdq{}id\PYZdq{}: 127815,}
+\PY{c}{\PYZsh{}         \PYZdq{}createDate\PYZdq{}: \PYZdq{}2014\PYZhy{}04\PYZhy{}19 16:27:45\PYZdq{},}
+\PY{c}{\PYZsh{}         \PYZdq{}lastModified\PYZdq{}: \PYZdq{}2014\PYZhy{}04\PYZhy{}19 16:27:45\PYZdq{},}
+\PY{c}{\PYZsh{}         \PYZdq{}time\PYZdq{}: \PYZdq{}5 days ago\PYZdq{},}
+\PY{c}{\PYZsh{}         \PYZdq{}userId\PYZdq{}: 10595,}
+\PY{c}{\PYZsh{}         \PYZdq{}username\PYZdq{}: \PYZdq{}Dominic Bosch\PYZdq{},}
+\PY{c}{\PYZsh{}         \PYZdq{}uri\PYZdq{}: \PYZdq{}https://probinder.com/content/view/id/127815/\PYZdq{},}
+\PY{c}{\PYZsh{}         \PYZdq{}localUri\PYZdq{}: \PYZdq{}https://probinder.com/content/view/id/127815/\PYZdq{},}
+\PY{c}{\PYZsh{}         \PYZdq{}title\PYZdq{}: \PYZdq{}\PYZdq{},}
+\PY{c}{\PYZsh{}         \PYZdq{}serviceId\PYZdq{}: 27,}
+\PY{c}{\PYZsh{}         \PYZdq{}userIds\PYZdq{}: [}
+\PY{c}{\PYZsh{}             10595}
+\PY{c}{\PYZsh{}         ],}
+\PY{c}{\PYZsh{}         \PYZdq{}description\PYZdq{}: \PYZdq{}\PYZdq{},}
+\PY{c}{\PYZsh{}         \PYZdq{}context\PYZdq{}: [}
+\PY{c}{\PYZsh{}             \PYZob{}}
+\PY{c}{\PYZsh{}                 \PYZdq{}id\PYZdq{}: 18749,}
+\PY{c}{\PYZsh{}                 \PYZdq{}name\PYZdq{}: \PYZdq{}WebAPI ECA Test Binder\PYZdq{},}
+\PY{c}{\PYZsh{}                 \PYZdq{}remove\PYZdq{}: true,}
+\PY{c}{\PYZsh{}                 \PYZdq{}uri\PYZdq{}: \PYZdq{}/content/context/id/18749/webapi\PYZhy{}eca\PYZhy{}test\PYZhy{}binder\PYZdq{}}
+\PY{c}{\PYZsh{}             \PYZcb{}}
+\PY{c}{\PYZsh{}         ]}
+\PY{c}{\PYZsh{}     \PYZcb{}}
+\end{Verbatim}
+
+
+
+
+
+
+
+
+
+\clearpage
+\section{ProBinder Action Dispatcher\label{pbactiondispatcher}}
+\begin{Verbatim}[fontsize=\scriptsize,commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{} }
+\PY{c}{\PYZsh{} ProBinder ACTION INVOKER}
+\PY{c}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+
+\PY{c}{\PYZsh{} Global variables}
+\PY{c}{\PYZsh{} This module requires user\PYZhy{}specific parameters:}
+
+\PY{c}{\PYZsh{} \PYZhy{} username}
+\PY{c}{\PYZsh{} \PYZhy{} password}
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{n}{urlService} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{https://probinder.com/service/}\PY{l+s}{\PYZsq{}}
+\PY{n}{credentials} \PY{o}{=}
+  \PY{n}{username}\PY{p}{:} \PY{n}{params}\PY{o}{.}\PY{n}{username}
+  \PY{n}{password}\PY{p}{:} \PY{n}{params}\PY{o}{.}\PY{n}{password}
+
+\PY{c}{\PYZsh{}}
+\PY{c}{\PYZsh{} The standard callback can be used if callback is not provided, e.g. if}
+\PY{c}{\PYZsh{} the function is called from outside}
+\PY{c}{\PYZsh{}}
+\PY{n}{standardCallback} \PY{o}{=} \PY{p}{(} \PY{n}{funcName} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{p}{(} \PY{n}{err}\PY{p}{,} \PY{n}{resp}\PY{p}{,} \PY{n}{body} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{k}{if} \PY{n}{err}
+      \PY{n}{log} \PY{l+s}{\PYZdq{}}\PY{l+s}{ERROR: During function }\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsh{}\PYZob{} funcName \PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZdq{}}
+    \PY{k}{else}
+      \PY{k}{if} \PY{n}{resp}\PY{o}{.}\PY{n}{statusCode} \PY{o+ow}{is} \PY{l+m+mi}{200}
+        \PY{n}{log} \PY{l+s}{\PYZdq{}}\PY{l+s}{Function }\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsh{}\PYZob{} funcName \PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{ ran through without error}\PY{l+s}{\PYZdq{}}
+      \PY{k}{else}
+        \PY{n}{log} \PY{l+s}{\PYZdq{}}\PY{l+s}{ERROR: During function }\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsh{}\PYZob{} funcName \PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{: \PYZsh{}\PYZob{} body.error.message \PYZcb{}}\PY{l+s}{\PYZdq{}}
+
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{c}{\PYZsh{} Call the ProBinder service with the given parameters.}
+
+\PY{c}{\PYZsh{}  \PYZhy{} \PYZob{}Object\PYZcb{} args the required function arguments object}
+\PY{c}{\PYZsh{}  \PYZhy{} \PYZob{}Object\PYZcb{} [args.data] the data to be posted}
+\PY{c}{\PYZsh{}  \PYZhy{} \PYZob{}String\PYZcb{} args.service the required service identifier to be appended to the url}
+\PY{c}{\PYZsh{}  \PYZhy{} \PYZob{}String\PYZcb{} args.method the required method identifier to be appended to the url}
+\PY{c}{\PYZsh{}  \PYZhy{} \PYZob{}function\PYZcb{} [args.callback] the function to receive the request answer}
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{n}{callService} \PY{o}{=} \PY{p}{(} \PY{n}{args} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{k}{if} \PY{o+ow}{not} \PY{n}{args}\PY{o}{.}\PY{n}{service} \PY{o+ow}{or} \PY{o+ow}{not} \PY{n}{args}\PY{o}{.}\PY{n}{method}
+    \PY{n}{log} \PY{l+s}{\PYZsq{}}\PY{l+s}{ERROR in call function: Missing arguments!}\PY{l+s}{\PYZsq{}}
+  \PY{k}{else}
+    \PY{k}{if} \PY{o+ow}{not} \PY{n}{args}\PY{o}{.}\PY{n}{callback}
+      \PY{n}{args}\PY{o}{.}\PY{n}{callback} \PY{o}{=} \PY{n}{standardCallback} \PY{l+s}{\PYZsq{}}\PY{l+s}{call}\PY{l+s}{\PYZsq{}}
+    \PY{n}{url} \PY{o}{=} \PY{n}{urlService} \PY{o}{+} \PY{n}{args}\PY{o}{.}\PY{n}{service} \PY{o}{+} \PY{l+s}{\PYZsq{}}\PY{l+s}{/}\PY{l+s}{\PYZsq{}} \PY{o}{+} \PY{n}{args}\PY{o}{.}\PY{n}{method}
+    \PY{n}{needle}\PY{o}{.}\PY{n}{request} \PY{l+s}{\PYZsq{}}\PY{l+s}{post}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{url}\PY{p}{,} \PY{n}{args}\PY{o}{.}\PY{n}{data}\PY{p}{,} \PY{n}{credentials}\PY{p}{,} \PY{n}{args}\PY{o}{.}\PY{n}{callback}
+
+
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{c}{\PYZsh{} Does everything to post something in a binder}
+
+\PY{c}{\PYZsh{}  \PYZhy{} \PYZob{}String\PYZcb{} companyId the comany associated to the binder}
+\PY{c}{\PYZsh{}  \PYZhy{} \PYZob{}String\PYZcb{} contextId the binder id}
+\PY{c}{\PYZsh{}  \PYZhy{} \PYZob{}String\PYZcb{} content the content to be posted}
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{n}{exports}\PY{o}{.}\PY{n}{newContent} \PY{o}{=} \PY{p}{(} \PY{n}{companyId}\PY{p}{,} \PY{n}{contextId}\PY{p}{,} \PY{n}{content} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{k}{if} \PY{n}{arguments}\PY{p}{[} \PY{l+m+mi}{4} \PY{p}{]}
+    \PY{n}{callback} \PY{o}{=} \PY{n}{arguments}\PY{p}{[} \PY{l+m+mi}{4} \PY{p}{]}
+  \PY{k}{else}
+    \PY{n}{callback} \PY{o}{=} \PY{n}{standardCallback} \PY{l+s}{\PYZsq{}}\PY{l+s}{newContent}\PY{l+s}{\PYZsq{}}
+  \PY{n}{callService}
+    \PY{n}{service}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{27}\PY{l+s}{\PYZsq{}}
+    \PY{n}{method}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{save}\PY{l+s}{\PYZsq{}}
+    \PY{n}{data}\PY{p}{:}
+      \PY{n}{companyId}\PY{p}{:} \PY{n}{companyId}
+      \PY{n}{context}\PY{p}{:} \PY{n}{contextId}
+      \PY{n}{text}\PY{p}{:} \PY{n}{content}
+    \PY{n}{callback}\PY{p}{:} \PY{n}{callback}
+
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{c}{\PYZsh{} Does everything to post a file info in a binder tab}
+
+\PY{c}{\PYZsh{}  \PYZhy{} \PYZob{}String\PYZcb{} fromService the content service which grabs the content}
+\PY{c}{\PYZsh{}  \PYZhy{} \PYZob{}String\PYZcb{} fromId the content id from which the information is grabbed}
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{n}{exports}\PY{o}{.}\PY{n}{makeFileEntry} \PY{o}{=} \PY{p}{(} \PY{n}{fromService}\PY{p}{,} \PY{n}{fromId}\PY{p}{,} \PY{n}{toCompany}\PY{p}{,} \PY{n}{toContext} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{n}{getContent}
+    \PY{n}{serviceid}\PY{p}{:} \PY{n}{fromService}
+    \PY{n}{contentid}\PY{p}{:} \PY{n}{fromId}
+    \PY{n}{callback}\PY{p}{:} \PY{p}{(} \PY{n}{err}\PY{p}{,} \PY{n}{resp}\PY{p}{,} \PY{n}{body} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+      \PY{n}{content} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{New file (\PYZsh{}\PYZob{} body.title \PYZcb{}) in tab }\PY{l+s+se}{\PYZbs{}\PYZdq{}}\PY{l+s}{\PYZsh{}\PYZob{} body.context[0].name \PYZcb{}}\PY{l+s+se}{\PYZbs{}\PYZdq{}}\PY{l+s}{,}
+          \PY{n}{find} \PY{n}{it} \PY{n}{here}\PY{err}{!}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZdq{}}
+      \PY{n}{exports}\PY{o}{.}\PY{n}{newContent} \PY{n}{toCompanyId}\PY{p}{,} \PY{n}{toContextId}\PY{p}{,} \PY{n}{content}\PY{p}{,} \PY{n}{standardCallback} \PY{l+s}{\PYZsq{}}\PY{l+s}{makeFileEntry}\PY{l+s}{\PYZsq{}}
+
+
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{c}{\PYZsh{} Calls the content get service with the content id and the service id provided. }
+
+\PY{c}{\PYZsh{}  \PYZhy{} \PYZob{}Object\PYZcb{} args the object containing the service id and the content id,}
+\PY{c}{\PYZsh{}    success and error callback methods}
+\PY{c}{\PYZsh{}  \PYZhy{} \PYZob{}String\PYZcb{} args.serviceid the service id that is able to process this content}
+\PY{c}{\PYZsh{}  \PYZhy{} \PYZob{}String\PYZcb{} args.contentid the content id}
+\PY{c}{\PYZsh{}  \PYZhy{} \PYZob{}function\PYZcb{} [args.callback] receives the needle answer from the \PYZdq{}call\PYZdq{} function}
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{n}{getContent} \PY{o}{=} \PY{p}{(} \PY{n}{args} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{k}{if} \PY{o+ow}{not} \PY{n}{args}\PY{o}{.}\PY{n}{callback}
+    \PY{n}{args}\PY{o}{.}\PY{n}{callback} \PY{o}{=} \PY{n}{standardCallback} \PY{l+s}{\PYZsq{}}\PY{l+s}{getContent}\PY{l+s}{\PYZsq{}}
+  \PY{n}{callService}
+    \PY{n}{service}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{2}\PY{l+s}{\PYZsq{}}
+    \PY{n}{method}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{get}\PY{l+s}{\PYZsq{}}
+    \PY{n}{data}\PY{p}{:} 
+      \PY{n+nb}{id}\PY{p}{:} \PY{n}{args}\PY{o}{.}\PY{n}{contentid}
+      \PY{n}{service}\PY{p}{:} \PY{n}{args}\PY{o}{.}\PY{n}{serviceid}
+    \PY{n}{callback}\PY{p}{:} \PY{n}{args}\PY{o}{.}\PY{n}{callback}
+
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{c}{\PYZsh{} Sets the content as read.}
+
+\PY{c}{\PYZsh{}  \PYZhy{} \PYZob{}Object\PYZcb{} id the content id to be set to read.}
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{n}{exports}\PY{o}{.}\PY{n}{setRead} \PY{o}{=} \PY{p}{(} \PY{n+nb}{id} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{n}{callService}
+    \PY{n}{service}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{2}\PY{l+s}{\PYZsq{}}
+    \PY{n}{method}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{setread}\PY{l+s}{\PYZsq{}}
+    \PY{n}{data}\PY{p}{:}
+      \PY{n+nb}{id}\PY{p}{:} \PY{n+nb}{id}
+    \PY{n}{callback}\PY{p}{:} \PY{n}{standardCallback} \PY{l+s}{\PYZsq{}}\PY{l+s}{setRead}\PY{l+s}{\PYZsq{}}
+
+\PY{n}{getWikiTitle} \PY{o}{=} \PY{p}{(} \PY{n}{title}\PY{p}{,} \PY{n}{cb} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{n}{titleUrl} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{http://en.wikipedia.org/w/api.php?format=json\PYZam{}action=query\PYZam{}prop=extracts\PYZam{}exintro\PYZam{}exchars=200\PYZam{}explaintext\PYZam{}titles=}\PY{l+s}{\PYZsq{}}
+  \PY{n}{needle}\PY{o}{.}\PY{n}{get} \PY{n}{titleUrl} \PY{o}{+} \PY{n}{encodeURIComponent}\PY{p}{(} \PY{n}{title} \PY{p}{)}\PY{p}{,} \PY{p}{(} \PY{n}{err}\PY{p}{,} \PY{n}{resp}\PY{p}{,} \PY{n}{obj} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{k}{if} \PY{n}{err} \PY{o+ow}{or} \PY{n}{resp}\PY{o}{.}\PY{n}{statusCode} \PY{n}{isnt} \PY{l+m+mi}{200} \PY{o+ow}{or} \PY{o+ow}{not} \PY{n}{obj}\PY{o}{.}\PY{n}{query} \PY{o+ow}{or} \PY{o+ow}{not} \PY{n}{obj}\PY{o}{.}\PY{n}{query}\PY{o}{.}\PY{n}{pages} \PY{o+ow}{or} \PY{n}{obj}\PY{o}{.}\PY{n}{query}\PY{o}{.}\PY{n}{pages}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZhy{}1}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+      \PY{n}{cb} \PY{n}{new} \PY{n}{Error} \PY{l+s}{\PYZsq{}}\PY{l+s}{Unable to fetch data}\PY{l+s}{\PYZsq{}}
+    \PY{k}{else}
+      \PY{k}{for} \PY{n+nb}{id}\PY{p}{,} \PY{n}{page} \PY{n}{of} \PY{n}{obj}\PY{o}{.}\PY{n}{query}\PY{o}{.}\PY{n}{pages}
+        \PY{n}{cb} \PY{n}{null}\PY{p}{,} \PY{n}{page}\PY{o}{.}\PY{n}{extract}
+
+\PY{n}{getWikiSearch} \PY{o}{=} \PY{p}{(} \PY{n}{text}\PY{p}{,} \PY{n}{cb} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{n}{searchUrl} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{http://en.wikipedia.org/w/api.php?format=json\PYZam{}action=query\PYZam{}list=search\PYZam{}srwhat=text\PYZam{}srlimit=3\PYZam{}srsearch=}\PY{l+s}{\PYZsq{}}
+  \PY{n}{needle}\PY{o}{.}\PY{n}{get} \PY{n}{searchUrl} \PY{o}{+} \PY{n}{encodeURIComponent}\PY{p}{(} \PY{n}{text} \PY{p}{)}\PY{p}{,} \PY{p}{(} \PY{n}{err}\PY{p}{,} \PY{n}{resp}\PY{p}{,} \PY{n}{obj} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{k}{if} \PY{n}{err} \PY{o+ow}{or} \PY{n}{resp}\PY{o}{.}\PY{n}{statusCode} \PY{n}{isnt} \PY{l+m+mi}{200} \PY{o+ow}{or} \PY{o+ow}{not} \PY{n}{obj}\PY{o}{.}\PY{n}{query} \PY{o+ow}{or} \PY{o+ow}{not} \PY{n}{obj}\PY{o}{.}\PY{n}{query}\PY{o}{.}\PY{n}{search} \PY{o+ow}{or} \PY{n}{obj}\PY{o}{.}\PY{n}{query}\PY{o}{.}\PY{n}{search}\PY{o}{.}\PY{n}{length} \PY{o+ow}{is} \PY{l+m+mi}{0}
+      \PY{n}{cb} \PY{n}{new} \PY{n}{Error} \PY{l+s}{\PYZsq{}}\PY{l+s}{Nothing found}\PY{l+s}{\PYZsq{}}
+    \PY{k}{else}
+      \PY{k}{for} \PY{n}{result} \PY{o+ow}{in} \PY{n}{obj}\PY{o}{.}\PY{n}{query}\PY{o}{.}\PY{n}{search}
+        \PY{n}{cb} \PY{n}{null}\PY{p}{,} \PY{n}{result}\PY{o}{.}\PY{n}{snippet}\PY{o}{.}\PY{n}{replace} \PY{o}{/}\PY{o}{\PYZlt{}}\PY{p}{(}\PY{err}{?}\PY{p}{:}\PY{o}{.}\PY{o}{|}\PYZbs{}\PY{n}{n}\PY{p}{)}\PY{o}{*}\PY{err}{?}\PY{o}{\PYZgt{}}\PY{o}{/}\PY{n}{gm}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsq{}}
+
+\PY{n}{exports}\PY{o}{.}\PY{n}{annotateTagEntries} \PY{o}{=} \PY{p}{(} \PY{n}{entryId}\PY{p}{,} \PY{n}{tags} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{n}{arrTags} \PY{o}{=} \PY{n}{tags}\PY{o}{.}\PY{n}{split}\PY{p}{(} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZsh{}}\PY{l+s}{\PYZdq{}} \PY{p}{)}\PY{o}{.}\PY{n}{slice} \PY{l+m+mi}{1}
+  \PY{k}{for} \PY{n}{tag} \PY{o+ow}{in} \PY{n}{arrTags}
+    \PY{n}{tag} \PY{o}{=} \PY{n}{tag}\PY{o}{.}\PY{n}{trim}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{replace} \PY{o}{/}\PYZbs{}\PYZbs{}\PY{l+s}{\PYZdq{}}\PY{l+s}{/g, }\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsq{}}
+    \PY{n}{tag} \PY{o}{=} \PY{n}{tag}\PY{o}{.}\PY{n}{trim}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{replace} \PY{o}{/}\PYZbs{}\PYZbs{}\PY{o}{/}\PY{n}{g}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsq{}}
+    \PY{n}{fProcessTitleAnswer} \PY{o}{=} \PY{p}{(} \PY{n}{loopTag} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}} 
+      \PY{p}{(} \PY{n}{err}\PY{p}{,} \PY{n}{result} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+        \PY{k}{if} \PY{o+ow}{not} \PY{n}{err} \PY{o+ow}{and} \PY{n}{result}
+          \PY{n}{exports}\PY{o}{.}\PY{n}{commentEntry} \PY{n}{entryId}\PY{p}{,} \PY{n}{result}
+        \PY{k}{else}
+          \PY{n}{getWikiSearch} \PY{n}{loopTag}\PY{p}{,} \PY{p}{(} \PY{n}{err}\PY{p}{,} \PY{n}{result} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+            \PY{n}{exports}\PY{o}{.}\PY{n}{commentEntry} \PY{n}{entryId}\PY{p}{,} \PY{n}{result}
+
+    \PY{n}{getWikiTitle} \PY{n}{tag}\PY{p}{,} \PY{n}{fProcessTitleAnswer} \PY{n}{tag}
+
+\PY{n}{exports}\PY{o}{.}\PY{n}{commentEntry} \PY{o}{=} \PY{p}{(} \PY{n}{entryId}\PY{p}{,} \PY{n}{text} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{n}{log} \PY{l+s}{\PYZdq{}}\PY{l+s}{Adding Commment }\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsh{}\PYZob{} text \PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{ to \PYZsh{}\PYZsh{}\PYZob{} entryId \PYZcb{}}\PY{l+s}{\PYZdq{}}
+  \PY{n}{callService}
+    \PY{n}{service}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{content}\PY{l+s}{\PYZsq{}}
+    \PY{n}{method}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{addcomment}\PY{l+s}{\PYZsq{}}
+    \PY{n}{data}\PY{p}{:}
+      \PY{n}{contentId}\PY{p}{:} \PY{n}{entryId}
+      \PY{n}{text}\PY{p}{:} \PY{n}{text}
+\end{Verbatim}
+
+
+
+\clearpage
+\section{ProBinder WebAPI Testing Trigger\label{apipoller}}
+\begin{Verbatim}[fontsize=\scriptsize,commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PY{c}{\PYZsh{}\PYZsh{}\PYZsh{}}
+
+\PY{n}{Tests} \PY{n}{the} \PY{n}{ProBinder} \PY{n}{API}\PY{o}{.} \PY{n}{Requires} \PY{n}{user} \PY{n}{credentials}\PY{p}{:}
+
+\PY{o}{\PYZhy{}} \PY{n}{username}
+\PY{o}{\PYZhy{}} \PY{n}{password}
+
+\PY{c}{\PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{n}{url} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{https://probinder.com/service/}\PY{l+s}{\PYZdq{}}
+\PY{n}{arrFailed} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+\PY{n}{testLog} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZdq{}}
+\PY{n}{testTimeout} \PY{o}{=} \PY{l+m+mi}{15000}
+\PY{n}{options} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+
+\PY{n}{exports}\PY{o}{.}\PY{n}{testProBinder} \PY{o}{=} \PY{p}{(} \PY{n}{requestTimeoutMilliSeconds} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{n}{arrFailed} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+  \PY{n}{testLog} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZdq{}}
+  \PY{n}{testTimeout} \PY{o}{=} \PY{n}{parseInt}\PY{p}{(} \PY{n}{requestTimeoutMilliSeconds} \PY{p}{)} \PY{o}{|}\PY{o}{|} \PY{n}{testTimeout}
+  \PY{n}{options} \PY{o}{=}
+    \PY{n}{username}\PY{p}{:} \PY{n}{params}\PY{o}{.}\PY{n}{username}
+    \PY{n}{password}\PY{p}{:} \PY{n}{params}\PY{o}{.}\PY{n}{password}
+    \PY{n}{timeout}\PY{p}{:} \PY{n}{testTimeout}
+
+  \PY{n}{oTestFuncs} \PY{o}{=}
+    \PY{n}{testLogin}\PY{p}{:} \PY{n}{testLogin}
+    \PY{n}{testNotLoggedInUnreadContentCount}\PY{p}{:} \PY{n}{testNotLoggedInUnreadContentCount}
+    \PY{n}{testLoggedInUnreadContentCount}\PY{p}{:} \PY{n}{testLoggedInUnreadContentCount}
+
+  \PY{n}{semaphore} \PY{o}{=} \PY{l+m+mi}{0}
+  \PY{k}{for} \PY{n}{name}\PY{p}{,} \PY{n}{fTest} \PY{n}{of} \PY{n}{oTestFuncs}
+    \PY{n}{semaphore}\PY{o}{+}\PY{o}{+}
+    \PY{n}{log} \PY{l+s}{\PYZdq{}}\PY{l+s}{Testing function }\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsh{}\PYZob{} name \PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZdq{}}
+    \PY{n}{fTest} \PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+      \PY{k}{if} \PY{o}{\PYZhy{}}\PY{o}{\PYZhy{}}\PY{n}{semaphore} \PY{o+ow}{is} \PY{l+m+mi}{0}
+        \PY{n}{testSuccess} \PY{o}{=} \PY{n}{arrFailed}\PY{o}{.}\PY{n}{length} \PY{o+ow}{is} \PY{l+m+mi}{0}
+        \PY{k}{if} \PY{n}{testSuccess}
+          \PY{n}{summary} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{All tests passed!}\PY{l+s}{\PYZdq{}}
+        \PY{k}{else}
+          \PY{n}{summary} \PY{o}{=} \PY{n}{arrFailed}\PY{o}{.}\PY{n}{length} \PY{o}{+} \PY{l+s}{\PYZdq{}}\PY{l+s}{ test(s) failed: }\PY{l+s}{\PYZdq{}} \PY{o}{+} \PY{n}{arrFailed}\PY{o}{.}\PY{n}{join} \PY{l+s}{\PYZdq{}}\PY{l+s}{, }\PY{l+s}{\PYZdq{}}
+        \PY{n}{pushEvent}
+          \PY{n}{success}\PY{p}{:} \PY{n}{testSuccess} 
+          \PY{n}{log}\PY{p}{:} \PY{n}{testLog}
+          \PY{n}{summary}\PY{p}{:} \PY{n}{summary}
+        \PY{n}{log} \PY{n}{summary} 
+
+\PY{n}{testLoggedInUnreadContentCount} \PY{o}{=} \PY{p}{(} \PY{n}{cb} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{n}{turl} \PY{o}{=} \PY{n}{url} \PY{o}{+} \PY{l+s}{\PYZdq{}}\PY{l+s}{user/unreadcontentcount}\PY{l+s}{\PYZdq{}}
+  \PY{n}{needle}\PY{o}{.}\PY{n}{get} \PY{n}{turl}\PY{p}{,} \PY{n}{options}\PY{p}{,} \PY{n}{responseHandler} \PY{n}{cb}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{testLoggedInUnreadContentCount}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{200}
+
+\PY{n}{testNotLoggedInUnreadContentCount} \PY{o}{=} \PY{p}{(} \PY{n}{cb} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{n}{turl} \PY{o}{=} \PY{n}{url} \PY{o}{+} \PY{l+s}{\PYZdq{}}\PY{l+s}{user/unreadcontentcount}\PY{l+s}{\PYZdq{}}
+  \PY{n}{needle}\PY{o}{.}\PY{n}{get} \PY{n}{turl}\PY{p}{,} \PY{n}{timeout}\PY{p}{:} \PY{n}{testTimeout}\PY{p}{,} \PY{n}{responseHandler} \PY{n}{cb}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{testNotLoggedInUnreadContentCount}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{400}
+
+\PY{n}{testLogin} \PY{o}{=} \PY{p}{(} \PY{n}{cb} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{n}{turl} \PY{o}{=} \PY{n}{url} \PY{o}{+} \PY{l+s}{\PYZdq{}}\PY{l+s}{auth/login/email/\PYZsh{}\PYZob{} params.username \PYZcb{}/password/\PYZsh{}\PYZob{} params.password \PYZcb{}}\PY{l+s}{\PYZdq{}}
+  \PY{n}{needle}\PY{o}{.}\PY{n}{get} \PY{n}{turl}\PY{p}{,} \PY{n}{timeout}\PY{p}{:} \PY{n}{testTimeout}\PY{p}{,} \PY{n}{responseHandler} \PY{n}{cb}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{testLogin}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{200}
+
+\PY{n}{responseHandler} \PY{o}{=} \PY{p}{(} \PY{n}{cb}\PY{p}{,} \PY{n}{testName}\PY{p}{,} \PY{n}{expectedCode} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{p}{(} \PY{n}{err}\PY{p}{,} \PY{n}{resp}\PY{p}{,} \PY{n}{body} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{k}{if} \PY{n}{err}
+      \PY{n}{testLog} \PY{o}{+}\PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZlt{}b\PYZgt{} \PYZhy{} FAIL | \PYZsh{}\PYZob{} testName \PYZcb{}: Timeout! Server didn}\PY{l+s}{\PYZsq{}}\PY{l+s}{t answer within \PYZsh{}\PYZob{} testTimeout / 1000 \PYZcb{} seconds\PYZlt{}/b\PYZgt{}\PYZlt{}br/\PYZgt{}}\PY{l+s}{\PYZdq{}}
+      \PY{n}{arrFailed}\PY{o}{.}\PY{n}{push} \PY{n}{testName}
+    \PY{k}{else} \PY{k}{if} \PY{n}{resp}\PY{o}{.}\PY{n}{statusCode} \PY{n}{isnt} \PY{n}{expectedCode}
+      \PY{n}{testLog} \PY{o}{+}\PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZlt{}b\PYZgt{} \PYZhy{} FAIL | \PYZsh{}\PYZob{} testName \PYZcb{}: Response }
+        \PY{c}{\PYZsh{}\PYZob{} resp.statusCode \PYZcb{}(expected: \PYZsh{}\PYZob{} expectedCode \PYZcb{}), \PYZsh{}\PYZob{} body.error.message \PYZcb{}\PYZlt{}/b\PYZgt{}\PYZlt{}br/\PYZgt{}\PYZdq{}}
+      \PY{n}{arrFailed}\PY{o}{.}\PY{n}{push} \PY{n}{testName}
+    \PY{k}{else}
+      \PY{n}{testLog} \PY{o}{+}\PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{ + SUCCESS | \PYZsh{}\PYZob{} testName \PYZcb{}\PYZlt{}br/\PYZgt{}}\PY{l+s}{\PYZdq{}}
+    \PY{n}{cb}\PY{err}{?}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}

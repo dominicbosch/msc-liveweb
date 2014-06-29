@@ -1,222 +1,223 @@
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{i}
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{i}
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{i}
-\glossaryentry{EDA?\glossaryentryfield{eda}{\glsnamefont{EDA}}{Event-Driven Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{i}
-\glossaryentry{EDA?\glossaryentryfield{eda}{\glsnamefont{EDA}}{Event-Driven Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{i}
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{iii}
-\glossaryentry{CMS?\glossaryentryfield{cms}{\glsnamefont{CMS}}{Content Management System}{\relax }|setentrycounter[]{page}\glsnumberformat}{iv}
-\glossaryentry{JSON?\glossaryentryfield{json}{\glsnamefont{JSON}}{JavaScript Object Notation}{\relax }|setentrycounter[]{page}\glsnumberformat}{vi}
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{3}
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{3}
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{3}
-\glossaryentry{PaaS?\glossaryentryfield{paas}{\glsnamefont{PaaS}}{Platform as a service}{\relax }|setentrycounter[]{page}\glsnumberformat}{3}
-\glossaryentry{PaaS?\glossaryentryfield{paas}{\glsnamefont{PaaS}}{Platform as a service}{\relax }|setentrycounter[]{page}\glsnumberformat}{3}
-\glossaryentry{SaaS?\glossaryentryfield{saas}{\glsnamefont{SaaS}}{Software as a service}{\relax }|setentrycounter[]{page}\glsnumberformat}{3}
-\glossaryentry{SaaS?\glossaryentryfield{saas}{\glsnamefont{SaaS}}{Software as a service}{\relax }|setentrycounter[]{page}\glsnumberformat}{3}
-\glossaryentry{IaaS?\glossaryentryfield{iaas}{\glsnamefont{IaaS}}{Infrastructure as a service}{\relax }|setentrycounter[]{page}\glsnumberformat}{3}
-\glossaryentry{IaaS?\glossaryentryfield{iaas}{\glsnamefont{IaaS}}{Infrastructure as a service}{\relax }|setentrycounter[]{page}\glsnumberformat}{3}
-\glossaryentry{SOAP?\glossaryentryfield{soap}{\glsnamefont{SOAP}}{Simple Object Access Protocol}{\relax }|setentrycounter[]{page}\glsnumberformat}{3}
-\glossaryentry{SOAP?\glossaryentryfield{soap}{\glsnamefont{SOAP}}{Simple Object Access Protocol}{\relax }|setentrycounter[]{page}\glsnumberformat}{3}
-\glossaryentry{REST?\glossaryentryfield{rest}{\glsnamefont{REST}}{Representational State Transfer}{\relax }|setentrycounter[]{page}\glsnumberformat}{3}
-\glossaryentry{REST?\glossaryentryfield{rest}{\glsnamefont{REST}}{Representational State Transfer}{\relax }|setentrycounter[]{page}\glsnumberformat}{3}
-\glossaryentry{SOAP?\glossaryentryfield{soap}{\glsnamefont{SOAP}}{Simple Object Access Protocol}{\relax }|setentrycounter[]{page}\glsnumberformat}{3}
-\glossaryentry{SOA?\glossaryentryfield{soa}{\glsnamefont{SOA}}{Service-Oriented Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{3}
-\glossaryentry{SOA?\glossaryentryfield{soa}{\glsnamefont{SOA}}{Service-Oriented Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{3}
-\glossaryentry{SOA?\glossaryentryfield{soa}{\glsnamefont{SOA}}{Service-Oriented Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{3}
-\glossaryentry{SOA?\glossaryentryfield{soa}{\glsnamefont{SOA}}{Service-Oriented Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
-\glossaryentry{SOA?\glossaryentryfield{soa}{\glsnamefont{SOA}}{Service-Oriented Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
-\glossaryentry{RPC?\glossaryentryfield{rpc}{\glsnamefont{RPC}}{Remote Procedure Call}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
-\glossaryentry{RPC?\glossaryentryfield{rpc}{\glsnamefont{RPC}}{Remote Procedure Call}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
-\glossaryentry{RPC?\glossaryentryfield{rpc}{\glsnamefont{RPC}}{Remote Procedure Call}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
-\glossaryentry{RPC?\glossaryentryfield{rpc}{\glsnamefont{RPC}}{Remote Procedure Call}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
-\glossaryentry{RPC?\glossaryentryfield{rpc}{\glsnamefont{RPC}}{Remote Procedure Call}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
-\glossaryentry{RPC?\glossaryentryfield{rpc}{\glsnamefont{RPC}}{Remote Procedure Call}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
-\glossaryentry{RPC?\glossaryentryfield{rpc}{\glsnamefont{RPC}}{Remote Procedure Call}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
-\glossaryentry{XML?\glossaryentryfield{xml}{\glsnamefont{XML}}{Extensible Markup Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
-\glossaryentry{XML?\glossaryentryfield{xml}{\glsnamefont{XML}}{Extensible Markup Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
-\glossaryentry{XML-RPC?\glossaryentryfield{xmlrpc}{\glsnamefont{XML-RPC}}{\textrm {XML} - Remote Procedure Call}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
-\glossaryentry{XML-RPC?\glossaryentryfield{xmlrpc}{\glsnamefont{XML-RPC}}{\textrm {XML} - Remote Procedure Call}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
-\glossaryentry{XML-RPC?\glossaryentryfield{xmlrpc}{\glsnamefont{XML-RPC}}{\textrm {XML} - Remote Procedure Call}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
-\glossaryentry{SOAP?\glossaryentryfield{soap}{\glsnamefont{SOAP}}{Simple Object Access Protocol}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
-\glossaryentry{SOAP?\glossaryentryfield{soap}{\glsnamefont{SOAP}}{Simple Object Access Protocol}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
-\glossaryentry{SOAP?\glossaryentryfield{soap}{\glsnamefont{SOAP}}{Simple Object Access Protocol}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
-\glossaryentry{WSDL?\glossaryentryfield{wsdl}{\glsnamefont{WSDL}}{Web Service Description Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
-\glossaryentry{WSDL?\glossaryentryfield{wsdl}{\glsnamefont{WSDL}}{Web Service Description Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
-\glossaryentry{SOAP?\glossaryentryfield{soap}{\glsnamefont{SOAP}}{Simple Object Access Protocol}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
-\glossaryentry{SOAP?\glossaryentryfield{soap}{\glsnamefont{SOAP}}{Simple Object Access Protocol}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
-\glossaryentry{WSDL?\glossaryentryfield{wsdl}{\glsnamefont{WSDL}}{Web Service Description Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
-\glossaryentry{WSDL?\glossaryentryfield{wsdl}{\glsnamefont{WSDL}}{Web Service Description Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
-\glossaryentry{SOAP?\glossaryentryfield{soap}{\glsnamefont{SOAP}}{Simple Object Access Protocol}{\relax }|setentrycounter[]{page}\glsnumberformat}{4}
-\glossaryentry{CORBA?\glossaryentryfield{corba}{\glsnamefont{CORBA}}{Common Object Request Broker Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
-\glossaryentry{CORBA?\glossaryentryfield{corba}{\glsnamefont{CORBA}}{Common Object Request Broker Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
-\glossaryentry{CORBA?\glossaryentryfield{corba}{\glsnamefont{CORBA}}{Common Object Request Broker Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
-\glossaryentry{ORB?\glossaryentryfield{orb}{\glsnamefont{ORB}}{Object Request Broker}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
-\glossaryentry{ORB?\glossaryentryfield{orb}{\glsnamefont{ORB}}{Object Request Broker}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
-\glossaryentry{ORB?\glossaryentryfield{orb}{\glsnamefont{ORB}}{Object Request Broker}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
-\glossaryentry{SOAP?\glossaryentryfield{soap}{\glsnamefont{SOAP}}{Simple Object Access Protocol}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
-\glossaryentry{WSDL?\glossaryentryfield{wsdl}{\glsnamefont{WSDL}}{Web Service Description Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
-\glossaryentry{CORBA?\glossaryentryfield{corba}{\glsnamefont{CORBA}}{Common Object Request Broker Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
-\glossaryentry{IDL?\glossaryentryfield{idl}{\glsnamefont{IDL}}{Interface Definition Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
-\glossaryentry{IDL?\glossaryentryfield{idl}{\glsnamefont{IDL}}{Interface Definition Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
-\glossaryentry{ORB?\glossaryentryfield{orb}{\glsnamefont{ORB}}{Object Request Broker}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
-\glossaryentry{ORB?\glossaryentryfield{orb}{\glsnamefont{ORB}}{Object Request Broker}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
-\glossaryentry{RPC?\glossaryentryfield{rpc}{\glsnamefont{RPC}}{Remote Procedure Call}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
-\glossaryentry{CORBA?\glossaryentryfield{corba}{\glsnamefont{CORBA}}{Common Object Request Broker Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
-\glossaryentry{IIOP?\glossaryentryfield{iiop}{\glsnamefont{IIOP}}{Internet Inter-\textrm {ORB} Protocol}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
-\glossaryentry{IIOP?\glossaryentryfield{iiop}{\glsnamefont{IIOP}}{Internet Inter-\textrm {ORB} Protocol}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
-\glossaryentry{ORB?\glossaryentryfield{orb}{\glsnamefont{ORB}}{Object Request Broker}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
-\glossaryentry{ORB?\glossaryentryfield{orb}{\glsnamefont{ORB}}{Object Request Broker}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
-\glossaryentry{REST?\glossaryentryfield{rest}{\glsnamefont{REST}}{Representational State Transfer}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
-\glossaryentry{REST?\glossaryentryfield{rest}{\glsnamefont{REST}}{Representational State Transfer}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
-\glossaryentry{REST?\glossaryentryfield{rest}{\glsnamefont{REST}}{Representational State Transfer}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
-\glossaryentry{REST?\glossaryentryfield{rest}{\glsnamefont{REST}}{Representational State Transfer}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
-\glossaryentry{REST?\glossaryentryfield{rest}{\glsnamefont{REST}}{Representational State Transfer}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
-\glossaryentry{REST?\glossaryentryfield{rest}{\glsnamefont{REST}}{Representational State Transfer}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
-\glossaryentry{URI?\glossaryentryfield{uri}{\glsnamefont{URI}}{Uniform Resource Identifiers}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
-\glossaryentry{URI?\glossaryentryfield{uri}{\glsnamefont{URI}}{Uniform Resource Identifiers}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
-\glossaryentry{REST?\glossaryentryfield{rest}{\glsnamefont{REST}}{Representational State Transfer}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
-\glossaryentry{REST?\glossaryentryfield{rest}{\glsnamefont{REST}}{Representational State Transfer}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
-\glossaryentry{HTTP?\glossaryentryfield{http}{\glsnamefont{HTTP}}{Hypertext Transfer Protocol}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
-\glossaryentry{HTTP?\glossaryentryfield{http}{\glsnamefont{HTTP}}{Hypertext Transfer Protocol}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
-\glossaryentry{REST?\glossaryentryfield{rest}{\glsnamefont{REST}}{Representational State Transfer}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
-\glossaryentry{REST?\glossaryentryfield{rest}{\glsnamefont{REST}}{Representational State Transfer}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
-\glossaryentry{REST?\glossaryentryfield{rest}{\glsnamefont{REST}}{Representational State Transfer}{\relax }|setentrycounter[]{page}\glsnumberformat}{5}
-\glossaryentry{URI?\glossaryentryfield{uri}{\glsnamefont{URI}}{Uniform Resource Identifiers}{\relax }|setentrycounter[]{page}\glsnumberformat}{7}
-\glossaryentry{URI?\glossaryentryfield{uri}{\glsnamefont{URI}}{Uniform Resource Identifiers}{\relax }|setentrycounter[]{page}\glsnumberformat}{7}
-\glossaryentry{JSON?\glossaryentryfield{json}{\glsnamefont{JSON}}{JavaScript Object Notation}{\relax }|setentrycounter[]{page}\glsnumberformat}{7}
-\glossaryentry{JSON?\glossaryentryfield{json}{\glsnamefont{JSON}}{JavaScript Object Notation}{\relax }|setentrycounter[]{page}\glsnumberformat}{7}
-\glossaryentry{XML?\glossaryentryfield{xml}{\glsnamefont{XML}}{Extensible Markup Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{7}
-\glossaryentry{REST?\glossaryentryfield{rest}{\glsnamefont{REST}}{Representational State Transfer}{\relax }|setentrycounter[]{page}\glsnumberformat}{7}
-\glossaryentry{JSON?\glossaryentryfield{json}{\glsnamefont{JSON}}{JavaScript Object Notation}{\relax }|setentrycounter[]{page}\glsnumberformat}{7}
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{7}
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{7}
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{7}
-\glossaryentry{EDA?\glossaryentryfield{eda}{\glsnamefont{EDA}}{Event-Driven Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{7}
-\glossaryentry{EDA?\glossaryentryfield{eda}{\glsnamefont{EDA}}{Event-Driven Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{7}
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{8}
-\glossaryentry{RDF?\glossaryentryfield{rdf}{\glsnamefont{RDF}}{Resource Description Framework}{\relax }|setentrycounter[]{page}\glsnumberformat}{8}
-\glossaryentry{RDF?\glossaryentryfield{rdf}{\glsnamefont{RDF}}{Resource Description Framework}{\relax }|setentrycounter[]{page}\glsnumberformat}{8}
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{8}
-\glossaryentry{RDF?\glossaryentryfield{rdf}{\glsnamefont{RDF}}{Resource Description Framework}{\relax }|setentrycounter[]{page}\glsnumberformat}{8}
-\glossaryentry{RDFTL?\glossaryentryfield{rdftl}{\glsnamefont{RDFTL}}{\textrm {RDF} Triggering Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{8}
-\glossaryentry{RDFTL?\glossaryentryfield{rdftl}{\glsnamefont{RDFTL}}{\textrm {RDF} Triggering Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{8}
-\glossaryentry{RDF?\glossaryentryfield{rdf}{\glsnamefont{RDF}}{Resource Description Framework}{\relax }|setentrycounter[]{page}\glsnumberformat}{8}
-\glossaryentry{RDFTL?\glossaryentryfield{rdftl}{\glsnamefont{RDFTL}}{\textrm {RDF} Triggering Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{8}
-\glossaryentry{RDF?\glossaryentryfield{rdf}{\glsnamefont{RDF}}{Resource Description Framework}{\relax }|setentrycounter[]{page}\glsnumberformat}{8}
-\glossaryentry{RDF?\glossaryentryfield{rdf}{\glsnamefont{RDF}}{Resource Description Framework}{\relax }|setentrycounter[]{page}\glsnumberformat}{8}
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{8}
-\glossaryentry{REWERSE?\glossaryentryfield{rewerse}{\glsnamefont{REWERSE}}{Reasoning on the Web with Rules and Semantics}{\relax }|setentrycounter[]{page}\glsnumberformat}{8}
-\glossaryentry{REWERSE?\glossaryentryfield{rewerse}{\glsnamefont{REWERSE}}{Reasoning on the Web with Rules and Semantics}{\relax }|setentrycounter[]{page}\glsnumberformat}{8}
-\glossaryentry{RDFTL?\glossaryentryfield{rdftl}{\glsnamefont{RDFTL}}{\textrm {RDF} Triggering Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{8}
-\glossaryentry{JSON?\glossaryentryfield{json}{\glsnamefont{JSON}}{JavaScript Object Notation}{\relax }|setentrycounter[]{page}\glsnumberformat}{8}
-\glossaryentry{DOM?\glossaryentryfield{dom}{\glsnamefont{DOM}}{Document Object Model}{\relax }|setentrycounter[]{page}\glsnumberformat}{8}
-\glossaryentry{DOM?\glossaryentryfield{dom}{\glsnamefont{DOM}}{Document Object Model}{\relax }|setentrycounter[]{page}\glsnumberformat}{8}
-\glossaryentry{DOM?\glossaryentryfield{dom}{\glsnamefont{DOM}}{Document Object Model}{\relax }|setentrycounter[]{page}\glsnumberformat}{8}
-\glossaryentry{JSON?\glossaryentryfield{json}{\glsnamefont{JSON}}{JavaScript Object Notation}{\relax }|setentrycounter[]{page}\glsnumberformat}{8}
-\glossaryentry{DOM?\glossaryentryfield{dom}{\glsnamefont{DOM}}{Document Object Model}{\relax }|setentrycounter[]{page}\glsnumberformat}{8}
-\glossaryentry{RuleML?\glossaryentryfield{ruleml}{\glsnamefont{RuleML}}{Rule Markup Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{RuleML?\glossaryentryfield{ruleml}{\glsnamefont{RuleML}}{Rule Markup Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{XML?\glossaryentryfield{xml}{\glsnamefont{XML}}{Extensible Markup Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{RuleML?\glossaryentryfield{ruleml}{\glsnamefont{RuleML}}{Rule Markup Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{RuleML?\glossaryentryfield{ruleml}{\glsnamefont{RuleML}}{Rule Markup Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{CEP?\glossaryentryfield{cep}{\glsnamefont{CEP}}{Complex Event Processing}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{CEP?\glossaryentryfield{cep}{\glsnamefont{CEP}}{Complex Event Processing}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{KR?\glossaryentryfield{kr}{\glsnamefont{KR}}{Knowledge Representation}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{KR?\glossaryentryfield{kr}{\glsnamefont{KR}}{Knowledge Representation}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{RuleML?\glossaryentryfield{ruleml}{\glsnamefont{RuleML}}{Rule Markup Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{XML?\glossaryentryfield{xml}{\glsnamefont{XML}}{Extensible Markup Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{JSON?\glossaryentryfield{json}{\glsnamefont{JSON}}{JavaScript Object Notation}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{JSON?\glossaryentryfield{json}{\glsnamefont{JSON}}{JavaScript Object Notation}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{RuleML?\glossaryentryfield{ruleml}{\glsnamefont{RuleML}}{Rule Markup Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{ESB?\glossaryentryfield{esb}{\glsnamefont{ESB}}{Enterprise Service Bus}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{ESB?\glossaryentryfield{esb}{\glsnamefont{ESB}}{Enterprise Service Bus}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{RuleML?\glossaryentryfield{ruleml}{\glsnamefont{RuleML}}{Rule Markup Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{CORBA?\glossaryentryfield{corba}{\glsnamefont{CORBA}}{Common Object Request Broker Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{KRL?\glossaryentryfield{krl}{\glsnamefont{KRL}}{Kinetic Rule Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{KRL?\glossaryentryfield{krl}{\glsnamefont{KRL}}{Kinetic Rule Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{KRE?\glossaryentryfield{kre}{\glsnamefont{KRE}}{Kinetic Rules Engine}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{KRE?\glossaryentryfield{kre}{\glsnamefont{KRE}}{Kinetic Rules Engine}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{KRE?\glossaryentryfield{kre}{\glsnamefont{KRE}}{Kinetic Rules Engine}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{KRE?\glossaryentryfield{kre}{\glsnamefont{KRE}}{Kinetic Rules Engine}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{KRL?\glossaryentryfield{krl}{\glsnamefont{KRL}}{Kinetic Rule Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{KRE?\glossaryentryfield{kre}{\glsnamefont{KRE}}{Kinetic Rules Engine}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{KRE?\glossaryentryfield{kre}{\glsnamefont{KRE}}{Kinetic Rules Engine}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{KRE?\glossaryentryfield{kre}{\glsnamefont{KRE}}{Kinetic Rules Engine}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{KRL?\glossaryentryfield{krl}{\glsnamefont{KRL}}{Kinetic Rule Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{EDA?\glossaryentryfield{eda}{\glsnamefont{EDA}}{Event-Driven Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{KRE?\glossaryentryfield{kre}{\glsnamefont{KRE}}{Kinetic Rules Engine}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
-\glossaryentry{KRL?\glossaryentryfield{krl}{\glsnamefont{KRL}}{Kinetic Rule Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
-\glossaryentry{ESB?\glossaryentryfield{esb}{\glsnamefont{ESB}}{Enterprise Service Bus}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
-\glossaryentry{EDA?\glossaryentryfield{eda}{\glsnamefont{EDA}}{Event-Driven Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
-\glossaryentry{CEP?\glossaryentryfield{cep}{\glsnamefont{CEP}}{Complex Event Processing}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
-\glossaryentry{CEP?\glossaryentryfield{cep}{\glsnamefont{CEP}}{Complex Event Processing}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
-\glossaryentry{CED?\glossaryentryfield{ced}{\glsnamefont{CED}}{Complex Event Detection}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
-\glossaryentry{CED?\glossaryentryfield{ced}{\glsnamefont{CED}}{Complex Event Detection}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
-\glossaryentry{EDA?\glossaryentryfield{eda}{\glsnamefont{EDA}}{Event-Driven Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
-\glossaryentry{CED?\glossaryentryfield{ced}{\glsnamefont{CED}}{Complex Event Detection}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
-\glossaryentry{CED?\glossaryentryfield{ced}{\glsnamefont{CED}}{Complex Event Detection}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{10}
-\glossaryentry{RDFTL?\glossaryentryfield{rdftl}{\glsnamefont{RDFTL}}{\textrm {RDF} Triggering Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{11}
-\glossaryentry{RDF?\glossaryentryfield{rdf}{\glsnamefont{RDF}}{Resource Description Framework}{\relax }|setentrycounter[]{page}\glsnumberformat}{11}
-\glossaryentry{RDF?\glossaryentryfield{rdf}{\glsnamefont{RDF}}{Resource Description Framework}{\relax }|setentrycounter[]{page}\glsnumberformat}{11}
-\glossaryentry{JSON?\glossaryentryfield{json}{\glsnamefont{JSON}}{JavaScript Object Notation}{\relax }|setentrycounter[]{page}\glsnumberformat}{11}
-\glossaryentry{DOM?\glossaryentryfield{dom}{\glsnamefont{DOM}}{Document Object Model}{\relax }|setentrycounter[]{page}\glsnumberformat}{11}
-\glossaryentry{DOM?\glossaryentryfield{dom}{\glsnamefont{DOM}}{Document Object Model}{\relax }|setentrycounter[]{page}\glsnumberformat}{11}
-\glossaryentry{DOM?\glossaryentryfield{dom}{\glsnamefont{DOM}}{Document Object Model}{\relax }|setentrycounter[]{page}\glsnumberformat}{11}
-\glossaryentry{RuleML?\glossaryentryfield{ruleml}{\glsnamefont{RuleML}}{Rule Markup Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{11}
-\glossaryentry{KRL?\glossaryentryfield{krl}{\glsnamefont{KRL}}{Kinetic Rule Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{11}
-\glossaryentry{KRE?\glossaryentryfield{kre}{\glsnamefont{KRE}}{Kinetic Rules Engine}{\relax }|setentrycounter[]{page}\glsnumberformat}{11}
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{14}
-\glossaryentry{CEP?\glossaryentryfield{cep}{\glsnamefont{CEP}}{Complex Event Processing}{\relax }|setentrycounter[]{page}\glsnumberformat}{14}
-\glossaryentry{CED?\glossaryentryfield{ced}{\glsnamefont{CED}}{Complex Event Detection}{\relax }|setentrycounter[]{page}\glsnumberformat}{14}
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{15}
-\glossaryentry{EDA?\glossaryentryfield{eda}{\glsnamefont{EDA}}{Event-Driven Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{15}
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{15}
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{15}
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{15}
-\glossaryentry{CMS?\glossaryentryfield{cms}{\glsnamefont{CMS}}{Content Management System}{\relax }|setentrycounter[]{page}\glsnumberformat}{17}
-\glossaryentry{CMS?\glossaryentryfield{cms}{\glsnamefont{CMS}}{Content Management System}{\relax }|setentrycounter[]{page}\glsnumberformat}{17}
-\glossaryentry{CMS?\glossaryentryfield{cms}{\glsnamefont{CMS}}{Content Management System}{\relax }|setentrycounter[]{page}\glsnumberformat}{17}
-\glossaryentry{CMS?\glossaryentryfield{cms}{\glsnamefont{CMS}}{Content Management System}{\relax }|setentrycounter[]{page}\glsnumberformat}{17}
-\glossaryentry{CMS?\glossaryentryfield{cms}{\glsnamefont{CMS}}{Content Management System}{\relax }|setentrycounter[]{page}\glsnumberformat}{17}
-\glossaryentry{CMS?\glossaryentryfield{cms}{\glsnamefont{CMS}}{Content Management System}{\relax }|setentrycounter[]{page}\glsnumberformat}{17}
-\glossaryentry{CMS?\glossaryentryfield{cms}{\glsnamefont{CMS}}{Content Management System}{\relax }|setentrycounter[]{page}\glsnumberformat}{17}
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{21}
-\glossaryentry{SOA?\glossaryentryfield{soa}{\glsnamefont{SOA}}{Service-Oriented Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{21}
-\glossaryentry{XML?\glossaryentryfield{xml}{\glsnamefont{XML}}{Extensible Markup Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{21}
-\glossaryentry{JSON?\glossaryentryfield{json}{\glsnamefont{JSON}}{JavaScript Object Notation}{\relax }|setentrycounter[]{page}\glsnumberformat}{21}
-\glossaryentry{EDA?\glossaryentryfield{eda}{\glsnamefont{EDA}}{Event-Driven Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{21}
-\glossaryentry{EDA?\glossaryentryfield{eda}{\glsnamefont{EDA}}{Event-Driven Architecture}{\relax }|setentrycounter[]{page}\glsnumberformat}{21}
-\glossaryentry{JSON?\glossaryentryfield{json}{\glsnamefont{JSON}}{JavaScript Object Notation}{\relax }|setentrycounter[]{page}\glsnumberformat}{21}
-\glossaryentry{JSON?\glossaryentryfield{json}{\glsnamefont{JSON}}{JavaScript Object Notation}{\relax }|setentrycounter[]{page}\glsnumberformat}{22}
-\glossaryentry{JSON?\glossaryentryfield{json}{\glsnamefont{JSON}}{JavaScript Object Notation}{\relax }|setentrycounter[]{page}\glsnumberformat}{22}
-\glossaryentry{JSON?\glossaryentryfield{json}{\glsnamefont{JSON}}{JavaScript Object Notation}{\relax }|setentrycounter[]{page}\glsnumberformat}{23}
-\glossaryentry{JSON?\glossaryentryfield{json}{\glsnamefont{JSON}}{JavaScript Object Notation}{\relax }|setentrycounter[]{page}\glsnumberformat}{23}
-\glossaryentry{REST?\glossaryentryfield{rest}{\glsnamefont{REST}}{Representational State Transfer}{\relax }|setentrycounter[]{page}\glsnumberformat}{23}
-\glossaryentry{REST?\glossaryentryfield{rest}{\glsnamefont{REST}}{Representational State Transfer}{\relax }|setentrycounter[]{page}\glsnumberformat}{23}
-\glossaryentry{SOAP?\glossaryentryfield{soap}{\glsnamefont{SOAP}}{Simple Object Access Protocol}{\relax }|setentrycounter[]{page}\glsnumberformat}{23}
-\glossaryentry{URI?\glossaryentryfield{uri}{\glsnamefont{URI}}{Uniform Resource Identifiers}{\relax }|setentrycounter[]{page}\glsnumberformat}{24}
-\glossaryentry{URI?\glossaryentryfield{uri}{\glsnamefont{URI}}{Uniform Resource Identifiers}{\relax }|setentrycounter[]{page}\glsnumberformat}{25}
-\glossaryentry{URI?\glossaryentryfield{uri}{\glsnamefont{URI}}{Uniform Resource Identifiers}{\relax }|setentrycounter[]{page}\glsnumberformat}{25}
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{26}
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{26}
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{26}
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{26}
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{26}
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{26}
-\glossaryentry{JSON?\glossaryentryfield{json}{\glsnamefont{JSON}}{JavaScript Object Notation}{\relax }|setentrycounter[]{page}\glsnumberformat}{26}
-\glossaryentry{JSON?\glossaryentryfield{json}{\glsnamefont{JSON}}{JavaScript Object Notation}{\relax }|setentrycounter[]{page}\glsnumberformat}{27}
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{27}
-\glossaryentry{REST?\glossaryentryfield{rest}{\glsnamefont{REST}}{Representational State Transfer}{\relax }|setentrycounter[]{page}\glsnumberformat}{34}
-\glossaryentry{HTML?\glossaryentryfield{html}{\glsnamefont{HTML}}{Hypertext Markup Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{34}
-\glossaryentry{HTML?\glossaryentryfield{html}{\glsnamefont{HTML}}{Hypertext Markup Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{34}
-\glossaryentry{CEP?\glossaryentryfield{cep}{\glsnamefont{CEP}}{Complex Event Processing}{\relax }|setentrycounter[]{page}\glsnumberformat}{35}
-\glossaryentry{RDF?\glossaryentryfield{rdf}{\glsnamefont{RDF}}{Resource Description Framework}{\relax }|setentrycounter[]{page}\glsnumberformat}{35}
-\glossaryentry{REST?\glossaryentryfield{rest}{\glsnamefont{REST}}{Representational State Transfer}{\relax }|setentrycounter[]{page}\glsnumberformat}{35}
-\glossaryentry{REST?\glossaryentryfield{rest}{\glsnamefont{REST}}{Representational State Transfer}{\relax }|setentrycounter[]{page}\glsnumberformat}{35}
-\glossaryentry{HTTP?\glossaryentryfield{http}{\glsnamefont{HTTP}}{Hypertext Transfer Protocol}{\relax }|setentrycounter[]{page}\glsnumberformat}{35}
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{35}
-\glossaryentry{ECA?\glossaryentryfield{eca}{\glsnamefont{ECA}}{Event-Condition-Action}{\relax }|setentrycounter[]{page}\glsnumberformat}{35}
+\glossaryentry{ECA?\glossentry{eca}|setentrycounter[]{page}\glsnumberformat}{i}
+\glossaryentry{ECA?\glossentry{eca}|setentrycounter[]{page}\glsnumberformat}{i}
+\glossaryentry{ECA?\glossentry{eca}|setentrycounter[]{page}\glsnumberformat}{i}
+\glossaryentry{EDA?\glossentry{eda}|setentrycounter[]{page}\glsnumberformat}{i}
+\glossaryentry{EDA?\glossentry{eda}|setentrycounter[]{page}\glsnumberformat}{i}
+\glossaryentry{ECA?\glossentry{eca}|setentrycounter[]{page}\glsnumberformat}{iii}
+\glossaryentry{CMS?\glossentry{cms}|setentrycounter[]{page}\glsnumberformat}{iv}
+\glossaryentry{JSON?\glossentry{json}|setentrycounter[]{page}\glsnumberformat}{vi}
+\glossaryentry{ECA?\glossentry{eca}|setentrycounter[]{page}\glsnumberformat}{3}
+\glossaryentry{ECA?\glossentry{eca}|setentrycounter[]{page}\glsnumberformat}{3}
+\glossaryentry{ECA?\glossentry{eca}|setentrycounter[]{page}\glsnumberformat}{3}
+\glossaryentry{PaaS?\glossentry{paas}|setentrycounter[]{page}\glsnumberformat}{3}
+\glossaryentry{PaaS?\glossentry{paas}|setentrycounter[]{page}\glsnumberformat}{3}
+\glossaryentry{SaaS?\glossentry{saas}|setentrycounter[]{page}\glsnumberformat}{3}
+\glossaryentry{SaaS?\glossentry{saas}|setentrycounter[]{page}\glsnumberformat}{3}
+\glossaryentry{IaaS?\glossentry{iaas}|setentrycounter[]{page}\glsnumberformat}{3}
+\glossaryentry{IaaS?\glossentry{iaas}|setentrycounter[]{page}\glsnumberformat}{3}
+\glossaryentry{SOAP?\glossentry{soap}|setentrycounter[]{page}\glsnumberformat}{3}
+\glossaryentry{SOAP?\glossentry{soap}|setentrycounter[]{page}\glsnumberformat}{3}
+\glossaryentry{REST?\glossentry{rest}|setentrycounter[]{page}\glsnumberformat}{3}
+\glossaryentry{REST?\glossentry{rest}|setentrycounter[]{page}\glsnumberformat}{3}
+\glossaryentry{SOAP?\glossentry{soap}|setentrycounter[]{page}\glsnumberformat}{3}
+\glossaryentry{SOA?\glossentry{soa}|setentrycounter[]{page}\glsnumberformat}{3}
+\glossaryentry{SOA?\glossentry{soa}|setentrycounter[]{page}\glsnumberformat}{3}
+\glossaryentry{SOA?\glossentry{soa}|setentrycounter[]{page}\glsnumberformat}{3}
+\glossaryentry{SOA?\glossentry{soa}|setentrycounter[]{page}\glsnumberformat}{4}
+\glossaryentry{SOA?\glossentry{soa}|setentrycounter[]{page}\glsnumberformat}{4}
+\glossaryentry{RPC?\glossentry{rpc}|setentrycounter[]{page}\glsnumberformat}{4}
+\glossaryentry{RPC?\glossentry{rpc}|setentrycounter[]{page}\glsnumberformat}{4}
+\glossaryentry{RPC?\glossentry{rpc}|setentrycounter[]{page}\glsnumberformat}{4}
+\glossaryentry{RPC?\glossentry{rpc}|setentrycounter[]{page}\glsnumberformat}{4}
+\glossaryentry{RPC?\glossentry{rpc}|setentrycounter[]{page}\glsnumberformat}{4}
+\glossaryentry{RPC?\glossentry{rpc}|setentrycounter[]{page}\glsnumberformat}{4}
+\glossaryentry{RPC?\glossentry{rpc}|setentrycounter[]{page}\glsnumberformat}{4}
+\glossaryentry{XML?\glossentry{xml}|setentrycounter[]{page}\glsnumberformat}{4}
+\glossaryentry{XML?\glossentry{xml}|setentrycounter[]{page}\glsnumberformat}{4}
+\glossaryentry{XML-RPC?\glossentry{xmlrpc}|setentrycounter[]{page}\glsnumberformat}{4}
+\glossaryentry{XML-RPC?\glossentry{xmlrpc}|setentrycounter[]{page}\glsnumberformat}{4}
+\glossaryentry{XML-RPC?\glossentry{xmlrpc}|setentrycounter[]{page}\glsnumberformat}{4}
+\glossaryentry{SOAP?\glossentry{soap}|setentrycounter[]{page}\glsnumberformat}{4}
+\glossaryentry{SOAP?\glossentry{soap}|setentrycounter[]{page}\glsnumberformat}{4}
+\glossaryentry{SOAP?\glossentry{soap}|setentrycounter[]{page}\glsnumberformat}{4}
+\glossaryentry{WSDL?\glossentry{wsdl}|setentrycounter[]{page}\glsnumberformat}{4}
+\glossaryentry{WSDL?\glossentry{wsdl}|setentrycounter[]{page}\glsnumberformat}{4}
+\glossaryentry{SOAP?\glossentry{soap}|setentrycounter[]{page}\glsnumberformat}{4}
+\glossaryentry{SOAP?\glossentry{soap}|setentrycounter[]{page}\glsnumberformat}{4}
+\glossaryentry{WSDL?\glossentry{wsdl}|setentrycounter[]{page}\glsnumberformat}{4}
+\glossaryentry{WSDL?\glossentry{wsdl}|setentrycounter[]{page}\glsnumberformat}{4}
+\glossaryentry{SOAP?\glossentry{soap}|setentrycounter[]{page}\glsnumberformat}{4}
+\glossaryentry{CORBA?\glossentry{corba}|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{CORBA?\glossentry{corba}|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{CORBA?\glossentry{corba}|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{ORB?\glossentry{orb}|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{ORB?\glossentry{orb}|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{ORB?\glossentry{orb}|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{SOAP?\glossentry{soap}|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{WSDL?\glossentry{wsdl}|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{CORBA?\glossentry{corba}|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{IDL?\glossentry{idl}|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{IDL?\glossentry{idl}|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{ORB?\glossentry{orb}|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{ORB?\glossentry{orb}|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{RPC?\glossentry{rpc}|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{CORBA?\glossentry{corba}|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{IIOP?\glossentry{iiop}|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{IIOP?\glossentry{iiop}|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{ORB?\glossentry{orb}|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{ORB?\glossentry{orb}|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{REST?\glossentry{rest}|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{REST?\glossentry{rest}|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{REST?\glossentry{rest}|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{REST?\glossentry{rest}|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{REST?\glossentry{rest}|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{REST?\glossentry{rest}|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{URI?\glossentry{uri}|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{URI?\glossentry{uri}|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{REST?\glossentry{rest}|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{REST?\glossentry{rest}|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{HTTP?\glossentry{http}|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{HTTP?\glossentry{http}|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{REST?\glossentry{rest}|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{REST?\glossentry{rest}|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{REST?\glossentry{rest}|setentrycounter[]{page}\glsnumberformat}{5}
+\glossaryentry{URI?\glossentry{uri}|setentrycounter[]{page}\glsnumberformat}{7}
+\glossaryentry{URI?\glossentry{uri}|setentrycounter[]{page}\glsnumberformat}{7}
+\glossaryentry{JSON?\glossentry{json}|setentrycounter[]{page}\glsnumberformat}{7}
+\glossaryentry{JSON?\glossentry{json}|setentrycounter[]{page}\glsnumberformat}{7}
+\glossaryentry{XML?\glossentry{xml}|setentrycounter[]{page}\glsnumberformat}{7}
+\glossaryentry{REST?\glossentry{rest}|setentrycounter[]{page}\glsnumberformat}{7}
+\glossaryentry{JSON?\glossentry{json}|setentrycounter[]{page}\glsnumberformat}{7}
+\glossaryentry{ECA?\glossentry{eca}|setentrycounter[]{page}\glsnumberformat}{7}
+\glossaryentry{ECA?\glossentry{eca}|setentrycounter[]{page}\glsnumberformat}{7}
+\glossaryentry{ECA?\glossentry{eca}|setentrycounter[]{page}\glsnumberformat}{7}
+\glossaryentry{EDA?\glossentry{eda}|setentrycounter[]{page}\glsnumberformat}{7}
+\glossaryentry{EDA?\glossentry{eda}|setentrycounter[]{page}\glsnumberformat}{7}
+\glossaryentry{ECA?\glossentry{eca}|setentrycounter[]{page}\glsnumberformat}{8}
+\glossaryentry{RDF?\glossentry{rdf}|setentrycounter[]{page}\glsnumberformat}{8}
+\glossaryentry{RDF?\glossentry{rdf}|setentrycounter[]{page}\glsnumberformat}{8}
+\glossaryentry{ECA?\glossentry{eca}|setentrycounter[]{page}\glsnumberformat}{8}
+\glossaryentry{RDF?\glossentry{rdf}|setentrycounter[]{page}\glsnumberformat}{8}
+\glossaryentry{RDFTL?\glossentry{rdftl}|setentrycounter[]{page}\glsnumberformat}{8}
+\glossaryentry{RDFTL?\glossentry{rdftl}|setentrycounter[]{page}\glsnumberformat}{8}
+\glossaryentry{RDF?\glossentry{rdf}|setentrycounter[]{page}\glsnumberformat}{8}
+\glossaryentry{RDFTL?\glossentry{rdftl}|setentrycounter[]{page}\glsnumberformat}{8}
+\glossaryentry{RDF?\glossentry{rdf}|setentrycounter[]{page}\glsnumberformat}{8}
+\glossaryentry{RDF?\glossentry{rdf}|setentrycounter[]{page}\glsnumberformat}{8}
+\glossaryentry{ECA?\glossentry{eca}|setentrycounter[]{page}\glsnumberformat}{8}
+\glossaryentry{REWERSE?\glossentry{rewerse}|setentrycounter[]{page}\glsnumberformat}{8}
+\glossaryentry{REWERSE?\glossentry{rewerse}|setentrycounter[]{page}\glsnumberformat}{8}
+\glossaryentry{RDFTL?\glossentry{rdftl}|setentrycounter[]{page}\glsnumberformat}{8}
+\glossaryentry{JSON?\glossentry{json}|setentrycounter[]{page}\glsnumberformat}{8}
+\glossaryentry{DOM?\glossentry{dom}|setentrycounter[]{page}\glsnumberformat}{8}
+\glossaryentry{DOM?\glossentry{dom}|setentrycounter[]{page}\glsnumberformat}{8}
+\glossaryentry{DOM?\glossentry{dom}|setentrycounter[]{page}\glsnumberformat}{8}
+\glossaryentry{JSON?\glossentry{json}|setentrycounter[]{page}\glsnumberformat}{8}
+\glossaryentry{DOM?\glossentry{dom}|setentrycounter[]{page}\glsnumberformat}{8}
+\glossaryentry{RuleML?\glossentry{ruleml}|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{RuleML?\glossentry{ruleml}|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{XML?\glossentry{xml}|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{RuleML?\glossentry{ruleml}|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{RuleML?\glossentry{ruleml}|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{CEP?\glossentry{cep}|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{CEP?\glossentry{cep}|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{KR?\glossentry{kr}|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{KR?\glossentry{kr}|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{ECA?\glossentry{eca}|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{ECA?\glossentry{eca}|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{RuleML?\glossentry{ruleml}|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{XML?\glossentry{xml}|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{JSON?\glossentry{json}|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{JSON?\glossentry{json}|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{RuleML?\glossentry{ruleml}|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{ESB?\glossentry{esb}|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{ESB?\glossentry{esb}|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{RuleML?\glossentry{ruleml}|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{CORBA?\glossentry{corba}|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{KRL?\glossentry{krl}|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{KRL?\glossentry{krl}|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{KRE?\glossentry{kre}|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{KRE?\glossentry{kre}|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{KRE?\glossentry{kre}|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{KRE?\glossentry{kre}|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{KRL?\glossentry{krl}|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{KRE?\glossentry{kre}|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{KRE?\glossentry{kre}|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{KRE?\glossentry{kre}|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{KRL?\glossentry{krl}|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{EDA?\glossentry{eda}|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{KRE?\glossentry{kre}|setentrycounter[]{page}\glsnumberformat}{9}
+\glossaryentry{ECA?\glossentry{eca}|setentrycounter[]{page}\glsnumberformat}{10}
+\glossaryentry{KRL?\glossentry{krl}|setentrycounter[]{page}\glsnumberformat}{10}
+\glossaryentry{ESB?\glossentry{esb}|setentrycounter[]{page}\glsnumberformat}{10}
+\glossaryentry{EDA?\glossentry{eda}|setentrycounter[]{page}\glsnumberformat}{10}
+\glossaryentry{CEP?\glossentry{cep}|setentrycounter[]{page}\glsnumberformat}{10}
+\glossaryentry{CEP?\glossentry{cep}|setentrycounter[]{page}\glsnumberformat}{10}
+\glossaryentry{CED?\glossentry{ced}|setentrycounter[]{page}\glsnumberformat}{10}
+\glossaryentry{CED?\glossentry{ced}|setentrycounter[]{page}\glsnumberformat}{10}
+\glossaryentry{EDA?\glossentry{eda}|setentrycounter[]{page}\glsnumberformat}{10}
+\glossaryentry{CED?\glossentry{ced}|setentrycounter[]{page}\glsnumberformat}{10}
+\glossaryentry{CED?\glossentry{ced}|setentrycounter[]{page}\glsnumberformat}{10}
+\glossaryentry{ECA?\glossentry{eca}|setentrycounter[]{page}\glsnumberformat}{10}
+\glossaryentry{RDFTL?\glossentry{rdftl}|setentrycounter[]{page}\glsnumberformat}{11}
+\glossaryentry{RDF?\glossentry{rdf}|setentrycounter[]{page}\glsnumberformat}{11}
+\glossaryentry{RDF?\glossentry{rdf}|setentrycounter[]{page}\glsnumberformat}{11}
+\glossaryentry{JSON?\glossentry{json}|setentrycounter[]{page}\glsnumberformat}{11}
+\glossaryentry{DOM?\glossentry{dom}|setentrycounter[]{page}\glsnumberformat}{11}
+\glossaryentry{DOM?\glossentry{dom}|setentrycounter[]{page}\glsnumberformat}{11}
+\glossaryentry{DOM?\glossentry{dom}|setentrycounter[]{page}\glsnumberformat}{11}
+\glossaryentry{RuleML?\glossentry{ruleml}|setentrycounter[]{page}\glsnumberformat}{11}
+\glossaryentry{KRL?\glossentry{krl}|setentrycounter[]{page}\glsnumberformat}{11}
+\glossaryentry{KRE?\glossentry{kre}|setentrycounter[]{page}\glsnumberformat}{11}
+\glossaryentry{ECA?\glossentry{eca}|setentrycounter[]{page}\glsnumberformat}{14}
+\glossaryentry{CEP?\glossentry{cep}|setentrycounter[]{page}\glsnumberformat}{14}
+\glossaryentry{CED?\glossentry{ced}|setentrycounter[]{page}\glsnumberformat}{14}
+\glossaryentry{ECA?\glossentry{eca}|setentrycounter[]{page}\glsnumberformat}{15}
+\glossaryentry{EDA?\glossentry{eda}|setentrycounter[]{page}\glsnumberformat}{15}
+\glossaryentry{ECA?\glossentry{eca}|setentrycounter[]{page}\glsnumberformat}{15}
+\glossaryentry{ECA?\glossentry{eca}|setentrycounter[]{page}\glsnumberformat}{15}
+\glossaryentry{ECA?\glossentry{eca}|setentrycounter[]{page}\glsnumberformat}{15}
+\glossaryentry{CMS?\glossentry{cms}|setentrycounter[]{page}\glsnumberformat}{17}
+\glossaryentry{CMS?\glossentry{cms}|setentrycounter[]{page}\glsnumberformat}{17}
+\glossaryentry{CMS?\glossentry{cms}|setentrycounter[]{page}\glsnumberformat}{17}
+\glossaryentry{CMS?\glossentry{cms}|setentrycounter[]{page}\glsnumberformat}{17}
+\glossaryentry{CMS?\glossentry{cms}|setentrycounter[]{page}\glsnumberformat}{17}
+\glossaryentry{CMS?\glossentry{cms}|setentrycounter[]{page}\glsnumberformat}{17}
+\glossaryentry{CMS?\glossentry{cms}|setentrycounter[]{page}\glsnumberformat}{17}
+\glossaryentry{ECA?\glossentry{eca}|setentrycounter[]{page}\glsnumberformat}{21}
+\glossaryentry{SOA?\glossentry{soa}|setentrycounter[]{page}\glsnumberformat}{21}
+\glossaryentry{XML?\glossentry{xml}|setentrycounter[]{page}\glsnumberformat}{21}
+\glossaryentry{JSON?\glossentry{json}|setentrycounter[]{page}\glsnumberformat}{21}
+\glossaryentry{EDA?\glossentry{eda}|setentrycounter[]{page}\glsnumberformat}{21}
+\glossaryentry{EDA?\glossentry{eda}|setentrycounter[]{page}\glsnumberformat}{21}
+\glossaryentry{JSON?\glossentry{json}|setentrycounter[]{page}\glsnumberformat}{21}
+\glossaryentry{JSON?\glossentry{json}|setentrycounter[]{page}\glsnumberformat}{22}
+\glossaryentry{JSON?\glossentry{json}|setentrycounter[]{page}\glsnumberformat}{22}
+\glossaryentry{JSON?\glossentry{json}|setentrycounter[]{page}\glsnumberformat}{23}
+\glossaryentry{JSON?\glossentry{json}|setentrycounter[]{page}\glsnumberformat}{23}
+\glossaryentry{REST?\glossentry{rest}|setentrycounter[]{page}\glsnumberformat}{23}
+\glossaryentry{REST?\glossentry{rest}|setentrycounter[]{page}\glsnumberformat}{23}
+\glossaryentry{SOAP?\glossentry{soap}|setentrycounter[]{page}\glsnumberformat}{23}
+\glossaryentry{URI?\glossentry{uri}|setentrycounter[]{page}\glsnumberformat}{24}
+\glossaryentry{URI?\glossentry{uri}|setentrycounter[]{page}\glsnumberformat}{25}
+\glossaryentry{URI?\glossentry{uri}|setentrycounter[]{page}\glsnumberformat}{25}
+\glossaryentry{ECA?\glossentry{eca}|setentrycounter[]{page}\glsnumberformat}{26}
+\glossaryentry{ECA?\glossentry{eca}|setentrycounter[]{page}\glsnumberformat}{26}
+\glossaryentry{ECA?\glossentry{eca}|setentrycounter[]{page}\glsnumberformat}{26}
+\glossaryentry{ECA?\glossentry{eca}|setentrycounter[]{page}\glsnumberformat}{26}
+\glossaryentry{ECA?\glossentry{eca}|setentrycounter[]{page}\glsnumberformat}{26}
+\glossaryentry{ECA?\glossentry{eca}|setentrycounter[]{page}\glsnumberformat}{26}
+\glossaryentry{JSON?\glossentry{json}|setentrycounter[]{page}\glsnumberformat}{26}
+\glossaryentry{JSON?\glossentry{json}|setentrycounter[]{page}\glsnumberformat}{27}
+\glossaryentry{ECA?\glossentry{eca}|setentrycounter[]{page}\glsnumberformat}{27}
+\glossaryentry{JSON?\glossentry{json}|setentrycounter[]{page}\glsnumberformat}{28}
+\glossaryentry{REST?\glossentry{rest}|setentrycounter[]{page}\glsnumberformat}{35}
+\glossaryentry{HTML?\glossentry{html}|setentrycounter[]{page}\glsnumberformat}{35}
+\glossaryentry{HTML?\glossentry{html}|setentrycounter[]{page}\glsnumberformat}{35}
+\glossaryentry{CEP?\glossentry{cep}|setentrycounter[]{page}\glsnumberformat}{36}
+\glossaryentry{RDF?\glossentry{rdf}|setentrycounter[]{page}\glsnumberformat}{36}
+\glossaryentry{REST?\glossentry{rest}|setentrycounter[]{page}\glsnumberformat}{36}
+\glossaryentry{REST?\glossentry{rest}|setentrycounter[]{page}\glsnumberformat}{36}
+\glossaryentry{HTTP?\glossentry{http}|setentrycounter[]{page}\glsnumberformat}{36}
+\glossaryentry{ECA?\glossentry{eca}|setentrycounter[]{page}\glsnumberformat}{36}
+\glossaryentry{ECA?\glossentry{eca}|setentrycounter[]{page}\glsnumberformat}{36}

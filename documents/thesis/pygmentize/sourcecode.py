@@ -1,6 +1,14 @@
-
-on ProBinder->unreadContent
-if "#{ .context .id }" == 18749
-do "ProBinder -> annotateTagEntries(\"#{ .id }\")",
-   "ProBinder -> setRead(\"#{ .id }\")"
-   
+{
+  "eventname": "ProBinder -> unreadContent",
+  "conditions": [
+    {
+    "selector": ".context .id",
+    "operator": "==",
+    "compare": 18749
+    }
+  ],
+  "actions": [
+    "ProBinder -> annotateTagEntries(\"#{ .id }\")" ,
+    "ProBinder -> setRead(\"#{ .id }\")"
+  ]
+}

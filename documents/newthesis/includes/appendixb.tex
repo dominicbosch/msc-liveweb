@@ -1,12 +1,1427 @@
 
-\chapter{Rules}
-\section{Binder Annotations}
-\subsection{Binder Annotations}
+\chapter{Prototype System}
+
+\section{Main Application for Startup}
+
+\begin{Verbatim}[fontsize=\scriptsize,commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+
+\PY{c}{\PYZsh{} WebAPI\PYZhy{}ECA Engine}
+\PY{c}{\PYZsh{} =================}
+
+\PY{c}{\PYZsh{} \PYZgt{}This is the main module that is used to run the whole application:}
+\PY{c}{\PYZsh{} \PYZgt{}}
+\PY{c}{\PYZsh{} \PYZgt{}     node webapi\PYZhy{}eca [opt]}
+\PY{c}{\PYZsh{} \PYZgt{}}
+\PY{c}{\PYZsh{} \PYZgt{} See below in the optimist CLI preparation for allowed optional parameters `[opt]`.}
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+
+\PY{c}{\PYZsh{} **Loads Modules:**}
+
+\PY{c}{\PYZsh{} \PYZhy{} [Logging](logging.html)}
+\PY{n}{logger} \PY{o}{=} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{./logging}\PY{l+s}{\PYZsq{}}
+
+\PY{c}{\PYZsh{} \PYZhy{} [Configuration](config.html)}
+\PY{n}{conf} \PY{o}{=} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{./config}\PY{l+s}{\PYZsq{}}
+
+\PY{c}{\PYZsh{} \PYZhy{} [Persistence](persistence.html)}
+\PY{n}{db} \PY{o}{=} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{./persistence}\PY{l+s}{\PYZsq{}}
+
+\PY{c}{\PYZsh{} \PYZhy{} [ECA Components Manager](components\PYZhy{}manager.html)}
+\PY{n}{cm} \PY{o}{=} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{./components\PYZhy{}manager}\PY{l+s}{\PYZsq{}}
+
+\PY{c}{\PYZsh{} \PYZhy{} [Engine](engine.html)}
+\PY{n}{engine} \PY{o}{=} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{./engine}\PY{l+s}{\PYZsq{}}
+
+\PY{c}{\PYZsh{} \PYZhy{} [HTTP Listener](http\PYZhy{}listener.html)}
+\PY{n}{http} \PY{o}{=} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{./http\PYZhy{}listener}\PY{l+s}{\PYZsq{}}
+
+\PY{c}{\PYZsh{} \PYZhy{} [Encryption](encryption.html)}
+\PY{n}{encryption} \PY{o}{=} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{./encryption}\PY{l+s}{\PYZsq{}}
+
+\PY{c}{\PYZsh{} \PYZhy{} [Event Poller](event\PYZhy{}poller.html) *(will be forked into a child process)*}
+\PY{n}{nameEP} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{event\PYZhy{}poller}\PY{l+s}{\PYZsq{}}
+
+\PY{c}{\PYZsh{} \PYZhy{} Node.js Modules: [fs](http://nodejs.org/api/fs.html),}
+\PY{c}{\PYZsh{} [path](http://nodejs.org/api/path.html)}
+\PY{c}{\PYZsh{} and [child\PYZus{}process](http://nodejs.org/api/child\PYZus{}process.html)}
+\PY{n}{fs} \PY{o}{=} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{fs}\PY{l+s}{\PYZsq{}}
+\PY{n}{path} \PY{o}{=} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{path}\PY{l+s}{\PYZsq{}}
+\PY{n}{cp} \PY{o}{=} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{child\PYZus{}process}\PY{l+s}{\PYZsq{}}
+
+\PY{c}{\PYZsh{} \PYZhy{} External Modules: [optimist](https://github.com/substack/node\PYZhy{}optimist)}
+\PY{n}{optimist} \PY{o}{=} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{optimist}\PY{l+s}{\PYZsq{}}
+
+\PY{n}{procCmds} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{c}{\PYZsh{} Let\PYZsq{}s prepare the optimist CLI optional arguments `[opt]`:}
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{n}{usage} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{This runs your webapi\PYZhy{}based ECA engine}\PY{l+s}{\PYZsq{}}
+\PY{n}{opt} \PY{o}{=}
+\PY{c}{\PYZsh{}  `\PYZhy{}h`, `\PYZhy{}\PYZhy{}help`: Display the help}
+  \PY{l+s}{\PYZsq{}}\PY{l+s}{h}\PY{l+s}{\PYZsq{}}\PY{p}{:}
+    \PY{n}{alias} \PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{help}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+    \PY{n}{describe}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{Display this}\PY{l+s}{\PYZsq{}}
+
+\PY{c}{\PYZsh{}  `\PYZhy{}c`, `\PYZhy{}\PYZhy{}config\PYZhy{}path`: Specify a path to a custom configuration file, other than \PYZdq{}config/config.json\PYZdq{}}
+  \PY{l+s}{\PYZsq{}}\PY{l+s}{c}\PY{l+s}{\PYZsq{}}\PY{p}{:}
+    \PY{n}{alias} \PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{config\PYZhy{}path}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+    \PY{n}{describe}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{Specify a path to a custom configuration file, other than }\PY{l+s}{\PYZdq{}}\PY{l+s}{config/config.json}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZsq{}}
+
+\PY{c}{\PYZsh{}  `\PYZhy{}w`, `\PYZhy{}\PYZhy{}http\PYZhy{}port`: Specify a HTTP port for the web server }
+  \PY{l+s}{\PYZsq{}}\PY{l+s}{w}\PY{l+s}{\PYZsq{}}\PY{p}{:}
+    \PY{n}{alias} \PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{http\PYZhy{}port}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+    \PY{n}{describe}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{Specify a HTTP port for the web server}\PY{l+s}{\PYZsq{}}
+
+\PY{c}{\PYZsh{}  `\PYZhy{}d`, `\PYZhy{}\PYZhy{}db\PYZhy{}port`: Specify a port for the redis DB}
+  \PY{l+s}{\PYZsq{}}\PY{l+s}{d}\PY{l+s}{\PYZsq{}}\PY{p}{:}
+    \PY{n}{alias} \PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{db\PYZhy{}port}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+    \PY{n}{describe}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{Specify a port for the redis DB}\PY{l+s}{\PYZsq{}}
+
+\PY{c}{\PYZsh{}  `\PYZhy{}s`, `\PYZhy{}\PYZhy{}db\PYZhy{}select`: Specify a database}
+  \PY{l+s}{\PYZsq{}}\PY{l+s}{s}\PY{l+s}{\PYZsq{}}\PY{p}{:}
+    \PY{n}{alias} \PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{db\PYZhy{}select}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+    \PY{n}{describe}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{Specify a database identifier}\PY{l+s}{\PYZsq{}}
+
+\PY{c}{\PYZsh{}  `\PYZhy{}m`, `\PYZhy{}\PYZhy{}log\PYZhy{}mode`: Specify a log mode: [development|productive]}
+  \PY{l+s}{\PYZsq{}}\PY{l+s}{m}\PY{l+s}{\PYZsq{}}\PY{p}{:}
+    \PY{n}{alias} \PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{log\PYZhy{}mode}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+    \PY{n}{describe}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{Specify a log mode: [development|productive]}\PY{l+s}{\PYZsq{}}
+
+\PY{c}{\PYZsh{}  `\PYZhy{}i`, `\PYZhy{}\PYZhy{}log\PYZhy{}io\PYZhy{}level`: Specify the log level for the I/O. in development expensive origin}
+\PY{c}{\PYZsh{}                           lookups are made and added to the log entries}
+  \PY{l+s}{\PYZsq{}}\PY{l+s}{i}\PY{l+s}{\PYZsq{}}\PY{p}{:}
+    \PY{n}{alias} \PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{log\PYZhy{}io\PYZhy{}level}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+    \PY{n}{describe}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{Specify the log level for the I/O}\PY{l+s}{\PYZsq{}}
+
+\PY{c}{\PYZsh{}  `\PYZhy{}f`, `\PYZhy{}\PYZhy{}log\PYZhy{}file\PYZhy{}level`: Specify the log level for the log file}
+  \PY{l+s}{\PYZsq{}}\PY{l+s}{f}\PY{l+s}{\PYZsq{}}\PY{p}{:}
+    \PY{n}{alias} \PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{log\PYZhy{}file\PYZhy{}level}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+    \PY{n}{describe}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{Specify the log level for the log file}\PY{l+s}{\PYZsq{}}
+
+\PY{c}{\PYZsh{}  `\PYZhy{}p`, `\PYZhy{}\PYZhy{}log\PYZhy{}file\PYZhy{}path`: Specify the path to the log file within the \PYZdq{}logs\PYZdq{} folder}
+  \PY{l+s}{\PYZsq{}}\PY{l+s}{p}\PY{l+s}{\PYZsq{}}\PY{p}{:}
+    \PY{n}{alias} \PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{log\PYZhy{}file\PYZhy{}path}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+    \PY{n}{describe}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{Specify the path to the log file within the }\PY{l+s}{\PYZdq{}}\PY{l+s}{logs}\PY{l+s}{\PYZdq{}}\PY{l+s}{ folder}\PY{l+s}{\PYZsq{}}
+
+\PY{c}{\PYZsh{}  `\PYZhy{}n`, `\PYZhy{}\PYZhy{}nolog`: Set this true if no output shall be generated}
+  \PY{l+s}{\PYZsq{}}\PY{l+s}{n}\PY{l+s}{\PYZsq{}}\PY{p}{:}
+    \PY{n}{alias} \PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{nolog}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+    \PY{n}{describe}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{Set this if no output shall be generated}\PY{l+s}{\PYZsq{}}
+
+\PY{c}{\PYZsh{} now fetch the CLI arguments and exit if the help has been called.}
+\PY{n}{argv} \PY{o}{=} \PY{n}{optimist}\PY{o}{.}\PY{n}{usage}\PY{p}{(} \PY{n}{usage} \PY{p}{)}\PY{o}{.}\PY{n}{options}\PY{p}{(} \PY{n}{opt} \PY{p}{)}\PY{o}{.}\PY{n}{argv}
+\PY{k}{if} \PY{n}{argv}\PY{o}{.}\PY{n}{help}
+  \PY{n}{console}\PY{o}{.}\PY{n}{log} \PY{n}{optimist}\PY{o}{.}\PY{n}{help}\PY{p}{(}\PY{p}{)}
+  \PY{n}{process}\PY{o}{.}\PY{n}{exit}\PY{p}{(}\PY{p}{)}
+
+\PY{n}{conf} \PY{n}{argv}\PY{o}{.}\PY{n}{c}
+\PY{c}{\PYZsh{} \PYZgt{} Check whether the config file is ready, which is required to start the server.}
+\PY{k}{if} \PY{err}{!}\PY{n}{conf}\PY{o}{.}\PY{n}{isReady}\PY{p}{(}\PY{p}{)}
+  \PY{n}{console}\PY{o}{.}\PY{n}{error} \PY{l+s}{\PYZsq{}}\PY{l+s}{FAIL: Config file not ready! Shutting down...}\PY{l+s}{\PYZsq{}}
+  \PY{n}{process}\PY{o}{.}\PY{n}{exit}\PY{p}{(}\PY{p}{)}
+
+\PY{n}{logconf} \PY{o}{=} \PY{n}{conf}\PY{o}{.}\PY{n}{getLogConf}\PY{p}{(}\PY{p}{)}
+
+\PY{k}{if} \PY{n}{argv}\PY{o}{.}\PY{n}{m}
+  \PY{n}{logconf}\PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{mode}\PY{l+s}{\PYZsq{}} \PY{p}{]} \PY{o}{=} \PY{n}{argv}\PY{o}{.}\PY{n}{m}
+\PY{k}{if} \PY{n}{argv}\PY{o}{.}\PY{n}{i}
+  \PY{n}{logconf}\PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{io\PYZhy{}level}\PY{l+s}{\PYZsq{}} \PY{p}{]} \PY{o}{=} \PY{n}{argv}\PY{o}{.}\PY{n}{i}
+\PY{k}{if} \PY{n}{argv}\PY{o}{.}\PY{n}{f}
+  \PY{n}{logconf}\PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{file\PYZhy{}level}\PY{l+s}{\PYZsq{}} \PY{p}{]} \PY{o}{=} \PY{n}{argv}\PY{o}{.}\PY{n}{f}
+\PY{k}{if} \PY{n}{argv}\PY{o}{.}\PY{n}{p}
+  \PY{n}{logconf}\PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{file\PYZhy{}path}\PY{l+s}{\PYZsq{}} \PY{p}{]} \PY{o}{=} \PY{n}{argv}\PY{o}{.}\PY{n}{p}
+\PY{k}{if} \PY{n}{argv}\PY{o}{.}\PY{n}{n}
+  \PY{n}{logconf}\PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{nolog}\PY{l+s}{\PYZsq{}} \PY{p}{]} \PY{o}{=} \PY{n}{true}
+\PY{k}{try}
+  \PY{n}{fs}\PY{o}{.}\PY{n}{unlinkSync} \PY{n}{path}\PY{o}{.}\PY{n}{resolve} \PY{n}{\PYZus{}\PYZus{}dirname}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{..}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{logs}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{logconf}\PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{file\PYZhy{}path}\PY{l+s}{\PYZsq{}} \PY{p}{]}
+\PY{n+nd}{@log} \PY{o}{=} \PY{n}{logger}\PY{o}{.}\PY{n}{getLogger} \PY{n}{logconf}
+\PY{n+nd}{@log.info} \PY{l+s}{\PYZsq{}}\PY{l+s}{RS | STARTING SERVER}\PY{l+s}{\PYZsq{}}
+
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{c}{\PYZsh{} This function is invoked right after the module is loaded and starts the server.}
+
+\PY{c}{\PYZsh{} @private init()}
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{n}{init} \PY{o}{=} \PY{o}{=}\PY{o}{\PYZgt{}}
+
+  \PY{n}{args} \PY{o}{=}
+    \PY{n}{logger}\PY{p}{:} \PY{n+nd}{@log}
+    \PY{n}{logconf}\PY{p}{:} \PY{n}{logconf}
+  \PY{c}{\PYZsh{} \PYZgt{} Fetch the `http\PYZhy{}port` argument}
+  \PY{n}{args}\PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{http\PYZhy{}port}\PY{l+s}{\PYZsq{}} \PY{p}{]} \PY{o}{=} \PY{n}{parseInt} \PY{n}{argv}\PY{o}{.}\PY{n}{w} \PY{o}{|}\PY{o}{|} \PY{n}{conf}\PY{o}{.}\PY{n}{getHttpPort}\PY{p}{(}\PY{p}{)}
+  \PY{n}{args}\PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{db\PYZhy{}port}\PY{l+s}{\PYZsq{}} \PY{p}{]} \PY{o}{=} \PY{n}{parseInt} \PY{n}{argv}\PY{o}{.}\PY{n}{d} \PY{o}{|}\PY{o}{|} \PY{n}{conf}\PY{o}{.}\PY{n}{getDbPort}\PY{p}{(}\PY{p}{)}
+  \PY{n}{args}\PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{db\PYZhy{}select}\PY{l+s}{\PYZsq{}} \PY{p}{]} \PY{o}{=} \PY{n}{parseInt} \PY{n}{argv}\PY{o}{.}\PY{n}{s} \PY{o}{|}\PY{o}{|} \PY{n}{conf}\PY{o}{.}\PY{n}{fetchProp} \PY{l+s}{\PYZsq{}}\PY{l+s}{db\PYZhy{}select}\PY{l+s}{\PYZsq{}}
+
+  \PY{c}{\PYZsh{}FIXME this has to come from user input for security reasons:}
+  \PY{n}{args}\PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{keygen}\PY{l+s}{\PYZsq{}} \PY{p}{]} \PY{o}{=} \PY{n}{conf}\PY{o}{.}\PY{n}{getKeygenPassphrase}\PY{p}{(}\PY{p}{)}
+  \PY{n}{args}\PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{webhooks}\PY{l+s}{\PYZsq{}} \PY{p}{]} \PY{o}{=} \PY{n}{conf}\PY{o}{.}\PY{n}{fetchProp} \PY{l+s}{\PYZsq{}}\PY{l+s}{webhooks}\PY{l+s}{\PYZsq{}}
+
+  \PY{n}{encryption} \PY{n}{args}
+  
+  \PY{n+nd}{@log.info} \PY{l+s}{\PYZsq{}}\PY{l+s}{RS | Initialzing DB}\PY{l+s}{\PYZsq{}}
+  \PY{n}{db} \PY{n}{args}
+  \PY{c}{\PYZsh{} \PYZgt{} We only proceed with the initialization if the DB is ready}
+  \PY{n}{db}\PY{o}{.}\PY{n}{isConnected} \PY{p}{(} \PY{n}{err} \PY{p}{)} \PY{o}{=}\PY{o}{\PYZgt{}}
+    \PY{n}{db}\PY{o}{.}\PY{n}{selectDatabase} \PY{n}{parseInt}\PY{p}{(} \PY{n}{args}\PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{db\PYZhy{}select}\PY{l+s}{\PYZsq{}} \PY{p}{]} \PY{p}{)} \PY{o}{|}\PY{o}{|} \PY{l+m+mi}{0}
+    \PY{k}{if} \PY{n}{err}
+      \PY{n+nd}{@log.error} \PY{l+s}{\PYZsq{}}\PY{l+s}{RS | No DB connection, shutting down system!}\PY{l+s}{\PYZsq{}}
+      \PY{n}{shutDown}\PY{p}{(}\PY{p}{)}
+
+    \PY{k}{else}
+      \PY{c}{\PYZsh{} \PYZgt{} Initialize all required modules with the args object.}
+      \PY{n+nd}{@log.info} \PY{l+s}{\PYZsq{}}\PY{l+s}{RS | Initialzing engine}\PY{l+s}{\PYZsq{}}
+      \PY{n}{engine} \PY{n}{args}
+      
+      \PY{c}{\PYZsh{} Start the event poller. The module manager will emit events for it}
+      \PY{n+nd}{@log.info} \PY{l+s}{\PYZsq{}}\PY{l+s}{RS | Forking a child process for the event poller}\PY{l+s}{\PYZsq{}}
+      \PY{c}{\PYZsh{} Grab all required log config fields}
+      
+      \PY{n}{cliArgs} \PY{o}{=} \PY{p}{[}
+        \PY{c}{\PYZsh{} \PYZhy{} the log mode: [development|productive], in development expensive origin}
+        \PY{c}{\PYZsh{} lookups are made and added to the log entries}
+        \PY{n}{args}\PY{o}{.}\PY{n}{logconf}\PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{mode}\PY{l+s}{\PYZsq{}} \PY{p}{]}
+        \PY{c}{\PYZsh{} \PYZhy{} the I/O log level, refer to logging.coffee for the different levels}
+        \PY{n}{args}\PY{o}{.}\PY{n}{logconf}\PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{io\PYZhy{}level}\PY{l+s}{\PYZsq{}} \PY{p}{]}
+        \PY{c}{\PYZsh{} \PYZhy{} the file log level, refer to logging.coffee for the different levels}
+        \PY{n}{args}\PY{o}{.}\PY{n}{logconf}\PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{file\PYZhy{}level}\PY{l+s}{\PYZsq{}} \PY{p}{]}
+        \PY{c}{\PYZsh{} \PYZhy{} the optional path to the log file}
+        \PY{n}{args}\PY{o}{.}\PY{n}{logconf}\PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{file\PYZhy{}path}\PY{l+s}{\PYZsq{}} \PY{p}{]}
+        \PY{c}{\PYZsh{} \PYZhy{} whether a log file shall be written at all [true|false]}
+        \PY{n}{args}\PY{o}{.}\PY{n}{logconf}\PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{nolog}\PY{l+s}{\PYZsq{}} \PY{p}{]}
+        \PY{c}{\PYZsh{} \PYZhy{} The selected database}
+        \PY{n}{args}\PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{db\PYZhy{}select}\PY{l+s}{\PYZsq{}} \PY{p}{]}
+        \PY{c}{\PYZsh{} \PYZhy{} The keygen phrase, this has to be handled differently in the future!}
+        \PY{n}{args}\PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{keygen}\PY{l+s}{\PYZsq{}} \PY{p}{]}
+      \PY{p}{]}
+      \PY{c}{\PYZsh{} Initialize the event poller with the required CLI arguments}
+      \PY{n}{poller} \PY{o}{=} \PY{n}{cp}\PY{o}{.}\PY{n}{fork} \PY{n}{path}\PY{o}{.}\PY{n}{resolve}\PY{p}{(} \PY{n}{\PYZus{}\PYZus{}dirname}\PY{p}{,} \PY{n}{nameEP} \PY{p}{)}\PY{p}{,} \PY{n}{cliArgs}
+
+      \PY{c}{\PYZsh{} after the engine and the event poller have been initialized we can}
+      \PY{c}{\PYZsh{} initialize the module manager and register event listener functions}
+      \PY{c}{\PYZsh{} from engine and event poller}
+      \PY{n+nd}{@log.info} \PY{l+s}{\PYZsq{}}\PY{l+s}{RS | Initialzing module manager}\PY{l+s}{\PYZsq{}}
+      \PY{n}{cm} \PY{n}{args}
+      \PY{n}{cm}\PY{o}{.}\PY{n}{addRuleListener} \PY{n}{engine}\PY{o}{.}\PY{n}{internalEvent}
+      \PY{n}{cm}\PY{o}{.}\PY{n}{addRuleListener} \PY{p}{(} \PY{n}{evt} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}} \PY{n}{poller}\PY{o}{.}\PY{n}{send} \PY{n}{evt}
+
+      \PY{n+nd}{@log.info} \PY{l+s}{\PYZsq{}}\PY{l+s}{RS | Initialzing http listener}\PY{l+s}{\PYZsq{}}
+      \PY{c}{\PYZsh{} The request handler passes certain requests to the components manager}
+      \PY{n}{args}\PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{request\PYZhy{}service}\PY{l+s}{\PYZsq{}} \PY{p}{]} \PY{o}{=} \PY{n}{cm}\PY{o}{.}\PY{n}{processRequest}
+      \PY{c}{\PYZsh{} We give the HTTP listener the ability to shutdown the whole system}
+      \PY{n}{args}\PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{shutdown\PYZhy{}function}\PY{l+s}{\PYZsq{}} \PY{p}{]} \PY{o}{=} \PY{n}{shutDown}
+      \PY{n}{http} \PY{n}{args}
+      
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{c}{\PYZsh{} Shuts down the server.}
+
+\PY{c}{\PYZsh{} @private shutDown()}
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{} }
+\PY{n}{shutDown} \PY{o}{=} \PY{p}{(}\PY{p}{)} \PY{o}{=}\PY{o}{\PYZgt{}}
+  \PY{n+nd}{@log.warn} \PY{l+s}{\PYZsq{}}\PY{l+s}{RS | Received shut down command!}\PY{l+s}{\PYZsq{}}
+  \PY{n}{db}\PY{err}{?}\PY{o}{.}\PY{n}{shutDown}\PY{p}{(}\PY{p}{)}
+  \PY{n}{engine}\PY{o}{.}\PY{n}{shutDown}\PY{p}{(}\PY{p}{)}
+  \PY{c}{\PYZsh{} We need to call process.exit() since the express server in the http\PYZhy{}listener}
+  \PY{c}{\PYZsh{} can\PYZsq{}t be stopped gracefully. Why would you stop this system anyways!?? }
+  \PY{n}{process}\PY{o}{.}\PY{n}{exit}\PY{p}{(}\PY{p}{)}
+
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{} Process Commands}
+
+\PY{c}{\PYZsh{} When the server is run as a child process, this function handles messages}
+\PY{c}{\PYZsh{} from the parent process (e.g. the testing suite)}
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{n}{process}\PY{o}{.}\PY{n}{on} \PY{l+s}{\PYZsq{}}\PY{l+s}{message}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{p}{(} \PY{n}{cmd} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}} \PY{n}{procCmds}\PY{p}{[}\PY{n}{cmd}\PY{p}{]}\PY{err}{?}\PY{p}{(}\PY{p}{)}
+
+\PY{n}{process}\PY{o}{.}\PY{n}{on} \PY{l+s}{\PYZsq{}}\PY{l+s}{SIGINT}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{shutDown}
+\PY{n}{process}\PY{o}{.}\PY{n}{on} \PY{l+s}{\PYZsq{}}\PY{l+s}{SIGTERM}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{shutDown}
+
+\PY{c}{\PYZsh{} The die command redirects to the shutDown function.}
+\PY{n}{procCmds}\PY{o}{.}\PY{n}{die} \PY{o}{=} \PY{n}{shutDown}
+
+\PY{c}{\PYZsh{} *Start initialization*}
+\PY{n}{init}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
 
 
-\begin{figure}[!ht]
-  \centering
-  \includegraphics{figures/Conceptual_Model_Simple}
-  \caption{SHOULD NOT SHOW UP}
-  \label{fig:Conceptual_Model_Simpledummy}
-\end{figure}
+
+
+
+
+
+\clearpage
+\section{Rule Engine}
+\begin{Verbatim}[fontsize=\scriptsize,commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{c}{\PYZsh{} Engine}
+\PY{c}{\PYZsh{} ==================}
+\PY{c}{\PYZsh{} \PYZgt{} The heart of the WebAPI ECA System. The engine loads action invoker modules}
+\PY{c}{\PYZsh{} \PYZgt{} corresponding to active rules actions and invokes them if an appropriate event}
+\PY{c}{\PYZsh{} \PYZgt{} is retrieved. }
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+
+\PY{c}{\PYZsh{} **Loads Modules:**}
+
+\PY{c}{\PYZsh{} \PYZhy{} [Persistence](persistence.html)}
+\PY{n}{db} \PY{o}{=} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{./persistence}\PY{l+s}{\PYZsq{}}
+\PY{c}{\PYZsh{} \PYZhy{} [Dynamic Modules](dynamic\PYZhy{}modules.html)}
+\PY{n}{dynmod} \PY{o}{=} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{./dynamic\PYZhy{}modules}\PY{l+s}{\PYZsq{}}
+
+\PY{c}{\PYZsh{} \PYZhy{} External Modules:}
+\PY{c}{\PYZsh{}   [js\PYZhy{}select](https://github.com/harthur/js\PYZhy{}select)}
+\PY{n}{jsonQuery} \PY{o}{=} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{js\PYZhy{}select}\PY{l+s}{\PYZsq{}}
+
+\PY{n}{listUserRules} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+\PY{n}{isRunning} \PY{o}{=} \PY{n}{false}
+
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{c}{\PYZsh{} Module call}
+\PY{c}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+\PY{c}{\PYZsh{} Initializes the Engine and starts polling the event queue for new events.}
+
+\PY{c}{\PYZsh{} @param \PYZob{}Object\PYZcb{} args}
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{n}{exports} \PY{o}{=} \PY{n}{module}\PY{o}{.}\PY{n}{exports} \PY{o}{=} \PY{p}{(} \PY{n}{args} \PY{p}{)} \PY{o}{=}\PY{o}{\PYZgt{}}
+  \PY{k}{if} \PY{o+ow}{not} \PY{n}{isRunning}
+    \PY{n+nd}{@log} \PY{o}{=} \PY{n}{args}\PY{o}{.}\PY{n}{logger}
+    \PY{n}{dynmod} \PY{n}{args}
+    \PY{n}{setTimeout} \PY{n}{exports}\PY{o}{.}\PY{n}{startEngine}\PY{p}{,} \PY{l+m+mi}{10} \PY{c}{\PYZsh{} Very important, this forks a token for the poll task}
+    \PY{n}{module}\PY{o}{.}\PY{n}{exports}
+
+
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{c}{\PYZsh{} This is a helper function for the unit tests so we can verify that action}
+\PY{c}{\PYZsh{} modules are loaded correctly}
+
+\PY{c}{\PYZsh{} @public getListUserRules ()}
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{n}{exports}\PY{o}{.}\PY{n}{getListUserRules} \PY{o}{=} \PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{n}{listUserRules}
+
+\PY{c}{\PYZsh{} We need this so we can shut it down after the module unit tests}
+\PY{n}{exports}\PY{o}{.}\PY{n}{startEngine} \PY{o}{=} \PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{k}{if} \PY{o+ow}{not} \PY{n}{isRunning}
+    \PY{n}{isRunning} \PY{o}{=} \PY{n}{true}
+    \PY{n}{pollQueue}\PY{p}{(}\PY{p}{)}
+
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{c}{\PYZsh{} An event associated to rules happened and is captured here. Such events }
+\PY{c}{\PYZsh{} are basically CRUD on rules.}
+
+\PY{c}{\PYZsh{} @public internalEvent ( *evt* )}
+\PY{c}{\PYZsh{} @param \PYZob{}Object\PYZcb{} evt}
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{n}{exports}\PY{o}{.}\PY{n}{internalEvent} \PY{o}{=} \PY{p}{(} \PY{n}{evt} \PY{p}{)} \PY{o}{=}\PY{o}{\PYZgt{}}
+  \PY{k}{if} \PY{o+ow}{not} \PY{n}{listUserRules}\PY{p}{[}\PY{n}{evt}\PY{o}{.}\PY{n}{user}\PY{p}{]} \PY{o+ow}{and} \PY{n}{evt}\PY{o}{.}\PY{n}{intevent} \PY{n}{isnt} \PY{l+s}{\PYZsq{}}\PY{l+s}{del}\PY{l+s}{\PYZsq{}}
+    \PY{n}{listUserRules}\PY{p}{[}\PY{n}{evt}\PY{o}{.}\PY{n}{user}\PY{p}{]} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+    
+  \PY{n}{oUser} \PY{o}{=} \PY{n}{listUserRules}\PY{p}{[}\PY{n}{evt}\PY{o}{.}\PY{n}{user}\PY{p}{]}
+  \PY{n}{oRule} \PY{o}{=} \PY{n}{evt}\PY{o}{.}\PY{n}{rule}
+  \PY{k}{if} \PY{n}{evt}\PY{o}{.}\PY{n}{intevent} \PY{o+ow}{is} \PY{l+s}{\PYZsq{}}\PY{l+s}{new}\PY{l+s}{\PYZsq{}} \PY{o+ow}{or} \PY{p}{(} \PY{n}{evt}\PY{o}{.}\PY{n}{intevent} \PY{o+ow}{is} \PY{l+s}{\PYZsq{}}\PY{l+s}{init}\PY{l+s}{\PYZsq{}} \PY{o+ow}{and} \PY{o+ow}{not} \PY{n}{oUser}\PY{p}{[}\PY{n}{oRule}\PY{o}{.}\PY{n}{id}\PY{p}{]} \PY{p}{)}
+    \PY{n}{oUser}\PY{p}{[}\PY{n}{oRule}\PY{o}{.}\PY{n}{id}\PY{p}{]} \PY{o}{=} 
+      \PY{n}{rule}\PY{p}{:} \PY{n}{oRule}
+      \PY{n}{actions}\PY{p}{:} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+    \PY{n}{updateActionModules} \PY{n}{oRule}\PY{o}{.}\PY{n}{id}
+
+  \PY{k}{if} \PY{n}{evt}\PY{o}{.}\PY{n}{intevent} \PY{o+ow}{is} \PY{l+s}{\PYZsq{}}\PY{l+s}{del}\PY{l+s}{\PYZsq{}} \PY{o+ow}{and} \PY{n}{oUser}
+    \PY{n}{delete} \PY{n}{oUser}\PY{p}{[}\PY{n}{evt}\PY{o}{.}\PY{n}{ruleId}\PY{p}{]}
+
+  \PY{c}{\PYZsh{} If a user is empty after all the updates above, we remove her from the list}
+  \PY{k}{if} \PY{n}{JSON}\PY{o}{.}\PY{n}{stringify}\PY{p}{(} \PY{n}{oUser} \PY{p}{)} \PY{o+ow}{is} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZob{}\PYZcb{}}\PY{l+s}{\PYZdq{}}
+    \PY{n}{delete} \PY{n}{listUserRules}\PY{p}{[}\PY{n}{evt}\PY{o}{.}\PY{n}{user}\PY{p}{]}
+
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{c}{\PYZsh{} As soon as changes were made to the rule set we need to ensure that the aprropriate action}
+\PY{c}{\PYZsh{} invoker modules are loaded, updated or deleted.}
+
+\PY{c}{\PYZsh{} @private updateActionModules ( *updatedRuleId* )}
+\PY{c}{\PYZsh{} @param \PYZob{}Object\PYZcb{} updatedRuleId}
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{n}{updateActionModules} \PY{o}{=} \PY{p}{(} \PY{n}{updatedRuleId} \PY{p}{)} \PY{o}{=}\PY{o}{\PYZgt{}}
+  
+  \PY{c}{\PYZsh{} Remove all action invoker modules that are not required anymore}
+  \PY{n}{fRemoveNotRequired} \PY{o}{=} \PY{p}{(} \PY{n}{oUser} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+
+    \PY{c}{\PYZsh{} Check whether the action is still existing in the rule}
+    \PY{n}{fRequired} \PY{o}{=} \PY{p}{(} \PY{n}{actionName} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+      \PY{k}{for} \PY{n}{action} \PY{o+ow}{in} \PY{n}{oUser}\PY{p}{[}\PY{n}{updatedRuleId}\PY{p}{]}\PY{o}{.}\PY{n}{rule}\PY{o}{.}\PY{n}{actions}
+        \PY{c}{\PYZsh{} Since the event is in the format \PYZsq{}module \PYZhy{}\PYZgt{} function\PYZsq{} we need to split the string}
+        \PY{k}{if} \PY{p}{(}\PY{n}{action}\PY{o}{.}\PY{n}{split} \PY{l+s}{\PYZsq{}}\PY{l+s}{ \PYZhy{}\PYZgt{} }\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{[} \PY{l+m+mi}{0} \PY{p}{]} \PY{o+ow}{is} \PY{n}{actionName}
+          \PY{k}{return} \PY{n}{true}
+      \PY{n}{false}
+
+    \PY{c}{\PYZsh{} Go thorugh all loaded action modules and check whether the action is still required}
+    \PY{k}{if} \PY{n}{oUser}\PY{p}{[}\PY{n}{updatedRuleId}\PY{p}{]}
+      \PY{k}{for} \PY{n}{action} \PY{n}{of} \PY{n}{oUser}\PY{p}{[}\PY{n}{updatedRuleId}\PY{p}{]}\PY{o}{.}\PY{n}{rule}\PY{o}{.}\PY{n}{actions} 
+        \PY{n}{delete} \PY{n}{oUser}\PY{p}{[}\PY{n}{updatedRuleId}\PY{p}{]}\PY{o}{.}\PY{n}{actions}\PY{p}{[}\PY{n}{action}\PY{p}{]} \PY{k}{if} \PY{o+ow}{not} \PY{n}{fRequired} \PY{n}{action}
+
+  \PY{n}{fRemoveNotRequired} \PY{n}{oUser} \PY{k}{for} \PY{n}{name}\PY{p}{,} \PY{n}{oUser} \PY{n}{of} \PY{n}{listUserRules}
+
+  \PY{c}{\PYZsh{} Add action invoker modules that are not yet loaded}
+  \PY{n}{fAddRequired} \PY{o}{=} \PY{p}{(} \PY{n}{userName}\PY{p}{,} \PY{n}{oUser} \PY{p}{)} \PY{o}{=}\PY{o}{\PYZgt{}}
+
+    \PY{c}{\PYZsh{} Check whether the action is existing in a rule and load if not}
+    \PY{n}{fCheckRules} \PY{o}{=} \PY{p}{(} \PY{n}{oMyRule} \PY{p}{)} \PY{o}{=}\PY{o}{\PYZgt{}}
+
+      \PY{c}{\PYZsh{} Load the action invoker module if it was part of the updated rule or if it\PYZsq{}s new}
+      \PY{n}{fAddIfNewOrNotExisting} \PY{o}{=} \PY{p}{(} \PY{n}{actionName} \PY{p}{)} \PY{o}{=}\PY{o}{\PYZgt{}}
+        \PY{n}{moduleName} \PY{o}{=} \PY{p}{(}\PY{n}{actionName}\PY{o}{.}\PY{n}{split} \PY{l+s}{\PYZsq{}}\PY{l+s}{ \PYZhy{}\PYZgt{} }\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{[} \PY{l+m+mi}{0} \PY{p}{]}
+        \PY{k}{if} \PY{o+ow}{not} \PY{n}{oMyRule}\PY{o}{.}\PY{n}{actions}\PY{p}{[}\PY{n}{moduleName}\PY{p}{]} \PY{o+ow}{or} \PY{n}{oMyRule}\PY{o}{.}\PY{n}{rule}\PY{o}{.}\PY{n}{id} \PY{o+ow}{is} \PY{n}{updatedRuleId}
+          \PY{n}{db}\PY{o}{.}\PY{n}{actionInvokers}\PY{o}{.}\PY{n}{getModule} \PY{n}{userName}\PY{p}{,} \PY{n}{moduleName}\PY{p}{,} \PY{p}{(} \PY{n}{err}\PY{p}{,} \PY{n}{obj} \PY{p}{)} \PY{o}{=}\PY{o}{\PYZgt{}}
+            \PY{k}{if} \PY{n}{obj}
+              \PY{c}{\PYZsh{} we compile the module and pass: }
+              \PY{n}{dynmod}\PY{o}{.}\PY{n}{compileString} \PY{n}{obj}\PY{o}{.}\PY{n}{data}\PY{p}{,}  \PY{c}{\PYZsh{} code}
+                \PY{n}{userName}\PY{p}{,}                           \PY{c}{\PYZsh{} userId}
+                \PY{n}{oMyRule}\PY{o}{.}\PY{n}{rule}\PY{p}{,}                     \PY{c}{\PYZsh{} oRule}
+                \PY{n}{moduleName}\PY{p}{,}                         \PY{c}{\PYZsh{} moduleId}
+                \PY{n}{obj}\PY{o}{.}\PY{n}{lang}\PY{p}{,}                           \PY{c}{\PYZsh{} script language}
+                \PY{l+s}{\PYZdq{}}\PY{l+s}{actioninvoker}\PY{l+s}{\PYZdq{}}\PY{p}{,}                    \PY{c}{\PYZsh{} module type}
+                \PY{n}{db}\PY{o}{.}\PY{n}{actionInvokers}\PY{p}{,}                  \PY{c}{\PYZsh{} the DB interface}
+                \PY{p}{(} \PY{n}{result} \PY{p}{)} \PY{o}{=}\PY{o}{\PYZgt{}}
+                  \PY{k}{if} \PY{n}{result}\PY{o}{.}\PY{n}{answ}\PY{o}{.}\PY{n}{code} \PY{o+ow}{is} \PY{l+m+mi}{200}
+                    \PY{n+nd}{@log.info} \PY{l+s}{\PYZdq{}}\PY{l+s}{EN | Module }\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsh{}\PYZob{} moduleName \PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{ successfully loaded for userName}
+                      \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsh{}\PYZob{} userName \PYZcb{}}\PY{l+s}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{rule} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsh{}\PYZob{} oMyRule.rule.id \PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZdq{}}
+                  \PY{k}{else}
+                    \PY{n+nd}{@log.error} \PY{l+s}{\PYZdq{}}\PY{l+s}{EN | Compilation of code failed! \PYZsh{}\PYZob{} userName \PYZcb{},}
+                      \PY{c}{\PYZsh{}\PYZob{} oMyRule.rule.id \PYZcb{}, \PYZsh{}\PYZob{} moduleName \PYZcb{}: \PYZsh{}\PYZob{} result.answ.message \PYZcb{}\PYZdq{}}
+                  \PY{n}{oMyRule}\PY{o}{.}\PY{n}{actions}\PY{p}{[}\PY{n}{moduleName}\PY{p}{]} \PY{o}{=} \PY{n}{result}
+            \PY{k}{else}
+              \PY{n+nd}{@log.warn} \PY{l+s}{\PYZdq{}}\PY{l+s}{EN | \PYZsh{}\PYZob{} moduleName \PYZcb{} not found for \PYZsh{}\PYZob{} oMyRule.rule.id \PYZcb{}!}\PY{l+s}{\PYZdq{}}
+
+      \PY{n}{fAddIfNewOrNotExisting} \PY{n}{action} \PY{k}{for} \PY{n}{action} \PY{o+ow}{in} \PY{n}{oMyRule}\PY{o}{.}\PY{n}{rule}\PY{o}{.}\PY{n}{actions}
+
+    \PY{c}{\PYZsh{} Go thorugh all rules and check whether the action is still required}
+    \PY{n}{fCheckRules} \PY{n}{oRl} \PY{k}{for} \PY{n}{nmRl}\PY{p}{,} \PY{n}{oRl} \PY{n}{of} \PY{n}{oUser}
+
+  \PY{c}{\PYZsh{} load all required modules for all users}
+  \PY{n}{fAddRequired} \PY{n}{userName}\PY{p}{,} \PY{n}{oUser} \PY{k}{for} \PY{n}{userName}\PY{p}{,} \PY{n}{oUser} \PY{n}{of} \PY{n}{listUserRules}
+
+\PY{n}{numExecutingFunctions} \PY{o}{=} \PY{l+m+mi}{1}
+\PY{n}{pollQueue} \PY{o}{=} \PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{k}{if} \PY{n}{isRunning}
+    \PY{n}{db}\PY{o}{.}\PY{n}{popEvent} \PY{p}{(} \PY{n}{err}\PY{p}{,} \PY{n}{obj} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+      \PY{k}{if} \PY{o+ow}{not} \PY{n}{err} \PY{o+ow}{and} \PY{n}{obj}
+        \PY{n}{processEvent} \PY{n}{obj}
+    \PY{n}{setTimeout} \PY{n}{pollQueue}\PY{p}{,} \PY{l+m+mi}{20} \PY{o}{*} \PY{n}{numExecutingFunctions} 
+
+\PY{n}{oOperators} \PY{o}{=}
+  \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZlt{}}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{p}{(} \PY{n}{x}\PY{p}{,} \PY{n}{y} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}} \PY{n}{x} \PY{o}{\PYZlt{}} \PY{n}{y}
+  \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZlt{}=}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{p}{(} \PY{n}{x}\PY{p}{,} \PY{n}{y} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}} \PY{n}{x} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{y}
+  \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZgt{}}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{p}{(} \PY{n}{x}\PY{p}{,} \PY{n}{y} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}} \PY{n}{x} \PY{o}{\PYZgt{}} \PY{n}{y}
+  \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZgt{}=}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{p}{(} \PY{n}{x}\PY{p}{,} \PY{n}{y} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}} \PY{n}{x} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{y}
+  \PY{l+s}{\PYZsq{}}\PY{l+s}{==}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{p}{(} \PY{n}{x}\PY{p}{,} \PY{n}{y} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}} \PY{n}{x} \PY{o+ow}{is} \PY{n}{y}
+  \PY{l+s}{\PYZsq{}}\PY{l+s}{!=}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{p}{(} \PY{n}{x}\PY{p}{,} \PY{n}{y} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}} \PY{n}{x} \PY{n}{isnt} \PY{n}{y}
+  \PY{l+s}{\PYZsq{}}\PY{l+s}{instr}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{p}{(} \PY{n}{x}\PY{p}{,} \PY{n}{y} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}} \PY{n}{x}\PY{o}{.}\PY{n}{indexOf}\PY{p}{(} \PY{n}{y} \PY{p}{)} \PY{o}{\PYZgt{}} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{c}{\PYZsh{} Checks whether all conditions of the rule are met by the event.}
+
+\PY{c}{\PYZsh{} @private validConditions ( *evt, rule* )}
+\PY{c}{\PYZsh{} @param \PYZob{}Object\PYZcb{} evt}
+\PY{c}{\PYZsh{} @param \PYZob{}Object\PYZcb{} rule}
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{n}{validConditions} \PY{o}{=} \PY{p}{(} \PY{n}{evt}\PY{p}{,} \PY{n}{rule}\PY{p}{,} \PY{n}{userId}\PY{p}{,} \PY{n}{ruleId} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{k}{if} \PY{n}{rule}\PY{o}{.}\PY{n}{conditions}\PY{o}{.}\PY{n}{length} \PY{o+ow}{is} \PY{l+m+mi}{0}
+    \PY{k}{return} \PY{n}{true}
+  \PY{k}{for} \PY{n}{cond} \PY{o+ow}{in} \PY{n}{rule}\PY{o}{.}\PY{n}{conditions}
+    \PY{n}{selectedProperty} \PY{o}{=} \PY{n}{jsonQuery}\PY{p}{(} \PY{n}{evt}\PY{p}{,} \PY{n}{cond}\PY{o}{.}\PY{n}{selector} \PY{p}{)}\PY{o}{.}\PY{n}{nodes}\PY{p}{(}\PY{p}{)}
+    \PY{k}{if} \PY{n}{selectedProperty}\PY{o}{.}\PY{n}{length} \PY{o+ow}{is} \PY{l+m+mi}{0}
+      \PY{n}{db}\PY{o}{.}\PY{n}{appendLog} \PY{n}{userId}\PY{p}{,} \PY{n}{ruleId}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Condition}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Node not found in event: \PYZsh{}\PYZob{} cond.selector \PYZcb{}}\PY{l+s}{\PYZdq{}}
+      \PY{k}{return} \PY{n}{false} 
+
+    \PY{n}{op} \PY{o}{=} \PY{n}{oOperators}\PY{p}{[} \PY{n}{cond}\PY{o}{.}\PY{n}{operator} \PY{p}{]}
+    \PY{k}{if} \PY{o+ow}{not} \PY{n}{op}
+      \PY{n}{db}\PY{o}{.}\PY{n}{appendLog} \PY{n}{userId}\PY{p}{,} \PY{n}{ruleId}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Condition}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Unknown operator: \PYZsh{}\PYZob{} cond.operator \PYZcb{}.}
+        \PY{n}{Use} \PY{n}{one} \PY{n}{of} \PY{c}{\PYZsh{}\PYZob{} Object.keys( oOperators ).join \PYZsq{}, \PYZsq{} \PYZcb{}\PYZdq{}}
+      \PY{k}{return} \PY{n}{false}
+
+    \PY{k}{try}
+      \PY{c}{\PYZsh{} maybe we should only allow certain ops for certain types}
+      \PY{k}{if} \PY{n}{cond}\PY{o}{.}\PY{n}{type} \PY{o+ow}{is} \PY{l+s}{\PYZsq{}}\PY{l+s}{string}\PY{l+s}{\PYZsq{}}
+        \PY{n}{val} \PY{o}{=} \PY{n}{selectedProperty}\PY{p}{[} \PY{l+m+mi}{0} \PY{p}{]}
+      \PY{k}{else} \PY{k}{if} \PY{n}{cond}\PY{o}{.}\PY{n}{type} \PY{o+ow}{is} \PY{l+s}{\PYZsq{}}\PY{l+s}{bool}\PY{l+s}{\PYZsq{}}
+        \PY{n}{val} \PY{o}{=} \PY{n}{selectedProperty}\PY{p}{[} \PY{l+m+mi}{0} \PY{p}{]}
+      \PY{k}{else} \PY{k}{if} \PY{n}{cond}\PY{o}{.}\PY{n}{type} \PY{o+ow}{is} \PY{l+s}{\PYZsq{}}\PY{l+s}{value}\PY{l+s}{\PYZsq{}}
+        \PY{n}{val} \PY{o}{=} \PY{n}{parseFloat}\PY{p}{(} \PY{n}{selectedProperty}\PY{p}{[} \PY{l+m+mi}{0} \PY{p}{]} \PY{p}{)} \PY{o}{|}\PY{o}{|} \PY{l+m+mi}{0}
+
+      \PY{k}{if} \PY{o+ow}{not} \PY{n}{op} \PY{n}{val}\PY{p}{,} \PY{n}{cond}\PY{o}{.}\PY{n}{compare}
+        \PY{k}{return} \PY{n}{false}
+    \PY{n}{catch} \PY{n}{err}
+      \PY{n}{db}\PY{o}{.}\PY{n}{appendLog} \PY{n}{userId}\PY{p}{,} \PY{n}{ruleId}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Condition}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Error: Selector }\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsh{}\PYZob{} cond.selector \PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{,}
+        \PY{n}{Operator} \PY{c}{\PYZsh{}\PYZob{} cond.operator \PYZcb{}, Compare: \PYZsh{}\PYZob{} cond.compare \PYZcb{}\PYZdq{}}
+      
+  \PY{k}{return} \PY{n}{true}
+
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{c}{\PYZsh{} Handles retrieved events.}
+
+\PY{c}{\PYZsh{} @private processEvent ( *evt* )}
+\PY{c}{\PYZsh{} @param \PYZob{}Object\PYZcb{} evt}
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{n}{processEvent} \PY{o}{=} \PY{p}{(} \PY{n}{evt} \PY{p}{)} \PY{o}{=}\PY{o}{\PYZgt{}}
+  \PY{n}{fSearchAndInvokeAction} \PY{o}{=} \PY{p}{(} \PY{n}{node}\PY{p}{,} \PY{n}{arrPath}\PY{p}{,} \PY{n}{funcName}\PY{p}{,} \PY{n}{evt}\PY{p}{,} \PY{n}{depth} \PY{p}{)} \PY{o}{=}\PY{o}{\PYZgt{}}
+    \PY{k}{if} \PY{o+ow}{not} \PY{n}{node}
+      \PY{n+nd}{@log.error} \PY{l+s}{\PYZdq{}}\PY{l+s}{EN | Didn}\PY{l+s}{\PYZsq{}}\PY{l+s}{t find property in rule list: }\PY{l+s}{\PYZdq{}} \PY{o}{+} \PY{n}{arrPath}\PY{o}{.}\PY{n}{join}\PY{p}{(} \PY{l+s}{\PYZsq{}}\PY{l+s}{, }\PY{l+s}{\PYZsq{}} \PY{p}{)} \PY{o}{+} \PY{l+s}{\PYZdq{}}\PY{l+s}{ at depth }\PY{l+s}{\PYZdq{}} \PY{o}{+} \PY{n}{depth}
+      \PY{k}{return}
+    \PY{k}{if} \PY{n}{depth} \PY{o+ow}{is} \PY{n}{arrPath}\PY{o}{.}\PY{n}{length}
+      \PY{k}{try}
+        \PY{n}{numExecutingFunctions}\PY{o}{+}\PY{o}{+}
+        \PY{n+nd}{@log.info} \PY{l+s}{\PYZdq{}}\PY{l+s}{EN | \PYZsh{}\PYZob{} funcName \PYZcb{} executes...}\PY{l+s}{\PYZdq{}}
+        \PY{n}{arrArgs} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{k}{if} \PY{n}{node}\PY{o}{.}\PY{n}{funcArgs}\PY{p}{[} \PY{n}{funcName} \PY{p}{]}
+          \PY{k}{for} \PY{n}{oArg} \PY{o+ow}{in} \PY{n}{node}\PY{o}{.}\PY{n}{funcArgs}\PY{p}{[} \PY{n}{funcName} \PY{p}{]}
+            \PY{n}{arrSelectors} \PY{o}{=} \PY{n}{oArg}\PY{o}{.}\PY{n}{value}\PY{o}{.}\PY{n}{match} \PY{o}{/}\PY{c}{\PYZsh{}\PYZbs{}\PYZob{}(.*?)\PYZbs{}\PYZcb{}/g}
+            \PY{n}{argument} \PY{o}{=} \PY{n}{oArg}\PY{o}{.}\PY{n}{value}
+            \PY{k}{if} \PY{n}{arrSelectors}
+              \PY{k}{for} \PY{n}{sel} \PY{o+ow}{in} \PY{n}{arrSelectors}
+                \PY{n}{selector} \PY{o}{=} \PY{n}{sel}\PY{o}{.}\PY{n}{substring} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{sel}\PY{o}{.}\PY{n}{length} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}
+                \PY{n}{data} \PY{o}{=} \PY{n}{jsonQuery}\PY{p}{(} \PY{n}{evt}\PY{o}{.}\PY{n}{body}\PY{p}{,} \PY{n}{selector} \PY{p}{)}\PY{o}{.}\PY{n}{nodes}\PY{p}{(}\PY{p}{)}\PY{p}{[} \PY{l+m+mi}{0} \PY{p}{]}
+                \PY{n}{argument} \PY{o}{=} \PY{n}{argument}\PY{o}{.}\PY{n}{replace} \PY{n}{sel}\PY{p}{,} \PY{n}{data}
+                \PY{k}{if} \PY{n}{oArg}\PY{o}{.}\PY{n}{value} \PY{o+ow}{is} \PY{n}{sel}
+                  \PY{n}{argument} \PY{o}{=} \PY{n}{data} \PY{c}{\PYZsh{} if the user wants to pass an object, we allow him to do so}
+            \PY{n}{arrArgs}\PY{o}{.}\PY{n}{push} \PY{n}{argument} \PY{c}{\PYZsh{} Add arguments to the array}
+        \PY{k}{else}
+          \PY{n+nd}{@log.warn} \PY{l+s}{\PYZdq{}}\PY{l+s}{EN | Weird! arguments not loaded for function }\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsh{}\PYZob{} funcName \PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{!}\PY{l+s}{\PYZdq{}}
+          
+        \PY{c}{\PYZsh{} Dispatching the action:}
+        \PY{n}{node}\PY{o}{.}\PY{n}{module}\PY{p}{[} \PY{n}{funcName} \PY{p}{]}\PY{o}{.}\PY{n}{apply} \PY{n}{this}\PY{p}{,} \PY{n}{arrArgs}
+
+        \PY{n+nd}{@log.info} \PY{l+s}{\PYZdq{}}\PY{l+s}{EN | \PYZsh{}\PYZob{} funcName \PYZcb{} finished execution}\PY{l+s}{\PYZdq{}}
+      \PY{n}{catch} \PY{n}{err}
+        \PY{n+nd}{@log.info} \PY{l+s}{\PYZdq{}}\PY{l+s}{EN | ERROR IN ACTION INVOKER: }\PY{l+s}{\PYZdq{}} \PY{o}{+} \PY{n}{err}\PY{o}{.}\PY{n}{message}
+        \PY{n}{node}\PY{o}{.}\PY{n}{logger} \PY{n}{err}\PY{o}{.}\PY{n}{message}
+      \PY{k}{if} \PY{n}{numExecutingFunctions}\PY{o}{\PYZhy{}}\PY{o}{\PYZhy{}} \PY{o}{\PYZpc{}} \PY{l+m+mi}{100} \PY{o+ow}{is} \PY{l+m+mi}{0}
+        \PY{n+nd}{@log.warn} \PY{l+s}{\PYZdq{}}\PY{l+s}{EN | The system is producing too many tokens! Currently: \PYZsh{}\PYZob{} numExecutingFunctions \PYZcb{}}\PY{l+s}{\PYZdq{}}
+    \PY{k}{else}
+      \PY{n}{fSearchAndInvokeAction} \PY{n}{node}\PY{p}{[}\PY{n}{arrPath}\PY{p}{[}\PY{n}{depth}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{arrPath}\PY{p}{,} \PY{n}{funcName}\PY{p}{,} \PY{n}{evt}\PY{p}{,} \PY{n}{depth} \PY{o}{+} \PY{l+m+mi}{1}
+
+  \PY{n+nd}{@log.info} \PY{l+s}{\PYZsq{}}\PY{l+s}{EN | Processing event: }\PY{l+s}{\PYZsq{}} \PY{o}{+} \PY{n}{evt}\PY{o}{.}\PY{n}{eventname}
+  \PY{n}{fCheckEventForUser} \PY{o}{=} \PY{p}{(} \PY{n}{userName}\PY{p}{,} \PY{n}{oUser} \PY{p}{)} \PY{o}{=}\PY{o}{\PYZgt{}}
+    \PY{k}{for} \PY{n}{ruleName}\PY{p}{,} \PY{n}{oMyRule} \PY{n}{of} \PY{n}{oUser}
+
+      \PY{n}{ruleEvent} \PY{o}{=} \PY{n}{oMyRule}\PY{o}{.}\PY{n}{rule}\PY{o}{.}\PY{n}{eventname}
+      \PY{k}{if} \PY{n}{oMyRule}\PY{o}{.}\PY{n}{rule}\PY{o}{.}\PY{n}{timestamp}
+        \PY{n}{ruleEvent} \PY{o}{+}\PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZus{}created:}\PY{l+s}{\PYZsq{}} \PY{o}{+} \PY{n}{oMyRule}\PY{o}{.}\PY{n}{rule}\PY{o}{.}\PY{n}{timestamp}
+      \PY{k}{if} \PY{n}{evt}\PY{o}{.}\PY{n}{eventname} \PY{o+ow}{is} \PY{n}{ruleEvent} \PY{o+ow}{and} \PY{n}{validConditions} \PY{n}{evt}\PY{p}{,} \PY{n}{oMyRule}\PY{o}{.}\PY{n}{rule}\PY{p}{,} \PY{n}{userName}\PY{p}{,} \PY{n}{ruleName}
+        
+        \PY{n+nd}{@log.info} \PY{l+s}{\PYZsq{}}\PY{l+s}{EN | EVENT FIRED: }\PY{l+s}{\PYZsq{}} \PY{o}{+} \PY{n}{evt}\PY{o}{.}\PY{n}{eventname} \PY{o}{+} \PY{l+s}{\PYZsq{}}\PY{l+s}{ for rule }\PY{l+s}{\PYZsq{}} \PY{o}{+} \PY{n}{ruleName}
+        
+        \PY{k}{for} \PY{n}{action} \PY{o+ow}{in} \PY{n}{oMyRule}\PY{o}{.}\PY{n}{rule}\PY{o}{.}\PY{n}{actions}
+          \PY{n}{arr} \PY{o}{=} \PY{n}{action}\PY{o}{.}\PY{n}{split} \PY{l+s}{\PYZsq{}}\PY{l+s}{ \PYZhy{}\PYZgt{} }\PY{l+s}{\PYZsq{}}
+          \PY{n}{fSearchAndInvokeAction} \PY{n}{listUserRules}\PY{p}{,} \PY{p}{[} \PY{n}{userName}\PY{p}{,} \PY{n}{ruleName}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{actions}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{arr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{arr}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{evt}\PY{p}{,} \PY{l+m+mi}{0}
+
+  \PY{c}{\PYZsh{} If the event is bound to a user, we only process it for him}
+  \PY{k}{if} \PY{n}{evt}\PY{o}{.}\PY{n}{username}
+    \PY{n}{fCheckEventForUser} \PY{n}{evt}\PY{o}{.}\PY{n}{username}\PY{p}{,} \PY{n}{listUserRules}\PY{p}{[} \PY{n}{evt}\PY{o}{.}\PY{n}{username} \PY{p}{]}
+
+  \PY{c}{\PYZsh{} Else we loop through all users}
+  \PY{k}{else}
+    \PY{n}{fCheckEventForUser} \PY{n}{userName}\PY{p}{,} \PY{n}{oUser} \PY{k}{for} \PY{n}{userName}\PY{p}{,} \PY{n}{oUser} \PY{n}{of} \PY{n}{listUserRules}
+
+\PY{n}{exports}\PY{o}{.}\PY{n}{shutDown} \PY{o}{=} \PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{n}{isRunning} \PY{o}{=} \PY{n}{false}
+  \PY{n}{listUserRules} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+\section{User Request Handler}
+\begin{Verbatim}[fontsize=\scriptsize,commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+
+\PY{c}{\PYZsh{} Components Manager}
+\PY{c}{\PYZsh{} ==================}
+\PY{c}{\PYZsh{} \PYZgt{} The components manager (User Request Handler) is the interface for CRUD on ECA components.}
+\PY{c}{\PYZsh{} \PYZgt{} It also takes care of the dynamic JS modules and the rules.}
+\PY{c}{\PYZsh{} \PYZgt{} Event Poller and Action Invoker modules are loaded as strings and stored in the database,}
+\PY{c}{\PYZsh{} \PYZgt{} then compiled into node modules and rules and used in the engine and event poller.}
+
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+
+\PY{c}{\PYZsh{} **Loads Modules:**}
+
+\PY{c}{\PYZsh{} \PYZhy{} [Persistence](persistence.html)}
+\PY{n}{db} \PY{o}{=} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{./persistence}\PY{l+s}{\PYZsq{}}
+\PY{c}{\PYZsh{} \PYZhy{} [Dynamic Modules](dynamic\PYZhy{}modules.html)}
+\PY{n}{dynmod} \PY{o}{=} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{./dynamic\PYZhy{}modules}\PY{l+s}{\PYZsq{}}
+\PY{c}{\PYZsh{} \PYZhy{} [Encryption](encryption.html)}
+\PY{n}{encryption} \PY{o}{=} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{./encryption}\PY{l+s}{\PYZsq{}}
+\PY{c}{\PYZsh{} \PYZhy{} [Request Handler](request\PYZhy{}handler.html)}
+\PY{n}{rh} \PY{o}{=} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{./request\PYZhy{}handler}\PY{l+s}{\PYZsq{}}
+
+\PY{c}{\PYZsh{} \PYZhy{} Node.js Modules: [fs](http://nodejs.org/api/fs.html),}
+\PY{c}{\PYZsh{}   [path](http://nodejs.org/api/path.html) and}
+\PY{c}{\PYZsh{}   [events](http://nodejs.org/api/events.html)}
+\PY{n}{fs} \PY{o}{=} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{fs}\PY{l+s}{\PYZsq{}}
+\PY{n}{path} \PY{o}{=} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{path}\PY{l+s}{\PYZsq{}}
+\PY{n}{events} \PY{o}{=} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{events}\PY{l+s}{\PYZsq{}}
+\PY{n}{eventEmitter} \PY{o}{=} \PY{n}{new} \PY{n}{events}\PY{o}{.}\PY{n}{EventEmitter}\PY{p}{(}\PY{p}{)}
+
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{c}{\PYZsh{} Module call}
+\PY{c}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+\PY{c}{\PYZsh{} Initializes the Components Manager and constructs a new Event Emitter.}
+
+\PY{c}{\PYZsh{} @param \PYZob{}Object\PYZcb{} args}
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{n}{exports} \PY{o}{=} \PY{n}{module}\PY{o}{.}\PY{n}{exports} \PY{o}{=} \PY{p}{(} \PY{n}{args} \PY{p}{)} \PY{o}{=}\PY{o}{\PYZgt{}}
+  \PY{n+nd}{@log} \PY{o}{=} \PY{n}{args}\PY{o}{.}\PY{n}{logger}
+  \PY{n}{db} \PY{n}{args}
+  \PY{n}{dynmod} \PY{n}{args}
+  \PY{n}{module}\PY{o}{.}\PY{n}{exports}
+
+
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{c}{\PYZsh{} Add an event handler (eh) that listens for rules.}
+
+\PY{c}{\PYZsh{} @public addRuleListener ( *eh* )}
+\PY{c}{\PYZsh{} @param \PYZob{}function\PYZcb{} eh}
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+
+\PY{n}{exports}\PY{o}{.}\PY{n}{addRuleListener} \PY{o}{=} \PY{p}{(} \PY{n}{eh} \PY{p}{)} \PY{o}{=}\PY{o}{\PYZgt{}}
+  \PY{n}{eventEmitter}\PY{o}{.}\PY{n}{addListener} \PY{l+s}{\PYZsq{}}\PY{l+s}{rule}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{eh}
+
+  \PY{c}{\PYZsh{} Fetch all active rules per user}
+  \PY{n}{db}\PY{o}{.}\PY{n}{getAllActivatedRuleIdsPerUser} \PY{p}{(} \PY{n}{err}\PY{p}{,} \PY{n}{objUsers} \PY{p}{)} \PY{o}{=}\PY{o}{\PYZgt{}}
+    
+    \PY{c}{\PYZsh{} Go through all rules of each user}
+    \PY{n}{fGoThroughUsers} \PY{o}{=} \PY{p}{(} \PY{n}{user}\PY{p}{,} \PY{n}{rules} \PY{p}{)} \PY{o}{=}\PY{o}{\PYZgt{}}
+
+      \PY{c}{\PYZsh{} Fetch the rules object for each rule in each user}
+      \PY{n}{fFetchRule} \PY{o}{=} \PY{p}{(} \PY{n}{rule} \PY{p}{)} \PY{o}{=}\PY{o}{\PYZgt{}}
+          \PY{n}{db}\PY{o}{.}\PY{n}{getRule} \PY{n}{user}\PY{p}{,} \PY{n}{rule}\PY{p}{,} \PY{p}{(} \PY{n}{err}\PY{p}{,} \PY{n}{strRule} \PY{p}{)} \PY{o}{=}\PY{o}{\PYZgt{}}
+            \PY{k}{try} 
+              \PY{n}{oRule} \PY{o}{=} \PY{n}{JSON}\PY{o}{.}\PY{n}{parse} \PY{n}{strRule}
+              \PY{n}{db}\PY{o}{.}\PY{n}{resetLog} \PY{n}{user}\PY{p}{,} \PY{n}{oRule}\PY{o}{.}\PY{n}{id}
+              \PY{n}{eventInfo} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsq{}}
+              \PY{k}{if} \PY{n}{oRule}\PY{o}{.}\PY{n}{eventstart}
+                \PY{n}{eventInfo} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Starting at \PYZsh{}\PYZob{} new Date( oRule.eventstart ) \PYZcb{},}
+                    \PY{n}{Interval} \PY{n+nb}{set} \PY{n}{to} \PY{c}{\PYZsh{}\PYZob{} oRule.eventinterval \PYZcb{} minutes\PYZdq{}}
+              \PY{n}{db}\PY{o}{.}\PY{n}{appendLog} \PY{n}{user}\PY{p}{,} \PY{n}{oRule}\PY{o}{.}\PY{n}{id}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{INIT}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Rule }\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsh{}\PYZob{} oRule.id \PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{ initialized. \PYZsh{}\PYZob{} eventInfo \PYZcb{}}\PY{l+s}{\PYZdq{}}
+
+              \PY{n}{eventEmitter}\PY{o}{.}\PY{n}{emit} \PY{l+s}{\PYZsq{}}\PY{l+s}{rule}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                \PY{n}{intevent}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{init}\PY{l+s}{\PYZsq{}}
+                \PY{n}{user}\PY{p}{:} \PY{n}{user}
+                \PY{n}{rule}\PY{p}{:} \PY{n}{oRule}
+            \PY{n}{catch} \PY{n}{err}
+              \PY{n+nd}{@log.warn} \PY{l+s}{\PYZdq{}}\PY{l+s}{CM | There}\PY{l+s}{\PYZsq{}}\PY{l+s}{s an invalid rule in the system: \PYZsh{}\PYZob{} strRule \PYZcb{}}\PY{l+s}{\PYZdq{}}
+
+      \PY{c}{\PYZsh{} Go through all rules for each user}
+      \PY{n}{fFetchRule} \PY{n}{rule} \PY{k}{for} \PY{n}{rule} \PY{o+ow}{in} \PY{n}{rules}
+          
+    \PY{c}{\PYZsh{} Go through each user}
+    \PY{n}{fGoThroughUsers} \PY{n}{user}\PY{p}{,} \PY{n}{rules} \PY{k}{for} \PY{n}{user}\PY{p}{,} \PY{n}{rules} \PY{n}{of} \PY{n}{objUsers}
+
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{c}{\PYZsh{} Processes a user request coming through the request\PYZhy{}handler.}
+
+\PY{c}{\PYZsh{} \PYZhy{} `user` is the user object as it comes from the DB.}
+\PY{c}{\PYZsh{} \PYZhy{} `oReq` is the request object that contains:}
+
+\PY{c}{\PYZsh{}   \PYZhy{} `command` as a string }
+\PY{c}{\PYZsh{}   \PYZhy{} `body` an optional stringified JSON object }
+\PY{c}{\PYZsh{} The callback function `callback( obj )` will receive an object}
+\PY{c}{\PYZsh{} containing the HTTP response code and a corresponding message.}
+
+\PY{c}{\PYZsh{} @public processRequest ( *user, oReq, callback* )}
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{n}{exports}\PY{o}{.}\PY{n}{processRequest} \PY{o}{=} \PY{p}{(} \PY{n}{user}\PY{p}{,} \PY{n}{oReq}\PY{p}{,} \PY{n}{callback} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{k}{if} \PY{o+ow}{not} \PY{n}{oReq}\PY{o}{.}\PY{n}{body}
+    \PY{n}{oReq}\PY{o}{.}\PY{n}{body} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZob{}\PYZcb{}}\PY{l+s}{\PYZsq{}}
+  \PY{k}{try}
+    \PY{n}{dat} \PY{o}{=} \PY{n}{JSON}\PY{o}{.}\PY{n}{parse} \PY{n}{oReq}\PY{o}{.}\PY{n}{body}
+  \PY{n}{catch} \PY{n}{err}
+    \PY{k}{return} \PY{n}{callback}
+      \PY{n}{code}\PY{p}{:} \PY{l+m+mi}{404}
+      \PY{n}{message}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{You had a strange body in your request!}\PY{l+s}{\PYZsq{}}
+  \PY{k}{if} \PY{n}{commandFunctions}\PY{p}{[}\PY{n}{oReq}\PY{o}{.}\PY{n}{command}\PY{p}{]}
+
+    \PY{c}{\PYZsh{} If the command function was registered we invoke it}
+    \PY{n}{commandFunctions}\PY{p}{[}\PY{n}{oReq}\PY{o}{.}\PY{n}{command}\PY{p}{]} \PY{n}{user}\PY{p}{,} \PY{n}{dat}\PY{p}{,} \PY{n}{callback}
+  \PY{k}{else}
+    \PY{n}{callback}
+      \PY{n}{code}\PY{p}{:} \PY{l+m+mi}{404}
+      \PY{n}{message}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{What do you want from me?}\PY{l+s}{\PYZsq{}}
+
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{c}{\PYZsh{} Checks whether all required parameters are present in the body.}
+
+\PY{c}{\PYZsh{} @private hasRequiredParams ( *arrParams, oBody* )}
+\PY{c}{\PYZsh{} @param \PYZob{}Array\PYZcb{} arrParams}
+\PY{c}{\PYZsh{} @param \PYZob{}Object\PYZcb{} oBody}
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{n}{hasRequiredParams} \PY{o}{=} \PY{p}{(} \PY{n}{arrParams}\PY{p}{,} \PY{n}{oBody} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{n}{answ} \PY{o}{=}
+    \PY{n}{code}\PY{p}{:} \PY{l+m+mi}{400}
+    \PY{n}{message}\PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{Your request didn}\PY{l+s}{\PYZsq{}}\PY{l+s}{t contain all necessary fields! Requires: \PYZsh{}\PYZob{} arrParams.join() \PYZcb{}}\PY{l+s}{\PYZdq{}}
+  \PY{k}{return} \PY{n}{answ} \PY{k}{for} \PY{n}{param} \PY{o+ow}{in} \PY{n}{arrParams} \PY{n}{when} \PY{o+ow}{not} \PY{n}{oBody}\PY{p}{[}\PY{n}{param}\PY{p}{]}
+  \PY{n}{answ}\PY{o}{.}\PY{n}{code} \PY{o}{=} \PY{l+m+mi}{200}
+  \PY{n}{answ}\PY{o}{.}\PY{n}{message} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{All required properties found}\PY{l+s}{\PYZsq{}}
+  \PY{n}{answ}
+
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{c}{\PYZsh{} Fetches all available modules and return them together with the available functions.}
+
+\PY{c}{\PYZsh{} @private getModules ( *user, oBody, dbMod, callback* )}
+\PY{c}{\PYZsh{} @param \PYZob{}Object\PYZcb{} user}
+\PY{c}{\PYZsh{} @param \PYZob{}Object\PYZcb{} oBody}
+\PY{c}{\PYZsh{} @param \PYZob{}Object\PYZcb{} dbMod}
+\PY{c}{\PYZsh{} @param \PYZob{}function\PYZcb{} callback}
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{n}{getModules} \PY{o}{=} \PY{p}{(} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{dbMod}\PY{p}{,} \PY{n}{callback} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{n}{fProcessIds} \PY{o}{=} \PY{p}{(} \PY{n}{userName} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{p}{(} \PY{n}{err}\PY{p}{,} \PY{n}{arrNames} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+      \PY{n}{oRes} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+      \PY{n}{answReq} \PY{o}{=} \PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+        \PY{n}{callback}
+          \PY{n}{code}\PY{p}{:} \PY{l+m+mi}{200}
+          \PY{n}{message}\PY{p}{:} \PY{n}{JSON}\PY{o}{.}\PY{n}{stringify} \PY{n}{oRes}
+      \PY{n}{sem} \PY{o}{=} \PY{n}{arrNames}\PY{o}{.}\PY{n}{length}
+      \PY{k}{if} \PY{n}{sem} \PY{o+ow}{is} \PY{l+m+mi}{0}
+        \PY{n}{answReq}\PY{p}{(}\PY{p}{)}
+      \PY{k}{else}
+        \PY{n}{fGetFunctions} \PY{o}{=} \PY{p}{(} \PY{n+nb}{id} \PY{p}{)} \PY{o}{=}\PY{o}{\PYZgt{}}
+          \PY{n}{dbMod}\PY{o}{.}\PY{n}{getModule} \PY{n}{userName}\PY{p}{,} \PY{n+nb}{id}\PY{p}{,} \PY{p}{(} \PY{n}{err}\PY{p}{,} \PY{n}{oModule} \PY{p}{)} \PY{o}{=}\PY{o}{\PYZgt{}}
+            \PY{k}{if} \PY{n}{oModule}
+              \PY{n}{oRes}\PY{p}{[}\PY{n+nb}{id}\PY{p}{]} \PY{o}{=} \PY{n}{JSON}\PY{o}{.}\PY{n}{parse} \PY{n}{oModule}\PY{o}{.}\PY{n}{functions}
+            \PY{k}{if} \PY{o}{\PYZhy{}}\PY{o}{\PYZhy{}}\PY{n}{sem} \PY{o+ow}{is} \PY{l+m+mi}{0}
+              \PY{n}{answReq}\PY{p}{(}\PY{p}{)}
+        \PY{n}{fGetFunctions} \PY{n+nb}{id} \PY{k}{for} \PY{n+nb}{id} \PY{o+ow}{in} \PY{n}{arrNames}
+
+  \PY{n}{dbMod}\PY{o}{.}\PY{n}{getAvailableModuleIds} \PY{n}{user}\PY{o}{.}\PY{n}{username}\PY{p}{,} \PY{n}{fProcessIds} \PY{n}{user}\PY{o}{.}\PY{n}{username}
+
+\PY{n}{getModuleParams} \PY{o}{=} \PY{p}{(} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{dbMod}\PY{p}{,} \PY{n}{callback} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{n}{answ} \PY{o}{=} \PY{n}{hasRequiredParams} \PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{id}\PY{l+s}{\PYZsq{}} \PY{p}{]}\PY{p}{,} \PY{n}{oBody}
+  \PY{k}{if} \PY{n}{answ}\PY{o}{.}\PY{n}{code} \PY{n}{isnt} \PY{l+m+mi}{200}
+    \PY{n}{callback} \PY{n}{answ}
+  \PY{k}{else}
+    \PY{n}{dbMod}\PY{o}{.}\PY{n}{getModuleField} \PY{n}{user}\PY{o}{.}\PY{n}{username}\PY{p}{,} \PY{n}{oBody}\PY{o}{.}\PY{n}{id}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{params}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{p}{(} \PY{n}{err}\PY{p}{,} \PY{n}{oBody} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+      \PY{n}{answ}\PY{o}{.}\PY{n}{message} \PY{o}{=} \PY{n}{oBody}
+      \PY{n}{callback} \PY{n}{answ}
+
+\PY{n}{getModuleUserParams} \PY{o}{=} \PY{p}{(} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{dbMod}\PY{p}{,} \PY{n}{callback} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{n}{answ} \PY{o}{=} \PY{n}{hasRequiredParams} \PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{id}\PY{l+s}{\PYZsq{}} \PY{p}{]}\PY{p}{,} \PY{n}{oBody}
+  \PY{k}{if} \PY{n}{answ}\PY{o}{.}\PY{n}{code} \PY{n}{isnt} \PY{l+m+mi}{200}
+    \PY{n}{callback} \PY{n}{answ}
+  \PY{k}{else}
+    \PY{n}{dbMod}\PY{o}{.}\PY{n}{getUserParams} \PY{n}{oBody}\PY{o}{.}\PY{n}{id}\PY{p}{,} \PY{n}{user}\PY{o}{.}\PY{n}{username}\PY{p}{,} \PY{p}{(} \PY{n}{err}\PY{p}{,} \PY{n+nb}{str} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+      \PY{n}{oParams} \PY{o}{=} \PY{n}{JSON}\PY{o}{.}\PY{n}{parse} \PY{n+nb}{str}
+      \PY{k}{for} \PY{n}{name}\PY{p}{,} \PY{n}{oParam} \PY{n}{of} \PY{n}{oParams}
+        \PY{k}{if} \PY{o+ow}{not} \PY{n}{oParam}\PY{o}{.}\PY{n}{shielded}
+          \PY{n}{oParam}\PY{o}{.}\PY{n}{value} \PY{o}{=} \PY{n}{encryption}\PY{o}{.}\PY{n}{decrypt} \PY{n}{oParam}\PY{o}{.}\PY{n}{value}
+      \PY{n}{answ}\PY{o}{.}\PY{n}{message} \PY{o}{=} \PY{n}{JSON}\PY{o}{.}\PY{n}{stringify} \PY{n}{oParams}
+      \PY{n}{callback} \PY{n}{answ}
+
+\PY{n}{getModuleUserArguments} \PY{o}{=} \PY{p}{(} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{dbMod}\PY{p}{,} \PY{n}{callback} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{n}{answ} \PY{o}{=} \PY{n}{hasRequiredParams} \PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{ruleId}\PY{l+s}{\PYZsq{}} \PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{moduleId}\PY{l+s}{\PYZsq{}} \PY{p}{]}\PY{p}{,} \PY{n}{oBody}
+  \PY{k}{if} \PY{n}{answ}\PY{o}{.}\PY{n}{code} \PY{n}{isnt} \PY{l+m+mi}{200}
+    \PY{n}{callback} \PY{n}{answ}
+  \PY{k}{else}
+    \PY{n}{dbMod}\PY{o}{.}\PY{n}{getAllModuleUserArguments} \PY{n}{user}\PY{o}{.}\PY{n}{username}\PY{p}{,} \PY{n}{oBody}\PY{o}{.}\PY{n}{ruleId}\PY{p}{,} \PY{n}{oBody}\PY{o}{.}\PY{n}{moduleId}\PY{p}{,} \PY{p}{(} \PY{n}{err}\PY{p}{,} \PY{n}{oBody} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+      \PY{n}{answ}\PY{o}{.}\PY{n}{message} \PY{o}{=} \PY{n}{oBody}
+      \PY{n}{callback} \PY{n}{answ}
+
+\PY{n}{forgeModule} \PY{o}{=} \PY{p}{(} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{modType}\PY{p}{,} \PY{n}{dbMod}\PY{p}{,} \PY{n}{callback} \PY{p}{)} \PY{o}{=}\PY{o}{\PYZgt{}}
+  \PY{n}{answ} \PY{o}{=} \PY{n}{hasRequiredParams} \PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{id}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{params}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{lang}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{data}\PY{l+s}{\PYZsq{}} \PY{p}{]}\PY{p}{,} \PY{n}{oBody}
+  \PY{k}{if} \PY{n}{answ}\PY{o}{.}\PY{n}{code} \PY{n}{isnt} \PY{l+m+mi}{200}
+    \PY{n}{callback} \PY{n}{answ}
+  \PY{k}{else}
+    \PY{k}{if} \PY{n}{oBody}\PY{o}{.}\PY{n}{overwrite}
+      \PY{n}{storeModule} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{modType}\PY{p}{,} \PY{n}{dbMod}\PY{p}{,} \PY{n}{callback}
+    \PY{k}{else}
+      \PY{n}{dbMod}\PY{o}{.}\PY{n}{getModule} \PY{n}{user}\PY{o}{.}\PY{n}{username}\PY{p}{,} \PY{n}{oBody}\PY{o}{.}\PY{n}{id}\PY{p}{,} \PY{p}{(} \PY{n}{err}\PY{p}{,} \PY{n}{mod} \PY{p}{)} \PY{o}{=}\PY{o}{\PYZgt{}}
+        \PY{k}{if} \PY{n}{mod}
+          \PY{n}{answ}\PY{o}{.}\PY{n}{code} \PY{o}{=} \PY{l+m+mi}{409}
+          \PY{n}{answ}\PY{o}{.}\PY{n}{message} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{Module name already existing: }\PY{l+s}{\PYZsq{}} \PY{o}{+} \PY{n}{oBody}\PY{o}{.}\PY{n}{id}
+          \PY{n}{callback} \PY{n}{answ}
+        \PY{k}{else}
+          \PY{n}{storeModule} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{modType}\PY{p}{,} \PY{n}{dbMod}\PY{p}{,} \PY{n}{callback}
+
+\PY{n}{storeModule} \PY{o}{=} \PY{p}{(} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{modType}\PY{p}{,} \PY{n}{dbMod}\PY{p}{,} \PY{n}{callback} \PY{p}{)} \PY{o}{=}\PY{o}{\PYZgt{}}
+  \PY{n}{src} \PY{o}{=} \PY{n}{oBody}\PY{o}{.}\PY{n}{data}
+  \PY{n}{dynmod}\PY{o}{.}\PY{n}{compileString} \PY{n}{src}\PY{p}{,} \PY{n}{user}\PY{o}{.}\PY{n}{username}\PY{p}{,} \PY{n+nb}{id}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{dummyRule}\PY{l+s}{\PYZsq{}} \PY{p}{,} \PY{n}{oBody}\PY{o}{.}\PY{n}{id}\PY{p}{,} \PY{n}{oBody}\PY{o}{.}\PY{n}{lang}\PY{p}{,} \PY{n}{modType}\PY{p}{,} \PY{n}{null}\PY{p}{,} \PY{p}{(} \PY{n}{cm} \PY{p}{)} \PY{o}{=}\PY{o}{\PYZgt{}}
+    \PY{n}{answ} \PY{o}{=} \PY{n}{cm}\PY{o}{.}\PY{n}{answ}
+    \PY{k}{if} \PY{n}{answ}\PY{o}{.}\PY{n}{code} \PY{o+ow}{is} \PY{l+m+mi}{200}
+      \PY{n}{funcs} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+      \PY{n}{funcs}\PY{o}{.}\PY{n}{push} \PY{n}{name} \PY{k}{for} \PY{n}{name}\PY{p}{,} \PY{n+nb}{id} \PY{n}{of} \PY{n}{cm}\PY{o}{.}\PY{n}{module}
+      \PY{n+nd}{@log.info} \PY{l+s}{\PYZdq{}}\PY{l+s}{CM | Storing new module with functions \PYZsh{}\PYZob{} funcs.join( }\PY{l+s}{\PYZsq{}}\PY{l+s}{, }\PY{l+s}{\PYZsq{}}\PY{l+s}{ ) \PYZcb{}}\PY{l+s}{\PYZdq{}}
+      \PY{n}{answ}\PY{o}{.}\PY{n}{message} \PY{o}{=} 
+        \PY{l+s}{\PYZdq{}}\PY{l+s}{ Module \PYZsh{}\PYZob{} oBody.id \PYZcb{} successfully stored! Found following function(s): \PYZsh{}\PYZob{} funcs \PYZcb{}}\PY{l+s}{\PYZdq{}}
+      \PY{n}{oBody}\PY{o}{.}\PY{n}{functions} \PY{o}{=} \PY{n}{JSON}\PY{o}{.}\PY{n}{stringify} \PY{n}{funcs}
+      \PY{n}{oBody}\PY{o}{.}\PY{n}{functionArgs} \PY{o}{=} \PY{n}{JSON}\PY{o}{.}\PY{n}{stringify} \PY{n}{cm}\PY{o}{.}\PY{n}{funcParams}
+      \PY{n}{dbMod}\PY{o}{.}\PY{n}{storeModule} \PY{n}{user}\PY{o}{.}\PY{n}{username}\PY{p}{,} \PY{n}{oBody}
+      \PY{c}{\PYZsh{} if oBody.public is \PYZsq{}true\PYZsq{}}
+      \PY{c}{\PYZsh{}   dbMod.publish oBody.id}
+    \PY{n}{callback} \PY{n}{answ}
+
+\PY{c}{\PYZsh{} Store a rule and inform everybody about it}
+\PY{c}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+\PY{n}{storeRule} \PY{o}{=} \PY{p}{(} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{callback} \PY{p}{)} \PY{o}{=}\PY{o}{\PYZgt{}}
+  \PY{c}{\PYZsh{} This is how a rule is stored in the database}
+    \PY{n}{rule} \PY{o}{=}
+      \PY{n+nb}{id}\PY{p}{:} \PY{n}{oBody}\PY{o}{.}\PY{n}{id}
+      \PY{n}{eventtype}\PY{p}{:} \PY{n}{oBody}\PY{o}{.}\PY{n}{eventtype}
+      \PY{n}{eventname}\PY{p}{:} \PY{n}{oBody}\PY{o}{.}\PY{n}{eventname}
+      \PY{n}{eventstart}\PY{p}{:} \PY{n}{oBody}\PY{o}{.}\PY{n}{eventstart}
+      \PY{n}{eventinterval}\PY{p}{:} \PY{n}{oBody}\PY{o}{.}\PY{n}{eventinterval}
+      \PY{n}{conditions}\PY{p}{:} \PY{n}{oBody}\PY{o}{.}\PY{n}{conditions}
+      \PY{n}{actions}\PY{p}{:} \PY{n}{oBody}\PY{o}{.}\PY{n}{actions}
+    \PY{k}{if} \PY{n}{oBody}\PY{o}{.}\PY{n}{eventstart}
+      \PY{n}{rule}\PY{o}{.}\PY{n}{timestamp} \PY{o}{=} \PY{p}{(}\PY{n}{new} \PY{n}{Date}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{toISOString}\PY{p}{(}\PY{p}{)}
+    \PY{n}{strRule} \PY{o}{=} \PY{n}{JSON}\PY{o}{.}\PY{n}{stringify} \PY{n}{rule}
+    \PY{c}{\PYZsh{} store the rule}
+    \PY{n}{db}\PY{o}{.}\PY{n}{storeRule} \PY{n}{user}\PY{o}{.}\PY{n}{username}\PY{p}{,} \PY{n}{rule}\PY{o}{.}\PY{n}{id}\PY{p}{,} \PY{n}{strRule}
+    \PY{c}{\PYZsh{} if event module parameters were sent, store them}
+    \PY{k}{if} \PY{n}{oBody}\PY{o}{.}\PY{n}{eventparams}
+      \PY{n}{epModId} \PY{o}{=} \PY{n}{rule}\PY{o}{.}\PY{n}{eventname}\PY{o}{.}\PY{n}{split}\PY{p}{(} \PY{l+s}{\PYZsq{}}\PY{l+s}{ \PYZhy{}\PYZgt{} }\PY{l+s}{\PYZsq{}} \PY{p}{)}\PY{p}{[} \PY{l+m+mi}{0} \PY{p}{]}
+      \PY{n}{db}\PY{o}{.}\PY{n}{eventPollers}\PY{o}{.}\PY{n}{storeUserParams} \PY{n}{epModId}\PY{p}{,} \PY{n}{user}\PY{o}{.}\PY{n}{username}\PY{p}{,} \PY{n}{JSON}\PY{o}{.}\PY{n}{stringify} \PY{n}{oBody}\PY{o}{.}\PY{n}{eventparams}
+    \PY{n}{oFuncArgs} \PY{o}{=} \PY{n}{oBody}\PY{o}{.}\PY{n}{eventfunctions}
+    \PY{c}{\PYZsh{} if event function arguments were sent, store them}
+    \PY{k}{for} \PY{n+nb}{id}\PY{p}{,} \PY{n}{args} \PY{n}{of} \PY{n}{oFuncArgs}
+      \PY{n}{arr} \PY{o}{=} \PY{n+nb}{id}\PY{o}{.}\PY{n}{split} \PY{l+s}{\PYZsq{}}\PY{l+s}{ \PYZhy{}\PYZgt{} }\PY{l+s}{\PYZsq{}}
+      \PY{n}{db}\PY{o}{.}\PY{n}{eventPollers}\PY{o}{.}\PY{n}{storeUserArguments} \PY{n}{user}\PY{o}{.}\PY{n}{username}\PY{p}{,} \PY{n}{rule}\PY{o}{.}\PY{n}{id}\PY{p}{,} \PY{n}{arr}\PY{p}{[} \PY{l+m+mi}{0} \PY{p}{]}\PY{p}{,} \PY{n}{arr}\PY{p}{[} \PY{l+m+mi}{1} \PY{p}{]}\PY{p}{,} \PY{n}{JSON}\PY{o}{.}\PY{n}{stringify} \PY{n}{args} 
+    
+    \PY{c}{\PYZsh{} if action module params were sent, store them}
+    \PY{n}{oParams} \PY{o}{=} \PY{n}{oBody}\PY{o}{.}\PY{n}{actionparams}
+    \PY{k}{for} \PY{n+nb}{id}\PY{p}{,} \PY{n}{params} \PY{n}{of} \PY{n}{oParams}
+      \PY{n}{db}\PY{o}{.}\PY{n}{actionInvokers}\PY{o}{.}\PY{n}{storeUserParams} \PY{n+nb}{id}\PY{p}{,} \PY{n}{user}\PY{o}{.}\PY{n}{username}\PY{p}{,} \PY{n}{JSON}\PY{o}{.}\PY{n}{stringify} \PY{n}{params}
+    \PY{n}{oFuncArgs} \PY{o}{=} \PY{n}{oBody}\PY{o}{.}\PY{n}{actionfunctions}
+    \PY{c}{\PYZsh{} if action function arguments were sent, store them}
+    \PY{k}{for} \PY{n+nb}{id}\PY{p}{,} \PY{n}{args} \PY{n}{of} \PY{n}{oFuncArgs}
+      \PY{n}{arr} \PY{o}{=} \PY{n+nb}{id}\PY{o}{.}\PY{n}{split} \PY{l+s}{\PYZsq{}}\PY{l+s}{ \PYZhy{}\PYZgt{} }\PY{l+s}{\PYZsq{}}
+      \PY{n}{db}\PY{o}{.}\PY{n}{actionInvokers}\PY{o}{.}\PY{n}{storeUserArguments} \PY{n}{user}\PY{o}{.}\PY{n}{username}\PY{p}{,} \PY{n}{rule}\PY{o}{.}\PY{n}{id}\PY{p}{,} \PY{n}{arr}\PY{p}{[} \PY{l+m+mi}{0} \PY{p}{]}\PY{p}{,} \PY{n}{arr}\PY{p}{[} \PY{l+m+mi}{1} \PY{p}{]}\PY{p}{,} \PY{n}{JSON}\PY{o}{.}\PY{n}{stringify} \PY{n}{args} 
+    
+    \PY{n}{eventInfo} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsq{}}
+    \PY{k}{if} \PY{n}{rule}\PY{o}{.}\PY{n}{eventstart}
+      \PY{n}{eventInfo} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Starting at \PYZsh{}\PYZob{} new Date( rule.eventstart ) \PYZcb{}, Interval set to \PYZsh{}\PYZob{} rule.eventinterval \PYZcb{} minutes}\PY{l+s}{\PYZdq{}}
+    \PY{c}{\PYZsh{} Initialize the rule log}
+    \PY{n}{db}\PY{o}{.}\PY{n}{resetLog} \PY{n}{user}\PY{o}{.}\PY{n}{username}\PY{p}{,} \PY{n}{rule}\PY{o}{.}\PY{n}{id}
+    \PY{n}{db}\PY{o}{.}\PY{n}{appendLog} \PY{n}{user}\PY{o}{.}\PY{n}{username}\PY{p}{,} \PY{n}{rule}\PY{o}{.}\PY{n}{id}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{INIT}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Rule }\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsh{}\PYZob{} rule.id \PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{ initialized. \PYZsh{}\PYZob{} eventInfo \PYZcb{}}\PY{l+s}{\PYZdq{}}
+    
+    \PY{c}{\PYZsh{} Inform everbody about the new rule}
+    \PY{n}{eventEmitter}\PY{o}{.}\PY{n}{emit} \PY{l+s}{\PYZsq{}}\PY{l+s}{rule}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+      \PY{n}{intevent}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{new}\PY{l+s}{\PYZsq{}}
+      \PY{n}{user}\PY{p}{:} \PY{n}{user}\PY{o}{.}\PY{n}{username}
+      \PY{n}{rule}\PY{p}{:} \PY{n}{rule}
+    \PY{n}{callback}
+      \PY{n}{code}\PY{p}{:} \PY{l+m+mi}{200}
+      \PY{n}{message}\PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{Rule }\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsh{}\PYZob{} rule.id \PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{ stored and activated!}\PY{l+s}{\PYZdq{}}
+
+
+\PY{c}{\PYZsh{}}
+\PY{c}{\PYZsh{} COMMAND FUNCTIONS}
+\PY{c}{\PYZsh{} =================}
+\PY{c}{\PYZsh{}}
+\PY{c}{\PYZsh{} Those are the answers to user requests.}
+
+\PY{n}{commandFunctions} \PY{o}{=}
+  \PY{n}{get\PYZus{}public\PYZus{}key}\PY{p}{:} \PY{p}{(} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{callback} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{n}{callback}
+      \PY{n}{code}\PY{p}{:} \PY{l+m+mi}{200}
+      \PY{n}{message}\PY{p}{:} \PY{n}{encryption}\PY{o}{.}\PY{n}{getPublicKey}\PY{p}{(}\PY{p}{)}
+
+\PY{c}{\PYZsh{} EVENT POLLERS}
+\PY{c}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+  \PY{n}{get\PYZus{}event\PYZus{}pollers}\PY{p}{:} \PY{p}{(} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{callback} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{n}{getModules}  \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{db}\PY{o}{.}\PY{n}{eventPollers}\PY{p}{,} \PY{n}{callback}
+  
+  \PY{n}{get\PYZus{}full\PYZus{}event\PYZus{}poller}\PY{p}{:} \PY{p}{(} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{callback} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{n}{db}\PY{o}{.}\PY{n}{eventPollers}\PY{o}{.}\PY{n}{getModule} \PY{n}{user}\PY{o}{.}\PY{n}{username}\PY{p}{,} \PY{n}{oBody}\PY{o}{.}\PY{n}{id}\PY{p}{,} \PY{p}{(} \PY{n}{err}\PY{p}{,} \PY{n}{obj} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+      \PY{n}{callback}
+        \PY{n}{code}\PY{p}{:} \PY{l+m+mi}{200}
+        \PY{n}{message}\PY{p}{:} \PY{n}{JSON}\PY{o}{.}\PY{n}{stringify} \PY{n}{obj}
+  
+  \PY{n}{get\PYZus{}event\PYZus{}poller\PYZus{}params}\PY{p}{:} \PY{p}{(} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{callback} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{n}{getModuleParams} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{db}\PY{o}{.}\PY{n}{eventPollers}\PY{p}{,} \PY{n}{callback}
+
+  \PY{n}{get\PYZus{}event\PYZus{}poller\PYZus{}user\PYZus{}params}\PY{p}{:} \PY{p}{(} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{callback} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{n}{getModuleUserParams} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{db}\PY{o}{.}\PY{n}{eventPollers}\PY{p}{,} \PY{n}{callback}
+
+  \PY{n}{get\PYZus{}event\PYZus{}poller\PYZus{}user\PYZus{}arguments}\PY{p}{:} \PY{p}{(} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{callback} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{n}{getModuleUserArguments} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{db}\PY{o}{.}\PY{n}{eventPollers}\PY{p}{,} \PY{n}{callback}
+
+  \PY{n}{get\PYZus{}event\PYZus{}poller\PYZus{}function\PYZus{}arguments}\PY{p}{:} \PY{p}{(} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{callback} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{n}{answ} \PY{o}{=} \PY{n}{hasRequiredParams} \PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{id}\PY{l+s}{\PYZsq{}} \PY{p}{]}\PY{p}{,} \PY{n}{oBody}
+    \PY{k}{if} \PY{n}{answ}\PY{o}{.}\PY{n}{code} \PY{n}{isnt} \PY{l+m+mi}{200}
+      \PY{n}{callback} \PY{n}{answ}
+    \PY{k}{else}
+      \PY{n}{db}\PY{o}{.}\PY{n}{eventPollers}\PY{o}{.}\PY{n}{getModuleField} \PY{n}{user}\PY{o}{.}\PY{n}{username}\PY{p}{,} \PY{n}{oBody}\PY{o}{.}\PY{n}{id}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{functionArgs}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{p}{(} \PY{n}{err}\PY{p}{,} \PY{n}{obj} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+        \PY{n}{callback}
+          \PY{n}{code}\PY{p}{:} \PY{l+m+mi}{200}
+          \PY{n}{message}\PY{p}{:} \PY{n}{obj}
+  
+  \PY{n}{forge\PYZus{}event\PYZus{}poller}\PY{p}{:} \PY{p}{(} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{callback} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{n}{forgeModule} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{eventpoller}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{db}\PY{o}{.}\PY{n}{eventPollers}\PY{p}{,} \PY{n}{callback}
+ 
+  \PY{n}{delete\PYZus{}event\PYZus{}poller}\PY{p}{:} \PY{p}{(} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{callback} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{n}{answ} \PY{o}{=} \PY{n}{hasRequiredParams} \PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{id}\PY{l+s}{\PYZsq{}} \PY{p}{]}\PY{p}{,} \PY{n}{oBody}
+    \PY{k}{if} \PY{n}{answ}\PY{o}{.}\PY{n}{code} \PY{n}{isnt} \PY{l+m+mi}{200}
+      \PY{n}{callback} \PY{n}{answ}
+    \PY{k}{else}
+      \PY{n}{db}\PY{o}{.}\PY{n}{eventPollers}\PY{o}{.}\PY{n}{deleteModule} \PY{n}{user}\PY{o}{.}\PY{n}{username}\PY{p}{,} \PY{n}{oBody}\PY{o}{.}\PY{n}{id}
+      \PY{n}{callback}
+        \PY{n}{code}\PY{p}{:} \PY{l+m+mi}{200}
+        \PY{n}{message}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{OK!}\PY{l+s}{\PYZsq{}}
+
+\PY{c}{\PYZsh{} ACTION INVOKERS}
+\PY{c}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+  \PY{n}{get\PYZus{}action\PYZus{}invokers}\PY{p}{:} \PY{p}{(} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{callback} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{n}{getModules}  \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{db}\PY{o}{.}\PY{n}{actionInvokers}\PY{p}{,} \PY{n}{callback}
+  
+  \PY{n}{get\PYZus{}full\PYZus{}action\PYZus{}invoker}\PY{p}{:} \PY{p}{(} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{callback} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{n}{answ} \PY{o}{=} \PY{n}{hasRequiredParams} \PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{id}\PY{l+s}{\PYZsq{}} \PY{p}{]}\PY{p}{,} \PY{n}{oBody}
+    \PY{k}{if} \PY{n}{answ}\PY{o}{.}\PY{n}{code} \PY{n}{isnt} \PY{l+m+mi}{200}
+      \PY{n}{callback} \PY{n}{answ}
+    \PY{k}{else}
+      \PY{n}{db}\PY{o}{.}\PY{n}{actionInvokers}\PY{o}{.}\PY{n}{getModule} \PY{n}{user}\PY{o}{.}\PY{n}{username}\PY{p}{,} \PY{n}{oBody}\PY{o}{.}\PY{n}{id}\PY{p}{,} \PY{p}{(} \PY{n}{err}\PY{p}{,} \PY{n}{obj} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+        \PY{n}{callback}
+          \PY{n}{code}\PY{p}{:} \PY{l+m+mi}{200}
+          \PY{n}{message}\PY{p}{:} \PY{n}{JSON}\PY{o}{.}\PY{n}{stringify} \PY{n}{obj}
+
+  \PY{n}{get\PYZus{}action\PYZus{}invoker\PYZus{}params}\PY{p}{:} \PY{p}{(} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{callback} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{n}{getModuleParams} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{db}\PY{o}{.}\PY{n}{actionInvokers}\PY{p}{,} \PY{n}{callback}
+
+  \PY{n}{get\PYZus{}action\PYZus{}invoker\PYZus{}user\PYZus{}params}\PY{p}{:} \PY{p}{(} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{callback} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{n}{getModuleUserParams} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{db}\PY{o}{.}\PY{n}{actionInvokers}\PY{p}{,} \PY{n}{callback}
+
+  \PY{n}{get\PYZus{}action\PYZus{}invoker\PYZus{}user\PYZus{}arguments}\PY{p}{:} \PY{p}{(} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{callback} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{n}{getModuleUserArguments} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{db}\PY{o}{.}\PY{n}{actionInvokers}\PY{p}{,} \PY{n}{callback}
+
+  \PY{n}{get\PYZus{}action\PYZus{}invoker\PYZus{}function\PYZus{}arguments}\PY{p}{:} \PY{p}{(} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{callback} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{n}{answ} \PY{o}{=} \PY{n}{hasRequiredParams} \PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{id}\PY{l+s}{\PYZsq{}} \PY{p}{]}\PY{p}{,} \PY{n}{oBody}
+    \PY{k}{if} \PY{n}{answ}\PY{o}{.}\PY{n}{code} \PY{n}{isnt} \PY{l+m+mi}{200}
+      \PY{n}{callback} \PY{n}{answ}
+    \PY{k}{else}
+      \PY{n}{db}\PY{o}{.}\PY{n}{actionInvokers}\PY{o}{.}\PY{n}{getModuleField} \PY{n}{user}\PY{o}{.}\PY{n}{username}\PY{p}{,} \PY{n}{oBody}\PY{o}{.}\PY{n}{id}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{functionArgs}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{p}{(} \PY{n}{err}\PY{p}{,} \PY{n}{obj} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+        \PY{n}{callback}
+          \PY{n}{code}\PY{p}{:} \PY{l+m+mi}{200}
+          \PY{n}{message}\PY{p}{:} \PY{n}{obj}
+  
+  \PY{n}{forge\PYZus{}action\PYZus{}invoker}\PY{p}{:} \PY{p}{(} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{callback} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{n}{forgeModule} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{actioninvoker}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{db}\PY{o}{.}\PY{n}{actionInvokers}\PY{p}{,} \PY{n}{callback}
+
+  \PY{n}{delete\PYZus{}action\PYZus{}invoker}\PY{p}{:} \PY{p}{(} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{callback} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{n}{answ} \PY{o}{=} \PY{n}{hasRequiredParams} \PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{id}\PY{l+s}{\PYZsq{}} \PY{p}{]}\PY{p}{,} \PY{n}{oBody}
+    \PY{k}{if} \PY{n}{answ}\PY{o}{.}\PY{n}{code} \PY{n}{isnt} \PY{l+m+mi}{200}
+      \PY{n}{callback} \PY{n}{answ}
+    \PY{k}{else}
+      \PY{n}{db}\PY{o}{.}\PY{n}{actionInvokers}\PY{o}{.}\PY{n}{deleteModule} \PY{n}{user}\PY{o}{.}\PY{n}{username}\PY{p}{,} \PY{n}{oBody}\PY{o}{.}\PY{n}{id}
+      \PY{n}{callback}
+        \PY{n}{code}\PY{p}{:} \PY{l+m+mi}{200}
+        \PY{n}{message}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{OK!}\PY{l+s}{\PYZsq{}}
+
+\PY{c}{\PYZsh{} RULES}
+\PY{c}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+  \PY{n}{get\PYZus{}rules}\PY{p}{:} \PY{p}{(} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{callback} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{n}{db}\PY{o}{.}\PY{n}{getRuleIds} \PY{n}{user}\PY{o}{.}\PY{n}{username}\PY{p}{,} \PY{p}{(} \PY{n}{err}\PY{p}{,} \PY{n}{obj} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+      \PY{n}{callback}
+        \PY{n}{code}\PY{p}{:} \PY{l+m+mi}{200}
+        \PY{n}{message}\PY{p}{:} \PY{n}{obj}
+
+  \PY{n}{get\PYZus{}rule}\PY{p}{:} \PY{p}{(} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{callback} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{n}{answ} \PY{o}{=} \PY{n}{hasRequiredParams} \PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{id}\PY{l+s}{\PYZsq{}} \PY{p}{]}\PY{p}{,} \PY{n}{oBody}
+    \PY{k}{if} \PY{n}{answ}\PY{o}{.}\PY{n}{code} \PY{n}{isnt} \PY{l+m+mi}{200}
+      \PY{n}{callback} \PY{n}{answ}
+    \PY{k}{else}
+      \PY{n}{db}\PY{o}{.}\PY{n}{getRule} \PY{n}{user}\PY{o}{.}\PY{n}{username}\PY{p}{,} \PY{n}{oBody}\PY{o}{.}\PY{n}{id}\PY{p}{,} \PY{p}{(} \PY{n}{err}\PY{p}{,} \PY{n}{obj} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+        \PY{n}{callback}
+          \PY{n}{code}\PY{p}{:} \PY{l+m+mi}{200}
+          \PY{n}{message}\PY{p}{:} \PY{n}{obj}
+
+  \PY{n}{get\PYZus{}rule\PYZus{}log}\PY{p}{:} \PY{p}{(} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{callback} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{n}{answ} \PY{o}{=} \PY{n}{hasRequiredParams} \PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{id}\PY{l+s}{\PYZsq{}} \PY{p}{]}\PY{p}{,} \PY{n}{oBody}
+    \PY{k}{if} \PY{n}{answ}\PY{o}{.}\PY{n}{code} \PY{n}{isnt} \PY{l+m+mi}{200}
+      \PY{n}{callback} \PY{n}{answ}
+    \PY{k}{else}
+      \PY{n}{db}\PY{o}{.}\PY{n}{getLog} \PY{n}{user}\PY{o}{.}\PY{n}{username}\PY{p}{,} \PY{n}{oBody}\PY{o}{.}\PY{n}{id}\PY{p}{,} \PY{p}{(} \PY{n}{err}\PY{p}{,} \PY{n}{obj} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+        \PY{n}{callback}
+          \PY{n}{code}\PY{p}{:} \PY{l+m+mi}{200}
+          \PY{n}{message}\PY{p}{:} \PY{n}{obj}
+
+  \PY{c}{\PYZsh{} Create new rule}
+  \PY{n}{forge\PYZus{}rule}\PY{p}{:} \PY{p}{(} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{callback} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{n}{answ} \PY{o}{=} \PY{n}{hasRequiredParams} \PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{id}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{eventname}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{conditions}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{actions}\PY{l+s}{\PYZsq{}} \PY{p}{]}\PY{p}{,} \PY{n}{oBody}
+    \PY{k}{if} \PY{n}{answ}\PY{o}{.}\PY{n}{code} \PY{n}{isnt} \PY{l+m+mi}{200}
+      \PY{n}{callback} \PY{n}{answ}
+    \PY{k}{else}
+      \PY{k}{if} \PY{n}{oBody}\PY{o}{.}\PY{n}{overwrite}
+        \PY{n}{storeRule} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{callback}
+      \PY{k}{else}
+        \PY{n}{db}\PY{o}{.}\PY{n}{getRule} \PY{n}{user}\PY{o}{.}\PY{n}{username}\PY{p}{,} \PY{n}{oBody}\PY{o}{.}\PY{n}{id}\PY{p}{,} \PY{p}{(} \PY{n}{err}\PY{p}{,} \PY{n}{mod} \PY{p}{)} \PY{o}{=}\PY{o}{\PYZgt{}}
+          \PY{k}{if} \PY{n}{mod}
+            \PY{n}{answ}\PY{o}{.}\PY{n}{code} \PY{o}{=} \PY{l+m+mi}{409}
+            \PY{n}{answ}\PY{o}{.}\PY{n}{message} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{Rule name already existing: }\PY{l+s}{\PYZsq{}} \PY{o}{+} \PY{n}{oBody}\PY{o}{.}\PY{n}{id}
+            \PY{n}{callback} \PY{n}{answ}
+          \PY{k}{else}
+            \PY{n}{storeRule} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{callback}
+
+  \PY{n}{delete\PYZus{}rule}\PY{p}{:} \PY{p}{(} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{callback} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{n}{answ} \PY{o}{=} \PY{n}{hasRequiredParams} \PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{id}\PY{l+s}{\PYZsq{}} \PY{p}{]}\PY{p}{,} \PY{n}{oBody}
+    \PY{k}{if} \PY{n}{answ}\PY{o}{.}\PY{n}{code} \PY{n}{isnt} \PY{l+m+mi}{200}
+      \PY{n}{callback} \PY{n}{answ}
+    \PY{k}{else}
+      \PY{n}{db}\PY{o}{.}\PY{n}{deleteRule} \PY{n}{user}\PY{o}{.}\PY{n}{username}\PY{p}{,} \PY{n}{oBody}\PY{o}{.}\PY{n}{id}
+      \PY{n}{eventEmitter}\PY{o}{.}\PY{n}{emit} \PY{l+s}{\PYZsq{}}\PY{l+s}{rule}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+        \PY{n}{intevent}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{del}\PY{l+s}{\PYZsq{}}
+        \PY{n}{user}\PY{p}{:} \PY{n}{user}\PY{o}{.}\PY{n}{username}
+        \PY{n}{rule}\PY{p}{:} \PY{n}{null}
+        \PY{n}{ruleId}\PY{p}{:} \PY{n}{oBody}\PY{o}{.}\PY{n}{id}
+      \PY{n}{callback}
+        \PY{n}{code}\PY{p}{:} \PY{l+m+mi}{200}
+        \PY{n}{message}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{OK!}\PY{l+s}{\PYZsq{}}
+
+
+\PY{c}{\PYZsh{} WEBHOOKS}
+\PY{c}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+  \PY{n}{create\PYZus{}webhook}\PY{p}{:} \PY{p}{(} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{callback} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{n}{answ} \PY{o}{=} \PY{n}{hasRequiredParams} \PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{hookname}\PY{l+s}{\PYZsq{}} \PY{p}{]}\PY{p}{,} \PY{n}{oBody}
+    \PY{k}{if} \PY{n}{answ}\PY{o}{.}\PY{n}{code} \PY{n}{isnt} \PY{l+m+mi}{200}
+      \PY{n}{callback} \PY{n}{answ}
+    \PY{k}{else}
+      \PY{n}{db}\PY{o}{.}\PY{n}{getAllUserWebhookNames} \PY{n}{user}\PY{o}{.}\PY{n}{username}\PY{p}{,} \PY{p}{(} \PY{n}{err}\PY{p}{,} \PY{n}{arrHooks} \PY{p}{)} \PY{o}{=}\PY{o}{\PYZgt{}}
+        \PY{n}{hookExists} \PY{o}{=} \PY{n}{false}
+        \PY{n}{hookExists} \PY{o}{=} \PY{n}{true} \PY{k}{for} \PY{n}{hookid}\PY{p}{,} \PY{n}{hookname} \PY{n}{of} \PY{n}{arrHooks} \PY{n}{when} \PY{n}{hookname} \PY{o+ow}{is} \PY{n}{oBody}\PY{o}{.}\PY{n}{hookname}
+        \PY{k}{if} \PY{n}{hookExists}
+          \PY{n}{callback}
+            \PY{n}{code}\PY{p}{:} \PY{l+m+mi}{409}
+            \PY{n}{message}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{Webhook already existing: }\PY{l+s}{\PYZsq{}} \PY{o}{+} \PY{n}{oBody}\PY{o}{.}\PY{n}{hookname}
+        \PY{k}{else}
+          \PY{n}{db}\PY{o}{.}\PY{n}{getAllWebhookIDs} \PY{p}{(} \PY{n}{err}\PY{p}{,} \PY{n}{arrHooks} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+            \PY{n}{genHookID} \PY{o}{=} \PY{p}{(} \PY{n}{arrHooks} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+              \PY{n}{hookid} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsq{}}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{p}{[} \PY{l+m+mf}{0.}\PY{o}{.}\PY{l+m+mi}{1} \PY{p}{]}
+                \PY{n}{hookid} \PY{o}{+}\PY{o}{=} \PY{n}{Math}\PY{o}{.}\PY{n}{random}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{toString}\PY{p}{(} \PY{l+m+mi}{36} \PY{p}{)}\PY{o}{.}\PY{n}{substring} \PY{l+m+mi}{2}
+              \PY{k}{if} \PY{n}{arrHooks} \PY{o+ow}{and} \PY{n}{arrHooks}\PY{o}{.}\PY{n}{indexOf}\PY{p}{(} \PY{n}{hookid} \PY{p}{)} \PY{o}{\PYZgt{}} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+                \PY{n}{hookid} \PY{o}{=} \PY{n}{genHookID} \PY{n}{arrHooks}
+              \PY{n}{hookid}
+            \PY{n}{hookid} \PY{o}{=} \PY{n}{genHookID} \PY{n}{arrHooks}
+            \PY{n}{db}\PY{o}{.}\PY{n}{createWebhook} \PY{n}{user}\PY{o}{.}\PY{n}{username}\PY{p}{,} \PY{n}{hookid}\PY{p}{,} \PY{n}{oBody}\PY{o}{.}\PY{n}{hookname}
+            \PY{n}{rh}\PY{o}{.}\PY{n}{activateWebhook} \PY{n}{user}\PY{o}{.}\PY{n}{username}\PY{p}{,} \PY{n}{hookid}\PY{p}{,} \PY{n}{oBody}\PY{o}{.}\PY{n}{hookname}
+            \PY{n}{callback}
+              \PY{n}{code}\PY{p}{:} \PY{l+m+mi}{200}
+              \PY{n}{message}\PY{p}{:} \PY{n}{JSON}\PY{o}{.}\PY{n}{stringify}
+                \PY{n}{hookid}\PY{p}{:} \PY{n}{hookid}
+                \PY{n}{hookname}\PY{p}{:} \PY{n}{oBody}\PY{o}{.}\PY{n}{hookname}
+
+  \PY{n}{get\PYZus{}all\PYZus{}webhooks}\PY{p}{:} \PY{p}{(} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{callback} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{n}{db}\PY{o}{.}\PY{n}{getAllUserWebhookNames} \PY{n}{user}\PY{o}{.}\PY{n}{username}\PY{p}{,} \PY{p}{(} \PY{n}{err}\PY{p}{,} \PY{n}{data} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+      \PY{k}{if} \PY{n}{err}
+        \PY{n}{callback}
+          \PY{n}{code}\PY{p}{:} \PY{l+m+mi}{400}
+          \PY{n}{message}\PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{We didn}\PY{l+s}{\PYZsq{}}\PY{l+s}{t like your request!}\PY{l+s}{\PYZdq{}}
+      \PY{k}{else}
+        \PY{n}{data} \PY{o}{=} \PY{n}{JSON}\PY{o}{.}\PY{n}{stringify}\PY{p}{(} \PY{n}{data} \PY{p}{)} \PY{o}{|}\PY{o}{|} \PY{n}{null}
+        \PY{n}{callback}
+          \PY{n}{code}\PY{p}{:} \PY{l+m+mi}{200}
+          \PY{n}{message}\PY{p}{:} \PY{n}{data}
+
+  \PY{n}{delete\PYZus{}webhook}\PY{p}{:} \PY{p}{(} \PY{n}{user}\PY{p}{,} \PY{n}{oBody}\PY{p}{,} \PY{n}{callback} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{n}{answ} \PY{o}{=} \PY{n}{hasRequiredParams} \PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{hookid}\PY{l+s}{\PYZsq{}} \PY{p}{]}\PY{p}{,} \PY{n}{oBody}
+    \PY{k}{if} \PY{n}{answ}\PY{o}{.}\PY{n}{code} \PY{n}{isnt} \PY{l+m+mi}{200}
+      \PY{n}{callback} \PY{n}{answ}
+    \PY{k}{else}
+      \PY{n}{rh}\PY{o}{.}\PY{n}{deactivateWebhook} \PY{n}{oBody}\PY{o}{.}\PY{n}{hookid}
+      \PY{n}{db}\PY{o}{.}\PY{n}{deleteWebhook} \PY{n}{user}\PY{o}{.}\PY{n}{username}\PY{p}{,} \PY{n}{oBody}\PY{o}{.}\PY{n}{hookid}
+      \PY{n}{callback}
+        \PY{n}{code}\PY{p}{:} \PY{l+m+mi}{200}
+        \PY{n}{message}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{OK!}\PY{l+s}{\PYZsq{}}
+\end{Verbatim}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+\section{Dynamic Code Loading for Event Trigger and Action Invoker}
+\begin{Verbatim}[fontsize=\scriptsize,commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+
+\PY{c}{\PYZsh{} Dynamic Modules}
+\PY{c}{\PYZsh{} ===============}
+\PY{c}{\PYZsh{} \PYZgt{} Compiles CoffeeScript modules and loads JS modules in a VM, together}
+\PY{c}{\PYZsh{} \PYZgt{} with only a few allowed node.js modules.}
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+
+\PY{c}{\PYZsh{} **Loads Modules:**}
+
+\PY{c}{\PYZsh{} \PYZhy{} [Persistence](persistence.html)}
+\PY{n}{db} \PY{o}{=} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{./persistence}\PY{l+s}{\PYZsq{}}
+\PY{c}{\PYZsh{} \PYZhy{} [Encryption](encryption.html)}
+\PY{n}{encryption} \PY{o}{=} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{./encryption}\PY{l+s}{\PYZsq{}}
+
+\PY{c}{\PYZsh{} \PYZhy{} Node.js Modules: [vm](http://nodejs.org/api/vm.html) and}
+\PY{c}{\PYZsh{}   [events](http://nodejs.org/api/events.html)}
+\PY{n}{vm} \PY{o}{=} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{vm}\PY{l+s}{\PYZsq{}}
+
+\PY{c}{\PYZsh{} \PYZhy{} External Modules: [coffee\PYZhy{}script](http://coffeescript.org/),}
+\PY{c}{\PYZsh{}       [crypto\PYZhy{}js](https://www.npmjs.org/package/crypto\PYZhy{}js) and}
+\PY{c}{\PYZsh{}       [import\PYZhy{}io](https://www.npmjs.org/package/import\PYZhy{}io)}
+\PY{n}{cs} \PY{o}{=} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{coffee\PYZhy{}script}\PY{l+s}{\PYZsq{}}
+
+
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{c}{\PYZsh{} Module call}
+\PY{c}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+\PY{c}{\PYZsh{} Initializes the dynamic module handler.}
+
+\PY{c}{\PYZsh{} @param \PYZob{}Object\PYZcb{} args}
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{n}{exports} \PY{o}{=} \PY{n}{module}\PY{o}{.}\PY{n}{exports} \PY{o}{=} \PY{p}{(} \PY{n}{args} \PY{p}{)} \PY{o}{=}\PY{o}{\PYZgt{}}
+  \PY{n+nd}{@log} \PY{o}{=} \PY{n}{args}\PY{o}{.}\PY{n}{logger}
+  \PY{n}{module}\PY{o}{.}\PY{n}{exports}
+
+\PY{n}{logFunction} \PY{o}{=} \PY{p}{(} \PY{n}{uId}\PY{p}{,} \PY{n}{rId}\PY{p}{,} \PY{n}{mId} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{p}{(} \PY{n}{msg} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{n}{db}\PY{o}{.}\PY{n}{appendLog} \PY{n}{uId}\PY{p}{,} \PY{n}{rId}\PY{p}{,} \PY{n}{mId}\PY{p}{,} \PY{n}{msg}
+
+\PY{n}{regexpComments} \PY{o}{=} \PY{o}{/}\PY{p}{(}\PY{p}{(}\PYZbs{}\PY{o}{/}\PYZbs{}\PY{o}{/}\PY{o}{.}\PY{o}{*}\PY{err}{\PYZdl{}}\PY{p}{)}\PY{o}{|}\PY{p}{(}\PYZbs{}\PY{o}{/}\PYZbs{}\PY{o}{*}\PY{p}{[}\PYZbs{}\PY{n}{s}\PYZbs{}\PY{n}{S}\PY{p}{]}\PY{o}{*}\PY{err}{?}\PYZbs{}\PY{o}{*}\PYZbs{}\PY{o}{/}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{mg}\PY{p}{;}
+\PY{n}{getFunctionParamNames} \PY{o}{=} \PY{p}{(} \PY{n}{fName}\PY{p}{,} \PY{n}{func}\PY{p}{,} \PY{n}{oFuncs} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{n}{fnStr} \PY{o}{=} \PY{n}{func}\PY{o}{.}\PY{n}{toString}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{replace} \PY{n}{regexpComments}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsq{}}
+  \PY{n}{result} \PY{o}{=} \PY{n}{fnStr}\PY{o}{.}\PY{n}{slice}\PY{p}{(} \PY{n}{fnStr}\PY{o}{.}\PY{n}{indexOf}\PY{p}{(} \PY{l+s}{\PYZsq{}}\PY{l+s}{(}\PY{l+s}{\PYZsq{}} \PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{fnStr}\PY{o}{.}\PY{n}{indexOf}\PY{p}{(} \PY{l+s}{\PYZsq{}}\PY{l+s}{)}\PY{l+s}{\PYZsq{}} \PY{p}{)} \PY{p}{)}\PY{o}{.}\PY{n}{match} \PY{o}{/}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZca{}}\PYZbs{}\PY{n}{s}\PY{p}{,}\PY{p}{]}\PY{o}{+}\PY{p}{)}\PY{o}{/}\PY{n}{g}
+  \PY{k}{if} \PY{o+ow}{not} \PY{n}{result}
+    \PY{n}{result} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+  \PY{n}{oFuncs}\PY{p}{[}\PY{n}{fName}\PY{p}{]} \PY{o}{=} \PY{n}{result}
+
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{c}{\PYZsh{} Try to run a JS module from a string, together with the}
+\PY{c}{\PYZsh{} given parameters. If it is written in CoffeeScript we}
+\PY{c}{\PYZsh{} compile it first into JS.}
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{n}{exports}\PY{o}{.}\PY{n}{compileString} \PY{o}{=} \PY{p}{(} \PY{n}{src}\PY{p}{,} \PY{n}{userId}\PY{p}{,} \PY{n}{oRule}\PY{p}{,} \PY{n}{modId}\PY{p}{,} \PY{n}{lang}\PY{p}{,} \PY{n}{modType}\PY{p}{,} \PY{n}{dbMod}\PY{p}{,} \PY{n}{cb} \PY{p}{)} \PY{o}{=}\PY{o}{\PYZgt{}}
+  \PY{k}{if} \PY{n}{lang} \PY{o+ow}{is} \PY{l+s}{\PYZsq{}}\PY{l+s}{CoffeeScript}\PY{l+s}{\PYZsq{}}
+    \PY{k}{try}
+      \PY{n+nd}{@log.info} \PY{l+s}{\PYZdq{}}\PY{l+s}{DM | Compiling module }\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsh{}\PYZob{} modId \PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{ for user }\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsh{}\PYZob{} userId \PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZdq{}}
+      \PY{n}{src} \PY{o}{=} \PY{n}{cs}\PY{o}{.}\PY{n}{compile} \PY{n}{src}
+    \PY{n}{catch} \PY{n}{err}
+      \PY{n}{cb}
+        \PY{n}{answ}\PY{p}{:}
+          \PY{n}{code}\PY{p}{:} \PY{l+m+mi}{400}
+          \PY{n}{message}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{Compilation of CoffeeScript failed at line }\PY{l+s}{\PYZsq{}} \PY{o}{+}
+            \PY{n}{err}\PY{o}{.}\PY{n}{location}\PY{o}{.}\PY{n}{first\PYZus{}line}
+      \PY{k}{return}
+
+  \PY{n+nd}{@log.info} \PY{l+s}{\PYZdq{}}\PY{l+s}{DM | Trying to fetch user specific module }\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsh{}\PYZob{} modId \PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{ paramters for user }\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsh{}\PYZob{} userId \PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZdq{}}
+  \PY{c}{\PYZsh{} dbMod is only attached if the module really gets loaded}
+  \PY{k}{if} \PY{n}{dbMod}
+    \PY{n}{dbMod}\PY{o}{.}\PY{n}{getUserParams} \PY{n}{modId}\PY{p}{,} \PY{n}{userId}\PY{p}{,} \PY{p}{(} \PY{n}{err}\PY{p}{,} \PY{n}{obj} \PY{p}{)} \PY{o}{=}\PY{o}{\PYZgt{}}
+      \PY{k}{try}
+        \PY{n}{oParams} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+        \PY{k}{for} \PY{n}{name}\PY{p}{,} \PY{n}{oParam} \PY{n}{of} \PY{n}{JSON}\PY{o}{.}\PY{n}{parse} \PY{n}{obj}
+          \PY{n}{oParams}\PY{p}{[} \PY{n}{name} \PY{p}{]} \PY{o}{=} \PY{n}{encryption}\PY{o}{.}\PY{n}{decrypt} \PY{n}{oParam}\PY{o}{.}\PY{n}{value}
+        \PY{n+nd}{@log.info} \PY{l+s}{\PYZdq{}}\PY{l+s}{DM | Loaded user defined params for \PYZsh{}\PYZob{} userId \PYZcb{}, \PYZsh{}\PYZob{} oRule.id \PYZcb{}, \PYZsh{}\PYZob{} modId \PYZcb{}}\PY{l+s}{\PYZdq{}}
+      \PY{n}{catch} \PY{n}{err}
+        \PY{n+nd}{@log.warn} \PY{l+s}{\PYZdq{}}\PY{l+s}{DM | Error during parsing of user defined params for \PYZsh{}\PYZob{} userId \PYZcb{}, \PYZsh{}\PYZob{} oRule.id \PYZcb{}, \PYZsh{}\PYZob{} modId \PYZcb{}}\PY{l+s}{\PYZdq{}}
+        \PY{n+nd}{@log.warn} \PY{n}{err}
+      \PY{n}{fTryToLoadModule} \PY{n}{userId}\PY{p}{,} \PY{n}{oRule}\PY{p}{,} \PY{n}{modId}\PY{p}{,} \PY{n}{src}\PY{p}{,} \PY{n}{modType}\PY{p}{,} \PY{n}{dbMod}\PY{p}{,} \PY{n}{oParams}\PY{p}{,} \PY{n}{cb}
+  \PY{k}{else}
+    \PY{n}{fTryToLoadModule} \PY{n}{userId}\PY{p}{,} \PY{n}{oRule}\PY{p}{,} \PY{n}{modId}\PY{p}{,} \PY{n}{src}\PY{p}{,} \PY{n}{modType}\PY{p}{,} \PY{n}{dbMod}\PY{p}{,} \PY{n}{null}\PY{p}{,} \PY{n}{cb}
+
+
+\PY{n}{fPushEvent} \PY{o}{=} \PY{p}{(} \PY{n}{userId}\PY{p}{,} \PY{n}{oRule}\PY{p}{,} \PY{n}{modType} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{p}{(} \PY{n}{obj} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{n}{timestamp} \PY{o}{=} \PY{p}{(} \PY{n}{new} \PY{n}{Date}\PY{p}{(}\PY{p}{)} \PY{p}{)}\PY{o}{.}\PY{n}{toISOString}\PY{p}{(}\PY{p}{)}
+    \PY{k}{if} \PY{n}{modType} \PY{o+ow}{is} \PY{l+s}{\PYZsq{}}\PY{l+s}{eventpoller}\PY{l+s}{\PYZsq{}}
+      \PY{n}{db}\PY{o}{.}\PY{n}{pushEvent}
+        \PY{n}{eventname}\PY{p}{:} \PY{n}{oRule}\PY{o}{.}\PY{n}{eventname} \PY{o}{+} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZus{}created:}\PY{l+s}{\PYZsq{}} \PY{o}{+} \PY{n}{oRule}\PY{o}{.}\PY{n}{timestamp}
+        \PY{n}{body}\PY{p}{:} \PY{n}{obj}
+    \PY{k}{else}
+      \PY{n}{db}\PY{o}{.}\PY{n}{pushEvent} \PY{n}{obj}
+
+\PY{n}{fTryToLoadModule} \PY{o}{=} \PY{p}{(} \PY{n}{userId}\PY{p}{,} \PY{n}{oRule}\PY{p}{,} \PY{n}{modId}\PY{p}{,} \PY{n}{src}\PY{p}{,} \PY{n}{modType}\PY{p}{,} \PY{n}{dbMod}\PY{p}{,} \PY{n}{params}\PY{p}{,} \PY{n}{cb} \PY{p}{)} \PY{o}{=}\PY{o}{\PYZgt{}}
+  \PY{k}{if} \PY{o+ow}{not} \PY{n}{params}
+    \PY{n}{params} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+
+  \PY{n}{answ} \PY{o}{=}
+    \PY{n}{code}\PY{p}{:} \PY{l+m+mi}{200}
+    \PY{n}{message}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{Successfully compiled}\PY{l+s}{\PYZsq{}}
+
+  \PY{n+nd}{@log.info} \PY{l+s}{\PYZdq{}}\PY{l+s}{DM | Running module }\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsh{}\PYZob{} modId \PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{ for user }\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsh{}\PYZob{} userId \PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZdq{}}
+  \PY{c}{\PYZsh{} The function used to provide logging mechanisms on a per rule basis}
+  \PY{n}{logFunc} \PY{o}{=} \PY{n}{logFunction} \PY{n}{userId}\PY{p}{,} \PY{n}{oRule}\PY{o}{.}\PY{n}{id}\PY{p}{,} \PY{n}{modId}
+  \PY{c}{\PYZsh{} The sandbox contains the objects that are accessible to the user }
+  \PY{n}{sandbox} \PY{o}{=} 
+    \PY{n}{importio}\PY{p}{:} \PY{n}{require}\PY{p}{(} \PY{l+s}{\PYZsq{}}\PY{l+s}{import\PYZhy{}io}\PY{l+s}{\PYZsq{}} \PY{p}{)}\PY{o}{.}\PY{n}{client}
+    \PY{n}{prettydiff}\PY{p}{:} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{prettydiff}\PY{l+s}{\PYZsq{}}
+    \PY{n}{cryptoJS}\PY{p}{:} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{crypto\PYZhy{}js}\PY{l+s}{\PYZsq{}}
+    \PY{n}{deepdiff}\PY{p}{:} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{deep\PYZhy{}diff}\PY{l+s}{\PYZsq{}}
+    \PY{n}{jsselect}\PY{p}{:} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{js\PYZhy{}select}\PY{l+s}{\PYZsq{}}
+    \PY{n}{request}\PY{p}{:} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{request}\PY{l+s}{\PYZsq{}}
+    \PY{n}{needle}\PY{p}{:} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{needle}\PY{l+s}{\PYZsq{}}
+    \PY{n}{jsdom}\PY{p}{:} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{jsdom}\PY{l+s}{\PYZsq{}}
+    \PY{n}{diff}\PY{p}{:} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{diff}\PY{l+s}{\PYZsq{}}
+    \PY{n+nb}{id}\PY{p}{:} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZsh{}\PYZob{} userId \PYZcb{}.\PYZsh{}\PYZob{} oRule.id \PYZcb{}.\PYZsh{}\PYZob{} modId \PYZcb{}.vm}\PY{l+s}{\PYZdq{}}
+    \PY{n}{params}\PY{p}{:} \PY{n}{params}
+    \PY{n}{log}\PY{p}{:} \PY{n}{logFunc}
+    \PY{n}{debug}\PY{p}{:} \PY{n}{console}\PY{o}{.}\PY{n}{log}
+    \PY{n}{exports}\PY{p}{:} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+    \PY{n}{setTimeout}\PY{p}{:} \PY{n}{setTimeout} \PY{c}{\PYZsh{} This one allows probably too much}
+    \PY{n}{pushEvent}\PY{p}{:} \PY{n}{fPushEvent} \PY{n}{userId}\PY{p}{,} \PY{n}{oRule}\PY{p}{,} \PY{n}{modType}
+
+  \PY{k}{try}
+    \PY{n}{vm}\PY{o}{.}\PY{n}{runInNewContext} \PY{n}{src}\PY{p}{,} \PY{n}{sandbox}\PY{p}{,} \PY{n}{sandbox}\PY{o}{.}\PY{n}{id}
+  \PY{n}{catch} \PY{n}{err}
+    \PY{n}{answ}\PY{o}{.}\PY{n}{code} \PY{o}{=} \PY{l+m+mi}{400}
+    \PY{n}{msg} \PY{o}{=} \PY{n}{err}\PY{o}{.}\PY{n}{message}
+    \PY{k}{if} \PY{o+ow}{not} \PY{n}{msg}
+      \PY{n}{msg} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{Try to run the script locally to track the error! Sadly we cannot provide the line number}\PY{l+s}{\PYZsq{}}
+    \PY{n}{answ}\PY{o}{.}\PY{n}{message} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{Loading Module failed: }\PY{l+s}{\PYZsq{}} \PY{o}{+} \PY{n}{msg}
+
+  \PY{n+nd}{@log.info} \PY{l+s}{\PYZdq{}}\PY{l+s}{DM | Module }\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsh{}\PYZob{} modId \PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{ ran successfully for user }\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsh{}\PYZob{} userId \PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{ in rule }\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsh{}\PYZob{} oRule.id \PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZdq{}}
+  \PY{n}{oFuncParams} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+  \PY{n}{oFuncArgs} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+  \PY{k}{for} \PY{n}{fName}\PY{p}{,} \PY{n}{func} \PY{n}{of} \PY{n}{sandbox}\PY{o}{.}\PY{n}{exports}
+    \PY{n}{getFunctionParamNames} \PY{n}{fName}\PY{p}{,} \PY{n}{func}\PY{p}{,} \PY{n}{oFuncParams}
+
+  \PY{k}{if} \PY{n}{dbMod}
+    \PY{n}{oFuncArgs} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+
+    \PY{n}{fRegisterArguments} \PY{o}{=} \PY{p}{(} \PY{n}{fName} \PY{p}{)} \PY{o}{=}\PY{o}{\PYZgt{}}
+      \PY{p}{(} \PY{n}{err}\PY{p}{,} \PY{n}{obj} \PY{p}{)} \PY{o}{=}\PY{o}{\PYZgt{}}
+        \PY{k}{if} \PY{n}{obj}
+          \PY{k}{try}
+            \PY{n}{oFuncArgs}\PY{p}{[} \PY{n}{fName} \PY{p}{]} \PY{o}{=} \PY{n}{JSON}\PY{o}{.}\PY{n}{parse} \PY{n}{obj}
+            \PY{n+nd}{@log.info} \PY{l+s}{\PYZdq{}}\PY{l+s}{DM | Found user\PYZhy{}specific arguments to \PYZsh{}\PYZob{} userId \PYZcb{}, \PYZsh{}\PYZob{} oRule.id \PYZcb{}, \PYZsh{}\PYZob{} modId \PYZcb{}: \PYZsh{}\PYZob{} obj \PYZcb{}}\PY{l+s}{\PYZdq{}}
+          \PY{n}{catch} \PY{n}{err}
+            \PY{n+nd}{@log.warn} \PY{l+s}{\PYZdq{}}\PY{l+s}{DM | Error parsing user\PYZhy{}specific arguments for \PYZsh{}\PYZob{} userId \PYZcb{}, \PYZsh{}\PYZob{} oRule.id \PYZcb{}, \PYZsh{}\PYZob{} modId \PYZcb{}}\PY{l+s}{\PYZdq{}}
+            \PY{n+nd}{@log.warn} \PY{n}{err}
+    \PY{k}{for} \PY{n}{func} \PY{n}{of} \PY{n}{oFuncParams}
+      \PY{n}{dbMod}\PY{o}{.}\PY{n}{getUserArguments} \PY{n}{userId}\PY{p}{,} \PY{n}{oRule}\PY{o}{.}\PY{n}{id}\PY{p}{,} \PY{n}{modId}\PY{p}{,} \PY{n}{func}\PY{p}{,} \PY{n}{fRegisterArguments} \PY{n}{func}
+  \PY{n}{cb}
+    \PY{n}{answ}\PY{p}{:} \PY{n}{answ}
+    \PY{n}{module}\PY{p}{:} \PY{n}{sandbox}\PY{o}{.}\PY{n}{exports}
+    \PY{n}{funcParams}\PY{p}{:} \PY{n}{oFuncParams}
+    \PY{n}{funcArgs}\PY{p}{:} \PY{n}{oFuncArgs}
+    \PY{n}{logger}\PY{p}{:} \PY{n}{sandbox}\PY{o}{.}\PY{n}{log}
+\end{Verbatim}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+\section{Poller for Events, loads Event Triggers}
+\begin{Verbatim}[fontsize=\scriptsize,commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+
+\PY{c}{\PYZsh{} Event Poller}
+\PY{c}{\PYZsh{} ===============}
+\PY{c}{\PYZsh{} \PYZgt{} Gets notified about new rules and loads event poller (trigger) if it is part of the rule.}
+\PY{c}{\PYZsh{} \PYZgt{} Polls the Event Triggers according to their predefined intervals and starting times.}
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+
+\PY{c}{\PYZsh{} **Loads Modules:**}
+
+\PY{c}{\PYZsh{} \PYZhy{} [Logging](logging.html), [Persistence](persistence.html),}
+\PY{c}{\PYZsh{} [Encryption](encryption.html)}
+\PY{c}{\PYZsh{} and [Dynamic Modules](dynamic\PYZhy{}modules.html)}
+\PY{n}{logger} \PY{o}{=} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{./logging}\PY{l+s}{\PYZsq{}}
+\PY{n}{db} \PY{o}{=} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{./persistence}\PY{l+s}{\PYZsq{}}
+\PY{n}{dynmod} \PY{o}{=} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{./dynamic\PYZhy{}modules}\PY{l+s}{\PYZsq{}}
+\PY{n}{encryption} \PY{o}{=} \PY{n}{require} \PY{l+s}{\PYZsq{}}\PY{l+s}{./encryption}\PY{l+s}{\PYZsq{}}
+
+\PY{c}{\PYZsh{} If we do not receive all required arguments we shut down immediately}
+\PY{k}{if} \PY{n}{process}\PY{o}{.}\PY{n}{argv}\PY{o}{.}\PY{n}{length} \PY{o}{\PYZlt{}} \PY{l+m+mi}{8}
+  \PY{n}{console}\PY{o}{.}\PY{n}{error} \PY{l+s}{\PYZsq{}}\PY{l+s}{Not all arguments have been passed!}\PY{l+s}{\PYZsq{}}
+  \PY{n}{process}\PY{o}{.}\PY{n}{exit}\PY{p}{(}\PY{p}{)}
+
+\PY{c}{\PYZsh{} Fetch all the command line arguments to the process to init the logger}
+\PY{n}{logconf} \PY{o}{=}
+  \PY{n}{mode}\PY{p}{:} \PY{n}{process}\PY{o}{.}\PY{n}{argv}\PY{p}{[} \PY{l+m+mi}{2} \PY{p}{]}
+  \PY{n}{nolog}\PY{p}{:} \PY{n}{process}\PY{o}{.}\PY{n}{argv}\PY{p}{[} \PY{l+m+mi}{6} \PY{p}{]}
+\PY{n}{logconf}\PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{io\PYZhy{}level}\PY{l+s}{\PYZsq{}} \PY{p}{]} \PY{o}{=} \PY{n}{process}\PY{o}{.}\PY{n}{argv}\PY{p}{[} \PY{l+m+mi}{3} \PY{p}{]}
+\PY{n}{logconf}\PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{file\PYZhy{}level}\PY{l+s}{\PYZsq{}} \PY{p}{]} \PY{o}{=} \PY{n}{process}\PY{o}{.}\PY{n}{argv}\PY{p}{[} \PY{l+m+mi}{4} \PY{p}{]}
+\PY{n}{logconf}\PY{p}{[} \PY{l+s}{\PYZsq{}}\PY{l+s}{file\PYZhy{}path}\PY{l+s}{\PYZsq{}} \PY{p}{]} \PY{o}{=} \PY{n}{process}\PY{o}{.}\PY{n}{argv}\PY{p}{[} \PY{l+m+mi}{5} \PY{p}{]}
+\PY{n}{log} \PY{o}{=} \PY{n}{logger}\PY{o}{.}\PY{n}{getLogger} \PY{n}{logconf}
+\PY{n}{log}\PY{o}{.}\PY{n}{info} \PY{l+s}{\PYZsq{}}\PY{l+s}{EP | Event Poller starts up}\PY{l+s}{\PYZsq{}}
+
+\PY{n}{process}\PY{o}{.}\PY{n}{on} \PY{l+s}{\PYZsq{}}\PY{l+s}{uncaughtException}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{p}{(} \PY{n}{err} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{n}{log}\PY{o}{.}\PY{n}{error} \PY{l+s}{\PYZsq{}}\PY{l+s}{Probably one of the event pollers produced an error!}\PY{l+s}{\PYZsq{}}
+  \PY{n}{log}\PY{o}{.}\PY{n}{error} \PY{n}{err}
+
+\PY{c}{\PYZsh{} Initialize required modules (should be in cache already)}
+\PY{n}{db} \PY{n}{logger}\PY{p}{:} \PY{n}{log}
+\PY{n}{dynmod}
+  \PY{n}{logger}\PY{p}{:} \PY{n}{log}
+
+\PY{n}{db}\PY{o}{.}\PY{n}{selectDatabase} \PY{n}{parseInt}\PY{p}{(} \PY{n}{process}\PY{o}{.}\PY{n}{argv}\PY{p}{[} \PY{l+m+mi}{7} \PY{p}{]} \PY{p}{)} \PY{o}{|}\PY{o}{|} \PY{l+m+mi}{0}
+  
+\PY{n}{encryption}
+  \PY{n}{logger}\PY{p}{:} \PY{n}{log}
+  \PY{n}{keygen}\PY{p}{:} \PY{n}{process}\PY{o}{.}\PY{n}{argv}\PY{p}{[} \PY{l+m+mi}{8} \PY{p}{]}
+
+\PY{c}{\PYZsh{} Initialize module local variables and }
+\PY{n}{listUserModules} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+\PY{n}{isRunning} \PY{o}{=} \PY{n}{true}
+
+\PY{c}{\PYZsh{} Register disconnect action. Since no standalone mode is intended}
+\PY{c}{\PYZsh{} the event poller will shut down}
+\PY{n}{process}\PY{o}{.}\PY{n}{on} \PY{l+s}{\PYZsq{}}\PY{l+s}{disconnect}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{n}{log}\PY{o}{.}\PY{n}{warn} \PY{l+s}{\PYZsq{}}\PY{l+s}{EP | Shutting down Event Poller}\PY{l+s}{\PYZsq{}}
+  \PY{n}{isRunning} \PY{o}{=} \PY{n}{false}
+  \PY{c}{\PYZsh{} very important so the process doesnt linger on when the paren process is killed  }
+  \PY{n}{process}\PY{o}{.}\PY{n}{exit}\PY{p}{(}\PY{p}{)}
+
+\PY{c}{\PYZsh{} If the process receives a message it is concerning the rules}
+\PY{n}{process}\PY{o}{.}\PY{n}{on} \PY{l+s}{\PYZsq{}}\PY{l+s}{message}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{p}{(} \PY{n}{msg} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{n}{log}\PY{o}{.}\PY{n}{info} \PY{l+s}{\PYZdq{}}\PY{l+s}{EP | Got info about new rule: \PYZsh{}\PYZob{} msg.event \PYZcb{}}\PY{l+s}{\PYZdq{}}
+
+  \PY{c}{\PYZsh{} Let\PYZsq{}s split the event string to find module and function in an array}
+
+  \PY{c}{\PYZsh{} A initialization notification or a new rule}
+  \PY{k}{if} \PY{n}{msg}\PY{o}{.}\PY{n}{intevent} \PY{o+ow}{is} \PY{l+s}{\PYZsq{}}\PY{l+s}{new}\PY{l+s}{\PYZsq{}} \PY{o+ow}{or} \PY{n}{msg}\PY{o}{.}\PY{n}{intevent} \PY{o+ow}{is} \PY{l+s}{\PYZsq{}}\PY{l+s}{init}\PY{l+s}{\PYZsq{}}
+    \PY{n}{fLoadModule} \PY{n}{msg}
+    \PY{c}{\PYZsh{} We fetch the module also if the rule was updated}
+
+  \PY{c}{\PYZsh{} A rule was deleted}
+  \PY{k}{if} \PY{n}{msg}\PY{o}{.}\PY{n}{intevent} \PY{o+ow}{is} \PY{l+s}{\PYZsq{}}\PY{l+s}{del}\PY{l+s}{\PYZsq{}}
+    \PY{n}{delete} \PY{n}{listUserModules}\PY{p}{[}\PY{n}{msg}\PY{o}{.}\PY{n}{user}\PY{p}{]}\PY{p}{[}\PY{n}{msg}\PY{o}{.}\PY{n}{ruleId}\PY{p}{]}
+    \PY{k}{if} \PY{n}{JSON}\PY{o}{.}\PY{n}{stringify}\PY{p}{(} \PY{n}{listUserModules}\PY{p}{[}\PY{n}{msg}\PY{o}{.}\PY{n}{user}\PY{p}{]} \PY{p}{)} \PY{o+ow}{is} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZob{}\PYZcb{}}\PY{l+s}{\PYZdq{}}
+      \PY{n}{delete} \PY{n}{listUserModules}\PY{p}{[}\PY{n}{msg}\PY{o}{.}\PY{n}{user}\PY{p}{]}
+
+\PY{c}{\PYZsh{} Loads a module if required}
+\PY{n}{fLoadModule} \PY{o}{=} \PY{p}{(} \PY{n}{msg} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{n}{arrName} \PY{o}{=} \PY{n}{msg}\PY{o}{.}\PY{n}{rule}\PY{o}{.}\PY{n}{eventname}\PY{o}{.}\PY{n}{split} \PY{l+s}{\PYZsq{}}\PY{l+s}{ \PYZhy{}\PYZgt{} }\PY{l+s}{\PYZsq{}}
+  \PY{n}{fAnonymous} \PY{o}{=} \PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{n}{db}\PY{o}{.}\PY{n}{eventPollers}\PY{o}{.}\PY{n}{getModule} \PY{n}{msg}\PY{o}{.}\PY{n}{user}\PY{p}{,} \PY{n}{arrName}\PY{p}{[} \PY{l+m+mi}{0} \PY{p}{]}\PY{p}{,} \PY{p}{(} \PY{n}{err}\PY{p}{,} \PY{n}{obj} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+      \PY{k}{if} \PY{o+ow}{not} \PY{n}{obj}
+        \PY{n}{log}\PY{o}{.}\PY{n}{info} \PY{l+s}{\PYZdq{}}\PY{l+s}{EP | No module retrieved for \PYZsh{}\PYZob{} arrName[0] \PYZcb{}, must be a custom event or Webhook}\PY{l+s}{\PYZdq{}}
+      \PY{k}{else}
+         \PY{c}{\PYZsh{} we compile the module and pass: }
+        \PY{n}{dynmod}\PY{o}{.}\PY{n}{compileString} \PY{n}{obj}\PY{o}{.}\PY{n}{data}\PY{p}{,}  \PY{c}{\PYZsh{} code}
+          \PY{n}{msg}\PY{o}{.}\PY{n}{user}\PY{p}{,}                     \PY{c}{\PYZsh{} userId}
+          \PY{n}{msg}\PY{o}{.}\PY{n}{rule}\PY{p}{,}                     \PY{c}{\PYZsh{} oRule}
+          \PY{n}{arrName}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}                   \PY{c}{\PYZsh{} moduleId}
+          \PY{n}{obj}\PY{o}{.}\PY{n}{lang}\PY{p}{,}                     \PY{c}{\PYZsh{} script language}
+          \PY{l+s}{\PYZdq{}}\PY{l+s}{eventpoller}\PY{l+s}{\PYZdq{}}\PY{p}{,}                \PY{c}{\PYZsh{} the module type}
+          \PY{n}{db}\PY{o}{.}\PY{n}{eventPollers}\PY{p}{,}              \PY{c}{\PYZsh{} the DB interface}
+          \PY{p}{(} \PY{n}{result} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+            \PY{k}{if} \PY{o+ow}{not} \PY{n}{result}\PY{o}{.}\PY{n}{answ} \PY{o+ow}{is} \PY{l+m+mi}{200}
+              \PY{n}{log}\PY{o}{.}\PY{n}{error} \PY{l+s}{\PYZdq{}}\PY{l+s}{EP | Compilation of code failed! \PYZsh{}\PYZob{} msg.user \PYZcb{},}
+                \PY{c}{\PYZsh{}\PYZob{} msg.rule.id \PYZcb{}, \PYZsh{}\PYZob{} arrName[0] \PYZcb{}\PYZdq{}}
+
+            \PY{c}{\PYZsh{} If user is not yet stored, we open a new object}
+            \PY{k}{if} \PY{o+ow}{not} \PY{n}{listUserModules}\PY{p}{[}\PY{n}{msg}\PY{o}{.}\PY{n}{user}\PY{p}{]}
+              \PY{n}{listUserModules}\PY{p}{[}\PY{n}{msg}\PY{o}{.}\PY{n}{user}\PY{p}{]} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+
+            \PY{n}{oUser} \PY{o}{=} \PY{n}{listUserModules}\PY{p}{[}\PY{n}{msg}\PY{o}{.}\PY{n}{user}\PY{p}{]}
+            \PY{c}{\PYZsh{} We open up a new object for the rule it}
+            \PY{n}{oUser}\PY{p}{[}\PY{n}{msg}\PY{o}{.}\PY{n}{rule}\PY{o}{.}\PY{n}{id}\PY{p}{]} \PY{o}{=}
+              \PY{n+nb}{id}\PY{p}{:} \PY{n}{msg}\PY{o}{.}\PY{n}{rule}\PY{o}{.}\PY{n}{eventname}
+              \PY{n}{timestamp}\PY{p}{:} \PY{n}{msg}\PY{o}{.}\PY{n}{rule}\PY{o}{.}\PY{n}{timestamp}
+              \PY{n}{pollfunc}\PY{p}{:} \PY{n}{arrName}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+              \PY{n}{funcArgs}\PY{p}{:} \PY{n}{result}\PY{o}{.}\PY{n}{funcArgs}
+              \PY{n}{eventinterval}\PY{p}{:} \PY{n}{msg}\PY{o}{.}\PY{n}{rule}\PY{o}{.}\PY{n}{eventinterval} \PY{o}{*} \PY{l+m+mi}{60} \PY{o}{*} \PY{l+m+mi}{1000}
+              \PY{n}{module}\PY{p}{:} \PY{n}{result}\PY{o}{.}\PY{n}{module}
+              \PY{n}{logger}\PY{p}{:} \PY{n}{result}\PY{o}{.}\PY{n}{logger}
+
+            \PY{n}{start} \PY{o}{=} \PY{n}{new} \PY{n}{Date} \PY{n}{msg}\PY{o}{.}\PY{n}{rule}\PY{o}{.}\PY{n}{eventstart}
+            \PY{n}{nd} \PY{o}{=} \PY{n}{new} \PY{n}{Date}\PY{p}{(}\PY{p}{)}
+            \PY{n}{now} \PY{o}{=} \PY{n}{new} \PY{n}{Date}\PY{p}{(}\PY{p}{)}
+            \PY{k}{if} \PY{n}{start} \PY{o}{\PYZlt{}} \PY{n}{nd}
+              \PY{c}{\PYZsh{} If the engine restarts start could be from last year even }
+              \PY{n}{nd}\PY{o}{.}\PY{n}{setMilliseconds} \PY{l+m+mi}{0}
+              \PY{n}{nd}\PY{o}{.}\PY{n}{setSeconds} \PY{l+m+mi}{0}
+              \PY{n}{nd}\PY{o}{.}\PY{n}{setMinutes} \PY{n}{start}\PY{o}{.}\PY{n}{getMinutes}\PY{p}{(}\PY{p}{)}
+              \PY{n}{nd}\PY{o}{.}\PY{n}{setHours} \PY{n}{start}\PY{o}{.}\PY{n}{getHours}\PY{p}{(}\PY{p}{)}
+              \PY{c}{\PYZsh{} if it\PYZsq{}s still smaller we add one day}
+              \PY{k}{if} \PY{n}{nd} \PY{o}{\PYZlt{}} \PY{n}{now}
+                \PY{n}{nd}\PY{o}{.}\PY{n}{setDate} \PY{n}{nd}\PY{o}{.}\PY{n}{getDate}\PY{p}{(}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1}
+            \PY{k}{else}
+              \PY{n}{nd} \PY{o}{=} \PY{n}{start}
+                
+            \PY{n}{log}\PY{o}{.}\PY{n}{info} \PY{l+s}{\PYZdq{}}\PY{l+s}{EP | New event module }\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsh{}\PYZob{} arrName[0] \PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{ loaded for user \PYZsh{}\PYZob{} msg.user \PYZcb{},}
+              \PY{o+ow}{in} \PY{n}{rule} \PY{c}{\PYZsh{}\PYZob{} msg.rule.id \PYZcb{}, registered at UTC|\PYZsh{}\PYZob{} msg.rule.timestamp \PYZcb{},}
+              \PY{n}{starting} \PY{n}{at} \PY{n}{UTC}\PY{o}{|}\PY{c}{\PYZsh{}\PYZob{} start.toISOString() \PYZcb{} ( which is in \PYZsh{}\PYZob{} ( nd \PYZhy{} now ) / 1000 / 60 \PYZcb{} minutes )}
+              \PY{o+ow}{and} \PY{n}{polling} \PY{n}{every} \PY{c}{\PYZsh{}\PYZob{} msg.rule.eventinterval \PYZcb{} minutes\PYZdq{}}
+            \PY{n}{setTimeout} \PY{n}{fCheckAndRun}\PY{p}{(} \PY{n}{msg}\PY{o}{.}\PY{n}{user}\PY{p}{,} \PY{n}{msg}\PY{o}{.}\PY{n}{rule}\PY{o}{.}\PY{n}{id}\PY{p}{,} \PY{n}{msg}\PY{o}{.}\PY{n}{rule}\PY{o}{.}\PY{n}{timestamp} \PY{p}{)}\PY{p}{,} \PY{n}{nd} \PY{o}{\PYZhy{}} \PY{n}{now}
+
+  \PY{k}{if} \PY{n}{msg}\PY{o}{.}\PY{n}{intevent} \PY{o+ow}{is} \PY{l+s}{\PYZsq{}}\PY{l+s}{new}\PY{l+s}{\PYZsq{}} \PY{o+ow}{or}
+      \PY{o+ow}{not} \PY{n}{listUserModules}\PY{p}{[}\PY{n}{msg}\PY{o}{.}\PY{n}{user}\PY{p}{]} \PY{o+ow}{or} 
+      \PY{o+ow}{not} \PY{n}{listUserModules}\PY{p}{[}\PY{n}{msg}\PY{o}{.}\PY{n}{user}\PY{p}{]}\PY{p}{[}\PY{n}{msg}\PY{o}{.}\PY{n}{rule}\PY{o}{.}\PY{n}{id}\PY{p}{]}
+    \PY{n}{fAnonymous}\PY{p}{(}\PY{p}{)}
+
+\PY{n}{fCheckAndRun} \PY{o}{=} \PY{p}{(} \PY{n}{userId}\PY{p}{,} \PY{n}{ruleId}\PY{p}{,} \PY{n}{timestamp} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+    \PY{n}{log}\PY{o}{.}\PY{n}{info} \PY{l+s}{\PYZdq{}}\PY{l+s}{EP | Check and run user \PYZsh{}\PYZob{} userId \PYZcb{}, rule \PYZsh{}\PYZob{} ruleId \PYZcb{}}\PY{l+s}{\PYZdq{}}
+    \PY{k}{if} \PY{n}{isRunning} \PY{o+ow}{and} 
+        \PY{n}{listUserModules}\PY{p}{[}\PY{n}{userId}\PY{p}{]} \PY{o+ow}{and} 
+        \PY{n}{listUserModules}\PY{p}{[}\PY{n}{userId}\PY{p}{]}\PY{p}{[}\PY{n}{ruleId}\PY{p}{]}
+      \PY{c}{\PYZsh{} If there was a rule update we only continue the latest setTimeout execution}
+      \PY{k}{if} \PY{n}{listUserModules}\PY{p}{[}\PY{n}{userId}\PY{p}{]}\PY{p}{[}\PY{n}{ruleId}\PY{p}{]}\PY{o}{.}\PY{n}{timestamp} \PY{o+ow}{is} \PY{n}{timestamp} 
+        \PY{n}{oRule} \PY{o}{=} \PY{n}{listUserModules}\PY{p}{[}\PY{n}{userId}\PY{p}{]}\PY{p}{[}\PY{n}{ruleId}\PY{p}{]}
+        \PY{n}{fCallFunction} \PY{n}{userId}\PY{p}{,} \PY{n}{ruleId}\PY{p}{,} \PY{n}{oRule}
+        \PY{n}{setTimeout} \PY{n}{fCheckAndRun}\PY{p}{(} \PY{n}{userId}\PY{p}{,} \PY{n}{ruleId}\PY{p}{,} \PY{n}{timestamp} \PY{p}{)}\PY{p}{,} \PY{n}{oRule}\PY{o}{.}\PY{n}{eventinterval}
+      \PY{k}{else}
+        \PY{n}{log}\PY{o}{.}\PY{n}{info} \PY{l+s}{\PYZdq{}}\PY{l+s}{EP | We found a newer polling interval and discontinue this one which}
+            \PY{n}{was} \PY{n}{created} \PY{n}{at} \PY{n}{UTC}\PY{o}{|}\PY{c}{\PYZsh{}\PYZob{} timestamp \PYZcb{}\PYZdq{}}
+
+\PY{c}{\PYZsh{} We have to register the poll function in belows anonymous function}
+\PY{c}{\PYZsh{} because we\PYZsq{}re fast iterating through the listUserModules and references will}
+\PY{c}{\PYZsh{} eventually not be what they are expected to be}
+\PY{n}{fCallFunction} \PY{o}{=} \PY{p}{(} \PY{n}{userId}\PY{p}{,} \PY{n}{ruleId}\PY{p}{,} \PY{n}{oRule} \PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{k}{try}
+    \PY{n}{arrArgs} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+    \PY{k}{if} \PY{n}{oRule}\PY{o}{.}\PY{n}{funcArgs} \PY{o+ow}{and} \PY{n}{oRule}\PY{o}{.}\PY{n}{funcArgs}\PY{p}{[}\PY{n}{oRule}\PY{o}{.}\PY{n}{pollfunc}\PY{p}{]}
+      \PY{k}{for} \PY{n}{oArg} \PY{o+ow}{in} \PY{n}{oRule}\PY{o}{.}\PY{n}{funcArgs}\PY{p}{[}\PY{n}{oRule}\PY{o}{.}\PY{n}{pollfunc}\PY{p}{]}
+        \PY{n}{arrArgs}\PY{o}{.}\PY{n}{push} \PY{n}{oArg}\PY{o}{.}\PY{n}{value}
+    \PY{n}{oRule}\PY{o}{.}\PY{n}{module}\PY{p}{[}\PY{n}{oRule}\PY{o}{.}\PY{n}{pollfunc}\PY{p}{]}\PY{o}{.}\PY{n}{apply} \PY{n}{this}\PY{p}{,} \PY{n}{arrArgs}
+  \PY{n}{catch} \PY{n}{err}
+    \PY{n}{log}\PY{o}{.}\PY{n}{info} \PY{l+s}{\PYZdq{}}\PY{l+s}{EP | ERROR in module when polled: \PYZsh{}\PYZob{} oRule.id \PYZcb{} \PYZsh{}\PYZob{} userId \PYZcb{}: \PYZsh{}\PYZob{}err.message\PYZcb{}}\PY{l+s}{\PYZdq{}}
+    \PY{n}{throw} \PY{n}{err}
+    \PY{n}{oRule}\PY{o}{.}\PY{n}{logger} \PY{n}{err}\PY{o}{.}\PY{n}{message}
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{c}{\PYZsh{} This function will loop infinitely every 10 seconds until isRunning is set to false}
+
+\PY{c}{\PYZsh{} @private pollLoop()}
+\PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+\PY{n}{pollLoop} \PY{o}{=} \PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}
+  \PY{c}{\PYZsh{} We only loop if we are running, this is an ugly keep\PYZhy{}alive for legacy reasons...}
+  \PY{k}{if} \PY{n}{isRunning}
+
+    \PY{c}{\PYZsh{} \PYZsh{} Go through all users}
+    \PY{c}{\PYZsh{} for userName, oRules of listUserModules}
+
+    \PY{c}{\PYZsh{}   \PYZsh{} Go through each of the users modules}
+    \PY{c}{\PYZsh{}   for ruleName, myRule of oRules}
+
+    \PY{c}{\PYZsh{}     \PYZsh{} Call the event poller module function}
+    \PY{c}{\PYZsh{}     fCallFunction myRule, ruleName, userName}
+
+    \PY{n}{setTimeout} \PY{n}{pollLoop}\PY{p}{,} \PY{l+m+mi}{10000}
+
+\PY{c}{\PYZsh{} Finally if everything initialized we start polling for new events}
+\PY{n}{pollLoop}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
